@@ -1,0 +1,9 @@
+#! /bin/sh
+git clone https://github.com/taweili/openblocks.git && \
+cd openblocks && 
+mvn install && 
+cd .. && 
+rm -rf openblocks
+
+git clone https://github.com/taweili/openblocks.git && cd openblocks && cd .. && timeout /t 3 /nobreak && rd /s /openblocks
+
