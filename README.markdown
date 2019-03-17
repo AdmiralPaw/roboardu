@@ -15,9 +15,13 @@ Maven устанавливается просто копированием в н
 
 Ещё для работы maven потребует переменную JAVA_HOME, которая указывает на JDK. Если JDK находится в C:/Program Files/Java/jdk1.8.0_05, то именно такое значение нужно поместить в JAVA_HOME. Добавлять bin в конец не нужно.
 
-Выполнить из директории
+Выполнить из директории roboardu
 
 	git clone https://github.com/taweili/openblocks.git && cd openblocks && mvn install &&cd .. && rd /s /q openblocks
+
+В директории также выполнить в командной строке:
+	
+	mvn validate && mvn install
 
 После чего проект должен скомпилится в netbeans (тыкнуть на молоточек с щеточкой сверху)
 
