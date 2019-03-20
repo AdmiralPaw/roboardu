@@ -8,7 +8,7 @@
 	<artifactId>ardublock</artifactId>
 	<packaging>jar</packaging>
 	<version>0.1.0-SNAPSHOT</version>
-	<name>ArduBlock</name>
+	<name>ArduBlockEtu</name>
 	<description>A Block Programming Language for Arduino</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

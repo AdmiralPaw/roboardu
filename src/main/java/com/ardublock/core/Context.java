@@ -29,13 +29,13 @@ import edu.mit.blocks.renderable.BlockUtilities;
 import edu.mit.blocks.renderable.FactoryRenderableBlock;
 import edu.mit.blocks.renderable.RenderableBlock;
 import edu.mit.blocks.workspace.FactoryManager;
-import edu.mit.blocks.workspace.Page;   
+import edu.mit.blocks.workspace.Page;
 import edu.mit.blocks.workspace.Workspace;
 
 public class Context
 {
 	public final static String LANG_DTD_PATH = "/com/ardublock/block/lang_def.dtd";
-	public final static String ARDUBLOCK_LANG_PATH = "/com/ardublock/block/ardublock.xml/";
+	public final static String ARDUBLOCK_LANG_PATH = "/com/ardublock/block/ardublock.xml";
 	public final static String DEFAULT_ARDUBLOCK_PROGRAM_PATH = "/com/ardublock/default.abp";
 	public final static String ARDUINO_VERSION_UNKNOWN = "unknown";
 	public final boolean isNeedAutoFormat = true;
