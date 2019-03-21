@@ -58,7 +58,7 @@ final public class Navigator {
     /** The UI options */
     public enum Type {
 
-        GLASS, MAGIC, POPUP, STACK, TABBED, WINDOW
+        GLASS, MAGIC, POPUP, STACK, TABBED, WINDOW, WINDOW2
     };
     /** UI Type */
     private Type explorerModel;
@@ -88,7 +88,7 @@ final public class Navigator {
      * Constructs new navigator with an empty collection of canvases.
      */
     public Navigator(Workspace workspace) {
-        this(workspace, Type.GLASS);
+        this(workspace, Type.WINDOW2);
     }
 
     public Navigator(Workspace workspace, Type UIModel) {
@@ -98,7 +98,7 @@ final public class Navigator {
         explorers = new ArrayList<Explorer>();
         view = new JPanel();
         position = 0;
-        view.setBackground(Color.GRAY);
+        view.setBackground(Color.darkGray);
         view.setLayout(null);
         this.scroll = new JScrollPane(view,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
@@ -146,8 +146,10 @@ final public class Navigator {
             explorer = new WindowExplorer();
         } else if (explorerModel == Type.TABBED) {
             explorer = new TabbedExplorer();
-        } else {
+        } else if (explorerModel == Type.STACK){
             explorer = new StackExplorer();
+        } else {
+            explorer = new Window2Explorer();
         }
         explorer.setName(name);
         explorers.add(explorer);
