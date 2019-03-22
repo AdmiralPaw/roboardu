@@ -712,14 +712,14 @@ public class WorkspaceController {
     }
 
     public static void main(final String[] args) {
-        if (args.length < 1) {
-            System.err.println("usage: WorkspaceController lang_def.xml");
-            System.exit(1);
-        }
+//        if (args.length < 1) {
+//            System.err.println("usage: WorkspaceController lang_def.xml");
+//            System.exit(1);
+//        }
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {
                 final WorkspaceController wc = new WorkspaceController();
-                wc.setLangDefFilePath(args[0]);
+                wc.setLangDefFilePath("D:\\Arduino\\ardublock-master\\openblocks-master\\support\\lang_def.xml");
                 wc.loadFreshWorkspace();
                 wc.createAndShowGUI();
             }

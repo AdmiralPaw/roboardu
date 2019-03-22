@@ -78,15 +78,16 @@ public class Window2Explorer extends JPanel implements Explorer {
         if (size % 2 == 1) {
             size++;
         }
-        size = buttonHeight * size;
+        size = buttonHeight * 12;
         buttonPane.setPreferredSize(new Dimension(6, size));
         JPanel butpan = new JPanel(new VerticalLayout());
-        butpan.setBackground(Color.black);
+        butpan.setBackground(new Color(0,100,104));
         for (int i = 0; i < items.size(); i++) {
             final int index = i;
             Canvas item = items.get(i);
             //final CButton button = new CButton(item.getColor(), item.getColor().brighter().brighter().brighter(),item.getName());
             CButton button = new CBorderlessButton(item.getName());
+            item.getJComponent().setBackground(new Color(23,161,165));
             JComponent scroll = new CHoverScrollPane(
                     item.getJComponent(),
                     ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
@@ -104,9 +105,9 @@ public class Window2Explorer extends JPanel implements Explorer {
         }
         CHoverScrollPane buttonScroll = new CHoverScrollPane(
                 butpan,
-                ScrollPolicy.VERTICAL_BAR_ALWAYS,
+                ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
                 ScrollPolicy.HORIZONTAL_BAR_AS_NEEDED,
-                18, new Color(255,255,255), Color.darkGray);//new JScrollPane(butpan);
+                18, new Color(255, 133, 8), Color.darkGray);//new JScrollPane(butpan);
         //buttonScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         buttonPane.add(buttonScroll, BorderLayout.CENTER);
         if (!canvases.isEmpty()) {

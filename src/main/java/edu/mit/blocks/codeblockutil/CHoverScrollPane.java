@@ -419,21 +419,24 @@ class HoverVerticalBar extends JPanel implements MouseListener, MouseMotionListe
             g2.addRenderingHints(renderingHints);
             g2.translate(vWidth / 2, 0);
             g2.setColor(trackColor);
-            g2.fillRoundRect(0, 0, vWidth, this.getHeight(), vWidth, vWidth);
-            g2.setColor(new Color(150, 150, 150));
-            g2.drawRoundRect(0, 0, vWidth, this.getHeight() - 1, vWidth, vWidth);
+            g2.fillRect(0, 0, vWidth, this.getHeight());
+//            g2.fillRoundRect(0, 0, vWidth, this.getHeight(), vWidth, vWidth);
+//            g2.setColor(new Color(150, 150, 150));
+//            g2.drawRoundRect(0, 0, vWidth, this.getHeight() - 1, vWidth, vWidth);
 
             if (viewValue < this.getHeight() - 0.5f * this.getWidth()) {
                 g2.translate(0, viewValue);
             } else {
                 g2.translate(0, this.getHeight() - 0.5f * this.getWidth());
             }
-            g2.setPaint(new GradientPaint(
-                    0, 0, this.thumbColor,
-                    this.getWidth() + 10, 0, Color.black, true));
-            g2.fillRoundRect(0, 0, vWidth, (int) viewExtent, vWidth, vWidth);
-            g2.setColor(new Color(250, 250, 250, 100));
-            g2.drawRoundRect(0, 0, vWidth, (int) viewExtent, vWidth, vWidth);
+            g2.setPaint(this.thumbColor);
+//            g2.setPaint(new GradientPaint(
+//                    0, 0, this.thumbColor,
+//                    this.getWidth() + 10, 0, Color.green, true));
+            g2.fillRect(0,0,vWidth,(int)viewExtent);
+            //g2.fillRoundRect(0, 0, vWidth, (int) viewExtent, vWidth, vWidth);
+//            g2.setColor(new Color(250, 250, 250, 100));
+//            g2.drawRoundRect(0, 0, vWidth, (int) viewExtent, vWidth, vWidth);
 
         }
     }
@@ -612,21 +615,24 @@ class HoverHorizontalBar extends JPanel implements MouseListener, MouseMotionLis
         g2.translate(0, vHeight / 2);
 
         g2.setColor(trackColor);
-        g2.fillRoundRect(0, 0, this.getWidth(), vHeight, vHeight, vHeight);
-        g2.setColor(new Color(150, 150, 150));
-        g2.drawRoundRect(0, 0, this.getWidth() - 1, vHeight, vHeight, vHeight);
+        g2.fillRect(0,0,this.getWidth(),vHeight);
+//        g2.fillRoundRect(0, 0, this.getWidth(), vHeight, vHeight, vHeight);
+//        g2.setColor(new Color(150, 150, 150));
+//        g2.drawRoundRect(0, 0, this.getWidth() - 1, vHeight, vHeight, vHeight);
 
         if (viewValue < this.getWidth() - 0.5f * this.getHeight()) {
             g2.translate(viewValue, 0);
         } else {
             g2.translate(this.getWidth() - 0.5f * this.getHeight(), 0);
         }
-        g2.setPaint(new GradientPaint(
-                0, 0, this.thumbColor,
-                0, this.getHeight() + 10, Color.black, true));
-        g2.fillRoundRect(0, 0, (int) viewExtent, vHeight, vHeight, vHeight);
-        g2.setColor(new Color(250, 250, 250, 100));
-        g2.drawRoundRect(0, 0, (int) viewExtent, vHeight, vHeight, vHeight);
+        g2.setPaint(this.thumbColor);
+        g2.fillRect(0,0,(int)viewExtent,vHeight);
+//        g2.setPaint(new GradientPaint(
+//                0, 0, this.thumbColor,
+//                0, this.getHeight() + 10, Color.black, true));
+//        g2.fillRoundRect(0, 0, (int) viewExtent, vHeight, vHeight, vHeight);
+//        g2.setColor(new Color(250, 250, 250, 100));
+//        g2.drawRoundRect(0, 0, (int) viewExtent, vHeight, vHeight, vHeight);
     }
 
     /**

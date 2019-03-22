@@ -154,7 +154,6 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 blockCanvasLayer.validate();
             }
         });
-
         blockCanvasLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
                 factory.getJComponent(), blockCanvas.getJComponent());
         blockCanvasLayer.setOneTouchExpandable(true);

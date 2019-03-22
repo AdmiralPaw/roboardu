@@ -15,12 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -32,6 +27,7 @@ import com.ardublock.ui.listener.OpenButtonListener;
 import com.ardublock.ui.listener.OpenblocksFrameListener;
 import com.ardublock.ui.listener.SaveAsButtonListener;
 import com.ardublock.ui.listener.SaveButtonListener;
+import com.ardublock.ui.СontrollerСonfiguration;
 
 import edu.mit.blocks.controller.WorkspaceController;
 import edu.mit.blocks.workspace.Workspace;
@@ -172,11 +168,14 @@ public class OpenblocksFrame extends JFrame
 		bottomPanel.add(saveImageButton);
 		bottomPanel.add(websiteButton);
 		bottomPanel.add(versionLabel);
-
-		
+		СontrollerСonfiguration controller = new СontrollerСonfiguration();
+		JSplitPane blockCanvasLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
+				workspace, controller);
+		blockCanvasLayer.setOneTouchExpandable(true);
+		blockCanvasLayer.setDividerSize(6);
 		this.add(buttons, BorderLayout.NORTH);
 		this.add(bottomPanel, BorderLayout.SOUTH);
-		this.add(workspace, BorderLayout.CENTER);
+		this.add(blockCanvasLayer, BorderLayout.CENTER);
 	}
 	
 	public void doOpenArduBlockFile()
