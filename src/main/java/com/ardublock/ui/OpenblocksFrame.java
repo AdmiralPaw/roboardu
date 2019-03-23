@@ -30,6 +30,8 @@ import com.ardublock.ui.listener.SaveButtonListener;
 import com.ardublock.ui.СontrollerСonfiguration;
 
 import edu.mit.blocks.controller.WorkspaceController;
+import edu.mit.blocks.workspace.SearchBar;
+import edu.mit.blocks.workspace.SearchableContainer;
 import edu.mit.blocks.workspace.Workspace;
 
 
@@ -139,7 +141,14 @@ public class OpenblocksFrame extends JFrame
 				}
 			}
 		});
-
+                 //21.03.2019
+                final SearchBar sb = new SearchBar("Search blocks",
+                        "Search for blocks in the drawers and workspace", workspace);
+                        for (final SearchableContainer con : workspace.getAllSearchableContainers()) {
+                    sb.addSearchableContainer(con);
+                                                        }
+                sb.getComponent().setPreferredSize(new Dimension(130, 23)); 
+                buttons.add(sb.getComponent()); //21.03.2019
 		buttons.add(newButton);
 		buttons.add(saveButton);
 		buttons.add(saveAsButton);
