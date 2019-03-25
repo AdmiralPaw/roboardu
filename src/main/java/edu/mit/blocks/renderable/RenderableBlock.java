@@ -1400,7 +1400,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
 		// draw the bevel on the shape -- comment this line to not apply
 		// beveling
-		//buffImgG2.drawImage(bevelImage, 0, 0, null);
+		buffImgG2.drawImage(bevelImage, 0, 0, null);
 
 		// DRAW BLOCK IMAGES
 		repositionBlockImages(blockArea.getBounds().width,
