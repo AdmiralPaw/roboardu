@@ -1394,12 +1394,13 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
 		// ADD BLOCK COLOR
 		Color blockColor = this.getBLockColor();
+		//Color new_block_color = new Color(blockColor.getRed(), blockColor.getGreen(), blockColor.getBlue(), 255);
 		buffImgG2.setColor(blockColor);
 		buffImgG2.fill(blockArea);
 
 		// draw the bevel on the shape -- comment this line to not apply
 		// beveling
-		buffImgG2.drawImage(bevelImage, 0, 0, null);
+		//buffImgG2.drawImage(bevelImage, 0, 0, null);
 
 		// DRAW BLOCK IMAGES
 		repositionBlockImages(blockArea.getBounds().width,
