@@ -66,7 +66,7 @@ public abstract class LabelWidget extends JComponent {
     private boolean editingText;
     /** the background color of the tooltip */
     private Color tooltipBackground = new Color(255, 255, 225);
-    private double zoom = 1.0;
+    private double zoom = 1.5;
 
     /**
      * BlockLabel Constructor that takes in BlockID as well.

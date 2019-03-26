@@ -160,7 +160,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         blockCanvasLayer.setDividerSize(6);
         add(blockCanvasLayer, BLOCK_LAYER);
         validate();
-        addPageAt(Page.getBlankPage(this), 0, false);
+        addPageAt(Page.getBlankPage(this), 0, true); //false
 
         this.workspaceWidgets.add(factory);
 

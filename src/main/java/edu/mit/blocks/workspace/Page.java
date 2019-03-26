@@ -102,7 +102,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     /** An empty string */
     private static final String emptyString = "";
     /** this.zoomLevel: zoom level state */
-    static double zoom = 1.0;
+    static double zoom = 1.5;
     /** The JComponent of this page */
     private final PageJComponent pageJComponent = new PageJComponent();
     /** The abstract width of this page */

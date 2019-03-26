@@ -31,8 +31,10 @@ import com.ardublock.ui.СontrollerСonfiguration;
 
 import edu.mit.blocks.controller.WorkspaceController;
 import edu.mit.blocks.workspace.SearchBar;
+import edu.mit.blocks.workspace.ZoomSlider;
 import edu.mit.blocks.workspace.SearchableContainer;
 import edu.mit.blocks.workspace.Workspace;
+import java.awt.Image;
 
 
 public class OpenblocksFrame extends JFrame
@@ -69,12 +71,16 @@ public class OpenblocksFrame extends JFrame
 		context = Context.getContext();
 		this.setTitle(makeFrameTitle());
 		this.setSize(new Dimension(1024, 760));
+                this.setExtendedState(MAXIMIZED_BOTH);
 		this.setLayout(new BorderLayout());
 		//put the frame to the center of screen
 		this.setLocationRelativeTo(null);
-		
 		uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
-		
+		//25.03.2019
+                Image icon = new ImageIcon(uiMessageBundle.getString("ardublock.url.icon")).getImage();
+                this.setIconImage(icon);
+                //25.03.2019
+                
 		fileChooser = new JFileChooser();
 		ffilter = new FileNameExtensionFilter(uiMessageBundle.getString("ardublock.file.suffix"), "abp");
 		fileChooser.setFileFilter(ffilter);
@@ -96,7 +102,8 @@ public class OpenblocksFrame extends JFrame
 		
 		// WTF I can't add worksapcelistener by workspace contrller
 		workspace.addWorkspaceListener(new ArdublockWorkspaceListener(this));
-		
+
+                
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new FlowLayout());
 		JButton newButton = new JButton(uiMessageBundle.getString("ardublock.ui.new"));
@@ -142,12 +149,17 @@ public class OpenblocksFrame extends JFrame
 			}
 		});
                  //21.03.2019
-                final SearchBar sb = new SearchBar("Search blocks",
+                SearchBar sb = new SearchBar("Search blocks",
                         "Search for blocks in the drawers and workspace", workspace);
-                        for (final SearchableContainer con : workspace.getAllSearchableContainers()) {
+                for (final SearchableContainer con : workspace.getAllSearchableContainers()) {
                     sb.addSearchableContainer(con);
-                                                        }
+                }
+                
+                        
                 sb.getComponent().setPreferredSize(new Dimension(130, 23)); 
+                ZoomSlider zoom = new ZoomSlider(workspace); 
+                
+                buttons.add(zoom);
                 buttons.add(sb.getComponent()); //21.03.2019
 		buttons.add(newButton);
 		buttons.add(saveButton);
@@ -378,7 +390,11 @@ public class OpenblocksFrame extends JFrame
 	{
 		if (context.isWorkspaceChanged())
 		{
-			int optionValue = JOptionPane.showOptionDialog(this, uiMessageBundle.getString("message.question.close_on_workspace_changed"), uiMessageBundle.getString("message.title.question"), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, JOptionPane.YES_OPTION);
+			int optionValue = JOptionPane.showOptionDialog(this, 
+                                uiMessageBundle.getString("message.question.close_on_workspace_changed"),
+                                uiMessageBundle.getString("message.title.question"), 
+                                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, 
+                                null, null, JOptionPane.YES_OPTION);
 			switch (optionValue)
 			{
             	case JOptionPane.YES_OPTION:

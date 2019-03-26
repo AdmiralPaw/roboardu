@@ -1331,6 +1331,14 @@
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.exponent" />
 			</BlockConnectors>
 		</BlockGenus>
+                
+                <BlockGenus name="pow2" kind="function" color="149 0 0" initlabel="bg.pow">
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="plug" />
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.base" />
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.exponent" />
+			</BlockConnectors>
+		</BlockGenus>
 
 		<BlockGenus name="sqrt" kind="function" color="149 193 31" initlabel="bg.sqrt">
 			<BlockConnectors>
@@ -11785,6 +11793,7 @@
 				<BlockGenusMember>modulo</BlockGenusMember>
 				<BlockGenusMember>abs</BlockGenusMember>
 				<BlockGenusMember>pow</BlockGenusMember>
+                                <BlockGenusMember>pow2</BlockGenusMember>
 				<BlockGenusMember>sqrt</BlockGenusMember>
 				<BlockGenusMember>sin</BlockGenusMember>
 				<BlockGenusMember>cos</BlockGenusMember>

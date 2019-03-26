@@ -88,7 +88,7 @@ final public class Navigator {
      * Constructs new navigator with an empty collection of canvases.
      */
     public Navigator(Workspace workspace) {
-        this(workspace, Type.WINDOW2);
+        this(workspace, Type.WINDOW2); //WINDOW2
     }
 
     public Navigator(Workspace workspace, Type UIModel) {
