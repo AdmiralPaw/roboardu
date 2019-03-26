@@ -19,6 +19,8 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 import edu.mit.blocks.workspace.Workspace;
+import java.awt.BorderLayout;
+import javax.swing.JLayeredPane;
 
 /**
  * A navigator navigates between different Explorers.
@@ -100,11 +102,13 @@ final public class Navigator {
         position = 0;
         view.setBackground(Color.darkGray);
         view.setLayout(null);
+        this.switcher = new ExplorerSwitcher();
+        this.view.add(switcher, BorderLayout.NORTH);
         this.scroll = new JScrollPane(view,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        this.switcher = new ExplorerSwitcher();
     }
+    
 
     /**
      * prints an error message for debugging purposes
@@ -343,7 +347,7 @@ final public class Navigator {
 
         private ExplorerSwitcher() {
             leftLabel = new JLabel("", SwingConstants.LEFT);
-            leftLabel.setForeground(Color.white);
+            leftLabel.setForeground(Color.black);
             leftLabel.setFont(new Font("Arial", Font.PLAIN, LABEL_HEIGHT));
             leftArrow = new CArrowButton(CArrowButton.Direction.WEST) {
                 private static final long serialVersionUID = 328149080296L;
@@ -355,7 +359,7 @@ final public class Navigator {
             leftArrow.setPreferredSize(ARROW_DIMENSION);
 
             rightLabel = new JLabel("", SwingConstants.RIGHT);
-            rightLabel.setForeground(Color.white);
+            rightLabel.setForeground(Color.black);
             rightLabel.setFont(new Font("Arial", Font.PLAIN, LABEL_HEIGHT));
             rightArrow = new CArrowButton(CArrowButton.Direction.EAST) {
                 private static final long serialVersionUID = 328149080297L;
@@ -368,9 +372,9 @@ final public class Navigator {
 
             mainLabel = new JLabel("", SwingConstants.CENTER);
             mainLabel.setFont(new Font("Arial", Font.BOLD, 15));
-            mainLabel.setForeground(Color.white);
-            mainLabel.setOpaque(false);
-
+            mainLabel.setForeground(Color.black);
+            //mainLabel.setOpaque(false);
+            
             setLayout(new GridBagLayout());
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;

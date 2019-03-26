@@ -157,7 +157,10 @@ public class OpenblocksFrame extends JFrame
                 
                         
                 sb.getComponent().setPreferredSize(new Dimension(130, 23)); 
-                ZoomSlider zoom = new ZoomSlider(workspace); 
+                ZoomSlider zoom = new ZoomSlider(workspace);
+                
+                buttons.add(workspace.factory.getFactorySwitcher());
+                
                 
                 buttons.add(zoom);
                 buttons.add(sb.getComponent()); //21.03.2019
@@ -196,7 +199,7 @@ public class OpenblocksFrame extends JFrame
 		blockCanvasLayer.setDividerSize(6);
 		this.add(buttons, BorderLayout.NORTH);
 		this.add(bottomPanel, BorderLayout.SOUTH);
-		this.add(blockCanvasLayer, BorderLayout.CENTER);
+		this.add(workspace, BorderLayout.CENTER);
 	}
 	
 	public void doOpenArduBlockFile()

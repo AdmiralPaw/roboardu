@@ -106,7 +106,7 @@ public class Window2Explorer extends JPanel implements Explorer {
         CHoverScrollPane buttonScroll = new CHoverScrollPane(
                 butpan,
                 ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
-                ScrollPolicy.HORIZONTAL_BAR_AS_NEEDED,
+                ScrollPolicy.HORIZONTAL_BAR_NEVER,
                 18, new Color(255, 133, 8), Color.darkGray);//new JScrollPane(butpan);
         //buttonScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         buttonPane.add(buttonScroll, BorderLayout.CENTER);

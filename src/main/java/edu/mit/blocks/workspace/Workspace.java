@@ -118,7 +118,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      * MiniMap associated with the blockCanvas
      */
     private MiniMap miniMap;
-    private FactoryManager factory;
+    public FactoryManager factory;
     private final FocusTraversalManager focusManager;
 
     private final TypeBlockManager typeBlockManager;
@@ -143,7 +143,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         for (final Explorer exp : factory.getNavigator().getExplorers()) {
             exp.addListener(this);
         }
-
+        
         this.miniMap = new MiniMap(this);
         this.addWidget(this.miniMap, true, true);
         this.addComponentListener(new ComponentAdapter() {
