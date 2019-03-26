@@ -417,12 +417,12 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
             Page p = pages.get(i);
             if (p.getDefaultPageColor() == null) {
                 if (i % 2 == 1) {
-                    p.setPageColor(Color.white); //new Color(30, 30, 30));
+                    p.setPageColor(new Color(225,225,225)); //new Color(30, 30, 30));
                 } else {
-                    p.setPageColor(Color.white);//new Color(40, 40, 40));
+                    p.setPageColor(new Color(225,225,225));//new Color(40, 40, 40));
                 }
             } else {
-                p.setPageColor(Color.white);//p.getDefaultPageColor());
+                p.setPageColor(new Color(225,225,225));//p.getDefaultPageColor());
             }
             widthCounter = widthCounter + p.reformBounds(widthCounter);
         }
