@@ -1,11 +1,6 @@
 package com.ardublock.ui;
 
-import java.awt.BorderLayout;
-import java.awt.Cursor;
-import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -34,7 +29,6 @@ import edu.mit.blocks.workspace.SearchBar;
 import edu.mit.blocks.workspace.ZoomSlider;
 import edu.mit.blocks.workspace.SearchableContainer;
 import edu.mit.blocks.workspace.Workspace;
-import java.awt.Image;
 
 
 public class OpenblocksFrame extends JFrame
@@ -170,7 +164,7 @@ public class OpenblocksFrame extends JFrame
 		buttons.add(openButton);
 		buttons.add(generateButton);
 		buttons.add(serialMonitorButton);
-
+		buttons.setBackground(new Color(23,161,165));
 		JPanel bottomPanel = new JPanel();
 		JButton websiteButton = new JButton(uiMessageBundle.getString("ardublock.ui.website"));
 		websiteButton.addActionListener(new ActionListener () {
@@ -193,13 +187,15 @@ public class OpenblocksFrame extends JFrame
 		bottomPanel.add(websiteButton);
 		bottomPanel.add(versionLabel);
 		СontrollerСonfiguration controller = new СontrollerСonfiguration();
+		controller.setMinimumSize(new Dimension(100,100));
+		workspace.setMinimumSize(new Dimension(1000,0));
 		JSplitPane blockCanvasLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
 				workspace, controller);
 		blockCanvasLayer.setOneTouchExpandable(true);
 		blockCanvasLayer.setDividerSize(6);
 		this.add(buttons, BorderLayout.NORTH);
 		this.add(bottomPanel, BorderLayout.SOUTH);
-		this.add(workspace, BorderLayout.CENTER);
+		this.add(blockCanvasLayer, BorderLayout.CENTER);
 	}
 	
 	public void doOpenArduBlockFile()
