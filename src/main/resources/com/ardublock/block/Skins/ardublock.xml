@@ -12204,10 +12204,13 @@
 			    <BlockGenusMember>trigger_greater</BlockGenusMember>
 			    <BlockGenusMember>trigger_less</BlockGenusMember>		    
 			</BlockDrawer>
+			<!--Sensors-->
+			<BlockDrawer button-color="93 13 125" name="bd.sensors">
+			<BlockGenusMember>little_bits_button</BlockGenusMember>
 			<!-- littlebits -->
 			<BlockDrawer button-color="93 13 125" name="bd.littlebits">
 			    <BlockGenusMember>little_bits_bendsensor</BlockGenusMember>
-			    <BlockGenusMember>little_bits_button</BlockGenusMember>
+
 			    <BlockGenusMember>little_bits_dimmer</BlockGenusMember>
 			    <BlockGenusMember>little_bits_lightsensor</BlockGenusMember>
 			    <BlockGenusMember>little_bits_lighttrigger</BlockGenusMember>

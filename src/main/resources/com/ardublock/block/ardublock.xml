@@ -2276,24 +2276,7 @@
 	      </BlockConnectors>
 	    </BlockGenus>
 		<!--****************** Utilities *************** -->		
-		<BlockGenus name="servo_default" kind="command" color="205 133 63" initlabel="bg.servo">
-			<description>
-				<text>Servo Default</text>
-			</description>
-			<BlockConnectors>
-				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="pinListDigital_D8" label="D8"/>
-				</BlockConnector>
-				<BlockConnector connector-type="number" connector-kind="socket" label="bc.angle">
-					<DefaultArg genus-name="number" label="90" />
-				</BlockConnector>
-			</BlockConnectors>
-			<Images>
-				<Image>
-					<FileLocation>com/ardublock/block/SG90.png</FileLocation>
-				</Image>
-			</Images>
-		</BlockGenus>
+
 		
 		<BlockGenus name="servo_sg90" kind="command" color="205 133 63" initlabel="bg.servo">
 			<description>
@@ -9557,6 +9540,67 @@
 				</Image>
 			</Images>
 		</BlockGenus>
+		<!-- sensors -->
+		<BlockGenus name="little_bits_button" kind="data" color="93 13 125" initlabel="bg.little_bits_button">
+					<description>
+						<text>Button</text>
+					</description>
+					<BlockConnectors>
+						<BlockConnector connector-type="number" connector-kind="socket" label="#">
+							<DefaultArg genus-name="number" label="1" />
+						</BlockConnector>
+						<BlockConnector connector-type="boolean" connector-kind="plug" />
+					</BlockConnectors>
+					<Images>
+						<Image>
+							<FileLocation>com/ardublock/block/littlebits/input/Button.jpg</FileLocation>
+						</Image>
+					</Images>
+				</BlockGenus>
+			<BlockGenus name="sensor_button" kind="data" color="93 13 125" initlabel="bg.sensor_button">
+					<description>
+						<text>Button</text>
+					</description>
+					<BlockConnectors>
+						<BlockConnector connector-type="number" connector-kind="socket" label="#">
+							<DefaultArg genus-name="number" label="1" />
+						</BlockConnector>
+						<BlockConnector connector-type="boolean" connector-kind="plug" />
+					</BlockConnectors>
+			</BlockGenus>
+		<!-- Servo -->
+		<BlockGenus name="servo_default" kind="command" color="205 133 63" initlabel="bg.servo">
+			<description>
+				<text>Servo Default</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListDigital_D8" label="D8"/>
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.angle">
+					<DefaultArg genus-name="number" label="90" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="servo_degrees_to_degrees" kind="command" color="205 133 63" initlabel="bg.servo_degrees_to_degrees">
+			<description>
+				<text>Servo Degrees_to_degrees</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListDigital_D8" label="D8"/>
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.angle">
+					<DefaultArg genus-name="number" label="0" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.angle">
+					<DefaultArg genus-name="number" label="90" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.time">
+					<DefaultArg genus-name="number" label="10" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
 		<!-- littlebits -->
 				<BlockGenus name="little_bits_bendsensor" kind="data" color="93 13 125" initlabel="bg.little_bits_bendsensor">
 					<description>
@@ -9575,22 +9619,7 @@
 					</Images>
 				</BlockGenus>
 		
-				<BlockGenus name="little_bits_button" kind="data" color="93 13 125" initlabel="bg.little_bits_button">
-					<description>
-						<text>Button</text>
-					</description>
-					<BlockConnectors>
-						<BlockConnector connector-type="number" connector-kind="socket" label="#">
-							<DefaultArg genus-name="number" label="1" />
-						</BlockConnector>
-						<BlockConnector connector-type="boolean" connector-kind="plug" />
-					</BlockConnectors>
-					<Images>
-						<Image>
-							<FileLocation>com/ardublock/block/littlebits/input/Button.jpg</FileLocation>
-						</Image>
-					</Images>
-				</BlockGenus>
+				
 		
 				<BlockGenus name="little_bits_dimmer" kind="data" color="93 13 125" initlabel="bg.little_bits_dimmer">
 					<description>
@@ -11857,6 +11886,38 @@
 				<BlockGenusMember>toint</BlockGenusMember>
 				<BlockGenusMember>constrain</BlockGenusMember>
 			</BlockDrawer>
+						<!-- sensors -->
+			<BlockDrawer button-color="93 13 125" name="bd.sensors">
+				<BlockGenusMember>sensor_button</BlockGenusMember>
+				<BlockGenusMember>little_bits_lightsensor</BlockGenusMember>
+				<BlockGenusMember>little_bits_microphone</BlockGenusMember>
+				<BlockGenusMember>little_bits_pulse</BlockGenusMember>
+				<BlockGenusMember>df_digital_viberation_sensor</BlockGenusMember>
+				<BlockGenusMember>df_joystick_module_button</BlockGenusMember>
+				<BlockGenusMember>df_joystick_module_x</BlockGenusMember>
+				<BlockGenusMember>df_joystick_module_y</BlockGenusMember>
+				<BlockGenusMember>df_analog_gp2y0a21</BlockGenusMember>
+				<BlockGenusMember>df_line_tracking_sensor</BlockGenusMember>
+				<BlockGenusMember>df_temperature_sensor</BlockGenusMember>
+				<BlockGenusMember>seeed_mag_switch</BlockGenusMember>
+				<BlockGenusMember>seeed_touch_sensor</BlockGenusMember>
+			</BlockDrawer>
+			<!-- servo -->
+			<BlockDrawer button-color="93 13 125" name="bg.servo">
+				<BlockGenusMember>servo_default</BlockGenusMember>
+				<BlockGenusMember>servo_degrees_to_degrees</BlockGenusMember>
+			</BlockDrawer>
+			<!-- diode -->
+			<BlockDrawer button-color="93 13 125" name="bg.diode">
+				<BlockGenusMember>df_led</BlockGenusMember>
+				<BlockGenusMember>df_led_pwm</BlockGenusMember>
+			</BlockDrawer>
+			<!-- display -->
+			<BlockDrawer button-color="93 13 125" name="bg.display">
+				<BlockGenusMember>DuinoEDU_Oled_I2C</BlockGenusMember>
+				<BlockGenusMember>DuinoEDU_Oled_Clear</BlockGenusMember>	
+			</BlockDrawer>
+			
 			<BlockDrawer button-color="232 156 149" name="bd.number" type="factory">
 				<BlockGenusMember>number</BlockGenusMember>
 				<BlockGenusMember>setter_variable_number</BlockGenusMember>
@@ -11886,7 +11947,7 @@
 				<BlockGenusMember>setter_variable_vector</BlockGenusMember>
 			</BlockDrawer>
 			<BlockDrawer button-color="205 133 63" name="bd.utilities" type="factory">
-				<BlockGenusMember>servo_default</BlockGenusMember>
+				
 				<BlockGenusMember>ultrasonic</BlockGenusMember>
 				<BlockGenusMember>df_dht11_temperature</BlockGenusMember>
 				<BlockGenusMember>df_dht11_humidity</BlockGenusMember>
@@ -11991,10 +12052,9 @@
 				<BlockGenusMember>Tinker_Mosfet_pwm</BlockGenusMember>
 			</BlockDrawer>
 			<BlockDrawer button-color="255 102 0" name="bd.dfrobot" type="factory">
-			    <BlockGenusMember>df_led</BlockGenusMember>
-				<BlockGenusMember>df_led_pwm</BlockGenusMember>
+
 				<BlockGenusMember>df_digital_push_button</BlockGenusMember>
-				<BlockGenusMember>df_digital_viberation_sensor</BlockGenusMember>
+				
 				<BlockGenusMember>df_analog_rotation_sensor_v1</BlockGenusMember>
 				<BlockGenusMember>df_analog_rotation_sensor_v2</BlockGenusMember>
 				<BlockGenusMember>df_servo</BlockGenusMember>
@@ -12012,21 +12072,19 @@
 				<BlockGenusMember>df_digital_infrared_motion_sensor</BlockGenusMember>
 				<BlockGenusMember>df_digital_ir_receiver_module</BlockGenusMember>
 				<BlockGenusMember>df_adjustable_infrared_sensor_switch</BlockGenusMember>
-				<BlockGenusMember>df_line_tracking_sensor</BlockGenusMember>
-				<BlockGenusMember>df_joystick_module_button</BlockGenusMember>
+
 				<BlockGenusMember>df_digital_magnetic_sensor</BlockGenusMember>
 				<BlockGenusMember>df_pizeo_disk_vibration_sensor</BlockGenusMember>
 				<BlockGenusMember>df_flame_sensor</BlockGenusMember>
-				<BlockGenusMember>df_temperature_sensor</BlockGenusMember>
-				<BlockGenusMember>df_joystick_module_x</BlockGenusMember>
-				<BlockGenusMember>df_joystick_module_y</BlockGenusMember>
+				
+
 				<BlockGenusMember>df_analog_mma7361_x</BlockGenusMember>
 				<BlockGenusMember>df_analog_mma7361_y</BlockGenusMember>
 				<BlockGenusMember>df_analog_mma7361_z</BlockGenusMember>
 				<BlockGenusMember>df_mma7260_x</BlockGenusMember>
 				<BlockGenusMember>df_mma7260_y</BlockGenusMember>
 				<BlockGenusMember>df_mma7260_z</BlockGenusMember>
-				<BlockGenusMember>df_analog_gp2y0a21</BlockGenusMember>
+				
 				<BlockGenusMember>df_analog_moisture</BlockGenusMember>
 				<BlockGenusMember>df_analog_gas_sensor</BlockGenusMember>
 				<BlockGenusMember>df_analog_co_sensor</BlockGenusMember>
@@ -12050,8 +12108,8 @@
 				<BlockGenusMember>seeed_tilt_switch</BlockGenusMember>
 				<BlockGenusMember>seeed_water_sensor</BlockGenusMember>
 				<BlockGenusMember>seeed_moisture_sensor</BlockGenusMember>
-				<BlockGenusMember>seeed_touch_sensor</BlockGenusMember>
-				<BlockGenusMember>seeed_mag_switch</BlockGenusMember>
+				
+				
 				<BlockGenusMember>seeed_ir_dist_int</BlockGenusMember>
 				<BlockGenusMember>seeed_ir_proximity_sensor</BlockGenusMember>
 				<BlockGenusMember>seeed_air_quality_sensor</BlockGenusMember>
@@ -12097,8 +12155,7 @@
 				<BlockGenusMember>DuinoEDU_humiPro</BlockGenusMember>
 				<BlockGenusMember>DuinoEDU_Barometer_Pression</BlockGenusMember>
 				<BlockGenusMember>DuinoEDU_Led_Bar</BlockGenusMember>
-				<BlockGenusMember>DuinoEDU_Oled_I2C</BlockGenusMember>
-				<BlockGenusMember>DuinoEDU_Oled_Clear</BlockGenusMember>	
+
 				<BlockGenusMember>DuinoEDU_Keypad_12_Button</BlockGenusMember>
 				<BlockGenusMember>DuinoEDU_Keypad_Post</BlockGenusMember>
 				<BlockGenusMember>DuinoEDU_Keypad_Pwd</BlockGenusMember>
@@ -12277,14 +12334,13 @@
 			<!-- littlebits -->
 			<BlockDrawer button-color="93 13 125" name="bd.littlebits">
 			    <BlockGenusMember>little_bits_bendsensor</BlockGenusMember>
-			    <BlockGenusMember>little_bits_button</BlockGenusMember>
-			    <BlockGenusMember>little_bits_dimmer</BlockGenusMember>
-			    <BlockGenusMember>little_bits_lightsensor</BlockGenusMember>
+				<BlockGenusMember>little_bits_button</BlockGenusMember>
+				<BlockGenusMember>little_bits_dimmer</BlockGenusMember>			    
 			    <BlockGenusMember>little_bits_lighttrigger</BlockGenusMember>
-			    <BlockGenusMember>little_bits_microphone</BlockGenusMember>
+			    
 			    <BlockGenusMember>little_bits_motiontrigger</BlockGenusMember>
 			    <BlockGenusMember>little_bits_pressuresensor</BlockGenusMember>
-			    <BlockGenusMember>little_bits_pulse</BlockGenusMember>
+			    
 			    <BlockGenusMember>little_bits_remotetrigger</BlockGenusMember>
 			    <BlockGenusMember>little_bits_rollerswitch</BlockGenusMember>
 			    <BlockGenusMember>little_bits_slidedimmer</BlockGenusMember>
