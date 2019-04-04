@@ -86,7 +86,7 @@ public class Engine_RightTurn extends TranslatorBlock
 	@Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
-            translator.addDefinitionCommand(MOTORS_DEFINE_PIN);
+            translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
             translator.addDefinitionCommand(MOTORS_DEFINE_VAR);
             translator.addDefinitionCommand(MOTORS_DEFINE);
             translator.addDefinitionCommand(MOTORS_RIGHT_DEFINE);
