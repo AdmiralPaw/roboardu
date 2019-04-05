@@ -11202,7 +11202,33 @@
             </BlockConnectors>
         </BlockGenus>
 
+		<!--ENCODER HERE====================================================================== -->
+
+		<BlockGenus name="EncoderSimple" kind="data" color="0 180 255" initlabel="bg.EncoderSimple" editable-label="no">
+			<description>
+				<text>Gives variable of encoder</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number"
+								connector-kind="plug" label="bc.EncoderSimple">
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="EncoderFull" kind="data" color="0 180 255" initlabel="bg.EncoderFull" editable-label="no">
+			<description>
+				<text>Gives variable of encoder</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number"
+								connector-kind="plug" label="bc.EncoderFull">
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+
 	</BlockGenuses>
+
+
+
 
 <!-- Start of Ardublock Standard UI layout -->
 	<BlockFamilies>
@@ -11960,10 +11986,24 @@
 				<BlockGenusMember>DuinoEDU_Oled_I2C</BlockGenusMember>
 				<BlockGenusMember>DuinoEDU_Oled_Clear</BlockGenusMember>	
 			</BlockDrawer>
+			<!-- accel -->
             <BlockDrawer button-color="0 180 255" name="bg.accel">
                 <BlockGenusMember>Accel</BlockGenusMember>
                 <BlockGenusMember>Gyro</BlockGenusMember>
             </BlockDrawer>
+			<!-- motors -->
+			<BlockDrawer button-color="93 13 125" name="bd.motors" type="factory">
+				<BlockGenusMember>Engine_Forward</BlockGenusMember>
+				<BlockGenusMember>Engine_Back</BlockGenusMember>
+				<BlockGenusMember>Engine_Stop</BlockGenusMember>
+				<BlockGenusMember>Engine_RightTurn</BlockGenusMember>
+				<BlockGenusMember>Engine_LeftTurn</BlockGenusMember>
+			</BlockDrawer>
+			<!-- encoder -->
+			<BlockDrawer button-color="0 180 255" name="bg.encoder">
+				<BlockGenusMember>EncoderSimple</BlockGenusMember>
+				<BlockGenusMember>EncoderFull</BlockGenusMember>
+			</BlockDrawer>
 			<BlockDrawer button-color="232 156 149" name="bd.number" type="factory">
 				<BlockGenusMember>number</BlockGenusMember>
 				<BlockGenusMember>setter_variable_number</BlockGenusMember>
@@ -12066,13 +12106,6 @@
 				<BlockGenusMember>bleshield_read_poly</BlockGenusMember>
 				<BlockGenusMember>bleshield_compare</BlockGenusMember>
 			</BlockDrawer>
-                        <BlockDrawer button-color="93 13 125" name="bd.motors" type="factory"> 
-                                <BlockGenusMember>Engine_Forward</BlockGenusMember>
-                                <BlockGenusMember>Engine_Back</BlockGenusMember>
-                                <BlockGenusMember>Engine_Stop</BlockGenusMember>
-                                <BlockGenusMember>Engine_RightTurn</BlockGenusMember>
-                                <BlockGenusMember>Engine_LeftTurn</BlockGenusMember>
-                        </BlockDrawer>
 			<BlockDrawer button-color="120 120 120" name="bd.especial" type="factory">
 				<BlockGenusMember>code_head</BlockGenusMember>
 				<BlockGenusMember>code_setup</BlockGenusMember>
