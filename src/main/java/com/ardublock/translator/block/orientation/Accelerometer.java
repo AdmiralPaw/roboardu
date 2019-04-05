@@ -33,6 +33,6 @@ public class Accelerometer extends TranslatorBlock
         translator.addSetupCommand(Accel+".initialize();\ndelay(100);");
 
 
-        return codePrefix + Accel + ".getAcceleration(" + AccX + ", " + AccY + ", " + AccZ + ")\n" + codeSuffix;
+        return codePrefix + Accel + ".getAcceleration(" + AccX + ", " + AccY + ", " + AccZ + ");\n" + codeSuffix;
     }
 }

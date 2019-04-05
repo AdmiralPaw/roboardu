@@ -11960,14 +11960,10 @@
 				<BlockGenusMember>DuinoEDU_Oled_I2C</BlockGenusMember>
 				<BlockGenusMember>DuinoEDU_Oled_Clear</BlockGenusMember>	
 			</BlockDrawer>
-<<<<<<< HEAD
             <BlockDrawer button-color="0 180 255" name="bg.accel">
                 <BlockGenusMember>Accel</BlockGenusMember>
                 <BlockGenusMember>Gyro</BlockGenusMember>
             </BlockDrawer>
-=======
-			
->>>>>>> 252e45916d6f51fe8cf01a0b600ff720d3dc8453
 			<BlockDrawer button-color="232 156 149" name="bd.number" type="factory">
 				<BlockGenusMember>number</BlockGenusMember>
 				<BlockGenusMember>setter_variable_number</BlockGenusMember>
