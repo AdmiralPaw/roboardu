@@ -4136,10 +4136,10 @@
 			</description>
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="number" label="1" />
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
 				</BlockConnector>
 				<BlockConnector connector-type="boolean" connector-kind="socket" label="bc.status">
-					<DefaultArg genus-name="digital-on" label="ON" />
+					<DefaultArg genus-name="digital-high" label="HIGH" />
 				</BlockConnector>
 			</BlockConnectors>
 			<Images>
@@ -4155,7 +4155,7 @@
 			</description>
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="number" label="1" />
+					<DefaultArg genus-name="pinListAnalogWrite_D3" label="D3" />
 				</BlockConnector>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.level">
 					<DefaultArg genus-name="number" label="255" />
@@ -9601,6 +9601,112 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
+		<!-- diode -->
+		<BlockGenus name="led_blink" kind="command" color="255 102 0" initlabel="bg.led_blink">
+			<description>
+				<text>Led Module</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.time">
+					<DefaultArg genus-name="number" label="10" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.time">
+					<DefaultArg genus-name="number" label="10" />
+				</BlockConnector>
+			</BlockConnectors>
+			<Images>
+				<Image>
+					<FileLocation>com/ardublock/block/dfrobot/dfr0021.png</FileLocation>
+				</Image>
+			</Images>
+		</BlockGenus>
+		
+		<BlockGenus name="rgb_led" kind="command" color="255 102 0" initlabel="bg.rgb_led">
+			<description>
+				<text>RGB LED Module</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListDigital_D1" label="D1" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListDigital_D2" label="D2" />
+				</BlockConnector>
+				<BlockConnector connector-type="boolean" connector-kind="socket" label="bc.status">
+					<DefaultArg genus-name="digital-high" label="HIGH" />
+				</BlockConnector>
+				<BlockConnector connector-type="boolean" connector-kind="socket" label="bc.status">
+					<DefaultArg genus-name="digital-high" label="HIGH" />
+				</BlockConnector>
+				<BlockConnector connector-type="boolean" connector-kind="socket" label="bc.status">
+					<DefaultArg genus-name="digital-high" label="HIGH" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		
+		<BlockGenus name="rgb_led_blink" kind="command" color="255 102 0" initlabel="bg.rgb_led_blink">
+			<description>
+				<text>RGB LED Module</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListAnalogWrite_D3" label="D3" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListAnalogWrite_D6" label="D6" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListAnalogWrite_D9" label="D9" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.level">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.level">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.level">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+								<BlockConnector connector-type="number" connector-kind="socket" label="bc.time">
+					<DefaultArg genus-name="number" label="10" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.time">
+					<DefaultArg genus-name="number" label="10" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		
+		<BlockGenus name="rgb_led_pwm" kind="command" color="255 102 0" initlabel="bg.rgb_led_pwm">
+			<description>
+				<text>RGB LED Module</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListAnalogWrite_D3" label="D3" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListAnalogWrite_D6" label="D6" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListAnalogWrite_D9" label="D9" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.level">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.level">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.level">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
 		<!-- littlebits -->
 				<BlockGenus name="little_bits_bendsensor" kind="data" color="93 13 125" initlabel="bg.little_bits_bendsensor">
 					<description>
@@ -11848,16 +11954,23 @@
 				<BlockGenusMember>seeed_mag_switch</BlockGenusMember>
 				<BlockGenusMember>seeed_touch_sensor</BlockGenusMember>
 			</BlockDrawer>
+			
 			<!-- servo -->
 			<BlockDrawer button-color="93 13 125" name="bg.servo">
 				<BlockGenusMember>servo_default</BlockGenusMember>
 				<BlockGenusMember>servo_degrees_to_degrees</BlockGenusMember>
 			</BlockDrawer>
+			
 			<!-- diode -->
 			<BlockDrawer button-color="93 13 125" name="bg.diode">
 				<BlockGenusMember>df_led</BlockGenusMember>
+				<BlockGenusMember>led_blink</BlockGenusMember>
 				<BlockGenusMember>df_led_pwm</BlockGenusMember>
+				<BlockGenusMember>rgb_led</BlockGenusMember>
+				<BlockGenusMember>rgb_led_blink</BlockGenusMember>
+				<BlockGenusMember>rgb_led_pwm</BlockGenusMember>
 			</BlockDrawer>
+			
 			<!-- display -->
 			<BlockDrawer button-color="93 13 125" name="bg.display">
 				<BlockGenusMember>DuinoEDU_Oled_I2C</BlockGenusMember>
@@ -11892,6 +12005,7 @@
 				<BlockGenusMember>variable_vector</BlockGenusMember>
 				<BlockGenusMember>setter_variable_vector</BlockGenusMember>
 			</BlockDrawer>
+			
 			<BlockDrawer button-color="205 133 63" name="bd.utilities" type="factory">
 				
 				<BlockGenusMember>ultrasonic</BlockGenusMember>
@@ -11903,6 +12017,7 @@
 				<BlockGenusMember>number-single-I2C-address</BlockGenusMember>
 				<BlockGenusMember>number-single-fixed-parallel</BlockGenusMember>
 			</BlockDrawer>
+			
 			<BlockDrawer button-color="255 255 255" name="bd.communication" type="factory">
 				<BlockGenusMember>serial_write</BlockGenusMember>
 				<BlockGenusMember>serial_print</BlockGenusMember>
