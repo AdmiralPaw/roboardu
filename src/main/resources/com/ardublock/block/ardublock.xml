@@ -2276,24 +2276,7 @@
 	      </BlockConnectors>
 	    </BlockGenus>
 		<!--****************** Utilities *************** -->		
-		<BlockGenus name="servo_default" kind="command" color="205 133 63" initlabel="bg.servo">
-			<description>
-				<text>Servo Default</text>
-			</description>
-			<BlockConnectors>
-				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="pinListDigital_D8" label="D8"/>
-				</BlockConnector>
-				<BlockConnector connector-type="number" connector-kind="socket" label="bc.angle">
-					<DefaultArg genus-name="number" label="90" />
-				</BlockConnector>
-			</BlockConnectors>
-			<Images>
-				<Image>
-					<FileLocation>com/ardublock/block/SG90.png</FileLocation>
-				</Image>
-			</Images>
-		</BlockGenus>
+
 		
 		<BlockGenus name="servo_sg90" kind="command" color="205 133 63" initlabel="bg.servo">
 			<description>
@@ -9585,6 +9568,39 @@
 						<BlockConnector connector-type="boolean" connector-kind="plug" />
 					</BlockConnectors>
 			</BlockGenus>
+		<!-- Servo -->
+		<BlockGenus name="servo_default" kind="command" color="205 133 63" initlabel="bg.servo">
+			<description>
+				<text>Servo Default</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListDigital_D8" label="D8"/>
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.angle">
+					<DefaultArg genus-name="number" label="90" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="servo_degrees_to_degrees" kind="command" color="205 133 63" initlabel="bg.servo_degrees_to_degrees">
+			<description>
+				<text>Servo Degrees_to_degrees</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListDigital_D8" label="D8"/>
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.angle">
+					<DefaultArg genus-name="number" label="0" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.angle">
+					<DefaultArg genus-name="number" label="90" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.time">
+					<DefaultArg genus-name="number" label="10" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
 		<!-- littlebits -->
 				<BlockGenus name="little_bits_bendsensor" kind="data" color="93 13 125" initlabel="bg.little_bits_bendsensor">
 					<description>
@@ -10359,8 +10375,62 @@
 				</Image>
 			</Images>			
 		</BlockGenus>			
-		
-		
+		<!-- MOTORS-->
+		<BlockGenus name="Engine_RightTurn" kind="command" color="205 133 63" 
+                            initlabel="bg.Engine_RightTurn">
+			<description>
+				<text>Engine_RightTurn</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.speed_number">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+                	<BlockGenus name="Engine_LeftTurn" kind="command" color="205 133 63" 
+                                    initlabel="bg.Engine_LeftTurn">
+			<description>
+				<text>Engine_LeftTurn</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.speed_number">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+                <BlockGenus name="Engine_Forward" kind="command" color="205 133 63" 
+                            initlabel="bg.Engine_Forward">
+			<description>
+				<text>Engine_Forward</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.speed_number">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+                <BlockGenus name="Engine_Back" kind="command" color="205 133 63" 
+                            initlabel="bg.Engine_Back">
+			<description>
+				<text>Engine_Back</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.speed_number">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+                <BlockGenus name="Engine_Stop" kind="command" color="205 133 63" 
+                            initlabel="bg.Engine_Stop">
+			<description>
+				<text>Engine_Stop</text>
+			</description>
+		</BlockGenus>
+                
 		<!-- 
 		TEST tft-msg
 				<BlockConnectors>
@@ -11875,6 +11945,11 @@
 				<BlockGenusMember>seeed_mag_switch</BlockGenusMember>
 				<BlockGenusMember>seeed_touch_sensor</BlockGenusMember>
 			</BlockDrawer>
+			<!-- servo -->
+			<BlockDrawer button-color="93 13 125" name="bg.servo">
+				<BlockGenusMember>servo_default</BlockGenusMember>
+				<BlockGenusMember>servo_degrees_to_degrees</BlockGenusMember>
+			</BlockDrawer>
 			<!-- diode -->
 			<BlockDrawer button-color="93 13 125" name="bg.diode">
 				<BlockGenusMember>df_led</BlockGenusMember>
@@ -11885,10 +11960,14 @@
 				<BlockGenusMember>DuinoEDU_Oled_I2C</BlockGenusMember>
 				<BlockGenusMember>DuinoEDU_Oled_Clear</BlockGenusMember>	
 			</BlockDrawer>
+<<<<<<< HEAD
             <BlockDrawer button-color="0 180 255" name="bg.accel">
                 <BlockGenusMember>Accel</BlockGenusMember>
                 <BlockGenusMember>Gyro</BlockGenusMember>
             </BlockDrawer>
+=======
+			
+>>>>>>> 252e45916d6f51fe8cf01a0b600ff720d3dc8453
 			<BlockDrawer button-color="232 156 149" name="bd.number" type="factory">
 				<BlockGenusMember>number</BlockGenusMember>
 				<BlockGenusMember>setter_variable_number</BlockGenusMember>
@@ -11918,7 +11997,7 @@
 				<BlockGenusMember>setter_variable_vector</BlockGenusMember>
 			</BlockDrawer>
 			<BlockDrawer button-color="205 133 63" name="bd.utilities" type="factory">
-				<BlockGenusMember>servo_default</BlockGenusMember>
+				
 				<BlockGenusMember>ultrasonic</BlockGenusMember>
 				<BlockGenusMember>df_dht11_temperature</BlockGenusMember>
 				<BlockGenusMember>df_dht11_humidity</BlockGenusMember>
@@ -11991,6 +12070,13 @@
 				<BlockGenusMember>bleshield_read_poly</BlockGenusMember>
 				<BlockGenusMember>bleshield_compare</BlockGenusMember>
 			</BlockDrawer>
+                        <BlockDrawer button-color="93 13 125" name="bd.motors" type="factory"> 
+                                <BlockGenusMember>Engine_Forward</BlockGenusMember>
+                                <BlockGenusMember>Engine_Back</BlockGenusMember>
+                                <BlockGenusMember>Engine_Stop</BlockGenusMember>
+                                <BlockGenusMember>Engine_RightTurn</BlockGenusMember>
+                                <BlockGenusMember>Engine_LeftTurn</BlockGenusMember>
+                        </BlockDrawer>
 			<BlockDrawer button-color="120 120 120" name="bd.especial" type="factory">
 				<BlockGenusMember>code_head</BlockGenusMember>
 				<BlockGenusMember>code_setup</BlockGenusMember>
