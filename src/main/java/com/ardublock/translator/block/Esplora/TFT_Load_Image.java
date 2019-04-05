@@ -30,7 +30,7 @@ public class TFT_Load_Image extends TranslatorBlock
 		translator.addHeaderFile("SD.h");
 		translator.addHeaderFile("TFT.h");
 		
-		translator.addDefinitionCommand("#define SD_CS    8");
+		translator.addHeaderDefinition("#define SD_CS    8");
 
 		
 		String ret = tb.toCode();

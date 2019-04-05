@@ -28,6 +28,7 @@ public class Translator
 	private static final String variablePrefix = "_ABVAR_";
 
 	private Set<String> headerFileSet;
+        private Set<String> headerDefinitionSet;
 	private Set<String> definitionSet;
 	private List<String> setupCommand;
 	private List<String> guinoCommand;
@@ -70,6 +71,15 @@ public class Translator
 			headerCommand.append("\n");
 		}
 		
+                if (!headerDefinitionSet.isEmpty())
+		{
+			for (String command:headerDefinitionSet)
+			{
+				headerCommand.append(command + "\n");
+			}
+			headerCommand.append("\n");
+		}
+                
 		if (!definitionSet.isEmpty())
 		{
 			for (String command:definitionSet)
@@ -161,7 +171,8 @@ public class Translator
 	public void reset()
 	{
 		headerFileSet = new LinkedHashSet<String>();
-		definitionSet = new LinkedHashSet<String>();
+		headerDefinitionSet = new LinkedHashSet<String>();
+                definitionSet = new LinkedHashSet<String>();
 		setupCommand = new LinkedList<String>();
 		guinoCommand = new LinkedList<String>();
 		functionNameSet = new HashSet<String>();
@@ -193,6 +204,14 @@ public class Translator
 		if (!headerFileSet.contains(headerFile))
 		{
 			headerFileSet.add(headerFile);
+		}
+	}
+        
+        public void addHeaderDefinition(String headerDefinition)
+	{
+		if (!headerDefinitionSet.contains(headerDefinition))
+		{
+			headerDefinitionSet.add(headerDefinition);
 		}
 	}
 	
