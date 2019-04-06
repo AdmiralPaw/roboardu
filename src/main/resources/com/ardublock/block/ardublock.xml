@@ -11308,6 +11308,18 @@
             </BlockConnectors>
         </BlockGenus>
 
+		<BlockGenus name="AccelModule" kind="command" color="0 180 255" initlabel="bg.AccelModule" editable-label="no">
+			<description>
+				<text>Gives variable of module ofacceleration</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.AccelModule">
+					<DefaultArg genus-name="variable_number" label="AccelModule" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+
 		<!--ENCODER HERE====================================================================== -->
 
 		<BlockGenus name="EncoderSimple" kind="data" color="0 180 255" initlabel="bg.EncoderSimple" editable-label="no">
@@ -11330,6 +11342,10 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
+
+		<!--DISPLAY HERE====================================================================== -->
+
+
 
 	</BlockGenuses>
 
