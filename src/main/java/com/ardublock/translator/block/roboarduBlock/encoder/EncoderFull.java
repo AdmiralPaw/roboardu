@@ -14,10 +14,21 @@ public class EncoderFull extends TranslatorBlock {
     @Override
         public String toCode() throws SocketNullException, SubroutineNotDeclaredException
         {
-            String EncoderSimple="EncoderSimple";
-            String EncoderFull="EncoderFull";
+            String EncoderSimple=translator.getNumberVariable("EncoderSimple");
+            String EncoderFull=translator.getNumberVariable("EncoderFull");
 
-
+            if (EncoderFull == null)
+            {
+                EncoderFull = translator.buildVariableName("EncoderFull");
+                translator.addNumberVariable("EncoderFull", EncoderFull);
+                translator.addDefinitionCommand("int " + EncoderFull + " = 0 ;");
+            }
+            if (EncoderSimple == null)
+            {
+                EncoderSimple = translator.buildVariableName("EncoderSimple");
+                translator.addNumberVariable("EncoderSimple", EncoderSimple);
+                translator.addDefinitionCommand("int " + EncoderSimple + " = 0 ;");
+            }
 
             translator.addDefinitionCommand("\nvoid Encoder_FUNCTION(){\n" +
                 EncoderSimple+"++;\n"+

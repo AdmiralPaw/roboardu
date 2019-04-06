@@ -14,18 +14,24 @@ public class EncoderSimple extends TranslatorBlock{
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {
-        String EncoderSimple="EncoderSimple";
-        String EncoderFull="EncoderFull";
+        String EncoderSimple=translator.getNumberVariable("EncoderSimple");
 
 
+        if (EncoderSimple == null)
+        {
+            EncoderSimple = translator.buildVariableName("EncoderSimple");
+            translator.addNumberVariable("EncoderSimple", EncoderSimple);
+            translator.addDefinitionCommand("int " + EncoderSimple + " = 0 ;");
+        }
 
-        translator.addDefinitionCommand("\nvoid Encoder_FUNCTION(){\n" +
-                EncoderSimple+"++;\n"+
-                EncoderFull+"="+EncoderSimple+"/20;\n"+
-                "}\n");
-        translator.addSetupCommand("attachInterrupt(2, Encoder_FUNCTION, RISING);\n");
+        if(translator.getNumberVariable("EncoderFull")==null){
+            translator.addDefinitionCommand("\nvoid Encoder_FUNCTION(){\n" +
+                    EncoderSimple+"++;\n"+
+                    "}\n");
+            translator.addSetupCommand("attachInterrupt(2, Encoder_FUNCTION, RISING);\n");
+        }
 
 
-        return codePrefix + EncoderFull + codeSuffix;
+        return codePrefix + EncoderSimple + codeSuffix;
     }
 }
