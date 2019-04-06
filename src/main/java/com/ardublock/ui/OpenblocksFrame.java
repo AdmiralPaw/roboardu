@@ -13,7 +13,15 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+ 
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import com.ardublock.core.Context;
 import com.ardublock.ui.listener.ArdublockWorkspaceListener;
 import com.ardublock.ui.listener.GenerateCodeButtonListener;
@@ -51,7 +59,8 @@ public class OpenblocksFrame extends JFrame
 	
 	public String makeFrameTitle()
 	{
-		String title = Context.APP_NAME + " " + context.getSaveFileName();
+		String title = context.getSaveFileName() + ".adb" + " | " + 
+                        Context.APP_NAME + " v." + "0.1";
 		if (context.isWorkspaceChanged())
 		{
 			title = title + " *";
@@ -97,6 +106,70 @@ public class OpenblocksFrame extends JFrame
 		// WTF I can't add worksapcelistener by workspace contrller
 		workspace.addWorkspaceListener(new ArdublockWorkspaceListener(this));
 
+                JMenuBar menuBar = new JMenuBar();
+                JMenu fileMenu = new JMenu(uiMessageBundle.getString("ardublock.ui.file"));
+                JMenuItem newItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.new"));
+                JMenuItem openItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.open") + "...");
+                JMenuItem saveItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.save"));       
+                JMenuItem saveAsItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveAs") + "...");
+                JMenuItem exitItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.exit"));
+                JMenu toolsMenu = new JMenu(uiMessageBundle.getString("ardublock.ui.tools"));
+                JMenuItem uploadItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.upload"));
+                JMenuItem serialMonitorItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.serialMonitor"));
+                JMenuItem saveImageItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveImage"));
+                
+                newItem.addActionListener(new NewButtonListener(this));
+                openItem.addActionListener(new OpenButtonListener(this));
+                saveItem.addActionListener(new SaveButtonListener(this));
+                saveAsItem.addActionListener(new SaveAsButtonListener(this));
+                exitItem.addActionListener(new ActionListener() {           
+                        public void actionPerformed(ActionEvent e) {
+                            System.exit(0);             
+                        }           
+                });
+                uploadItem.addActionListener(new GenerateCodeButtonListener(this, context));
+                serialMonitorItem.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				context.getEditor().handleSerial();
+			}
+		});
+                saveImageItem.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				Dimension size = workspace.getCanvasSize();
+				System.out.println("size: " + size);
+				BufferedImage bi = new BufferedImage(2560, 2560, BufferedImage.TYPE_INT_RGB);
+				Graphics2D g = (Graphics2D)bi.createGraphics();
+				double theScaleFactor = (300d/72d);  
+				g.scale(theScaleFactor,theScaleFactor);
+				
+				workspace.getBlockCanvas().getPageAt(0).getJComponent().paint(g);
+				try{
+					final JFileChooser fc = new JFileChooser();
+					fc.setSelectedFile(new File("ardublock.png"));
+					int returnVal = fc.showSaveDialog(workspace.getBlockCanvas().getJComponent());
+			        if (returnVal == JFileChooser.APPROVE_OPTION) {
+			            File file = fc.getSelectedFile();
+						ImageIO.write(bi,"png",file);
+			        }
+				} catch (Exception e1) {
+					
+				} finally {
+					g.dispose();
+				}
+			}
+		});
+                
+                fileMenu.add(newItem);
+                fileMenu.add(openItem);
+                fileMenu.add(saveItem);
+                fileMenu.add(saveAsItem);
+                fileMenu.addSeparator();
+                fileMenu.add(exitItem);
+                toolsMenu.add(uploadItem);
+                toolsMenu.add(serialMonitorItem);
+                
+                menuBar.add(fileMenu);
+                menuBar.add(toolsMenu);
                 
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new FlowLayout());
@@ -183,9 +256,9 @@ public class OpenblocksFrame extends JFrame
 		});
 		JLabel versionLabel = new JLabel("v " + uiMessageBundle.getString("ardublock.ui.version"));
 		
-		bottomPanel.add(saveImageButton);
-		bottomPanel.add(websiteButton);
-		bottomPanel.add(versionLabel);
+//		bottomPanel.add(saveImageButton);
+//		bottomPanel.add(websiteButton);
+//		bottomPanel.add(versionLabel);
 		СontrollerСonfiguration controller = new СontrollerСonfiguration();
 		controller.setMinimumSize(new Dimension(100,100));
 		workspace.setMinimumSize(new Dimension(1000,0));
@@ -193,8 +266,9 @@ public class OpenblocksFrame extends JFrame
 				workspace, controller);
 		blockCanvasLayer.setOneTouchExpandable(true);
 		blockCanvasLayer.setDividerSize(6);
-		this.add(buttons, BorderLayout.NORTH);
-		this.add(bottomPanel, BorderLayout.SOUTH);
+		this.setJMenuBar(menuBar);
+                this.add(buttons, BorderLayout.NORTH);
+//		this.add(bottomPanel, BorderLayout.SOUTH);
 		this.add(blockCanvasLayer, BorderLayout.CENTER);
 	}
 	

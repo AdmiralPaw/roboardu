@@ -5,7 +5,7 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
-public class Accelerometer extends TranslatorBlock
+    public class Accelerometer extends TranslatorBlock
 {
     public Accelerometer (Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
@@ -33,6 +33,7 @@ public class Accelerometer extends TranslatorBlock
         translator.addSetupCommand(Accel+".initialize();\ndelay(100);");
 
 
-        return codePrefix + Accel + ".getAcceleration(" + AccX + ", " + AccY + ", " + AccZ + ");\n" + codeSuffix;
+        return codePrefix + Accel + ".getAcceleration(" + AccX + ", " 
+                + AccY + ", " + AccZ + ");\n" + codeSuffix;
     }
 }

@@ -26,6 +26,8 @@ public class AccelerometerModule extends TranslatorBlock {
         translator.addSetupCommand(Accel+".initialize();\ndelay(100);");
 
 
-        return codePrefix + AccMod +"=sqrt("+ Accel + ".getAccelerationX()"+ Accel + ".getAccelerationY()"+ Accel + ".getAccelerationZ()" + ");\n" + codeSuffix;
+        return codePrefix + AccMod +"=sqrt("+ Accel + ".getAccelerationX()"+ 
+                Accel + ".getAccelerationY()"+ 
+                Accel + ".getAccelerationZ()" + ");\n" + codeSuffix;
     }
 }

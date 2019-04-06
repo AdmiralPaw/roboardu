@@ -68,7 +68,6 @@ public class Translator
 			{
 				headerCommand.append("#include <" + file + ">\n");
 			}
-			headerCommand.append("\n");
 		}
 		
                 if (!headerDefinitionSet.isEmpty())
@@ -77,7 +76,6 @@ public class Translator
 			{
 				headerCommand.append(command + "\n");
 			}
-			headerCommand.append("\n");
 		}
                 
 		if (!definitionSet.isEmpty())
@@ -86,7 +84,6 @@ public class Translator
 			{
 				headerCommand.append(command + "\n");
 			}
-			headerCommand.append("\n");
 		}
 		
 		if (!functionNameSet.isEmpty())
@@ -95,10 +92,10 @@ public class Translator
 			{
 				headerCommand.append("void " + functionName + "();\n");
 			}
-			headerCommand.append("\n");
 		}
 		
-		return headerCommand.toString() + generateSetupFunction() +generateGuinoFunction();
+		return headerCommand.toString() + "\n" + generateSetupFunction() +
+                        generateGuinoFunction();
 	}
 	
 	public String generateSetupFunction()

@@ -10518,6 +10518,22 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
+                <BlockGenus name="Engine_ForwardDistance" kind="command" color="205 133 63" 
+                            initlabel="bg.Engine_ForwardDistance">
+			<description>
+				<text>Engine_ForwardDistance</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.speed_number">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+                                <BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.distance">
+					<DefaultArg genus-name="number" label="50" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
                 <BlockGenus name="Engine_Back" kind="command" color="205 133 63" 
                             initlabel="bg.Engine_Back">
 			<description>
@@ -10527,6 +10543,22 @@
 				<BlockConnector connector-type="number" 
                                                 connector-kind="socket" label="bc.speed_number">
 					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+                <BlockGenus name="Engine_BackDistance" kind="command" color="205 133 63" 
+                            initlabel="bg.Engine_BackDistance">
+			<description>
+				<text>Engine_BackDistance</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.speed_number">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+                                <BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.distance">
+					<DefaultArg genus-name="number" label="50" />
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
@@ -11275,15 +11307,15 @@
             <BlockConnectors>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.AccelX">
-                    <DefaultArg genus-name="variable_number" label="AccelX" />
+                    <DefaultArg genus-name="number" label="AccelX" />
                 </BlockConnector>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.AccelY">
-                    <DefaultArg genus-name="variable_number" label="AccelY" />
+                    <DefaultArg genus-name="number" label="AccelY" />
                 </BlockConnector>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.AccelZ">
-                    <DefaultArg genus-name="variable_number" label="AccelZ" />
+                    <DefaultArg genus-name="number" label="AccelZ" />
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -11295,15 +11327,15 @@
             <BlockConnectors>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.GyroX">
-                    <DefaultArg genus-name="variable_number" label="GyroX" />
+                    <DefaultArg genus-name="number" label="GyroX" />
                 </BlockConnector>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.GyroY">
-                    <DefaultArg genus-name="variable_number" label="GyroY" />
+                    <DefaultArg genus-name="number" label="GyroY" />
                 </BlockConnector>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.GyroZ">
-                    <DefaultArg genus-name="variable_number" label="GyroZ" />
+                    <DefaultArg genus-name="number" label="GyroZ" />
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -11315,7 +11347,7 @@
 			<BlockConnectors>
 				<BlockConnector connector-type="number"
 								connector-kind="socket" label="bc.AccelModule">
-					<DefaultArg genus-name="variable_number" label="AccelModule" />
+					<DefaultArg genus-name="number" label="AccelModule" />
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
@@ -12000,7 +12032,19 @@
 			<FamilyMember>Midi_AS</FamilyMember>
 			<FamilyMember>Midi_B</FamilyMember>
 		</BlockFamily>
-		
+                <!--MOTORS-->
+		<BlockFamily>
+                        <FamilyMember>Engine_ForwardDistance</FamilyMember>
+			<FamilyMember>Engine_BackDistance</FamilyMember>
+                </BlockFamily>
+                <BlockFamily>
+                        <FamilyMember>Engine_Forward</FamilyMember>
+			<FamilyMember>Engine_Back</FamilyMember>
+                </BlockFamily>
+                <BlockFamily>
+                        <FamilyMember>Engine_RightTurn</FamilyMember>
+			<FamilyMember>Engine_LeftTurn</FamilyMember>
+                </BlockFamily>
 	</BlockFamilies>
 
 	<BlockDrawerSets>
@@ -12123,7 +12167,9 @@
 			<!-- motors -->
 			<BlockDrawer button-color="93 13 125" name="bd.motors" type="factory">
 				<BlockGenusMember>Engine_Forward</BlockGenusMember>
+                                <BlockGenusMember>Engine_ForwardDistance</BlockGenusMember>
 				<BlockGenusMember>Engine_Back</BlockGenusMember>
+                                <BlockGenusMember>Engine_BackDistance</BlockGenusMember>
 				<BlockGenusMember>Engine_Stop</BlockGenusMember>
 				<BlockGenusMember>Engine_RightTurn</BlockGenusMember>
 				<BlockGenusMember>Engine_LeftTurn</BlockGenusMember>
