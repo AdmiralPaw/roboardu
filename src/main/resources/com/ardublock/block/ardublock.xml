@@ -11391,16 +11391,85 @@
 
 		<!--DISPLAY HERE====================================================================== -->
 
-        <BlockGenus name="DisplayClear" kind="command" color="0 180 255" initlabel="bg.EncoderFull" editable-label="no">
+        <BlockGenus name="DisplayClear" kind="command" color="0 180 255" initlabel="bg.DisplayClear" editable-label="no">
             <description>
-                <text>Clears the display</text>
+                <text>Clears buffer</text>
             </description>
-            <BlockConnectors>
-                <BlockConnector connector-type="number"
-                                connector-kind="socket" label="bc.EncoderFull">
-                </BlockConnector>
-            </BlockConnectors>
         </BlockGenus>
+		<BlockGenus name="DisplayShow" kind="command" color="0 180 255" initlabel="bg.DisplayShow" editable-label="no">
+			<description>
+				<text>Shows buffer on display</text>
+			</description>
+		</BlockGenus>
+		<BlockGenus name="DisplayString" kind="command" color="0 180 255" initlabel="bg.DisplayString" editable-label="no">
+			<description>
+				<text>Adds string to buffer</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="string"
+								connector-kind="socket" label="bc.DisplayStringString">
+					<DefaultArg genus-name="message" label="Hello world!" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayStringSize">
+					<DefaultArg genus-name="number" label="1" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayStringCursorX">
+					<DefaultArg genus-name="number" label="10" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayStringCursorY">
+					<DefaultArg genus-name="number" label="0" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="DisplayLine" kind="command" color="0 180 255" initlabel="bg.DisplayLine" editable-label="no">
+			<description>
+				<text>Adds string to buffer</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayLineBeginX">
+					<DefaultArg genus-name="number" label="10" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayLineBeginY">
+					<DefaultArg genus-name="number" label="10" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayLineEndX">
+					<DefaultArg genus-name="number" label="20" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayLineEndY">
+					<DefaultArg genus-name="number" label="20" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="DisplayRectangle" kind="command" color="0 180 255" initlabel="bg.DisplayRectangle" editable-label="no">
+			<description>
+				<text>Adds string to buffer</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayRectangleBeginX">
+					<DefaultArg genus-name="number" label="10" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayRectangleBeginY">
+					<DefaultArg genus-name="number" label="10" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayRectangleEndX">
+					<DefaultArg genus-name="number" label="20" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayRectangleEndY">
+					<DefaultArg genus-name="number" label="20" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
 
 	</BlockGenuses>
 
@@ -12184,18 +12253,17 @@
 			
 			<!-- display -->
 			<BlockDrawer button-color="93 13 125" name="bg.display">
-				<BlockGenusMember>DuinoEDU_Oled_I2C</BlockGenusMember>
-				<BlockGenusMember>DuinoEDU_Oled_Clear</BlockGenusMember>	
+				<BlockGenusMember>DisplayClear</BlockGenusMember>
+				<BlockGenusMember>DisplayShow</BlockGenusMember>
+				<BlockGenusMember>DisplayString</BlockGenusMember>
+				<BlockGenusMember>DisplayLine</BlockGenusMember>
+				<BlockGenusMember>DisplayRectangle</BlockGenusMember>
 			</BlockDrawer>
             <!-- accel -->
             <BlockDrawer button-color="0 180 255" name="bg.accel">
                 <BlockGenusMember>Accel</BlockGenusMember>
                 <BlockGenusMember>AccelModule</BlockGenusMember>
                 <BlockGenusMember>Gyro</BlockGenusMember>
-            </BlockDrawer>
-            <!-- display -->
-            <BlockDrawer button-color="0 180 255" name="bg.display">
-                <BlockGenusMember>DisplayClear</BlockGenusMember>
             </BlockDrawer>
 			<!-- motors -->
 			<BlockDrawer button-color="93 13 125" name="bd.motors" type="factory">

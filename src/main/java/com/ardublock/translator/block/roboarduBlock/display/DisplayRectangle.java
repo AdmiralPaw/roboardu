@@ -5,8 +5,8 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
-public class DisplayClear extends TranslatorBlock {
-    public DisplayClear (Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+public class DisplayRectangle extends TranslatorBlock {
+    public DisplayRectangle (Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
@@ -16,7 +16,7 @@ public class DisplayClear extends TranslatorBlock {
             "#define OLED_RESET     4 // Reset pin # (or -1 if sharing Arduino reset pin)\n";
 
     @Override
-    public String toCode()
+    public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {
         String display="display";
         translator.addHeaderFile("Wire.h");
@@ -28,11 +28,21 @@ public class DisplayClear extends TranslatorBlock {
                 "  delay(2000);\n" +
                 "\n" +
                 "  // Clear the buffer\n" +
-                display + ".clearDisplay();" +
+                display + ".clearDisplay();\n" +
                 display + ".display();\n");
 
 
-        return codePrefix + display + ".clear();\n" + codeSuffix;
+        TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
+        String BeginX = translatorBlock.toCode();
+        translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
+        String BeginY = translatorBlock.toCode();
+        translatorBlock = this.getRequiredTranslatorBlockAtSocket(2);
+        String SizeX = translatorBlock.toCode();
+        translatorBlock = this.getRequiredTranslatorBlockAtSocket(3);
+        String SizeY = translatorBlock.toCode();
+
+
+        return codePrefix + display + ".drawRect("+ BeginX +", " + BeginY +", " + SizeX + ", " + SizeY + ", WHITE);\n" + codeSuffix;
     }
 
 }

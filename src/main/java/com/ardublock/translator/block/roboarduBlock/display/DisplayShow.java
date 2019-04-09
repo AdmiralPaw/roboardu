@@ -5,8 +5,8 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
-public class DisplayClear extends TranslatorBlock {
-    public DisplayClear (Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+public class DisplayShow extends TranslatorBlock {
+    public DisplayShow (Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
@@ -28,11 +28,11 @@ public class DisplayClear extends TranslatorBlock {
                 "  delay(2000);\n" +
                 "\n" +
                 "  // Clear the buffer\n" +
-                display + ".clearDisplay();" +
+                display + ".clearDisplay();\n" +
                 display + ".display();\n");
 
 
-        return codePrefix + display + ".clear();\n" + codeSuffix;
+        return codePrefix + display + ".display();\n" + codeSuffix;
     }
 
 }
