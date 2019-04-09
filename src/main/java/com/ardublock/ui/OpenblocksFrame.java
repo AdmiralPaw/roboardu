@@ -265,7 +265,7 @@ public class OpenblocksFrame extends JFrame
 		JSplitPane blockCanvasLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
 				workspace, controller);
 		blockCanvasLayer.setOneTouchExpandable(true);
-		blockCanvasLayer.setDividerSize(6);
+		blockCanvasLayer.setDividerSize(1);
 		this.setJMenuBar(menuBar);
                 this.add(buttons, BorderLayout.NORTH);
 //		this.add(bottomPanel, BorderLayout.SOUTH);

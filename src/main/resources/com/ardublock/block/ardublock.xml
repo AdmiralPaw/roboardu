@@ -478,7 +478,7 @@
 			</description>
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="DuinoEDU_D8" label="D8" />
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
 				</BlockConnector>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.frequency">
 					<DefaultArg genus-name="number" label="440" />
@@ -495,7 +495,7 @@
 			</description>
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="pinListDigital_D8" label="D8" />
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
 				</BlockConnector>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.frequency">
 					<DefaultArg genus-name="number" label="440" />
@@ -513,7 +513,7 @@
 			</description>
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="pinListDigital_D8" label="D8" />
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
@@ -9707,6 +9707,20 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
+		<!-- Sound -->
+		<BlockGenus name="melody" kind="command" color="77 191 169" initlabel="bg.melody">
+			<description>
+				<text>Generates a square wave of the specified frequency (and 50%
+					duty cycle) on a pin.
+				</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+
 		<!-- littlebits -->
 				<BlockGenus name="little_bits_bendsensor" kind="data" color="93 13 125" initlabel="bg.little_bits_bendsensor">
 					<description>
@@ -12085,9 +12099,6 @@
 				<BlockGenusMember>pin-read-digital-pullup</BlockGenusMember>
 				<BlockGenusMember>pin-read-analog</BlockGenusMember>
 				<BlockGenusMember>pin-write-analog</BlockGenusMember>
-				<BlockGenusMember>tone</BlockGenusMember>
-				<BlockGenusMember>tone_time</BlockGenusMember>
-				<BlockGenusMember>no_tone</BlockGenusMember>
 				<BlockGenusMember>pinListDigital_D0</BlockGenusMember>
 				<BlockGenusMember>pinListAnalog_A0</BlockGenusMember>
 				<BlockGenusMember>pinListAnalogWrite_D3</BlockGenusMember>
@@ -12161,6 +12172,14 @@
 				<BlockGenusMember>rgb_led</BlockGenusMember>
 				<BlockGenusMember>rgb_led_blink</BlockGenusMember>
 				<BlockGenusMember>rgb_led_pwm</BlockGenusMember>
+			</BlockDrawer>
+			
+			<!-- sound -->
+			<BlockDrawer button-color="93 13 125" name="bg.sound">
+				<BlockGenusMember>tone</BlockGenusMember>
+				<BlockGenusMember>tone_time</BlockGenusMember>
+				<BlockGenusMember>no_tone</BlockGenusMember>
+				<BlockGenusMember>melody</BlockGenusMember>
 			</BlockDrawer>
 			
 			<!-- display -->
