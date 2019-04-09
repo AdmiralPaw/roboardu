@@ -11307,15 +11307,15 @@
             <BlockConnectors>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.AccelX">
-                    <DefaultArg genus-name="number" label="AccelX" />
+                    <DefaultArg genus-name="variable_number" label="AccelX" />
                 </BlockConnector>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.AccelY">
-                    <DefaultArg genus-name="number" label="AccelY" />
+                    <DefaultArg genus-name="variable_number" label="AccelY" />
                 </BlockConnector>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.AccelZ">
-                    <DefaultArg genus-name="number" label="AccelZ" />
+                    <DefaultArg genus-name="variable_number" label="AccelZ" />
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -11327,15 +11327,15 @@
             <BlockConnectors>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.GyroX">
-                    <DefaultArg genus-name="number" label="GyroX" />
+                    <DefaultArg genus-name="variable_number" label="GyroX" />
                 </BlockConnector>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.GyroY">
-                    <DefaultArg genus-name="number" label="GyroY" />
+                    <DefaultArg genus-name="variable_number" label="GyroY" />
                 </BlockConnector>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.GyroZ">
-                    <DefaultArg genus-name="number" label="GyroZ" />
+                    <DefaultArg genus-name="variable_number" label="GyroZ" />
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -11347,7 +11347,7 @@
 			<BlockConnectors>
 				<BlockConnector connector-type="number"
 								connector-kind="socket" label="bc.AccelModule">
-					<DefaultArg genus-name="number" label="AccelModule" />
+					<DefaultArg genus-name="variable_number" label="AccelModule" />
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
@@ -11377,7 +11377,16 @@
 
 		<!--DISPLAY HERE====================================================================== -->
 
-
+        <BlockGenus name="DisplayClear" kind="command" color="0 180 255" initlabel="bg.EncoderFull" editable-label="no">
+            <description>
+                <text>Clears the display</text>
+            </description>
+            <BlockConnectors>
+                <BlockConnector connector-type="number"
+                                connector-kind="socket" label="bc.EncoderFull">
+                </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
 
 	</BlockGenuses>
 
@@ -12159,10 +12168,15 @@
 				<BlockGenusMember>DuinoEDU_Oled_I2C</BlockGenusMember>
 				<BlockGenusMember>DuinoEDU_Oled_Clear</BlockGenusMember>	
 			</BlockDrawer>
-			<!-- accel -->
+            <!-- accel -->
             <BlockDrawer button-color="0 180 255" name="bg.accel">
                 <BlockGenusMember>Accel</BlockGenusMember>
+                <BlockGenusMember>AccelModule</BlockGenusMember>
                 <BlockGenusMember>Gyro</BlockGenusMember>
+            </BlockDrawer>
+            <!-- display -->
+            <BlockDrawer button-color="0 180 255" name="bg.display">
+                <BlockGenusMember>DisplayClear</BlockGenusMember>
             </BlockDrawer>
 			<!-- motors -->
 			<BlockDrawer button-color="93 13 125" name="bd.motors" type="factory">
