@@ -12,6 +12,8 @@ import java.util.List;
 import javax.swing.*;
 
 import edu.mit.blocks.codeblockutil.CScrollPane.ScrollPolicy;
+import edu.mit.blocks.workspace.SearchBar;
+import edu.mit.blocks.workspace.SearchableContainer;
 import org.jfree.ui.tabbedui.VerticalLayout;
 
 /**
@@ -78,21 +80,22 @@ public class Window2Explorer extends JPanel implements Explorer {
         if (size % 2 == 1) {
             size++;
         }
-        size = buttonHeight * 12;
-        buttonPane.setPreferredSize(new Dimension(6, size));
+        size = buttonHeight * 24;
+        buttonPane.setPreferredSize(new Dimension(60, size));
         JPanel butpan = new JPanel(new VerticalLayout());
-        butpan.setBackground(new Color(0,100,104));
+        butpan.setBackground(Color.white);
         for (int i = 0; i < items.size(); i++) {
             final int index = i;
             Canvas item = items.get(i);
             //final CButton button = new CButton(item.getColor(), item.getColor().brighter().brighter().brighter(),item.getName());
-            CButton button = new CBorderlessButton(item.getName());
-            item.getJComponent().setBackground(new Color(23,161,165));
-            JComponent scroll = new CHoverScrollPane(
+            item.getJComponent().setBackground(new Color(236,236,236));
+            CButton button = new RMenuButton(item.getName(), item.getColor());
+            button.setPreferredSize(new Dimension(30,35));
+            JComponent scroll = new RHoverScrollPane(
                     item.getJComponent(),
                     ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
                     ScrollPolicy.HORIZONTAL_BAR_AS_NEEDED,
-                    18, item.getColor(), Color.darkGray);
+                    15, item.getColor(), Color.darkGray);
             canvases.add(scroll);
             button.addActionListener(new ActionListener() {
 
@@ -103,11 +106,11 @@ public class Window2Explorer extends JPanel implements Explorer {
             butpan.add(button);
 
         }
-        CHoverScrollPane buttonScroll = new CHoverScrollPane(
+        RHoverScrollPane buttonScroll = new RHoverScrollPane(
                 butpan,
                 ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
                 ScrollPolicy.HORIZONTAL_BAR_NEVER,
-                18, new Color(255, 133, 8), Color.darkGray);//new JScrollPane(butpan);
+                15, new Color(255, 133, 8), Color.darkGray);//new JScrollPane(butpan);
         //buttonScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         buttonPane.add(buttonScroll, BorderLayout.CENTER);
         if (!canvases.isEmpty()) {
