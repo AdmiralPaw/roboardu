@@ -478,7 +478,7 @@
 			</description>
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="DuinoEDU_D8" label="D8" />
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
 				</BlockConnector>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.frequency">
 					<DefaultArg genus-name="number" label="440" />
@@ -495,7 +495,7 @@
 			</description>
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="pinListDigital_D8" label="D8" />
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
 				</BlockConnector>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.frequency">
 					<DefaultArg genus-name="number" label="440" />
@@ -513,7 +513,7 @@
 			</description>
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="pinListDigital_D8" label="D8" />
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
@@ -9568,6 +9568,28 @@
 						<BlockConnector connector-type="boolean" connector-kind="plug" />
 					</BlockConnectors>
 			</BlockGenus>
+			<BlockGenus name="obstacle_sensor" kind="data" color="93 13 125" initlabel="bg.obstacle_sensor">
+					<description>
+						<text>Obstacle sensor</text>
+					</description>
+					<BlockConnectors>
+						<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+							<DefaultArg genus-name="pinListAnalogWrite_D3" label="D3" />
+						</BlockConnector>
+						<BlockConnector connector-type="number" connector-kind="plug" />
+					</BlockConnectors>
+			</BlockGenus>
+			<BlockGenus name="magnetic_sensor" kind="data" color="93 13 125" initlabel="bg.magnetic_sensor">
+					<description>
+						<text>Magnetic sensor</text>
+					</description>
+					<BlockConnectors>
+						<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+							<DefaultArg genus-name="pinListAnalogWrite_D3" label="D3" />
+						</BlockConnector>
+						<BlockConnector connector-type="number" connector-kind="plug" />
+					</BlockConnectors>
+				</BlockGenus>
 		<!-- Servo -->
 		<BlockGenus name="servo_default" kind="command" color="205 133 63" initlabel="bg.servo">
 			<description>
@@ -9707,6 +9729,20 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
+		<!-- Sound -->
+		<BlockGenus name="melody" kind="command" color="77 191 169" initlabel="bg.melody">
+			<description>
+				<text>Generates a square wave of the specified frequency (and 50%
+					duty cycle) on a pin.
+				</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+
 		<!-- littlebits -->
 				<BlockGenus name="little_bits_bendsensor" kind="data" color="93 13 125" initlabel="bg.little_bits_bendsensor">
 					<description>
@@ -11391,11 +11427,11 @@
                 </BlockConnector>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.AccelY">
-                    <DefaultArg genus-name="number" label="AccelY" />
+                    <DefaultArg genus-name="variable_number" label="AccelY" />
                 </BlockConnector>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.AccelZ">
-                    <DefaultArg genus-name="number" label="AccelZ" />
+                    <DefaultArg genus-name="variable_number" label="AccelZ" />
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -11407,15 +11443,15 @@
             <BlockConnectors>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.GyroX">
-                    <DefaultArg genus-name="number" label="GyroX" />
+                    <DefaultArg genus-name="variable_number" label="GyroX" />
                 </BlockConnector>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.GyroY">
-                    <DefaultArg genus-name="number" label="GyroY" />
+                    <DefaultArg genus-name="variable_number" label="GyroY" />
                 </BlockConnector>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket" label="bc.GyroZ">
-                    <DefaultArg genus-name="number" label="GyroZ" />
+                    <DefaultArg genus-name="variable_number" label="GyroZ" />
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -11427,7 +11463,7 @@
 			<BlockConnectors>
 				<BlockConnector connector-type="number"
 								connector-kind="socket" label="bc.AccelModule">
-					<DefaultArg genus-name="number" label="AccelModule" />
+					<DefaultArg genus-name="variable_number" label="AccelModule" />
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
@@ -11457,7 +11493,85 @@
 
 		<!--DISPLAY HERE====================================================================== -->
 
-
+        <BlockGenus name="DisplayClear" kind="command" color="0 180 255" initlabel="bg.DisplayClear" editable-label="no">
+            <description>
+                <text>Clears buffer</text>
+            </description>
+        </BlockGenus>
+		<BlockGenus name="DisplayShow" kind="command" color="0 180 255" initlabel="bg.DisplayShow" editable-label="no">
+			<description>
+				<text>Shows buffer on display</text>
+			</description>
+		</BlockGenus>
+		<BlockGenus name="DisplayString" kind="command" color="0 180 255" initlabel="bg.DisplayString" editable-label="no">
+			<description>
+				<text>Adds string to buffer</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="string"
+								connector-kind="socket" label="bc.DisplayStringString">
+					<DefaultArg genus-name="message" label="Hello world!" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayStringSize">
+					<DefaultArg genus-name="number" label="1" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayStringCursorX">
+					<DefaultArg genus-name="number" label="10" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayStringCursorY">
+					<DefaultArg genus-name="number" label="0" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="DisplayLine" kind="command" color="0 180 255" initlabel="bg.DisplayLine" editable-label="no">
+			<description>
+				<text>Adds string to buffer</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayLineBeginX">
+					<DefaultArg genus-name="number" label="10" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayLineBeginY">
+					<DefaultArg genus-name="number" label="10" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayLineEndX">
+					<DefaultArg genus-name="number" label="20" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayLineEndY">
+					<DefaultArg genus-name="number" label="20" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="DisplayRectangle" kind="command" color="0 180 255" initlabel="bg.DisplayRectangle" editable-label="no">
+			<description>
+				<text>Adds string to buffer</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayRectangleBeginX">
+					<DefaultArg genus-name="number" label="10" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayRectangleBeginY">
+					<DefaultArg genus-name="number" label="10" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayRectangleEndX">
+					<DefaultArg genus-name="number" label="20" />
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.DisplayRectangleEndY">
+					<DefaultArg genus-name="number" label="20" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
 
 	</BlockGenuses>
 
@@ -12156,9 +12270,6 @@
 				<BlockGenusMember>pin-read-digital-pullup</BlockGenusMember>
 				<BlockGenusMember>pin-read-analog</BlockGenusMember>
 				<BlockGenusMember>pin-write-analog</BlockGenusMember>
-				<BlockGenusMember>tone</BlockGenusMember>
-				<BlockGenusMember>tone_time</BlockGenusMember>
-				<BlockGenusMember>no_tone</BlockGenusMember>
 				<BlockGenusMember>pinListDigital_D0</BlockGenusMember>
 				<BlockGenusMember>pinListAnalog_A0</BlockGenusMember>
 				<BlockGenusMember>pinListAnalogWrite_D3</BlockGenusMember>
@@ -12216,6 +12327,8 @@
 				<BlockGenusMember>df_temperature_sensor</BlockGenusMember>
 				<BlockGenusMember>seeed_mag_switch</BlockGenusMember>
 				<BlockGenusMember>seeed_touch_sensor</BlockGenusMember>
+				<BlockGenusMember>obstacle_sensor</BlockGenusMember>
+				<BlockGenusMember>magnetic_sensor</BlockGenusMember>
 			</BlockDrawer>
 			
 			<!-- servo -->
@@ -12234,14 +12347,26 @@
 				<BlockGenusMember>rgb_led_pwm</BlockGenusMember>
 			</BlockDrawer>
 			
+			<!-- sound -->
+			<BlockDrawer button-color="93 13 125" name="bg.sound">
+				<BlockGenusMember>tone</BlockGenusMember>
+				<BlockGenusMember>tone_time</BlockGenusMember>
+				<BlockGenusMember>no_tone</BlockGenusMember>
+				<BlockGenusMember>melody</BlockGenusMember>
+			</BlockDrawer>
+			
 			<!-- display -->
 			<BlockDrawer button-color="93 13 125" name="bg.display">
-				<BlockGenusMember>DuinoEDU_Oled_I2C</BlockGenusMember>
-				<BlockGenusMember>DuinoEDU_Oled_Clear</BlockGenusMember>	
+				<BlockGenusMember>DisplayClear</BlockGenusMember>
+				<BlockGenusMember>DisplayShow</BlockGenusMember>
+				<BlockGenusMember>DisplayString</BlockGenusMember>
+				<BlockGenusMember>DisplayLine</BlockGenusMember>
+				<BlockGenusMember>DisplayRectangle</BlockGenusMember>
 			</BlockDrawer>
-			<!-- accel -->
+            <!-- accel -->
             <BlockDrawer button-color="0 180 255" name="bg.accel">
                 <BlockGenusMember>Accel</BlockGenusMember>
+                <BlockGenusMember>AccelModule</BlockGenusMember>
                 <BlockGenusMember>Gyro</BlockGenusMember>
             </BlockDrawer>
 			<!-- motors -->
