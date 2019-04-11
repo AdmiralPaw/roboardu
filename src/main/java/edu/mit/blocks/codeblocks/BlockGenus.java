@@ -777,7 +777,7 @@ public class BlockGenus {
     public static void loadBlockGenera(Workspace workspace, Element root) {
     	WorkspaceEnvironment env = workspace.getEnv();
 
-        Pattern attrExtractor = Pattern.compile("\"(.*)\"");
+        Pattern attrExtractor = Pattern.compile("\"((.*\n*)*)\"");
         Matcher nameMatcher;
         NodeList genusNodes = root.getElementsByTagName("BlockGenus"); //look for genus
         Node genusNode;

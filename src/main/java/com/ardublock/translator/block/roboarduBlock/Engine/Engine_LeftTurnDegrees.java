@@ -7,11 +7,11 @@ import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
 
-public class Engine_ForwardTime extends TranslatorBlock
+public class Engine_LeftTurnDegrees extends TranslatorBlock
 {
 	private List<String> setupCommand;
 	
-	public Engine_ForwardTime(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+	public Engine_LeftTurnDegrees(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{   
             super(blockId, translator, codePrefix, codeSuffix, label);
 	}
@@ -21,8 +21,41 @@ public class Engine_ForwardTime extends TranslatorBlock
                 "#define M_DIR_PIN_2               7\n" +
                 "#define M_SPEED_PIN_1             5\n" +
                 "#define M_SPEED_PIN_2             6\n";
+        private static final String ENCODER_DEFINE_PIN = "" +
+                "#define ENCODER_PIN_1             2\n" +
+                "#define ENCODER_PIN_2             3\n";
+        private static final String ENCODER_DEFINE_SWITCH = "" +
+                "#define ON                        1\n" +
+                "#define OFF                       0\n";
+        private static final String ENCODER_DEFINE_VAR = "" +
+                "unsigned long long nEncoder1, nEncoder2;\n" +
+                "unsigned long long nEncoder1Old, nEncoder2Old;\n";
         private static final String MOTORS_DEFINE_VAR = "" + 
-                "int SpeedMotor1, SpeedMotor2;\n";
+                "int SpeedMotor1, SpeedMotor2;\n";        
+        private static final String ENCODER_DEFINE = "" +
+                "void InitEnc(int fEn)\n" +
+                "{\n" +
+                "  if(fEn == ON)\n" +
+                "  {\n" +
+                "    attachInterrupt(ENCODER_PIN_1, Encoder1, CHANGE);\n" +
+                "    attachInterrupt(ENCODER_PIN_2, Encoder2, CHANGE);\n" +
+                "  }\n" +
+                "  if(fEn == OFF)\n" +
+                "  {\n" +
+                "    detachInterrupt(ENCODER_PIN_1);\n" +
+                "    detachInterrupt(ENCODER_PIN_2);\n" +
+                "  }\n" +
+                "}\n" +
+                "\n" +
+                "void Encoder1()\n" +
+                "{\n" +
+                "  nEncoder1++;\n" +
+                "}\n" +
+                "\n" +
+                "void Encoder2()\n" +
+                "{\n" +
+                "  nEncoder2++;\n" + 
+                "}\n";
         private static final String MOTORS_DEFINE = "" +
                 "void InitMotors()\n" +
                 "{\n" +
@@ -78,38 +111,42 @@ public class Engine_ForwardTime extends TranslatorBlock
                 "  Motor1(Speed1);\n" +
                 "  Motor2(Speed2);\n" +
                 "}\n";
-        private static final String MOTORS_FORWARD_DEFINE = "" +
-                "void MotorsForward(int Speed)\n" +
+        private static final String MOTORS_LEFT_DEGREES_DEFINE = "" +
+                "void MotorsLeftDegrees(int Speed, int Deegree)\n" +
                 "{\n" +
-                "  Motors(Speed, Speed);\n" +
-                "}\n";
-        private static final String MOTORS_STOP_DEFINE = "" +
-                "void MotorsStop()\n" +
-                "{\n" +
-                "  Motors(0, 0);\n" +
-                "}\n";
-        private static final String MOTORS_FORWARD_TIME_DEFINE = "" +
-                "void MotorsForwardTime(int Speed, int Time)\n" +
-                "{\n" +
-                "  MotorsForward(Speed);\n" +
-                "  delay(Time);\n" +
+                "  unsigned long long nEncoder1Start = nEncoder1;\n" +
+                "  unsigned long long nEncoder2Start = nEncoder2;\n" +
+                "\n" +
+                "  unsigned long long TimeStart = millis();\n" +
+                "\n" +
+                "  Motors(-Speed, Speed);\n" +
+                "\n" +
+                "  while(nEncoder1 - nEncoder1Start < Deegree*0.6 || nEncoder2 - nEncoder2Start < Degree*0.6)\n" +
+                "  {\n" +
+                "    delay(1);\n" +
+                "  }\n" +
+                "\n" +
                 "  MotorsStop();\n" +
                 "}\n";
-        
+
 	@Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
             translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
+            translator.addHeaderDefinition(ENCODER_DEFINE_PIN);
+            translator.addHeaderDefinition(ENCODER_DEFINE_SWITCH);
             translator.addHeaderDefinition(MOTORS_DEFINE_VAR);
+            translator.addHeaderDefinition(ENCODER_DEFINE_VAR);
+            translator.addDefinitionCommand(ENCODER_DEFINE);
             translator.addDefinitionCommand(MOTORS_DEFINE);
-            translator.addDefinitionCommand(MOTORS_FORWARD_DEFINE);
-            translator.addDefinitionCommand(MOTORS_STOP_DEFINE);
-            translator.addDefinitionCommand(MOTORS_FORWARD_TIME_DEFINE);
+            
+            translator.addDefinitionCommand(MOTORS_LEFT_DEGREES_DEFINE);
             translator.addSetupCommand("InitMotors();");
+            translator.addSetupCommand("InitEnc(ON);");
             TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
-            String ret = "MotorsForwardTime(" + translatorBlock.toCode() + ", ";
+            String ret = "MotorsLeftDegrees(" + translatorBlock.toCode() + ", ";
             translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
-            ret = ret + translatorBlock.toCode() + " );";
+            ret = ret + translatorBlock.toCode() + ");";
             return codePrefix + ret + codeSuffix;
         }
 }

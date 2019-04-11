@@ -7,11 +7,11 @@ import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
 
-public class Engine_ForwardTime extends TranslatorBlock
+public class Engine_BackTime extends TranslatorBlock
 {
 	private List<String> setupCommand;
 	
-	public Engine_ForwardTime(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+	public Engine_BackTime(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{   
             super(blockId, translator, codePrefix, codeSuffix, label);
 	}
@@ -78,20 +78,20 @@ public class Engine_ForwardTime extends TranslatorBlock
                 "  Motor1(Speed1);\n" +
                 "  Motor2(Speed2);\n" +
                 "}\n";
-        private static final String MOTORS_FORWARD_DEFINE = "" +
-                "void MotorsForward(int Speed)\n" +
+        private static final String MOTORS_BACK_DEFINE = "" +
+                "void MotorsBack(int Speed)\n" +
                 "{\n" +
-                "  Motors(Speed, Speed);\n" +
+                "  Motors(-Speed, -Speed);\n" +
                 "}\n";
         private static final String MOTORS_STOP_DEFINE = "" +
                 "void MotorsStop()\n" +
                 "{\n" +
                 "  Motors(0, 0);\n" +
                 "}\n";
-        private static final String MOTORS_FORWARD_TIME_DEFINE = "" +
-                "void MotorsForwardTime(int Speed, int Time)\n" +
+        private static final String MOTORS_BACK_TIME_DEFINE = "" +
+                "void MotorsBackTime(int Speed, int Time)\n" +
                 "{\n" +
-                "  MotorsForward(Speed);\n" +
+                "  MotorsBack(Speed);\n" +
                 "  delay(Time);\n" +
                 "  MotorsStop();\n" +
                 "}\n";
@@ -102,12 +102,12 @@ public class Engine_ForwardTime extends TranslatorBlock
             translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
             translator.addHeaderDefinition(MOTORS_DEFINE_VAR);
             translator.addDefinitionCommand(MOTORS_DEFINE);
-            translator.addDefinitionCommand(MOTORS_FORWARD_DEFINE);
+            translator.addDefinitionCommand(MOTORS_BACK_DEFINE);
             translator.addDefinitionCommand(MOTORS_STOP_DEFINE);
-            translator.addDefinitionCommand(MOTORS_FORWARD_TIME_DEFINE);
+            translator.addDefinitionCommand(MOTORS_BACK_TIME_DEFINE);
             translator.addSetupCommand("InitMotors();");
             TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
-            String ret = "MotorsForwardTime(" + translatorBlock.toCode() + ", ";
+            String ret = "MotorsBackTime(" + translatorBlock.toCode() + ", ";
             translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
             ret = ret + translatorBlock.toCode() + " );";
             return codePrefix + ret + codeSuffix;
