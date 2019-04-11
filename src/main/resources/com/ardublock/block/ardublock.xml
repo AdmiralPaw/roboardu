@@ -3539,7 +3539,7 @@
 			<BlockConnectors>
 				<BlockConnector connector-type="boolean" connector-kind="plug" />
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="number" label="1" />
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
 				</BlockConnector>
 			</BlockConnectors>
 			<Images>
@@ -3609,7 +3609,7 @@
 			<BlockConnectors>
 				<BlockConnector connector-type="boolean" connector-kind="plug" />
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="number" label="1" />
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
 				</BlockConnector>
 			</BlockConnectors>
 			<Images>
@@ -3637,7 +3637,7 @@
 			<BlockConnectors>
 				<BlockConnector connector-type="boolean" connector-kind="plug" />
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="number" label="1" />
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
 				</BlockConnector>
 			</BlockConnectors>
 			<Images>
@@ -3803,7 +3803,7 @@
 			</description>
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="number" label="1" />
+					<DefaultArg genus-name="pinListAnalog_A0" label="A0" />
 				</BlockConnector>
 				<BlockConnector connector-type="number" connector-kind="plug" label="centermeter" />
 			</BlockConnectors>
@@ -3838,7 +3838,7 @@
 			</description>
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="number" label="1" />
+					<DefaultArg genus-name="pinListAnalog_A0" label="A0" />
 				</BlockConnector>
 				<BlockConnector connector-type="number" connector-kind="plug" />
 			</BlockConnectors>
@@ -3854,7 +3854,7 @@
 			</description>
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="number" label="1" />
+					<DefaultArg genus-name="pinListAnalog_A0" label="A0" />
 				</BlockConnector>
 				<BlockConnector connector-type="number" connector-kind="plug" />
 			</BlockConnectors>
@@ -3870,7 +3870,7 @@
 			</description>
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="number" label="1" />
+					<DefaultArg genus-name="pinListAnalog_A0" label="A0" />
 				</BlockConnector>
 				<BlockConnector connector-type="number" connector-kind="plug" />
 			</BlockConnectors>
@@ -4827,7 +4827,7 @@
 			<BlockConnectors>
 				<BlockConnector connector-type="boolean" connector-kind="plug" />
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="DuinoEDU_D2" label="D2" />
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
 				</BlockConnector>
 			</BlockConnectors>
 			<Images>
@@ -4844,7 +4844,7 @@
 			<BlockConnectors>
 				<BlockConnector connector-type="boolean" connector-kind="plug" />
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-					<DefaultArg genus-name="DuinoEDU_D2" label="D2" />
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
 				</BlockConnector>
 			</BlockConnectors>
 			<Images>
@@ -9563,7 +9563,7 @@
 					</description>
 					<BlockConnectors>
 						<BlockConnector connector-type="number" connector-kind="socket" label="#">
-							<DefaultArg genus-name="number" label="1" />
+							<DefaultArg genus-name="pinListDigital_D0" label="D0" />
 						</BlockConnector>
 						<BlockConnector connector-type="boolean" connector-kind="plug" />
 					</BlockConnectors>
@@ -9764,7 +9764,7 @@
 					</description>
 					<BlockConnectors>
 						<BlockConnector connector-type="number" connector-kind="socket" label="#">
-							<DefaultArg genus-name="number" label="1" />
+							<DefaultArg genus-name="pinListAnalog_A0" label="A0" />
 						</BlockConnector>
 						<BlockConnector connector-type="number" connector-kind="plug" />
 					</BlockConnectors>
@@ -9798,7 +9798,7 @@
 					</description>
 					<BlockConnectors>
 						<BlockConnector connector-type="number" connector-kind="socket" label="#">
-							<DefaultArg genus-name="number" label="1" />
+							<DefaultArg genus-name="pinListAnalog_A0" label="A0" />
 						</BlockConnector>
 						<BlockConnector connector-type="number" connector-kind="plug" />
 					</BlockConnectors>
@@ -9849,7 +9849,7 @@
 					</description>
 					<BlockConnectors>
 						<BlockConnector connector-type="number" connector-kind="socket" label="#">
-							<DefaultArg genus-name="number" label="1" />
+							<DefaultArg genus-name="pinListAnalog_A0" label="A0" />
 						</BlockConnector>
 						<BlockConnector connector-type="number" connector-kind="plug" />
 					</BlockConnectors>
@@ -11388,6 +11388,26 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
+		<BlockGenus name="EncoderSimple2" kind="data" color="0 180 255" initlabel="bg.EncoderSimple2" editable-label="no">
+			<description>
+				<text>Gives variable of encoder</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number"
+								connector-kind="plug" label="bc.EncoderSimple">
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+		<BlockGenus name="EncoderFull2" kind="data" color="0 180 255" initlabel="bg.EncoderFull2" editable-label="no">
+			<description>
+				<text>Gives variable of encoder</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number"
+								connector-kind="plug" label="bc.EncoderFull">
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
 
 		<!--DISPLAY HERE====================================================================== -->
 
@@ -11590,40 +11610,7 @@
 			<FamilyMember>pinListDigital_D18</FamilyMember>
 			<FamilyMember>pinListDigital_D19</FamilyMember>
 			<!--****************** Digital pins on Arduino Mega only *************** -->
-			<FamilyMember>pinListDigital_D20</FamilyMember>
-			<FamilyMember>pinListDigital_D21</FamilyMember>
-			<FamilyMember>pinListDigital_D22</FamilyMember>
-			<FamilyMember>pinListDigital_D23</FamilyMember>
-			<FamilyMember>pinListDigital_D24</FamilyMember>
-			<FamilyMember>pinListDigital_D25</FamilyMember>
-			<FamilyMember>pinListDigital_D26</FamilyMember>
-			<FamilyMember>pinListDigital_D27</FamilyMember>
-			<FamilyMember>pinListDigital_D28</FamilyMember>
-			<FamilyMember>pinListDigital_D29</FamilyMember>
-			<FamilyMember>pinListDigital_D30</FamilyMember>
-			<FamilyMember>pinListDigital_D31</FamilyMember>
-			<FamilyMember>pinListDigital_D32</FamilyMember>
-			<FamilyMember>pinListDigital_D33</FamilyMember>
-			<FamilyMember>pinListDigital_D34</FamilyMember>
-			<FamilyMember>pinListDigital_D35</FamilyMember>
-			<FamilyMember>pinListDigital_D36</FamilyMember>
-			<FamilyMember>pinListDigital_D37</FamilyMember>
-			<FamilyMember>pinListDigital_D38</FamilyMember>
-			<FamilyMember>pinListDigital_D39</FamilyMember>
-			<FamilyMember>pinListDigital_D40</FamilyMember>
-			<FamilyMember>pinListDigital_D41</FamilyMember>
-			<FamilyMember>pinListDigital_D42</FamilyMember>
-			<FamilyMember>pinListDigital_D43</FamilyMember>
-			<FamilyMember>pinListDigital_D44</FamilyMember>
-			<FamilyMember>pinListDigital_D45</FamilyMember>
-			<FamilyMember>pinListDigital_D46</FamilyMember>
-			<FamilyMember>pinListDigital_D47</FamilyMember>
-			<FamilyMember>pinListDigital_D48</FamilyMember>
-			<FamilyMember>pinListDigital_D49</FamilyMember>
-			<FamilyMember>pinListDigital_D50</FamilyMember>
-			<FamilyMember>pinListDigital_D51</FamilyMember>
-			<FamilyMember>pinListDigital_D52</FamilyMember>
-			<FamilyMember>pinListDigital_D53</FamilyMember>
+
 			<!--****************** Analog pins that can be used as digital pins. *************** -->
 			<!--****************** In practice only used with UNO boards    *************** -->
 			<FamilyMember>pinListAnalog_A0</FamilyMember>
@@ -11643,17 +11630,6 @@
 			<FamilyMember>pinListAnalog_A4</FamilyMember>
 			<FamilyMember>pinListAnalog_A5</FamilyMember>
 			<!--****************** Extra Analog DAC pins on Mega/Nano Boards *************** -->
-			<FamilyMember>pinListAnalog_A6</FamilyMember>
-			<FamilyMember>pinListAnalog_A7</FamilyMember>
-			<!--****************** Extra Analog DAC pins on Mega Boards *************** -->
-			<FamilyMember>pinListAnalog_A8</FamilyMember>
-			<FamilyMember>pinListAnalog_A9</FamilyMember>
-			<FamilyMember>pinListAnalog_A10</FamilyMember>
-			<FamilyMember>pinListAnalog_A11</FamilyMember>
-			<FamilyMember>pinListAnalog_A12</FamilyMember>
-			<FamilyMember>pinListAnalog_A13</FamilyMember>
-			<FamilyMember>pinListAnalog_A14</FamilyMember>
-			<FamilyMember>pinListAnalog_A15</FamilyMember>
 		</BlockFamily>
 		
 		<BlockFamily>
@@ -11665,15 +11641,6 @@
 			<FamilyMember>pinListAnalogWrite_D10</FamilyMember>
 			<FamilyMember>pinListAnalogWrite_D11</FamilyMember>
 			<!--****************** Extra 'Analog' PWM pins on Arduino Mega only *************** -->
-			<FamilyMember>pinListAnalogWrite_D2</FamilyMember>
-			<FamilyMember>pinListAnalogWrite_D4</FamilyMember>
-			<FamilyMember>pinListAnalogWrite_D7</FamilyMember>
-			<FamilyMember>pinListAnalogWrite_D8</FamilyMember>
-			<FamilyMember>pinListAnalogWrite_D12</FamilyMember>
-			<FamilyMember>pinListAnalogWrite_D13</FamilyMember>
-			<FamilyMember>pinListAnalogWrite_D44</FamilyMember>
-			<FamilyMember>pinListAnalogWrite_D45</FamilyMember>
-			<FamilyMember>pinListAnalogWrite_D46</FamilyMember>
 		</BlockFamily>
 		
 		<BlockFamily>
@@ -12192,6 +12159,34 @@
 				<BlockGenusMember>string_empty</BlockGenusMember>
 				<BlockGenusMember>string_toInt</BlockGenusMember>
 			</BlockDrawer>
+			<BlockDrawer button-color="232 156 149" name="bd.number" type="factory">
+				<BlockGenusMember>number</BlockGenusMember>
+				<BlockGenusMember>setter_variable_number</BlockGenusMember>
+				<BlockGenusMember>variable_number</BlockGenusMember>
+				<BlockGenusMember>setter_variable_number_unsigned_long</BlockGenusMember>
+				<BlockGenusMember>variable_number_unsigned_long</BlockGenusMember>
+				<BlockGenusMember>setter_variable_digital</BlockGenusMember>
+				<BlockGenusMember>variable_digital</BlockGenusMember>
+				<BlockGenusMember>digital-low</BlockGenusMember>
+				<BlockGenusMember>digital-high</BlockGenusMember>
+				<BlockGenusMember>true</BlockGenusMember>
+				<BlockGenusMember>false</BlockGenusMember>
+				<BlockGenusMember>setter_variable_number_double</BlockGenusMember>
+				<BlockGenusMember>variable_number_double</BlockGenusMember>
+				<BlockGenusMember>number_double</BlockGenusMember>
+				<BlockGenusMember>pinListDigital_D0</BlockGenusMember>
+				<BlockGenusMember>pinListAnalog_A0</BlockGenusMember>
+				<BlockGenusMember>pinListAnalogWrite_D3</BlockGenusMember>
+				<BlockGenusMember>setter_variable_char</BlockGenusMember>
+				<BlockGenusMember>variable_poly</BlockGenusMember>
+				<BlockGenusMember>char</BlockGenusMember>
+				<BlockGenusMember>setter_variable_String</BlockGenusMember>
+				<BlockGenusMember>variable_String</BlockGenusMember>
+				<BlockGenusMember>message</BlockGenusMember>
+				<BlockGenusMember>create_variable_vector</BlockGenusMember>
+				<BlockGenusMember>variable_vector</BlockGenusMember>
+				<BlockGenusMember>setter_variable_vector</BlockGenusMember>
+			</BlockDrawer>
 			<BlockDrawer button-color="114 147 71" name="bd.operators" type="factory">
 				<BlockGenusMember>addition</BlockGenusMember>
 				<BlockGenusMember>subtraction</BlockGenusMember>
@@ -12279,34 +12274,8 @@
 			<BlockDrawer button-color="0 180 255" name="bg.encoder">
 				<BlockGenusMember>EncoderSimple</BlockGenusMember>
 				<BlockGenusMember>EncoderFull</BlockGenusMember>
-			</BlockDrawer>
-			<BlockDrawer button-color="232 156 149" name="bd.number" type="factory">
-				<BlockGenusMember>number</BlockGenusMember>
-				<BlockGenusMember>setter_variable_number</BlockGenusMember>
-				<BlockGenusMember>variable_number</BlockGenusMember>
-				<BlockGenusMember>setter_variable_number_unsigned_long</BlockGenusMember>
-				<BlockGenusMember>variable_number_unsigned_long</BlockGenusMember>
-				<BlockGenusMember>setter_variable_digital</BlockGenusMember>
-				<BlockGenusMember>variable_digital</BlockGenusMember>
-				<BlockGenusMember>digital-low</BlockGenusMember>
-				<BlockGenusMember>digital-high</BlockGenusMember>
-				<BlockGenusMember>true</BlockGenusMember>
-				<BlockGenusMember>false</BlockGenusMember>
-				<BlockGenusMember>setter_variable_number_double</BlockGenusMember>
-				<BlockGenusMember>variable_number_double</BlockGenusMember>
-				<BlockGenusMember>number_double</BlockGenusMember>
-				<BlockGenusMember>pinListDigital_D0</BlockGenusMember>
-				<BlockGenusMember>pinListAnalog_A0</BlockGenusMember>
-				<BlockGenusMember>pinListAnalogWrite_D3</BlockGenusMember>
-				<BlockGenusMember>setter_variable_char</BlockGenusMember>
-				<BlockGenusMember>variable_poly</BlockGenusMember>
-				<BlockGenusMember>char</BlockGenusMember>
-				<BlockGenusMember>setter_variable_String</BlockGenusMember>
-				<BlockGenusMember>variable_String</BlockGenusMember>
-				<BlockGenusMember>message</BlockGenusMember>
-				<BlockGenusMember>create_variable_vector</BlockGenusMember>
-				<BlockGenusMember>variable_vector</BlockGenusMember>
-				<BlockGenusMember>setter_variable_vector</BlockGenusMember>
+				<BlockGenusMember>EncoderSimple2</BlockGenusMember>
+				<BlockGenusMember>EncoderFull2</BlockGenusMember>
 			</BlockDrawer>
 			
 			<BlockDrawer button-color="205 133 63" name="bd.utilities" type="factory">
@@ -12495,7 +12464,7 @@
 				<BlockGenusMember>seeed_mp3_sensor</BlockGenusMember>
 				<BlockGenusMember>seeed_o2_sensor</BlockGenusMember>
 			</BlockDrawer>
-			<BlockDrawer button-color="20 206 20" name="bd.DuinoEDU">
+			<!-- <BlockDrawer button-color="20 206 20" name="bd.DuinoEDU">
 				<BlockGenusMember>DDRA</BlockGenusMember>
 				<BlockGenusMember>PORTA</BlockGenusMember>
 				<BlockGenusMember>PORT_FIX</BlockGenusMember>
@@ -12562,7 +12531,7 @@
 				<BlockGenusMember>keyboard_post</BlockGenusMember>
 				<BlockGenusMember>keyboard_compare</BlockGenusMember>
 				<BlockGenusMember>DuinoEDU_Nunchuck_BoutonC</BlockGenusMember>
-			</BlockDrawer>
+			</BlockDrawer> -->
 			<BlockDrawer button-color="20 206 20" name="bd.Esplora">
 			<BlockGenusMember>Esplora_Led</BlockGenusMember>
 			<BlockGenusMember>Esplora_tone</BlockGenusMember>
