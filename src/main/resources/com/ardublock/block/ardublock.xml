@@ -9568,6 +9568,28 @@
 						<BlockConnector connector-type="boolean" connector-kind="plug" />
 					</BlockConnectors>
 			</BlockGenus>
+			<BlockGenus name="obstacle_sensor" kind="data" color="93 13 125" initlabel="bg.obstacle_sensor">
+					<description>
+						<text>Obstacle sensor</text>
+					</description>
+					<BlockConnectors>
+						<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+							<DefaultArg genus-name="pinListAnalogWrite_D3" label="D3" />
+						</BlockConnector>
+						<BlockConnector connector-type="number" connector-kind="plug" />
+					</BlockConnectors>
+			</BlockGenus>
+			<BlockGenus name="magnetic_sensor" kind="data" color="93 13 125" initlabel="bg.magnetic_sensor">
+					<description>
+						<text>Magnetic sensor</text>
+					</description>
+					<BlockConnectors>
+						<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+							<DefaultArg genus-name="pinListAnalogWrite_D3" label="D3" />
+						</BlockConnector>
+						<BlockConnector connector-type="number" connector-kind="plug" />
+					</BlockConnectors>
+				</BlockGenus>
 		<!-- Servo -->
 		<BlockGenus name="servo_default" kind="command" color="205 133 63" initlabel="bg.servo">
 			<description>
@@ -12220,6 +12242,8 @@
 				<BlockGenusMember>df_temperature_sensor</BlockGenusMember>
 				<BlockGenusMember>seeed_mag_switch</BlockGenusMember>
 				<BlockGenusMember>seeed_touch_sensor</BlockGenusMember>
+				<BlockGenusMember>obstacle_sensor</BlockGenusMember>
+				<BlockGenusMember>magnetic_sensor</BlockGenusMember>
 			</BlockDrawer>
 			
 			<!-- servo -->

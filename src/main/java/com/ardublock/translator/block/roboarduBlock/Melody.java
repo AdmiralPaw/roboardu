@@ -7,7 +7,7 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
 public class Melody extends TranslatorBlock {
 
-    public static final String RGB_BRIGHTNESS_CONTROL= "void melody(int pin)\n" +
+    public static final String MELODY= "void melody(int pin)\n" +
             "{\n" +
             "tone(pin, 392, 350);\n" +
             "delay(350);\n" +
@@ -110,7 +110,7 @@ public class Melody extends TranslatorBlock {
         String pin = tb.toCode();
 
 
-        translator.addDefinitionCommand(RGB_BRIGHTNESS_CONTROL);
+        translator.addDefinitionCommand(MELODY);
         String ret = "melody(" + pin + ");\n";
 
         return codePrefix + ret + codeSuffix;
