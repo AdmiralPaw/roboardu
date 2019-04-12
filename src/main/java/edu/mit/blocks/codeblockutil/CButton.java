@@ -88,7 +88,7 @@ public class CButton extends JButton implements MouseListener {
         this.buttonColor = buttonColor;
         this.selectedColor = selectedColor;
         this.setText(text);
-        this.setFont(new Font("Ariel", Font.BOLD, 16));
+        this.setFont(new Font("TimesRoman",Font.PLAIN, 16));
         this.addMouseListener(this);
         this.setPreferredSize(new Dimension(80, 25));
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));

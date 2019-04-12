@@ -269,6 +269,7 @@ public abstract class LabelWidget extends JComponent {
         //update the text everywhere
         textLabel.setText(text);
         textField.setText(text);
+        textLabel.setForeground(Color.white);
 
         //resize to new text
         updateDimensions();
@@ -620,14 +621,15 @@ public abstract class LabelWidget extends JComponent {
             //super.paint(g);
 
             //draw shadows
-            for (int i = 0; i < shadowPositionArray.length; i++) {
-                int dx = shadowPositionArray[i][0];
-                int dy = shadowPositionArray[i][1];
-                g2.setColor(new Color(0.5f, 0.5f, 0.5f, shadowColorArray[i]));
-                g2.drawString(this.getText(), (int) ((4 + dx) * offsetSize), this.getHeight() + (int) ((dy - 6) * offsetSize));
-            }
+//            for (int i = 0; i < shadowPositionArray.length; i++) {
+//                int dx = shadowPositionArray[i][0];
+//                int dy = shadowPositionArray[i][1];
+//                g2.setColor(new Color(0.5f, 0.5f, 0.5f, shadowColorArray[i]));
+//                g2.drawString(this.getText(), (int) ((4 + dx) * offsetSize), this.getHeight() + (int) ((dy - 6) * offsetSize));
+//            }
 
             //draw main Text
+            //TODO: сделать перенос по строкам
             g2.setColor(Color.white);
             g2.drawString(this.getText(), (int) ((4) * offsetSize), this.getHeight() + (int) ((-6) * offsetSize));
         }

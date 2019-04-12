@@ -10518,6 +10518,22 @@
 			</Images>			
 		</BlockGenus>			
 		<!-- MOTORS-->
+                <BlockGenus name="Engine_Basic" kind="command" color="205 133 63" 
+                            initlabel="bg.Engine_Basic">
+			<description>
+				<text>Engine_Basic</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.speed_number">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+                                <BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.speed_number">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
 		<BlockGenus name="Engine_RightTurn" kind="command" color="205 133 63" 
                             initlabel="bg.Engine_RightTurn">
 			<description>
@@ -10530,7 +10546,23 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-                	<BlockGenus name="Engine_LeftTurn" kind="command" color="205 133 63" 
+                <BlockGenus name="Engine_RightTurnDegrees" kind="command" color="205 133 63" 
+                            initlabel="bg.Engine_RightTurn">
+			<description>
+				<text>Engine_RightTurn</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.speed_number">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+                                <BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.degrees">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+                <BlockGenus name="Engine_LeftTurn" kind="command" color="205 133 63" 
                                     initlabel="bg.Engine_LeftTurn">
 			<description>
 				<text>Engine_LeftTurn</text>
@@ -10539,6 +10571,22 @@
 				<BlockConnector connector-type="number" 
                                                 connector-kind="socket" label="bc.speed_number">
 					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+                <BlockGenus name="Engine_LeftTurnDegrees" kind="command" color="205 133 63" 
+                                    initlabel="bg.Engine_LeftTurnDegrees">
+			<description>
+				<text>Engine_LeftTurnDegrees</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.speed_number">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+                                <BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.degrees">
+					<DefaultArg genus-name="number" label="90" />
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
@@ -10570,6 +10618,22 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
+                <BlockGenus name="Engine_ForwardTime" kind="command" color="205 133 63" 
+                            initlabel="bg.Engine_ForwardTime">
+			<description>
+				<text>Engine_ForwardTime</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.speed_number">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+                                <BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.time">
+					<DefaultArg genus-name="number" label="5" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
                 <BlockGenus name="Engine_Back" kind="command" color="205 133 63" 
                             initlabel="bg.Engine_Back">
 			<description>
@@ -10595,6 +10659,22 @@
                                 <BlockConnector connector-type="number" 
                                                 connector-kind="socket" label="bc.distance">
 					<DefaultArg genus-name="number" label="50" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+                <BlockGenus name="Engine_BackTime" kind="command" color="205 133 63" 
+                            initlabel="bg.Engine_BackTime">
+			<description>
+				<text>Engine_BackTime</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.speed_number">
+					<DefaultArg genus-name="number" label="100" />
+				</BlockConnector>
+                                <BlockConnector connector-type="number" 
+                                                connector-kind="socket" label="bc.time">
+					<DefaultArg genus-name="number" label="5" />
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
@@ -12286,13 +12366,18 @@
             </BlockDrawer>
 			<!-- motors -->
 			<BlockDrawer button-color="93 13 125" name="bd.motors" type="factory">
-				<BlockGenusMember>Engine_Forward</BlockGenusMember>
+                                <BlockGenusMember>Engine_Basic</BlockGenusMember>
+                                <BlockGenusMember>Engine_Forward</BlockGenusMember>
                                 <BlockGenusMember>Engine_ForwardDistance</BlockGenusMember>
+                                <BlockGenusMember>Engine_ForwardTime</BlockGenusMember>
 				<BlockGenusMember>Engine_Back</BlockGenusMember>
                                 <BlockGenusMember>Engine_BackDistance</BlockGenusMember>
+                                <BlockGenusMember>Engine_BackTime</BlockGenusMember>
 				<BlockGenusMember>Engine_Stop</BlockGenusMember>
 				<BlockGenusMember>Engine_RightTurn</BlockGenusMember>
+                                <BlockGenusMember>Engine_RightTurnDegrees</BlockGenusMember>
 				<BlockGenusMember>Engine_LeftTurn</BlockGenusMember>
+                                <BlockGenusMember>Engine_LeftTurnDegrees</BlockGenusMember>
 			</BlockDrawer>
 			<!-- encoder -->
 			<BlockDrawer button-color="0 180 255" name="bg.encoder">
