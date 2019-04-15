@@ -45,7 +45,7 @@ public class PageDivider extends JComponent implements MouseListener, MouseMotio
 
     private static final long serialVersionUID = 328149080272L;
     /** The color of all PageDividers */
-    private static final Color DIVIDER_COLOR = Color.GRAY;
+    private static final Color DIVIDER_COLOR = Color.ORANGE;
     /** A pointer to the left page of this PageDivider */
     private final Page leftPage;
     /** mouseIn Flag: true if and only if mouse is over this PageDivider */

@@ -99,7 +99,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         }
     });
 
-    public static boolean everyPageHasDrawer = false;
+    public static boolean everyPageHasDrawer = true;
 
     /** The Workspace has a BlockCanvas widget on which blocks actually live.
      * The blockCanvas is what takes care of allowing scrolling and drawing pages,

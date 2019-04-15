@@ -15,19 +15,16 @@ public class AccelerometerModule extends TranslatorBlock {
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {
         String Accel="Accel";
-        String AccMod;
         translator.addHeaderFile("I2Cdev.h");
         translator.addHeaderFile("MPU6050.h");
 
-        TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
-        AccMod=translatorBlock.toCode();
 
         translator.addDefinitionCommand("MPU6050 "+Accel+";");
         translator.addSetupCommand(Accel+".initialize();\ndelay(100);");
 
 
-        return codePrefix + AccMod +"=sqrt("+ Accel + ".getAccelerationX()"+ 
+        return codePrefix + "sqrt("+ Accel + ".getAccelerationX()"+
                 Accel + ".getAccelerationY()"+ 
-                Accel + ".getAccelerationZ()" + ");\n" + codeSuffix;
+                Accel + ".getAccelerationZ()" + ")" + codeSuffix;
     }
 }

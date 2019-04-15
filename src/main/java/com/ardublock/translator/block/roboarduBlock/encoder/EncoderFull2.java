@@ -15,29 +15,21 @@ public class EncoderFull2 extends TranslatorBlock {
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {
-        String EncoderSimple2=translator.getNumberVariable("EncoderSimple2");
-        String EncoderFull2=translator.getNumberVariable("EncoderFull2");
+        String nEncoder2=translator.getNumberVariable("nEncoder2");
 
-        if (EncoderFull2 == null)
+        if (nEncoder2 == null)
         {
-            EncoderFull2 = translator.buildVariableName("EncoderFull2");
-            translator.addNumberVariable("EncoderFull2", EncoderFull2);
-            translator.addDefinitionCommand("unsigned long long " + EncoderFull2 + " = 0 ;");
-        }
-        if (EncoderSimple2 == null)
-        {
-            EncoderSimple2 = translator.buildVariableName("EncoderSimple2");
-            translator.addNumberVariable("EncoderSimple2", EncoderSimple2);
-            translator.addDefinitionCommand("unsigned long long " + EncoderSimple2 + " = 0 ;");
+            nEncoder2 = translator.buildVariableName("nEncoder2");
+            translator.addNumberVariable("nEncoder2", nEncoder2);
+            translator.addDefinitionCommand("unsigned long long " + nEncoder2 + " = 0 ;");
         }
 
-        translator.addDefinitionCommand("\nvoid Encoder_FUNCTION2(){\n" +
-                EncoderSimple2+"++;\n"+
-                EncoderFull2+"="+EncoderSimple2+"/20;\n"+
+        translator.addDefinitionCommand("\nvoid Encoder2(){\n" +
+                nEncoder2+"++;\n"+
                 "}\n");
-        translator.addSetupCommand("attachInterrupt(3, Encoder_FUNCTION2, RISING);\n");
+        translator.addSetupCommand("attachInterrupt(3, Encoder2, CHANGE);\n");
 
 
-        return codePrefix + EncoderFull2 + codeSuffix;
+        return codePrefix + nEncoder2 + "/40" + codeSuffix;
     }
 }
