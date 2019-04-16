@@ -18,7 +18,7 @@ public class NewButtonListener implements ActionListener
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{
+	{   
 		parentFrame.doNewArduBlockFile();
 	}
 

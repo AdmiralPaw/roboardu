@@ -194,13 +194,13 @@ public class MiniMap extends JPanel implements WorkspaceWidget, MouseListener, M
                 //re-render this.blocks and this.comments
                 if (component instanceof RenderableBlock && component != null && component.isVisible()) {
                     if (((RenderableBlock) component).isSearchResult()) {
-                        g.setColor(Color.yellow);
+                        g.setColor(Color.red);
                     } else {
                         g.setColor(((RenderableBlock) component).getBLockColor());
                     }
                     drawBoundingBox(g, component);
                 } else if (component instanceof Comment && component.isVisible()) {
-                    g.setColor(Color.yellow);
+                    g.setColor(Color.red);
                     drawBoundingBox(g, component);
                 }
             }
@@ -218,7 +218,7 @@ public class MiniMap extends JPanel implements WorkspaceWidget, MouseListener, M
                 g.setColor(((RenderableBlock) component).getBLockColor());
                 drawBoundingBox(g, component);
             } else if (component instanceof Comment && component.isVisible()) {
-                g.setColor(Color.yellow);
+                g.setColor(Color.red);
                 drawBoundingBox(g, component);
             }
         }

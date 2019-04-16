@@ -99,7 +99,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         }
     });
 
-    public static boolean everyPageHasDrawer = false;
+    public static boolean everyPageHasDrawer = true;
 
     /** The Workspace has a BlockCanvas widget on which blocks actually live.
      * The blockCanvas is what takes care of allowing scrolling and drawing pages,
@@ -118,7 +118,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      * MiniMap associated with the blockCanvas
      */
     private MiniMap miniMap;
-    private FactoryManager factory;
+    public FactoryManager factory;
     private final FocusTraversalManager focusManager;
 
     private final TypeBlockManager typeBlockManager;
@@ -143,7 +143,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         for (final Explorer exp : factory.getNavigator().getExplorers()) {
             exp.addListener(this);
         }
-
+        
         this.miniMap = new MiniMap(this);
         this.addWidget(this.miniMap, true, true);
         this.addComponentListener(new ComponentAdapter() {
@@ -154,14 +154,14 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 blockCanvasLayer.validate();
             }
         });
-
         blockCanvasLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
                 factory.getJComponent(), blockCanvas.getJComponent());
+        factory.getJComponent().setPreferredSize(new Dimension(350, 30));
         blockCanvasLayer.setOneTouchExpandable(true);
         blockCanvasLayer.setDividerSize(6);
         add(blockCanvasLayer, BLOCK_LAYER);
         validate();
-        addPageAt(Page.getBlankPage(this), 0, false);
+        addPageAt(Page.getBlankPage(this), 0, true); //false
 
         this.workspaceWidgets.add(factory);
 

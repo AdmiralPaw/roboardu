@@ -39,12 +39,12 @@ public class BlockLabel implements MouseListener, MouseMotionListener, KeyListen
     public enum Type {
         NAME_LABEL, PAGE_LABEL, PORT_LABEL, DATA_LABEL
     }
-    public final static Font blockFontSmall_Bold = new Font("Monospaced", Font.BOLD, 7);
-    public final static Font blockFontMedium_Bold = new Font("Monospaced", Font.BOLD, 10);
-    public final static Font blockFontLarge_Bold = new Font("Monospaced", Font.BOLD, 12);
-    public final static Font blockFontSmall_Plain = new Font("Monospaced", Font.PLAIN, 7);
-    public final static Font blockFontMedium_Plain = new Font("Monospaced", Font.PLAIN, 10);
-    public final static Font blockFontLarge_Plain = new Font("Monospaced", Font.PLAIN, 12);
+    public final static Font blockFontSmall_Bold = new Font("lucida sans unicode", Font.PLAIN, 7);
+    public final static Font blockFontMedium_Bold = new Font("lucida sans unicode", Font.PLAIN, 10);
+    public final static Font blockFontLarge_Bold = new Font("lucida sans unicode", Font.PLAIN, 12);
+    public final static Font blockFontSmall_Plain = new Font("lucida sans unicode", Font.PLAIN, 7);
+    public final static Font blockFontMedium_Plain = new Font("lucida sans unicode", Font.PLAIN, 10);
+    public final static Font blockFontLarge_Plain = new Font("lucida sans unicode"   , Font.PLAIN, 12);
     private LabelWidget widget;
 
     /** These keys inputs are delegated back to renderable block */
@@ -79,21 +79,16 @@ public class BlockLabel implements MouseListener, MouseMotionListener, KeyListen
         this.blockID = blockID;
         this.labelType = labelType;
         widget = new LabelWidget(initLabelText, workspace.getEnv().getBlock(blockID).getColor().darker(), tooltipBackground) {
-
             private static final long serialVersionUID = 328149080424L;
-
             protected void fireTextChanged(String text) {
                 textChanged(text);
             }
-
             protected void fireGenusChanged(String genus) {
                 genusChanged(genus);
             }
-
             protected void fireDimensionsChanged(Dimension value) {
                 dimensionsChanged(value);
             }
-
             protected boolean isTextValid(String text) {
                 return textValid(text);
             }
@@ -107,6 +102,7 @@ public class BlockLabel implements MouseListener, MouseMotionListener, KeyListen
                 && (labelType == BlockLabel.Type.NAME_LABEL || labelType == BlockLabel.Type.PORT_LABEL)
                 && workspace.getEnv().getBlock(blockID).isLabelEditable()
                 && !(workspace.getEnv().getRenderableBlock(blockID) instanceof FactoryRenderableBlock));
+        
         if (labelType == null || labelType.equals(BlockLabel.Type.NAME_LABEL)) {
             widget.setFont(BlockLabel.blockFontLarge_Bold);
         } else if (labelType.equals(BlockLabel.Type.PAGE_LABEL)) {
@@ -116,6 +112,7 @@ public class BlockLabel implements MouseListener, MouseMotionListener, KeyListen
         } else if (labelType.equals(BlockLabel.Type.DATA_LABEL)) {
             widget.setFont(BlockLabel.blockFontMedium_Bold);
         }
+        
         if (workspace.getEnv().getBlock(blockID).hasSiblings()) {
             //Map<String, String> siblings = new HashMap<String, String>();
             List<String> siblingsNames = workspace.getEnv().getBlock(blockID).getSiblingsList();

@@ -38,7 +38,7 @@ public class ZoomSlider extends JComponent implements PropertyChangeListener {
         slider = new CSlider(34, 200, 100, true, 10, true, "100%");
         JLabel label = new JLabel("Zoom  ");
         label.setFont(new Font("Ariel", Font.BOLD, 10));
-        label.setForeground(Color.white);
+        label.setForeground(Color.black);
         this.add(label, BorderLayout.WEST);
         this.add(slider, BorderLayout.CENTER);
         slider.addPropertyChangeListener(this);

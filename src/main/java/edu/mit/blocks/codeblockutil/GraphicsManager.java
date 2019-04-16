@@ -44,7 +44,7 @@ public class GraphicsManager {
         Graphics2D g2D = img.createGraphics();
         g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 0.0f));
         Rectangle2D.Double rect = new Rectangle2D.Double(0, 0, width, height);
-        g2D.fill(rect);
+        //g2D.fill(rect);
         return img;
     }
 

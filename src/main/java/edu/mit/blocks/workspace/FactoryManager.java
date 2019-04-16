@@ -96,7 +96,7 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     private static final String DYNAMIC_NAME = "My Blocks";
     /** The string identifier of subset drawers */
     private static final String SUBSETS_NAME = "Subsets";
-    /** The high-level UI that manages the controlling of internal CWsing components */
+    /** The high-level UI that manages the controlling of internal CSwing components */
     private Navigator navigator;
     /** The high-level UI widget that manages swicthing between different factories */
     private JComponent factorySwicther;
@@ -115,11 +115,11 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     public FactoryManager(Workspace workspace) {
         this.workspace = workspace;
         this.navigator = new Navigator(workspace);
-        this.navigator.getJComponent().setPreferredSize(new Dimension(160, 600));
+        this.navigator.getJComponent().setPreferredSize(new Dimension(210, 600));
         this.navigator.addExlorer(STATIC_NAME);
         this.navigator.addExlorer(DYNAMIC_NAME);
         this.navigator.addExlorer(SUBSETS_NAME);
-        this.factorySwicther = new JPanel(new BorderLayout());
+        this.factorySwicther = new JPanel();
         this.factorySwicther.add(navigator.getSwitcher());
         this.factorySwicther.setOpaque(false);
         this.navigator.getJComponent().addComponentListener(this);
@@ -337,7 +337,7 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
      * @param position
      * @return true if and only if the following conditions are met:
      * 			-specified name is not null,
-     * 			-if "sta" is true, then 0<=position<staticdrawers.size
+     * 			-if "sta" is true, then 0<=position<static drawers.size
      * 			-if "dyn" is true, then 0<=position<static drawers.size
      * 			-there is NO other drawers with the same name as the
      * 			 specified name (in oth static or dynamic sets)

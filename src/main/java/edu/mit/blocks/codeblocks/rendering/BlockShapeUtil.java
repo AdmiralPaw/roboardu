@@ -1,9 +1,6 @@
 package edu.mit.blocks.codeblocks.rendering;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.Transparency;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.GeneralPath;
@@ -173,7 +170,7 @@ public class BlockShapeUtil {
         //System.out.println("Not found cached bevel!");
         //generic light vector - "chosen to look good"
         float[] light = ShapeBevel.getLightVector(-1, -2, 2);
-        int bevelSize = 3;
+        int bevelSize = 1;
         //create image
         img = GraphicsManager.gc.createCompatibleImage(width, height, Transparency.TRANSLUCENT);
         Graphics2D g2 = (Graphics2D) img.getGraphics();

@@ -189,7 +189,7 @@ public class Block implements ISupportMemento {
      * @param workspace The workspace in which this block should be created
      * @param genusName the name of its associated <code>BlockGenus</code>
      * @param linkToStubs if true, this block can have stubs and be linked to them;
-     * if false, then this block even though the genus specifies it will not be
+     * if false, then this block even thfough the genus specifies it will not be
      * linked to stubs
      */
     public Block(Workspace workspace, String genusName, boolean linkToStubs) {

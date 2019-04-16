@@ -14,6 +14,7 @@ import edu.mit.blocks.renderable.RenderableBlock;
 import edu.mit.blocks.codeblocks.Block;
 import edu.mit.blocks.codeblockutil.CGraphite;
 import edu.mit.blocks.codeblockutil.Canvas;
+import java.awt.ComponentOrientation;
 
 /**
  * A Canvas that acts as the parent of all blocks.
@@ -66,7 +67,8 @@ class FactoryCanvas extends JPanel implements Canvas, SearchableContainer, RBPar
     public void updateContainsSearchResults(boolean containsSearchResults) {
         Color previousHighlight = this.highlight;
         if (containsSearchResults) {
-            this.setHighlight(Color.yellow);
+            this.setHighlight(Color.red);
+            this.setComponentOrientation(this.getComponentOrientation());
         } else {
             this.setHighlight(null);
         }

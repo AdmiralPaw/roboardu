@@ -35,31 +35,36 @@ public class CBorderlessButton extends CButton {
             Color topColoring;
             Color bottomColoring;
             if (this.pressed || this.selected) {
-                topColoring = this.selectedColor.darker();
-                bottomColoring = CGraphite.blue;
+                topColoring = new Color(23,161,165);
+                bottomColoring = new Color(23,161,165);
+//                topColoring = this.selectedColor.darker();
+//                bottomColoring = CGraphite.blue;
             } else {
-                topColoring = this.buttonColor;
-                bottomColoring = this.buttonColor;
+//                topColoring = this.buttonColor;
+//                bottomColoring = this.buttonColor;
+                topColoring = new Color(23,161,165);
+                bottomColoring = new Color(23,161,165);
             }
             // Paint the first layer
             g2.setPaint(new GradientPaint(0, 0, topColoring, 0, buttonHeight, bottomColoring, false));
-            g2.fillRoundRect(INSET, INSET, buttonWidth, buttonHeight, arc, arc);
-            g2.setColor(Color.darkGray);
-            g2.drawRoundRect(INSET, INSET, buttonWidth, buttonHeight, arc, arc);
+            g2.fillRect(INSET, INSET, buttonWidth, buttonHeight);
+//            g2.fillRoundRect(INSET, INSET, buttonWidth, buttonHeight, arc, arc);
+//            g2.setColor(Color.darkGray);
+//            g2.drawRoundRect(INSET, INSET, buttonWidth, buttonHeight, arc, arc);
 
             // set up paint data fields for second layer
-            int highlightHeight = buttonHeight / 2 - HIGHLIGHT_INSET;
-            int highlightWidth = buttonWidth - (HIGHLIGHT_INSET * 2) + 1;
-            if (this.pressed || this.selected) {
-                topColoring = Color.white;
-                bottomColoring = this.selectedColor;
-            } else {
-                topColoring = Color.white;
-                bottomColoring = Color.darkGray;
-            }
-            // Paint the second layer
-            g2.setPaint(new GradientPaint(0, 0, topColoring, 0, buttonHeight, bottomColoring, false));
-            g2.fillRoundRect(INSET + HIGHLIGHT_INSET, INSET + HIGHLIGHT_INSET + 1, highlightWidth, highlightHeight, arc, arc);
+//            int highlightHeight = buttonHeight / 2 - HIGHLIGHT_INSET;
+//            int highlightWidth = buttonWidth - (HIGHLIGHT_INSET * 2) + 1;
+//            if (this.pressed || this.selected) {
+//                topColoring = Color.white;
+//                bottomColoring = this.selectedColor;
+//            } else {
+//                topColoring = Color.white;
+//                bottomColoring = Color.darkGray;
+//            }
+//            // Paint the second layer
+//            g2.setPaint(new GradientPaint(0, 0, topColoring, 0, buttonHeight, bottomColoring, false));
+//            g2.fillRoundRect(INSET + HIGHLIGHT_INSET, INSET + HIGHLIGHT_INSET + 1, highlightWidth, highlightHeight, arc, arc);
 
         }
         // Draw the text (if any)

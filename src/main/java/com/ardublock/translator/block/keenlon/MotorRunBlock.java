@@ -29,7 +29,7 @@ public class MotorRunBlock extends TranslatorBlock
 		String rightspeed = translatorBlock.toCode();
 		
 		String ret = "motor.run(" + leftspeed + " , " + rightspeed + ");\n";
-		return  ret;		
+		return codePrefix + ret + codeSuffix;		
 		
 		
 		

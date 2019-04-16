@@ -1394,6 +1394,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
 		// ADD BLOCK COLOR
 		Color blockColor = this.getBLockColor();
+		//Color new_block_color = new Color(blockColor.getRed(), blockColor.getGreen(), blockColor.getBlue(), 255);
 		buffImgG2.setColor(blockColor);
 		buffImgG2.fill(blockArea);
 

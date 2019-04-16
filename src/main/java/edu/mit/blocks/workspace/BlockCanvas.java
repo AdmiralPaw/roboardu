@@ -78,10 +78,10 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
         this.scrollPane = new CHoverScrollPane(canvas,
                 ScrollPolicy.VERTICAL_BAR_ALWAYS,
                 ScrollPolicy.HORIZONTAL_BAR_ALWAYS,
-                18, CGraphite.blue, null);
+                18, new Color(255, 133, 8), null);
         scrollPane.setScrollingUnit(5);
         canvas.setLayout(null);
-        canvas.setBackground(Color.gray);
+        canvas.setBackground(Color.white);
         canvas.setOpaque(true);
         PageChangeEventManager.addPageChangeListener(this);
     }
@@ -417,12 +417,12 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
             Page p = pages.get(i);
             if (p.getDefaultPageColor() == null) {
                 if (i % 2 == 1) {
-                    p.setPageColor(new Color(30, 30, 30));
+                    p.setPageColor(new Color(225,225,225)); //new Color(30, 30, 30));
                 } else {
-                    p.setPageColor(new Color(40, 40, 40));
+                    p.setPageColor(new Color(225,225,225));//new Color(40, 40, 40));
                 }
             } else {
-                p.setPageColor(p.getDefaultPageColor());
+                p.setPageColor(new Color(225,225,225));//p.getDefaultPageColor());
             }
             widthCounter = widthCounter + p.reformBounds(widthCounter);
         }

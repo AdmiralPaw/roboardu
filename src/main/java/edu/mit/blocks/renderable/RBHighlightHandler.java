@@ -130,7 +130,7 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
         } else if (rb.getBlock().hasFocus()) {
             color = new Color(200, 200, 255); //Color.BLUE);
         } else if (isSearchResult) {
-            color = new Color(255, 255, 120); //Color.YELLOW);
+            color = new Color(0, 83, 138); //Color.DARKBLUE);
         } else if (rb.getBlock().isBad()) {
             color = new Color(255, 100, 100); //Color.RED);
         } else {

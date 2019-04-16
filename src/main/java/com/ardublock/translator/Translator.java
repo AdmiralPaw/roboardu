@@ -25,9 +25,10 @@ import edu.mit.blocks.workspace.Workspace;
 
 public class Translator
 {
-	private static final String variablePrefix = "_ABVAR_";
+	private static final String variablePrefix = "_";
 
 	private Set<String> headerFileSet;
+        private Set<String> headerDefinitionSet;
 	private Set<String> definitionSet;
 	private List<String> setupCommand;
 	private List<String> guinoCommand;
@@ -67,16 +68,22 @@ public class Translator
 			{
 				headerCommand.append("#include <" + file + ">\n");
 			}
-			headerCommand.append("\n");
 		}
 		
+                if (!headerDefinitionSet.isEmpty())
+		{
+			for (String command:headerDefinitionSet)
+			{
+				headerCommand.append(command + "\n");
+			}
+		}
+                
 		if (!definitionSet.isEmpty())
 		{
 			for (String command:definitionSet)
 			{
 				headerCommand.append(command + "\n");
 			}
-			headerCommand.append("\n");
 		}
 		
 		if (!functionNameSet.isEmpty())
@@ -85,10 +92,10 @@ public class Translator
 			{
 				headerCommand.append("void " + functionName + "();\n");
 			}
-			headerCommand.append("\n");
 		}
 		
-		return headerCommand.toString() + generateSetupFunction() +generateGuinoFunction();
+		return headerCommand.toString() + "\n" + generateSetupFunction() +
+                        generateGuinoFunction();
 	}
 	
 	public String generateSetupFunction()
@@ -161,7 +168,8 @@ public class Translator
 	public void reset()
 	{
 		headerFileSet = new LinkedHashSet<String>();
-		definitionSet = new LinkedHashSet<String>();
+		headerDefinitionSet = new LinkedHashSet<String>();
+                definitionSet = new LinkedHashSet<String>();
 		setupCommand = new LinkedList<String>();
 		guinoCommand = new LinkedList<String>();
 		functionNameSet = new HashSet<String>();
@@ -193,6 +201,14 @@ public class Translator
 		if (!headerFileSet.contains(headerFile))
 		{
 			headerFileSet.add(headerFile);
+		}
+	}
+        
+        public void addHeaderDefinition(String headerDefinition)
+	{
+		if (!headerDefinitionSet.contains(headerDefinition))
+		{
+			headerDefinitionSet.add(headerDefinition);
 		}
 	}
 	
