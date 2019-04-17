@@ -15,8 +15,8 @@ import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNameDuplicatedException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
-import edu.mit.blocks.renderable.RenderableBlock;
-import edu.mit.blocks.workspace.Workspace;
+import com.mit.blocks.renderable.RenderableBlock;
+import com.mit.blocks.workspace.Workspace;
 
 import org.testng.annotations.*;
 
