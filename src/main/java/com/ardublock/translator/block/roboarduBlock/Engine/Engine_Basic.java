@@ -39,9 +39,10 @@ public class Engine_Basic extends TranslatorBlock
                 "{\n" +
                 "  int Dir = 0;\n" +
                 "\n" +
-                "  if(Speed > 255)  Speed = 255;\n" +
-                "  if(Speed < -255)  Speed = -255;\n" +
+                "  if(Speed > 100)  Speed = 100;\n" +
+                "  if(Speed < -100)  Speed = -100;\n" +
                 "\n" +
+                "  map(Speed,-100,100,-255,255);\n" +
                 "  if(Speed < 0)\n" +
                 "  {\n" +
                 "    Dir = 1;\n" +
@@ -58,9 +59,10 @@ public class Engine_Basic extends TranslatorBlock
                 "{\n" +
                 "  int Dir = 0;\n" +
                 "\n" +
-                "  if(Speed > 255)  Speed = 255;\n" +
-                "  if(Speed < -255)  Speed = -255;\n" +
+                "  if(Speed > 100)  Speed = 100;\n" +
+                "  if(Speed < -100)  Speed = -100;\n" +
                 "\n" +
+                "  map(Speed,-100,100,-255,255);\n" +
                 "  if(Speed < 0)\n" +
                 "  {\n" +
                 "    Dir = 1;\n" +

@@ -14,24 +14,22 @@ public class EncoderSimple extends TranslatorBlock{
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {
-        String EncoderSimple=translator.getNumberVariable("EncoderSimple");
+        String nEncoder1=translator.getNumberVariable("nEncoder");
 
 
-        if (EncoderSimple == null)
+        if (nEncoder1 == null)
         {
-            EncoderSimple = translator.buildVariableName("EncoderSimple");
-            translator.addNumberVariable("EncoderSimple", EncoderSimple);
-            translator.addDefinitionCommand("int " + EncoderSimple + " = 0 ;");
+            nEncoder1 = translator.buildVariableName("nEncoder1");
+            translator.addNumberVariable("nEncoder1", nEncoder1);
+            translator.addDefinitionCommand("unsigned long long " + nEncoder1 + " = 0 ;");
         }
 
-        if(translator.getNumberVariable("EncoderFull")==null){
-            translator.addDefinitionCommand("\nvoid Encoder_FUNCTION(){\n" +
-                    EncoderSimple+"++;\n"+
-                    "}\n");
-            translator.addSetupCommand("attachInterrupt(2, Encoder_FUNCTION, RISING);\n");
-        }
+        translator.addDefinitionCommand("\nvoid Encoder1(){\n" +
+                nEncoder1+"++;\n"+
+                "}\n");
+        translator.addSetupCommand("attachInterrupt(2, Encoder1, CHANGE);\n");
 
 
-        return codePrefix + EncoderSimple + codeSuffix;
+        return codePrefix + nEncoder1 + codeSuffix;
     }
 }

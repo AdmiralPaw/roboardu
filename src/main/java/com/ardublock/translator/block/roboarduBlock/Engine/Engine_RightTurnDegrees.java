@@ -72,9 +72,10 @@ public class Engine_RightTurnDegrees extends TranslatorBlock
                 "{\n" +
                 "  int Dir = 0;\n" +
                 "\n" +
-                "  if(Speed > 255)  Speed = 255;\n" +
-                "  if(Speed < -255)  Speed = -255;\n" +
+                "  if(Speed > 100)  Speed = 100;\n" +
+                "  if(Speed < -100)  Speed = -100;\n" +
                 "\n" +
+                "  map(Speed,-100,100,-255,255);\n" +
                 "  if(Speed < 0)\n" +
                 "  {\n" +
                 "    Dir = 1;\n" +
@@ -91,9 +92,10 @@ public class Engine_RightTurnDegrees extends TranslatorBlock
                 "{\n" +
                 "  int Dir = 0;\n" +
                 "\n" +
-                "  if(Speed > 255)  Speed = 255;\n" +
-                "  if(Speed < -255)  Speed = -255;\n" +
+                "  if(Speed > 100)  Speed = 100;\n" +
+                "  if(Speed < -100)  Speed = -100;\n" +
                 "\n" +
+                "  map(Speed,-100,100,-255,255);\n" +
                 "  if(Speed < 0)\n" +
                 "  {\n" +
                 "    Dir = 1;\n" +
@@ -121,7 +123,7 @@ public class Engine_RightTurnDegrees extends TranslatorBlock
                 "\n" +
                 "  Motors(Speed,-Speed);\n" +
                 "\n" +
-                "  while(nEncoder1 - nEncoder1Start < Deegree*0.6 || nEncoder2 - nEncoder2Start < Degree*0.6)\n" +
+                "  while(nEncoder1 - nEncoder1Start < Deegree*0.3 || nEncoder2 - nEncoder2Start < Degree*0.3)\n" +
                 "  {\n" +
                 "    delay(1);\n" +
                 "  }\n" +

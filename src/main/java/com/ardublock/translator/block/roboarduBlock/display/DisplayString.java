@@ -44,7 +44,7 @@ public class DisplayString extends TranslatorBlock {
 
 
         return codePrefix + display + ".setTextSize(" + StringSize + ");\n  " +
-                display + ".setCursor(" + BeginX + ", " + BeginY + ");\n   " + 
+                display + ".setCursor(" + BeginX + ", " + BeginY + ");\n   " +
                 display + ".println(F(\"" + DisplayString + "\"));\n" + codeSuffix;
     }
 

@@ -72,9 +72,10 @@ public class Engine_BackDistance extends TranslatorBlock
                 "{\n" +
                 "  int Dir = 0;\n" +
                 "\n" +
-                "  if(Speed > 255)  Speed = 255;\n" +
-                "  if(Speed < -255)  Speed = -255;\n" +
+                "  if(Speed > 100)  Speed = 100;\n" +
+                "  if(Speed < -100)  Speed = -100;\n" +
                 "\n" +
+                "  map(Speed,-100,100,-255,255);\n" +
                 "  if(Speed < 0)\n" +
                 "  {\n" +
                 "    Dir = 1;\n" +
@@ -91,9 +92,10 @@ public class Engine_BackDistance extends TranslatorBlock
                 "{\n" +
                 "  int Dir = 0;\n" +
                 "\n" +
-                "  if(Speed > 255)  Speed = 255;\n" +
-                "  if(Speed < -255)  Speed = -255;\n" +
+                "  if(Speed > 100)  Speed = 100;\n" +
+                "  if(Speed < -100)  Speed = -100;\n" +
                 "\n" +
+                "  map(Speed,-100,100,-255,255);\n" +
                 "  if(Speed < 0)\n" +
                 "  {\n" +
                 "    Dir = 1;\n" +
@@ -132,7 +134,7 @@ public class Engine_BackDistance extends TranslatorBlock
                 "\n" +
                 "  MotorsBack(Speed);\n" +
                 "\n" +
-                "  while(nEncoder1 - nEncoder1Start < Dist || nEncoder2 - nEncoder2Start < Dist)\n" +
+                "  while(nEncoder1 - nEncoder1Start < Dist/2 || nEncoder2 - nEncoder2Start < Dist/2)\n" +
                 "  {\n" +
                 "    if(millis() - TimeStart > MaxTime)\n" +
                 "    {\n" +
