@@ -22,9 +22,9 @@ import javax.swing.JTextField;
 public class CQueryField extends JPanel implements MouseListener, MouseMotionListener {
 
     private static final long serialVersionUID = 328149080259L;
-    private JTextField field;
-    private boolean pressed = false;
-    private boolean mouseover = false;
+    protected JTextField field;
+    protected boolean pressed = false;
+    protected boolean mouseover = false;
 
     public CQueryField() {
         this(null);
@@ -53,7 +53,7 @@ public class CQueryField extends JPanel implements MouseListener, MouseMotionLis
         return new Insets(h / 6, h, h / 6, h);
     }
 
-    private Shape getXCross(int w, int h) {
+    protected Shape getXCross(int w, int h) {
         GeneralPath shape = new GeneralPath();
         shape.moveTo(w - h * 2 / 3, h / 3);
         shape.lineTo(w - h / 3, h * 2 / 3);
@@ -62,13 +62,13 @@ public class CQueryField extends JPanel implements MouseListener, MouseMotionLis
         return shape;
     }
 
-    private Shape getXBox(int w, int h) {
+    protected Shape getXBox(int w, int h) {
         Ellipse2D.Double box = new Ellipse2D.Double(w - 5 * h / 6, h / 6, 2 * h / 3, 2 * h / 3);
         //RoundRectangle2D.Double box = new RoundRectangle2D.Double(w-5*h/6, h/6, 2*h/3, 2*h/3, h/3, h/3);
         return box;
     }
 
-    private Shape getMag(int w, int h) {
+    protected Shape getMag(int w, int h) {
         Ellipse2D.Double e = new Ellipse2D.Double(h / 2, h / 6, h * 1 / 3, h * 1 / 3);
         GeneralPath shape = new GeneralPath();
         shape.moveTo(h / 3, h * 2 / 3);

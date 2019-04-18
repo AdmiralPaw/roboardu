@@ -22,6 +22,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import edu.mit.blocks.codeblockutil.CQueryField;
+import edu.mit.blocks.codeblockutil.RQueryField;
 
 /**
  * Contributes a search bar component to the CodeBlocks GUI, which allows the user to find 
@@ -56,7 +57,7 @@ public class SearchBar {
      */
     public SearchBar(String defaultText, String tooltip, final Component defaultComponent) {
         this.defaultText = defaultText;
-        this.searchPanel = new CQueryField();
+        this.searchPanel = new RQueryField();
         this.searchBar = this.searchPanel.getQueryField();
         searchBar.setToolTipText(tooltip);
         searchBar.setColumns(12);
