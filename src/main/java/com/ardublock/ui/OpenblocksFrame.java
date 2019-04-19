@@ -180,12 +180,12 @@ public class OpenblocksFrame extends JFrame
                 
                 menuBar.add(fileMenu);
                 menuBar.add(toolsMenu);
+
+				final JPanel northPanel = new JPanel();
+				final JPanel logo = new JPanel();
+                final JPanel buttons = new JPanel();
                 
-                JPanel northPanel = new JPanel();
-                JPanel logo = new JPanel();
-                JPanel buttons = new JPanel();
-                
-		buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
+				buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
                 logo.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
                 northPanel.setLayout(new BorderLayout());
                 ImageIcon mLogo = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(
@@ -197,7 +197,7 @@ public class OpenblocksFrame extends JFrame
                 mainLogo.setIcon(mLogo);
                 logo.add(mainLogo);
                 logo.setBackground(new Color(0,151,157));
-                JPanel rightPanel = new JPanel();
+                final JPanel rightPanel = new JPanel();
                 
                 logo.setPreferredSize(workspace.getFactorySize()); //new Dimension(355, 50));
                 rightPanel.setPreferredSize(new Dimension(10, 50));
