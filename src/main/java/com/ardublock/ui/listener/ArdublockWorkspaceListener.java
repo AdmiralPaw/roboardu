@@ -3,9 +3,9 @@ package com.ardublock.ui.listener;
 import com.ardublock.core.Context;
 import com.ardublock.ui.OpenblocksFrame;
 
-import edu.mit.blocks.codeblocks.Block;
-import edu.mit.blocks.workspace.WorkspaceEvent;
-import edu.mit.blocks.workspace.WorkspaceListener;
+import com.mit.blocks.codeblocks.Block;
+import com.mit.blocks.workspace.WorkspaceEvent;
+import com.mit.blocks.workspace.WorkspaceListener;
 
 public class ArdublockWorkspaceListener implements WorkspaceListener
 {

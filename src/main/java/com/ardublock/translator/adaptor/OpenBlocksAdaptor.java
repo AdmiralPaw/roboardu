@@ -4,8 +4,8 @@ import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.TranslatorBlockFactory;
 
-import edu.mit.blocks.codeblocks.Block;
-import edu.mit.blocks.codeblocks.BlockConnector;
+import com.mit.blocks.codeblocks.Block;
+import com.mit.blocks.codeblocks.BlockConnector;
 
 public class OpenBlocksAdaptor implements BlockAdaptor
 {

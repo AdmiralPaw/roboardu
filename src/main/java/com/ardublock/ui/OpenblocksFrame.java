@@ -32,26 +32,32 @@ import com.ardublock.ui.listener.SaveAsButtonListener;
 import com.ardublock.ui.listener.SaveButtonListener;
 import com.ardublock.ui.СontrollerСonfiguration;
 
-import edu.mit.blocks.controller.WorkspaceController;
-import edu.mit.blocks.workspace.SearchBar;
-import edu.mit.blocks.workspace.ZoomSlider;
-import edu.mit.blocks.workspace.SearchableContainer;
-import edu.mit.blocks.workspace.Workspace;
+import com.mit.blocks.controller.WorkspaceController;
+import com.mit.blocks.workspace.SearchBar;
+import com.mit.blocks.workspace.ZoomSlider;
+import com.mit.blocks.workspace.SearchableContainer;
+import com.mit.blocks.workspace.Workspace;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 
 public class OpenblocksFrame extends JFrame
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2841155965906223806L;
-
+        
 	private Context context;
 	private JFileChooser fileChooser;
 	private FileFilter ffilter;
-	
+        
 	private ResourceBundle uiMessageBundle;
 	
+//        private JPanel rightPanel;
+//        private JPanel northPanel;
+        private СontrollerСonfiguration controller; 
+        
 	public void addListener(OpenblocksFrameListener ofl)
 	{
 		context.registerOpenblocksFrameListener(ofl);
@@ -80,7 +86,8 @@ public class OpenblocksFrame extends JFrame
 		this.setLocationRelativeTo(null);
 		uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
 		//25.03.2019
-                Image icon = new ImageIcon(uiMessageBundle.getString("ardublock.url.icon")).getImage();
+                Image icon = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(
+                        "com/ardublock/block/mainIcon.png")).getImage();
                 this.setIconImage(icon);
                 //25.03.2019
                 
@@ -105,7 +112,10 @@ public class OpenblocksFrame extends JFrame
 		
 		// WTF I can't add worksapcelistener by workspace contrller
 		workspace.addWorkspaceListener(new ArdublockWorkspaceListener(this));
-
+                controller = new СontrollerСonfiguration();
+		controller.setMinimumSize(new Dimension(100,100));
+		workspace.setMinimumSize(new Dimension(1000,0));
+                
                 JMenuBar menuBar = new JMenuBar();
                 JMenu fileMenu = new JMenu(uiMessageBundle.getString("ardublock.ui.file"));
                 JMenuItem newItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.new"));
@@ -171,25 +181,93 @@ public class OpenblocksFrame extends JFrame
                 menuBar.add(fileMenu);
                 menuBar.add(toolsMenu);
                 
-		JPanel buttons = new JPanel();
-		buttons.setLayout(new FlowLayout());
-		JButton newButton = new JButton(uiMessageBundle.getString("ardublock.ui.new"));
+                JPanel northPanel = new JPanel();
+                JPanel logo = new JPanel();
+                JPanel buttons = new JPanel();
+                
+		buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
+                logo.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
+                northPanel.setLayout(new BorderLayout());
+                ImageIcon mLogo = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(
+                        "com/ardublock/block/mainLogo.png")
+                );
+                JLabel mainLogo = new JLabel();
+                Image image = mLogo.getImage().getScaledInstance(92, 40,  java.awt.Image.SCALE_SMOOTH);
+                mLogo = new ImageIcon(image);
+                mainLogo.setIcon(mLogo);
+                logo.add(mainLogo);
+                logo.setBackground(new Color(0,151,157));
+                JPanel rightPanel = new JPanel();
+                
+                logo.setPreferredSize(workspace.getFactorySize()); //new Dimension(355, 50));
+                rightPanel.setPreferredSize(new Dimension(10, 50));
+                rightPanel.setBackground(new Color(0,151,157));
+                buttons.setBackground(new Color(0,100,104));
+                northPanel.add(logo, BorderLayout.WEST);
+                northPanel.add(buttons);
+                northPanel.add(rightPanel, BorderLayout.EAST);
+                
+                JLabel infoLabel = new JLabel();
+                infoLabel.setPreferredSize(new Dimension(200, 30));
+                infoLabel.setForeground(Color.white);
+		ImageButton newButton = new ImageButton(
+                        "new",
+                        "com/ardublock/block/buttons/newA.jpg",
+                        "com/ardublock/block/buttons/newB.jpg",
+                        infoLabel
+                );
 		newButton.addActionListener(new NewButtonListener(this));
-		JButton saveButton = new JButton(uiMessageBundle.getString("ardublock.ui.save"));
+                
+		ImageButton saveButton = new ImageButton(
+                        "save",
+                        "com/ardublock/block/buttons/saveA.jpg",
+                        "com/ardublock/block/buttons/saveB.jpg",
+                        infoLabel
+                );
 		saveButton.addActionListener(new SaveButtonListener(this));
-		JButton saveAsButton = new JButton(uiMessageBundle.getString("ardublock.ui.saveAs"));
+                
+		ImageButton saveAsButton = new ImageButton(
+                        "saveAs",
+                        "com/ardublock/block/buttons/saveAsA.jpg",
+                        "com/ardublock/block/buttons/saveAsB.jpg",
+                        infoLabel
+                );
 		saveAsButton.addActionListener(new SaveAsButtonListener(this));
-		JButton openButton = new JButton(uiMessageBundle.getString("ardublock.ui.load"));
+                
+		ImageButton openButton = new ImageButton(
+                    "open",
+                    "com/ardublock/block/buttons/openA.jpg",
+                    "com/ardublock/block/buttons/openB.jpg",
+                    infoLabel
+                );
 		openButton.addActionListener(new OpenButtonListener(this));
-		JButton generateButton = new JButton(uiMessageBundle.getString("ardublock.ui.upload"));
+                
+		ImageButton generateButton = new ImageButton(
+                    "upload to Arduino",
+                    "com/ardublock/block/buttons/uploadA.jpg",
+                    "com/ardublock/block/buttons/uploadB.jpg",
+                    infoLabel
+                );
 		generateButton.addActionListener(new GenerateCodeButtonListener(this, context));
-		JButton serialMonitorButton = new JButton(uiMessageBundle.getString("ardublock.ui.serialMonitor"));
+                
+		ImageButton serialMonitorButton = new ImageButton(
+                    "serialMonitor",
+                    "com/ardublock/block/buttons/monitorA.jpg",
+                    "com/ardublock/block/buttons/monitorB.jpg",
+                    infoLabel
+                );
 		serialMonitorButton.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
 				context.getEditor().handleSerial();
 			}
 		});
-		JButton saveImageButton = new JButton(uiMessageBundle.getString("ardublock.ui.saveImage"));
+                
+		ImageButton saveImageButton = new ImageButton(
+                    "save image",
+                    "com/ardublock/block/buttons/saveAsImageA.jpg",
+                    "com/ardublock/block/buttons/saveAsImageB.jpg",
+                    infoLabel
+                );
 		saveImageButton.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
 				Dimension size = workspace.getCanvasSize();
@@ -226,20 +304,19 @@ public class OpenblocksFrame extends JFrame
                 sb.getComponent().setPreferredSize(new Dimension(130, 23)); 
                 ZoomSlider zoom = new ZoomSlider(workspace);
                 
-                buttons.add(workspace.factory.getFactorySwitcher());
+                //buttons.add(workspace.factory.getFactorySwitcher());
                 
                 
-                buttons.add(zoom);
-                buttons.add(sb.getComponent()); //21.03.2019
-		buttons.add(newButton);
-		buttons.add(saveButton);
-		buttons.add(saveAsButton);
-		buttons.add(openButton);
-		buttons.add(generateButton);
-		buttons.add(serialMonitorButton);
-		buttons.setBackground(new Color(23,161,165));
+                //buttons.add(zoom);
+                //buttons.add(sb.getComponent()); //21.03.2019
+                
 		JPanel bottomPanel = new JPanel();
-		JButton websiteButton = new JButton(uiMessageBundle.getString("ardublock.ui.website"));
+		ImageButton websiteButton = new ImageButton(
+                    "website",
+                    "com/ardublock/block/buttons/websiteA.jpg",
+                    "com/ardublock/block/buttons/websiteB.jpg",
+                    infoLabel
+                );
 		websiteButton.addActionListener(new ActionListener () {
 			public void actionPerformed(ActionEvent e) {
 			    Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
@@ -255,21 +332,49 @@ public class OpenblocksFrame extends JFrame
 			}
 		});
 		JLabel versionLabel = new JLabel("v " + uiMessageBundle.getString("ardublock.ui.version"));
+                
+                buttons.add(newButton);
+		buttons.add(saveButton);
+		buttons.add(saveAsButton);
+		buttons.add(openButton);
+		buttons.add(generateButton);
+		buttons.add(serialMonitorButton);
+		buttons.add(saveImageButton);
+		buttons.add(websiteButton);
+         	buttons.add(infoLabel);
+                
 		
-//		bottomPanel.add(saveImageButton);
-//		bottomPanel.add(websiteButton);
-//		bottomPanel.add(versionLabel);
-		СontrollerСonfiguration controller = new СontrollerСonfiguration();
-		controller.setMinimumSize(new Dimension(100,100));
-		workspace.setMinimumSize(new Dimension(1000,0));
-		JSplitPane blockCanvasLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
+		JSplitPane blockCanvasLayerC = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
 				workspace, controller);
-		blockCanvasLayer.setOneTouchExpandable(true);
-		blockCanvasLayer.setDividerSize(1);
+		blockCanvasLayerC.setOneTouchExpandable(true);
+		blockCanvasLayerC.setDividerSize(3);
+                blockCanvasLayerC.addPropertyChangeListener(new PropertyChangeListener()
+                {
+                    public void propertyChange(PropertyChangeEvent e)
+                    {
+                        Dimension s = controller.getSize();
+                        Dimension q = workspace.getCanvasSize();
+                        rightPanel.setPreferredSize(new Dimension(s.width, 50));
+                        buttons.setPreferredSize(new Dimension(q.width, 50));
+                        northPanel.updateUI();
+                    }
+                });
+                workspace.blockCanvasLayer.addPropertyChangeListener(new PropertyChangeListener()
+                {
+                    public void propertyChange(PropertyChangeEvent e)
+                    {
+                        Dimension s = workspace.getFactorySize();
+                        Dimension q = workspace.getCanvasSize();
+                        logo.setPreferredSize(new Dimension(s.width, 50));
+                        buttons.setPreferredSize(new Dimension(q.width, 50));
+                        northPanel.updateUI();
+                    }
+                });
+                
 		this.setJMenuBar(menuBar);
-                this.add(buttons, BorderLayout.NORTH);
+                this.add(northPanel, BorderLayout.NORTH);
 //		this.add(bottomPanel, BorderLayout.SOUTH);
-		this.add(blockCanvasLayer, BorderLayout.CENTER);
+		this.add(blockCanvasLayerC, BorderLayout.CENTER);
 	}
 	
 	public void doOpenArduBlockFile()
@@ -508,4 +613,57 @@ public class OpenblocksFrame extends JFrame
 			return new File(filePath + ".abp");
 		}
 	}
+
+    class ImageButton extends JButton {
+        private String name;
+        private JLabel label;
+        
+        public ImageButton(String name, String iconA, String iconB, JLabel label) {
+            this.name = name;
+            this.label = label;
+            URL iconURL = OpenblocksFrame.class.getClassLoader().getResource(iconA);
+            Image image = new ImageIcon(iconURL).getImage().getScaledInstance(
+                    38, 38,  java.awt.Image.SCALE_SMOOTH);
+            setIcon(new ImageIcon(image));
+            
+            iconURL = OpenblocksFrame.class.getClassLoader().getResource(iconB);
+            image = new ImageIcon(iconURL).getImage().getScaledInstance(
+                    38, 38,  java.awt.Image.SCALE_SMOOTH);
+            setPressedIcon (new ImageIcon(image));
+            setSelectedIcon(new ImageIcon(image));
+            setRolloverIcon(new ImageIcon(image));
+            
+            setMargin(new Insets(0, 0, 0, 0));
+            setIconTextGap(0);
+            setBorderPainted(false);
+            setBorder(null);
+            setText(null);
+            setSize(image.getWidth(null) - 1, image.getHeight(null) - 1);
+            MouseListener mouseListener = new CustomMouseListener();
+            addMouseListener(mouseListener);
+        }
+        
+        public class CustomMouseListener implements MouseListener {
+             @Override
+            public void mouseEntered(MouseEvent e) {
+                label.setText(name);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                label.setText("");
+            }
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+     }
+    }
 }

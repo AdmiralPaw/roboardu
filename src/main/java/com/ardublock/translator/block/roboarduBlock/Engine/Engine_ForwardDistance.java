@@ -37,13 +37,13 @@ public class Engine_ForwardDistance extends TranslatorBlock
                 "{\n" +
                 "  if(fEn == ON)\n" +
                 "  {\n" +
-                "    attachInterrupt(0, Encoder1, CHANGE);\n" +
-                "    attachInterrupt(1, Encoder2, CHANGE);\n" +
+                "    attachInterrupt(ENCODER_PIN_1, Encoder1, CHANGE);\n" +
+                "    attachInterrupt(ENCODER_PIN_2, Encoder2, CHANGE);\n" +
                 "  }\n" +
                 "  if(fEn == OFF)\n" +
                 "  {\n" +
-                "    detachInterrupt(0);\n" +
-                "    detachInterrupt(1);\n" +
+                "    detachInterrupt(ENCODER_PIN_1);\n" +
+                "    detachInterrupt(ENCODER_PIN_2);\n" +
                 "  }\n" +
                 "}\n" +
                 "\n" +
@@ -72,9 +72,10 @@ public class Engine_ForwardDistance extends TranslatorBlock
                 "{\n" +
                 "  int Dir = 0;\n" +
                 "\n" +
-                "  if(Speed > 255)  Speed = 255;\n" +
-                "  if(Speed < -255)  Speed = -255;\n" +
+                "  if(Speed > 100)  Speed = 100;\n" +
+                "  if(Speed < -100)  Speed = -100;\n" +
                 "\n" +
+                "  map(Speed,-100,100,-255,255);\n" +
                 "  if(Speed < 0)\n" +
                 "  {\n" +
                 "    Dir = 1;\n" +
@@ -91,9 +92,10 @@ public class Engine_ForwardDistance extends TranslatorBlock
                 "{\n" +
                 "  int Dir = 0;\n" +
                 "\n" +
-                "  if(Speed > 255)  Speed = 255;\n" +
-                "  if(Speed < -255)  Speed = -255;\n" +
+                "  if(Speed > 100)  Speed = 100;\n" +
+                "  if(Speed < -100)  Speed = -100;\n" +
                 "\n" +
+                "  map(Speed,-100,100,-255,255);\n" +
                 "  if(Speed < 0)\n" +
                 "  {\n" +
                 "    Dir = 1;\n" +
@@ -132,7 +134,7 @@ public class Engine_ForwardDistance extends TranslatorBlock
                 "\n" +
                 "  MotorsForward(Speed);\n" +
                 "\n" +
-                "  while(nEncoder1 - nEncoder1Start < Dist || nEncoder2 - nEncoder2Start < Dist)\n" +
+                "  while(nEncoder1 - nEncoder1Start < Dist/2 || nEncoder2 - nEncoder2Start < Dist/2 )\n" +
                 "  {\n" +
                 "    if(millis() - TimeStart > MaxTime)\n" +
                 "    {\n" +
@@ -151,11 +153,12 @@ public class Engine_ForwardDistance extends TranslatorBlock
             translator.addHeaderDefinition(ENCODER_DEFINE_SWITCH);
             translator.addHeaderDefinition(MOTORS_DEFINE_VAR);
             translator.addHeaderDefinition(ENCODER_DEFINE_VAR);
+            translator.addDefinitionCommand(ENCODER_DEFINE);
             translator.addDefinitionCommand(MOTORS_DEFINE);
+            
             translator.addDefinitionCommand(MOTORS_FORWARD);
             translator.addDefinitionCommand(MOTORS_STOP);
             translator.addDefinitionCommand(MOTORS_FORWARD_DISTANCE);
-            translator.addDefinitionCommand(ENCODER_DEFINE);
             translator.addSetupCommand("InitMotors();");
             translator.addSetupCommand("InitEnc(ON);");
             TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);

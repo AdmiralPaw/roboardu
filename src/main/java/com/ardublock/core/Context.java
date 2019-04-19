@@ -23,14 +23,14 @@ import processing.app.Editor;
 
 import com.ardublock.ui.listener.OpenblocksFrameListener;
 
-import edu.mit.blocks.codeblocks.Block;
-import edu.mit.blocks.controller.WorkspaceController;
-import edu.mit.blocks.renderable.BlockUtilities;
-import edu.mit.blocks.renderable.FactoryRenderableBlock;
-import edu.mit.blocks.renderable.RenderableBlock;
-import edu.mit.blocks.workspace.FactoryManager;
-import edu.mit.blocks.workspace.Page;
-import edu.mit.blocks.workspace.Workspace;
+import com.mit.blocks.codeblocks.Block;
+import com.mit.blocks.controller.WorkspaceController;
+import com.mit.blocks.renderable.BlockUtilities;
+import com.mit.blocks.renderable.FactoryRenderableBlock;
+import com.mit.blocks.renderable.RenderableBlock;
+import com.mit.blocks.workspace.FactoryManager;
+import com.mit.blocks.workspace.Page;
+import com.mit.blocks.workspace.Workspace;
 
 public class Context
 {

@@ -32,6 +32,6 @@ public class Gyroscope extends TranslatorBlock {
         translator.addSetupCommand(Accel+".initialize();\ndelay(100);");
 
 
-        return codePrefix + Accel + ".getRotation(" + GyroX + ", " + GyroY + ", " + GyroZ + ");\n" + codeSuffix;
+        return codePrefix + Accel + ".getRotation(&" + GyroX + ", &" + GyroY + ", &" + GyroZ + ");\n" + codeSuffix;
     }
 }
