@@ -33,7 +33,7 @@ public class Window2Explorer extends JPanel implements Explorer {
     /** Teh canvas portion */
     private JPanel canvasPane;
     /** The tab portion */
-    private JPanel buttonPane;
+    public JPanel buttonPane;
 
     /**
      * Constructs new stack explorer

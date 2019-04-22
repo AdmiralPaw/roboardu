@@ -18,6 +18,8 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
+import com.mit.blocks.workspace.SearchBar;
+import com.mit.blocks.workspace.SearchableContainer;
 import com.mit.blocks.workspace.Workspace;
 import java.awt.BorderLayout;
 import javax.swing.JLayeredPane;
@@ -255,6 +257,16 @@ final public class Navigator {
         for (Explorer ex : explorers) {
             if (ex.getName().equals(explorer)) {
                 ex.setDrawersCard(canvases);
+            }
+            if (ex instanceof Window2Explorer)
+            {
+                final SearchBar sb = new SearchBar(
+                        "Search blocks", "Search for blocks in the drawers and workspace", workspace);
+                for (SearchableContainer con : workspace.getAllSearchableContainers()) {
+                    sb.addSearchableContainer(con);
+                }
+                sb.getComponent().setPreferredSize(new Dimension(1,40));
+                ((Window2Explorer) ex).buttonPane.add(sb.getComponent(), BorderLayout.SOUTH);
             }
         }
         this.reformView();
