@@ -28,8 +28,7 @@ public class Engine_BackDistance extends TranslatorBlock
                 "#define ON                        1\n" +
                 "#define OFF                       0\n";
         private static final String ENCODER_DEFINE_VAR = "" +
-                "unsigned long long nEncoder1, nEncoder2;\n" +
-                "unsigned long long nEncoder1Old, nEncoder2Old;\n";
+                "unsigned long long nEncoder1, nEncoder2;\n";
         private static final String MOTORS_DEFINE_VAR = "" + 
                 "int SpeedMotor1, SpeedMotor2;\n";        
         private static final String ENCODER_DEFINE = "" +
