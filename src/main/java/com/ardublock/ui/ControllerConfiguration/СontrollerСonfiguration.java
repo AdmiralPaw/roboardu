@@ -16,17 +16,10 @@ import org.jfree.ui.tabbedui.VerticalLayout;
 
 public class СontrollerСonfiguration extends JPanel {
     Container everythingVisible = new Container();
-    public ControllerImage controllerImage = new ControllerImage();
-    //private ControllerImage controllerImage = new ControllerImage();
-<<<<<<< HEAD
     public ControllerImage controllerImage;
+    //private ControllerImage controllerImage = new ControllerImage();
     private List<Device> components;
     private JPanel componentsPane;
-
-=======
-    private List<JComponent> components;    
-    private JPanel componentsPane;
->>>>>>> fea927c57b690191622ed2416fdebc3520b017c9
     public enum Pin {
         
         dir04pwm05, dir07pwm06, d2, d3, d8, d10, d9, d11, a3, a2, a1, a0, i2c

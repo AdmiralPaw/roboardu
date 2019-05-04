@@ -49,11 +49,7 @@ public class OpenblocksFrame extends JFrame
 	private FileFilter ffilter;
         
 	private ResourceBundle uiMessageBundle;
-	
-//        private JPanel rightPanel;
-//        private JPanel northPanel;
-        private СontrollerСonfiguration controller; 
-        
+    
 	public void addListener(OpenblocksFrameListener ofl)
 	{
 		context.registerOpenblocksFrameListener(ofl);
@@ -350,28 +346,28 @@ public class OpenblocksFrame extends JFrame
 		//		workspace, controller);
 		//blockCanvasLayerC.setOneTouchExpandable(true);
 		//blockCanvasLayerC.setDividerSize(3);
-                //blockCanvasLayerC.addPropertyChangeListener(new PropertyChangeListener()
-//                {
-//                    public void propertyChange(PropertyChangeEvent e)
-//                    {
-//                        Dimension s = controller.getSize();
-//                        Dimension q = workspace.getCanvasSize();
-//                        rightPanel.setPreferredSize(new Dimension(s.width, 50));
-//                        buttons.setPreferredSize(new Dimension(q.width, 50));
-//                        northPanel.updateUI();
-//                    }
-//                });
-//                workspace.blockCanvasLayer.addPropertyChangeListener(new PropertyChangeListener()
-//                {
-//                    public void propertyChange(PropertyChangeEvent e)
-//                    {
-//                        Dimension s = workspace.getFactorySize();
-//                        Dimension q = workspace.getCanvasSize();
-//                        logo.setPreferredSize(new Dimension(s.width, 50));
-//                        buttons.setPreferredSize(new Dimension(q.width, 50));
-//                        northPanel.updateUI();
-//                    }
-//                });
+                workspace.mainLayer.addPropertyChangeListener(new PropertyChangeListener()
+                {
+                    public void propertyChange(PropertyChangeEvent e)
+                    {
+                        Dimension s = workspace.controller.getSize();
+                        Dimension q = workspace.getCanvasSize();
+                        rightPanel.setPreferredSize(new Dimension(s.width, 50));
+                        buttons.setPreferredSize(new Dimension(q.width, 50));
+                        northPanel.updateUI();
+                    }
+                });
+                workspace.mainLayer.addPropertyChangeListener(new PropertyChangeListener()
+                {
+                    public void propertyChange(PropertyChangeEvent e)
+                    {
+                        Dimension s = workspace.getFactorySize();
+                        Dimension q = workspace.getCanvasSize();
+                        logo.setPreferredSize(new Dimension(s.width, 50));
+                        buttons.setPreferredSize(new Dimension(q.width, 50));
+                        northPanel.updateUI();
+                    }
+                });
                 
 		this.setJMenuBar(menuBar);
                 this.add(northPanel, BorderLayout.NORTH);

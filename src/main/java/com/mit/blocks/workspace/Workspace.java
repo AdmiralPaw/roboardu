@@ -119,6 +119,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      * such a component would be a static block factory.  In user testing, we found that novice users performed
      * better with a static block factory than one in which they could drag around and toggle the visibility
      * of. */
+    public JSplitPane mainLayer;
     public JPanel blockCanvasLayer;
 
     /**
@@ -191,7 +192,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         centerPane.setOneTouchExpandable(true);
         centerPane.setDividerSize(6);
         
-        JSplitPane mainLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
+        mainLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
                 factory.getJComponent(), centerPane);
         mainLayer.setOneTouchExpandable(true);
         mainLayer.setDividerSize(6);

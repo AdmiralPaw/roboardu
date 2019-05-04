@@ -9,7 +9,9 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.ArrayList;
-import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration.Pin
+import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration.Pin;
+import com.ardublock.ui.OpenblocksFrame;
+import java.net.URL;
 
 
 
@@ -18,11 +20,12 @@ public class ControllerImage extends JPanel {
     private BufferedImage usingImage;
     private ArrayList<BufferedImage> moduleImages = new ArrayList<BufferedImage>();
 
-    public ControllerImage() {
+    public ControllerImage(СontrollerСonfiguration controller) {
         setLayout(null);
         this.setBounds(0,0,150,150);
         try {
-            image = ImageIO.read(new File("com/ardublock/ui/ControllerConfiguration/Images/mainImage.jpg"));
+            URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/1.png");
+            image = ImageIO.read(new File(iconURL.getPath()));
         } catch (IOException ex) {
             ex.printStackTrace();
             throw new NullPointerException("Отсутствует изображение контроллера");
@@ -31,7 +34,8 @@ public class ControllerImage extends JPanel {
 
     public void setModuleImages(){
         try{
-            moduleImages.add( ImageIO.read(new File("com/ardublock/ui/ControllerConfiguration/Images/1.png")));
+            URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/2.jpg");
+            moduleImages.add( ImageIO.read(new File(iconURL.getPath())));
 
         } catch(IOException ex){
             ex.printStackTrace();
