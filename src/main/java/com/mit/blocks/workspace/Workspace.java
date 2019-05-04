@@ -119,7 +119,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      * such a component would be a static block factory.  In user testing, we found that novice users performed
      * better with a static block factory than one in which they could drag around and toggle the visibility
      * of. */
-    public JSplitPane blockCanvasLayer;
+    public JPanel blockCanvasLayer;
 
     /**
      * MiniMap associated with the blockCanvas
@@ -144,7 +144,9 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         setLayout(null);
         setBackground(Color.WHITE);
         setPreferredSize(new Dimension(800, 600));
-
+        
+        this.controller = new СontrollerСonfiguration();
+        controller.setMinimumSize(new Dimension(100,100));
         this.factory = new FactoryManager(this);
         this.addWorkspaceListener(this.factory);
         this.blockCanvas.getHorizontalModel().addChangeListener(this);
@@ -189,13 +191,17 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         centerPane.setOneTouchExpandable(true);
         centerPane.setDividerSize(6);
         
-        blockCanvasLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
+        JSplitPane mainLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
                 factory.getJComponent(), centerPane);
+        mainLayer.setOneTouchExpandable(true);
+        mainLayer.setDividerSize(6);
+        blockCanvasLayer = new JPanel(new BorderLayout()); 
+        blockCanvasLayer.add(mainLayer, BorderLayout.CENTER);
+        blockCanvasLayer.add(controller, BorderLayout.EAST);
         factory.getJComponent().setPreferredSize(new Dimension(350, 50));
-        blockCanvasLayer.setOneTouchExpandable(true);
-        blockCanvasLayer.setDividerSize(6);
-        
+        controller.setPreferredSize(new Dimension(300, 50));
         add(blockCanvasLayer, BLOCK_LAYER);
+        //add(blockCanvasLayer, BLOCK_LAYER);
         validate();
         addPageAt(Page.getBlankPage(this), 0, true); //false
         
@@ -881,18 +887,21 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
 
         if (newRoot != null) {
             PageDrawerLoadingUtils.loadBlockDrawerSets(this, originalLangRoot, factory, controller); //
+            PageDrawerLoadingUtils.loadComponentsSets(this, originalLangRoot, controller);
             //load pages, page drawers, and their blocks from save file
             blockCanvas.loadSaveString(newRoot);
             //load the block drawers specified in the file (may contain
             //custom drawers) and/or the lang def file if the contents specify
 //            PageDrawerLoadingUtils.loadBlockDrawerSets(this, originalLangRoot, factory);
             PageDrawerLoadingUtils.loadBlockDrawerSets(this, newRoot, factory, controller);
+            PageDrawerLoadingUtils.loadComponentsSets(this, newRoot, controller);
             loadWorkspaceSettings(newRoot);
         } else {
             //load from original language/workspace root specification
             blockCanvas.loadSaveString(originalLangRoot);
             //load block drawers and their content
             PageDrawerLoadingUtils.loadBlockDrawerSets(this, originalLangRoot, factory, controller);
+            PageDrawerLoadingUtils.loadComponentsSets(this, originalLangRoot, controller);
             loadWorkspaceSettings(originalLangRoot);
         }
 

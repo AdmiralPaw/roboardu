@@ -109,8 +109,8 @@ public class OpenblocksFrame extends JFrame
 		// WTF I can't add worksapcelistener by workspace contrller
                                
 		workspace.addWorkspaceListener(new ArdublockWorkspaceListener(this));
-                controller = new СontrollerСonfiguration();
-		controller.setMinimumSize(new Dimension(100,100));
+                //controller = new СontrollerСonfiguration();
+		
 		workspace.setMinimumSize(new Dimension(1000,0));
                 
                 JMenuBar menuBar = new JMenuBar();
@@ -187,7 +187,7 @@ public class OpenblocksFrame extends JFrame
 				final JPanel logo = new JPanel();
                 final JPanel buttons = new JPanel();*/
                 
-				buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
+		buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
                 logo.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
                 northPanel.setLayout(new BorderLayout());
                 ImageIcon mLogo = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(
@@ -346,37 +346,37 @@ public class OpenblocksFrame extends JFrame
          	buttons.add(infoLabel);
                 
 		
-		JSplitPane blockCanvasLayerC = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
-				workspace, controller);
-		blockCanvasLayerC.setOneTouchExpandable(true);
-		blockCanvasLayerC.setDividerSize(3);
-                blockCanvasLayerC.addPropertyChangeListener(new PropertyChangeListener()
-                {
-                    public void propertyChange(PropertyChangeEvent e)
-                    {
-                        Dimension s = controller.getSize();
-                        Dimension q = workspace.getCanvasSize();
-                        rightPanel.setPreferredSize(new Dimension(s.width, 50));
-                        buttons.setPreferredSize(new Dimension(q.width, 50));
-                        northPanel.updateUI();
-                    }
-                });
-                workspace.blockCanvasLayer.addPropertyChangeListener(new PropertyChangeListener()
-                {
-                    public void propertyChange(PropertyChangeEvent e)
-                    {
-                        Dimension s = workspace.getFactorySize();
-                        Dimension q = workspace.getCanvasSize();
-                        logo.setPreferredSize(new Dimension(s.width, 50));
-                        buttons.setPreferredSize(new Dimension(q.width, 50));
-                        northPanel.updateUI();
-                    }
-                });
+		//JSplitPane blockCanvasLayerC = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
+		//		workspace, controller);
+		//blockCanvasLayerC.setOneTouchExpandable(true);
+		//blockCanvasLayerC.setDividerSize(3);
+                //blockCanvasLayerC.addPropertyChangeListener(new PropertyChangeListener()
+//                {
+//                    public void propertyChange(PropertyChangeEvent e)
+//                    {
+//                        Dimension s = controller.getSize();
+//                        Dimension q = workspace.getCanvasSize();
+//                        rightPanel.setPreferredSize(new Dimension(s.width, 50));
+//                        buttons.setPreferredSize(new Dimension(q.width, 50));
+//                        northPanel.updateUI();
+//                    }
+//                });
+//                workspace.blockCanvasLayer.addPropertyChangeListener(new PropertyChangeListener()
+//                {
+//                    public void propertyChange(PropertyChangeEvent e)
+//                    {
+//                        Dimension s = workspace.getFactorySize();
+//                        Dimension q = workspace.getCanvasSize();
+//                        logo.setPreferredSize(new Dimension(s.width, 50));
+//                        buttons.setPreferredSize(new Dimension(q.width, 50));
+//                        northPanel.updateUI();
+//                    }
+//                });
                 
 		this.setJMenuBar(menuBar);
                 this.add(northPanel, BorderLayout.NORTH);
 //		this.add(bottomPanel, BorderLayout.SOUTH);
-		this.add(blockCanvasLayerC, BorderLayout.CENTER);
+		this.add(workspace.blockCanvasLayer, BorderLayout.CENTER);
 	}
 	
 	public void doOpenArduBlockFile()

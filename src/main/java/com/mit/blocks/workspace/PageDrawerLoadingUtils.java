@@ -241,7 +241,40 @@ public class PageDrawerLoadingUtils {
                     }
                 }
             }
-        }
-        
+        }     
+    }
+    
+    public static void loadComponentsSets(Workspace workspace, Element root, СontrollerСonfiguration controller) {
+        Pattern attrExtractor = Pattern.compile("\"(.*)\"");
+        List<String> tempComponentsName = new ArrayList<String>();
+        Matcher nameMatcher;
+        NodeList componentsSetNodes = root.getElementsByTagName("ControllerComponentsSet");
+        Node componentSetNode;
+        for (int i = 0; i < componentsSetNodes.getLength(); i++) {
+            componentSetNode = componentsSetNodes.item(i);
+            if (componentSetNode.getNodeName().equals("ControllerComponentsSet")) {
+                NodeList componentNodes = componentSetNode.getChildNodes();
+                Node componentNode;
+                //retreive drawer information of this bar
+                for (int j = 0; j < componentNodes.getLength(); j++) {
+                    componentNode = componentNodes.item(j);
+                    if (componentNode.getNodeName().equals("ControllerComponents")) {
+                        String pinName = null;
+                        nameMatcher = attrExtractor.matcher(componentNode.getAttributes().getNamedItem("pin").toString());
+                        if (nameMatcher.find()) {//will be true
+                            pinName = nameMatcher.group(1);
+                        }
+                        NodeList component = componentNode.getChildNodes();
+                        for (int k = 0; k < component.getLength(); k++) {
+                            componentNode = component.item(k);
+                            if (componentNode.getNodeName().equals("Component")) {
+                                String componentName = componentNode.getTextContent();
+                                controller.addComponent(pinName, componentName);
+                            }
+                        }
+                    }
+                }
+            }
+        }     
     }
 }
