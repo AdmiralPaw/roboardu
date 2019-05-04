@@ -14,10 +14,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
- 
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -30,7 +27,7 @@ import com.ardublock.ui.listener.OpenButtonListener;
 import com.ardublock.ui.listener.OpenblocksFrameListener;
 import com.ardublock.ui.listener.SaveAsButtonListener;
 import com.ardublock.ui.listener.SaveButtonListener;
-import com.ardublock.ui.СontrollerСonfiguration;
+import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
 
 import com.mit.blocks.controller.WorkspaceController;
 import com.mit.blocks.workspace.SearchBar;
@@ -39,7 +36,6 @@ import com.mit.blocks.workspace.SearchableContainer;
 import com.mit.blocks.workspace.Workspace;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -181,12 +177,23 @@ public class OpenblocksFrame extends JFrame
                 
                 menuBar.add(fileMenu);
                 menuBar.add(toolsMenu);
+<<<<<<< HEAD
                 
                 final JPanel northPanel = new JPanel();
                 final JPanel logo = new JPanel();
+=======
+
+		final JPanel northPanel = new JPanel();
+		final JPanel logo = new JPanel();
+>>>>>>> c3ee96d1b673db58b138d14dbbc4737e926826f9
                 final JPanel buttons = new JPanel();
                 
 		buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
+				/*final JPanel northPanel = new JPanel();
+				final JPanel logo = new JPanel();
+                final JPanel buttons = new JPanel();*/
+                
+				buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
                 logo.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
                 northPanel.setLayout(new BorderLayout());
                 ImageIcon mLogo = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(

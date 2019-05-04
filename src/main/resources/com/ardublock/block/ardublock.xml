@@ -4107,11 +4107,6 @@
 					<DefaultArg genus-name="digital-high" label="HIGH" />
 				</BlockConnector>
 			</BlockConnectors>
-			<Images>
-				<Image>
-					<FileLocation>com/ardublock/block/dfrobot/dfr0021.png</FileLocation>
-				</Image>
-			</Images>
 		</BlockGenus>
 
 		<BlockGenus name="df_led_pwm" kind="command" color="255 102 0" initlabel="bg.df_led_pwm">
@@ -4126,11 +4121,6 @@
 					<DefaultArg genus-name="number" label="255" />
 				</BlockConnector>
 			</BlockConnectors>
-			<Images>
-				<Image>
-					<FileLocation>com/ardublock/block/dfrobot/dfr0021.png</FileLocation>
-				</Image>
-			</Images>
 		</BlockGenus>
 
 		<BlockGenus name="df_piranha_led" kind="command" color="255 102 0" initlabel="bg.df_piranha_led">
@@ -9594,11 +9584,6 @@
 					<DefaultArg genus-name="number" label="10" />
 				</BlockConnector>
 			</BlockConnectors>
-			<Images>
-				<Image>
-					<FileLocation>com/ardublock/block/dfrobot/dfr0021.png</FileLocation>
-				</Image>
-			</Images>
 		</BlockGenus>
 		
 		<BlockGenus name="rgb_led" kind="command" color="255 102 0" initlabel="bg.rgb_led">
@@ -11376,7 +11361,7 @@
             </BlockConnectors>
         </BlockGenus>
 
-		<BlockGenus name="AccelX" kind="command" color="0 180 255" initlabel="bg.AccelX" editable-label="no">
+		<BlockGenus name="AccelX" kind="data" color="0 180 255" initlabel="bg.AccelX" editable-label="no">
 			<description>
 				<text>Gives variable of module ofacceleration</text>
 			</description>
@@ -11387,7 +11372,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="AccelY" kind="command" color="0 180 255" initlabel="bg.AccelY" editable-label="no">
+		<BlockGenus name="AccelY" kind="data" color="0 180 255" initlabel="bg.AccelY" editable-label="no">
 			<description>
 				<text>Gives variable of module ofacceleration</text>
 			</description>
@@ -11398,7 +11383,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="AccelZ" kind="command" color="0 180 255" initlabel="bg.AccelZ" editable-label="no">
+		<BlockGenus name="AccelZ" kind="data" color="0 180 255" initlabel="bg.AccelZ" editable-label="no">
 			<description>
 				<text>Gives variable of module ofacceleration</text>
 			</description>
@@ -11429,7 +11414,7 @@
             </BlockConnectors>
         </BlockGenus>
 
-		<BlockGenus name="GyroX" kind="command" color="0 180 255" initlabel="bg.GyroX" editable-label="no">
+		<BlockGenus name="GyroX" kind="data" color="0 180 255" initlabel="bg.GyroX" editable-label="no">
 			<description>
 				<text>Gives variable of module ofacceleration</text>
 			</description>
@@ -11440,7 +11425,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="GyroY" kind="command" color="0 180 255" initlabel="bg.GyroY" editable-label="no">
+		<BlockGenus name="GyroY" kind="data" color="0 180 255" initlabel="bg.GyroY" editable-label="no">
 			<description>
 				<text>Gives variable of module ofacceleration</text>
 			</description>
@@ -11451,7 +11436,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="GyroZ" kind="command" color="0 180 255" initlabel="bg.GyroZ" editable-label="no">
+		<BlockGenus name="GyroZ" kind="data" color="0 180 255" initlabel="bg.GyroZ" editable-label="no">
 			<description>
 				<text>Gives variable of module ofacceleration</text>
 			</description>
