@@ -177,15 +177,9 @@ public class OpenblocksFrame extends JFrame
                 
                 menuBar.add(fileMenu);
                 menuBar.add(toolsMenu);
-<<<<<<< HEAD
                 
                 final JPanel northPanel = new JPanel();
                 final JPanel logo = new JPanel();
-=======
-
-		final JPanel northPanel = new JPanel();
-		final JPanel logo = new JPanel();
->>>>>>> c3ee96d1b673db58b138d14dbbc4737e926826f9
                 final JPanel buttons = new JPanel();
                 
 		buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));

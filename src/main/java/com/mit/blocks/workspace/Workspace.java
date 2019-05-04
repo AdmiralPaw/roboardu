@@ -1,5 +1,6 @@
 package com.mit.blocks.workspace;
 
+import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -125,6 +126,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      */
     private MiniMap miniMap;
     public FactoryManager factory;
+    public СontrollerСonfiguration controller;
     private final FocusTraversalManager focusManager;
 
     private final TypeBlockManager typeBlockManager;
@@ -161,6 +163,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 blockCanvasLayer.validate();
             }
         });
+        
         //TODO: оформить как класс{
         JPanel errPanel = new JPanel(new BorderLayout());
         errPanel.setBackground(Color.black);
@@ -178,6 +181,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         errWindow.setBackground(Color.black);
         errPanel.add(errWindow, BorderLayout.CENTER);
         //TODO: оформить как класс}
+        
         blockCanvas.getJComponent().setMinimumSize(new Dimension(0,100));
         blockCanvas.getJComponent().setPreferredSize(new Dimension(0,600));
         JSplitPane centerPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true,
@@ -876,19 +880,19 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         ProcedureOutputManager.finishLoad();
 
         if (newRoot != null) {
-            PageDrawerLoadingUtils.loadBlockDrawerSets(this, originalLangRoot, factory); //
+            PageDrawerLoadingUtils.loadBlockDrawerSets(this, originalLangRoot, factory, controller); //
             //load pages, page drawers, and their blocks from save file
             blockCanvas.loadSaveString(newRoot);
             //load the block drawers specified in the file (may contain
             //custom drawers) and/or the lang def file if the contents specify
 //            PageDrawerLoadingUtils.loadBlockDrawerSets(this, originalLangRoot, factory);
-            PageDrawerLoadingUtils.loadBlockDrawerSets(this, newRoot, factory);
+            PageDrawerLoadingUtils.loadBlockDrawerSets(this, newRoot, factory, controller);
             loadWorkspaceSettings(newRoot);
         } else {
             //load from original language/workspace root specification
             blockCanvas.loadSaveString(originalLangRoot);
             //load block drawers and their content
-            PageDrawerLoadingUtils.loadBlockDrawerSets(this, originalLangRoot, factory);
+            PageDrawerLoadingUtils.loadBlockDrawerSets(this, originalLangRoot, factory, controller);
             loadWorkspaceSettings(originalLangRoot);
         }
 

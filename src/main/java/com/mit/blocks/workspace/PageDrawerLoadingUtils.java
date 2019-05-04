@@ -15,6 +15,7 @@ import org.w3c.dom.NodeList;
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.renderable.FactoryRenderableBlock;
 import com.mit.blocks.renderable.RenderableBlock;
+import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
 
 /**
  * Utilities class that provides the loading and saving of
@@ -182,7 +183,7 @@ public class PageDrawerLoadingUtils {
         }
     }
 
-    public static void loadBlockDrawerSets(Workspace workspace, Element root, FactoryManager manager) {
+    public static void loadBlockDrawerSets(Workspace workspace, Element root, FactoryManager manager, СontrollerСonfiguration controller) {
         Pattern attrExtractor = Pattern.compile("\"(.*)\"");
         Matcher nameMatcher;
         NodeList drawerSetNodes = root.getElementsByTagName("BlockDrawerSet");
@@ -218,8 +219,8 @@ public class PageDrawerLoadingUtils {
                             }
                         }
 
-                        manager.addStaticDrawer(drawerName, buttonColor);
-
+                        manager.addStaticDrawer(drawerName, buttonColor);            
+                        
                         //get block genuses in drawer and create blocks
                         NodeList drawerBlocks = drawerNode.getChildNodes();
                         Node blockNode;
@@ -241,5 +242,6 @@ public class PageDrawerLoadingUtils {
                 }
             }
         }
+        
     }
 }

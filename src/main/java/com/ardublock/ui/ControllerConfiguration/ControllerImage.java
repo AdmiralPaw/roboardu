@@ -8,21 +8,22 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.ArrayList;
-import com.ardublock.ui.ControllerConfiguration.InvisibleButton;
+import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
 
-public class ControllerImage extends JPanel{
-
+public class ControllerImage extends JPanel {
+    private com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration.Pin Pin;
     private BufferedImage image;
     private BufferedImage usingImage;
     private ArrayList<BufferedImage> moduleImages = new ArrayList<BufferedImage>();
 
-    public ControllerImage() {
-        try {
-            image = ImageIO.read(new File("image name and path"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            throw new NullPointerException("Отсутствует изображение контроллера");
-        }
+    public ControllerImage(СontrollerСonfiguration controller) {
+        Pin = controller.controllerPin;
+        //try {
+        //    image = ImageIO.read(new File("image name and path"));
+        //} catch (IOException ex) {
+        //    ex.printStackTrace();
+        //    throw new NullPointerException("Отсутствует изображение контроллера");
+        //}
     }
 
     public void addPicture(int numberOfModule){
