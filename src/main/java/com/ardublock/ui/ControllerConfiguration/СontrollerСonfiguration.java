@@ -6,7 +6,6 @@ import com.ardublock.ui.ControllerConfiguration.ControllerImage;
 public class СontrollerСonfiguration extends Component {
 
     Container everythingVisible = new Container();
-    //private ControllerImage controllerImage = new ControllerImage();
     public ControllerImage controllerImage = new ControllerImage();
 
     public СontrollerСonfiguration()
@@ -16,7 +15,7 @@ public class СontrollerСonfiguration extends Component {
         setBackground(new Color(200,200,200));
     }
 
-    public initControllerConfiguration(){
+    public void initControllerConfiguration(){
         everythingVisible.add(controllerImage);
     }
 
