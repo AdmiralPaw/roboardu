@@ -167,9 +167,9 @@ public class MiniMap extends JPanel implements WorkspaceWidget, MouseListener, M
         super.paint(g);
 
         // draw shadow border
-        for (int i = 0; i < BORDER_WIDTH; i++) {
-            g.setColor(new Color(200, 200, 150, 50 * (i + 1)));
-            g.drawRect(i, i, this.getWidth() - 1 - 2 * i, this.getHeight() - 1 - 2 * i);
+        for (int i = 0; i < BORDER_WIDTH - 2; i++) {
+            g.setColor(new Color(128, 128, 128, 50 * (i + 1)));
+            g.drawRect(i, i, this.getWidth() - 1 - (2*i), this.getHeight() - 1 - (2*i));
         }
 
         //Aspect-Ratio Logic
@@ -206,13 +206,13 @@ public class MiniMap extends JPanel implements WorkspaceWidget, MouseListener, M
             }
 
         }
-        for (Component component : this.getCanvas().getComponents()) {
-            if (component instanceof PageDivider) {
-                g.setColor(Color.GRAY);
-                Rectangle dividerRect = rescaleRect(component.getBounds());
-                g.fillRect(dividerRect.x, dividerRect.y, dividerRect.width + 1, dividerRect.height);
-            }
-        }
+//        for (Component component : this.getCanvas().getComponents()) {
+//            if (component instanceof PageDivider) {
+//                g.setColor(Color.white);
+//                Rectangle dividerRect = rescaleRect(component.getBounds());
+//                g.fillRect(dividerRect.x, dividerRect.y, dividerRect.width + 1, dividerRect.height);
+//            }
+//        }
         for (Component component : workspace.getComponentsInLayer(Workspace.DRAGGED_BLOCK_LAYER)) {
             if (component instanceof RenderableBlock && component != null && component.isVisible()) {
                 g.setColor(((RenderableBlock) component).getBLockColor());

@@ -48,6 +48,11 @@ import com.mit.blocks.renderable.BlockUtilities;
 import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.typeblocking.FocusTraversalManager;
 import com.mit.blocks.workspace.typeblocking.TypeBlockManager;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import org.jfree.ui.tabbedui.VerticalLayout;
 
 /**
  * The Workspace is the main block area, where blocks are manipulated and assembled.
@@ -156,15 +161,40 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 blockCanvasLayer.validate();
             }
         });
+        //TODO: оформить как класс{
+        JPanel errPanel = new JPanel(new BorderLayout());
+        errPanel.setBackground(Color.black);
+        JPanel errDevider = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 5));
+        JLabel errLabel = new JLabel("Какой-то текст");
+        errLabel.setForeground(Color.white);
+        errDevider.setBackground(new Color(0,151,157));
+        errDevider.add(errLabel);
+        errDevider.setPreferredSize(new Dimension(0, 24));
+        errPanel.add(errDevider, BorderLayout.NORTH);
+        JPanel errWindow = new JPanel(new FlowLayout(FlowLayout.LEFT, 20,3));
+        JLabel errInfo = new JLabel("[INFO] Кто вообще сюда посмотрит?");
+        errInfo.setForeground(Color.white);
+        errWindow.add(errInfo);
+        errWindow.setBackground(Color.black);
+        errPanel.add(errWindow, BorderLayout.CENTER);
+        //TODO: оформить как класс}
+        blockCanvas.getJComponent().setMinimumSize(new Dimension(0,100));
+        blockCanvas.getJComponent().setPreferredSize(new Dimension(0,600));
+        JSplitPane centerPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true,
+                blockCanvas.getJComponent(), errPanel); 
+        centerPane.setOneTouchExpandable(true);
+        centerPane.setDividerSize(6);
+        
         blockCanvasLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
-                factory.getJComponent(), blockCanvas.getJComponent());
-        factory.getJComponent().setPreferredSize(new Dimension(350, 30));
+                factory.getJComponent(), centerPane);
+        factory.getJComponent().setPreferredSize(new Dimension(350, 50));
         blockCanvasLayer.setOneTouchExpandable(true);
         blockCanvasLayer.setDividerSize(6);
+        
         add(blockCanvasLayer, BLOCK_LAYER);
         validate();
         addPageAt(Page.getBlankPage(this), 0, true); //false
-
+        
         this.workspaceWidgets.add(factory);
 
         this.focusManager = new FocusTraversalManager(this);

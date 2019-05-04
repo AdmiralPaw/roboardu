@@ -12432,13 +12432,13 @@
 			</BlockDrawer>
 			
 			<!-- servo -->
-			<BlockDrawer button-color="225 100 0" name="bg.servo">
+			<BlockDrawer button-color="225 100 0" name="bd.servo">
 				<BlockGenusMember>servo_default</BlockGenusMember>
 				<BlockGenusMember>servo_degrees_to_degrees</BlockGenusMember>
 			</BlockDrawer>
 			
 			<!-- diode -->
-			<BlockDrawer button-color="50 50 50" name="bg.diode">
+			<BlockDrawer button-color="50 50 50" name="bd.diode">
 				<BlockGenusMember>df_led</BlockGenusMember>
 				<BlockGenusMember>led_blink</BlockGenusMember>
 				<BlockGenusMember>df_led_pwm</BlockGenusMember>
@@ -12448,7 +12448,7 @@
 			</BlockDrawer>
 			
 			<!-- sound -->
-			<BlockDrawer button-color="180 0 225" name="bg.sound">
+			<BlockDrawer button-color="180 0 225" name="bd.sound">
 				<BlockGenusMember>tone</BlockGenusMember>
 				<BlockGenusMember>tone_time</BlockGenusMember>
 				<BlockGenusMember>no_tone</BlockGenusMember>
@@ -12456,7 +12456,7 @@
 			</BlockDrawer>
 			
 			<!-- display -->
-			<BlockDrawer button-color="0 200 0" name="bg.display">
+			<BlockDrawer button-color="0 200 0" name="bd.display">
 				<BlockGenusMember>DisplayClear</BlockGenusMember>
 				<BlockGenusMember>DisplayShow</BlockGenusMember>
 				<BlockGenusMember>DisplayString</BlockGenusMember>
@@ -12464,7 +12464,7 @@
 				<BlockGenusMember>DisplayRectangle</BlockGenusMember>
 			</BlockDrawer>
             <!-- accel -->
-            <BlockDrawer button-color="0 0 200" name="bg.accel">
+            <BlockDrawer button-color="0 0 200" name="bd.accel">
 				<BlockGenusMember>Accel</BlockGenusMember>
 				<BlockGenusMember>AccelX</BlockGenusMember>
 				<BlockGenusMember>AccelY</BlockGenusMember>

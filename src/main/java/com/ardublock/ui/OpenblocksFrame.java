@@ -111,6 +111,7 @@ public class OpenblocksFrame extends JFrame
 		final Workspace workspace = context.getWorkspace();
 		
 		// WTF I can't add worksapcelistener by workspace contrller
+                               
 		workspace.addWorkspaceListener(new ArdublockWorkspaceListener(this));
                 controller = new СontrollerСonfiguration();
 		controller.setMinimumSize(new Dimension(100,100));
@@ -181,9 +182,9 @@ public class OpenblocksFrame extends JFrame
                 menuBar.add(fileMenu);
                 menuBar.add(toolsMenu);
                 
-                JPanel northPanel = new JPanel();
-                JPanel logo = new JPanel();
-                JPanel buttons = new JPanel();
+                final JPanel northPanel = new JPanel();
+                final JPanel logo = new JPanel();
+                final JPanel buttons = new JPanel();
                 
 		buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
                 logo.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
@@ -191,13 +192,13 @@ public class OpenblocksFrame extends JFrame
                 ImageIcon mLogo = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(
                         "com/ardublock/block/mainLogo.png")
                 );
-                JLabel mainLogo = new JLabel();
+                final JLabel mainLogo = new JLabel();
                 Image image = mLogo.getImage().getScaledInstance(92, 40,  java.awt.Image.SCALE_SMOOTH);
                 mLogo = new ImageIcon(image);
                 mainLogo.setIcon(mLogo);
                 logo.add(mainLogo);
                 logo.setBackground(new Color(0,151,157));
-                JPanel rightPanel = new JPanel();
+                final JPanel rightPanel = new JPanel();
                 
                 logo.setPreferredSize(workspace.getFactorySize()); //new Dimension(355, 50));
                 rightPanel.setPreferredSize(new Dimension(10, 50));
