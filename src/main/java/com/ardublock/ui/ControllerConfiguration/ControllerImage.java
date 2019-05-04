@@ -19,10 +19,8 @@ public class ControllerImage extends JPanel {
     private ArrayList<BufferedImage> moduleImages = new ArrayList<BufferedImage>();
 
     public ControllerImage() {
-        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        setPreferredSize(new Dimension(50,50));
-        setMinimumSize(new Dimension(10,10));
-        setMaximumSize(new Dimension(200,200));
+        setLayout(null);
+        this.setBounds(0,0,150,150);
         try {
             image = ImageIO.read(new File("com/ardublock/ui/ControllerConfiguration/Images/mainImage.jpg"));
         } catch (IOException ex) {
@@ -42,33 +40,85 @@ public class ControllerImage extends JPanel {
     }
 
     public void addModule(int numberOfModule, Pin pin){
+        JLabel picLabel;
         switch (pin){
             case dir04pwm05:
-
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
                 break;
             case dir07pwm06:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
                 break;
             case d2:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
                 break;
             case d3:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
                 break;
             case d8:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
                 break;
             case d10:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
                 break;
             case d9:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
                 break;
             case d11:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
                 break;
             case a3:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
                 break;
             case a2:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
                 break;
             case a1:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
                 break;
             case a0:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
                 break;
             case i2c:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
                 break;
         }
     }
