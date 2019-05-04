@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import com.ardublock.ui.ControllerConfiguration.InvisibleButton;
 import com.ardublock.ui.ControllerConfiguration.pins;
 
@@ -15,10 +16,17 @@ import com.ardublock.ui.ControllerConfiguration.pins;
 public class ControllerImage extends JPanel{
 
 
+=======
+import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
+
+public class ControllerImage extends JPanel {
+    private com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration.Pin Pin;
+>>>>>>> e7072bdeba9f9a08a505507637a67c9a5c276ba1
     private BufferedImage image;
     private BufferedImage usingImage;
     private ArrayList<BufferedImage> moduleImages = new ArrayList<BufferedImage>();
 
+<<<<<<< HEAD
     public ControllerImage() {
         setLayout(null);
         try {
@@ -27,6 +35,16 @@ public class ControllerImage extends JPanel{
             ex.printStackTrace();
             throw new NullPointerException("Отсутствует изображение контроллера");
         }
+=======
+    public ControllerImage(СontrollerСonfiguration controller) {
+        Pin = controller.controllerPin;
+        //try {
+        //    image = ImageIO.read(new File("image name and path"));
+        //} catch (IOException ex) {
+        //    ex.printStackTrace();
+        //    throw new NullPointerException("Отсутствует изображение контроллера");
+        //}
+>>>>>>> e7072bdeba9f9a08a505507637a67c9a5c276ba1
     }
 
     public void setModuleImages(){
