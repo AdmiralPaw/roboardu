@@ -16,8 +16,8 @@ public class СontrollerСonfiguration extends Component {
         setBackground(new Color(200,200,200));
     }
 
-    public initControllerConfiguration(){
-        everythingVisible.add(controllerImage);
-    }
+//    public initControllerConfiguration(){
+//        everythingVisible.add(controllerImage);
+//    }
 
 }

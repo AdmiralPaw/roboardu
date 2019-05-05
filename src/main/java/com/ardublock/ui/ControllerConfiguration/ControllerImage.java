@@ -17,12 +17,12 @@ public class ControllerImage extends JPanel{
     private ArrayList<BufferedImage> moduleImages = new ArrayList<BufferedImage>();
 
     public ControllerImage() {
-        try {
-            image = ImageIO.read(new File("image name and path"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            throw new NullPointerException("Отсутствует изображение контроллера");
-        }
+//        try {
+//            image = ImageIO.read(new File("image name and path"));
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//            throw new NullPointerException("Отсутствует изображение контроллера");
+//        }
     }
 
     public void addPicture(int numberOfModule){

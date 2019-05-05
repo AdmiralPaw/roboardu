@@ -1,10 +1,6 @@
 package com.mit.blocks.workspace;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
-import java.awt.Point;
-import java.awt.PopupMenu;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -14,11 +10,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.BoundedRangeModel;
-import javax.swing.JComponent;
-import javax.swing.JLayeredPane;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
+import com.mit.blocks.codeblockutil.RHoverScrollPane;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -75,10 +69,10 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
     public BlockCanvas(Workspace workspace) {
         this.workspace = workspace;
         this.canvas = new Canvas();
-        this.scrollPane = new CHoverScrollPane(canvas,
+        this.scrollPane = new RHoverScrollPane(canvas,
                 ScrollPolicy.VERTICAL_BAR_ALWAYS,
                 ScrollPolicy.HORIZONTAL_BAR_ALWAYS,
-                18, new Color(255, 133, 8), null);
+                15, new Color(255, 133, 8), null);
         scrollPane.setScrollingUnit(5);
         canvas.setLayout(null);
         canvas.setBackground(Color.white);
@@ -572,6 +566,7 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
             this.p = null;
             this.addMouseListener(this);
             this.addMouseMotionListener(this);
+
         }
 
         public void mousePressed(MouseEvent e) {
@@ -610,5 +605,8 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
 
         public void mouseExited(MouseEvent e) {
         }
+
     }
+
 }
+

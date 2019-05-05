@@ -175,6 +175,8 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
             this.pageJComponent.add(collapse);
         }
         this.pageJComponent.setFullView(inFullview);
+
+
     }
 
     public void disableMinimize() {
@@ -1139,9 +1141,9 @@ class PageJComponent extends JLayeredPane implements RBParent {
         super.paintComponent(g);
         //set label color
         if (this.getBackground().getBlue() + this.getBackground().getGreen() + this.getBackground().getRed() > 400) {
-            g.setColor(Color.DARK_GRAY);
+            g.setColor(Color.white);
         } else {
-            g.setColor(Color.LIGHT_GRAY);
+            g.setColor(Color.white);
         }
 
         //paint label at correct position
@@ -1160,6 +1162,22 @@ class PageJComponent extends JLayeredPane implements RBParent {
             g.drawImage(this.getImage(), imageX, getHeight() * 3 / 4 + 5, imageWidth, imageWidth, null);
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
         }
+                        int startWidth = 0;
+                int startHeight = 0;
+                int width = this.getWidth();
+                int height = this.getHeight();
+                g.setColor(new Color(255,255,255));
+                g.fillRect(startWidth,startHeight, width, height);
+                g.setColor(new Color(237,237,237));
+                for (int i=startWidth;i<width;i+=25*Page.zoom)
+                {
+                    g.drawLine(i,startHeight,i,height);
+                }
+
+                for (int i=startHeight;i<height;i+=25*Page.zoom)
+                {
+                    g.drawLine(startWidth,i,width,i);
+                }
 
     }
 
