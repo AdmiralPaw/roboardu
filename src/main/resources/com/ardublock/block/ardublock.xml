@@ -12979,7 +12979,14 @@
 			<!-- Sound blocks reside in the auto-generated String drawer. (see slcodeblocks.SoundBlocksGenerator for details) -->
 		</BlockDrawerSet>
 	</BlockDrawerSets>
-	
+<!-- Controller Components -->       
+    <ControllerCompnentsSets>
+        <ControllerComponentsSet>
+            <ControllerComponents pin="a1">
+                <Component>dude</Component> 
+            </ControllerComponents>
+        </ControllerComponentsSet>
+    </ControllerCompnentsSets>    
 <!-- End of Ardublock Standard UI layout -->
 
 	<Pages drawer-with-page="yes">

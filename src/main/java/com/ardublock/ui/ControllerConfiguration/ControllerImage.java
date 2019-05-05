@@ -1,6 +1,7 @@
 package com.ardublock.ui.ControllerConfiguration;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -8,29 +9,132 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.ArrayList;
-import com.ardublock.ui.ControllerConfiguration.InvisibleButton;
+import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration.Pin;
+import com.ardublock.ui.OpenblocksFrame;
+import java.net.URL;
 
-public class ControllerImage extends JPanel{
 
+
+public class ControllerImage extends JPanel {
     private BufferedImage image;
     private BufferedImage usingImage;
     private ArrayList<BufferedImage> moduleImages = new ArrayList<BufferedImage>();
 
-    public ControllerImage() {
-//        try {
-//            image = ImageIO.read(new File("image name and path"));
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//            throw new NullPointerException("Отсутствует изображение контроллера");
-//        }
+    public ControllerImage(СontrollerСonfiguration controller) {
+        setLayout(null);
+        this.setBounds(0,0,150,150);
+        try {
+            URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/1.png");
+            image = ImageIO.read(new File(iconURL.getPath()));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            throw new NullPointerException("Отсутствует изображение контроллера");
+        }
     }
 
-    public void addPicture(int numberOfModule){
+    public void setModuleImages(){
+        try{
+            URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/2.jpg");
+            moduleImages.add( ImageIO.read(new File(iconURL.getPath())));
+
+        } catch(IOException ex){
+            ex.printStackTrace();
+            throw new NullPointerException("Не хватает каких то изображений");
+        }
+    }
+
+    public void addModule(int numberOfModule, Pin pin){
+        JLabel picLabel;
+        switch (pin){
+            case dir04pwm05:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
+                break;
+            case dir07pwm06:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
+                break;
+            case d2:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
+                break;
+            case d3:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
+                break;
+            case d8:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
+                break;
+            case d10:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
+                break;
+            case d9:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
+                break;
+            case d11:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
+                break;
+            case a3:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
+                break;
+            case a2:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
+                break;
+            case a1:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
+                break;
+            case a0:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
+                break;
+            case i2c:
+                usingImage = moduleImages.get(numberOfModule);
+                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel.setBounds(10,10,10,10);
+                add(picLabel);
+                break;
+        }
+    }
+
+    public void addPicture(int numberOfModule,int x,int y,int width,int height){
         usingImage = moduleImages.get(numberOfModule);
         JLabel picLabel = new JLabel(new ImageIcon(usingImage));
+        picLabel.setBounds(x,y,width,height);
         add(picLabel);
-
     }
+
+
 
     public void deletePicture(int numberOfModule){
         try{
@@ -47,3 +151,4 @@ public class ControllerImage extends JPanel{
     }
 
 }
+
