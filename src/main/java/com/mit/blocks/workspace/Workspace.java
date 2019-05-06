@@ -160,8 +160,8 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 blockCanvas.reformBlockCanvas();
                 blockCanvasLayer.setSize(getSize());
                 blockCanvasLayer.validate();
-                mainLayer.setSize(getSize());
-                mainLayer.validate();
+                workLayer.setSize(getSize());
+                workLayer.validate();
             }
         });
         
