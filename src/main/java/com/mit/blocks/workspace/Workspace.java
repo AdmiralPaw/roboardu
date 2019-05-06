@@ -6,8 +6,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,10 +19,7 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.JComponent;
-import javax.swing.JLayeredPane;
-import javax.swing.JSplitPane;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -33,6 +29,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathConstants;
 
+import com.mit.blocks.codeblockutil.RSplitPane;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -51,8 +48,7 @@ import com.mit.blocks.workspace.typeblocking.FocusTraversalManager;
 import com.mit.blocks.workspace.typeblocking.TypeBlockManager;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+
 import org.jfree.ui.tabbedui.VerticalLayout;
 
 /**
@@ -119,8 +115,8 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      * such a component would be a static block factory.  In user testing, we found that novice users performed
      * better with a static block factory than one in which they could drag around and toggle the visibility
      * of. */
-    public JSplitPane mainLayer;
-    public JPanel blockCanvasLayer;
+    public JSplitPane workLayer;
+    public JPanel blockCanvasLayer; //Layer with controller
 
     /**
      * MiniMap associated with the blockCanvas
@@ -184,43 +180,177 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         errWindow.setBackground(Color.black);
         errPanel.add(errWindow, BorderLayout.CENTER);
         //TODO: оформить как класс}
-        
+
+
+        final JLayeredPane blockCanvasWithDepth = new JLayeredPane();
+        blockCanvasWithDepth.setPreferredSize(new Dimension(300,500));
+        final JPanel level_one = new JPanel();
+        level_one.setLayout(new BoxLayout(level_one, BoxLayout.X_AXIS));
+        level_one.setBounds(0,0,650,500);
+        level_one.setMinimumSize(new Dimension(0,0));
+        level_one.add(blockCanvas.getJComponent());
+        blockCanvasWithDepth.setBackground(Color.black);
+        blockCanvasWithDepth.add(level_one, 2);
+        blockCanvasWithDepth.add(errPanel, 4);
+        blockCanvasWithDepth.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                super.componentResized(e);
+                blockCanvasWithDepth.getComponents()[1].setBounds(0,0,blockCanvasWithDepth.getWidth()-1,blockCanvasWithDepth.getHeight()-1);
+                blockCanvasWithDepth.getComponents()[0].setBounds(blockCanvasWithDepth.getWidth()-75,blockCanvasWithDepth.getHeight()-150,75,150);
+
+
+            }
+        });
+
         blockCanvas.getJComponent().setMinimumSize(new Dimension(0,100));
         blockCanvas.getJComponent().setPreferredSize(new Dimension(0,600));
-        JSplitPane centerPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true,
-                blockCanvas.getJComponent(), errPanel); 
+        JSplitPane centerPane = new RSplitPane(JSplitPane.VERTICAL_SPLIT, true,
+                blockCanvasWithDepth, errPanel);
         centerPane.setOneTouchExpandable(true);
         centerPane.setDividerSize(6);
+        workLayer = new RSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
+                factory.getJComponent(), centerPane);
+        workLayer.setOneTouchExpandable(true);
+        workLayer.setDividerSize(6);
         
-        
-//        mainLayer = new JPanel(new BorderLayout()); 
-//        mainLayer.add(blockCanvasLayer, BorderLayout.CENTER);
-//        mainLayer.add(controller, BorderLayout.EAST);
-
-        mainLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
-               factory.getJComponent(), centerPane);
-        mainLayer.setOneTouchExpandable(true);
-        mainLayer.setDividerSize(6);
-//        
-//       
-//        add(mainLayer, BLOCK_LAYER);
-        //add(blockCanvasLayer, BLOCK_LAYER);
-
-//      blockCanvasLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
-//              factory.getJComponent(), centerPane);
-//      blockCanvasLayer.setOneTouchExpandable(true);
-//      blockCanvasLayer.setDividerSize(2);
-//        blockCanvasLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
-//                this.mainLayer, controller);
-//        blockCanvasLayer.setOneTouchExpandable(true);
-//        blockCanvasLayer.setDividerSize(6);
         blockCanvasLayer = new JPanel(new BorderLayout()); 
-        blockCanvasLayer.add(mainLayer, BorderLayout.CENTER);
+        blockCanvasLayer.add(workLayer, BorderLayout.CENTER);
         blockCanvasLayer.add(controller, BorderLayout.EAST);
         factory.getJComponent().setPreferredSize(new Dimension(350, 50));
         controller.setPreferredSize(new Dimension(300, 50));
-        
         add(blockCanvasLayer, BLOCK_LAYER);
+
+        int size = 45;
+        final double coef = 0.25;
+        final double max_zoom = 2.5;
+        final double min_zoom = 0.5;
+        ImageIcon button_icon = new ImageIcon(new ImageIcon("src\\main\\resources\\com\\ardublock\\block\\buttons\\zoom+.png").getImage().getScaledInstance(size,size, java.awt.Image.SCALE_SMOOTH));
+        JButton zoomPlus = new JButton(button_icon);
+        zoomPlus.setBorder(BorderFactory.createEmptyBorder());
+        zoomPlus.setContentAreaFilled(false);
+        zoomPlus.setFocusable(false);
+        zoomPlus.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                double zoom = Page.zoom+coef;
+                if (zoom > max_zoom)
+                {
+                    zoom = max_zoom;
+                }
+                setWorkspaceZoom(zoom);
+            }
+        });
+        zoomPlus.addMouseListener(new MouseListener() {
+            public void mouseClicked(MouseEvent e) {
+                repaint();
+            }
+
+            public void mousePressed(MouseEvent e) {
+                repaint();
+            }
+
+            public void mouseReleased(MouseEvent e) {
+                repaint();
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                repaint();
+            }
+
+            public void mouseExited(MouseEvent e) {
+                repaint();
+            }
+        });
+
+        button_icon = new ImageIcon(new ImageIcon("src\\main\\resources\\com\\ardublock\\block\\buttons\\zoom-.png").getImage().getScaledInstance(size,size, java.awt.Image.SCALE_SMOOTH));
+        JButton zoomMinus = new JButton(button_icon);
+        zoomMinus.setBorder(BorderFactory.createEmptyBorder());
+        zoomMinus.setContentAreaFilled(false);
+        zoomMinus.setFocusable(false);
+        zoomMinus.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                double zoom = Page.zoom-coef;
+                if (zoom < min_zoom)
+                {
+                    zoom = min_zoom;
+                }
+                setWorkspaceZoom(zoom);
+            }
+        });
+        zoomMinus.addMouseListener(new MouseListener() {
+            public void mouseClicked(MouseEvent e) {
+                repaint();
+            }
+
+            public void mousePressed(MouseEvent e) {
+                repaint();
+            }
+
+            public void mouseReleased(MouseEvent e) {
+                repaint();
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                repaint();
+            }
+
+            public void mouseExited(MouseEvent e) {
+                repaint();
+            }
+        });
+
+        button_icon = new ImageIcon(new ImageIcon("src\\main\\resources\\com\\ardublock\\block\\buttons\\zoomNormal.png").getImage().getScaledInstance(size,size, java.awt.Image.SCALE_SMOOTH));
+        JButton zoomNormal = new JButton(button_icon);
+        zoomNormal.setBorder(BorderFactory.createEmptyBorder());
+        zoomNormal.setContentAreaFilled(false);
+        zoomNormal.setFocusable(false);
+        zoomNormal.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setWorkspaceZoom(1);
+            }
+        });
+        zoomNormal.addMouseListener(new MouseListener() {
+            public void mouseClicked(MouseEvent e) {
+                repaint();
+            }
+
+            public void mousePressed(MouseEvent e) {
+                repaint();
+            }
+
+            public void mouseReleased(MouseEvent e) {
+                repaint();
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                repaint();
+            }
+
+            public void mouseExited(MouseEvent e) {
+                repaint();
+            }
+        });
+
+
+        JPanel level_two = new JPanel();
+        level_two.setLayout(new BorderLayout());
+        level_two.setBackground(new Color(0,0,0,0));
+        JPanel zoom_buttons = new JPanel();
+        zoom_buttons.setLayout(new BoxLayout(zoom_buttons,BoxLayout.Y_AXIS));
+        zoom_buttons.add(zoomPlus);
+        zoom_buttons.add(zoomMinus);
+        zoom_buttons.add(zoomNormal);
+
+        int zoom_panel_x = 500;
+        int zoom_panel_y = 500;
+        level_two.setBounds(1,1,
+                299,649);
+
+        zoom_buttons.setBackground(new Color(255,255,255,0));
+
+        level_two.add(zoom_buttons,BorderLayout.CENTER);
+        blockCanvasWithDepth.add(level_two, new Integer(3));
+        
         validate();
         addPageAt(Page.getBlankPage(this), 0, true); //false
         

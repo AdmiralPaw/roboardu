@@ -94,21 +94,11 @@ public class OpenblocksFrame extends JFrame
 	private void initOpenBlocks()
 	{
 		final Context context = Context.getContext();
-		
-		/*
-		WorkspaceController workspaceController = context.getWorkspaceController();
-		JComponent workspaceComponent = workspaceController.getWorkspacePanel();
-		*/
-		
-		final Workspace workspace = context.getWorkspace();
-		
-		// WTF I can't add worksapcelistener by workspace contrller
-                               
+		final Workspace workspace = context.getWorkspace();   
 		workspace.addWorkspaceListener(new ArdublockWorkspaceListener(this));
-                //controller = new СontrollerСonfiguration();
-		
 		workspace.setMinimumSize(new Dimension(1000,0));
                 
+                //MENU--------------------------------------------------------//
                 JMenuBar menuBar = new JMenuBar();
                 JMenu fileMenu = new JMenu(uiMessageBundle.getString("ardublock.ui.file"));
                 JMenuItem newItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.new"));
@@ -173,16 +163,12 @@ public class OpenblocksFrame extends JFrame
                 
                 menuBar.add(fileMenu);
                 menuBar.add(toolsMenu);
-                
+                //MENU--------------------------------------------------------//
+                //Panels------------------------------------------------------//
                 final JPanel northPanel = new JPanel();
                 final JPanel logo = new JPanel();
                 final JPanel buttons = new JPanel();
-                
-		buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
-				/*final JPanel northPanel = new JPanel();
-				final JPanel logo = new JPanel();
-                final JPanel buttons = new JPanel();*/
-                
+
 		buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
                 logo.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
                 northPanel.setLayout(new BorderLayout());
@@ -197,8 +183,8 @@ public class OpenblocksFrame extends JFrame
                 logo.setBackground(new Color(0,151,157));
                 final JPanel rightPanel = new JPanel();
                 
-                logo.setPreferredSize(workspace.getFactorySize()); //new Dimension(355, 50));
-                rightPanel.setPreferredSize(new Dimension(10, 50));
+                logo.setPreferredSize(workspace.getFactorySize());
+                rightPanel.setPreferredSize(new Dimension(310, 50));
                 rightPanel.setBackground(new Color(0,151,157));
                 buttons.setBackground(new Color(0,100,104));
                 northPanel.add(logo, BorderLayout.WEST);
@@ -291,24 +277,8 @@ public class OpenblocksFrame extends JFrame
 				}
 			}
 		});
-                 //21.03.2019
-                SearchBar sb = new SearchBar("Search blocks",
-                        "Search for blocks in the drawers and workspace", workspace);
-                for (final SearchableContainer con : workspace.getAllSearchableContainers()) {
-                    sb.addSearchableContainer(con);
-                }
                 
-                        
-                sb.getComponent().setPreferredSize(new Dimension(130, 23)); 
-                ZoomSlider zoom = new ZoomSlider(workspace);
-                
-                //buttons.add(workspace.factory.getFactorySwitcher());
-                
-                
-                //buttons.add(zoom);
-                //buttons.add(sb.getComponent()); //21.03.2019
-                
-		JPanel bottomPanel = new JPanel();
+		//JPanel bottomPanel = new JPanel();
 		ImageButton websiteButton = new ImageButton(
                     "website",
                     "com/ardublock/block/buttons/websiteA.jpg",
@@ -329,7 +299,7 @@ public class OpenblocksFrame extends JFrame
 			    }
 			}
 		});
-		JLabel versionLabel = new JLabel("v " + uiMessageBundle.getString("ardublock.ui.version"));
+		//JLabel versionLabel = new JLabel("v " + uiMessageBundle.getString("ardublock.ui.version"));
                 
                 buttons.add(newButton);
 		buttons.add(saveButton);
@@ -341,23 +311,7 @@ public class OpenblocksFrame extends JFrame
 		buttons.add(websiteButton);
          	buttons.add(infoLabel);
                 
-		
-		//JSplitPane blockCanvasLayerC = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
-		//		workspace, controller);
-		//blockCanvasLayerC.setOneTouchExpandable(true);
-		//blockCanvasLayerC.setDividerSize(3);
-                workspace.mainLayer.addPropertyChangeListener(new PropertyChangeListener()
-                {
-                    public void propertyChange(PropertyChangeEvent e)
-                    {
-                        Dimension s = workspace.controller.getSize();
-                        Dimension q = workspace.getCanvasSize();
-                        rightPanel.setPreferredSize(new Dimension(s.width, 50));
-                        buttons.setPreferredSize(new Dimension(q.width, 50));
-                        northPanel.updateUI();
-                    }
-                });
-                workspace.mainLayer.addPropertyChangeListener(new PropertyChangeListener()
+                workspace.workLayer.addPropertyChangeListener(new PropertyChangeListener()
                 {
                     public void propertyChange(PropertyChangeEvent e)
                     {
@@ -371,7 +325,6 @@ public class OpenblocksFrame extends JFrame
                 
 		this.setJMenuBar(menuBar);
                 this.add(northPanel, BorderLayout.NORTH);
-//		this.add(bottomPanel, BorderLayout.SOUTH);
 		this.add(workspace, BorderLayout.CENTER);
 	}
 	

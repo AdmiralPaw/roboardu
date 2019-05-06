@@ -162,72 +162,72 @@ public class MiniMap extends JPanel implements WorkspaceWidget, MouseListener, M
      * 			   real-time relative positions and dimension
      */
     public void paint(Graphics g) {
-        //should paint super first then reset canvas.
-        //using new canvas, find new height and ratio.
-        super.paint(g);
-
-        // draw shadow border
-        for (int i = 0; i < BORDER_WIDTH - 2; i++) {
-            g.setColor(new Color(128, 128, 128, 50 * (i + 1)));
-            g.drawRect(i, i, this.getWidth() - 1 - (2*i), this.getHeight() - 1 - (2*i));
-        }
-
-        //Aspect-Ratio Logic
-        this.blockCanvas = workspace.getBlockCanvas();
-        this.transformX = (double) (MAPWIDTH) / this.getCanvas().getWidth();//MUST CAST MAPHEIGHT TO DOUBLE!!
-        this.transformY = (double) (MAPHEIGHT) / this.getCanvas().getHeight();
-
-        g.translate(5, 5);
-        for (Page page : this.blockCanvas.getPages()) {
-            Color pageColor = page.getPageColor();
-            g.setColor(new Color(pageColor.getRed(), pageColor.getGreen(), pageColor.getBlue(), 200));
-            Rectangle pageRect = rescaleRect(page.getJComponent().getBounds());
-            g.fillRect(pageRect.x, pageRect.y, pageRect.width, pageRect.height);
-            g.setColor(Color.white);
-            g.clipRect(pageRect.x, pageRect.y, pageRect.width, pageRect.height);
-            g.drawString(page.getPageName(), pageRect.x + 1, pageRect.height - 3);
-            if (page.getIcon() != null && expand) {
-                g.drawImage(page.getIcon(), pageRect.x + 1, pageRect.height - 28, 15, 15, null);
-            }
-            g.setClip(null);
-            for (Component component : page.getJComponent().getComponents()) {
-                //re-render this.blocks and this.comments
-                if (component instanceof RenderableBlock && component != null && component.isVisible()) {
-                    if (((RenderableBlock) component).isSearchResult()) {
-                        g.setColor(Color.red);
-                    } else {
-                        g.setColor(((RenderableBlock) component).getBLockColor());
-                    }
-                    drawBoundingBox(g, component);
-                } else if (component instanceof Comment && component.isVisible()) {
-                    g.setColor(Color.red);
-                    drawBoundingBox(g, component);
-                }
-            }
-
-        }
-//        for (Component component : this.getCanvas().getComponents()) {
-//            if (component instanceof PageDivider) {
-//                g.setColor(Color.white);
-//                Rectangle dividerRect = rescaleRect(component.getBounds());
-//                g.fillRect(dividerRect.x, dividerRect.y, dividerRect.width + 1, dividerRect.height);
+//        //should paint super first then reset canvas.
+//        //using new canvas, find new height and ratio.
+//        super.paint(g);
+//
+//        // draw shadow border
+//        for (int i = 0; i < BORDER_WIDTH - 2; i++) {
+//            g.setColor(new Color(128, 128, 128, 50 * (i + 1)));
+//            g.drawRect(i, i, this.getWidth() - 1 - (2*i), this.getHeight() - 1 - (2*i));
+//        }
+//
+//        //Aspect-Ratio Logic
+//        this.blockCanvas = workspace.getBlockCanvas();
+//        this.transformX = (double) (MAPWIDTH) / this.getCanvas().getWidth();//MUST CAST MAPHEIGHT TO DOUBLE!!
+//        this.transformY = (double) (MAPHEIGHT) / this.getCanvas().getHeight();
+//
+//        g.translate(5, 5);
+//        for (Page page : this.blockCanvas.getPages()) {
+//            Color pageColor = page.getPageColor();
+//            g.setColor(new Color(pageColor.getRed(), pageColor.getGreen(), pageColor.getBlue(), 200));
+//            Rectangle pageRect = rescaleRect(page.getJComponent().getBounds());
+//            g.fillRect(pageRect.x, pageRect.y, pageRect.width, pageRect.height);
+//            g.setColor(Color.white);
+//            g.clipRect(pageRect.x, pageRect.y, pageRect.width, pageRect.height);
+//            g.drawString(page.getPageName(), pageRect.x + 1, pageRect.height - 3);
+//            if (page.getIcon() != null && expand) {
+//                g.drawImage(page.getIcon(), pageRect.x + 1, pageRect.height - 28, 15, 15, null);
+//            }
+//            g.setClip(null);
+//            for (Component component : page.getJComponent().getComponents()) {
+//                //re-render this.blocks and this.comments
+//                if (component instanceof RenderableBlock && component != null && component.isVisible()) {
+//                    if (((RenderableBlock) component).isSearchResult()) {
+//                        g.setColor(Color.red);
+//                    } else {
+//                        g.setColor(((RenderableBlock) component).getBLockColor());
+//                    }
+//                    drawBoundingBox(g, component);
+//                } else if (component instanceof Comment && component.isVisible()) {
+//                    g.setColor(Color.red);
+//                    drawBoundingBox(g, component);
+//                }
+//            }
+//
+//        }
+////        for (Component component : this.getCanvas().getComponents()) {
+////            if (component instanceof PageDivider) {
+////                g.setColor(Color.white);
+////                Rectangle dividerRect = rescaleRect(component.getBounds());
+////                g.fillRect(dividerRect.x, dividerRect.y, dividerRect.width + 1, dividerRect.height);
+////            }
+////        }
+//        for (Component component : workspace.getComponentsInLayer(Workspace.DRAGGED_BLOCK_LAYER)) {
+//            if (component instanceof RenderableBlock && component != null && component.isVisible()) {
+//                g.setColor(((RenderableBlock) component).getBLockColor());
+//                drawBoundingBox(g, component);
+//            } else if (component instanceof Comment && component.isVisible()) {
+//                g.setColor(Color.red);
+//                drawBoundingBox(g, component);
 //            }
 //        }
-        for (Component component : workspace.getComponentsInLayer(Workspace.DRAGGED_BLOCK_LAYER)) {
-            if (component instanceof RenderableBlock && component != null && component.isVisible()) {
-                g.setColor(((RenderableBlock) component).getBLockColor());
-                drawBoundingBox(g, component);
-            } else if (component instanceof Comment && component.isVisible()) {
-                g.setColor(Color.red);
-                drawBoundingBox(g, component);
-            }
-        }
-        g.setColor(Color.red);
-        g.drawRect(
-                rescaleX(blockCanvas.getHorizontalModel().getValue()),
-                rescaleY(blockCanvas.getVerticalModel().getValue()),
-                rescaleX(blockCanvas.getWidth()),
-                rescaleY(blockCanvas.getHeight()));
+//        g.setColor(Color.red);
+//        g.drawRect(
+//                rescaleX(blockCanvas.getHorizontalModel().getValue()),
+//                rescaleY(blockCanvas.getVerticalModel().getValue()),
+//                rescaleX(blockCanvas.getWidth()),
+//                rescaleY(blockCanvas.getHeight()));
     }
 
     /**
