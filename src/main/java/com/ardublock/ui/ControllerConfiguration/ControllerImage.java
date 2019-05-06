@@ -21,7 +21,7 @@ public class ControllerImage extends JPanel {
     private ArrayList<BufferedImage> moduleImages = new ArrayList<BufferedImage>();
 
     public ControllerImage(СontrollerСonfiguration controller) {
-        setLayout(null);
+        //setLayout(null);
         this.setBounds(0,0,150,150);
         try {
             URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/1.png");
@@ -126,6 +126,7 @@ public class ControllerImage extends JPanel {
                 break;
         }
     }
+    
 
     public void addPicture(int numberOfModule,int x,int y,int width,int height){
         usingImage = moduleImages.get(numberOfModule);
