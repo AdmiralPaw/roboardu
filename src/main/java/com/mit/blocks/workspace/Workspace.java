@@ -192,17 +192,35 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         centerPane.setOneTouchExpandable(true);
         centerPane.setDividerSize(6);
         
+        
+//        mainLayer = new JPanel(new BorderLayout()); 
+//        mainLayer.add(blockCanvasLayer, BorderLayout.CENTER);
+//        mainLayer.add(controller, BorderLayout.EAST);
+
         mainLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
-                factory.getJComponent(), centerPane);
+               factory.getJComponent(), centerPane);
         mainLayer.setOneTouchExpandable(true);
         mainLayer.setDividerSize(6);
+//        
+//       
+//        add(mainLayer, BLOCK_LAYER);
+        //add(blockCanvasLayer, BLOCK_LAYER);
+
+//      blockCanvasLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
+//              factory.getJComponent(), centerPane);
+//      blockCanvasLayer.setOneTouchExpandable(true);
+//      blockCanvasLayer.setDividerSize(2);
+//        blockCanvasLayer = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
+//                this.mainLayer, controller);
+//        blockCanvasLayer.setOneTouchExpandable(true);
+//        blockCanvasLayer.setDividerSize(6);
         blockCanvasLayer = new JPanel(new BorderLayout()); 
         blockCanvasLayer.add(mainLayer, BorderLayout.CENTER);
         blockCanvasLayer.add(controller, BorderLayout.EAST);
         factory.getJComponent().setPreferredSize(new Dimension(350, 50));
         controller.setPreferredSize(new Dimension(300, 50));
+        
         add(blockCanvasLayer, BLOCK_LAYER);
-        //add(blockCanvasLayer, BLOCK_LAYER);
         validate();
         addPageAt(Page.getBlankPage(this), 0, true); //false
         

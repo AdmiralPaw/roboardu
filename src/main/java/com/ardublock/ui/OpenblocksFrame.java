@@ -372,7 +372,7 @@ public class OpenblocksFrame extends JFrame
 		this.setJMenuBar(menuBar);
                 this.add(northPanel, BorderLayout.NORTH);
 //		this.add(bottomPanel, BorderLayout.SOUTH);
-		this.add(workspace.blockCanvasLayer, BorderLayout.CENTER);
+		this.add(workspace, BorderLayout.CENTER);
 	}
 	
 	public void doOpenArduBlockFile()
