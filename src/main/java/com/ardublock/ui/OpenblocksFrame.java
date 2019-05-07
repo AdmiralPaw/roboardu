@@ -49,7 +49,9 @@ public class OpenblocksFrame extends JFrame
 	private FileFilter ffilter;
         
 	private ResourceBundle uiMessageBundle;
-    
+        
+        private boolean controllerIsShown = true;
+        
 	public void addListener(OpenblocksFrameListener ofl)
 	{
 		context.registerOpenblocksFrameListener(ofl);
@@ -166,12 +168,16 @@ public class OpenblocksFrame extends JFrame
                 //MENU--------------------------------------------------------//
                 //Panels------------------------------------------------------//
                 final JPanel northPanel = new JPanel();
+                final JPanel northPanelCenter = new JPanel();
                 final JPanel logo = new JPanel();
                 final JPanel buttons = new JPanel();
-
+                final JPanel panel = new JPanel();
+                
+                panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 5));
 		buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
                 logo.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
                 northPanel.setLayout(new BorderLayout());
+                northPanelCenter.setLayout(new BorderLayout());
                 ImageIcon mLogo = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(
                         "com/ardublock/block/mainLogo.png")
                 );
@@ -184,15 +190,21 @@ public class OpenblocksFrame extends JFrame
                 final JPanel rightPanel = new JPanel();
                 
                 logo.setPreferredSize(workspace.getFactorySize());
+                northPanelCenter.setMinimumSize(new Dimension(1000, 50));
                 rightPanel.setPreferredSize(new Dimension(310, 50));
                 rightPanel.setBackground(new Color(0,151,157));
                 buttons.setBackground(new Color(0,100,104));
+                panel.setBackground(new Color(0,100,104));
+                northPanel.setBackground(new Color(0,100,104));
+                northPanelCenter.setBackground(new Color(0,100,104));
                 northPanel.add(logo, BorderLayout.WEST);
-                northPanel.add(buttons);
+                northPanelCenter.add(buttons, BorderLayout.WEST);
+                northPanelCenter.add(panel, BorderLayout.EAST);
+                northPanel.add(northPanelCenter, BorderLayout.CENTER);
                 northPanel.add(rightPanel, BorderLayout.EAST);
                 
                 JLabel infoLabel = new JLabel();
-                infoLabel.setPreferredSize(new Dimension(200, 30));
+                infoLabel.setPreferredSize(new Dimension(150, 30));
                 infoLabel.setForeground(Color.white);
 		ImageButton newButton = new ImageButton(
                         "new",
@@ -299,6 +311,45 @@ public class OpenblocksFrame extends JFrame
 			    }
 			}
 		});
+                ImageButton configButton = new ImageButton(
+                    "controller",
+                    "com/ardublock/block/buttons/showPanelsA.jpg",
+                    "com/ardublock/block/buttons/showPanelsB.jpg",
+                    null
+                );
+                configButton.addMouseListener(new MouseListener() {
+                    public void mouseClicked(MouseEvent e) {
+                        workspace.blockCanvasLayer.updateUI();
+                    }
+
+                    public void mousePressed(MouseEvent e) {
+                        if (controllerIsShown){
+                                workspace.blockCanvasLayer.remove(workspace.controller);
+                                northPanel.remove(rightPanel);
+                                controllerIsShown = false;
+                            }
+                        else {
+                            workspace.blockCanvasLayer.add(workspace.controller, BorderLayout.EAST);
+                            northPanel.add(rightPanel, BorderLayout.EAST);
+                            controllerIsShown = true;
+                        }
+                        workspace.blockCanvasLayer.updateUI();
+                        northPanel.updateUI();
+                        
+                    }
+
+                    public void mouseReleased(MouseEvent e) {
+                        workspace.blockCanvasLayer.updateUI();
+                    }
+
+                    public void mouseEntered(MouseEvent e) {
+                        workspace.blockCanvasLayer.updateUI();
+                    }
+
+                    public void mouseExited(MouseEvent e) {
+                        workspace.blockCanvasLayer.updateUI();
+                    }
+                });
 		//JLabel versionLabel = new JLabel("v " + uiMessageBundle.getString("ardublock.ui.version"));
                 
                 buttons.add(newButton);
@@ -309,8 +360,9 @@ public class OpenblocksFrame extends JFrame
 		buttons.add(serialMonitorButton);
 		buttons.add(saveImageButton);
 		buttons.add(websiteButton);
-         	buttons.add(infoLabel);
-                
+                buttons.add(infoLabel);
+                panel.add(configButton);
+               
                 workspace.workLayer.addPropertyChangeListener(new PropertyChangeListener()
                 {
                     public void propertyChange(PropertyChangeEvent e)
@@ -318,11 +370,16 @@ public class OpenblocksFrame extends JFrame
                         Dimension s = workspace.getFactorySize();
                         Dimension q = workspace.getCanvasSize();
                         logo.setPreferredSize(new Dimension(s.width, 50));
-                        buttons.setPreferredSize(new Dimension(q.width, 50));
+//                        if (workspace.workLayer.getDividerLocation() > 380)
+//                            workspace.workLayer.setDividerLocation(380);
+//                        else if (workspace.workLayer.getDividerLocation() < 120)
+//                            workspace.workLayer.setDividerLocation(120);
                         northPanel.updateUI();
                     }
                 });
                 
+                northPanel.updateUI();
+                workspace.updateUI();
 		this.setJMenuBar(menuBar);
                 this.add(northPanel, BorderLayout.NORTH);
 		this.add(workspace, BorderLayout.CENTER);
@@ -597,12 +654,16 @@ public class OpenblocksFrame extends JFrame
         public class CustomMouseListener implements MouseListener {
              @Override
             public void mouseEntered(MouseEvent e) {
-                label.setText(name);
+                if (label != null) {
+                    label.setText(name);
+                }
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                label.setText("");
+                if (label != null) {
+                    label.setText("");
+                }
             }
             @Override
             public void mouseClicked(MouseEvent e) {

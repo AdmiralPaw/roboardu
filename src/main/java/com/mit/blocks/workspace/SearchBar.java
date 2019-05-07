@@ -22,7 +22,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import com.mit.blocks.codeblockutil.CQueryField;
-import edu.mit.blocks.codeblockutil.RQueryField;
+import com.mit.blocks.codeblockutil.RQueryField;
 
 /**
  * Contributes a search bar component to the CodeBlocks GUI, which allows the user to find 

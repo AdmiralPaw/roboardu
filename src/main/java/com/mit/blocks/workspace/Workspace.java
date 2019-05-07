@@ -1,6 +1,7 @@
 package com.mit.blocks.workspace;
 
 import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
+import com.ardublock.ui.OpenblocksFrame;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -48,6 +49,9 @@ import com.mit.blocks.workspace.typeblocking.FocusTraversalManager;
 import com.mit.blocks.workspace.typeblocking.TypeBlockManager;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.net.URL;
 
 import org.jfree.ui.tabbedui.VerticalLayout;
 
@@ -215,6 +219,14 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 factory.getJComponent(), centerPane);
         workLayer.setOneTouchExpandable(true);
         workLayer.setDividerSize(6);
+        workLayer.addPropertyChangeListener(new PropertyChangeListener()
+        {
+            public void propertyChange(PropertyChangeEvent e)
+            {
+                if (workLayer.getDividerLocation() > 380)
+                    workLayer.setDividerLocation(380);
+            }
+        });
         
         blockCanvasLayer = new JPanel(new BorderLayout()); 
         blockCanvasLayer.add(workLayer, BorderLayout.CENTER);
@@ -227,7 +239,10 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         final double coef = 0.25;
         final double max_zoom = 2.5;
         final double min_zoom = 0.5;
-        ImageIcon button_icon = new ImageIcon(new ImageIcon("src\\main\\resources\\com\\ardublock\\block\\buttons\\zoom+.png").getImage().getScaledInstance(size,size, java.awt.Image.SCALE_SMOOTH));
+        URL iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/block/buttons/zoom+.png");
+        ImageIcon button_icon = new ImageIcon(
+                 new ImageIcon(iconURL).getImage()
+                         .getScaledInstance(size,size, java.awt.Image.SCALE_SMOOTH));
         JButton zoomPlus = new JButton(button_icon);
         zoomPlus.setBorder(BorderFactory.createEmptyBorder());
         zoomPlus.setContentAreaFilled(false);
@@ -264,7 +279,10 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
             }
         });
 
-        button_icon = new ImageIcon(new ImageIcon("src\\main\\resources\\com\\ardublock\\block\\buttons\\zoom-.png").getImage().getScaledInstance(size,size, java.awt.Image.SCALE_SMOOTH));
+        iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/block/buttons/zoom-.png");
+        button_icon = new ImageIcon(
+                 new ImageIcon(iconURL).getImage()
+                         .getScaledInstance(size,size, java.awt.Image.SCALE_SMOOTH));
         JButton zoomMinus = new JButton(button_icon);
         zoomMinus.setBorder(BorderFactory.createEmptyBorder());
         zoomMinus.setContentAreaFilled(false);
@@ -301,7 +319,10 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
             }
         });
 
-        button_icon = new ImageIcon(new ImageIcon("src\\main\\resources\\com\\ardublock\\block\\buttons\\zoomNormal.png").getImage().getScaledInstance(size,size, java.awt.Image.SCALE_SMOOTH));
+        iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/block/buttons/zoomNormal.png");
+        button_icon = new ImageIcon(
+                 new ImageIcon(iconURL).getImage()
+                         .getScaledInstance(size,size, java.awt.Image.SCALE_SMOOTH));
         JButton zoomNormal = new JButton(button_icon);
         zoomNormal.setBorder(BorderFactory.createEmptyBorder());
         zoomNormal.setContentAreaFilled(false);

@@ -1,4 +1,4 @@
-package edu.mit.blocks.codeblockutil;
+package com.mit.blocks.codeblockutil;
 
 import javax.swing.*;
 import javax.swing.border.Border;

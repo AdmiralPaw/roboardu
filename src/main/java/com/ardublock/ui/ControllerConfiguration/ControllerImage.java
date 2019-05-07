@@ -16,111 +16,100 @@ import java.net.URL;
 
 
 public class ControllerImage extends JPanel {
-    private BufferedImage image;
-    private BufferedImage usingImage;
-    private ArrayList<BufferedImage> moduleImages = new ArrayList<BufferedImage>();
+    private ImageIcon image;
+    private ImageIcon usingImage;
+    private ArrayList<ImageIcon> moduleImages = new ArrayList<ImageIcon>();
 
     public ControllerImage(СontrollerСonfiguration controller) {
         //setLayout(null);
         this.setBounds(0,0,150,150);
-        try {
-            URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/1.png");
-            image = ImageIO.read(new File(iconURL.getPath()));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            throw new NullPointerException("Отсутствует изображение контроллера");
-        }
+        URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/1.png");
+        image = new ImageIcon(iconURL);
     }
 
     public void setModuleImages(){
-        try{
             URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/2.jpg");
-            moduleImages.add( ImageIO.read(new File(iconURL.getPath())));
-
-        } catch(IOException ex){
-            ex.printStackTrace();
-            throw new NullPointerException("Не хватает каких то изображений");
+            moduleImages.add(new ImageIcon(iconURL));
         }
-    }
 
     public void addModule(int numberOfModule, Pin pin){
         JLabel picLabel;
         switch (pin){
             case dir04pwm05:
                 usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel = new JLabel(usingImage);
                 picLabel.setBounds(10,10,10,10);
                 add(picLabel);
                 break;
             case dir07pwm06:
                 usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel = new JLabel(usingImage);
                 picLabel.setBounds(10,10,10,10);
                 add(picLabel);
                 break;
             case d2:
                 usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel = new JLabel(usingImage);
                 picLabel.setBounds(10,10,10,10);
                 add(picLabel);
                 break;
             case d3:
                 usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel = new JLabel(usingImage);
                 picLabel.setBounds(10,10,10,10);
                 add(picLabel);
                 break;
             case d8:
                 usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel = new JLabel(usingImage);
                 picLabel.setBounds(10,10,10,10);
                 add(picLabel);
                 break;
             case d10:
                 usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel = new JLabel(usingImage);
                 picLabel.setBounds(10,10,10,10);
                 add(picLabel);
                 break;
             case d9:
                 usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel = new JLabel(usingImage);
                 picLabel.setBounds(10,10,10,10);
                 add(picLabel);
                 break;
             case d11:
                 usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel = new JLabel(usingImage);
                 picLabel.setBounds(10,10,10,10);
                 add(picLabel);
                 break;
             case a3:
                 usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel = new JLabel(usingImage);
                 picLabel.setBounds(10,10,10,10);
                 add(picLabel);
                 break;
             case a2:
                 usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel = new JLabel(usingImage);
                 picLabel.setBounds(10,10,10,10);
                 add(picLabel);
                 break;
             case a1:
                 usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel = new JLabel(usingImage);
                 picLabel.setBounds(10,10,10,10);
                 add(picLabel);
                 break;
             case a0:
                 usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel = new JLabel(usingImage);
                 picLabel.setBounds(10,10,10,10);
                 add(picLabel);
                 break;
             case i2c:
                 usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(new ImageIcon(usingImage));
+                picLabel = new JLabel(usingImage);
                 picLabel.setBounds(10,10,10,10);
                 add(picLabel);
                 break;
@@ -130,7 +119,7 @@ public class ControllerImage extends JPanel {
 
     public void addPicture(int numberOfModule,int x,int y,int width,int height){
         usingImage = moduleImages.get(numberOfModule);
-        JLabel picLabel = new JLabel(new ImageIcon(usingImage));
+        JLabel picLabel = new JLabel(usingImage);
         picLabel.setBounds(x,y,width,height);
         add(picLabel);
     }
@@ -148,7 +137,7 @@ public class ControllerImage extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image, 0, 0, this); // see javadoc for more info on the parameters
+        g.drawImage(image.getImage(), 0, 0, this); // see javadoc for more info on the parameters
     }
 
 }
