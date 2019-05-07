@@ -255,6 +255,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                     zoom = max_zoom;
                 }
                 setWorkspaceZoom(zoom);
+                PageChangeEventManager.notifyListeners();
             }
         });
         zoomPlus.addMouseListener(new MouseListener() {
@@ -295,6 +296,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                     zoom = min_zoom;
                 }
                 setWorkspaceZoom(zoom);
+                PageChangeEventManager.notifyListeners();
             }
         });
         zoomMinus.addMouseListener(new MouseListener() {
@@ -330,6 +332,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         zoomNormal.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setWorkspaceZoom(1);
+                PageChangeEventManager.notifyListeners();
             }
         });
         zoomNormal.addMouseListener(new MouseListener() {
