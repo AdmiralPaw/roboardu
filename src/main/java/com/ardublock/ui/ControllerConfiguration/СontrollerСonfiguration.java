@@ -1,13 +1,11 @@
 package com.ardublock.ui.ControllerConfiguration;
 
 import java.awt.*;
-import com.ardublock.ui.ControllerConfiguration.ControllerImage;
 import com.mit.blocks.codeblockutil.CButton;
 import com.mit.blocks.codeblockutil.RMenuButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import java.util.List;
 import javax.swing.JButton;
@@ -15,11 +13,14 @@ import javax.swing.JSplitPane;
 import org.jfree.ui.tabbedui.VerticalLayout;
 
 public class СontrollerСonfiguration extends JPanel {
-    Container everythingVisible = new Container();
+    //верхняя панель контроллера
     public ControllerImage controllerImage;
-    //private ControllerImage controllerImage = new ControllerImage();
+    
+    //лист всевозможных компонентов на подключение
     private List<Device> components;
+    //нижняя панель
     private JPanel componentsPane;
+    
     public enum Pin {
         
         dir04pwm05, dir07pwm06, d2, d3, d8, d10, d9, d11, a3, a2, a1, a0, i2c
@@ -61,17 +62,15 @@ public class СontrollerСonfiguration extends JPanel {
         this.components.add(new Device(pin, name));
     }
     
-    public void initControllerConfiguration(){
-        //everythingVisible.add(controllerImage);
-        
-    }
-    
     public void changeComponentsPane(int index){
         
         CButton button = new RMenuButton(this.components.get(index).deviceName);
         componentsPane.add(button);
     }
     
+    /**
+     * Класс отвечающий за информацию о подключаемом устроистве
+    */
     private static class Device {
         final String pin;
         final String deviceName;

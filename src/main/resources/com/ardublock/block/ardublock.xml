@@ -12982,9 +12982,45 @@
 <!-- Controller Components -->       
     <ControllerCompnentsSets>
         <ControllerComponentsSet>
-            <ControllerComponents pin="a1">
-                <Component>dude</Component> 
+            <ControllerComponents pin="dir-04-pwm-05">
+                <Component>dude1</Component> 
             </ControllerComponents>
+            <ControllerComponents pin="dir-04-pwm-06">
+                <Component>dude2</Component> 
+            </ControllerComponents>
+            <ControllerComponents pin="d2">
+                <Component>dude3</Component> 
+            </ControllerComponents>
+            <ControllerComponents pin="d3">
+                <Component>dude4</Component> 
+            </ControllerComponents>
+            <ControllerComponents pin="d8">
+                <Component>dude5</Component> 
+            </ControllerComponents>
+            <ControllerComponents pin="d10">
+                <Component>dude6</Component> 
+            </ControllerComponents>
+            <ControllerComponents pin="d9">
+                <Component>dude7</Component> 
+            </ControllerComponents>
+            <ControllerComponents pin="d11">
+                <Component>dude8</Component> 
+            </ControllerComponents>
+            <ControllerComponents pin="a3">
+                <Component>dude9</Component> 
+            </ControllerComponents>
+            <ControllerComponents pin="a2">
+                <Component>dude10</Component> 
+            </ControllerComponents>
+            <ControllerComponents pin="a1">
+                <Component>dude11</Component> 
+            </ControllerComponents>
+            <ControllerComponents pin="a0">
+                <Component>dude12</Component> 
+            </ControllerComponents>
+            <ControllerComponents pin="i2c">
+                <Component>dude13</Component> 
+            </ControllerComponents>  
         </ControllerComponentsSet>
     </ControllerCompnentsSets>    
 <!-- End of Ardublock Standard UI layout -->
