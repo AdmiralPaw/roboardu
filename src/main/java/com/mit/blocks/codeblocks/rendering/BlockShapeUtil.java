@@ -175,7 +175,7 @@ public class BlockShapeUtil {
         img = GraphicsManager.gc.createCompatibleImage(width, height, Transparency.TRANSLUCENT);
         Graphics2D g2 = (Graphics2D) img.getGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(ShapeBevel.getFrontFaceOverlay(light));
+        g2.setColor(new Color(0,0,0,0));
         g2.fill(s);
         ShapeBevel.createShapeBevel(g2, s, 0.1, bevelSize, bevelSize, light);
         // Make a copy of the Area to prevent aliasing.

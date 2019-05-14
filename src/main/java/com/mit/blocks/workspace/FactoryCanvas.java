@@ -27,7 +27,7 @@ import java.awt.ComponentOrientation;
 class FactoryCanvas extends JPanel implements Canvas, SearchableContainer, RBParent, ComponentListener {
 
     private static final long serialVersionUID = 328149080291L;
-    private static final int BORDER_WIDTH = 10;
+    private static final int BORDER_WIDTH = 15;
     /** The highlight of this canvas */
     private Color highlight = null;
     /** The color of this canvas */

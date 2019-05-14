@@ -40,7 +40,7 @@ public class ShapeBevel {
                 norm[1] = bi.perpVec[1]*theCos;
                 norm[2] = theSin;
                 getLightingOverlay(norm,light,grayAlpha);
-                g2.setColor(new Color(grayAlpha[0],grayAlpha[0],grayAlpha[0],grayAlpha[1]));
+                g2.setColor(new Color(130, 130, 130));
                 g2.setComposite(AlphaComposite.Src);
                 
                 GeneralPath gp = new GeneralPath();
