@@ -12302,9 +12302,6 @@
 				<BlockGenusMember>setter_variable_number_double</BlockGenusMember>
 				<BlockGenusMember>variable_number_double</BlockGenusMember>
 				<BlockGenusMember>number_double</BlockGenusMember>
-				<BlockGenusMember>pinListDigital_D0</BlockGenusMember>
-				<BlockGenusMember>pinListAnalog_A0</BlockGenusMember>
-				<BlockGenusMember>pinListAnalogWrite_D3</BlockGenusMember>
 				<BlockGenusMember>setter_variable_char</BlockGenusMember>
 				<BlockGenusMember>variable_poly</BlockGenusMember>
 				<BlockGenusMember>char</BlockGenusMember>
