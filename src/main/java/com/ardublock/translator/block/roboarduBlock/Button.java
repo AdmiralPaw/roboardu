@@ -19,7 +19,7 @@ public class Button extends TranslatorBlock
                     "{\n" +
                     "  boolean f = digitalRead(pin);\n" +
                     "  delay(10);\n" +
-                    "  if (f == digitalRead(pin)\n" +
+                    "  if (f == digitalRead(pin))\n" +
                     "  {\n" +
                     "    return f;\n" +
                     "  }\n" +
