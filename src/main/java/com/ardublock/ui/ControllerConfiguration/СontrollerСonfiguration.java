@@ -13,22 +13,22 @@ import javax.swing.JSplitPane;
 import org.jfree.ui.tabbedui.VerticalLayout;
 
 public class СontrollerСonfiguration extends JPanel {
+
     //верхняя панель контроллера
     public ControllerImage controllerImage;
-    
+
     //лист всевозможных компонентов на подключение
     private List<Device> components;
     //нижняя панель
     private JPanel componentsPane;
-    
+
     public enum Pin {
-        
+
         dir04pwm05, dir07pwm06, d2, d3, d8, d10, d9, d11, a3, a2, a1, a0, i2c
     };
     public Pin controllerPin;
 
-    public СontrollerСonfiguration()
-    {
+    public СontrollerСonfiguration() {
         super();
         this.setLayout(new BorderLayout());
         this.components = new ArrayList<Device>();
@@ -38,18 +38,19 @@ public class СontrollerСonfiguration extends JPanel {
         //buttonPane.setBorder(BorderFactory.createMatteBorder(3, 0, 0, 0, new Color(55, 150, 240)));
         setBackground(Color.black);
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true,
-				controllerImage, componentsPane);
+                controllerImage, componentsPane);
+        splitPane.setDividerLocation(750 / 2);
         this.add(splitPane);
         JButton justButt = new JButton();
         //this.controllerImage.add(justButt);
         this.addButtons();
     }
-    
-    public void addButtons(){
+
+    public void addButtons() {
         this.controllerImage.add(callButtons());
     }
-    
-    public Container callButtons(){
+
+    public Container callButtons() {
         Container allButtons = new Container();
         JButton testVisibleButton = new JButton();
         testVisibleButton.setLayout(null);
@@ -57,40 +58,43 @@ public class СontrollerСonfiguration extends JPanel {
         allButtons.add(testVisibleButton);
         return allButtons;
     }
-    
-    public void addComponent(String name, String pin){
+
+    public void addComponent(String name, String pin) {
         this.components.add(new Device(pin, name));
     }
-    
-    public void changeComponentsPane(int index){
-        
+
+    public void changeComponentsPane(int index) {
+
         CButton button = new RMenuButton(this.components.get(index).deviceName);
         componentsPane.add(button);
     }
-    
+
     /**
      * Класс отвечающий за информацию о подключаемом устроистве
-    */
+     */
     private static class Device {
+
         final String pin;
         final String deviceName;
-        
+
         public Device(String pin, String deviceName) {
             this.pin = pin;
-            this.deviceName = deviceName; 
+            this.deviceName = deviceName;
         }
     }
+
     /**
-    * те самые невидимые кнопки, которые будут над местами пинов
-    * на картинке
-    */
+     * те самые невидимые кнопки, которые будут над местами пинов на картинке
+     */
     public class InvisibleButton extends JButton {
-        private СontrollerСonfiguration controller; 
+
+        private СontrollerСonfiguration controller;
         private int index;
+
         /**
          * @param i отвечает за индексирование кнопок
          */
-        public void JButton(int i){
+        public void JButton(int i) {
             index = i;
             this.setOpaque(false);
             this.setContentAreaFilled(false);
@@ -103,4 +107,3 @@ public class СontrollerСonfiguration extends JPanel {
         }
     }
 }
-
