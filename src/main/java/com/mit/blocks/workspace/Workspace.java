@@ -170,6 +170,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 blockCanvas.reformBlockCanvas();
                 blockCanvasLayer.setSize(getSize());
                 blockCanvasLayer.validate();
+                blockCanvasLayer.updateUI();
                 workLayer.setSize(getSize());
                 workLayer.validate();
             }
@@ -229,6 +230,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 if (workLayer.getDividerLocation() > 380) {
                     workLayer.setDividerLocation(380);
                 }
+                blockCanvasLayer.updateUI();
             }
         });
 

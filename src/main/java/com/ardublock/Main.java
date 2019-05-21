@@ -13,6 +13,7 @@ import org.xml.sax.SAXException;
 import com.ardublock.core.Context;
 import com.ardublock.ui.ConsoleFrame;
 import com.ardublock.ui.OpenblocksFrame;
+import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -59,6 +60,7 @@ public class Main {
 
         Context context = Context.getContext();
         context.setInArduino(false);
+        openblocksFrame.setMinimumSize(new Dimension(1140, 460));
         openblocksFrame.setVisible(true);
     }
 

@@ -170,7 +170,9 @@ public class OpenblocksFrame extends JFrame {
         final JPanel buttons = new JPanel();
         final JPanel panelWithConfigButton = new JPanel();
         final JPanel rightPanel = new JPanel();
-
+        final JLabel dividerFirst = new JLabel();
+        final JLabel dividerSecond = new JLabel();
+        
         //Main logo---------------------------------------------------//
         final JLabel mainLogo = new JLabel();
         ImageIcon mLogo = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(
@@ -184,7 +186,7 @@ public class OpenblocksFrame extends JFrame {
         logo.setPreferredSize(workspace.getFactorySize());
 
         panelWithConfigButton.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 5));
-        buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
+        buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
         logo.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
         northPanel.setLayout(new BorderLayout());
         northPanelCenter.setLayout(new BorderLayout());
@@ -195,9 +197,11 @@ public class OpenblocksFrame extends JFrame {
         northPanel.setBackground(new Color(0, 100, 104));
         northPanelCenter.setBackground(new Color(0, 100, 104));
 
-        northPanelCenter.setMinimumSize(new Dimension(1000, standartNorthPanelSize));
+        northPanelCenter.setMinimumSize(new Dimension(600, standartNorthPanelSize));
         rightPanel.setPreferredSize(new Dimension(310, standartNorthPanelSize));
-
+        dividerFirst.setPreferredSize(new Dimension(2,2));
+        dividerSecond.setPreferredSize(new Dimension(2,2));
+        
         northPanel.add(logo, BorderLayout.WEST);
 
         northPanelCenter.add(buttons, BorderLayout.WEST);
@@ -323,10 +327,6 @@ public class OpenblocksFrame extends JFrame {
         );
         configButton.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
-                workspace.blockCanvasLayer.updateUI();
-            }
-
-            public void mousePressed(MouseEvent e) {
                 if (controllerIsShown) {
                     workspace.blockCanvasLayer.remove(workspace.controller);
                     northPanel.remove(rightPanel);
@@ -336,21 +336,36 @@ public class OpenblocksFrame extends JFrame {
                     northPanel.add(rightPanel, BorderLayout.EAST);
                     controllerIsShown = true;
                 }
-                workspace.blockCanvasLayer.updateUI();
+                workspace.updateUI();
+                workspace.controller.updateUI();
                 northPanel.updateUI();
+            }
 
+            public void mousePressed(MouseEvent e) {
+                workspace.updateUI();
+                workspace.controller.updateUI();
+                northPanel.updateUI();
             }
 
             public void mouseReleased(MouseEvent e) {
+                workspace.updateUI();
                 workspace.blockCanvasLayer.updateUI();
+                workspace.controller.updateUI();
+                northPanel.updateUI();
             }
 
             public void mouseEntered(MouseEvent e) {
+                workspace.updateUI();
                 workspace.blockCanvasLayer.updateUI();
+                workspace.controller.updateUI();
+                northPanel.updateUI();
             }
 
             public void mouseExited(MouseEvent e) {
+                workspace.updateUI();
                 workspace.blockCanvasLayer.updateUI();
+                workspace.controller.updateUI();
+                northPanel.updateUI();
             }
         });
         // </editor-fold>
@@ -359,8 +374,10 @@ public class OpenblocksFrame extends JFrame {
         buttons.add(saveButton);
         buttons.add(saveAsButton);
         buttons.add(openButton);
+        buttons.add(dividerFirst);
         buttons.add(generateButton);
         buttons.add(serialMonitorButton);
+        buttons.add(dividerSecond);
         buttons.add(saveImageButton);
         buttons.add(websiteButton);
         buttons.add(infoLabel);
@@ -376,6 +393,8 @@ public class OpenblocksFrame extends JFrame {
 //                        else if (workspace.workLayer.getDividerLocation() < 120)
 //                            workspace.workLayer.setDividerLocation(120);
                 northPanel.updateUI();
+                workspace.updateUI();
+                workspace.validate();
             }
         });
 
