@@ -14,7 +14,7 @@ public class Potentiometer extends TranslatorBlock {
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
 
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
-        String pin = "MotorsForward(" + translatorBlock.toCode() + ");";
+        String pin = translatorBlock.toCode();
         translator.addDefinitionCommand("int Potentiometer(int Pin){\n" +
                 "  int value = analogRead(Pin);\n" +
                 "  map(value,0,1024,0,100);\n" +

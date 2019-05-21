@@ -22,13 +22,13 @@ public class DisplayString extends TranslatorBlock {
         translator.addHeaderFile("Wire.h");
         translator.addHeaderFile("Adafruit_GFX.h");
         translator.addHeaderFile("Adafruit_SSD1306.h");
-        translator.addDefinitionCommand("Adafruit_SSD1306 "+display+"(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);");
-        translator.addSetupCommand("    while(!" + display + ".begin(SSD1306_SWITCHCAPVCC, 0x3D) delay(1);\n" +
+        translator.addDefinitionCommand("Adafruit_SSD1306 "+display+"(128, 64, &Wire, -1);");
+        translator.addSetupCommand("while(!" + display + ".begin(SSD1306_SWITCHCAPVCC, 0x3D) delay(1);\n" +
                 display + ".display();\n" +
                 "  delay(2000);\n" +
                 "\n" +
-                "  // Clear the buffer\n    " +
-                display + ".clearDisplay();\n   " +
+                "  // Clear the buffer\n" +
+                display + ".clearDisplay();" +
                 display + ".display();\n");
         translator.addSetupCommand(display + ".setTextColor(WHITE);\n");
 
@@ -45,7 +45,7 @@ public class DisplayString extends TranslatorBlock {
 
         return codePrefix + display + ".setTextSize(" + StringSize + ");\n  " +
                 display + ".setCursor(" + BeginX + ", " + BeginY + ");\n   " +
-                display + ".println(F(\"" + DisplayString + "\"));\n" + codeSuffix;
+                display + ".println(F(" + DisplayString + "));\n" + codeSuffix;
     }
 
 }

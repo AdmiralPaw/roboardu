@@ -11613,6 +11613,21 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
+                
+                <BlockGenus name="sensorTemperature" kind="data" color="242 123 99" initlabel="bg.sensorTemperature" editable-label="no">
+			<description>
+				<text>Gives percentage of potentiometer</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number"
+								connector-kind="plug">
+				</BlockConnector>
+				<BlockConnector connector-type="number"
+								connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListDigital_D6" label="D6" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
 
 	</BlockGenuses>
 
@@ -12344,7 +12359,7 @@
 				<BlockGenusMember>df_joystick_module_y</BlockGenusMember>
 				<BlockGenusMember>df_analog_gp2y0a21</BlockGenusMember>
 				<BlockGenusMember>df_line_tracking_sensor</BlockGenusMember>
-				<BlockGenusMember>df_temperature_sensor</BlockGenusMember>
+				<BlockGenusMember>sensorTemperature</BlockGenusMember>
 				<BlockGenusMember>seeed_mag_switch</BlockGenusMember>
 				<BlockGenusMember>seeed_touch_sensor</BlockGenusMember>
 				<BlockGenusMember>obstacle_sensor</BlockGenusMember>
