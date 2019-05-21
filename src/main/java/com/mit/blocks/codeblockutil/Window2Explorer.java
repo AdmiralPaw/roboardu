@@ -17,9 +17,10 @@ import com.mit.blocks.workspace.SearchableContainer;
 import org.jfree.ui.tabbedui.VerticalLayout;
 
 /**
- * A WindowExplorer is an Explorer that explores its set of canvases by displaying a panel
- * of tabs on the top or bottom .  In the center is the current active canvas.  When a user
- * presses a tab, the corresponding canvas changes to reflect the new active canvas.
+ * A WindowExplorer is an Explorer that explores its set of canvases by
+ * displaying a panel of tabs on the top or bottom . In the center is the
+ * current active canvas. When a user presses a tab, the corresponding canvas
+ * changes to reflect the new active canvas.
  *
  * @author An Ho
  *
@@ -28,11 +29,17 @@ public class Window2Explorer extends JPanel implements Explorer {
 
     private static final long serialVersionUID = 328149080308L;
     private static final int buttonHeight = 13;
-    /** The set of drawers that wraps each canvas */
+    /**
+     * The set of drawers that wraps each canvas
+     */
     private List<JComponent> canvases;
-    /** Teh canvas portion */
+    /**
+     * Teh canvas portion
+     */
     private JPanel canvasPane;
-    /** The tab portion */
+    /**
+     * The tab portion
+     */
     public JPanel buttonPane;
 
     /**
@@ -66,12 +73,12 @@ public class Window2Explorer extends JPanel implements Explorer {
     }
 
     /**
-     * Reassigns the set of canvases that this explorer controls.
-     * Though the collection of canvas mnay be empty, it may not be null.
+     * Reassigns the set of canvases that this explorer controls. Though the
+     * collection of canvas mnay be empty, it may not be null.
+     *
      * @param items
      *
-     * @requires items != null &&
-     * 			 for each element in item, element!= null
+     * @requires items != null && for each element in item, element!= null
      */
     public void setDrawersCard(List<? extends Canvas> items) {
         canvases.clear();
@@ -88,9 +95,9 @@ public class Window2Explorer extends JPanel implements Explorer {
             final int index = i;
             Canvas item = items.get(i);
             //final CButton button = new CButton(item.getColor(), item.getColor().brighter().brighter().brighter(),item.getName());
-            item.getJComponent().setBackground(new Color(236,236,236));
+            item.getJComponent().setBackground(new Color(236, 236, 236));
             CButton button = new RMenuButton(item.getName(), item.getColor());
-            button.setPreferredSize(new Dimension(30,35));
+            button.setPreferredSize(new Dimension(30, 35));
             JComponent scroll = new RHoverScrollPane(
                     item.getJComponent(),
                     ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
@@ -132,8 +139,8 @@ public class Window2Explorer extends JPanel implements Explorer {
 
     /**
      * Reforms this explorer based on the new size or location of this explorer.
-     * For some explorers whose implementation does not depend on the size of itself,
-     * this method may trigger no action.
+     * For some explorers whose implementation does not depend on the size of
+     * itself, this method may trigger no action.
      */
     public void reformView() {
     }

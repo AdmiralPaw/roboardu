@@ -92,8 +92,8 @@ public class OpenblocksFrame extends JFrame {
         final Context context = Context.getContext();
         final Workspace workspace = context.getWorkspace();
         workspace.addWorkspaceListener(new ArdublockWorkspaceListener(this));
-        workspace.setMinimumSize(new Dimension(1000, 0));
-        
+        workspace.setMinimumSize(new Dimension(100, 0));
+
         // <editor-fold defaultstate="collapsed" desc="menu">
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu(uiMessageBundle.getString("ardublock.ui.file"));
@@ -162,8 +162,8 @@ public class OpenblocksFrame extends JFrame {
         // </editor-fold>
 
         //Panels------------------------------------------------------//
-        int standartNorthPanelSize = 24;  //TODO: make like constant
-        
+        final int standartNorthPanelSize = 24;  //TODO: make like constant
+
         final JPanel northPanel = new JPanel();
         final JPanel logo = new JPanel();
         final JPanel northPanelCenter = new JPanel();
@@ -182,28 +182,27 @@ public class OpenblocksFrame extends JFrame {
         logo.add(mainLogo);
         logo.setBackground(new Color(0, 151, 157));
         logo.setPreferredSize(workspace.getFactorySize());
-        
-        
+
         panelWithConfigButton.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 5));
         buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
         logo.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
         northPanel.setLayout(new BorderLayout());
         northPanelCenter.setLayout(new BorderLayout());
-        
+
         rightPanel.setBackground(new Color(0, 151, 157));
         buttons.setBackground(new Color(0, 100, 104));
         panelWithConfigButton.setBackground(new Color(0, 100, 104));
         northPanel.setBackground(new Color(0, 100, 104));
         northPanelCenter.setBackground(new Color(0, 100, 104));
-        
+
         northPanelCenter.setMinimumSize(new Dimension(1000, standartNorthPanelSize));
         rightPanel.setPreferredSize(new Dimension(310, standartNorthPanelSize));
-        
+
         northPanel.add(logo, BorderLayout.WEST);
-        
+
         northPanelCenter.add(buttons, BorderLayout.WEST);
         northPanelCenter.add(panelWithConfigButton, BorderLayout.EAST);
-        
+
         northPanel.add(northPanelCenter, BorderLayout.CENTER);
         northPanel.add(rightPanel, BorderLayout.EAST);
 
@@ -355,7 +354,7 @@ public class OpenblocksFrame extends JFrame {
             }
         });
         // </editor-fold>
-        
+
         buttons.add(newButton);
         buttons.add(saveButton);
         buttons.add(saveAsButton);
@@ -571,7 +570,7 @@ public class OpenblocksFrame extends JFrame {
         }
     }
     // </editor-fold>
-    
+
     class ImageButton extends JButton {
 
         private String name;

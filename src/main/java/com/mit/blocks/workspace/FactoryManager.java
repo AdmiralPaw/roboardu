@@ -26,87 +26,101 @@ import com.mit.blocks.renderable.FactoryRenderableBlock;
 import com.mit.blocks.renderable.RenderableBlock;
 
 /**
- * ***********************OVERVIEW**************************
- * The FactoryManager manages all block factories in the workspace.
- * It has three main functions:  to control and display all factories
- * in one simple UI design, to manage the additions of new drawers,
- * and to add blocks to throse drawers appropriately.
- * 
- * The FactoryManager manages two factories: the static factory
- * and dynamic factory.  Each factory has a set of drawers.  NO TWO
- * DRAWERS WITHIN ANY FACTORY MAY SHARE the same name.
- * 
+ * ***********************OVERVIEW************************** The FactoryManager
+ * manages all block factories in the workspace. It has three main functions: to
+ * control and display all factories in one simple UI design, to manage the
+ * additions of new drawers, and to add blocks to throse drawers appropriately.
+ *
+ * The FactoryManager manages two factories: the static factory and dynamic
+ * factory. Each factory has a set of drawers. NO TWO DRAWERS WITHIN ANY FACTORY
+ * MAY SHARE the same name.
+ *
  * ********************FACTORY STRUCTURE***********************
- * 
- * Let's take a look into the stucture of a factory.  Factory is
- * a pallete that sits on the far left side of the workspace.
- * It has a bunch of drawers that slides up and down.  Each
- * drawer contains a bunch of related blocks that can be dragged
- * out.
- * 
- * The FactoryManager has two types of drawers: static and dynamic.
- * To add, remove, rename, drawers of either type, users should
- * invoke the name that specifies a particular drawer. Users
- * may also add blocks to the drawers or retrieve the set of blocks
- * that each drawer holds.
- * 
+ *
+ * Let's take a look into the stucture of a factory. Factory is a pallete that
+ * sits on the far left side of the workspace. It has a bunch of drawers that
+ * slides up and down. Each drawer contains a bunch of related blocks that can
+ * be dragged out.
+ *
+ * The FactoryManager has two types of drawers: static and dynamic. To add,
+ * remove, rename, drawers of either type, users should invoke the name that
+ * specifies a particular drawer. Users may also add blocks to the drawers or
+ * retrieve the set of blocks that each drawer holds.
+ *
  * *************IMPLEMENTATION DETAIL******************
- * 
- * How the FactoryManager implements this UI is implementation
- * dependant.  Right now, it uses the Navigator-Explorer-Canvas deisgn.
- * Clients of the FactoryManager should know nothing about the
- * internal GUIs used to control the interface.  Internally,
- * a Canvas (rahter than an instance of Drawer) is created for every
- * "drawer" that the user wishes to add.  But this is an implementation
- * detail that the user should not be bothered with.  All the user should
- * know is that a "drawer" specified by some String object was created.
- * The handling of the drawers themselves are dealt with internally.
- * In a previous design of the factories, developers had to create
- * instance of Drawers and pass them along to the the factories.
- * In the NEW design, we remove that burden from the developer and allow the
- * developer to access drawers by calling its name only.  This may
- * limit extensibility but keeps the system more robust.
- * 
- * *********************A WORD ON DRAWER**********************
- * Please note that the word "drawer" as it is used by the
- * FactoryManager refers to the object that holds blocks.
- * A factory holds a bunch of drawers, which in turn holds
- * a bunch of blocks.
- * 
- * Please do not mix this definition with the CSwing Drawer class.
- * A CSwing Drawer is a low-level component that is used
- * in a CSwing Exlorer.  Here, when the documentation refers
- * to drawers, it is NOT refering to the CSwing Drawer.  Rather,
- * when we say "drawer", we are referign to that object that holds blocks.
- * 
- * *****************NAMING OF DRAWERS*************************
- * Each factory may have only ONE drawer with a particular name.
- * Two different factories may NOT share a name.   If we have
- * a static drawer named "FOO", we may not have another drawer named
- * "FOO" in the dynamic drawers.
- * 
+ *
+ * How the FactoryManager implements this UI is implementation dependant. Right
+ * now, it uses the Navigator-Explorer-Canvas deisgn. Clients of the
+ * FactoryManager should know nothing about the internal GUIs used to control
+ * the interface. Internally, a Canvas (rahter than an instance of Drawer) is
+ * created for every "drawer" that the user wishes to add. But this is an
+ * implementation detail that the user should not be bothered with. All the user
+ * should know is that a "drawer" specified by some String object was created.
+ * The handling of the drawers themselves are dealt with internally. In a
+ * previous design of the factories, developers had to create instance of
+ * Drawers and pass them along to the the factories. In the NEW design, we
+ * remove that burden from the developer and allow the developer to access
+ * drawers by calling its name only. This may limit extensibility but keeps the
+ * system more robust.
+ *
+ * *********************A WORD ON DRAWER********************** Please note that
+ * the word "drawer" as it is used by the FactoryManager refers to the object
+ * that holds blocks. A factory holds a bunch of drawers, which in turn holds a
+ * bunch of blocks.
+ *
+ * Please do not mix this definition with the CSwing Drawer class. A CSwing
+ * Drawer is a low-level component that is used in a CSwing Exlorer. Here, when
+ * the documentation refers to drawers, it is NOT refering to the CSwing Drawer.
+ * Rather, when we say "drawer", we are referign to that object that holds
+ * blocks.
+ *
+ * *****************NAMING OF DRAWERS************************* Each factory may
+ * have only ONE drawer with a particular name. Two different factories may NOT
+ * share a name. If we have a static drawer named "FOO", we may not have another
+ * drawer named "FOO" in the dynamic drawers.
+ *
  * @author An Ho
  *
  */
 public class FactoryManager implements WorkspaceWidget, ComponentListener, WorkspaceListener {
 
-    /** The string identifier of static drawers */
+    /**
+     * The string identifier of static drawers
+     */
     private static final String STATIC_NAME = "Factory";
-    /** The string identifier of dynamic drawers */
+    /**
+     * The string identifier of dynamic drawers
+     */
     private static final String DYNAMIC_NAME = "My Blocks";
-    /** The string identifier of subset drawers */
+    /**
+     * The string identifier of subset drawers
+     */
     private static final String SUBSETS_NAME = "Subsets";
-    /** The high-level UI that manages the controlling of internal CSwing components */
+    /**
+     * The high-level UI that manages the controlling of internal CSwing
+     * components
+     */
     private Navigator navigator;
-    /** The high-level UI widget that manages swicthing between different factories */
+    /**
+     * The high-level UI widget that manages swicthing between different
+     * factories
+     */
     private JComponent factorySwicther;
-    /** the set os static drawers */
+    /**
+     * the set os static drawers
+     */
     private List<FactoryCanvas> staticCanvases;
-    /** The set of dynaic drawers */
+    /**
+     * The set of dynaic drawers
+     */
     private List<FactoryCanvas> dynamicCanvases;
-    /** The set of subset drawers */
+    /**
+     * The set of subset drawers
+     */
     private List<FactoryCanvas> subsetCanvases;
-    /** The workspace in use */
+    /**
+     * The workspace in use
+     */
     private final Workspace workspace;
 
     /**
@@ -141,11 +155,11 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     }
 
     /**
-     * Sets up the subsets by clearing all subsets and installing
-     * the new collection of subsets.  If "usingSys" is true,
-     * the the factory and myblocks drawers will be accessible.
-     * If "usingSubs" is true, then the subset drawers will
-     * be accessible.
+     * Sets up the subsets by clearing all subsets and installing the new
+     * collection of subsets. If "usingSys" is true, the the factory and
+     * myblocks drawers will be accessible. If "usingSubs" is true, then the
+     * subset drawers will be accessible.
+     *
      * @param subsets - collection of subsets
      * @param usingSys - true for factory and myblocks
      * @param usingSubs - true for subsets
@@ -196,8 +210,9 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     }
 
     /**
-     * prints an error message in red without ending the run process.
-     * For debuggin purposes
+     * prints an error message in red without ending the run process. For
+     * debuggin purposes
+     *
      * @param m
      */
     private void printError(String m) {
@@ -263,6 +278,7 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
 
     /**
      * Returns a collection of the subsets within this
+     *
      * @return a collection of the subsets within this
      */
     public Collection<Subset> getSubsets() {
@@ -275,10 +291,9 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     }
 
     /**
-     * @return an array containing the set of drawers
-     * 			in no particular order.  If no drawers exists,
-     * 			then an empty set is returned. The return value
-     * 			MAY NOT BE NULL.
+     * @return an array containing the set of drawers in no particular order. If
+     * no drawers exists, then an empty set is returned. The return value MAY
+     * NOT BE NULL.
      */
     public Collection<String> getStaticDrawers() {
         Collection<String> drawers = new HashSet<String>();
@@ -331,16 +346,16 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
 
     /**
      * may not two draers with the same name
+     *
      * @param sta
      * @param dyn
      * @param name
      * @param position
-     * @return true if and only if the following conditions are met:
-     * 			-specified name is not null,
-     * 			-if "sta" is true, then 0<=position<static drawers.size
-     * 			-if "dyn" is true, then 0<=position<static drawers.size
-     * 			-there is NO other drawers with the same name as the
-     * 			 specified name (in oth static or dynamic sets)
+     * @return true if and only if the following conditions are met: -specified
+     * name is not null, -if "sta" is true, then 0<=position<static drawers.size
+     * -if "dyn" is true, then 0<=position<static drawers.size -there is NO
+     * other drawers with the same name as the specified name (in oth static or
+     * dynamic sets)
      */
     private boolean isValidDrawer(boolean sta, boolean dyn, String name, int position) {
         if (sta) {
@@ -374,12 +389,13 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
 
     /**
      * Adds a static drawer if no drawer with the specified name already exists.
-     * If one alreaedy exist, then do ntohing.  If the name is null, do nothing
+     * If one alreaedy exist, then do ntohing. If the name is null, do nothing
+     *
      * @param name - name os drawer, may not be null
      * @param color
      *
-     * @requires name != null &&
-     * 			 drawer to not already exist in BOTH static and dynamic set
+     * @requires name != null && drawer to not already exist in BOTH static and
+     * dynamic set
      */
     public void addStaticDrawer(String name, Color color) {
         this.addStaticDrawer(name, staticCanvases.size(), color);
@@ -387,13 +403,14 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
 
     /**
      * Adds a static drawer if no drawer with the specified name already exists.
-     * If one alreaedy exist, then do ntohing.  If the name is null, do nothing
+     * If one alreaedy exist, then do ntohing. If the name is null, do nothing
+     *
      * @param name - name os drawer, may not be null
      * @param color
      * @param position
      *
-     * @requires name != null &&
-     * 			 drawer to not already exist in BOTH static and dynamic set
+     * @requires name != null && drawer to not already exist in BOTH static and
+     * dynamic set
      */
     public void addStaticDrawer(String name, int position, Color color) {
         if (isValidDrawer(true, false, name, position)) {
@@ -406,8 +423,9 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     }
 
     /**
-     * Adds a new Subset drawer with the specified name and button color.
-     * Places the drawer button below the last added subset drawer
+     * Adds a new Subset drawer with the specified name and button color. Places
+     * the drawer button below the last added subset drawer
+     *
      * @param name String name of new subset drawer, should not be null
      * @param color Color of drawer button
      */
@@ -416,7 +434,9 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     }
 
     /**
-     * Adds a new Subset drawer with the specified name and button color at the specified position.
+     * Adds a new Subset drawer with the specified name and button color at the
+     * specified position.
+     *
      * @param name String name of the new subset drawer, should not be null.
      * @param position index of drawer button position in block drawer set
      * @param color button color of drawer
@@ -429,24 +449,27 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
 
     /**
      * Adds a static drawer if no drawer with the specified name already exists.
-     * If one alreaedy exist, then do ntohing.  If the name is null, do nothing
+     * If one alreaedy exist, then do ntohing. If the name is null, do nothing
+     *
      * @param name - name os drawer, may not be null
      *
-     * @requires name != null &&
-     * 			 drawer to not already exist in BOTH static and dynamic set
+     * @requires name != null && drawer to not already exist in BOTH static and
+     * dynamic set
      */
     public void addDynamicDrawer(String name) {
         this.addDynamicDrawer(name, dynamicCanvases.size());
     }
 
     /**
-     * Adds a duynamic drawer if no drawer with the specified name already exists.
-     * If one alreaedy exist, then do ntohing.  If the name is null, do nothing
+     * Adds a duynamic drawer if no drawer with the specified name already
+     * exists. If one alreaedy exist, then do ntohing. If the name is null, do
+     * nothing
+     *
      * @param name - name os drawer, may not be null
      * @param position
      *
-     * @requires name != null &&
-     * 			 drawer to not already exist in BOTH static and dynamic set
+     * @requires name != null && drawer to not already exist in BOTH static and
+     * dynamic set
      */
     public void addDynamicDrawer(String name, int position) {
         if (isValidDrawer(false, true, name, position)) {
@@ -459,16 +482,16 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     }
 
     /**
-     * Renames drawer from oldName to newName.  Only perform this action if:
-     * 		(1) there exists a drawer specified by oldName,
-     * 		(2) there exists no drawers specified by newName
-     * 		(3) oldName and newName != null
+     * Renames drawer from oldName to newName. Only perform this action if: (1)
+     * there exists a drawer specified by oldName, (2) there exists no drawers
+     * specified by newName (3) oldName and newName != null
+     *
      * @param oldName
      * @param newName
      *
-     * @requires oldName != null &&
-     * 			 drawer with newName exists in EITHER static or dynamic set &&
-     * 			 drawer with newName to not already exist in BOTH static and dynamic set
+     * @requires oldName != null && drawer with newName exists in EITHER static
+     * or dynamic set && drawer with newName to not already exist in BOTH static
+     * and dynamic set
      */
     public void renameStaticDrawer(String oldName, String newName) {
         //check rep
@@ -517,9 +540,9 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     }
 
     /**
-     * removes drawer with specified name.  Only perform this action if:
-     * 		(1) there exists a drawer specified by name,
-     * 		(3) name != null
+     * removes drawer with specified name. Only perform this action if: (1)
+     * there exists a drawer specified by name, (3) name != null
+     *
      * @param name
      *
      * @requires name != null && there exists a drawer with sepcified name
@@ -560,9 +583,9 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     //Block Methods//
     /////////////////
     /**
-     * @return set of blocks found in drawer with the specified name.
-     * 			If no blocks are found in the drawer, return an empty set.
-     * 			If no Drawers are found with specified name, return empty set.
+     * @return set of blocks found in drawer with the specified name. If no
+     * blocks are found in the drawer, return an empty set. If no Drawers are
+     * found with specified name, return empty set.
      */
     public Collection<RenderableBlock> getStaticBlocks(String name) {
         ArrayList<RenderableBlock> blocks = new ArrayList<RenderableBlock>();
@@ -589,9 +612,8 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     }
 
     /**
-     * @return all blocks in all drawers.  If no blocks found, return
-     * 			an empty set.  Ifno drawers exists in either factories,
-     * 			return an empty set.
+     * @return all blocks in all drawers. If no blocks found, return an empty
+     * set. Ifno drawers exists in either factories, return an empty set.
      */
     public Collection<RenderableBlock> getBlocks() {
         ArrayList<RenderableBlock> blocks = new ArrayList<RenderableBlock>();
@@ -605,14 +627,15 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     }
 
     /**
-     * Add blocks to drawer if drawer can be found.  Do nothing
-     * if no drawer if specified name is found.
+     * Add blocks to drawer if drawer can be found. Do nothing if no drawer if
+     * specified name is found.
+     *
      * @param block
      * @param drawer
      */
     public void addStaticBlock(RenderableBlock block, String drawer) {
         for (FactoryCanvas canvas : this.staticCanvases) {
-        	if (canvas.getName().equals(drawer)) {
+            if (canvas.getName().equals(drawer)) {
                 if (block == null || Block.NULL.equals(block.getBlockID())) {
                     printError("Attempting to add a null instance of block");
                     return;
@@ -647,9 +670,8 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     }
 
     /**
-     * Add blocks to drawer if drawer can be found.  Add graphically
-     * and alos throw event.  Do nothing if no drawer if specified
-     * name is found.
+     * Add blocks to drawer if drawer can be found. Add graphically and alos
+     * throw event. Do nothing if no drawer if specified name is found.
      *
      * @param blocks
      * @param drawer
@@ -695,9 +717,12 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     }
 
     /**
-     * Adds the specified RenderableBlocks to the drawer with the specified drawerName.  Do nothing
-     * if the drawer with the specified drawerName does not exist.
-     * @param blocks Collection of RenderableBlocks to the drawer with name: drawerName
+     * Adds the specified RenderableBlocks to the drawer with the specified
+     * drawerName. Do nothing if the drawer with the specified drawerName does
+     * not exist.
+     *
+     * @param blocks Collection of RenderableBlocks to the drawer with name:
+     * drawerName
      * @param drawerName String name of the drawer to add blocks to
      */
     public void addSubsetBlocks(Collection<RenderableBlock> blocks, String drawerName) {
@@ -721,8 +746,9 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     }
 
     /**
-     * Removes block from specified drawer.  DO nothing if no drawer is found
+     * Removes block from specified drawer. DO nothing if no drawer is found
      * with specified name.
+     *
      * @param block
      * @param drawer
      */
@@ -774,6 +800,7 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
 
     public void addBlock(RenderableBlock block) {
     }
+
     public void addBlocks(Collection<RenderableBlock> blocks) {
     }
 
@@ -809,18 +836,18 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     public boolean contains(int x, int y) {
         return this.navigator.getJComponent().contains(x, y);
     }
-    
+
     private String staticdrawer(BlockStub stub) {
-	    for (FactoryCanvas canvas : this.staticCanvases) {
-	    	for (RenderableBlock bl : canvas.getBlocks()) {
-	    		if (bl.getGenus().equals(stub.getParentGenus())) {
-	    			return canvas.getName();
-	    		}
-	    	}
-	    }
-		return null;
+        for (FactoryCanvas canvas : this.staticCanvases) {
+            for (RenderableBlock bl : canvas.getBlocks()) {
+                if (bl.getGenus().equals(stub.getParentGenus())) {
+                    return canvas.getName();
+                }
+            }
+        }
+        return null;
     }
-    
+
     public void workspaceEventOccurred(WorkspaceEvent event) {
         //THIS ENTIRE METHOD IS A HACK!
         //PLEASE CHANGE WITH CAUTION
@@ -857,7 +884,7 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         } else if (event.getEventType() == WorkspaceEvent.BLOCK_MOVED) {
             Block block = workspace.getEnv().getBlock(event.getSourceBlockID());
             if (block != null && block.hasStubs()) {
-                for (Long stub : BlockStub.getStubsOfParent(event.getWorkspace() ,block)) {
+                for (Long stub : BlockStub.getStubsOfParent(event.getWorkspace(), block)) {
                     RenderableBlock rb = workspace.getEnv().getRenderableBlock(stub);
                     if (rb != null && !rb.getBlockID().equals(Block.NULL)
                             && rb.getParentWidget() != null && rb.getParentWidget().equals(this)) {
