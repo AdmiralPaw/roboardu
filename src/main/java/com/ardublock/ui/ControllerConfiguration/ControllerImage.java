@@ -21,10 +21,14 @@ public class ControllerImage extends JPanel {
     private ArrayList<ImageIcon> moduleImages = new ArrayList<ImageIcon>();
 
     public ControllerImage(СontrollerСonfiguration controller) {
-        //setLayout(null);
+        setLayout(null);
         this.setBounds(0,0,150,150);
-        URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/1.png");
+        URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/plata.png");
         image = new ImageIcon(iconURL);
+        JButton someButt = new JButton();
+        someButt.setLayout(null);
+        someButt.setBounds(this.getBounds().x,this.getBounds().y,10,10);
+        this.add(someButt);
     }
 
     public void setModuleImages(){
@@ -92,7 +96,7 @@ public class ControllerImage extends JPanel {
             case a2:
                 usingImage = moduleImages.get(numberOfModule);
                 picLabel = new JLabel(usingImage);
-                picLabel.setBounds(10,10,10,10);
+                picLabel.setBounds(this.getBounds().x,this.getBounds().y,10,10);
                 add(picLabel);
                 break;
             case a1:
