@@ -967,77 +967,77 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
         private void paintFull(Graphics g, Color col) {
             int w = this.getWidth();
-            g.setColor(col);
-            g.fillRect(5, 5, w - 10, w - 17);
-            g.setColor(col);
-            g.drawRoundRect(3, 3, w - 6, w - 6, 3, 3);
+//            g.setColor(col);
+//            g.fillRect(5, 5, w - 10, w - 17);
+//            g.setColor(col);
+//            g.drawRoundRect(3, 3, w - 6, w - 6, 3, 3);
         }
 
         private void paintCollapsed(Graphics g, Color col) {
             int w = this.getWidth();
-            g.setColor(col);
-            g.fillRect(5, 5, w - 10, w - 15);
-            Graphics2D g2 = (Graphics2D) g;
-            for (int j = 0; j < charSet.length; j++) {
-                String c = charSet[j];
-                int x = 5;
-                int y = (j + 2) * (FONT_SIZE + 3);
-                g.setColor(Color.black);
-                for (int i = 0; i < shadowPositionArray.length; i++) {
-                    int dx = shadowPositionArray[i][0];
-                    int dy = shadowPositionArray[i][1];
-                    g2.setColor(new Color(0.5f, 0.5f, 0.5f, shadowColorArray[i]));
-                    g2.drawString(c, x + (int) ((dx) * offsetSize), y + (int) ((dy) * offsetSize));
-                }
-                g2.setColor(col);
-                g2.drawString(c, x, y);
-            }
-            g2.drawRoundRect(3, 3, w - 6, w - 6 + charSet.length * (FONT_SIZE + 3), 3, 3);
+//            g.setColor(col);
+//            g.fillRect(5, 5, w - 10, w - 15);
+//            Graphics2D g2 = (Graphics2D) g;
+//            for (int j = 0; j < charSet.length; j++) {
+//                String c = charSet[j];
+//                int x = 5;
+//                int y = (j + 2) * (FONT_SIZE + 3);
+//                g.setColor(Color.black);
+//                for (int i = 0; i < shadowPositionArray.length; i++) {
+//                    int dx = shadowPositionArray[i][0];
+//                    int dy = shadowPositionArray[i][1];
+//                    g2.setColor(new Color(0.5f, 0.5f, 0.5f, shadowColorArray[i]));
+//                    g2.drawString(c, x + (int) ((dx) * offsetSize), y + (int) ((dy) * offsetSize));
+//                }
+//                g2.setColor(col);
+//                g2.drawString(c, x, y);
+//            }
+//            g2.drawRoundRect(3, 3, w - 6, w - 6 + charSet.length * (FONT_SIZE + 3), 3, 3);
         }
 
         @Override
         public void paintComponent(Graphics g) {
-            int w = this.getWidth();
-
-            if ((!Page.this.hideMinimize)) {
-                if (fullview) {
-                    this.setToolTipText("Collapse " + this.button_text);
-                    paintFull(g);
-                    if (pressed) {
-                        g.setColor(Color.blue.darker());
-                        g.fillRoundRect(3, 3, w - 6, w - 6, 3, 3);
-                        paintFull(g);
-                    } else {
-                        if (focus) {
-                            g.setColor(new Color(51, 153, 255)); //light blue
-                            g.fillRoundRect(3, 3, w - 6, w - 6, 3, 3);
-                            paintFull(g);
-                        }
-                    }
-                } else {
-                    this.setToolTipText("Restore " + this.button_text);
-                    paintCollapsed(g);
-                    if (pressed) {
-                        g.setColor(Color.blue.darker());
-                        g.fillRoundRect(3, 3, w - 6, w - 6 + charSet.length
-                                * (FONT_SIZE + 3), 3, 3);
-                        paintCollapsed(g);
-                    } else {
-                        if (focus) {
-                            g.setColor(new Color(51, 153, 255)); //light blue
-                            g.fillRoundRect(3, 3, w - 6, w - 6 + charSet.length
-                                    * (FONT_SIZE + 3), 3, 3);
-                            paintCollapsed(g);
-                        }
-                    }
-                }
-            } else {
-                if (fullview) {
-                    paintFull(g, Color.gray);
-                } else {
-                    paintCollapsed(g, Color.gray);
-                }
-            }
+//            int w = this.getWidth();
+//
+//            if ((!Page.this.hideMinimize)) {
+//                if (fullview) {
+//                    this.setToolTipText("Collapse " + this.button_text);
+//                    paintFull(g);
+//                    if (pressed) {
+//                        g.setColor(Color.blue.darker());
+//                        g.fillRoundRect(3, 3, w - 6, w - 6, 3, 3);
+//                        paintFull(g);
+//                    } else {
+//                        if (focus) {
+//                            g.setColor(new Color(51, 153, 255)); //light blue
+//                            g.fillRoundRect(3, 3, w - 6, w - 6, 3, 3);
+//                            paintFull(g);
+//                        }
+//                    }
+//                } else {
+//                    this.setToolTipText("Restore " + this.button_text);
+//                    paintCollapsed(g);
+//                    if (pressed) {
+//                        g.setColor(Color.blue.darker());
+//                        g.fillRoundRect(3, 3, w - 6, w - 6 + charSet.length
+//                                * (FONT_SIZE + 3), 3, 3);
+//                        paintCollapsed(g);
+//                    } else {
+//                        if (focus) {
+//                            g.setColor(new Color(51, 153, 255)); //light blue
+//                            g.fillRoundRect(3, 3, w - 6, w - 6 + charSet.length
+//                                    * (FONT_SIZE + 3), 3, 3);
+//                            paintCollapsed(g);
+//                        }
+//                    }
+//                }
+//            } else {
+//                if (fullview) {
+//                    paintFull(g, Color.gray);
+//                } else {
+//                    paintCollapsed(g, Color.gray);
+//                }
+//            }
 
         }
 
@@ -1053,17 +1053,17 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         @Override
         public void mouseClicked(MouseEvent e) {
 
-            if ((!Page.this.hideMinimize)) {
-                if (fullview) {
-                    this.setBounds(0, 0, COLLAPSED_WIDTH, charSet.length
-                            * (FONT_SIZE + 3) + COLLAPSED_WIDTH);
-                } else {
-                    this.setBounds(0, 0, COLLAPSED_WIDTH, COLLAPSED_WIDTH);
-                }
-                fullview = !fullview;
-                pageJComponent.setFullView(fullview);
-                PageChangeEventManager.notifyListeners();
-            }
+//            if ((!Page.this.hideMinimize)) {
+//                if (fullview) {
+//                    this.setBounds(0, 0, COLLAPSED_WIDTH, charSet.length
+//                            * (FONT_SIZE + 3) + COLLAPSED_WIDTH);
+//                } else {
+//                    this.setBounds(0, 0, COLLAPSED_WIDTH, COLLAPSED_WIDTH);
+//                }
+//                fullview = !fullview;
+//                pageJComponent.setFullView(fullview);
+//                PageChangeEventManager.notifyListeners();
+//            }
         }
 
         @Override
