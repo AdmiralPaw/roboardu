@@ -22,7 +22,7 @@ public class SerialPrintlnBlock extends TranslatorBlock
 		if (translatorBlock != null) {
 			ret = translatorBlock.toCode();
 		}
-		ret = ret + "Serial.println();\n";
+		ret = ret;
 		
 		return ret;
 	}

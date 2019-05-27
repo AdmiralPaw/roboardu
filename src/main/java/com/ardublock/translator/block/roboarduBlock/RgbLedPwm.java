@@ -12,9 +12,15 @@ public class RgbLedPwm extends TranslatorBlock {
             "  pinMode(red_pin, OUTPUT);\n" +
             "  pinMode(green_pin, OUTPUT);\n" +
             "  pinMode(blue_pin, OUTPUT);\n" +
-            "  analogWrite(red_pin, r);\n" +
-            "  analogWrite(green_pin, g);\n" +
-            "  analogWrite(blue_pin, b);\n" +
+            "  if(GLOW > 255) r = 255;\n"+
+            "  if(GLOW < 0) r = 0;\n"+
+            "  if(GLOW > 255) g = 255;\n"+
+            "  if(GLOW < 0) g = 0;\n"+
+            "  if(GLOW > 255) b = 255;\n"+
+            "  if(GLOW < 0) b = 0;\n"+
+            "  analogWrite(red_pin, map(r,0,255,255,0));\n" +
+            "  analogWrite(green_pin, map(g,0,255,255,0));\n" +
+            "  analogWrite(blue_pin, map(b,0,255,255,0));\n" +
             "}\n";
 
     public RgbLedPwm (Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)

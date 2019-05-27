@@ -9,7 +9,7 @@ public class MagneticSensor extends TranslatorBlock {
 
     public static final String MAGNET_SENSOR= "int magnetSensor(int Pin){\n" +
             "int value = analogRead(Pin);\n" +
-            "map(value, 0, 1024, -100, 100);\n" +
+            "value = map(value, 0, 1024, -100, 100);\n" +
             "return value;\n" +
             "}\n";
 

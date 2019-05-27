@@ -18,6 +18,7 @@ import java.net.URL;
 public class ControllerImage extends JPanel {
     private ImageIcon image;
     private ImageIcon usingImage;
+    private ArrayList<JLabel> moduleLabels = new ArrayList<JLabel>();
     private ArrayList<ImageIcon> moduleImages = new ArrayList<ImageIcon>();
 
     public ControllerImage(СontrollerСonfiguration controller) {
@@ -130,7 +131,7 @@ public class ControllerImage extends JPanel {
 
 
 
-    public void deletePicture(int numberOfModule){
+    public void deletePicture(Pin pin){
         try{
             remove(numberOfModule);
         } catch(NullPointerException nul){
@@ -138,11 +139,11 @@ public class ControllerImage extends JPanel {
         }
     }
 
-    @Override
+    /*@Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image.getImage(), 0, 0, this); // see javadoc for more info on the parameters
-    }
+    }*/
 
 }
 

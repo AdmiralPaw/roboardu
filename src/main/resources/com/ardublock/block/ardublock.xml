@@ -26,7 +26,7 @@
 	<BlockGenuses>
 		<BlockGenus name="dummy" kind="command" initlabel="" color="0 0 0" />
 	    <!-- ******************** NEW FOR LOOP **************** -->
-<BlockGenus name="repeat_control" kind="command" color="118 189 191" initlabel="bg.repeat_control">
+<BlockGenus name="repeat_control" kind="command" color="98 169 171" initlabel="bg.repeat_control">
 			<description>
 				<text>repeat</text>
 				<arg-description n="1" name="variable">
@@ -64,7 +64,7 @@
 		</BlockGenus>
 		
 		<!-- ******************** Controls Menu *************** -->
-		<BlockGenus name="program" kind="command" color="118 189 191" initlabel="bg.program" is-starter="yes" is-terminator="yes" label-unique="no">
+		<BlockGenus name="program" kind="command" color="98 169 171" initlabel="bg.program" is-starter="yes" is-terminator="yes" label-unique="no">
 			<description>
 				<text>this is the loop of the arduino</text>
 				<arg-description n="1" name="setup">
@@ -79,7 +79,7 @@
 				<BlockConnector connector-type="cmd" connector-kind="socket" label="bc.loop" />
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="loop" kind="command" color="118 189 191" initlabel="bg.loop" is-starter="yes" is-terminator="yes" label-unique="yes">
+		<BlockGenus name="loop" kind="command" color="98 169 171" initlabel="bg.loop" is-starter="yes" is-terminator="yes" label-unique="yes">
 			<description>
 				<text>this is the loop of the arduino</text>
 				<arg-description n="2" name="start">
@@ -91,12 +91,12 @@
 			</BlockConnectors>
 		</BlockGenus>
 		<!-- legacy support -->
-		<BlockGenus name="loop1" kind="command" color="118 189 191" initlabel="bg.loop" is-starter="yes" is-terminator="yes" label-unique="no" />
-		<BlockGenus name="loop2" kind="command" color="118 189 191" initlabel="bg.loop" is-starter="yes" is-terminator="yes" label-unique="no" />
-		<BlockGenus name="loop3" kind="command" color="118 189 191" initlabel="bg.loop" is-starter="yes" is-terminator="yes" label-unique="no" />
+		<BlockGenus name="loop1" kind="command" color="98 169 171" initlabel="bg.loop" is-starter="yes" is-terminator="yes" label-unique="no" />
+		<BlockGenus name="loop2" kind="command" color="98 169 171" initlabel="bg.loop" is-starter="yes" is-terminator="yes" label-unique="no" />
+		<BlockGenus name="loop3" kind="command" color="98 169 171" initlabel="bg.loop" is-starter="yes" is-terminator="yes" label-unique="no" />
 		<!-- end of legacy support -->
 
-		<BlockGenus name="delay" kind="command" color="118 189 191" initlabel="bg.delay">
+		<BlockGenus name="delay" kind="command" color="98 169 171" initlabel="bg.delay">
 			<description>
 				<text>program delay in x milliseconds</text>
 			</description>
@@ -107,7 +107,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="if" kind="command" initlabel="bg.if" color="118 189 191">
+		<BlockGenus name="if" kind="command" initlabel="bg.if" color="98 169 171">
 			<description>
 				<text>
 					If
@@ -129,7 +129,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="ifelse" kind="command" initlabel="bg.ifelse" color="118 189 191">
+		<BlockGenus name="ifelse" kind="command" initlabel="bg.ifelse" color="98 169 171">
 			<description>
 				<text>
 					Does the first list of commands if the test specified is
@@ -154,7 +154,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="while" kind="command" initlabel="bg.while" color="118 189 191">
+		<BlockGenus name="while" kind="command" initlabel="bg.while" color="98 169 171">
 			<description>
 				<text>
 					While Block
@@ -173,7 +173,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-	<BlockGenus name="do_while" kind="command" initlabel="bg.do_while" color="118 189 191">
+	<BlockGenus name="do_while" kind="command" initlabel="bg.do_while" color="98 169 171">
           <description>            
 			<text>
                 Do While Block
@@ -193,13 +193,13 @@
           </BlockConnectors>
       </BlockGenus> 
 		
-		<BlockGenus name="break" kind="command" color="118 189 191" initlabel="bg.break">
+		<BlockGenus name="break" kind="command" color="98 169 171" initlabel="bg.break">
 			<description>
 				<text>Repeat the commands for "times"</text>
 			</description>
 		</BlockGenus>
 
-		<BlockGenus name="repeat_times" kind="command" color="118 189 191" initlabel="bg.repeat_times">
+		<BlockGenus name="repeat_times" kind="command" color="98 169 171" initlabel="bg.repeat_times">
 			<description>
 				<text>Repeat the commands for "times"</text>
 				<arg-description n="1" name="repeat">
@@ -217,7 +217,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="repeat" kind="command" color="118 189 191" initlabel="bg.repeat">
+		<BlockGenus name="repeat" kind="command" color="98 169 171" initlabel="bg.repeat">
 			<description>
 				<text>repeat</text>
 				<arg-description n="1" name="variable">
@@ -240,7 +240,7 @@
 				<BlockConnector label="bc.commands" connector-type="cmd" connector-kind="socket" />
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="subroutine" kind="command" color="118 189 191" initlabel="bg.subroutine" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
+		<BlockGenus name="subroutine" kind="command" color="98 169 171" initlabel="bg.subroutine" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
 			<description>
 				<text>subroutine</text>
 			</description>
@@ -248,12 +248,12 @@
 				<BlockConnector label="bc.commands" connector-type="cmd" connector-kind="socket" />
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="subroutine-ref" kind="command" color="118 189 191" initlabel="bg.subroutine" editable-label="yes">
+		<BlockGenus name="subroutine-ref" kind="command" color="98 169 171" initlabel="bg.subroutine" editable-label="yes">
 			<description>
 				<text>invoke subroutine</text>
 			</description>
 		</BlockGenus>
-		<BlockGenus name="subroutine_var" kind="command" color="118 189 191" initlabel="bg.subroutine_var" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
+		<BlockGenus name="subroutine_var" kind="command" color="98 169 171" initlabel="bg.subroutine_var" is-starter="yes" is-terminator="yes" label-unique="yes" editable-label="yes">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="socket" label="">
 					<DefaultArg genus-name="ref_var" label="variable_transmise" />
@@ -261,19 +261,19 @@
 				<BlockConnector label="bc.commands" connector-type="cmd" connector-kind="socket" />
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="subroutine-ref_var" kind="command" color="118 189 191" initlabel="bg.subroutine_var" editable-label="yes">
+		<BlockGenus name="subroutine-ref_var" kind="command" color="98 169 171" initlabel="bg.subroutine_var" editable-label="yes">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.transmit">
 					<DefaultArg genus-name="number" label="2" />
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="ref_var" kind="data" color="118 189 191" initlabel="bg.ref_var" editable-label="yes">
+		<BlockGenus name="ref_var" kind="data" color="98 169 171" initlabel="bg.ref_var" editable-label="yes">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" />
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="delay_microseconds" kind="command" color="118 189 191" initlabel="bg.delay_microseconds">
+		<BlockGenus name="delay_microseconds" kind="command" color="98 169 171" initlabel="bg.delay_microseconds">
 			<description>
 				<text>program delay in x milliseconds</text>
 			</description>
@@ -470,7 +470,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="tone" kind="command" color="208 116 232" initlabel="tone">
+		<BlockGenus name="tone" kind="command" color="95 95 195" initlabel="tone">
 			<description>
 				<text>Generates a square wave of the specified frequency (and 50%
 					duty cycle) on a pin.
@@ -487,7 +487,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="tone_time" kind="command" color="208 116 232" initlabel="tone">
+		<BlockGenus name="tone_time" kind="command" color="95 95 195" initlabel="tone">
 			<description>
 				<text>Generates a square wave of the specified frequency (and 50%
 					duty cycle) on a pin.
@@ -506,7 +506,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="no_tone" kind="command" color="208 116 232" initlabel="noTone">
+		<BlockGenus name="no_tone" kind="command" color="95 95 195" initlabel="noTone">
 			<description>
 				<text>Stops the generation of a square wave triggered by tone().
 				</text>
@@ -968,7 +968,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="DDRA" kind="command" color="208 116 232" initlabel="bg.DDRA">
+		<BlockGenus name="DDRA" kind="command" color="95 95 195" initlabel="bg.DDRA">
 			<description>
 				<text>DDRA
 				</text>
@@ -979,7 +979,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="DDRB" kind="command" color="208 116 232" initlabel="bg.DDRB">
+		<BlockGenus name="DDRB" kind="command" color="95 95 195" initlabel="bg.DDRB">
 			<description>
 				<text>DDRB
 				</text>
@@ -990,7 +990,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="DDRC" kind="command" color="208 116 232" initlabel="bg.DDRC">
+		<BlockGenus name="DDRC" kind="command" color="95 95 195" initlabel="bg.DDRC">
 			<description>
 				<text>DDRC
 				</text>
@@ -1001,7 +1001,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="DDRD" kind="command" color="208 116 232" initlabel="bg.DDRD">
+		<BlockGenus name="DDRD" kind="command" color="95 95 195" initlabel="bg.DDRD">
 			<description>
 				<text>DDRD
 				</text>
@@ -1012,7 +1012,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="DDRH" kind="command" color="208 116 232" initlabel="bg.DDRH">
+		<BlockGenus name="DDRH" kind="command" color="95 95 195" initlabel="bg.DDRH">
 			<description>
 				<text>DDRH
 				</text>
@@ -1023,7 +1023,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="DDRL" kind="command" color="208 116 232" initlabel="bg.DDRL">
+		<BlockGenus name="DDRL" kind="command" color="95 95 195" initlabel="bg.DDRL">
 			<description>
 				<text>DDRL
 				</text>
@@ -1034,7 +1034,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="PORTA" kind="command" color="208 116 232" initlabel="bg.PORTA">
+		<BlockGenus name="PORTA" kind="command" color="95 95 195" initlabel="bg.PORTA">
 			<description>
 				<text>PORTA
 				</text>
@@ -1045,7 +1045,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="PORTB" kind="command" color="208 116 232" initlabel="bg.PORTB">
+		<BlockGenus name="PORTB" kind="command" color="95 95 195" initlabel="bg.PORTB">
 			<description>
 				<text>PORTB
 				</text>
@@ -1056,7 +1056,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="PORTC" kind="command" color="208 116 232" initlabel="bg.PORTC">
+		<BlockGenus name="PORTC" kind="command" color="95 95 195" initlabel="bg.PORTC">
 			<description>
 				<text>PORTC
 				</text>
@@ -1067,7 +1067,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="PORTD" kind="command" color="208 116 232" initlabel="bg.PORTD">
+		<BlockGenus name="PORTD" kind="command" color="95 95 195" initlabel="bg.PORTD">
 			<description>
 				<text>PORTD
 				</text>
@@ -1078,7 +1078,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="PORTH" kind="command" color="208 116 232" initlabel="bg.PORTH">
+		<BlockGenus name="PORTH" kind="command" color="95 95 195" initlabel="bg.PORTH">
 			<description>
 				<text>PORTH
 				</text>
@@ -1089,7 +1089,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="PORTL" kind="command" color="208 116 232" initlabel="bg.PORTL">
+		<BlockGenus name="PORTL" kind="command" color="95 95 195" initlabel="bg.PORTL">
 			<description>
 				<text>PORTL
 				</text>
@@ -1100,7 +1100,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="PORT_FIX" kind="command" color="208 116 232" initlabel="bg.PORT_FIX">
+		<BlockGenus name="PORT_FIX" kind="command" color="95 95 195" initlabel="bg.PORT_FIX">
 			<description>
 				<text>PORTL
 				</text>
@@ -1145,37 +1145,37 @@
 				<BlockConnector connector-type="boolean" connector-kind="plug"/>
 			</BlockConnectors>		
 		</BlockGenus>
-		<BlockGenus name="PORTA2" kind="data" color="208 116 232" initlabel="bg.PORTA2" editable-label="no">
+		<BlockGenus name="PORTA2" kind="data" color="95 95 195" initlabel="bg.PORTA2" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug"/>
 			</BlockConnectors>		
 		</BlockGenus>
-		<BlockGenus name="PORTB2" kind="data" color="208 116 232" initlabel="bg.PORTB2" editable-label="no">
+		<BlockGenus name="PORTB2" kind="data" color="95 95 195" initlabel="bg.PORTB2" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug"/>
 			</BlockConnectors>		
 		</BlockGenus>
-		<BlockGenus name="PORTC2" kind="data" color="208 116 232" initlabel="bg.PORTC2" editable-label="no">
+		<BlockGenus name="PORTC2" kind="data" color="95 95 195" initlabel="bg.PORTC2" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug"/>
 			</BlockConnectors>		
 		</BlockGenus>
-		<BlockGenus name="PORTD2" kind="data" color="208 116 232" initlabel="bg.PORTD2" editable-label="no">
+		<BlockGenus name="PORTD2" kind="data" color="95 95 195" initlabel="bg.PORTD2" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug"/>
 			</BlockConnectors>		
 		</BlockGenus>
-		<BlockGenus name="PORTH2" kind="data" color="208 116 232" initlabel="bg.PORTH2" editable-label="no">
+		<BlockGenus name="PORTH2" kind="data" color="95 95 195" initlabel="bg.PORTH2" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug"/>
 			</BlockConnectors>		
 		</BlockGenus>
-		<BlockGenus name="PORTL2" kind="data" color="208 116 232" initlabel="bg.PORTL2" editable-label="no">
+		<BlockGenus name="PORTL2" kind="data" color="95 95 195" initlabel="bg.PORTL2" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug"/>
 			</BlockConnectors>		
 		</BlockGenus>
-		<BlockGenus name="PINA" kind="data" color="208 116 232" initlabel="bg.PINA">
+		<BlockGenus name="PINA" kind="data" color="95 95 195" initlabel="bg.PINA">
 			<description>
 				<text>PINA</text>
 			</description>
@@ -1183,7 +1183,7 @@
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="PINB" kind="data" color="208 116 232" initlabel="bg.PINB">
+		<BlockGenus name="PINB" kind="data" color="95 95 195" initlabel="bg.PINB">
 			<description>
 				<text>PINB</text>
 			</description>
@@ -1191,7 +1191,7 @@
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="PINC" kind="data" color="208 116 232" initlabel="bg.PINC">
+		<BlockGenus name="PINC" kind="data" color="95 95 195" initlabel="bg.PINC">
 			<description>
 				<text>PINC</text>
 			</description>
@@ -1199,7 +1199,7 @@
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" />
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="PIND" kind="data" color="208 116 232" initlabel="bg.PIND">
+		<BlockGenus name="PIND" kind="data" color="95 95 195" initlabel="bg.PIND">
 			<description>
 				<text>PIND</text>
 			</description>
@@ -1207,7 +1207,7 @@
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="PINH" kind="data" color="208 116 232" initlabel="bg.PINH">
+		<BlockGenus name="PINH" kind="data" color="95 95 195" initlabel="bg.PINH">
 			<description>
 				<text>PINH</text>
 			</description>
@@ -1215,7 +1215,7 @@
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="PINL" kind="data" color="208 116 232" initlabel="bg.PINL">
+		<BlockGenus name="PINL" kind="data" color="95 95 195" initlabel="bg.PINL">
 			<description>
 				<text>PINL</text>
 			</description>
@@ -1479,7 +1479,7 @@
 
 		<!--****************** Logical Operators *************** -->
 
-		<BlockGenus name="greater" kind="function" color="246 213 126" initlabel="bg.greater">
+		<BlockGenus name="greater" kind="function" color="90 160 85" initlabel="bg.greater">
 			<description>
 				<text>is upper number greater then lower?</text>
 			</description>
@@ -1493,7 +1493,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="less" kind="function" color="246 213 126" initlabel="bg.less">
+		<BlockGenus name="less" kind="function" color="90 160 85" initlabel="bg.less">
 			<description>
 				<text>is upper number less then lower?</text>
 			</description>
@@ -1507,7 +1507,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="equal" kind="function" color="246 213 126" initlabel="bg.equal">
+		<BlockGenus name="equal" kind="function" color="90 160 85" initlabel="bg.equal">
 			<description>
 				<text>is upper number greater then lower?</text>
 			</description>
@@ -1520,7 +1520,7 @@
 				<BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="equal_digital" kind="function" color="246 213 126" initlabel="bg.equal_digital">
+		<BlockGenus name="equal_digital" kind="function" color="90 160 85" initlabel="bg.equal_digital">
 			<description>
 				<text>is upper number greater then lower?</text>
 			</description>
@@ -1534,7 +1534,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="greater_equal" kind="function" color="246 213 126" initlabel="bg.greater_equal">
+		<BlockGenus name="greater_equal" kind="function" color="90 160 85" initlabel="bg.greater_equal">
 			<description>
 				<text>is upper number greater then lower?</text>
 			</description>
@@ -1548,7 +1548,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="less_equal" kind="function" color="246 213 126" initlabel="bg.less_equal">
+		<BlockGenus name="less_equal" kind="function" color="90 160 85" initlabel="bg.less_equal">
 			<description>
 				<text>is upper number greater then lower?</text>
 			</description>
@@ -1562,7 +1562,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="not_equal" kind="function" color="246 213 126" initlabel="bg.not_equal">
+		<BlockGenus name="not_equal" kind="function" color="90 160 85" initlabel="bg.not_equal">
 			<description>
 				<text>is upper number greater then lower?</text>
 			</description>
@@ -1576,7 +1576,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="not_equal_digital" kind="function" color="246 213 126" initlabel="bg.not_equal_digital">
+		<BlockGenus name="not_equal_digital" kind="function" color="90 160 85" initlabel="bg.not_equal_digital">
 			<description>
 				<text>is upper number greater then lower?</text>
 			</description>
@@ -1620,7 +1620,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="string_equal" kind="data" color="246 213 126" initlabel="bg.string_equal">
+		<BlockGenus name="string_equal" kind="data" color="90 160 85" initlabel="bg.string_equal">
 			<description>
 				<text>is upper string greater then lower?</text>
 			</description>
@@ -1727,7 +1727,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="string_toInt" kind="data" color="246 213 126" initlabel="bg.string_toInt">
+		<BlockGenus name="string_toInt" kind="data" color="90 160 85" initlabel="bg.string_toInt">
 			<description>
 				<text>is a numeric string compared to the number it represents</text>
 			</description>
@@ -1742,7 +1742,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="and" kind="data" initlabel="bg.and" color="246 213 126">
+		<BlockGenus name="and" kind="data" initlabel="bg.and" color="90 160 85">
 			<description>
 				<text>
 					Reports true if both of the two conditions are true.
@@ -1756,7 +1756,7 @@
 		</BlockGenus>
 
 
-		<BlockGenus name="or" kind="function" initlabel="bg.or" color="246 213 126">
+		<BlockGenus name="or" kind="function" initlabel="bg.or" color="90 160 85">
 			<description>
 				<text>
 					Reports true if one or both of the two conditions are true.
@@ -1769,7 +1769,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="not" kind="function" initlabel="bg.not" color="246 213 126">
+		<BlockGenus name="not" kind="function" initlabel="bg.not" color="90 160 85">
 			<description>
 				<text>
 					Reports the opposite of
@@ -1783,7 +1783,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="equal_poly" kind="function" color="246 213 126" initlabel="bg.equal_poly">
+		<BlockGenus name="equal_poly" kind="function" color="90 160 85" initlabel="bg.equal_poly">
 			<description>
 				<text>is upper number greater then lower?</text>
 			</description>
@@ -1799,7 +1799,7 @@
 		
 
 
-		<BlockGenus name="not_equal_poly" kind="function" color="246 213 126" initlabel="bg.not_equal_poly">
+		<BlockGenus name="not_equal_poly" kind="function" color="90 160 85" initlabel="bg.not_equal_poly">
 			<description>
 				<text>is upper number greater then lower?</text>
 			</description>
@@ -1813,7 +1813,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="string_equal" kind="function" color="246 213 126" initlabel="bg.string_equal">
+		<BlockGenus name="string_equal" kind="function" color="90 160 85" initlabel="bg.string_equal">
 			<description>
 				<text>is upper number greater then lower?</text>
 			</description>
@@ -1827,7 +1827,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="string_empty" kind="function" color="246 213 126" initlabel="bg.string_empty">
+		<BlockGenus name="string_empty" kind="function" color="90 160 85" initlabel="bg.string_empty">
 			<description>
 				<text>is upper number greater then lower?</text>
 			</description>
@@ -1839,7 +1839,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-				<BlockGenus name="equal_string" kind="function" color="246 213 126" initlabel="bg.equal_string">
+				<BlockGenus name="equal_string" kind="function" color="90 160 85" initlabel="bg.equal_string">
 			<description>
 				<text>is upper number greater then lower?</text>
 			</description>
@@ -1853,7 +1853,7 @@
 			</BlockConnectors>
 		</BlockGenus>	
 		
-		<BlockGenus name="not_equal_string" kind="function" color="246 213 126" initlabel="bg.not_equal_string">
+		<BlockGenus name="not_equal_string" kind="function" color="90 160 85" initlabel="bg.not_equal_string">
 			<description>
 				<text>is upper number greater then lower?</text>
 			</description>
@@ -1868,7 +1868,7 @@
 		</BlockGenus>	
 
 		<!--****************** Numbers/Constants *************** -->
-		<BlockGenus name="millis" kind="data" color="118 189 191" initlabel="bg.millis">
+		<BlockGenus name="millis" kind="data" color="98 169 171" initlabel="bg.millis">
 			<description>
 				<text>Time in milliseconds</text>
 			</description>
@@ -1877,7 +1877,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="number" kind="data" color="191 208 95" initlabel="bg.number" editable-label="yes">
+		<BlockGenus name="number" kind="data" color="150 190 100" initlabel="bg.number" editable-label="yes">
 			<description>
 				<text>
 					Standard integer constant
@@ -1985,7 +1985,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="number_double" kind="data" color="191 208 95" initlabel="bg.number_double" editable-label="yes">
+		<BlockGenus name="number_double" kind="data" color="150 190 100" initlabel="bg.number_double" editable-label="yes">
 			<description>
 				<text>
 					'Double' constant
@@ -2014,7 +2014,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="digital-high" kind="data" color="191 208 95" initlabel="bg.digital-high">
+		<BlockGenus name="digital-high" kind="data" color="150 190 100" initlabel="bg.digital-high">
 			<description>
 				<text>
 					Pin HIGH
@@ -2025,7 +2025,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="digital-low" kind="data" color="191 208 95" initlabel="bg.digital-low">
+		<BlockGenus name="digital-low" kind="data" color="150 190 100" initlabel="bg.digital-low">
 			<description>
 				<text>
 					Pin LOW
@@ -2037,7 +2037,7 @@
 		</BlockGenus>
 
 
-		<BlockGenus name="true" kind="data" initlabel="bg.true" color="191 208 95" editable-label="no">
+		<BlockGenus name="true" kind="data" initlabel="bg.true" color="150 190 100" editable-label="no">
 			<description>
 				<text>
 					Reports the boolean true.
@@ -2048,7 +2048,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="false" kind="data" initlabel="bg.false" color="191 208 95">
+		<BlockGenus name="false" kind="data" initlabel="bg.false" color="150 190 100">
 			<description>
 				<text>
 					Reports the boolean false.
@@ -2059,7 +2059,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="variable_number" kind="data" initlabel="bg.variable_number" editable-label="yes" is-label-value="yes" color="191 208 95">
+		<BlockGenus name="variable_number" kind="data" initlabel="bg.variable_number" editable-label="yes" is-label-value="yes" color="150 190 100">
 			<description>
 				<text>
 					Digital Var
@@ -2070,7 +2070,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-	    <BlockGenus name="variable_number_unsigned_long" kind="data" initlabel="bg.variable_number_unsigned_long" editable-label="yes" is-label-value="yes" color="191 208 95">
+	    <BlockGenus name="variable_number_unsigned_long" kind="data" initlabel="bg.variable_number_unsigned_long" editable-label="yes" is-label-value="yes" color="150 190 100">
 	      <description>
 	        <text>
 	          Unsigned Long Var
@@ -2081,7 +2081,7 @@
 	      </BlockConnectors>
 	    </BlockGenus>
 	    
-	    <BlockGenus name="variable_number_double" kind="data" initlabel="bg.variable_number_double" editable-label="yes" is-label-value="yes" color="191 208 95">
+	    <BlockGenus name="variable_number_double" kind="data" initlabel="bg.variable_number_double" editable-label="yes" is-label-value="yes" color="150 190 100">
 	      <description>
 	        <text>
 	          Double
@@ -2092,7 +2092,7 @@
 	      </BlockConnectors>
 	    </BlockGenus>
 
-		<BlockGenus name="variable_digital" kind="data" initlabel="bg.variable_digital" editable-label="yes" is-label-value="yes" color="191 208 95">
+		<BlockGenus name="variable_digital" kind="data" initlabel="bg.variable_digital" editable-label="yes" is-label-value="yes" color="150 190 100">
 			<description>
 				<text>
 					Digital Var
@@ -2112,7 +2112,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="setter_variable_number" kind="command" color="191 208 95" initlabel="bg.setter_variable_number">
+		<BlockGenus name="setter_variable_number" kind="command" color="150 190 100" initlabel="bg.setter_variable_number">
 			<description>
 				<text>set integer variable</text>
 			</description>
@@ -2126,7 +2126,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-	    <BlockGenus name="setter_variable_number_unsigned_long" kind="command" color="191 208 95" initlabel="bg.setter_variable_number_unsigned_long">
+	    <BlockGenus name="setter_variable_number_unsigned_long" kind="command" color="150 190 100" initlabel="bg.setter_variable_number_unsigned_long">
 	      <description>
 	        <text>set a large integer variable</text>
 	      </description>
@@ -2140,7 +2140,7 @@
 	      </BlockConnectors>
 	    </BlockGenus>
 
-	    <BlockGenus name="setter_variable_number_double" kind="command" color="191 208 95" initlabel="bg.setter_variable_number_double">
+	    <BlockGenus name="setter_variable_number_double" kind="command" color="150 190 100" initlabel="bg.setter_variable_number_double">
 	      <description>
 	        <text>set decimal variable</text>
 	      </description>
@@ -2154,7 +2154,7 @@
 	      </BlockConnectors>
 	    </BlockGenus>
 
-		<BlockGenus name="setter_variable_digital" kind="command" color="191 208 95" initlabel="bg.setter_variable_digital">
+		<BlockGenus name="setter_variable_digital" kind="command" color="150 190 100" initlabel="bg.setter_variable_digital">
 			<description>
 				<text>write digital to pin</text>
 			</description>
@@ -2168,7 +2168,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="variable_vector" kind="data" initlabel="bg.variable_vector" editable-label="yes" is-label-value="yes" color="191 208 95">
+		<BlockGenus name="variable_vector" kind="data" initlabel="bg.variable_vector" editable-label="yes" is-label-value="yes" color="150 190 100">
 			<description>
 				<text>
 					Array member value
@@ -2182,7 +2182,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="create_variable_vector" kind="command" color="191 208 95" initlabel="bg.create_variable_vector">
+		<BlockGenus name="create_variable_vector" kind="command" color="150 190 100" initlabel="bg.create_variable_vector">
 			<description>
 				<text>create a vector of numbers</text>
 			</description>
@@ -2197,7 +2197,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="setter_variable_vector" kind="command" color="191 208 95" initlabel="bg.setter_variable_vector">
+		<BlockGenus name="setter_variable_vector" kind="command" color="150 190 100" initlabel="bg.setter_variable_vector">
 			<description>
 				<text>Set a vector number</text>
 			</description>
@@ -2214,7 +2214,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="setter_variable_char" kind="command" color="191 208 95" initlabel="bg.setter_variable_char">
+		<BlockGenus name="setter_variable_char" kind="command" color="150 190 100" initlabel="bg.setter_variable_char">
 			<description>
 				<text>create a vector of numbers</text>
 			</description>
@@ -2229,7 +2229,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="variable_poly" kind="data" initlabel="bg.variable_poly" editable-label="yes" is-label-value="yes" color="191 208 95">
+		<BlockGenus name="variable_poly" kind="data" initlabel="bg.variable_poly" editable-label="yes" is-label-value="yes" color="150 190 100">
 			<description>
 				<text>
 					character variable
@@ -2240,7 +2240,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="char" kind="data" color="191 208 95" initlabel="bg.char" editable-label="yes">
+		<BlockGenus name="char" kind="data" color="150 190 100" initlabel="bg.char" editable-label="yes">
 			<description>
 				<text>
 					character
@@ -2251,7 +2251,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-	    <BlockGenus name="setter_variable_String" kind="command" color="191 208 95" initlabel="bg.setter_variable_String">
+	    <BlockGenus name="setter_variable_String" kind="command" color="150 190 100" initlabel="bg.setter_variable_String">
 	      <description>
 	        <text>set String variable</text>
 	      </description>
@@ -2265,7 +2265,7 @@
 	      </BlockConnectors>
 	    </BlockGenus>
 				
-	    <BlockGenus name="variable_String" kind="data" initlabel="bg.variable_String" editable-label="yes" is-label-value="yes" color="191 208 95">
+	    <BlockGenus name="variable_String" kind="data" initlabel="bg.variable_String" editable-label="yes" is-label-value="yes" color="150 190 100">
 	      <description>
 	        <text>
 	          Variable String
@@ -2316,7 +2316,7 @@
 			</Images>
 		</BlockGenus>
 		
-		<BlockGenus name="ultrasonic" kind="data" color="208 116 232" initlabel="bg.ultrasonic">
+		<BlockGenus name="ultrasonic" kind="data" color="95 95 195" initlabel="bg.ultrasonic">
 			<description>
 				<text>Ultrasonic distance sensor</text>
 			</description>
@@ -2503,37 +2503,37 @@
 
 		<!-- ******************** Communication *************** -->
 
-		<BlockGenus name="serial_read" kind="data" color="158 145 255" initlabel="bg.serial_read">
+		<BlockGenus name="serial_read" kind="data" color="90 110 190" initlabel="bg.serial_read">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" />
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="serial_parseInt" kind="data" color="158 145 255" initlabel="bg.serial_parseInt">
+		<BlockGenus name="serial_parseInt" kind="data" color="90 110 190" initlabel="bg.serial_parseInt">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" />
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="serial_read_poly" kind="data" color="158 145 255" initlabel="bg.serial_read">
+		<BlockGenus name="serial_read_poly" kind="data" color="90 110 190" initlabel="bg.serial_read">
 			<BlockConnectors>
 				<BlockConnector connector-type="poly" connector-kind="plug" position-type="mirror" />
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="serial_available" kind="data" color="158 145 255" initlabel="bg.serial_available">
+		<BlockGenus name="serial_available" kind="data" color="90 110 190" initlabel="bg.serial_available">
 			<BlockConnectors>
 				<BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" />
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="serial_available2" kind="data" color="158 145 255" initlabel="bg.serial_available2">
+		<BlockGenus name="serial_available2" kind="data" color="90 110 190" initlabel="bg.serial_available2">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" />
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="serial_write" kind="command" color="158 145 255" initlabel="serial_write">
+		<BlockGenus name="serial_write" kind="command" color="90 110 190" initlabel="serial_write">
 			<description>
 				<text>send message via Serial port</text>
 			</description>
@@ -2544,7 +2544,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="serial_print" kind="command" color="158 145 255" initlabel="bg.serial_print">
+		<BlockGenus name="serial_print" kind="command" color="90 110 190" initlabel="bg.serial_print">
 			<description>
 				<text>send message via Serial port</text>
 			</description>
@@ -2558,7 +2558,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="message" kind="data" color="191 208 95" initlabel="bg.message" editable-label="yes">
+		<BlockGenus name="message" kind="data" color="150 190 100" initlabel="bg.message" editable-label="yes">
 			<description>
 				<text>string message</text>
 			</description>
@@ -2568,7 +2568,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="glue_sn" kind="data" color="158 145 255" initlabel="bg.glue_sn">
+		<BlockGenus name="glue_sn" kind="data" color="90 110 190" initlabel="bg.glue_sn">
 			<description>
 				<text>glue number to string</text>
 			</description>
@@ -2578,7 +2578,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="glue_sb" kind="data" color="158 145 255" initlabel="bg.glue_sb">
+		<BlockGenus name="glue_sb" kind="data" color="90 110 190" initlabel="bg.glue_sb">
 			<description>
 				<text>glue boolean to string</text>
 			</description>
@@ -2588,7 +2588,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="glue_poly" kind="data" color="158 145 255" initlabel="bg.glue_poly" editable-label="no">
+		<BlockGenus name="glue_poly" kind="data" color="90 110 190" initlabel="bg.glue_poly" editable-label="no">
 			<description>
 				<text></text>
 			</description>
@@ -2598,7 +2598,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="wire_write" kind="command" color="158 145 255" initlabel="bg.wire_write">
+		<BlockGenus name="wire_write" kind="command" color="90 110 190" initlabel="bg.wire_write">
 			<description>
 				<text>write data via I2C</text>
 			</description>
@@ -2615,7 +2615,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="wire_read" kind="data" color="158 145 255" initlabel="bg.wire_read">
+		<BlockGenus name="wire_read" kind="data" color="90 110 190" initlabel="bg.wire_read">
 			<description>
 				<text>read data from i2c</text>
 			</description>
@@ -2630,7 +2630,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="wire_isread" kind="data" color="158 145 255" initlabel="bg.wire_isread">
+		<BlockGenus name="wire_isread" kind="data" color="90 110 190" initlabel="bg.wire_isread">
 			<description>
 				<text>is last read from I2C success?</text>
 			</description>
@@ -2638,7 +2638,7 @@
 				<BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" />
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="Serialplus_send_variable_number" kind="command" color="158 145 255" initlabel="bg.Serialplus_send_variable_number">
+		<BlockGenus name="Serialplus_send_variable_number" kind="command" color="90 110 190" initlabel="bg.Serialplus_send_variable_number">
 			<description>
 				<text>Send integer variable</text>
 			</description>
@@ -2657,7 +2657,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="Serialplus_send_variable_digital" kind="command" color="158 145 255" initlabel="bg.Serialplus_send_variable_digital">
+		<BlockGenus name="Serialplus_send_variable_digital" kind="command" color="90 110 190" initlabel="bg.Serialplus_send_variable_digital">
 			<description>
 				<text>Send digital </text>
 			</description>
@@ -2676,7 +2676,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="Serialplus_receive_number" kind="data" color="158 145 255" initlabel="bg.Serialplus_receive_number">
+		<BlockGenus name="Serialplus_receive_number" kind="data" color="90 110 190" initlabel="bg.Serialplus_receive_number">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug"/>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.channel">
@@ -2687,7 +2687,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="Serialplus_receive_digital" kind="data" color="158 145 255" initlabel="bg.Serialplus_receive_digital">
+		<BlockGenus name="Serialplus_receive_digital" kind="data" color="90 110 190" initlabel="bg.Serialplus_receive_digital">
 			<BlockConnectors>
 				<BlockConnector connector-type="boolean" connector-kind="plug"/>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.channel">
@@ -2960,7 +2960,7 @@
 		</BlockGenus>
 
 		<!-- ******************** Unused/Obsoletes *************** -->
-		<BlockGenus name="glue_msg" kind="data" color="158 145 255" initlabel="bg.glue_msg" editable-label="yes">
+		<BlockGenus name="glue_msg" kind="data" color="90 110 190" initlabel="bg.glue_msg" editable-label="yes">
 			<description>
 				<text></text>
 			</description>
@@ -2993,7 +2993,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="serial_println" kind="command" color="158 145 255" initlabel="bg.serial_println">
+		<BlockGenus name="serial_println" kind="command" color="90 110 190" initlabel="bg.serial_println">
 			<description>
 				<text>send message via Serial port</text>
 			</description>
@@ -3004,7 +3004,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="ir_setport" kind="command" color="158 145 255" initlabel="bg.ir_setport">
+		<BlockGenus name="ir_setport" kind="command" color="90 110 190" initlabel="bg.ir_setport">
 			<description>
 				<text></text>
 			</description>
@@ -3015,7 +3015,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="ir_getcode" kind="command" color="158 145 255" initlabel="bg.ir_getcode">
+		<BlockGenus name="ir_getcode" kind="command" color="90 110 190" initlabel="bg.ir_getcode">
 			<description>
 				<text></text>
 			</description>
@@ -4037,7 +4037,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="df_dht11_temperature" kind="data" color="208 116 232" initlabel="bg.df_dht11_temperature">
+		<BlockGenus name="df_dht11_temperature" kind="data" color="95 95 195" initlabel="bg.df_dht11_temperature">
 			<description>
 				<text>Read analog value from pin</text>
 			</description>
@@ -4049,7 +4049,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="df_dht11_humidity" kind="data" color="208 116 232" initlabel="bg.df_dht11_humidity">
+		<BlockGenus name="df_dht11_humidity" kind="data" color="95 95 195" initlabel="bg.df_dht11_humidity">
 			<description>
 				<text>Read analog value from pin</text>
 			</description>
@@ -4095,7 +4095,7 @@
 			</description>
 		</BlockGenus>
 		
-		<BlockGenus name="df_led" kind="command" color="240 192 181" initlabel="bg.df_led">
+		<BlockGenus name="df_led" kind="command" color="190 30 180" initlabel="bg.df_led">
 			<description>
 				<text>DFRobot LED Module</text>
 			</description>
@@ -4109,7 +4109,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="df_led_pwm" kind="command" color="240 192 181" initlabel="bg.df_led_pwm">
+		<BlockGenus name="df_led_pwm" kind="command" color="190 30 180" initlabel="bg.df_led_pwm">
 			<description>
 				<text>DFRobot LED Module</text>
 			</description>
@@ -6529,18 +6529,18 @@
 			</description>
 			
 		</BlockGenus>
-		<BlockGenus name="DuinoEDU_Guino_column" kind="command" color="158 145 255" initlabel="bg.DuinoEDU_Guino_column">
+		<BlockGenus name="DuinoEDU_Guino_column" kind="command" color="90 110 190" initlabel="bg.DuinoEDU_Guino_column">
 			<description>
 				<text>Guino column</text>
 			</description>
 			
 		</BlockGenus>
-		<BlockGenus name="DuinoEDU_Guino_pause" kind="command" color="158 145 255" initlabel="bg.DuinoEDU_Guino_pause">
+		<BlockGenus name="DuinoEDU_Guino_pause" kind="command" color="90 110 190" initlabel="bg.DuinoEDU_Guino_pause">
 			<description>
 				<text>Guino column</text>
 			</description>
 		</BlockGenus>	
-		<BlockGenus name="DuinoEDU_Guino_Read" kind="command" color="158 145 255" initlabel="bg.DuinoEDU_Guino_Read">
+		<BlockGenus name="DuinoEDU_Guino_Read" kind="command" color="90 110 190" initlabel="bg.DuinoEDU_Guino_Read">
 			<description>
 				<text>Guino Read</text>
 			</description>
@@ -6559,7 +6559,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="DuinoEDU_Guino_Title" kind="command" color="158 145 255" initlabel="bg.DuinoEDU_Guino_Title">
+		<BlockGenus name="DuinoEDU_Guino_Title" kind="command" color="90 110 190" initlabel="bg.DuinoEDU_Guino_Title">
 			<description>
 				<text>Guino Title</text>
 			</description>
@@ -6569,7 +6569,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="DuinoEDU_Guino_Slider" kind="data" color="158 145 255" initlabel="bg.DuinoEDU_Guino_Slider">
+		<BlockGenus name="DuinoEDU_Guino_Slider" kind="data" color="90 110 190" initlabel="bg.DuinoEDU_Guino_Slider">
 			<description>
 				<text>Guino Slider</text>
 			</description>
@@ -6586,7 +6586,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="DuinoEDU_Guino_switch" kind="data" color="158 145 255" initlabel="bg.DuinoEDU_Guino_switch">
+		<BlockGenus name="DuinoEDU_Guino_switch" kind="data" color="90 110 190" initlabel="bg.DuinoEDU_Guino_switch">
 			<description>
 				<text>Guino switch</text>
 			</description>
@@ -6819,7 +6819,7 @@
 				<BlockConnector connector-type="number" connector-kind="plug"/>
 			</BlockConnectors>		
 		</BlockGenus>
-		<BlockGenus name="DuinoEDU_hand_positionX" kind="data" color="158 145 255" initlabel="bg.DuinoEDU_hand_positionX">
+		<BlockGenus name="DuinoEDU_hand_positionX" kind="data" color="90 110 190" initlabel="bg.DuinoEDU_hand_positionX">
 			<description>
 				<text>DuinoEDU_hand_positionX</text>
 			</description>
@@ -6827,7 +6827,7 @@
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="DuinoEDU_hand_positionY" kind="data" color="158 145 255" initlabel="bg.DuinoEDU_hand_positionY">
+		<BlockGenus name="DuinoEDU_hand_positionY" kind="data" color="90 110 190" initlabel="bg.DuinoEDU_hand_positionY">
 			<description>
 				<text>DuinoEDU_hand_positionY</text>
 			</description>
@@ -6835,7 +6835,7 @@
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="DuinoEDU_hand_positionZ" kind="data" color="158 145 255" initlabel="bg.DuinoEDU_hand_positionZ">
+		<BlockGenus name="DuinoEDU_hand_positionZ" kind="data" color="90 110 190" initlabel="bg.DuinoEDU_hand_positionZ">
 			<description>
 				<text>DuinoEDU_hand_positionZ</text>
 			</description>
@@ -6843,7 +6843,7 @@
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="DuinoEDU_handRotX" kind="data" color="158 145 255" initlabel="bg.DuinoEDU_handRotX">
+		<BlockGenus name="DuinoEDU_handRotX" kind="data" color="90 110 190" initlabel="bg.DuinoEDU_handRotX">
 			<description>
 				<text>DuinoEDU_handRotX</text>
 			</description>
@@ -6851,7 +6851,7 @@
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="DuinoEDU_handRotY" kind="data" color="158 145 255" initlabel="bg.DuinoEDU_handRotY">
+		<BlockGenus name="DuinoEDU_handRotY" kind="data" color="90 110 190" initlabel="bg.DuinoEDU_handRotY">
 			<description>
 				<text>DuinoEDU_handRotY</text>
 			</description>
@@ -6859,7 +6859,7 @@
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="DuinoEDU_handRotZ" kind="data" color="158 145 255" initlabel="bg.DuinoEDU_handRotZ">
+		<BlockGenus name="DuinoEDU_handRotZ" kind="data" color="90 110 190" initlabel="bg.DuinoEDU_handRotZ">
 			<description>
 				<text>DuinoEDU_handRotZ</text>
 			</description>
@@ -6867,7 +6867,7 @@
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="DuinoEDU_angle_pouce" kind="data" color="158 145 255" initlabel="bg.DuinoEDU_angle_pouce">
+		<BlockGenus name="DuinoEDU_angle_pouce" kind="data" color="90 110 190" initlabel="bg.DuinoEDU_angle_pouce">
 			<description>
 				<text>DuinoEDU_angle_pouce</text>
 			</description>
@@ -9504,7 +9504,35 @@
 			</BlockConnectors>
 		</BlockGenus>
 		<!-- diode -->
-		<BlockGenus name="led_blink" kind="command" color="240 192 181" initlabel="bg.led_blink">
+                <BlockGenus name="justled" kind="command" color="190 30 180" initlabel="bg.justled">
+			<description>
+				<text>DFRobot LED Module</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
+				</BlockConnector>
+				<BlockConnector connector-type="boolean" connector-kind="socket" label="bc.status">
+					<DefaultArg genus-name="digital-high" label="HIGH" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+
+		<BlockGenus name="pwmled" kind="command" color="190 30 180" initlabel="bg.pwmled">
+			<description>
+				<text>DFRobot LED Module</text>
+			</description>
+			<BlockConnectors>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+					<DefaultArg genus-name="pinListAnalogWrite_D3" label="D3" />
+				</BlockConnector>
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.level">
+					<DefaultArg genus-name="number" label="255" />
+				</BlockConnector>
+			</BlockConnectors>
+		</BlockGenus>
+                
+		<BlockGenus name="led_blink" kind="command" color="190 30 180" initlabel="bg.led_blink">
 			<description>
 				<text>Led Module</text>
 			</description>
@@ -9521,7 +9549,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="rgb_led" kind="command" color="240 192 181" initlabel="bg.rgb_led">
+		<BlockGenus name="rgb_led" kind="command" color="190 30 180" initlabel="bg.rgb_led">
 			<description>
 				<text>RGB LED Module</text>
 			</description>
@@ -9547,7 +9575,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="rgb_led_blink" kind="command" color="240 192 181" initlabel="bg.rgb_led_blink">
+		<BlockGenus name="rgb_led_blink" kind="command" color="190 30 180" initlabel="bg.rgb_led_blink">
 			<description>
 				<text>RGB LED Module</text>
 			</description>
@@ -9579,7 +9607,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		
-		<BlockGenus name="rgb_led_pwm" kind="command" color="240 192 181" initlabel="bg.rgb_led_pwm">
+		<BlockGenus name="rgb_led_pwm" kind="command" color="190 30 180" initlabel="bg.rgb_led_pwm">
 			<description>
 				<text>RGB LED Module</text>
 			</description>
@@ -9605,7 +9633,7 @@
 			</BlockConnectors>
 		</BlockGenus>
 		<!-- Sound -->
-		<BlockGenus name="melody" kind="command" color="208 116 232" initlabel="bg.melody">
+		<BlockGenus name="melody" kind="command" color="95 95 195" initlabel="bg.melody">
 			<description>
 				<text>Generates a square wave of the specified frequency (and 50%
 					duty cycle) on a pin.
@@ -11211,63 +11239,63 @@
 			</Images>
 		</BlockGenus>
 
-		<BlockGenus name="Midi_C" kind="data" color="158 145 255" initlabel="bg.Midi_C" editable-label="no">
+		<BlockGenus name="Midi_C" kind="data" color="90 110 190" initlabel="bg.Midi_C" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
 
-		<BlockGenus name="Midi_CS" kind="data" color="158 145 255" initlabel="bg.Midi_CS" editable-label="no">
+		<BlockGenus name="Midi_CS" kind="data" color="90 110 190" initlabel="bg.Midi_CS" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="Midi_D" kind="data" color="158 145 255" initlabel="bg.Midi_D" editable-label="no">
+		<BlockGenus name="Midi_D" kind="data" color="90 110 190" initlabel="bg.Midi_D" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="Midi_DS" kind="data" color="158 145 255" initlabel="bg.Midi_DS" editable-label="no">
+		<BlockGenus name="Midi_DS" kind="data" color="90 110 190" initlabel="bg.Midi_DS" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="Midi_E" kind="data" color="158 145 255" initlabel="bg.Midi_E" editable-label="no">
+		<BlockGenus name="Midi_E" kind="data" color="90 110 190" initlabel="bg.Midi_E" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="Midi_F" kind="data" color="158 145 255" initlabel="bg.Midi_F" editable-label="no">
+		<BlockGenus name="Midi_F" kind="data" color="90 110 190" initlabel="bg.Midi_F" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="Midi_FS" kind="data" color="158 145 255" initlabel="bg.Midi_FS" editable-label="no">
+		<BlockGenus name="Midi_FS" kind="data" color="90 110 190" initlabel="bg.Midi_FS" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="Midi_G" kind="data" color="158 145 255" initlabel="bg.Midi_G" editable-label="no">
+		<BlockGenus name="Midi_G" kind="data" color="90 110 190" initlabel="bg.Midi_G" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="Midi_GS" kind="data" color="158 145 255" initlabel="bg.Midi_GS" editable-label="no">
+		<BlockGenus name="Midi_GS" kind="data" color="90 110 190" initlabel="bg.Midi_GS" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="Midi_A" kind="data" color="158 145 255" initlabel="bg.Midi_A" editable-label="no">
+		<BlockGenus name="Midi_A" kind="data" color="90 110 190" initlabel="bg.Midi_A" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="Midi_AS" kind="data" color="158 145 255" initlabel="bg.Midi_AS" editable-label="no">
+		<BlockGenus name="Midi_AS" kind="data" color="90 110 190" initlabel="bg.Midi_AS" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="Midi_B" kind="data" color="158 145 255" initlabel="bg.Midi_B" editable-label="no">
+		<BlockGenus name="Midi_B" kind="data" color="90 110 190" initlabel="bg.Midi_B" editable-label="no">
 			<BlockConnectors>
 				<BlockConnector connector-type="number" connector-kind="plug" position-type="mirror"/>
 			</BlockConnectors>
@@ -11439,7 +11467,7 @@
 
 		<!--ENCODER HERE====================================================================== -->
 
-		<BlockGenus name="EncoderSimple" kind="data" color="121 216 200" initlabel="bg.EncoderSimple" editable-label="no">
+		<BlockGenus name="EncoderSimple" kind="data" color="0 190 190" initlabel="bg.EncoderSimple" editable-label="no">
 			<description>
 				<text>Gives variable of encoder</text>
 			</description>
@@ -11449,7 +11477,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="EncoderFull" kind="data" color="121 216 200" initlabel="bg.EncoderFull" editable-label="no">
+		<BlockGenus name="EncoderFull" kind="data" color="0 190 190" initlabel="bg.EncoderFull" editable-label="no">
 			<description>
 				<text>Gives variable of encoder</text>
 			</description>
@@ -11459,7 +11487,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="EncoderSimple2" kind="data" color="121 216 200" initlabel="bg.EncoderSimple2" editable-label="no">
+		<BlockGenus name="EncoderSimple2" kind="data" color="0 190 190" initlabel="bg.EncoderSimple2" editable-label="no">
 			<description>
 				<text>Gives variable of encoder</text>
 			</description>
@@ -11469,7 +11497,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="EncoderFull2" kind="data" color="121 216 200" initlabel="bg.EncoderFull2" editable-label="no">
+		<BlockGenus name="EncoderFull2" kind="data" color="0 190 190" initlabel="bg.EncoderFull2" editable-label="no">
 			<description>
 				<text>Gives variable of encoder</text>
 			</description>
@@ -11482,17 +11510,17 @@
 
 		<!--DISPLAY HERE====================================================================== -->
 
-        <BlockGenus name="DisplayClear" kind="command" color="106 216 119" initlabel="bg.DisplayClear" editable-label="no">
+        <BlockGenus name="DisplayClear" kind="command" color="100 180 100" initlabel="bg.DisplayClear" editable-label="no">
             <description>
                 <text>Clears buffer</text>
             </description>
         </BlockGenus>
-		<BlockGenus name="DisplayShow" kind="command" color="106 216 119" initlabel="bg.DisplayShow" editable-label="no">
+		<BlockGenus name="DisplayShow" kind="command" color="100 180 100" initlabel="bg.DisplayShow" editable-label="no">
 			<description>
 				<text>Shows buffer on display</text>
 			</description>
 		</BlockGenus>
-		<BlockGenus name="DisplayString" kind="command" color="106 216 119" initlabel="bg.DisplayString" editable-label="no">
+		<BlockGenus name="DisplayString" kind="command" color="100 180 100" initlabel="bg.DisplayString" editable-label="no">
 			<description>
 				<text>Adds string to buffer</text>
 			</description>
@@ -11515,7 +11543,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="DisplayLine" kind="command" color="106 216 119" initlabel="bg.DisplayLine" editable-label="no">
+		<BlockGenus name="DisplayLine" kind="command" color="100 180 100" initlabel="bg.DisplayLine" editable-label="no">
 			<description>
 				<text>Adds string to buffer</text>
 			</description>
@@ -11538,7 +11566,7 @@
 				</BlockConnector>
 			</BlockConnectors>
 		</BlockGenus>
-		<BlockGenus name="DisplayRectangle" kind="command" color="106 216 119" initlabel="bg.DisplayRectangle" editable-label="no">
+		<BlockGenus name="DisplayRectangle" kind="command" color="100 180 100" initlabel="bg.DisplayRectangle" editable-label="no">
 			<description>
 				<text>Adds string to buffer</text>
 			</description>
@@ -12245,10 +12273,10 @@
 	</BlockFamilies>
 	
 	
-	<!--???? ?????? 118 189 191 -->
+	<!--???? ?????? 98 169 171 -->
 	<BlockDrawerSets>
 		<BlockDrawerSet name="factory" type="stack" location="southwest" window-per-drawer="no" drawer-draggable="no">
-			<BlockDrawer name="bd.control" type="factory" is-open="yes" button-color="118 189 191">
+			<BlockDrawer name="bd.control" type="factory" is-open="yes" button-color="98 169 171">
 				<BlockGenusMember>loop</BlockGenusMember>
 				<BlockGenusMember>program</BlockGenusMember>
 				<BlockGenusMember>delay</BlockGenusMember>
@@ -12280,8 +12308,8 @@
 				<BlockGenusMember>pinListAnalog_A0</BlockGenusMember>
 				<BlockGenusMember>pinListAnalogWrite_D3</BlockGenusMember>
 			</BlockDrawer>
-			<!--246 213 126-->
-			<BlockDrawer button-color="246 213 126" name="bd.logic" type="factory">
+			<!--90 160 85-->
+			<BlockDrawer button-color="90 160 85" name="bd.logic" type="factory">
 				<BlockGenusMember>greater</BlockGenusMember>
 				<BlockGenusMember>less</BlockGenusMember>
 				<BlockGenusMember>equal</BlockGenusMember>
@@ -12301,8 +12329,8 @@
 				<BlockGenusMember>string_empty</BlockGenusMember>
 				<BlockGenusMember>string_toInt</BlockGenusMember>
 			</BlockDrawer>
-			<!--191 208 95-->
-			<BlockDrawer button-color="191 208 95" name="bd.number" type="factory">
+			<!--150 190 100-->
+			<BlockDrawer button-color="150 190 100" name="bd.number" type="factory">
 				<BlockGenusMember>number</BlockGenusMember>
 				<BlockGenusMember>setter_variable_number</BlockGenusMember>
 				<BlockGenusMember>variable_number</BlockGenusMember>
@@ -12377,19 +12405,19 @@
 			</BlockDrawer>
 			
 			<!-- diode -->
-			<!--240 192 181-->
-			<BlockDrawer button-color="240 192 181" name="bd.diode">
-				<BlockGenusMember>df_led</BlockGenusMember>
+			<!--190 30 180-->
+			<BlockDrawer button-color="190 30 180" name="bd.diode">
+				<BlockGenusMember>justled</BlockGenusMember>
 				<BlockGenusMember>led_blink</BlockGenusMember>
-				<BlockGenusMember>df_led_pwm</BlockGenusMember>
+				<BlockGenusMember>pwmled</BlockGenusMember>
 				<BlockGenusMember>rgb_led</BlockGenusMember>
 				<BlockGenusMember>rgb_led_blink</BlockGenusMember>
 				<BlockGenusMember>rgb_led_pwm</BlockGenusMember>
 			</BlockDrawer>
 			
 			<!-- sound -->
-			<!--208 116 232-->
-			<BlockDrawer button-color="208 116 232" name="bd.sound">
+			<!--95 95 195-->
+			<BlockDrawer button-color="95 95 195" name="bd.sound">
 				<BlockGenusMember>tone</BlockGenusMember>
 				<BlockGenusMember>tone_time</BlockGenusMember>
 				<BlockGenusMember>no_tone</BlockGenusMember>
@@ -12397,8 +12425,8 @@
 			</BlockDrawer>
 			
 			<!-- display -->
-			<!--106 216 119-->
-			<BlockDrawer button-color="106 216 119" name="bd.display">
+			<!--100 180 100-->
+			<BlockDrawer button-color="100 180 100" name="bd.display">
 				<BlockGenusMember>DisplayClear</BlockGenusMember>
 				<BlockGenusMember>DisplayShow</BlockGenusMember>
 				<BlockGenusMember>DisplayString</BlockGenusMember>
@@ -12436,8 +12464,8 @@
                 <BlockGenusMember>Engine_LeftTurnDegrees</BlockGenusMember>
 			</BlockDrawer>
 			<!-- encoder -->
-			<!--121 216 200-->
-			<BlockDrawer button-color="121 216 200" name="bg.encoder">
+			<!--0 190 190-->
+			<BlockDrawer button-color="0 190 190" name="bg.encoder">
 				<BlockGenusMember>EncoderSimple</BlockGenusMember>
 				<BlockGenusMember>EncoderFull</BlockGenusMember>
 				<BlockGenusMember>EncoderSimple2</BlockGenusMember>
@@ -12455,8 +12483,8 @@
 				<BlockGenusMember>number-single-I2C-address</BlockGenusMember>
 				<BlockGenusMember>number-single-fixed-parallel</BlockGenusMember>
 			</BlockDrawer>-->
-			<!--158 145 255-->
-			<BlockDrawer button-color="158 145 255" name="bd.communication" type="factory">
+			<!--90 110 190-->
+			<BlockDrawer button-color="90 110 190" name="bd.communication" type="factory">
 				<BlockGenusMember>serial_write</BlockGenusMember>
 				<BlockGenusMember>serial_print</BlockGenusMember>
 				<BlockGenusMember>glue_sn</BlockGenusMember>
@@ -12471,19 +12499,6 @@
 				<BlockGenusMember>serial_available2</BlockGenusMember>
 				<BlockGenusMember>serial_read</BlockGenusMember>
 				<BlockGenusMember>serial_parseInt</BlockGenusMember>
-				<BlockGenusMember>DuinoEDU_Guino_Read</BlockGenusMember>
-				<BlockGenusMember>DuinoEDU_Guino_Slider</BlockGenusMember>
-				<BlockGenusMember>DuinoEDU_Guino_switch</BlockGenusMember>
-				<BlockGenusMember>DuinoEDU_Guino_pause</BlockGenusMember>
-				<BlockGenusMember>DuinoEDU_Guino_Title</BlockGenusMember>
-				<BlockGenusMember>DuinoEDU_Guino_column</BlockGenusMember>
-				<BlockGenusMember>DuinoEDU_hand_positionX</BlockGenusMember>
-				<BlockGenusMember>DuinoEDU_handRotX</BlockGenusMember>
-				<BlockGenusMember>DuinoEDU_angle_pouce</BlockGenusMember>
-				<BlockGenusMember>Serialplus_send_variable_number</BlockGenusMember>
-				<BlockGenusMember>Serialplus_send_variable_digital</BlockGenusMember>
-				<BlockGenusMember>Serialplus_receive_number</BlockGenusMember>
-				<BlockGenusMember>Serialplus_receive_digital</BlockGenusMember>
 			</BlockDrawer>
 			<!--<BlockDrawer button-color="26 97 218" name="bd.scoop">
 			    <BlockGenusMember>scoop_task</BlockGenusMember>
