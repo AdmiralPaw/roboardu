@@ -25,7 +25,6 @@ public class ControllerImage extends JPanel {
 
     public ControllerImage(СontrollerСonfiguration controller) {
         setLayout(null);
-<<<<<<< HEAD
         this.setBounds(0,0,150,150);
         URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/plata.png");
         image = new ImageIcon(iconURL);
@@ -33,18 +32,7 @@ public class ControllerImage extends JPanel {
         someButt.setLayout(null);
         someButt.setBounds(this.getBounds().x,this.getBounds().y,10,10);
         this.add(someButt);
-=======
-        this.setBounds(0, 0, 150, 150);
-        URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/Moduli_Dlya_veb/Plata.png");
-        imageRaw = new ImageIcon(iconURL).getImage().getScaledInstance(
-                200, 140, java.awt.Image.SCALE_SMOOTH);
-        image = new ImageIcon(imageRaw);
-        JButton someButt = new JButton();
-        someButt.setLayout(null);
-        someButt.setBounds(this.getBounds().x, this.getBounds().y, 10, 10);
-        this.add(someButt);
 
->>>>>>> bc9d04d6dce58f2ffcb3aa89a37890d0904c4262
     }
 
     public void setModuleImages() {
@@ -112,11 +100,8 @@ public class ControllerImage extends JPanel {
             case a2:
                 usingImage = moduleImages.get(numberOfModule);
                 picLabel = new JLabel(usingImage);
-<<<<<<< HEAD
                 picLabel.setBounds(this.getBounds().x,this.getBounds().y,10,10);
-=======
                 picLabel.setBounds(10, 10, 10, 10);
->>>>>>> bc9d04d6dce58f2ffcb3aa89a37890d0904c4262
                 add(picLabel);
                 break;
             case a1:
@@ -147,15 +132,9 @@ public class ControllerImage extends JPanel {
         add(picLabel);
     }
 
-<<<<<<< HEAD
 
-
-    public void deletePicture(Pin pin){
-        try{
-=======
     public void deletePicture(int numberOfModule) {
         try {
->>>>>>> bc9d04d6dce58f2ffcb3aa89a37890d0904c4262
             remove(numberOfModule);
         } catch (NullPointerException nul) {
             throw new NullPointerException("Такого дерьма тут нет");
