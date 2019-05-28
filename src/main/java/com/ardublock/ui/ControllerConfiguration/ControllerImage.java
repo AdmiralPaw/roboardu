@@ -3,6 +3,7 @@ package com.ardublock.ui.ControllerConfiguration;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.Dimension;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -11,9 +12,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.ArrayList;
 import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration.Pin;
+import com.ardublock.ui.ControllerConfiguration.InvisibleButton;
 import com.ardublock.ui.OpenblocksFrame;
 import java.awt.Image;
 import java.net.URL;
+
 
 public class ControllerImage extends JPanel {
 
@@ -23,14 +26,28 @@ public class ControllerImage extends JPanel {
     private ArrayList<JLabel> moduleLabels = new ArrayList<JLabel>();
     private ArrayList<ImageIcon> moduleImages = new ArrayList<ImageIcon>();
 
-    public ControllerImage(СontrollerСonfiguration controller) {
+    ControllerImage(СontrollerСonfiguration controller) {
         setLayout(null);
         this.setBounds(0,0,150,150);
-        URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/plata.png");
-        image = new ImageIcon(iconURL);
-        JButton someButt = new JButton();
+        URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/Plata.png");
+        BufferedImage img = null;
+        BufferedImage resized = null;
+        try{
+             img = ImageIO.read(iconURL);
+             resized = resize(img,150,200);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        //image = new ImageIcon(iconURL);
+        //InvisibleButton mainPlat = new InvisibleButton();
+        /*JLabel mainPlat = new JLabel(image);
+        mainPlat = */
+        image = new ImageIcon(resized);
+        JButton someButt = new JButton(image);
         someButt.setLayout(null);
-        someButt.setBounds(this.getBounds().x,this.getBounds().y,10,10);
+        someButt.setBounds(this.getBounds().x + 50,this.getBounds().y+ 100,200,150);
+        //someButt.setBorderPainted(false);
         this.add(someButt);
 
     }
@@ -139,6 +156,16 @@ public class ControllerImage extends JPanel {
         } catch (NullPointerException nul) {
             throw new NullPointerException("Такого дерьма тут нет");
         }
+    }
+    
+    
+    private static BufferedImage resize(BufferedImage img, int height, int width) {
+        Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = resized.createGraphics();
+        g2d.drawImage(tmp, 0, 0, null);
+        g2d.dispose();
+        return resized;
     }
 
     /*@Override
