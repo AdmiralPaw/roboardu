@@ -12989,10 +12989,15 @@
                 <Component>dude10</Component> 
             </ControllerComponents>
             <ControllerComponents pin="a1">
-                <Component>dude11</Component> 
+                <Component>dude111</Component>
+                <Component>dude112</Component> 
+                <Component>dude113</Component>
+                <Component>соси бибу</Component>   
             </ControllerComponents>
             <ControllerComponents pin="a0">
-                <Component>dude12</Component> 
+                <Component>dude121</Component> 
+                <Component>dude122</Component> 
+                <Component>dude123</Component> 
             </ControllerComponents>
             <ControllerComponents pin="i2c">
                 <Component>dude13</Component> 
@@ -13002,7 +13007,7 @@
 <!-- End of Ardublock Standard UI layout -->
 
 	<Pages drawer-with-page="yes">
-		<Page page-name="Main" page-width="400" page-color="128 128 128"/>
+		<Page page-name="Main" page-width="2560" page-color="128 128 128"/>
 	</Pages>
 
 	<TrashCan>

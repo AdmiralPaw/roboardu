@@ -96,7 +96,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     /** The smallest value that this.minimumPixelWidth/zoom can be */
     private static final int DEFAULT_MINUMUM_WIDTH = 100;
     /** The default abstract width */
-    private static final int DEFAULT_ABSTRACT_WIDTH = 700;
+    private static final int DEFAULT_ABSTRACT_WIDTH = 1500;
     /** The default abstract height */
     public static final int DEFAULT_ABSTRACT_HEIGHT = 3000;
     /** An empty string */

@@ -172,13 +172,14 @@ public class OpenblocksFrame extends JFrame {
         final JPanel rightPanel = new JPanel();
         final JLabel dividerFirst = new JLabel();
         final JLabel dividerSecond = new JLabel();
-        
+
         //Main logo---------------------------------------------------//
         final JLabel mainLogo = new JLabel();
         ImageIcon mLogo = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(
-                "com/ardublock/block/mainLogo.png")
+                "com/ardublock/block/mainLogo2.png")
         );
-        Image image = mLogo.getImage().getScaledInstance(60, standartNorthPanelSize, java.awt.Image.SCALE_SMOOTH);
+        Image image = mLogo.getImage().getScaledInstance(180, standartNorthPanelSize,
+                java.awt.Image.SCALE_SMOOTH);
         mLogo = new ImageIcon(image);
         mainLogo.setIcon(mLogo);
         logo.add(mainLogo);
@@ -187,7 +188,7 @@ public class OpenblocksFrame extends JFrame {
 
         panelWithConfigButton.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 5));
         buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-        logo.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
+        logo.setLayout(new FlowLayout(FlowLayout.CENTER));
         northPanel.setLayout(new BorderLayout());
         northPanelCenter.setLayout(new BorderLayout());
 
@@ -199,9 +200,9 @@ public class OpenblocksFrame extends JFrame {
 
         northPanelCenter.setMinimumSize(new Dimension(600, standartNorthPanelSize));
         rightPanel.setPreferredSize(new Dimension(310, standartNorthPanelSize));
-        dividerFirst.setPreferredSize(new Dimension(2,2));
-        dividerSecond.setPreferredSize(new Dimension(2,2));
-        
+        dividerFirst.setPreferredSize(new Dimension(2, 2));
+        dividerSecond.setPreferredSize(new Dimension(2, 2));
+
         northPanel.add(logo, BorderLayout.WEST);
 
         northPanelCenter.add(buttons, BorderLayout.WEST);

@@ -179,7 +179,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         //TODO: оформить как класс{
         JPanel errPanel = new JPanel(new BorderLayout());
         errPanel.setBackground(Color.black);
-        //errPanel.setPreferredSize(new Dimension(0, 50));
+        //errPanel.setPreferredSize(new Dimension(50, 50));
         JPanel errDevider = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 5));
         JLabel errLabel = new JLabel("Какой-то текст");
         errLabel.setForeground(Color.white);
@@ -215,12 +215,22 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
             }
         });
 
-        blockCanvas.getJComponent().setMinimumSize(new Dimension(0, 100));
-        blockCanvas.getJComponent().setPreferredSize(new Dimension(0, 600));
-        JSplitPane centerPane = new RSplitPane(JSplitPane.VERTICAL_SPLIT, true,
+        //blockCanvas.getJComponent().setMinimumSize(new Dimension(0, 100));
+        //blockCanvas.getJComponent().setPreferredSize(new Dimension(0, 600));
+        final JSplitPane centerPane = new RSplitPane(JSplitPane.VERTICAL_SPLIT, true,
                 blockCanvasWithDepth, errPanel);
         centerPane.setOneTouchExpandable(true);
         centerPane.setDividerSize(6);
+//        centerPane.setDividerLocation(centerPane.getMaximumDividerLocation() - 100);
+        centerPane.addPropertyChangeListener(new PropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent e) {
+                if (centerPane.getDividerLocation() < centerPane.getMaximumDividerLocation() - 50) {
+                    centerPane.setDividerLocation(centerPane.getMaximumDividerLocation() - 50);
+                }
+                blockCanvasLayer.updateUI();
+            }
+        });
+       
         workLayer = new RSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
                 factory.getJComponent(), centerPane);
         workLayer.setOneTouchExpandable(true);

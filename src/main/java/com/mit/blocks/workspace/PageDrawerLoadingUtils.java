@@ -18,8 +18,7 @@ import com.mit.blocks.renderable.RenderableBlock;
 import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
 
 /**
- * Utilities class that provides the loading and saving of
- * pages and drawers
+ * Utilities class that provides the loading and saving of pages and drawers
  *
  * @author An Ho
  */
@@ -73,7 +72,6 @@ public class PageDrawerLoadingUtils {
         //LinkedHashMap<Page, PageBlockDrawer> pagesToAdd = new LinkedHashMap<Page, PageBlockDrawer>();
         LinkedHashMap<String, ArrayList<RenderableBlock>> blocksForDrawers = new LinkedHashMap<String, ArrayList<RenderableBlock>>();
         LinkedHashMap<Page, ArrayList<RenderableBlock>> blocksForPages = new LinkedHashMap<Page, ArrayList<RenderableBlock>>();
-
 
         NodeList pagesRoot = root.getElementsByTagName("Pages");
         if (pagesRoot != null) {
@@ -219,8 +217,8 @@ public class PageDrawerLoadingUtils {
                             }
                         }
 
-                        manager.addStaticDrawer(drawerName, buttonColor);            
-                        
+                        manager.addStaticDrawer(drawerName, buttonColor);
+
                         //get block genuses in drawer and create blocks
                         NodeList drawerBlocks = drawerNode.getChildNodes();
                         Node blockNode;
@@ -241,9 +239,9 @@ public class PageDrawerLoadingUtils {
                     }
                 }
             }
-        }     
+        }
     }
-    
+
     public static void loadComponentsSets(Workspace workspace, Element root, СontrollerСonfiguration controller) {
         Pattern attrExtractor = Pattern.compile("\"(.*)\"");
         List<String> tempComponentsName = new ArrayList<String>();
@@ -275,6 +273,6 @@ public class PageDrawerLoadingUtils {
                     }
                 }
             }
-        }     
+        }
     }
 }

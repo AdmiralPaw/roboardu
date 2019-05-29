@@ -41,8 +41,6 @@ public class СontrollerСonfiguration extends JPanel {
                 controllerImage, componentsPane);
         splitPane.setDividerLocation(750 / 2);
         this.add(splitPane);
-        JButton justButt = new JButton();
-        //this.controllerImage.add(justButt);
         this.addButtons();
     }
 
@@ -59,14 +57,19 @@ public class СontrollerСonfiguration extends JPanel {
         return allButtons;
     }
 
-    public void addComponent(String name, String pin) {
+    public void addComponent(String pin, String name) {
         this.components.add(new Device(pin, name));
     }
 
-    public void changeComponentsPane(int index) {
-
-        CButton button = new RMenuButton(this.components.get(index).deviceName);
-        componentsPane.add(button);
+    public void changeComponentsPane(String buttonPin) {
+        componentsPane.removeAll();
+        for (int i = 0; i < components.size(); i++) {
+            if (components.get(i).pin.equals(buttonPin)) {
+                componentsPane.add(new RMenuButton(components.get(i).deviceName));
+            }
+        }
+        componentsPane.validate();
+        componentsPane.repaint();
     }
 
     /**
@@ -80,30 +83,6 @@ public class СontrollerСonfiguration extends JPanel {
         public Device(String pin, String deviceName) {
             this.pin = pin;
             this.deviceName = deviceName;
-        }
-    }
-
-    /**
-     * те самые невидимые кнопки, которые будут над местами пинов на картинке
-     */
-    public class InvisibleButton extends JButton {
-
-        private СontrollerСonfiguration controller;
-        private int index;
-
-        /**
-         * @param i отвечает за индексирование кнопок
-         */
-        public void JButton(int i) {
-            index = i;
-            this.setOpaque(false);
-            this.setContentAreaFilled(false);
-            this.setBorderPainted(false);
-            this.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    controller.changeComponentsPane(index);
-                }
-            });
         }
     }
 }

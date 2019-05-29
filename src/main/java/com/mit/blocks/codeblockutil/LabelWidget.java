@@ -40,37 +40,60 @@ public abstract class LabelWidget extends JComponent {
 
     public static final int DROP_DOWN_MENU_WIDTH = 7;
     private static final long serialVersionUID = 837647234895L;
-    /** Border of textfield*/
+    /**
+     * Border of textfield
+     */
     private static final Border textFieldBorder = new CompoundBorder(BorderFactory.createLoweredBevelBorder(), new EmptyBorder(1, 2, 1, 2));
-    /** Number formatter for this label */
+    /**
+     * Number formatter for this label
+     */
     private static final NumberFormatter nf = new NumberFormatter(NumberFormatter.MEDIUM_PRECISION);
-    /** Label that is visable iff editingText is false */
+    /**
+     * Label that is visable iff editingText is false
+     */
     private final ShadowLabel textLabel = new ShadowLabel();
-    /** TextField that is visable iff editingText is true */
+    /**
+     * TextField that is visable iff editingText is true
+     */
     private final BlockLabelTextField textField = new BlockLabelTextField();
-    /** drop down menu icon */
+    /**
+     * drop down menu icon
+     */
     private final LabelMenu menu = new LabelMenu();
 
     ;
     /** The label text before user begins edit (applies only to editable labels)*/
     private String labelBeforeEdit = "";
-    /** If this is a number, then only allow nagatvie signs and periods at certain spots */
+    /**
+     * If this is a number, then only allow nagatvie signs and periods at
+     * certain spots
+     */
     private boolean isNumber = false;
-    /** Is labelText editable by the user -- default true */
+    /**
+     * Is labelText editable by the user -- default true
+     */
     private boolean isEditable = false;
-    /** If focus is true, then show the combo pop up menu */
+    /**
+     * If focus is true, then show the combo pop up menu
+     */
     private boolean isFocused = false;
-    /** Has ComboPopup accessable selections */
+    /**
+     * Has ComboPopup accessable selections
+     */
     private boolean hasSiblings = false;
-    /** True if TEXTFIELD is being edited by user. */
+    /**
+     * True if TEXTFIELD is being edited by user.
+     */
     private boolean editingText;
-    /** the background color of the tooltip */
+    /**
+     * the background color of the tooltip
+     */
     private Color tooltipBackground = new Color(255, 255, 225);
     private double zoom = 1.5;
 
     /**
-     * BlockLabel Constructor that takes in BlockID as well.
-     * Unfortunately BlockID is needed, so the label can redirect mouse actions.
+     * BlockLabel Constructor that takes in BlockID as well. Unfortunately
+     * BlockID is needed, so the label can redirect mouse actions.
      *
      */
     public LabelWidget(String initLabelText, Color fieldColor, Color tooltipBackground) {
@@ -154,6 +177,7 @@ public abstract class LabelWidget extends JComponent {
 
     /**
      * editingText returns if BlockLable is being edited
+     *
      * @return editingText
      */
     public boolean editingText() {
@@ -162,6 +186,7 @@ public abstract class LabelWidget extends JComponent {
 
     /**
      * setEditable state of BlockLabel
+     *
      * @param isEditable specifying editable state of BlockLabel
      */
     public void setEditable(boolean isEditable) {
@@ -170,6 +195,7 @@ public abstract class LabelWidget extends JComponent {
 
     /**
      * isEditable returns if BlockLable is editable
+     *
      * @return isEditable
      */
     public boolean isEditable() {
@@ -182,6 +208,7 @@ public abstract class LabelWidget extends JComponent {
 
     /**
      * isEditable returns if BlockLable is editable
+     *
      * @return isEditable
      */
     public boolean isNumeric() {
@@ -199,6 +226,7 @@ public abstract class LabelWidget extends JComponent {
 
     /**
      * set up fonts
+     *
      * @param font
      */
     public void setFont(Font font) {
@@ -217,6 +245,7 @@ public abstract class LabelWidget extends JComponent {
 
     /**
      * getText
+     *
      * @return String of the current BlockLabel
      */
     public String getText() {
@@ -225,6 +254,7 @@ public abstract class LabelWidget extends JComponent {
 
     /**
      * setText to a NumberFormatted double
+     *
      * @param value
      */
     public void setText(double value) {
@@ -240,6 +270,7 @@ public abstract class LabelWidget extends JComponent {
 
     /**
      * setText to a String (trimmed to remove excess spaces)
+     *
      * @param string
      */
     public void setText(String string) {
@@ -250,6 +281,7 @@ public abstract class LabelWidget extends JComponent {
 
     /**
      * setText to a boolean
+     *
      * @param bool
      */
     public void setText(boolean bool) {
@@ -257,7 +289,9 @@ public abstract class LabelWidget extends JComponent {
     }
 
     /**
-     * updateLabelText updates labelText and sychronizes textField and textLabel to it
+     * updateLabelText updates labelText and sychronizes textField and textLabel
+     * to it
+     *
      * @param text
      */
     public void updateLabelText(String text) {
@@ -289,8 +323,8 @@ public abstract class LabelWidget extends JComponent {
     //// RENDERING /////
     ////////////////////
     /**
-     * Updates the dimensions of the textRect, textLabel, and textField to the minimum size needed
-     * to contain all of the text in the current font.
+     * Updates the dimensions of the textRect, textLabel, and textField to the
+     * minimum size needed to contain all of the text in the current font.
      */
     private void updateDimensions() {
         Dimension updatedDimension = new Dimension(
@@ -306,22 +340,22 @@ public abstract class LabelWidget extends JComponent {
     }
 
     /**
-     * high lights the text of the editing text field from
-     * 0 to the end of textfield
+     * high lights the text of the editing text field from 0 to the end of
+     * textfield
      */
     public void highlightText() {
         this.textField.setSelectionStart(0);
     }
 
     /**
-     * Toggles the visual suggestion that this label may be editable depending on the specified
-     * suggest flag and properties of the block and label.  If suggest is true, the visual suggestion will display.  Otherwise, nothing 
-     * is shown.  For now, the visual suggestion is a simple white line boder.
-     * Other requirements for indicator to show: 
-     * - label type must be NAME
-     * - label must be editable
-     * - block can not be a factory block
-     * @param suggest 
+     * Toggles the visual suggestion that this label may be editable depending
+     * on the specified suggest flag and properties of the block and label. If
+     * suggest is true, the visual suggestion will display. Otherwise, nothing
+     * is shown. For now, the visual suggestion is a simple white line boder.
+     * Other requirements for indicator to show: - label type must be NAME -
+     * label must be editable - block can not be a factory block
+     *
+     * @param suggest
      */
     protected void suggestEditable(boolean suggest) {
         if (isEditable) {
@@ -375,18 +409,23 @@ public abstract class LabelWidget extends JComponent {
     }
 
     /**
-     * BlockLabelTextField is a java JtextField that internally handles various events
-     * and provides the semantic to interface with the user.  Unliek typical JTextFields,
-     * the blockLabelTextField allows clients to only enter certain keys board input.
-     * It also reacts to enters and escapse by delegating the KeyEvent to the parent
-     * RenderableBlock.
+     * BlockLabelTextField is a java JtextField that internally handles various
+     * events and provides the semantic to interface with the user. Unliek
+     * typical JTextFields, the blockLabelTextField allows clients to only enter
+     * certain keys board input. It also reacts to enters and escapse by
+     * delegating the KeyEvent to the parent RenderableBlock.
      */
     private class BlockLabelTextField extends JTextField implements MouseListener, DocumentListener, FocusListener, ActionListener {
 
         private static final long serialVersionUID = 873847239234L;
-        /** These Key inputs are processed by this text field */
+        /**
+         * These Key inputs are processed by this text field
+         */
         private final char[] validNumbers = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'};
-        /** These Key inputs are processed by this text field if NOT a number block*/
+        /**
+         * These Key inputs are processed by this text field if NOT a number 
+         * block
+         */
         private final char[] validChar = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
             'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j',
             'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm',
@@ -395,7 +434,9 @@ public abstract class LabelWidget extends JComponent {
             '\'', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+',
             '-', '=', '{', '}', '|', '[', ']', '\\', ' ',
             ':', '"', ';', '\'', '<', '>', '?', ',', '.', '/', '`', '~'};
-        /** These Key inputs are processed by all this text field */
+        /**
+         * These Key inputs are processed by all this text field
+         */
         private final int[] validMasks = {KeyEvent.VK_BACK_SPACE,
             KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT,
             KeyEvent.VK_RIGHT, KeyEvent.VK_END, KeyEvent.VK_HOME,
@@ -462,9 +503,8 @@ public abstract class LabelWidget extends JComponent {
         }
 
         /**
-         * for all user-generated AND/OR system generated key inputs,
-         * either perform some action that should be triggered by
-         * that key or
+         * for all user-generated AND/OR system generated key inputs, either
+         * perform some action that should be triggered by that key or
          */
         protected boolean processKeyBinding(KeyStroke ks, KeyEvent e, int condition, boolean pressed) {
             if (isNumber) {
@@ -513,8 +553,8 @@ public abstract class LabelWidget extends JComponent {
         }
 
         /**
-         * @param siblings = array of siblin's genus and initial label
-         *  { {genus, label}, {genus, label}, {genus, label} ....}
+         * @param siblings = array of siblin's genus and initial label { {genus,
+         * label}, {genus, label}, {genus, label} ....}
          */
         private void setSiblings(String[][] siblings) {
             popupmenu = new CPopupMenu();
@@ -619,7 +659,6 @@ public abstract class LabelWidget extends JComponent {
             //DO NOT DRAW SUPER's to prevent drawing of label's string.
             //Implecations: background not automatically drawn
             //super.paint(g);
-
             //draw shadows
 //            for (int i = 0; i < shadowPositionArray.length; i++) {
 //                int dx = shadowPositionArray[i][0];
@@ -627,11 +666,20 @@ public abstract class LabelWidget extends JComponent {
 //                g2.setColor(new Color(0.5f, 0.5f, 0.5f, shadowColorArray[i]));
 //                g2.drawString(this.getText(), (int) ((4 + dx) * offsetSize), this.getHeight() + (int) ((dy - 6) * offsetSize));
 //            }
-
             //draw main Text
             //TODO: сделать перенос по строкам
             g2.setColor(Color.white);
-            g2.drawString(this.getText(), (int) ((4) * offsetSize), this.getHeight() + (int) ((-6) * offsetSize));
+            String labelText = this.getText();
+            String[] subString;
+            subString = labelText.split("\n");
+            int nextString = -1;
+            for (int i = 0; i < subString.length; i++) {
+                g2.drawString(subString[i], (int) ((4) * offsetSize),
+                        this.getHeight() + (int) ((6) * offsetSize * (nextString)));
+                nextString = nextString + 2;
+            }
+//            g2.drawString(this.getText(), (int) ((4) * offsetSize),
+//                    this.getHeight() + (int) ((-6) * offsetSize));
         }
 
         public JToolTip createToolTip() {
