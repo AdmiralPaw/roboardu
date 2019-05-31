@@ -1,19 +1,12 @@
 package com.ardublock.ui.ControllerConfiguration;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.awt.Dimension;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.ArrayList;
 import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration.Pin;
-import com.ardublock.ui.ControllerConfiguration.InvisibleButton;
-import com.ardublock.ui.OpenblocksFrame;
 import java.awt.Image;
 import java.net.URL;
 
@@ -39,15 +32,10 @@ public class ControllerImage extends JPanel {
         catch(IOException e){
             e.printStackTrace();
         }
-        //image = new ImageIcon(iconURL);
-        //InvisibleButton mainPlat = new InvisibleButton();
-        /*JLabel mainPlat = new JLabel(image);
-        mainPlat = */
         image = new ImageIcon(resized);
         JButton someButt = new JButton(image);
         someButt.setLayout(null);
         someButt.setBounds(this.getBounds().x + 50,this.getBounds().y+ 100,200,150);
-        //someButt.setBorderPainted(false);
         this.add(someButt);
 
     }

@@ -42,7 +42,6 @@ public class СontrollerСonfiguration extends JPanel {
         splitPane.setDividerLocation(750 / 2);
         this.add(splitPane);
         JButton justButt = new JButton();
-        //this.controllerImage.add(justButt);
         this.addButtons();
     }
 
