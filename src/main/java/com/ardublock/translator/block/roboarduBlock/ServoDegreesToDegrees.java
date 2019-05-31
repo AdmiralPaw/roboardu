@@ -71,7 +71,6 @@ public class ServoDegreesToDegrees extends TranslatorBlock {
         tb = this.getRequiredTranslatorBlockAtSocket(3);
         String time = tb.toCode();
         String ret = servoName + ".write(" + start_angle + ");\n" + "SetServoPos(" + servoName + ", " + end_angle + ", " + time + ");\n";
-        //ret = ret +
 
         return codePrefix + ret + codeSuffix;
     }
