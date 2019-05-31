@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.swing.JOptionPane;
-
 import com.ardublock.translator.adaptor.BlockAdaptor;
 import com.ardublock.translator.adaptor.OpenBlocksAdaptor;
 import com.ardublock.translator.block.TranslatorBlock;
@@ -256,12 +254,7 @@ public class Translator
 	{
 		return booleanVariableSet.get(userVarName);
 	}
-	
-	public String getStringVariable(String userVarName)
-	{
-		return stringVariableSet.get(userVarName);
-	}
-	
+
 	public void addNumberVariable(String userVarName, String internalName)
 	{
 		numberVariableSet.put(userVarName, internalName);
@@ -271,12 +264,7 @@ public class Translator
 	{
 		booleanVariableSet.put(userVarName, internalName);
 	}
-	
-	public void addStringVariable(String userVarName, String internalName)
-	{
-		stringVariableSet.put(userVarName, internalName);
-	}
-	
+
 	public void addFunctionName(Long blockId, String functionName) throws SubroutineNameDuplicatedException
 	{
 		if (functionName.equals("loop") ||functionName.equals("setup") || functionNameSet.contains(functionName))
@@ -350,6 +338,7 @@ public class Translator
 	public void setScoopProgram(boolean isScoopProgram) {
 		this.isScoopProgram = isScoopProgram;
 	}
+
 	public boolean isGuinoProgram() {
 		return isGuinoProgram;
 	}
@@ -357,72 +346,7 @@ public class Translator
 	public void setGuinoProgram(boolean isGuinoProgram) {
 		this.isGuinoProgram = isGuinoProgram;
 	}
-	
-	public Set<RenderableBlock> findEntryBlocks()
-	{
-		Set<RenderableBlock> loopBlockSet = new HashSet<RenderableBlock>();
-		Iterable<RenderableBlock> renderableBlocks = workspace.getRenderableBlocks();
-		
-		for (RenderableBlock renderableBlock:renderableBlocks)
-		{
-			Block block = renderableBlock.getBlock();
-			
-			if (!block.hasPlug() && (Block.NULL.equals(block.getBeforeBlockID())))
-			{
-				if(block.getGenusName().equals("loop"))
-				{
-					loopBlockSet.add(renderableBlock);
-				}
-				if(block.getGenusName().equals("loop1"))
-				{
-					loopBlockSet.add(renderableBlock);
-				}
-				if(block.getGenusName().equals("loop2"))
-				{
-					loopBlockSet.add(renderableBlock);
-				}
-				if(block.getGenusName().equals("loop3"))
-				{
-					loopBlockSet.add(renderableBlock);
-				}
-				if(block.getGenusName().equals("program"))
-				{
-					loopBlockSet.add(renderableBlock);
-				}
-				if(block.getGenusName().equals("setup"))
-				{
-					loopBlockSet.add(renderableBlock);
-				}
-			}
-		}
-		
-		return loopBlockSet;
-	}
-	
-	public Set<RenderableBlock> findSubroutineBlocks() throws SubroutineNameDuplicatedException
-	{
-		Set<RenderableBlock> subroutineBlockSet = new HashSet<RenderableBlock>();
-		Iterable<RenderableBlock> renderableBlocks = workspace.getRenderableBlocks();
-		
-		for (RenderableBlock renderableBlock:renderableBlocks)
-		{
-			Block block = renderableBlock.getBlock();
-			
-			if (!block.hasPlug() && (Block.NULL.equals(block.getBeforeBlockID())))
-			{
-				if (block.getGenusName().equals("subroutine"))
-				{
-					String functionName = block.getBlockLabel().trim();
-					this.addFunctionName(block.getBlockID(), functionName);
-					subroutineBlockSet.add(renderableBlock);
-				}
-				
-			}
-		}
-		
-		return subroutineBlockSet;
-	}
-	
+
 	public String translate(Set<RenderableBlock> loopBlocks, Set<RenderableBlock> subroutineBlocks) throws SocketNullException, SubroutineNotDeclaredException
 	{
 		StringBuilder code = new StringBuilder();
