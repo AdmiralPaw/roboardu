@@ -20,13 +20,12 @@ public class RepeatBlock extends TranslatorBlock
 	@Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
-		String varName="";//this.getRequiredTranslatorBlockAtSocket(0);
+		String varName="";
 		TranslatorBlock teste = this.getRequiredTranslatorBlockAtSocket(0);
 		if (!(teste instanceof VariableNumberBlock || teste instanceof VariableNumberUnsignedLongBlock || teste instanceof VariableNumberDoubleBlock)) {
 			throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.number_var_slot"));
 		}
 		varName=varName+teste.toCode();
-		//translator.addDefinitionCommand("int " + varName + "; //teste");
 		String ret = "for (" + varName + "= 1; " + varName + "<= ( ";
 		TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
 		ret = ret + translatorBlock.toCode();

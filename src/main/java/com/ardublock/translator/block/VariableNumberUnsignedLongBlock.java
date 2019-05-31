@@ -18,7 +18,6 @@ public class VariableNumberUnsignedLongBlock extends TranslatorBlock
       internalVariableName = translator.buildVariableName(label);
       translator.addNumberVariable(label, internalVariableName);
       translator.addDefinitionCommand("unsigned long " + internalVariableName + " = 0UL ;");
-//      translator.addSetupCommand(internalVariableName + " = 0;");
     }
     return codePrefix + internalVariableName + codeSuffix;
   }
