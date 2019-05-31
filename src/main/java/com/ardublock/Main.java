@@ -34,7 +34,6 @@ public class Main {
 
     public void startArdublock() {
         startOpenblocksFrame();
-        //startConsoleFrame();
     }
 
     private void startOpenblocksFrame() {
