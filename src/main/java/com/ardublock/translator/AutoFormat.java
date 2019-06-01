@@ -188,9 +188,17 @@ public class AutoFormat
 		}
 	}
 
+	// public void fprintf(int outfil, String out_string) {
 	public void fprintf(String out_string)
 	{
+		// int out_len = out_string.length();
+		// String j_string = new String(string);
 		strOut.append(out_string);
+	}
+
+	public int grabLines()
+	{
+		return lineNumber;
 	}
 
 	/* special edition of put string for comment processing */
@@ -216,18 +224,22 @@ public class AutoFormat
 			{
 				if ((last_char != ';') && (sav_s_flg == 1))
 				{
+					// fprintf(outfil, strBuffer.substring(i,j));
 					fprintf(strBuffer.substring(i, j));
 				}
 				else
 				{
+					// fprintf(outfil, strBuffer);
 					fprintf(strBuffer);
 				}
 			}
 			else
 			{
 				if (string[i] == '*' || jdoc == 0)
+					// fprintf (outfil, " "+strBuffer.substring(i,j));
 					fprintf(" " + strBuffer.substring(i, j));
 				else
+					// fprintf (outfil, " * "+strBuffer.substring(i,j));
 					fprintf(" * " + strBuffer.substring(i, j));
 			}
 			j = 0;
@@ -535,6 +547,7 @@ public class AutoFormat
 						{
 							break;
 						}
+						// String j_string = new String(string);
 
 						e_flg = lookup(w_else);
 						if (e_flg == 1)
@@ -549,8 +562,8 @@ public class AutoFormat
 						}
 
 						indent_puts();
+						// fprintf(outfil, line_feed);
 						fprintf(line_feed);
-
 						s_flg = 1;
 						if (e_flg == 1)
 						{
@@ -581,12 +594,11 @@ public class AutoFormat
 							tabs--;
 						}
 						string[j++] = c;
-
 						indent_puts();
 						getnl();
 						indent_puts();
+						// fprintf(outfil,"\n");
 						fprintf("\n");
-
 						tabs++;
 						s_flg = 1;
 						if (p_flg[level] > 0)
@@ -619,6 +631,7 @@ public class AutoFormat
 							onechar = new StringBuffer();
 							onechar.append(c); // the }
 							onechar.append(';');
+							// fprintf(outfil, onechar.toString());
 							fprintf(onechar.toString());
 							peek = -1;
 							peekc = '`';
@@ -627,11 +640,13 @@ public class AutoFormat
 						{
 							onechar = new StringBuffer();
 							onechar.append(c);
+							// fprintf(outfil, onechar.toString());
 							fprintf(onechar.toString());
 							peek = 1;
 						}
 						getnl();
 						indent_puts();
+						// fprintf(outfil,"\n");
 						fprintf("\n");
 						s_flg = 1;
 						if (c_level < s_level[level])
@@ -685,11 +700,10 @@ public class AutoFormat
 							tabs -= p_flg[level];
 							p_flg[level] = 0;
 						}
-
 						getnl();
 						indent_puts();
+						// fprintf(outfil,"\n");
 						fprintf("\n");
-
 						s_flg = 1;
 						if (if_lev > 0)
 							if (if_flg == 1)
@@ -717,6 +731,7 @@ public class AutoFormat
 						if (peekc == ':')
 						{
 							indent_puts();
+							// fprintf (outfil,":");
 							fprintf(":");
 							peek = -1;
 							peekc = '`';
@@ -724,6 +739,7 @@ public class AutoFormat
 						}
 						else
 						{
+							// int double_colon = 0;
 							peek = 1;
 						}
 
@@ -770,6 +786,7 @@ public class AutoFormat
 							peekc = '`';
 							peek = -1;
 							cpp_comment();
+							// fprintf(outfil,"\n");
 							fprintf("\n");
 							break;
 						}
@@ -866,6 +883,7 @@ public class AutoFormat
 							if (paren < 0)
 							{
 								EOF = 1;
+								// System.out.println("eof d");
 							}
 							indent_puts();
 							if (getnl() == 1)
@@ -890,7 +908,21 @@ public class AutoFormat
 						}
 				} // end switch
 
+				// System.out.println("string len is " + string.length);
+				// if (EOF == 1) System.out.println(string);
+				// String j_string = new String(string);
+
 			} // end while not EOF
+
+			/*
+			 * int bad; while ((bad = bin.read()) != -1) {
+			 * System.out.print((char) bad); }
+			 */
+			/*
+			 * char bad; //while ((bad = getchr()) != 0) { while (true) {
+			 * getchr(); if (peek != -1) { System.out.print(last_char); } else {
+			 * break; } }
+			 */
 
 			// save current (rough) selection point
 

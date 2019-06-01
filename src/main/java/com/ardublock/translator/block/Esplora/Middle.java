@@ -15,8 +15,11 @@ public class Middle extends TranslatorBlock {
 	//@Override
 			public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 			{
-
+				
+				
+				
 				String ret = "MIDDLE";
+				
 				return codePrefix + ret + codeSuffix;
 					
 			}

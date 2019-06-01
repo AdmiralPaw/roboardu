@@ -10,6 +10,7 @@ public class TinkerOutputPortBlock extends TranslatorBlock
 	public TinkerOutputPortBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
 		super(blockId, translator, codePrefix, codeSuffix, label);
 		translator.addHeaderFile("TinkerKit.h");
+		//translator.addSetupCommand("pinMode( " + label + ", OUTPUT);");
 	}
 
 	@Override

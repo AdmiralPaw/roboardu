@@ -56,7 +56,10 @@ public class PlayerPara extends TranslatorBlock
 
 		actuatorParaDef += "};";
 
+		
 		translator.addDefinitionCommand(actuatorParaDef);
+
+		/**/
 
 		ret = "PALETTE_PIN_UART," + "FUNCTION_PLAYER_MINI," + "sizeof(" + varName +")," + varName;
 		

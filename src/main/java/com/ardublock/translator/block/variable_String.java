@@ -18,6 +18,7 @@ public class variable_String extends TranslatorBlock
 			internalVariableName = translator.buildVariableName(label);
 			translator.addNumberVariable(label, internalVariableName);
 			translator.addDefinitionCommand("String " + internalVariableName + " = \"\" ;");
+//			translator.addSetupCommand(internalVariableName + " = \"\";");
 		}
 		return codePrefix + internalVariableName + codeSuffix;
 	}

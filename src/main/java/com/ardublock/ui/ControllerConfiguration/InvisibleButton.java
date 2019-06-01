@@ -3,6 +3,10 @@ package com.ardublock.ui.ControllerConfiguration;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.*;
+import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 

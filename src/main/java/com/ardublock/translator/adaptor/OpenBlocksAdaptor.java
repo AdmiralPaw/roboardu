@@ -49,6 +49,7 @@ public class OpenBlocksAdaptor implements BlockAdaptor
 		else
 		{
 			block = translator.getBlock(blockId);
+//			System.out.println("name: " + block.getGenusName() + "      | label: " + block.getBlockLabel());
 			TranslatorBlock translatorBlock = translatorBlockFactory.buildTranslatorBlock(translator, blockId, block.getGenusName(), codePrefix, codeSuffix, block.getBlockLabel());
 			return translatorBlock;
 		}

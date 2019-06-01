@@ -51,7 +51,10 @@ public class DigitalOutputPara extends TranslatorBlock
 
 		actuatorParaDef += "};";
 
+		
 		translator.addDefinitionCommand(actuatorParaDef);
+
+		/**/
 
 		ret = pin + ",FUNCTION_ACTUATOR_DIGITAL," + "sizeof(" + varName +")," + varName;
 		

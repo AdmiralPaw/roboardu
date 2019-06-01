@@ -22,6 +22,7 @@ public class variable_PImage extends TranslatorBlock
 			internalVariableName = translator.buildVariableName(label);
 			translator.addNumberVariable(label, internalVariableName);
 			translator.addDefinitionCommand("PImage " + internalVariableName + ";");
+//			translator.addSetupCommand(internalVariableName + " = \"\";");
 		}
 		return codePrefix + internalVariableName + codeSuffix;
 	}

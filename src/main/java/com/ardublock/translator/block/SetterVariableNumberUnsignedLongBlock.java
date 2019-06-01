@@ -27,6 +27,7 @@ public class SetterVariableNumberUnsignedLongBlock extends TranslatorBlock
     String ret = tb.toCode();
     tb = this.getRequiredTranslatorBlockAtSocket(1);
     ret = ret + " = " + tb.toCode() + " ;\n";
+    //ret = ret + " = " + "(unsigned long)" + tb.toCode() + " ;\n";
     return ret;
   }
 

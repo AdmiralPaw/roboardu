@@ -23,6 +23,7 @@ public class SerialPrintBlock extends TranslatorBlock
 		String ret = translatorBlock.toCode();
 		translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
 		String test=translatorBlock.toCode();
+//		ret+=test;
 		if(test.equals("true")){
 		    ret+="Serial.println();\n";
 		}

@@ -26,6 +26,9 @@ public class RgbLed extends TranslatorBlock {
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {
 
+
+        String servoSpecs = "";
+
         TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(0);
         String pin_red = tb.toCode();
         tb = this.getRequiredTranslatorBlockAtSocket(1);

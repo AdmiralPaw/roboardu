@@ -57,7 +57,10 @@ public class LedPara extends TranslatorBlock
 
 		actuatorParaDef += "};";
 
+		
 		translator.addDefinitionCommand(actuatorParaDef);
+
+		/**/
 
 		ret = pin + ",FUNCTION_LED," + "sizeof(" + varName +")," + varName;
 		

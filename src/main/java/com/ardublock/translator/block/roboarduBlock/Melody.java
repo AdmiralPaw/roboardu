@@ -103,6 +103,9 @@ public class Melody extends TranslatorBlock {
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {
 
+
+        String servoSpecs = "";
+
         TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(0);
         String pin = tb.toCode();
 
