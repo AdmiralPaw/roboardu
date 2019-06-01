@@ -5,6 +5,9 @@ import com.ardublock.core.exception.ArdublockException;
 public class SubroutineNotDeclaredException extends ArdublockException
 {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = -2621233841585294257L;
 	
 	private Long blockId;

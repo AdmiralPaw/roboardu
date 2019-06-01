@@ -5,6 +5,9 @@ import com.ardublock.core.exception.ArdublockException;
 public class SocketNullException extends ArdublockException
 {
 
+	/**
+	 * 
+	 */
 	private Long blockId;
 	
 	

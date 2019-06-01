@@ -11,6 +11,9 @@ public class DisplayString extends TranslatorBlock {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    private static final String OLED_DEFINE="#define SCREEN_WIDTH 128 // OLED display width, in pixels\n" +
+            "#define SCREEN_HEIGHT 64 // OLED display height, in pixels\n"+
+            "#define OLED_RESET     4 // Reset pin # (or -1 if sharing Arduino reset pin)\n";
 
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException

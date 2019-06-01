@@ -7,6 +7,17 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/*
+public class TinkerButtonBlock extends AbstractTinkerReadDigitalBlock
+{
+
+	public TinkerButtonBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+	{
+		super(blockId, translator, codePrefix, codeSuffix, label);
+	}
+}
+
+*/
 
 public class TinkerButtonBlock extends TranslatorBlock
 {

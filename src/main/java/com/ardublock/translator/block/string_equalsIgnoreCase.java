@@ -27,6 +27,7 @@ public class string_equalsIgnoreCase extends TranslatorBlock
 			internalVariableName = translator.buildVariableName(label);
 			translator.addNumberVariable(label, internalVariableName);
 			translator.addDefinitionCommand("String " + internalVariableName + " = "+first +" ;");
+//			translator.addSetupCommand(internalVariableName + " = \"\";");
 		}
 		String ret= internalVariableName + ".equalsIgnoreCase("+second+")";
 		return codePrefix + ret + codeSuffix;

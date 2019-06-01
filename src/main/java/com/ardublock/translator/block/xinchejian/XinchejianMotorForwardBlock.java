@@ -30,4 +30,55 @@ public class XinchejianMotorForwardBlock extends TranslatorBlock
 		return ret;
 	}
 
+	
+//CPP code
+/*
+
+#define XINCHEJIAN_MOTORSHIELD_M1_FORWARD	5
+#define XINCHEJIAN_MOTORSHIELD_M1_BACKWARD	6
+#define XINCHEJIAN_MOTORSHIELD_M2_FORWARD	9
+#define XINCHEJIAN_MOTORSHIELD_M2_BACKWARD	10
+
+
+void __ardublock_xinchejian_ms(int motorNumber, boolean forward, int speed)
+{
+	if (speed > 255)
+	{
+		speed = 255;
+	}
+	if (speed < 0)
+	{
+		speed = 0;
+	}
+	if (motorNumber == 1)
+	{
+		if (forward)
+		{
+			digitalWrite(XINCHEJIAN_MOTORSHIELD_M1_BACKWARD, LOW);
+			analogWrite(XINCHEJIAN_MOTORSHIELD_M1_FORWARD, speed);
+		}
+		else
+		{
+			digitalWrite(XINCHEJIAN_MOTORSHIELD_M1_FORWARD, LOW);
+			analogWrite(XINCHEJIAN_MOTORSHIELD_M1_BACKWARD, speed);
+		}
+	}
+	else
+	{
+		if (motorNumber == 2)
+		{
+			if (forward)
+			{
+				digitalWrite(XINCHEJIAN_MOTORSHIELD_M2_BACKWARD, LOW);
+				analogWrite(XINCHEJIAN_MOTORSHIELD_M2_FORWARD, speed);
+			}
+			else
+			{
+				digitalWrite(XINCHEJIAN_MOTORSHIELD_M2_FORWARD, LOW);
+				analogWrite(XINCHEJIAN_MOTORSHIELD_M2_BACKWARD, speed);
+			}
+		}
+	}
+}
+*/
 }

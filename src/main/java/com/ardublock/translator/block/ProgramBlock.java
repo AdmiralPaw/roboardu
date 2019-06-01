@@ -35,6 +35,7 @@ public class ProgramBlock extends TranslatorBlock
 		}
 		
 		translator.registerBodyTranslateFinishCallback(this);
+//		return "";
 		ret="";
 		ret = "void loop()\n{\n";
 		TranslatorBlock translatorBlock2 = getTranslatorBlockAtSocket(1);

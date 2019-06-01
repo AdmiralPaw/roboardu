@@ -18,6 +18,8 @@ public class ObstacleSensor extends TranslatorBlock {
     {
 
 
+        String servoSpecs = "";
+
         TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(0);
         String pin = tb.toCode();
 

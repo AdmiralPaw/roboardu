@@ -2,9 +2,11 @@ package com.ardublock.translator.block.roboarduBlock;
 
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
+import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+import java.util.ResourceBundle;
 
 public class BlinkLed extends TranslatorBlock {
 
@@ -26,6 +28,8 @@ public class BlinkLed extends TranslatorBlock {
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {
         TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(0);
+
+        String servoSpecs = "";
 
         String pinNumber = tb.toCode();
         tb = this.getRequiredTranslatorBlockAtSocket(1);
