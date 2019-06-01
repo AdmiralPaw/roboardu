@@ -39,7 +39,7 @@
 				<version>2.3.2</version>
 				<configuration>
                                             <source>${jdk.version}</source>
-                                            <target>${jdk.version}</target>
+                                            <target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>

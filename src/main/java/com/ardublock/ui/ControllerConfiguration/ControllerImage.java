@@ -1,7 +1,5 @@
 package com.ardublock.ui.ControllerConfiguration;
 
-<<<<<<< HEAD
-=======
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.Dimension;
@@ -11,15 +9,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
->>>>>>> 658a592225fe81c42b181623f2d5ee150384985f
 import javax.swing.*;
 import java.util.ArrayList;
 import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration.Pin;
 import com.ardublock.ui.ControllerConfiguration.InvisibleButton;
-<<<<<<< HEAD
-=======
 import com.ardublock.ui.OpenblocksFrame;
->>>>>>> 658a592225fe81c42b181623f2d5ee150384985f
 import java.awt.Image;
 import java.net.URL;
 
@@ -34,7 +28,6 @@ public class ControllerImage extends JPanel {
 
     ControllerImage(СontrollerСonfiguration controller) {
         setLayout(null);
-<<<<<<< HEAD
         this.setBounds(0, 0, 150, 150);
         URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/Plata.png");
         imageRaw = new ImageIcon(iconURL).getImage().getScaledInstance(
@@ -46,9 +39,8 @@ public class ControllerImage extends JPanel {
         someButt2.setBounds(this.getBounds().x + 10, this.getBounds().y + 10, 10, 10);
         this.add(someButt);
         this.add(someButt2);
-=======
         this.setBounds(0,0,150,150);
-        URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/Plata.png");
+        iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/Plata.png");
         BufferedImage img = null;
         BufferedImage resized = null;
         try{
@@ -63,13 +55,10 @@ public class ControllerImage extends JPanel {
         /*JLabel mainPlat = new JLabel(image);
         mainPlat = */
         image = new ImageIcon(resized);
-        JButton someButt = new JButton(image);
         someButt.setLayout(null);
         someButt.setBounds(this.getBounds().x + 50,this.getBounds().y+ 100,200,150);
         //someButt.setBorderPainted(false);
         this.add(someButt);
-
->>>>>>> 658a592225fe81c42b181623f2d5ee150384985f
     }
 
     public void setModuleImages() {
