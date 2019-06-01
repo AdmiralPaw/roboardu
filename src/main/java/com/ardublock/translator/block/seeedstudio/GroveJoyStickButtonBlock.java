@@ -1,9 +1,7 @@
 package com.ardublock.translator.block.seeedstudio;
 
 import com.ardublock.translator.Translator;
-import com.ardublock.translator.block.NumberBlock;
 import com.ardublock.translator.block.TranslatorBlock;
-import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 

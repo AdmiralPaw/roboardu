@@ -25,11 +25,6 @@ public class Button extends TranslatorBlock
                     "  }\n" +
                     "  return 0;\n" +
                     "}";
-//            "int __ardublockAnalogRead(int pinNumber)\n" +
-//                    "{\n" +
-//                    "pinMode(pinNumber, INPUT);\n" +
-//                    "return analogRead(pinNumber);\n" +
-//                    "}\n\n";
 
     public Button(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {

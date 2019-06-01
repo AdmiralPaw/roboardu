@@ -27,7 +27,6 @@ public class string_compareTo extends TranslatorBlock
 			internalVariableName = translator.buildVariableName(label);
 			translator.addNumberVariable(label, internalVariableName);
 			translator.addDefinitionCommand("String " + internalVariableName + " = "+first +" ;");
-//			translator.addSetupCommand(internalVariableName + " = \"\";");
 		}
 		String ret= internalVariableName + ".compareTo("+second+")< 0";
 		return codePrefix + ret + codeSuffix;

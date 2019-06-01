@@ -2,8 +2,6 @@ package com.ardublock.translator.block.roboarduBlock.display;
 
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
-import com.ardublock.translator.block.exception.SocketNullException;
-import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
 public class DisplayShow extends TranslatorBlock {
     public DisplayShow (Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
@@ -11,9 +9,6 @@ public class DisplayShow extends TranslatorBlock {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
-    private static final String OLED_DEFINE="#define SCREEN_WIDTH 128 // OLED display width, in pixels\n" +
-            "#define SCREEN_HEIGHT 64 // OLED display height, in pixels\n"+
-            "#define OLED_RESET     4 // Reset pin # (or -1 if sharing Arduino reset pin)\n";
 
     @Override
     public String toCode()

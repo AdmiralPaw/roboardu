@@ -387,12 +387,7 @@ public class OpenblocksFrame extends JFrame {
         workspace.workLayer.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent e) {
                 Dimension s = workspace.getFactorySize();
-                Dimension q = workspace.getCanvasSize();
                 logo.setPreferredSize(new Dimension(s.width, standartNorthPanelSize));
-//                        if (workspace.workLayer.getDividerLocation() > 380)
-//                            workspace.workLayer.setDividerLocation(380);
-//                        else if (workspace.workLayer.getDividerLocation() < 120)
-//                            workspace.workLayer.setDividerLocation(120);
                 northPanel.updateUI();
                 workspace.updateUI();
                 workspace.validate();

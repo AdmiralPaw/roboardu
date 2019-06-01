@@ -1,9 +1,7 @@
 package com.ardublock.ui.listener;
 
 public interface OpenblocksFrameListener {
-	public void didNew();
-	public void didSave();
-	public void didSaveAs();
-	public void didLoad();	
-	public void didGenerate(String source);
+	 void didSave();
+	 void didLoad();
+	 void didGenerate(String source);
 }
