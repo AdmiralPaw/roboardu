@@ -1,6 +1,5 @@
 package com.ardublock.translator.block.roboarduBlock.Engine;
 
-import java.util.List;
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
@@ -9,8 +8,7 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
 public class Engine_BackDistance extends TranslatorBlock
 {
-	private List<String> setupCommand;
-	
+
 	public Engine_BackDistance(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{   
             super(blockId, translator, codePrefix, codeSuffix, label);
