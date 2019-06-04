@@ -31,7 +31,7 @@ public class pwmLed extends TranslatorBlock {
 
         translator.addDefinitionCommand(PWM_LED);
 
-        String ret ="LedGlow(" + pinNumber +", " + glow_time + ");\n";
+        String ret ="LedPWM(" + pinNumber +", " + glow_time + ");\n";
 
         return codePrefix + ret + codeSuffix;
     }
