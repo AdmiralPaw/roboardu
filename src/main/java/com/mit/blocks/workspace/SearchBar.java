@@ -105,6 +105,10 @@ public class SearchBar {
                     // the blocks yet to be found may have changed.  Recheck all blocks.
                     performSearch(SearchRange.CHECK_ALL);
                 }
+                
+                
+                
+                
             }
 
             public void removeUpdate(DocumentEvent e) {

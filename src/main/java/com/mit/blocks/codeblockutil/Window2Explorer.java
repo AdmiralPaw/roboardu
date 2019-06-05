@@ -31,11 +31,17 @@ import org.jfree.ui.tabbedui.VerticalLayout;
  */
 public class Window2Explorer extends JPanel implements Explorer {
     
+    //TODO: добавить поиск - удаление не соответсвующих элементов в тек директории(компоненте)
+    //и добавление в него компонентов из переменной dictionary соответствующих блоков
+    
+    
     //var for knoving current canvas in method set drawers card in kesha code
     private int currentCanvas=0;
     boolean was=false;
+    boolean getedParent=false;
     
-    Map<String,JComponent> dictionary = new HashMap<String,JComponent>();
+    public static Map<String,JComponent> dictionary = new HashMap<String,JComponent>();
+    public static JComponent currentDir;
 
     private static final long serialVersionUID = 328149080308L;
     private static final int buttonHeight = 13;
@@ -140,6 +146,8 @@ public class Window2Explorer extends JPanel implements Explorer {
 //            
             
         }
+        
+        
         //kesha code
         List<JComponent> mycanvases = canvases;
         RHoverScrollPane myc2;
@@ -149,6 +157,7 @@ public class Window2Explorer extends JPanel implements Explorer {
             int siz = myc2.getComponents().length;
             JComponent tc =(JComponent) myc2.getComponent(2);
             myc=tc;
+            
               
             int siz2 = myc.getComponents().length;
             myc=(JComponent)tc.getComponent(0);
@@ -161,6 +170,7 @@ public class Window2Explorer extends JPanel implements Explorer {
             
             //geted var with list with blocks
             mc5=listcpnts;
+            
             
             //FactoryRenderableBlock
             int onebl = (int)mc5.getComponents().length;
@@ -192,13 +202,22 @@ public class Window2Explorer extends JPanel implements Explorer {
 //        RHoverScrollPane rh =(RHoverScrollPane)myc.getComponent(2);
 //        JViewport vp = (JViewport)rh.getComponent(0);
         //FactoryCanvas fc = (FactoryCanvas)vp.getComponent(0);
-        System.out.println("my code dont throw exception");
+        System.out.println("my code dont throw exception?");
         
         
         
         this.revalidate();
         System.out.println(this.canvases.size());
         System.out.println("cavases size");
+    }
+    
+    
+    //kesha code
+    public static JComponent getCurrentDir(){
+        
+        
+        
+        return null;
     }
 
     public void selectCanvas(int index) {
