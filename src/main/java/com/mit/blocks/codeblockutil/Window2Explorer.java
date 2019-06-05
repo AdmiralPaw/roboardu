@@ -12,8 +12,12 @@ import java.util.List;
 import javax.swing.*;
 
 import com.mit.blocks.codeblockutil.CScrollPane.ScrollPolicy;
+import com.mit.blocks.renderable.FactoryRenderableBlock;
 import com.mit.blocks.workspace.SearchBar;
 import com.mit.blocks.workspace.SearchableContainer;
+import java.awt.Component;
+import java.util.HashMap;
+import java.util.Map;
 import org.jfree.ui.tabbedui.VerticalLayout;
 
 /**
@@ -26,6 +30,12 @@ import org.jfree.ui.tabbedui.VerticalLayout;
  *
  */
 public class Window2Explorer extends JPanel implements Explorer {
+    
+    //var for knoving current canvas in method set drawers card in kesha code
+    private int currentCanvas=0;
+    boolean was=false;
+    
+    Map<String,JComponent> dictionary = new HashMap<String,JComponent>();
 
     private static final long serialVersionUID = 328149080308L;
     private static final int buttonHeight = 13;
@@ -122,9 +132,73 @@ public class Window2Explorer extends JPanel implements Explorer {
         buttonPane.add(buttonScroll, BorderLayout.CENTER);
         if (!canvases.isEmpty()) {
             canvasPane.add(canvases.get(0));
+            
+            //kesha code
+//            Component[] mycanvases = canvasPane.getComponents();
+//            RHoverScrollPane[] paness =(RHoverScrollPane[])mycanvases;
+//            Component[] rendBlocks = paness[0].getComponents();
+//            
+            
         }
+        //kesha code
+        List<JComponent> mycanvases = canvases;
+        RHoverScrollPane myc2;
+        if(mycanvases.size()>0){
+            JComponent myc = (JComponent)mycanvases.get(this.currentCanvas);
+            myc2=(RHoverScrollPane)myc;
+            int siz = myc2.getComponents().length;
+            JComponent tc =(JComponent) myc2.getComponent(2);
+            myc=tc;
+              
+            int siz2 = myc.getComponents().length;
+            myc=(JComponent)tc.getComponent(0);
+            
+            //geted jviewport
+            JComponent mc5 = myc;
+            JComponent mc6=mc5;
+            
+            JComponent listcpnts=(JComponent)mc6.getComponent(0);
+            
+            //geted var with list with blocks
+            mc5=listcpnts;
+            
+            //FactoryRenderableBlock
+            int onebl = (int)mc5.getComponents().length;
+            
+            for(int i=0;i<mc5.getComponentCount();i+=2){
+            FactoryRenderableBlock bl;
+            if(onebl>0){
+                FactoryRenderableBlock bliner=(FactoryRenderableBlock)mc5.getComponent(i);
+                 bl=bliner;
+                 String kye = bl.getKeyword();
+                 System.out.println(kye);
+                 this.dictionary.put(bl.getKeyword(),bl);
+            }
+            }
+            int allcpnts = mc5.getComponents().length;
+            int siz3 = myc.getComponents().length;
+            System.out.println(siz);
+            System.out.println(siz2);
+            System.out.println(siz3);
+            System.out.println(allcpnts);
+            System.out.println(onebl);
+            if(this.was){
+            this.currentCanvas++;
+            
+            
+            }
+            this.was=true;
+        }
+//        RHoverScrollPane rh =(RHoverScrollPane)myc.getComponent(2);
+//        JViewport vp = (JViewport)rh.getComponent(0);
+        //FactoryCanvas fc = (FactoryCanvas)vp.getComponent(0);
+        System.out.println("my code dont throw exception");
+        
+        
+        
         this.revalidate();
-
+        System.out.println(this.canvases.size());
+        System.out.println("cavases size");
     }
 
     public void selectCanvas(int index) {
