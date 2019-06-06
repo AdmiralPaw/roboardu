@@ -33,8 +33,9 @@ public class ControllerImage extends JPanel {
         Image imageRaw = new ImageIcon(iconURL).getImage().getScaledInstance(
                 200, 140, java.awt.Image.SCALE_SMOOTH);
         image = new ImageIcon(imageRaw);
-        InvisibleButton someButt = new InvisibleButton(image,controller, "a0");
-        InvisibleButton someButt2 = new InvisibleButton(image,controller, "a1");
+        
+        InvisibleButton someButt = new InvisibleButton(image,controller, this, "a0");
+        InvisibleButton someButt2 = new InvisibleButton(image,controller, this, "a1");
         someButt.setBounds(this.getBounds().x, this.getBounds().y, 10, 10);
         someButt2.setBounds(this.getBounds().x + 10, this.getBounds().y + 10, 10, 10);
         this.add(someButt);
