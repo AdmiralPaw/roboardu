@@ -27,7 +27,7 @@ public class ModuleButton extends InvisibleButton {
     public ModuleButton(Icon icon, СontrollerСonfiguration root, ControllerImage rootImage, String Id, String pathToModule) {
         super(icon, root, rootImage, Id);
         this.path = pathToModule;
-                
+        
         this.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
                 //this.controller.changeComponentsPane(buttonId);
