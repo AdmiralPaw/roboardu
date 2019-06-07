@@ -59,7 +59,7 @@
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.increment">
 					<DefaultArg genus-name="number" label="1" />
 				</BlockConnector>
-				<BlockConnector label="commands" connector-type="cmd" connector-kind="socket" />
+				<BlockConnector label="bc.repeat_control_commands" connector-type="cmd" connector-kind="socket" />
 			</BlockConnectors>
 		</BlockGenus>
 		
@@ -186,7 +186,7 @@
 			</arg-description>
           </description>
           <BlockConnectors>
-            <BlockConnector label="commands" connector-kind="socket" connector-type="cmd" />
+            <BlockConnector label="bc.do_while_commands" connector-kind="socket" connector-type="cmd" />
             <BlockConnector label="bc.condition" connector-kind="socket" connector-type="boolean">
               <DefaultArg genus-name="less" label="Pick a test" />
             </BlockConnector>    
@@ -9540,7 +9540,7 @@
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
 					<DefaultArg genus-name="pinListDigital_D0" label="D0" />
 				</BlockConnector>
-				<BlockConnector connector-type="number" connector-kind="socket" label="bc.time">
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.led_blink_time1">
 					<DefaultArg genus-name="number" label="10" />
 				</BlockConnector>
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.time">
