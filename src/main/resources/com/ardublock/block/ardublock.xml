@@ -9498,7 +9498,7 @@
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.angle">
 					<DefaultArg genus-name="number" label="90" />
 				</BlockConnector>
-				<BlockConnector connector-type="number" connector-kind="socket" label="bc.time">
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.servo_degrees_time">
 					<DefaultArg genus-name="number" label="10" />
 				</BlockConnector>
 			</BlockConnectors>
@@ -9543,7 +9543,7 @@
 				<BlockConnector connector-type="number" connector-kind="socket" label="bc.led_blink_time1">
 					<DefaultArg genus-name="number" label="10" />
 				</BlockConnector>
-				<BlockConnector connector-type="number" connector-kind="socket" label="bc.time">
+				<BlockConnector connector-type="number" connector-kind="socket" label="bc.led_blink_time2">
 					<DefaultArg genus-name="number" label="10" />
 				</BlockConnector>
 			</BlockConnectors>
