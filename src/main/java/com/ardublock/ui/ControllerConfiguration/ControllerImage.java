@@ -28,22 +28,11 @@ public class ControllerImage extends JPanel {
 
     ControllerImage(СontrollerСonfiguration controller) {
         setLayout(null);
-        this.setBounds(0, 0, 150, 150);
-        URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/Plata.png");
-        Image imageRaw = new ImageIcon(iconURL).getImage().getScaledInstance(
-                200, 140, java.awt.Image.SCALE_SMOOTH);
-        image = new ImageIcon(imageRaw);
         
-        InvisibleButton someButt = new InvisibleButton(image,controller, this, "a0");
-        InvisibleButton someButt2 = new InvisibleButton(image,controller, this, "a1");
-        someButt.setBounds(this.getBounds().x, this.getBounds().y, 10, 10);
-        someButt2.setBounds(this.getBounds().x + 10, this.getBounds().y + 10, 10, 10);
-        this.add(someButt);
-        this.add(someButt2);
-        //image = new ImageIcon(iconURL);
-        //InvisibleButton mainPlat = new InvisibleButton();
-        /*JLabel mainPlat = new JLabel(image);
-        mainPlat = */
+        
+        
+        InvisibleButton someButt = new InvisibleButton(controller, this, "a0");
+        InvisibleButton someButt2 = new InvisibleButton(controller, this, "a1");
     }
 
     public void setModuleImages() {
