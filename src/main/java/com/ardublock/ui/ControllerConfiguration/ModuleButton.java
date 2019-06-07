@@ -24,14 +24,39 @@ public class ModuleButton extends InvisibleButton {
     
     private final String path;
     
-    public ModuleButton(Icon icon, СontrollerСonfiguration root, String Id, String pathToModule) {
-        super(icon, root, Id);
+    public ModuleButton(Icon icon, СontrollerСonfiguration root, ControllerImage rootImage, String Id, String pathToModule) {
+        super(icon, root, rootImage, Id);
         this.path = pathToModule;
+        
+        this.addMouseListener(new MouseListener() {
+            public void mouseClicked(MouseEvent e) {
+                //this.controller.changeComponentsPane(buttonId);
+            }
+
+            public void mousePressed(MouseEvent e) {
+                
+            }
+
+            public void mouseReleased(MouseEvent e) {
+    
+            }
+
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            public void mouseExited(MouseEvent e) {
+
+            }
+        }
+        );
     }
     
     public String getPath(){
         return this.path;
     }
+    
+    
     
     public String getAssignedId(){
         return this.getId();
