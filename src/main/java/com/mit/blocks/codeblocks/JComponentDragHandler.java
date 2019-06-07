@@ -143,6 +143,7 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
         mPressedY = e.getY();
         oldLocX = myComponent.getX();
         oldLocY = myComponent.getY();
+        workspace.setBasket(true);
     }
 
     /**
@@ -154,6 +155,7 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
     public void mouseDragged(MouseEvent e) {
         //System.out.println("mouse dragged: "+this.getLocation());
         myComponent.setCursor(closedHandCursor);
+        workspace.setBasket(true);
         mCurrentX = e.getX();
         mCurrentY = e.getY();
         int dx = mCurrentX - mPressedX;
@@ -199,17 +201,21 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
      */
     public void mouseReleased(MouseEvent e) {
         myComponent.setCursor(openHandCursor);
+        workspace.setBasket(false);
     }
 
     public void mouseClicked(MouseEvent arg0) {
         myComponent.setCursor(openHandCursor);
+        workspace.setBasket(false);
     }
 
     public void mouseEntered(MouseEvent arg0) {
         myComponent.setCursor(openHandCursor);
+
     }
 
     public void mouseExited(MouseEvent arg0) {
         myComponent.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        workspace.setBasket(false);
     }
 }

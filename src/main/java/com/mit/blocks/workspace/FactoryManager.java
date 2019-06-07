@@ -209,6 +209,10 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         this.factorySwicther.repaint();
     }
 
+    public void setBasket(boolean status)
+    {
+        this.navigator.setBasket(status);
+    }
     /**
      * prints an error message in red without ending the run process. For
      * debuggin purposes
