@@ -112,9 +112,10 @@ public class Window2Explorer extends JPanel implements Explorer {
             blockCanvasWithDepth.setPreferredSize(new Dimension(300, 500));
             blockCanvasWithDepth.add(scrollFLVL, 0);
             URL iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/trashcan.png");
-            ImageIcon button_icon = new ImageIcon(
-                    new ImageIcon(iconURL).getImage()
-                            .getScaledInstance(128,128, java.awt.Image.SCALE_SMOOTH));
+            Image imageRaw = new ImageIcon(iconURL).getImage().getScaledInstance(
+                128, 128, java.awt.Image.SCALE_SMOOTH);
+            ImageIcon button_icon = new ImageIcon(imageRaw);
+            //ImageIcon button_icon = new ImageIcon(iconURL).getImage().getScaledInstance(128,128, java.awt.Image.SCALE_SMOOTH);
             final JLabel mainLogo = new JLabel(button_icon);
             basketPane = new JPanel(new BorderLayout());
             basketPane.add(mainLogo, BorderLayout.CENTER);

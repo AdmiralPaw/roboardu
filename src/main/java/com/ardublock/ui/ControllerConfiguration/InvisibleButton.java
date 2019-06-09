@@ -17,50 +17,86 @@ public class InvisibleButton extends JButton {
     private final ControllerImage controllerImage;
     private final СontrollerСonfiguration controller;
     private final String buttonId;
+    private String path;
+    private String pathSet;
+    private boolean isPressed;
 
     /**
      * @param controller
      * @param buttonId отвечает за индексирование кнопок
      */
     
-    public InvisibleButton(СontrollerСonfiguration root, ControllerImage rootImage, String Id){
+    public InvisibleButton(СontrollerСonfiguration root, ControllerImage rootImage, String Id, String mode){
         super();
         this.controller = root;
         this.buttonId = Id;
         this.controllerImage = rootImage;
-        setPositionAsConnector(Id);
-        setIconAsConnector(Id);
+        switch (mode) {
+            case "connector":
+            case "Connector":
+                setStartPositionAsConnector(Id);
+                setIconAsConnector(Id);
+                break;
+            case "module":
+            case "Module":
+                setStartPositionAsModule(Id);
+                setStartIconAsModule();
+                break;
+            default:
+                this.path = null;
+                this.pathSet = null;
+                break;
+        }
+        setListenersAsConnector();
         rootImage.add(this);
     }
     
-    public InvisibleButton(Icon icon, СontrollerСonfiguration root, ControllerImage rootImage, String Id) {
-        super(icon);
-        this.controller = root;
-        this.buttonId = Id;
-        this.controllerImage = rootImage;
-//        this.setOpaque(false);
-//        this.setContentAreaFilled(false);
-//        this.setBorderPainted(false);
-    }
+    //-----------------------------------------------Методы коннекторов------------------------------------------
+    public void setListenersAsConnector(){
+        this.addMouseListener(new MouseListener() {
+            public void mouseClicked(MouseEvent e) {
+                if(isPressed){
+                    isPressed=false;
+                    setIconAccordingToPress();
+                }
+                else{  
+                    isPressed=true;  
+                    setIconAccordingToPress();              
+                }
+            }
+
+            public void mousePressed(MouseEvent e) {
+                
+            }
+
+            public void mouseReleased(MouseEvent e) {
     
-    public void setListenersAsConnector(String Id){
-        
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                setBounds(getX() - 10, getY() - 10, getWidth() + 20, getHeight() + 20);
+                setIconAccordingToPress();
+            }
+
+            public void mouseExited(MouseEvent e) {
+                setBounds(getX() + 10, getY() + 10, getWidth() - 20, getHeight() - 20);
+                setIconAccordingToPress();
+            }
+        }
+        );
     }
     
     public void setIconAsConnector(String Id) {
-        Image imageRaw;
-        ImageIcon image;
-        URL iconURL;
         switch (Id) {
             case "dir04pwm05":
             case "dir07pwm06":
-                rePaint("com/ardublock/Images/connectors/engine1.png");
+                setPath(rePaint("com/ardublock/Images/connectors/engine1.png"));
                 break;
             case "d2":
-                rePaint("com/ardublock/Images/connectors/connectorEncUp.png");
+                setPath(rePaint("com/ardublock/Images/connectors/connectorEncUp.png"));
                 break;
             case "d3":
-                rePaint("com/ardublock/Images/connectors/connectorEncDown.png");
+                setPath(rePaint("com/ardublock/Images/connectors/connectorEncDown.png"));
                 break;
             case "d8":
             case "d10":
@@ -70,49 +106,16 @@ public class InvisibleButton extends JButton {
             case "a2":
             case "a1":
             case "a0":
-                rePaint("com/ardublock/Images/connectors/connector1.png");
+                setPath(rePaint("com/ardublock/Images/connectors/connector1.png"));
                 break;
             case "i2c":
-                rePaint("com/ardublock/Images/connectors/connector1.png");
+                setPath(rePaint("com/ardublock/Images/connectors/connector1.png"));
                 break;
                 
         }
     }
     
-    public void setIconAsConnectorPressed(String Id){
-       Image imageRaw;
-        ImageIcon image;
-        URL iconURL;
-        switch (Id) {
-            case "dir04pwm05":
-            case "dir07pwm06":
-                rePaint("com/ardublock/Images/connectors/engineSet.png");
-                break;
-            case "d2":
-                rePaint("com/ardublock/Images/connectors/connectorEncUpSet.png");
-                break;
-            case "d3":
-                rePaint("com/ardublock/Images/connectors/connectorEncDownSet.png");
-                break;
-            case "d8":
-            case "d10":
-            case "d9":
-            case "d11":
-            case "a3":
-            case "a2":
-            case "a1":
-            case "a0":
-                rePaint("com/ardublock/Images/connectors/connectorSet.png");
-                break;
-            case "i2c":
-                rePaint("com/ardublock/Images/connectors/connectorSet.png");
-                break;
-                
-        } 
-    }
-    
-    
-    public void setPositionAsConnector(String Id){
+    public void setStartPositionAsConnector(String Id){
         switch(Id){
             case "dir04pwm05":
                 this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
@@ -157,6 +160,83 @@ public class InvisibleButton extends JButton {
         }
     }
     
+    public void setStartPositionAsModule(String Id){
+        switch(Id){
+            case "dir04pwm05":
+                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 35, 35);
+                break;
+            case "dir07pwm06":
+                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 35, 35);
+                break;
+            case "d2":
+                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 35, 35);
+                break;
+            case "d3":
+                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 35, 35);
+                break;
+            case "d8":
+                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 35, 35);
+                break;
+            case "d10":
+                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                break;
+            case "d9":
+                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                break;
+            case "d11":
+                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                break;
+            case "a3":
+                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                break;
+            case "a2":
+                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                break;
+            case "a1":
+                this.setBounds(this.controller.getX()+120, this.controller.getY()+120, 35, 35);
+                break;
+            case "a0":
+                this.setBounds(this.controller.getX()+100, this.controller.getY()+120, 35, 35);
+                break;
+            case "i2c":
+                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                break;
+                
+        }
+    }
+    
+    public void setStartIconAsModule(){
+        setPath(rePaint("com/ardublock/Images/module/start.png"));
+    }
+    
+    public void setNewIconAsModule(String Path){
+        setPath(rePaint(Path));
+    }
+    
+    public void setNewIconAsModule(URL iconURL){
+        setPath(rePaint(iconURL));
+    }
+
+    public void setIconAccordingToPress() {
+        if (this.isPressed) {
+            rePaint(this.pathSet);
+        } 
+        else {
+            rePaint(this.path);
+        }
+    }
+    
+    public void setPath(String Path){
+        this.path = Path;
+        this.pathSet = getPathAddedName(Path, "Set");
+    }
+    
+    public String getPathAddedName(String base, String adding){
+        String beforePoint = base.substring(0, base.length()-4);
+        String afterPoint = base.substring(base.length()-4);
+        return beforePoint + adding + afterPoint;
+    }
+    
     public String getId(){
         return this.buttonId;
     };
@@ -169,23 +249,29 @@ public class InvisibleButton extends JButton {
         return this.controllerImage;
     }
     
+    public String getPath(){
+        return this.path;
+    }
+    
     public void delete(){
         this.controllerImage.remove(this);
     }
     
-    public void rePaint(URL iconURL){
+    public String rePaint(URL iconURL){
         Image imageRaw = new ImageIcon(iconURL).getImage().getScaledInstance(
                 this.getWidth(), this.getHeight(), java.awt.Image.SCALE_SMOOTH);
         ImageIcon image = new ImageIcon(imageRaw);
         this.setIcon(image);
+        return iconURL.getPath();
     }
     
-    public void rePaint(String path){
-        URL iconURL = ControllerImage.class.getClassLoader().getResource(path);
+    public String rePaint(String Path){
+        URL iconURL = ControllerImage.class.getClassLoader().getResource(Path);
         Image imageRaw = new ImageIcon(iconURL).getImage().getScaledInstance(
                 this.getWidth(), this.getHeight(), java.awt.Image.SCALE_SMOOTH);
         ImageIcon image = new ImageIcon(imageRaw);
         this.setIcon(image);
+        return Path;
     }
     
     public void rePaint(ImageIcon image){
