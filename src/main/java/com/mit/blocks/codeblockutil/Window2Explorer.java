@@ -45,6 +45,7 @@ public class Window2Explorer extends JPanel implements Explorer {
     public JPanel buttonPane;
     public JPanel basketPane;
     public int oldIndex;
+
     /**
      * Constructs new stack explorer
      */
@@ -59,7 +60,6 @@ public class Window2Explorer extends JPanel implements Explorer {
         this.add(canvasPane, BorderLayout.CENTER);
         buttonPane.setLayout(new BorderLayout());//VerticalLayout());//GridLayout(0, 2));
         this.add(buttonPane, BorderLayout.NORTH);
-
 
     }
 
@@ -113,7 +113,7 @@ public class Window2Explorer extends JPanel implements Explorer {
             blockCanvasWithDepth.add(scrollFLVL, 0);
             URL iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/trashcan.png");
             Image imageRaw = new ImageIcon(iconURL).getImage().getScaledInstance(
-                128, 128, java.awt.Image.SCALE_SMOOTH);
+                    84, 84, java.awt.Image.SCALE_SMOOTH);
             ImageIcon button_icon = new ImageIcon(imageRaw);
             //ImageIcon button_icon = new ImageIcon(iconURL).getImage().getScaledInstance(128,128, java.awt.Image.SCALE_SMOOTH);
             final JLabel mainLogo = new JLabel(button_icon);
@@ -173,20 +173,18 @@ public class Window2Explorer extends JPanel implements Explorer {
     public void reformView() {
     }
 
-    public void activeBasket()
-    {
-            JLayeredPane scroll = canvases.get(oldIndex);
-            scroll.getComponents()[0].setVisible(false);
-            scroll.getComponents()[1].setVisible(true);
-            canvasPane.removeAll();
-            canvasPane.add(scroll);
-            canvasPane.revalidate();
-            canvasPane.repaint();
+    public void activeBasket() {
+        JLayeredPane scroll = canvases.get(oldIndex);
+        scroll.getComponents()[0].setVisible(false);
+        scroll.getComponents()[1].setVisible(true);
+        canvasPane.removeAll();
+        canvasPane.add(scroll);
+        canvasPane.revalidate();
+        canvasPane.repaint();
 
     }
 
-    public void deactiveBasket()
-    {
+    public void deactiveBasket() {
         JLayeredPane scroll = canvases.get(oldIndex);
         scroll.getComponents()[0].setVisible(true);
         scroll.getComponents()[1].setVisible(false);

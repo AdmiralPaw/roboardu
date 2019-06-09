@@ -340,17 +340,13 @@ final public class Navigator {
         }
     }
 
-    public void setBasket(boolean status)
-    {
+    public void setBasket(boolean status) {
         for (int i = 0; i < explorers.size(); i++) {
             Explorer ex = explorers.get(i);
             if (ex instanceof Window2Explorer) {
-                if (status)
-                {
+                if (status) {
                     ((Window2Explorer) ex).activeBasket();
-                }
-                else
-                {
+                } else {
                     ((Window2Explorer) ex).deactiveBasket();
                 }
             }
@@ -460,7 +456,6 @@ final public class Navigator {
             mainLabel.setText(middle);
             rightLabel.setText(right);
         }
-
 
     }
 
