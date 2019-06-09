@@ -182,7 +182,7 @@ public class Window2Explorer extends JPanel implements Explorer {
             canvasPane.add(scroll);
             canvasPane.revalidate();
             canvasPane.repaint();
-        
+
     }
 
     public void deactiveBasket()
