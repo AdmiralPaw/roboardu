@@ -211,6 +211,8 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 super.componentResized(e);
                 blockCanvasWithDepth.getComponents()[1].setBounds(0, 0, blockCanvasWithDepth.getWidth() - 1, blockCanvasWithDepth.getHeight() - 1);
                 blockCanvasWithDepth.getComponents()[0].setBounds(blockCanvasWithDepth.getWidth() - 75, blockCanvasWithDepth.getHeight() - 150, 75, 150);
+                blockCanvasWithDepth.getComponents()[1].revalidate();
+                blockCanvasWithDepth.getComponents()[1].repaint();
 
             }
         });
@@ -406,6 +408,12 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      * If event is of type "2" then shows the Minimize page button
      * Event type details can be found in the GlassExplorerEvent class
      */
+
+    public void setBasket(boolean status)
+    {
+        this.factory.setBasket(status);
+    }
+
     @Override
     public void explorerEventOccurred(ExplorerEvent event) {
         final Explorer exp = event.getSource();

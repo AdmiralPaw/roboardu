@@ -19,23 +19,7 @@ public class DigitalOutputBlock extends TranslatorBlock
 		TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
 		// Should it ever not use ARDUBLOCK_DIGITAL_WRITE_DEFINE? Cannot think why.
 		// What is special about NumberBlocks?
-		// Should check for "is a simple number" not "instanceof NumberBlock" now that pinLists constants exist 
-//		if (translatorBlock instanceof NumberBlock)
-//		{
-//			String number = translatorBlock.toCode();
-//			String setupCode = "pinMode( " + number + " , OUTPUT);";
-//			translator.addSetupCommand(setupCode);
-//			
-//			String ret = "digitalWrite( ";
-//			ret = ret + number;
-//			ret = ret + " , ";
-//			translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
-//			ret = ret + translatorBlock.toCode();
-//			ret = ret + " );\n";
-//			return ret;
-//		}
-//		else
-//		{
+		// Should check for "is a simple number" not "instanceof NumberBlock" now that pinLists constants exist
 			translator.addDefinitionCommand(ARDUBLOCK_DIGITAL_WRITE_DEFINE);
 			String ret = "__ardublockDigitalWrite(";
 			
@@ -45,8 +29,7 @@ public class DigitalOutputBlock extends TranslatorBlock
 			ret = ret + translatorBlock.toCode();
 			ret = ret + ");\n";
 			return ret;
-//		}
-		
+
 	}
 
 }

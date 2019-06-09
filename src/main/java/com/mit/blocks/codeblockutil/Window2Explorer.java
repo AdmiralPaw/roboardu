@@ -1,19 +1,21 @@
 package com.mit.blocks.codeblockutil;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
 
+import com.ardublock.ui.OpenblocksFrame;
 import com.mit.blocks.codeblockutil.CScrollPane.ScrollPolicy;
 import com.mit.blocks.workspace.SearchBar;
 import com.mit.blocks.workspace.SearchableContainer;
+import com.mit.blocks.workspace.Workspace;
 import org.jfree.ui.tabbedui.VerticalLayout;
 
 /**
@@ -32,7 +34,7 @@ public class Window2Explorer extends JPanel implements Explorer {
     /**
      * The set of drawers that wraps each canvas
      */
-    private List<JComponent> canvases;
+    private List<JLayeredPane> canvases;
     /**
      * Teh canvas portion
      */
@@ -41,14 +43,15 @@ public class Window2Explorer extends JPanel implements Explorer {
      * The tab portion
      */
     public JPanel buttonPane;
-
+    public JPanel basketPane;
+    public int oldIndex;
     /**
      * Constructs new stack explorer
      */
     public Window2Explorer() {
         super();
         this.setLayout(new BorderLayout());
-        this.canvases = new ArrayList<JComponent>();
+        this.canvases = new ArrayList<JLayeredPane>();
         this.canvasPane = new JPanel(new BorderLayout());
         this.buttonPane = new JPanel();
         //buttonPane.setBorder(BorderFactory.createMatteBorder(3, 0, 0, 0, new Color(55, 150, 240)));
@@ -56,6 +59,8 @@ public class Window2Explorer extends JPanel implements Explorer {
         this.add(canvasPane, BorderLayout.CENTER);
         buttonPane.setLayout(new BorderLayout());//VerticalLayout());//GridLayout(0, 2));
         this.add(buttonPane, BorderLayout.NORTH);
+
+
     }
 
     public boolean anyCanvasSelected() {
@@ -98,12 +103,34 @@ public class Window2Explorer extends JPanel implements Explorer {
             item.getJComponent().setBackground(new Color(236, 236, 236));
             CButton button = new RMenuButton(item.getName(), item.getColor());
             button.setPreferredSize(new Dimension(30, 35));
-            JComponent scroll = new RHoverScrollPane(
+            JComponent scrollFLVL = new RHoverScrollPane(
                     item.getJComponent(),
                     ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
                     ScrollPolicy.HORIZONTAL_BAR_AS_NEEDED,
                     15, item.getColor(), Color.darkGray);
-            canvases.add(scroll);
+            final JLayeredPane blockCanvasWithDepth = new JLayeredPane();
+            blockCanvasWithDepth.setPreferredSize(new Dimension(300, 500));
+            blockCanvasWithDepth.add(scrollFLVL, 0);
+            URL iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/trashcan.png");
+            Image imageRaw = new ImageIcon(iconURL).getImage().getScaledInstance(
+                128, 128, java.awt.Image.SCALE_SMOOTH);
+            ImageIcon button_icon = new ImageIcon(imageRaw);
+            //ImageIcon button_icon = new ImageIcon(iconURL).getImage().getScaledInstance(128,128, java.awt.Image.SCALE_SMOOTH);
+            final JLabel mainLogo = new JLabel(button_icon);
+            basketPane = new JPanel(new BorderLayout());
+            basketPane.add(mainLogo, BorderLayout.CENTER);
+            blockCanvasWithDepth.add(basketPane, 1);
+            blockCanvasWithDepth.addComponentListener(new ComponentAdapter() {
+                @Override
+                public void componentResized(ComponentEvent e) {
+                    super.componentResized(e);
+                    blockCanvasWithDepth.getComponents()[0].setBounds(0, 0, blockCanvasWithDepth.getWidth() - 1, blockCanvasWithDepth.getHeight() - 1);
+                    blockCanvasWithDepth.getComponents()[1].setBounds(0, 0, blockCanvasWithDepth.getWidth() - 1, blockCanvasWithDepth.getHeight() - 1);
+
+                }
+            });
+            blockCanvasWithDepth.getComponents()[1].setVisible(false);
+            canvases.add(blockCanvasWithDepth);
             button.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e) {
@@ -128,6 +155,7 @@ public class Window2Explorer extends JPanel implements Explorer {
     }
 
     public void selectCanvas(int index) {
+        oldIndex = index;
         if (index >= 0 && index < canvases.size()) {
             JComponent scroll = canvases.get(index);
             canvasPane.removeAll();
@@ -143,6 +171,29 @@ public class Window2Explorer extends JPanel implements Explorer {
      * itself, this method may trigger no action.
      */
     public void reformView() {
+    }
+
+    public void activeBasket()
+    {
+            JLayeredPane scroll = canvases.get(oldIndex);
+            scroll.getComponents()[0].setVisible(false);
+            scroll.getComponents()[1].setVisible(true);
+            canvasPane.removeAll();
+            canvasPane.add(scroll);
+            canvasPane.revalidate();
+            canvasPane.repaint();
+
+    }
+
+    public void deactiveBasket()
+    {
+        JLayeredPane scroll = canvases.get(oldIndex);
+        scroll.getComponents()[0].setVisible(true);
+        scroll.getComponents()[1].setVisible(false);
+        canvasPane.removeAll();
+        canvasPane.add(scroll);
+        canvasPane.revalidate();
+        canvasPane.repaint();
     }
 
     /**

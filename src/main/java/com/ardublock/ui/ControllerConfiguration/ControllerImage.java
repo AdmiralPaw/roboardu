@@ -20,143 +20,49 @@ import java.net.URL;
 
 public class ControllerImage extends JPanel {
 
-    private Image imageRaw;
-    private ImageIcon image;
-    private ImageIcon usingImage;
-    private ArrayList<JLabel> moduleLabels = new ArrayList<JLabel>();
-    private ArrayList<ImageIcon> moduleImages = new ArrayList<ImageIcon>();
+    public ArrayList<InvisibleButton> moduleButtons;
+    public ArrayList<InvisibleButton> connectorButtons;
+    private static final String[] names = {"dir04pwm05", "dir07pwm06", "d2", "d3", "d8", "d10", "d9", "d11", "a3", "a2", "a1", "a0", "i2c"};
 
     ControllerImage(СontrollerСonfiguration controller) {
         setLayout(null);
-        this.setBounds(0, 0, 150, 150);
-        URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/Plata.png");
+        setAllLabelsStart();
+
+        InvisibleButton someButt = new InvisibleButton(controller, this, "a0", "connector");
+        InvisibleButton someButt2 = new InvisibleButton(controller, this, "a1", "module");
+
+    }
+
+    public void setAllLabelsStart() {
+        String[] names = {"com/ardublock/Images/Plata.png", "/com/ardublock/Images/lines/a0.png", "/com/ardublock/Images/lines/a1.png",
+            "/com/ardublock/Images/lines/a2.png", "/com/ardublock/Images/lines/a3.png", "/com/ardublock/Images/lines/i2c.png",
+            "/com/ardublock/Images/lines/d11.png", "/com/ardublock/Images/lines/d9.png", "/com/ardublock/Images/lines/d10.png",
+            "/com/ardublock/Images/lines/d8.png", "/com/ardublock/Images/lines/motorUp.png", "/com/ardublock/Images/lines/d2.png",
+            "/com/ardublock/Images/lines/d3.png", "/com/ardublock/Images/lines/motorDown.png"};
+        setLabelAsIntended(names[0]);
+
+    }
+
+    public void setLabelAsIntended(String Path) {
+        switch(Path){
+            case "/com/ardublock/Images/Plata.png":
+                this.setLabel(Path, 0, 0, 158, 131);
+                break;
+        }
+    }
+    
+    public void setLabel(String Path, int x, int y, int width, int height){
+        URL iconURL = ControllerImage.class.getClassLoader().getResource(Path);
         Image imageRaw = new ImageIcon(iconURL).getImage().getScaledInstance(
-                200, 140, java.awt.Image.SCALE_SMOOTH);
-        image = new ImageIcon(imageRaw);
-        InvisibleButton someButt = new InvisibleButton(controller, "a0");
-        InvisibleButton someButt2 = new InvisibleButton(controller, "a1");
-        someButt.setBounds(this.getBounds().x, this.getBounds().y, 10, 10);
-        someButt2.setBounds(this.getBounds().x + 10, this.getBounds().y + 10, 10, 10);
-        this.add(someButt);
-        this.add(someButt2);
-        this.setBounds(0,0,150,150);
-        iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/Plata.png");
-        BufferedImage img = null;
-        BufferedImage resized = null;
-        try{
-             img = ImageIO.read(iconURL);
-             resized = resize(img,150,200);
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        //image = new ImageIcon(iconURL);
-        //InvisibleButton mainPlat = new InvisibleButton();
-        /*JLabel mainPlat = new JLabel(image);
-        mainPlat = */
-        image = new ImageIcon(resized);
-        someButt.setLayout(null);
-        someButt.setBounds(this.getBounds().x + 50,this.getBounds().y+ 100,200,150);
-        //someButt.setBorderPainted(false);
-        this.add(someButt);
+                width, height, java.awt.Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(imageRaw);
+        JLabel picLabel = new JLabel(image);
+        picLabel.setBounds(this.getX()+x, this.getY()+y, width, height);
+        this.add(picLabel);
     }
+    
 
-    public void setModuleImages() {
-        URL iconURL = ControllerImage.class.getClassLoader().getResource("com/ardublock/Images/Moduli_Dlya_veb/Plata.png");
-        moduleImages.add(new ImageIcon(iconURL));
-    }
-
-    public void addModule(int numberOfModule, Pin pin) {
-        JLabel picLabel;
-        switch (pin) {
-            case dir04pwm05:
-                usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(usingImage);
-                picLabel.setBounds(10, 10, 10, 10);
-                add(picLabel);
-                break;
-            case dir07pwm06:
-                usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(usingImage);
-                picLabel.setBounds(10, 10, 10, 10);
-                add(picLabel);
-                break;
-            case d2:
-                usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(usingImage);
-                picLabel.setBounds(10, 10, 10, 10);
-                add(picLabel);
-                break;
-            case d3:
-                usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(usingImage);
-                picLabel.setBounds(10, 10, 10, 10);
-                add(picLabel);
-                break;
-            case d8:
-                usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(usingImage);
-                picLabel.setBounds(10, 10, 10, 10);
-                add(picLabel);
-                break;
-            case d10:
-                usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(usingImage);
-                picLabel.setBounds(10, 10, 10, 10);
-                add(picLabel);
-                break;
-            case d9:
-                usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(usingImage);
-                picLabel.setBounds(10, 10, 10, 10);
-                add(picLabel);
-                break;
-            case d11:
-                usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(usingImage);
-                picLabel.setBounds(10, 10, 10, 10);
-                add(picLabel);
-                break;
-            case a3:
-                usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(usingImage);
-                picLabel.setBounds(10, 10, 10, 10);
-                add(picLabel);
-                break;
-            case a2:
-                usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(usingImage);
-                picLabel.setBounds(this.getBounds().x,this.getBounds().y,10,10);
-                picLabel.setBounds(10, 10, 10, 10);
-                add(picLabel);
-                break;
-            case a1:
-                usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(usingImage);
-                picLabel.setBounds(10, 10, 10, 10);
-                add(picLabel);
-                break;
-            case a0:
-                usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(usingImage);
-                picLabel.setBounds(10, 10, 10, 10);
-                add(picLabel);
-                break;
-            case i2c:
-                usingImage = moduleImages.get(numberOfModule);
-                picLabel = new JLabel(usingImage);
-                picLabel.setBounds(10, 10, 10, 10);
-                add(picLabel);
-                break;
-        }
-    }
-
-    public void addPicture(int numberOfModule, int x, int y, int width, int height) {
-        usingImage = moduleImages.get(numberOfModule);
-        JLabel picLabel = new JLabel(usingImage);
-        picLabel.setBounds(x, y, width, height);
-        add(picLabel);
-    }
+    
 
 
     public void deletePicture(int numberOfModule) {
@@ -167,14 +73,6 @@ public class ControllerImage extends JPanel {
         }
     }
     
-    private static BufferedImage resize(BufferedImage img, int height, int width) {
-        Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = resized.createGraphics();
-        g2d.drawImage(tmp, 0, 0, null);
-        g2d.dispose();
-        return resized;
-    }
 
     /*@Override
     protected void paintComponent(Graphics g) {

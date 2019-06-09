@@ -19,7 +19,6 @@ public class Variable_File extends TranslatorBlock
 			internalVariableName = translator.buildVariableName(label);
 			translator.addNumberVariable(label, internalVariableName);
 			translator.addDefinitionCommand("File " + internalVariableName + ";");
-//			translator.addSetupCommand(internalVariableName + " = \"\";");
 		}
 		return codePrefix + internalVariableName + codeSuffix;
 	}

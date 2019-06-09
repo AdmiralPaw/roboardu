@@ -33,7 +33,7 @@ public class RMenuButton extends CButton {
         // Set up first layer
         int buttonHeight = this.getHeight();
         int buttonWidth = this.getWidth();
-        int cube_x = buttonWidth/9;
+        int cube_x = 38;
         int cube_y = buttonHeight/2;
         g2.setPaint(new Color(218,226,228));
         g2.drawLine(0,buttonHeight/2,cube_x,buttonHeight/2);
@@ -43,7 +43,7 @@ public class RMenuButton extends CButton {
         g2.fillRect(cube_x-5, cube_y-5, 10, 10);
         if (this.focus) {
             g2.setPaint(new Color(241,241,241));
-            int rect_x = cube_x + cube_x - cube_x/3;
+            int rect_x = 50;
             g2.fillRect(rect_x,1,buttonWidth-rect_x, buttonHeight-1);
         }
 
@@ -51,12 +51,12 @@ public class RMenuButton extends CButton {
         // Draw the text (if any)
         if (this.getText() != null) {
             g2.setColor(new Color(19,144,148));
-            Font font = g2.getFont().deriveFont((float) (((float) buttonHeight) * .5));
+            Font font = g2.getFont().deriveFont((float) (((float) buttonHeight) * 0.4));
             g2.setFont(font);
             FontMetrics metrics = g2.getFontMetrics();
             Rectangle2D textBounds = metrics.getStringBounds(this.getText(), g2);
-            float x = (float) ((this.getWidth() / 4));
-            float y = (float) ((this.getHeight() - 2 * metrics.getDescent()));
+            float x = 60;
+            float y = (float) ((1.0*this.getHeight() - 2.75 * metrics.getDescent()));
             g2.drawString(this.getText(), x, y);
         }
     }

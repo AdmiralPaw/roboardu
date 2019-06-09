@@ -35,6 +35,21 @@ public class GenerateCodeButtonListener implements ActionListener
 		workspace = context.getWorkspaceController().getWorkspace();
 		uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
 	}
+
+	private void afterException(Long blockId)
+	{
+		Iterable<RenderableBlock> blocks = workspace.getRenderableBlocks();
+		for (RenderableBlock renderableBlock2 : blocks)
+		{
+			Block block2 = renderableBlock2.getBlock();
+			if (block2.getBlockID().equals(blockId))
+			{
+				context.highlightBlock(renderableBlock2);
+				break;
+			}
+		}
+
+	}
 	
 	public void actionPerformed(ActionEvent e)
 	{
@@ -64,85 +79,52 @@ public class GenerateCodeButtonListener implements ActionListener
 			if ((block.getGenusName().equals("DuinoEDU_Guino_Title")) || (block.getGenusName().equals("DuinoEDU_Guino_Slider")) || (block.getGenusName().equals("DuinoEDU_Guino_column")) || (block.getGenusName().equals("DuinoEDU_Guino_switch"))|| (block.getGenusName().equals("DuinoEDU_Guino_pause")) ) 
 			{
 				translator.setGuinoProgram(true);
-				
 			}
 			
 			
 			if (!block.hasPlug() && (Block.NULL.equals(block.getBeforeBlockID())))
 			{
-				
-				if(block.getGenusName().equals("loop"))
+				String[] names = new String[]{"loop","loop1","loop2","loop3","program","setup"};
+				for(String name : names)
 				{
-					loopBlockSet.add(renderableBlock);
-				}
-				if(block.getGenusName().equals("loop1"))
-				{
-					loopBlockSet.add(renderableBlock);
-				}
-				if(block.getGenusName().equals("loop2"))
-				{
-					loopBlockSet.add(renderableBlock);
-				}
-				if(block.getGenusName().equals("loop3"))
-				{
-					loopBlockSet.add(renderableBlock);
-				}
-				if(block.getGenusName().equals("program"))
-				{
-					loopBlockSet.add(renderableBlock);
-				}
-				if(block.getGenusName().equals("setup"))
-				{
-					loopBlockSet.add(renderableBlock);
-				}
-				if (block.getGenusName().equals("subroutine"))
-				{
-					String functionName = block.getBlockLabel().trim();
-					try
+					if(block.getGenusName().equals(name))
 					{
-						translator.addFunctionName(block.getBlockID(), functionName);
+						loopBlockSet.add(renderableBlock);
 					}
-					catch (SubroutineNameDuplicatedException e1)
+				}
+
+
+				names = new String[]{"subroutine","subroutine_var"};
+				for(String name : names)
+				{
+					if(block.getGenusName().equals(name))
 					{
-						context.highlightBlock(renderableBlock);
-						//find the second subroutine whose name is defined, and make it highlight. though it cannot happen due to constraint of OpenBlocks -_-
-						JOptionPane.showMessageDialog(parentFrame, uiMessageBundle.getString("ardublock.translator.exception.subroutineNameDuplicated"), "Error", JOptionPane.ERROR_MESSAGE);
-						return ;
+						String functionName = block.getBlockLabel().trim();
+						try
+						{
+							translator.addFunctionName(block.getBlockID(), functionName);
+						}
+						catch (SubroutineNameDuplicatedException e1)
+						{
+							context.highlightBlock(renderableBlock);
+							//find the second subroutine whose name is defined, and make it highlight. though it cannot happen due to constraint of OpenBlocks -_-
+							JOptionPane.showMessageDialog(parentFrame, uiMessageBundle.getString("ardublock.translator.exception.subroutineNameDuplicated"), "Error", JOptionPane.ERROR_MESSAGE);
+							return ;
+						}
+						subroutineBlockSet.add(renderableBlock);
 					}
-					subroutineBlockSet.add(renderableBlock);
 				}
-				if (block.getGenusName().equals("subroutine_var"))
+
+				names = new String[]{"scoop_task","scoop_loop","scoop_pin_event"};
+				for(String name : names)
 				{
-					String functionName = block.getBlockLabel().trim();
-					try
+					if(block.getGenusName().equals(name))
 					{
-						translator.addFunctionName(block.getBlockID(), functionName);
+						translator.setScoopProgram(true);
+						scoopBlockSet.add(renderableBlock);
 					}
-					catch (SubroutineNameDuplicatedException e1)
-					{
-						context.highlightBlock(renderableBlock);
-						//find the second subroutine whose name is defined, and make it highlight. though it cannot happen due to constraint of OpenBlocks -_-
-						JOptionPane.showMessageDialog(parentFrame, uiMessageBundle.getString("ardublock.translator.exception.subroutineNameDuplicated"), "Error", JOptionPane.ERROR_MESSAGE);
-						return ;
-					}
-					subroutineBlockSet.add(renderableBlock);
 				}
-				if (block.getGenusName().equals("scoop_task"))
-				{
-					translator.setScoopProgram(true);
-					scoopBlockSet.add(renderableBlock);
-				}
-				if (block.getGenusName().equals("scoop_loop"))
-				{
-					translator.setScoopProgram(true);
-					scoopBlockSet.add(renderableBlock);
-				}
-				if (block.getGenusName().equals("scoop_pin_event"))
-				{
-					translator.setScoopProgram(true);
-					scoopBlockSet.add(renderableBlock);
-				}
-				
+
 			}
 		}
 		if (loopBlockSet.size() == 0) {
@@ -197,16 +179,7 @@ public class GenerateCodeButtonListener implements ActionListener
 			e1.printStackTrace();
 			success = false;
 			Long blockId = e1.getBlockId();
-			Iterable<RenderableBlock> blocks = workspace.getRenderableBlocks();
-			for (RenderableBlock renderableBlock2 : blocks)
-			{
-				Block block2 = renderableBlock2.getBlock();
-				if (block2.getBlockID().equals(blockId))
-				{
-					context.highlightBlock(renderableBlock2);
-					break;
-				}
-			}
+			afterException(blockId);
 			JOptionPane.showMessageDialog(parentFrame, uiMessageBundle.getString("ardublock.translator.exception.socketNull"), "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		catch (BlockException e2)
@@ -214,16 +187,7 @@ public class GenerateCodeButtonListener implements ActionListener
 			e2.printStackTrace();
 			success = false;
 			Long blockId = e2.getBlockId();
-			Iterable<RenderableBlock> blocks = workspace.getRenderableBlocks();
-			for (RenderableBlock renderableBlock2 : blocks)
-			{
-				Block block2 = renderableBlock2.getBlock();
-				if (block2.getBlockID().equals(blockId))
-				{
-					context.highlightBlock(renderableBlock2);
-					break;
-				}
-			}
+			afterException(blockId);
 			JOptionPane.showMessageDialog(parentFrame, e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		catch (SubroutineNotDeclaredException e3)
@@ -231,16 +195,7 @@ public class GenerateCodeButtonListener implements ActionListener
 			e3.printStackTrace();
 			success = false;
 			Long blockId = e3.getBlockId();
-			Iterable<RenderableBlock> blocks = workspace.getRenderableBlocks();
-			for (RenderableBlock renderableBlock3 : blocks)
-			{
-				Block block2 = renderableBlock3.getBlock();
-				if (block2.getBlockID().equals(blockId))
-				{
-					context.highlightBlock(renderableBlock3);
-					break;
-				}
-			}
+			afterException(blockId);
 			JOptionPane.showMessageDialog(parentFrame, uiMessageBundle.getString("ardublock.translator.exception.subroutineNotDeclared"), "Error", JOptionPane.ERROR_MESSAGE);
 			
 		}

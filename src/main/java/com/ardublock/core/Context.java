@@ -3,21 +3,12 @@ package com.ardublock.core;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
 
 import processing.app.Editor;
 
@@ -25,7 +16,6 @@ import com.ardublock.ui.listener.OpenblocksFrameListener;
 
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.controller.WorkspaceController;
-import com.mit.blocks.renderable.BlockUtilities;
 import com.mit.blocks.renderable.FactoryRenderableBlock;
 import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.FactoryManager;
@@ -66,8 +56,7 @@ public class Context
 	private String saveFilePath;
 	private String saveFileName;
 	
-	//final public static String VERSION_STRING = " ";
-	
+
 	public static Context getContext()
 	{
 		if (singletonContext == null)
@@ -103,16 +92,9 @@ public class Context
 	
 	public void resetWorksapce()
 	{
-		/*
-		 * workspace = new Workspace(); workspace.reset(); workspace.setl
-		 */
 
-		// Style list
 		List<String[]> list = new ArrayList<String[]>();
 		String[][] styles = {};
-		
-		//		{ "//BlockGenus[@name[starts-with(.,\"Tinker\")]]/@color", "128 0 0" },
-		//		{ "//BlockGenus[@name[starts-with(.,\"df_\")]]/@color",	"0 128 0" } };
 
 		for (String[] style : styles) {
 			list.add(style);
@@ -134,45 +116,7 @@ public class Context
 	
 	private void loadDefaultArdublockProgram()
 	{
-		/*
-		InputStream defaultArdublockProgram = this.getClass().getResourceAsStream(DEFAULT_ARDUBLOCK_PROGRAM_PATH);
-		
-		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true);
-        final DocumentBuilder builder;
-        final Document doc;
-		try
-		{
-			builder = factory.newDocumentBuilder();
-			doc = builder.parse(defaultArdublockProgram);
-			final Element projectRoot = doc.getDocumentElement();
-			workspaceController.resetWorkspace();
-			workspaceController.loadProjectFromElement(projectRoot);
-		}
-		catch (ParserConfigurationException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (SAXException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (IllegalArgumentException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			workspaceController.loadFreshWorkspace();
-		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			workspaceController.loadFreshWorkspace();
-		}
-        */
-		
+
 		Workspace workspace = workspaceController.getWorkspace();
 		Page page = workspace.getPageNamed("Main");
 		

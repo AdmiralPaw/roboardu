@@ -185,10 +185,11 @@ public class OpenblocksFrame extends JFrame {
         logo.add(mainLogo);
         logo.setBackground(new Color(0, 151, 157));
         logo.setPreferredSize(workspace.getFactorySize());
+        logo.setBounds(38,0,workspace.getFactorySize().width, workspace.getFactorySize().height);
 
         panelWithConfigButton.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 5));
         buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-        logo.setLayout(new FlowLayout(FlowLayout.CENTER));
+        logo.setLayout(new FlowLayout(FlowLayout.LEFT, 38, 5));
         northPanel.setLayout(new BorderLayout());
         northPanelCenter.setLayout(new BorderLayout());
 

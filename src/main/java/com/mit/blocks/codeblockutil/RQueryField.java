@@ -81,9 +81,13 @@ public class RQueryField extends JPanel implements MouseListener, MouseMotionLis
         g2.setColor(new Color(204,204,204));
         g2.fillRect(0, 0, this.getWidth(),this.getHeight());
 
-        g2.setStroke(new BasicStroke(3));
+        g2.setStroke(new BasicStroke(2));
         g2.setColor(new Color(230,230,230));
-        g2.draw(this.getMag(w, h));
+        //g2.draw(this.getMag(w, h));
+        int l_x = this.field.getX()/2-5;
+        int l_y = this.field.getY();
+        g2.drawOval(l_x,l_y,16,16);
+        g2.drawLine(l_x+3,l_y+15,l_x-6,l_y+this.field.getHeight());
 
 
         super.paint(g);

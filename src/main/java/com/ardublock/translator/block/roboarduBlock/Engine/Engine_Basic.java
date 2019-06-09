@@ -9,8 +9,7 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
 public class Engine_Basic extends TranslatorBlock
 {
-	private List<String> setupCommand;
-	
+
 	public Engine_Basic(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{   
             super(blockId, translator, codePrefix, codeSuffix, label);
