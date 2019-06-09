@@ -18,7 +18,7 @@ public class ErrWindow extends JPanel {
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBackground(Color.black);
         errDevider = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 5));
-        errLabel = new JLabel("Какой-то текст");
+        errLabel = new JLabel();
         errLabel.setForeground(Color.white);
         errDevider.setBackground(
                 new Color(0, 151, 157));
@@ -27,7 +27,7 @@ public class ErrWindow extends JPanel {
                 new Dimension(0, 24));
         mainPanel.add(errDevider, BorderLayout.NORTH);
         JPanel errWindow = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 3));
-        errInfo = new JLabel("[INFO] Кто вообще сюда посмотрит?");
+        errInfo = new JLabel();
         errInfo.setForeground(Color.white);
         errWindow.add(errInfo);
         errWindow.setBackground(Color.black);
