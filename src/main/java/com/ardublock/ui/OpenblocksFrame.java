@@ -30,6 +30,7 @@ import com.ardublock.ui.listener.SaveButtonListener;
 import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
 
 import com.mit.blocks.controller.WorkspaceController;
+import com.mit.blocks.workspace.ErrWindow;
 import com.mit.blocks.workspace.SearchBar;
 import com.mit.blocks.workspace.ZoomSlider;
 import com.mit.blocks.workspace.SearchableContainer;
@@ -46,6 +47,7 @@ public class OpenblocksFrame extends JFrame {
     private Context context;
     private JFileChooser fileChooser;
     private FileFilter ffilter;
+    private ErrWindow errWindow;
 
     private ResourceBundle uiMessageBundle;
 
@@ -91,6 +93,7 @@ public class OpenblocksFrame extends JFrame {
     private void initOpenBlocks() {
         final Context context = Context.getContext();
         final Workspace workspace = context.getWorkspace();
+        errWindow = workspace.getErrWindow();
         workspace.addWorkspaceListener(new ArdublockWorkspaceListener(this));
         workspace.setMinimumSize(new Dimension(100, 0));
 
@@ -185,7 +188,7 @@ public class OpenblocksFrame extends JFrame {
         logo.add(mainLogo);
         logo.setBackground(new Color(0, 151, 157));
         logo.setPreferredSize(workspace.getFactorySize());
-        logo.setBounds(38,0,workspace.getFactorySize().width, workspace.getFactorySize().height);
+        logo.setBounds(38, 0, workspace.getFactorySize().width, workspace.getFactorySize().height);
 
         panelWithConfigButton.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 5));
         buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
@@ -430,7 +433,9 @@ public class OpenblocksFrame extends JFrame {
         if (result == JFileChooser.APPROVE_OPTION) {
             File savedFile = fileChooser.getSelectedFile();
             if (!savedFile.exists()) {
-                JOptionPane.showOptionDialog(this, uiMessageBundle.getString("message.file_not_found"), uiMessageBundle.getString("message.title.error"), JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null, null, JOptionPane.OK_OPTION);
+                //JOptionPane.showOptionDialog(this, uiMessageBundle.getString("message.file_not_found"), uiMessageBundle.getString("message.title.error"), JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null, null, JOptionPane.OK_OPTION);
+                errWindow.setErr(uiMessageBundle.getString("message.title.error"),
+                        uiMessageBundle.getString("message.file_not_found"));
                 return;
             }
 
@@ -439,12 +444,15 @@ public class OpenblocksFrame extends JFrame {
                 context.loadArduBlockFile(savedFile);
                 context.setWorkspaceChanged(false);
             } catch (IOException e) {
-                JOptionPane.showOptionDialog(this, uiMessageBundle.getString("message.file_not_found"), uiMessageBundle.getString("message.title.error"), JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null, null, JOptionPane.OK_OPTION);
+                //JOptionPane.showOptionDialog(this, uiMessageBundle.getString("message.file_not_found"), uiMessageBundle.getString("message.title.error"), JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE, null, null, JOptionPane.OK_OPTION);
+                errWindow.setErr(uiMessageBundle.getString("message.title.error"),
+                        uiMessageBundle.getString("message.file_not_found"));
                 e.printStackTrace();
             } finally {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             }
         }
+        errWindow.reset();
     }
 
     public boolean doSaveArduBlockFile() {

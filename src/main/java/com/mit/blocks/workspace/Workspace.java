@@ -131,6 +131,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
     /**
      * MiniMap associated with the blockCanvas
      */
+    private ErrWindow errWindow = new ErrWindow();
     private MiniMap miniMap;
     public FactoryManager factory;
     public СontrollerСonfiguration controller;
@@ -175,26 +176,10 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 workLayer.validate();
             }
         });
-
-        //TODO: оформить как класс{
-        JPanel errPanel = new JPanel(new BorderLayout());
-        errPanel.setBackground(Color.black);
-        //errPanel.setPreferredSize(new Dimension(50, 50));
-        JPanel errDevider = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 5));
-        JLabel errLabel = new JLabel("Какой-то текст");
-        errLabel.setForeground(Color.white);
-        errDevider.setBackground(new Color(0, 151, 157));
-        errDevider.add(errLabel);
-        errDevider.setPreferredSize(new Dimension(0, 24));
-        errPanel.add(errDevider, BorderLayout.NORTH);
-        JPanel errWindow = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 3));
-        JLabel errInfo = new JLabel("[INFO] Кто вообще сюда посмотрит?");
-        errInfo.setForeground(Color.white);
-        errWindow.add(errInfo);
-        errWindow.setBackground(Color.black);
-        errPanel.add(errWindow, BorderLayout.CENTER);
-        //TODO: оформить как класс}
-
+        
+        
+        JPanel errPanel = errWindow.getErrPanel();
+        
         final JLayeredPane blockCanvasWithDepth = new JLayeredPane();
         blockCanvasWithDepth.setPreferredSize(new Dimension(300, 500));
         final JPanel level_one = new JPanel();
@@ -455,7 +440,11 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
     public MiniMap getMiniMap() {
         return this.miniMap;
     }
-
+    
+    public ErrWindow getErrWindow() {
+        return this.errWindow;
+    }
+    
     /**
      * Returns the FocusTraversalManager instance
      *
