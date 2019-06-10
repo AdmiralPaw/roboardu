@@ -20,6 +20,8 @@ public class InvisibleButton extends JButton {
     private String path;
     private String pathSet;
     private boolean isPressed;
+    private boolean isItConnector;
+    //private boolean canBePressed;
 
     /**
      * @param controller
@@ -34,11 +36,13 @@ public class InvisibleButton extends JButton {
         switch (mode) {
             case "connector":
             case "Connector":
+                this.isItConnector=true;
                 setStartPositionAsConnector(Id);
                 setIconAsConnector(Id);
                 break;
             case "module":
             case "Module":
+                this.isItConnector=false;
                 setStartPositionAsModule(Id);
                 setStartIconAsModule();
                 break;
@@ -50,19 +54,22 @@ public class InvisibleButton extends JButton {
         setListenersAsConnector();
         rootImage.add(this);
     }
-    
+
     //-----------------------------------------------Методы коннекторов------------------------------------------
-    public void setListenersAsConnector(){
+    public void setListenersAsConnector() {
         this.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
-                if(isPressed){
-                    isPressed=false;
-                    setIconAccordingToPress();
-                }
-                else{  
-                    isPressed=true;  
-                    setIconAccordingToPress();              
-                }
+                /*if (canBePressed) {
+                    if (isPressed) {
+                        isPressed = false;
+                        setIconAccordingToPress();
+                    } 
+                    else {
+                        isPressed = true;
+                        setIconAccordingToPress();
+                    }
+                }*/
+                sayPressed(); //хз как правильноп передать в аргументах тут ссылку на обьект класса InvisibleButton, поэтому сделал приватную функцию
             }
 
             public void mousePressed(MouseEvent e) {
@@ -84,6 +91,24 @@ public class InvisibleButton extends JButton {
             }
         }
         );
+    }
+    private void sayPressed() {
+        if (isItConnector) {
+            controllerImage.someConnectorPressed(this);
+        } 
+        else {
+            controllerImage.someModulePressed(this);
+        }
+    }
+
+    public void commandToBePressed() {
+        isPressed = true;
+        setIconAccordingToPress();
+    }
+
+    public void commandToBeUnpressed(){
+        isPressed = false;
+        setIconAccordingToPress();
     }
     
     public void setIconAsConnector(String Id) {
@@ -109,7 +134,7 @@ public class InvisibleButton extends JButton {
                 setPath(rePaint("com/ardublock/Images/connectors/connector1.png"));
                 break;
             case "i2c":
-                setPath(rePaint("com/ardublock/Images/connectors/connector1.png"));
+                setPath(rePaint("com/ardublock/Images/connectors/i2c.png"));
                 break;
                 
         }
@@ -118,43 +143,43 @@ public class InvisibleButton extends JButton {
     public void setStartPositionAsConnector(String Id){
         switch(Id){
             case "dir04pwm05":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+0, this.controller.getY()+50, 20, 12);
                 break;
             case "dir07pwm06":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+50, this.controller.getY()+150, 20, 12);
                 break;
             case "d2":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+50, this.controller.getY()+80, 12, 20);
                 break;
             case "d3":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+50, this.controller.getY()+120, 12, 20);
                 break;
             case "d8":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+70, this.controller.getY()+50, 20, 12);
                 break;
             case "d10":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+85, this.controller.getY()+50, 20, 12);
                 break;
             case "d9":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+100, this.controller.getY()+50, 20, 12);
                 break;
             case "d11":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+115, this.controller.getY()+50, 20, 12);
                 break;
             case "a3":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+70, this.controller.getY()+170, 20, 12);
                 break;
             case "a2":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+85, this.controller.getY()+170, 20, 12);
                 break;
             case "a1":
-                this.setBounds(this.controller.getX()+120, this.controller.getY()+120, 12, 20);
+                this.setBounds(this.controller.getX()+100, this.controller.getY()+170, 12, 20);
                 break;
             case "a0":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+120, 12, 20);
+                this.setBounds(this.controller.getX()+115, this.controller.getY()+170, 12, 20);
                 break;
             case "i2c":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+200, this.controller.getY()+70, 20, 15);
                 break;
                 
         }
@@ -209,12 +234,22 @@ public class InvisibleButton extends JButton {
         setPath(rePaint("com/ardublock/Images/module/start.png"));
     }
     
-    public void setNewIconAsModule(String Path){
-        setPath(rePaint(Path));
+    
+    public void setIsPressed(boolean Bool){
+        this.isPressed = Bool;
     }
+    
+    public boolean getIsPressed(){
+        return this.isPressed;
+    }
+    
+    
     
     public void setNewIconAsModule(URL iconURL){
         setPath(rePaint(iconURL));
+    }
+    public void setNewIconAsModule(String Path){
+        setPath(rePaint(Path));
     }
 
     public void setIconAccordingToPress() {
