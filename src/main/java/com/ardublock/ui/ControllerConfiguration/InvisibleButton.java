@@ -143,43 +143,43 @@ public class InvisibleButton extends JButton {
     public void setStartPositionAsConnector(String Id){
         switch(Id){
             case "dir04pwm05":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+0, this.controller.getY()+50, 20, 12);
                 break;
             case "dir07pwm06":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+50, this.controller.getY()+150, 20, 12);
                 break;
             case "d2":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+50, this.controller.getY()+80, 12, 20);
                 break;
             case "d3":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+50, this.controller.getY()+120, 12, 20);
                 break;
             case "d8":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+70, this.controller.getY()+50, 20, 12);
                 break;
             case "d10":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+85, this.controller.getY()+50, 20, 12);
                 break;
             case "d9":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+100, this.controller.getY()+50, 20, 12);
                 break;
             case "d11":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+115, this.controller.getY()+50, 20, 12);
                 break;
             case "a3":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+70, this.controller.getY()+170, 20, 12);
                 break;
             case "a2":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+85, this.controller.getY()+170, 20, 12);
                 break;
             case "a1":
-                this.setBounds(this.controller.getX()+120, this.controller.getY()+120, 12, 20);
+                this.setBounds(this.controller.getX()+100, this.controller.getY()+170, 12, 20);
                 break;
             case "a0":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+120, 12, 20);
+                this.setBounds(this.controller.getX()+115, this.controller.getY()+170, 12, 20);
                 break;
             case "i2c":
-                this.setBounds(this.controller.getX()+100, this.controller.getY()+20, 20, 12);
+                this.setBounds(this.controller.getX()+200, this.controller.getY()+70, 20, 15);
                 break;
                 
         }
