@@ -23,13 +23,17 @@ import processing.app.tools.Tool;
 
 import com.ardublock.core.Context;
 import com.ardublock.ui.ArduBlockToolFrame;
+import com.ardublock.ui.Settings;
 import com.ardublock.ui.listener.OpenblocksFrameListener;
+import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 
 public class Roboscratch implements Tool, OpenblocksFrameListener {
-
+    
     static Editor editor;
     static ArduBlockToolFrame openblocksFrame;
-
+    private Preferences userPrefs;
+    
     public void init(Editor editor) {
         if (Roboscratch.editor == null) {
             Roboscratch.editor = editor;
@@ -41,7 +45,7 @@ public class Roboscratch implements Tool, OpenblocksFrameListener {
             context.setArduinoVersionString(arduinoVersion);
             context.setEditor(editor);
             System.out.println("Arduino Version: " + arduinoVersion);
-
+            userPrefs = Preferences.userRoot().node("roboscratch");
             // Don't just "close" Ardublock, see if there's something to save first.
             // Note to self: Code here only affects behaviour when we're an Arduino Tool,
             // not when run directly - See Main.java for that.
@@ -51,7 +55,9 @@ public class Roboscratch implements Tool, OpenblocksFrameListener {
                     Roboscratch.openblocksFrame.doCloseArduBlockFile();
                 }
             });
-            Roboscratch.openblocksFrame.setVisible(true);
+            if (userPrefs.getBoolean("ardublock.ui.autostart", false)) {
+                Roboscratch.openblocksFrame.setVisible(true);
+            }
         }
     }
 

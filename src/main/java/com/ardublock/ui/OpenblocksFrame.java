@@ -48,7 +48,8 @@ public class OpenblocksFrame extends JFrame {
     private JFileChooser fileChooser;
     private FileFilter ffilter;
     private ErrWindow errWindow;
-
+    private Settings settings;
+    
     private ResourceBundle uiMessageBundle;
 
     private boolean controllerIsShown = true;
@@ -69,6 +70,7 @@ public class OpenblocksFrame extends JFrame {
 
     public OpenblocksFrame() {
         context = Context.getContext();
+        settings = new Settings();
         this.setTitle(makeFrameTitle());
         this.setSize(new Dimension(1024, 760));
         this.setExtendedState(MAXIMIZED_BOTH);
@@ -104,6 +106,7 @@ public class OpenblocksFrame extends JFrame {
         JMenuItem openItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.open") + "...");
         JMenuItem saveItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.save"));
         JMenuItem saveAsItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveAs") + "...");
+        JMenuItem settingsItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.settings"));
         JMenuItem exitItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.exit"));
         JMenu toolsMenu = new JMenu(uiMessageBundle.getString("ardublock.ui.tools"));
         JMenuItem uploadItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.upload"));
@@ -114,6 +117,11 @@ public class OpenblocksFrame extends JFrame {
         openItem.addActionListener(new OpenButtonListener(this));
         saveItem.addActionListener(new SaveButtonListener(this));
         saveAsItem.addActionListener(new SaveAsButtonListener(this));
+            settingsItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                settings.setVisible(true);
+            }
+        });
         exitItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
@@ -155,6 +163,8 @@ public class OpenblocksFrame extends JFrame {
         fileMenu.add(openItem);
         fileMenu.add(saveItem);
         fileMenu.add(saveAsItem);
+        fileMenu.addSeparator();
+        fileMenu.add(settingsItem);
         fileMenu.addSeparator();
         fileMenu.add(exitItem);
         toolsMenu.add(uploadItem);
@@ -587,6 +597,7 @@ public class OpenblocksFrame extends JFrame {
         } else {
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         }
+        settings.dispose();
 
     }
 
