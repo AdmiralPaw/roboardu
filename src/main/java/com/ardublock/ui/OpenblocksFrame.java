@@ -620,7 +620,7 @@ public class OpenblocksFrame extends JFrame {
             setPressedIcon(new ImageIcon(image));
             setSelectedIcon(new ImageIcon(image));
             setRolloverIcon(new ImageIcon(image));
-
+            
             setMargin(new Insets(0, 0, 0, 0));
             setIconTextGap(0);
             setBorderPainted(false);
