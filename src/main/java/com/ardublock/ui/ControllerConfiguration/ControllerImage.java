@@ -56,7 +56,15 @@ public class ControllerImage extends JPanel {
         }
     }
     
+    //-------------------------------------ДЛЯ УСТАНОВКИ ИЗОБРАЖЕНИЯ В МОДУЛЬ----------------------------------------------
+    public void setModule(String Id, String Path){
+        this.callModuleButton(Id).setNewIconAsModule(Path);
+    }
     
+    public void setModule(String Id, URL iconURL){
+        this.callModuleButton(Id).setNewIconAsModule(iconURL);
+    }
+    //---------------------------------------------------------------------------------------------------------------------
     
     public Image getImage(String Path, int Width, int Height){
         URL iconURL = ControllerImage.class.getClassLoader().getResource(Path);
@@ -81,18 +89,31 @@ public class ControllerImage extends JPanel {
         if(connector.getId() == this.idOfPressedConnector){
             connector.commandToBeUnpressed();
             this.idOfPressedConnector = null;
-            callModuleButton(connector.getId()).commandToBeUnpressed();
-            this.idOfPressedModule = null;
+            if (this.idOfPressedModule != null) {
+                callModuleButton(this.idOfPressedModule).commandToBeUnpressed();
+                this.idOfPressedModule = null;
+            }
         }
         else{
-            this.callConnectorButton(this.idOfPressedConnector).commandToBeUnpressed();
+            if(this.idOfPressedConnector != null ) this.callConnectorButton(this.idOfPressedConnector).commandToBeUnpressed();
             connector.commandToBePressed();
             this.idOfPressedConnector = connector.getId();
-            if (connector.getId() != this.idOfPressedModule) {
-                callModuleButton(this.idOfPressedModule).commandToBeUnpressed();
+            if (this.idOfPressedModule != null) {
+                if (this.idOfPressedModule != connector.getId()) {
+                    callModuleButton(this.idOfPressedModule).commandToBeUnpressed();
+                    callModuleButton(connector.getId()).commandToBePressed();
+                    this.idOfPressedModule = connector.getId();
+                }
+            }
+            else{
                 callModuleButton(connector.getId()).commandToBePressed();
                 this.idOfPressedModule = connector.getId();
             }
+            /*if (connector.getId() != this.idOfPressedModule) {
+                callModuleButton(this.idOfPressedModule).commandToBeUnpressed();
+                callModuleButton(connector.getId()).commandToBePressed();
+                this.idOfPressedModule = connector.getId();
+            }*/
         }
     }
 
@@ -110,7 +131,7 @@ public class ControllerImage extends JPanel {
                 this.idOfPressedModule = null;
             } 
             else {
-                this.callModuleButton(this.idOfPressedModule).commandToBeUnpressed();
+                if(this.idOfPressedModule != null) this.callModuleButton(this.idOfPressedModule).commandToBeUnpressed();
                 module.commandToBePressed();
                 this.idOfPressedModule = module.getId();
             }
