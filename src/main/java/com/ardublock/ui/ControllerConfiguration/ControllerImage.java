@@ -20,47 +20,102 @@ import java.net.URL;
 
 public class ControllerImage extends JPanel {
 
+    private СontrollerСonfiguration controllerConf;
+    private Image background;
     public ArrayList<InvisibleButton> moduleButtons;
     public ArrayList<InvisibleButton> connectorButtons;
     private static final String[] names = {"dir04pwm05", "dir07pwm06", "d2", "d3", "d8", "d10", "d9", "d11", "a3", "a2", "a1", "a0", "i2c"};
+    private String idOfPressedConnector;
+    private String idOfPressedModule;
 
     ControllerImage(СontrollerСonfiguration controller) {
         setLayout(null);
-        setAllLabelsStart();
-
-        InvisibleButton someButt = new InvisibleButton(controller, this, "a0", "connector");
-        InvisibleButton someButt2 = new InvisibleButton(controller, this, "a1", "module");
+        this.controllerConf = controller;
+        background = getImage("com/ardublock/Images/PlataBackground1.png",300/*this.getWidth()*/,300/*this.getHeight()*/);
+        this.initArrays();
+        
+        /*for(String i:names){
+            this.moduleButtons.add(new InvisibleButton(controller, this, i, "module"));
+            this.connectorButtons.add(new InvisibleButton(controller, this, i, "connector"));
+        }*/
+        /*for(int i=0;i<names.length;i++){
+            this.moduleButtons.add(new InvisibleButton(controller, this, names[i], "module"));
+            this.connectorButtons.add(new InvisibleButton(controller, this, names[i], "connector"));
+        }*/
+        /*InvisibleButton someButt = new InvisibleButton(controller, this, names[0], "connector");
+        InvisibleButton someButt2 = new InvisibleButton(controller, this, names[0], "connector");*/
 
     }
-
-    public void setAllLabelsStart() {
-        String[] names = {"com/ardublock/Images/Plata.png", "/com/ardublock/Images/lines/a0.png", "/com/ardublock/Images/lines/a1.png",
-            "/com/ardublock/Images/lines/a2.png", "/com/ardublock/Images/lines/a3.png", "/com/ardublock/Images/lines/i2c.png",
-            "/com/ardublock/Images/lines/d11.png", "/com/ardublock/Images/lines/d9.png", "/com/ardublock/Images/lines/d10.png",
-            "/com/ardublock/Images/lines/d8.png", "/com/ardublock/Images/lines/motorUp.png", "/com/ardublock/Images/lines/d2.png",
-            "/com/ardublock/Images/lines/d3.png", "/com/ardublock/Images/lines/motorDown.png"};
-        setLabelAsIntended(names[0]);
-
-    }
-
-    public void setLabelAsIntended(String Path) {
-        switch(Path){
-            case "/com/ardublock/Images/Plata.png":
-                this.setLabel(Path, 0, 0, 158, 131);
-                break;
+    
+    private void initArrays(){
+        this.moduleButtons = new ArrayList<InvisibleButton>();
+        this.connectorButtons = new ArrayList<InvisibleButton>();
+        for(String i:names){
+            this.moduleButtons.add(new InvisibleButton(controllerConf, this, i, "module"));
+            this.connectorButtons.add(new InvisibleButton(controllerConf, this, i, "connector"));
         }
     }
     
-    public void setLabel(String Path, int x, int y, int width, int height){
+    
+    
+    public Image getImage(String Path, int Width, int Height){
         URL iconURL = ControllerImage.class.getClassLoader().getResource(Path);
-        Image imageRaw = new ImageIcon(iconURL).getImage().getScaledInstance(
-                width, height, java.awt.Image.SCALE_SMOOTH);
-        ImageIcon image = new ImageIcon(imageRaw);
-        JLabel picLabel = new JLabel(image);
-        picLabel.setBounds(this.getX()+x, this.getY()+y, width, height);
-        this.add(picLabel);
+        return new ImageIcon(iconURL).getImage().getScaledInstance(Width, Height, java.awt.Image.SCALE_SMOOTH);
     }
     
+    public InvisibleButton callModuleButton(String Id){
+        for(InvisibleButton i: moduleButtons){
+            if(i.getId() == Id) return i;
+        }
+        return null;
+    }
+    
+    public InvisibleButton callConnectorButton(String Id){
+        for(InvisibleButton i: connectorButtons){
+            if(i.getId() == Id) return i;
+        }
+        return null;
+    }
+    
+    public void someConnectorPressed(InvisibleButton connector){
+        if(connector.getId() == this.idOfPressedConnector){
+            connector.commandToBeUnpressed();
+            this.idOfPressedConnector = null;
+            callModuleButton(connector.getId()).commandToBeUnpressed();
+            this.idOfPressedModule = null;
+        }
+        else{
+            this.callConnectorButton(this.idOfPressedConnector).commandToBeUnpressed();
+            connector.commandToBePressed();
+            this.idOfPressedConnector = connector.getId();
+            if (connector.getId() != this.idOfPressedModule) {
+                callModuleButton(this.idOfPressedModule).commandToBeUnpressed();
+                callModuleButton(connector.getId()).commandToBePressed();
+                this.idOfPressedModule = connector.getId();
+            }
+        }
+    }
+
+    public void someModulePressed(InvisibleButton module) {
+        if (this.idOfPressedConnector != null) {
+            this.callConnectorButton(this.idOfPressedConnector).commandToBeUnpressed();
+            this.idOfPressedConnector = null;
+            this.callModuleButton(this.idOfPressedModule).commandToBeUnpressed();
+            module.commandToBePressed();
+            this.idOfPressedModule = module.getId();
+        }
+        else {
+            if (module.getId() == this.idOfPressedModule) {
+                module.commandToBeUnpressed();
+                this.idOfPressedModule = null;
+            } 
+            else {
+                this.callModuleButton(this.idOfPressedModule).commandToBeUnpressed();
+                module.commandToBePressed();
+                this.idOfPressedModule = module.getId();
+            }
+        }
+    }
 
     
 
@@ -74,10 +129,11 @@ public class ControllerImage extends JPanel {
     }
     
 
-    /*@Override
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image.getImage(), 0, 0, this); // see javadoc for more info on the parameters
-    }*/
+        //g.drawImage(image.getImage(), 0, 0, this); // see javadoc for more info on the parameters
+        g.drawImage(background, 0, 0, this);
+    }
 
 }

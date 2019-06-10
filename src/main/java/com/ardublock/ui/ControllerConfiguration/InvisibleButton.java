@@ -20,6 +20,8 @@ public class InvisibleButton extends JButton {
     private String path;
     private String pathSet;
     private boolean isPressed;
+    private boolean isItConnector;
+    //private boolean canBePressed;
 
     /**
      * @param controller
@@ -34,11 +36,13 @@ public class InvisibleButton extends JButton {
         switch (mode) {
             case "connector":
             case "Connector":
+                this.isItConnector=true;
                 setStartPositionAsConnector(Id);
                 setIconAsConnector(Id);
                 break;
             case "module":
             case "Module":
+                this.isItConnector=false;
                 setStartPositionAsModule(Id);
                 setStartIconAsModule();
                 break;
@@ -50,19 +54,22 @@ public class InvisibleButton extends JButton {
         setListenersAsConnector();
         rootImage.add(this);
     }
-    
+
     //-----------------------------------------------Методы коннекторов------------------------------------------
-    public void setListenersAsConnector(){
+    public void setListenersAsConnector() {
         this.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
-                if(isPressed){
-                    isPressed=false;
-                    setIconAccordingToPress();
-                }
-                else{  
-                    isPressed=true;  
-                    setIconAccordingToPress();              
-                }
+                /*if (canBePressed) {
+                    if (isPressed) {
+                        isPressed = false;
+                        setIconAccordingToPress();
+                    } 
+                    else {
+                        isPressed = true;
+                        setIconAccordingToPress();
+                    }
+                }*/
+                sayPressed(); //хз как правильноп передать в аргументах тут ссылку на обьект класса InvisibleButton, поэтому сделал приватную функцию
             }
 
             public void mousePressed(MouseEvent e) {
@@ -84,6 +91,24 @@ public class InvisibleButton extends JButton {
             }
         }
         );
+    }
+    private void sayPressed() {
+        if (isItConnector) {
+            controllerImage.someConnectorPressed(this);
+        } 
+        else {
+            controllerImage.someModulePressed(this);
+        }
+    }
+
+    public void commandToBePressed() {
+        isPressed = true;
+        setIconAccordingToPress();
+    }
+
+    public void commandToBeUnpressed(){
+        isPressed = false;
+        setIconAccordingToPress();
     }
     
     public void setIconAsConnector(String Id) {
@@ -109,7 +134,7 @@ public class InvisibleButton extends JButton {
                 setPath(rePaint("com/ardublock/Images/connectors/connector1.png"));
                 break;
             case "i2c":
-                setPath(rePaint("com/ardublock/Images/connectors/connector1.png"));
+                setPath(rePaint("com/ardublock/Images/connectors/i2c.png"));
                 break;
                 
         }
@@ -209,12 +234,22 @@ public class InvisibleButton extends JButton {
         setPath(rePaint("com/ardublock/Images/module/start.png"));
     }
     
-    public void setNewIconAsModule(String Path){
-        setPath(rePaint(Path));
+    
+    public void setIsPressed(boolean Bool){
+        this.isPressed = Bool;
     }
+    
+    public boolean getIsPressed(){
+        return this.isPressed;
+    }
+    
+    
     
     public void setNewIconAsModule(URL iconURL){
         setPath(rePaint(iconURL));
+    }
+    public void setNewIconAsModule(String Path){
+        setPath(rePaint(Path));
     }
 
     public void setIconAccordingToPress() {
