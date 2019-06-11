@@ -164,7 +164,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
 
         ZoomSlider zoom = new ZoomSlider(this);
         this.miniMap = new MiniMap(this);
-        this.addWidget(this.miniMap, true, true);
+        //this.addWidget(this.miniMap, true, true);
         this.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
                 miniMap.repositionMiniMap();
