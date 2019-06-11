@@ -165,7 +165,7 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
      * Resizes and moves this highlight to match its RB's size and position
      */
     private void updateBounds() {
-        Point rbLoc = SwingUtilities.convertPoint(rb.getParent(), rb.getLocation(), this.getParent());
+        Point rbLoc = SwingUtilities.convertPoint(rb.getParent(), rb.getLocation(), rb.getParent());
         this.setBounds(rbLoc.x - HIGHLIGHT_STROKE_WIDTH / 2, rbLoc.y - HIGHLIGHT_STROKE_WIDTH / 2, rb.getBlockWidth() + HIGHLIGHT_STROKE_WIDTH, rb.getBlockHeight() + HIGHLIGHT_STROKE_WIDTH);
     }
 
