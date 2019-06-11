@@ -49,7 +49,7 @@ public class OpenblocksFrame extends JFrame {
     private FileFilter ffilter;
     private ErrWindow errWindow;
     private Settings settings;
-    
+
     private ResourceBundle uiMessageBundle;
 
     private boolean controllerIsShown = true;
@@ -59,8 +59,13 @@ public class OpenblocksFrame extends JFrame {
     }
 
     public String makeFrameTitle() {
-        String title = context.getSaveFileName() + ".adb" + " | "
-                + Context.APP_NAME + " v." + "0.1";
+        String title;
+        if (!context.getSaveFileName().endsWith(".abp")) {
+            title = context.getSaveFileName() + ".abp" + " | ";
+        } else {
+            title = context.getSaveFileName() + " | ";
+        }
+        title = title + Context.APP_NAME + " v." + "0.1";
         if (context.isWorkspaceChanged()) {
             title = title + " *";
         }
@@ -117,7 +122,7 @@ public class OpenblocksFrame extends JFrame {
         openItem.addActionListener(new OpenButtonListener(this));
         saveItem.addActionListener(new SaveButtonListener(this));
         saveAsItem.addActionListener(new SaveAsButtonListener(this));
-            settingsItem.addActionListener(new ActionListener() {
+        settingsItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 settings.setVisible(true);
             }
@@ -631,7 +636,7 @@ public class OpenblocksFrame extends JFrame {
             setPressedIcon(new ImageIcon(image));
             setSelectedIcon(new ImageIcon(image));
             setRolloverIcon(new ImageIcon(image));
-            
+
             setMargin(new Insets(0, 0, 0, 0));
             setIconTextGap(0);
             setBorderPainted(false);
