@@ -12,13 +12,19 @@ public class BlinkRgbLed extends TranslatorBlock {
             "  pinMode(red_pin, OUTPUT);\n" +
             "  pinMode(green_pin, OUTPUT);\n" +
             "  pinMode(blue_pin, OUTPUT);\n" +
-            "  analogWrite(red_pin, r);\n" +
-            "  analogWrite(green_pin, g);\n" +
-            "  analogWrite(blue_pin, b);\n" +
+            "  if(GLOW > 255) r = 255;\n"+
+            "  if(GLOW < 0) r = 0;\n"+
+            "  if(GLOW > 255) g = 255;\n"+
+            "  if(GLOW < 0) g = 0;\n"+
+            "  if(GLOW > 255) b = 255;\n"+
+            "  if(GLOW < 0) b = 0;\n"+
+            "  analogWrite(red_pin, map(r,0,255,255,0));\n" +
+            "  analogWrite(green_pin, map(g,0,255,255,0));\n" +
+            "  analogWrite(blue_pin, map(b,0,255,255,0));\n" +
             "  delay(glow_time);\n" +
-            "  analogWrite(red_pin, 0);\n" +
-            "  analogWrite(green_pin, 0);\n" +
-            "  analogWrite(blue_pin, 0);\n" +
+            "  analogWrite(red_pin, 255);\n" +
+            "  analogWrite(green_pin, 255);\n" +
+            "  analogWrite(blue_pin, 255);\n" +
             "  delay(dark_time);\n" +
             "}\n";
 

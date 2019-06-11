@@ -12,9 +12,9 @@ public class RgbLed extends TranslatorBlock {
             "  pinMode(red_pin, OUTPUT);\n" +
             "  pinMode(green_pin, OUTPUT);\n" +
             "  pinMode(blue_pin, OUTPUT);\n" +
-            "  digitalWrite(red_pin, r);\n" +
-            "  digitalWrite(green_pin, g);\n" +
-            "  digitalWrite(blue_pin, b);\n" +
+            "  digitalWrite(red_pin, !r);\n" +
+            "  digitalWrite(green_pin, !g);\n" +
+            "  digitalWrite(blue_pin, !b);\n" +
             "}\n";
 
     public RgbLed (Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
@@ -25,9 +25,6 @@ public class RgbLed extends TranslatorBlock {
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {
-
-
-        String servoSpecs = "";
 
         TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(0);
         String pin_red = tb.toCode();

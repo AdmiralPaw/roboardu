@@ -1,6 +1,5 @@
 package com.ardublock.translator.block.roboarduBlock.Engine;
 
-import java.util.List;
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
@@ -9,8 +8,7 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
 public class Engine_RightTurnDegrees extends TranslatorBlock
 {
-	private List<String> setupCommand;
-	
+
 	public Engine_RightTurnDegrees(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{   
             super(blockId, translator, codePrefix, codeSuffix, label);
@@ -28,8 +26,7 @@ public class Engine_RightTurnDegrees extends TranslatorBlock
                 "#define ON                        1\n" +
                 "#define OFF                       0\n";
         private static final String ENCODER_DEFINE_VAR = "" +
-                "unsigned long long nEncoder1, nEncoder2;\n" +
-                "unsigned long long nEncoder1Old, nEncoder2Old;\n";
+                "unsigned long long nEncoder1, nEncoder2;\n";
         private static final String MOTORS_DEFINE_VAR = "" + 
                 "int SpeedMotor1, SpeedMotor2;\n";        
         private static final String ENCODER_DEFINE = "" +

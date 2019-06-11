@@ -19,17 +19,12 @@ public class Button extends TranslatorBlock
                     "{\n" +
                     "  boolean f = digitalRead(pin);\n" +
                     "  delay(10);\n" +
-                    "  if (f == digitalRead(pin)\n" +
+                    "  if (f == digitalRead(pin))\n" +
                     "  {\n" +
                     "    return f;\n" +
                     "  }\n" +
                     "  return 0;\n" +
                     "}";
-//            "int __ardublockAnalogRead(int pinNumber)\n" +
-//                    "{\n" +
-//                    "pinMode(pinNumber, INPUT);\n" +
-//                    "return analogRead(pinNumber);\n" +
-//                    "}\n\n";
 
     public Button(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {

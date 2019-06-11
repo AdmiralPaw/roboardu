@@ -14,6 +14,7 @@ public class DivisionBlock extends TranslatorBlock
 	@Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
+		//TODO find where it use [ i have seen alot inharitated classes from Translator block with this method
 		String ret = "( ";
 		TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
 		ret = ret + translatorBlock.toCode();

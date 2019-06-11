@@ -9731,7 +9731,7 @@
 	</BlockDrawerSets>
 
 	<Pages drawer-with-page="yes">
-		<Page page-name="Main" page-width="400" page-color="240 240 240"/>
+		<Page page-name="Main" page-width="1000" page-color="240 240 240"/>
 	</Pages>
 
 	<TrashCan>

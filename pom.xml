@@ -5,10 +5,10 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 	<groupId>org.ardublock</groupId>
-	<artifactId>ardublock</artifactId>
+	<artifactId>roboscratch</artifactId>
 	<packaging>jar</packaging>
-	<version>0.1.0-SNAPSHOT</version>
-	<name>ArduBlockEtu</name>
+	<version>0.1.0</version>
+	<name>RoboscratchEtu</name>
 	<description>A Block Programming Language for Arduino</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,8 +38,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-                                            <source>${jdk.version}</source>
-                                            <target>${jdk.version}</target>
+                                            <source>1.8</source>
+                                            <target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -115,11 +115,6 @@
 	</repositories>
 	<dependencies>
 		<dependency>
-			<groupId>edu.mit</groupId>
-			<artifactId>openblocks</artifactId>
-			<version>1.0.2-SNAPSHOT</version>
-		</dependency>
-		<dependency>
 			<groupId>arduino</groupId>
 			<artifactId>pde</artifactId>
 			<scope>provided</scope>
@@ -154,6 +149,18 @@
                   <artifactId>testng</artifactId>
                   <version>6.3.1</version>
                   <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>jfree</groupId>
+                    <artifactId>jcommon</artifactId>
+                    <version>1.0.16</version>
+                    <type>jar</type>
+                </dependency>
+                <dependency>
+                    <groupId>jfree</groupId>
+                    <artifactId>jfreechart</artifactId>
+                    <version>1.0.13</version>
+                    <type>jar</type>
                 </dependency>
 	</dependencies>
 	<url>http://ardublock.com/</url>

@@ -24,7 +24,7 @@ public class Keyboard_print extends TranslatorBlock
 		String ret = translatorBlock.toCode();
 		translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
 		String test=translatorBlock.toCode();
-//		ret+=test;
+
 		if(test.equals("true")){
 		    ret+="Keyboard.println();\n";
 		}
