@@ -1672,6 +1672,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     	newRb.moveConnectedBlocks();
     	parent.addBlock(newRb);
     	newRb.linkedDefArgsBefore = true;
+    	newRb.setZoomLevel(this.zoom);
     	return newRb;
     }
 
