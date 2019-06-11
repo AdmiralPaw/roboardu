@@ -258,6 +258,7 @@ public class BlockLabel implements MouseListener, MouseMotionListener, KeyListen
                 workspace.notifyListeners(new WorkspaceEvent(workspace, rb.getParentWidget(), blockID, WorkspaceEvent.BLOCK_RENAMED));
             }
         }
+
     }
 
     protected void genusChanged(String genus) {

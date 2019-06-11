@@ -1282,6 +1282,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 		Graphics2D g2 = (Graphics2D) g;
 		if (!isLoading) {
 			// if buffImg is null, redraw block shape
+			reformBlockShape();
 			if (buffImg == null) {
 				updateBuffImg();// this method also moves connected blocks
 			}
