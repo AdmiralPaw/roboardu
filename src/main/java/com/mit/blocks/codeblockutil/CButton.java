@@ -44,13 +44,13 @@ public class CButton extends JButton implements MouseListener {
     static final int HIGHLIGHT_INSET = 2;
 
     /** Focus Flag: true iff mouse is hovering over button */
-    boolean focus = false;
+    public boolean focus = false;
 
     /** Press Flag: true iff button was pressed but has not been released */
-    boolean pressed = false;
+    public boolean pressed = false;
 
     /** Selected Flag: true iff button was toggled to selected */
-    boolean selected = false;
+    public boolean selected = false;
 
     /** Color of this button when not pressed */
     Color buttonColor;

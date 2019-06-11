@@ -7,7 +7,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.net.URL;
 
-public class InvisibleButton extends JToggleButton {
+public class ControllerButton extends JToggleButton {
 
     private final ControllerImage controllerImage;
     private final СontrollerСonfiguration controller;
@@ -17,7 +17,7 @@ public class InvisibleButton extends JToggleButton {
     private ImageIcon image;
     private ImageIcon imageSet;
     private boolean isItConnector;
-    private InvisibleButton button;
+    private ControllerButton button;
     //private boolean canBePressed;
 
     /**
@@ -26,7 +26,7 @@ public class InvisibleButton extends JToggleButton {
      * @param Id
      * @param mode
      */
-    public InvisibleButton(СontrollerСonfiguration root, ControllerImage rootImage, String Id, String mode) {
+    public ControllerButton(СontrollerСonfiguration root, ControllerImage rootImage, String Id, String mode) {
         this.button = this;
         this.controller = root;
         this.buttonId = Id;
@@ -58,28 +58,31 @@ public class InvisibleButton extends JToggleButton {
         }
         this.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
-                if (button.isSelected()) {
-                    controllerImage.setSelectedId(Id,isItConnector);
-                } else {
-                    controllerImage.resetSelectedId(Id,isItConnector);
-                }
-                controllerImage.unpressElse(Id,isItConnector);
+//                if (button.isSelected()) {
+//                    controllerImage.setSelectedId(Id,isItConnector);
+//                } else {
+//                    controllerImage.resetSelectedId(Id,isItConnector);
+//                }
+//                controllerImage.unpressElse(Id,isItConnector);
             }
 
             public void mousePressed(MouseEvent e) {
-                if (button.isSelected()) {
-                    controllerImage.setSelectedId(Id,isItConnector);
-                } else {
-                    controllerImage.resetSelectedId(Id,isItConnector);
-                }
-                controllerImage.unpressElse(Id,isItConnector);
+//                if (button.isSelected()) {
+//                    controllerImage.setSelectedId(Id,isItConnector);
+//                } else {
+//                    controllerImage.resetSelectedId(Id,isItConnector);
+//                }
+//                controllerImage.unpressElse(Id,isItConnector);
             }
             
             public void mouseReleased(MouseEvent e) {
                 if (button.isSelected()) {
                     controllerImage.setSelectedId(Id,isItConnector);
+                    if (isItConnector) controller.changeConnectorComponentsPane(buttonId);
+                    else controller.changeModuleComponentsPane(buttonId);
                 } else {
                     controllerImage.resetSelectedId(Id,isItConnector);
+                    controller.changeConnectorComponentsPane(null);
                 }
                 controllerImage.unpressElse(Id,isItConnector);
             }
@@ -268,9 +271,9 @@ public class InvisibleButton extends JToggleButton {
     
     private void setImages(){
         //pathSet = getPathAddedName(path, "Set");
-        URL iconURL = InvisibleButton.class.getClassLoader().getResource(path);
+        URL iconURL = ControllerButton.class.getClassLoader().getResource(path);
         image = new ImageIcon(iconURL);
-        iconURL = InvisibleButton.class.getClassLoader().getResource(getPathAddedName(path, "Set"));
+        iconURL = ControllerButton.class.getClassLoader().getResource(getPathAddedName(path, "Set"));
         imageSet = new ImageIcon(iconURL);
         this.setIcon(getScaled(image));
         this.setSelectedIcon(getScaled(imageSet));

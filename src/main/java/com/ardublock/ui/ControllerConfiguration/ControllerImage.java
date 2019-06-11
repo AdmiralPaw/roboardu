@@ -11,8 +11,8 @@ public class ControllerImage extends JPanel {
 
     private СontrollerСonfiguration controllerConf;
     private Image background;
-    public ArrayList<InvisibleButton> moduleButtons;
-    public ArrayList<InvisibleButton> connectorButtons;
+    public ArrayList<ControllerButton> moduleButtons;
+    public ArrayList<ControllerButton> connectorButtons;
     private static final String[] names = {
         "dir04pwm05",
         "dir07pwm06",
@@ -32,11 +32,11 @@ public class ControllerImage extends JPanel {
     }
 
     private void initArrays() {
-        this.moduleButtons = new ArrayList<InvisibleButton>();
-        this.connectorButtons = new ArrayList<InvisibleButton>();
+        this.moduleButtons = new ArrayList<ControllerButton>();
+        this.connectorButtons = new ArrayList<ControllerButton>();
         for (String i : names) {
-            this.moduleButtons.add(new InvisibleButton(controllerConf, this, i, "module"));
-            this.connectorButtons.add(new InvisibleButton(controllerConf, this, i, "connector"));
+            this.moduleButtons.add(new ControllerButton(controllerConf, this, i, "module"));
+            this.connectorButtons.add(new ControllerButton(controllerConf, this, i, "connector"));
         }
     }
 
@@ -57,8 +57,8 @@ public class ControllerImage extends JPanel {
     }
 //
 
-    public InvisibleButton callModuleButton(String Id) {
-        for (InvisibleButton i : moduleButtons) {
+    public ControllerButton callModuleButton(String Id) {
+        for (ControllerButton i : moduleButtons) {
             if (i.getId() == Id) {
                 return i;
             }
@@ -66,8 +66,8 @@ public class ControllerImage extends JPanel {
         return null;
     }
 
-    public InvisibleButton callConnectorButton(String Id) {
-        for (InvisibleButton i : connectorButtons) {
+    public ControllerButton callConnectorButton(String Id) {
+        for (ControllerButton i : connectorButtons) {
             if (i.getId() == Id) {
                 return i;
             }
@@ -77,8 +77,8 @@ public class ControllerImage extends JPanel {
 
     public void unpressAll() {
         for (Component butt : this.getComponents()) {
-            if (butt instanceof InvisibleButton) {
-                ((InvisibleButton) butt).setSelected(false);
+            if (butt instanceof ControllerButton) {
+                ((ControllerButton) butt).setSelected(false);
             }
         }
     }
@@ -86,22 +86,22 @@ public class ControllerImage extends JPanel {
     public void unpressElse(String Id, boolean isConnector) {
         if (isConnector) {
             for (Component i : this.getComponents()) {
-                if (i instanceof InvisibleButton) {
-                    if (!((InvisibleButton) i).getId().equals(Id)) {
-                        ((InvisibleButton) i).setSelected(false);
+                if (i instanceof ControllerButton) {
+                    if (!((ControllerButton) i).getId().equals(Id)) {
+                        ((ControllerButton) i).setSelected(false);
                     }
                 }
             }
         } else {
             for (Component i : this.getComponents()) {
-                if (/*i instanceof InvisibleButton*/this.moduleButtons.contains(i)) {
-                    if (!((InvisibleButton) i).getId().equals(Id)) {
-                        ((InvisibleButton) i).setSelected(false);
+                if (this.moduleButtons.contains(i)) {
+                    if (!((ControllerButton) i).getId().equals(Id)) {
+                        ((ControllerButton) i).setSelected(false);
 
                     }
                 }
                 if (this.connectorButtons.contains(i)) {
-                    ((InvisibleButton) i).setSelected(false);
+                    ((ControllerButton) i).setSelected(false);
                 }
             }
         }
@@ -110,9 +110,9 @@ public class ControllerImage extends JPanel {
     public void setSelectedId(String Id, boolean isConnector) {
         if (isConnector) {
             for (Component i : this.getComponents()) {
-                if (i instanceof InvisibleButton) {
-                    if (((InvisibleButton) i).getId().equals(Id)) {
-                        ((InvisibleButton) i).setSelected(true);
+                if (i instanceof ControllerButton) {
+                    if (((ControllerButton) i).getId().equals(Id)) {
+                        ((ControllerButton) i).setSelected(true);
 
                     }
                 }
@@ -120,8 +120,8 @@ public class ControllerImage extends JPanel {
         } else {
             for (Component i : this.getComponents()) {
                 if (this.moduleButtons.contains(i)) {
-                    if (((InvisibleButton) i).getId().equals(Id)) {
-                        ((InvisibleButton) i).setSelected(true);
+                    if (((ControllerButton) i).getId().equals(Id)) {
+                        ((ControllerButton) i).setSelected(true);
 
                     }
                 }
@@ -132,23 +132,23 @@ public class ControllerImage extends JPanel {
     public void resetSelectedId(String Id, boolean isConnector) {
         if (isConnector) {
             for (Component i : this.getComponents()) {
-                if (i instanceof InvisibleButton) {
-                    if (((InvisibleButton) i).getId().equals(Id)) {
-                        ((InvisibleButton) i).setSelected(false);
+                if (i instanceof ControllerButton) {
+                    if (((ControllerButton) i).getId().equals(Id)) {
+                        ((ControllerButton) i).setSelected(false);
 
                     }
                 }
             }
         } else {
             for (Component i : this.getComponents()) {
-                if (/*i instanceof InvisibleButton*/this.moduleButtons.contains(i)) {
-                    if (((InvisibleButton) i).getId().equals(Id)) {
-                        ((InvisibleButton) i).setSelected(false);
+                if (this.moduleButtons.contains(i)) {
+                    if (((ControllerButton) i).getId().equals(Id)) {
+                        ((ControllerButton) i).setSelected(false);
 
                     }
                 }
                 if(this.connectorButtons.contains(i)){
-                    ((InvisibleButton) i).setSelected(false);
+                    ((ControllerButton) i).setSelected(false);
                 }
             }
         }

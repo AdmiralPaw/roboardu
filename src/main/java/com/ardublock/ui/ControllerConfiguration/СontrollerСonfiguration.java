@@ -1,14 +1,11 @@
 package com.ardublock.ui.ControllerConfiguration;
 
 import java.awt.*;
-import com.mit.blocks.codeblockutil.CButton;
 import com.mit.blocks.codeblockutil.RMenuButton;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import java.util.List;
-import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JSplitPane;
 import org.jfree.ui.tabbedui.VerticalLayout;
 
@@ -31,7 +28,7 @@ public class СontrollerСonfiguration extends JPanel {
     public СontrollerСonfiguration() {
         super();
         this.setLayout(new BorderLayout());
-        this.components = new ArrayList<Device>();
+        this.components = new ArrayList<>();
         this.controllerImage = new ControllerImage(this);
         this.componentsPane = new JPanel(new VerticalLayout());
         componentsPane.setBackground(Color.white);
@@ -61,11 +58,28 @@ public class СontrollerСonfiguration extends JPanel {
         this.components.add(new Device(pin, name));
     }
 
-    public void changeComponentsPane(String buttonPin) {
+    public void changeConnectorComponentsPane(String buttonPin) {
         componentsPane.removeAll();
         for (int i = 0; i < components.size(); i++) {
             if (components.get(i).pin.equals(buttonPin)) {
-                componentsPane.add(new RMenuButton(components.get(i).deviceName));
+                componentsPane.add(new ControllerMenuButton(
+                        this, components.get(i).deviceName, buttonPin));
+            }
+        }
+        componentsPane.validate();
+        componentsPane.repaint();
+    }
+    
+    public void changeModuleComponentsPane(String buttonPin) {
+        componentsPane.removeAll();
+        JLabel info = new JLabel();
+        for (int i = 0; i < components.size(); i++) {
+            if (components.get(i).pin.equals(buttonPin)) {
+                info.setText(components.get(i).deviceInfo);
+                info.setBackground(Color.black);
+                componentsPane.add(new ControllerMenuButton(
+                        this, components.get(i).deviceName, buttonPin));
+                componentsPane.add(info);
             }
         }
         componentsPane.validate();
@@ -79,6 +93,7 @@ public class СontrollerСonfiguration extends JPanel {
 
         final String pin;
         final String deviceName;
+        final String deviceInfo = "info";
 
         public Device(String pin, String deviceName) {
             this.pin = pin;
