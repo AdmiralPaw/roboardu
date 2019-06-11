@@ -16,10 +16,10 @@ public class ControllerImage extends JPanel {
     private static final String[] names = {
         "dir04pwm05",
         "dir07pwm06",
-        "d2", "d3", "d8",
-        "d10", "d9", "d11",
-        "a3", "a2", "a1",
-        "a0", "i2c"};
+        "d2", "d3", 
+        "d8", "d10", "d9", "d11",
+        "a3", "a2", "a1", "a0", 
+        "i2c"};
     private String idOfPressedConnector;
     private String idOfPressedModule;
 
@@ -75,10 +75,6 @@ public class ControllerImage extends JPanel {
         return null;
     }
 
-    public void someConnectorPressed(InvisibleButton connector) {
-
-    }
-
     public void unpressAll() {
         for (Component butt : this.getComponents()) {
             if (butt instanceof InvisibleButton) {
@@ -87,45 +83,77 @@ public class ControllerImage extends JPanel {
         }
     }
 
-    public void unpressElse(String Id) {
-        for (Component butt : this.getComponents()) {
-            if (butt instanceof InvisibleButton) {
-                if (!(((InvisibleButton) butt).getId().equals(Id))) {
-                    ((InvisibleButton) butt).setSelected(false);
+    public void unpressElse(String Id, boolean isConnector) {
+        if (isConnector) {
+            for (Component i : this.getComponents()) {
+                if (i instanceof InvisibleButton) {
+                    if (!((InvisibleButton) i).getId().equals(Id)) {
+                        ((InvisibleButton) i).setSelected(false);
+                    }
+                }
+            }
+        } else {
+            for (Component i : this.getComponents()) {
+                if (/*i instanceof InvisibleButton*/this.moduleButtons.contains(i)) {
+                    if (!((InvisibleButton) i).getId().equals(Id)) {
+                        ((InvisibleButton) i).setSelected(false);
+
+                    }
+                }
+                if (this.connectorButtons.contains(i)) {
+                    ((InvisibleButton) i).setSelected(false);
                 }
             }
         }
     }
 
-    public void setSelectedId(String Id) {
-        for (Component i : this.getComponents()) {
-            if (i instanceof InvisibleButton) {
-                if (((InvisibleButton) i).getId().equals(Id)) {
-                    ((InvisibleButton) i).setSelected(true);
+    public void setSelectedId(String Id, boolean isConnector) {
+        if (isConnector) {
+            for (Component i : this.getComponents()) {
+                if (i instanceof InvisibleButton) {
+                    if (((InvisibleButton) i).getId().equals(Id)) {
+                        ((InvisibleButton) i).setSelected(true);
 
+                    }
+                }
+            }
+        } else {
+            for (Component i : this.getComponents()) {
+                if (this.moduleButtons.contains(i)) {
+                    if (((InvisibleButton) i).getId().equals(Id)) {
+                        ((InvisibleButton) i).setSelected(true);
+
+                    }
                 }
             }
         }
     }
     
-    public void resetSelectedId(String Id) {
-        for (Component i : this.getComponents()) {
-            if (i instanceof InvisibleButton) {
-                if (((InvisibleButton) i).getId().equals(Id)) {
-                    ((InvisibleButton) i).setSelected(false);
+    public void resetSelectedId(String Id, boolean isConnector) {
+        if (isConnector) {
+            for (Component i : this.getComponents()) {
+                if (i instanceof InvisibleButton) {
+                    if (((InvisibleButton) i).getId().equals(Id)) {
+                        ((InvisibleButton) i).setSelected(false);
 
+                    }
+                }
+            }
+        } else {
+            for (Component i : this.getComponents()) {
+                if (/*i instanceof InvisibleButton*/this.moduleButtons.contains(i)) {
+                    if (((InvisibleButton) i).getId().equals(Id)) {
+                        ((InvisibleButton) i).setSelected(false);
+
+                    }
+                }
+                if(this.connectorButtons.contains(i)){
+                    ((InvisibleButton) i).setSelected(false);
                 }
             }
         }
     }
 
-    public void deletePicture(int numberOfModule) {
-        try {
-            remove(numberOfModule);
-        } catch (NullPointerException nul) {
-            throw new NullPointerException("Такого дерьма тут нет");
-        }
-    }
 
     @Override
     protected void paintComponent(Graphics g) {

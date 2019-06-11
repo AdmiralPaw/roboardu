@@ -39,7 +39,7 @@ public class СontrollerСonfiguration extends JPanel {
         setBackground(Color.black);
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true,
                 controllerImage, componentsPane);
-        splitPane.setDividerLocation(750 / 2);
+        splitPane.setDividerLocation(300/*750 / 2*/);
         this.add(splitPane);
         JButton justButt = new JButton();
         //this.controllerImage.add(justButt);

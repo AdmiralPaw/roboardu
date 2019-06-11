@@ -13,10 +13,9 @@ public class InvisibleButton extends JToggleButton {
     private final СontrollerСonfiguration controller;
     private final String buttonId;
     private String path;
-    private String pathSet;
+    //private String pathSet;
     private ImageIcon image;
     private ImageIcon imageSet;
-    private boolean isPressed;
     private boolean isItConnector;
     private InvisibleButton button;
     //private boolean canBePressed;
@@ -53,35 +52,35 @@ public class InvisibleButton extends JToggleButton {
                 break;
             default:
                 this.path = null;
-                this.pathSet = null;
+                //this.pathSet = null;
                 break;
         }
         this.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
                 if (button.isSelected()) {
-                    controllerImage.setSelectedId(Id);
+                    controllerImage.setSelectedId(Id,isItConnector);
                 } else {
-                    controllerImage.resetSelectedId(Id);
+                    controllerImage.resetSelectedId(Id,isItConnector);
                 }
-                controllerImage.unpressElse(Id);
+                controllerImage.unpressElse(Id,isItConnector);
             }
 
             public void mousePressed(MouseEvent e) {
                 if (button.isSelected()) {
-                    controllerImage.setSelectedId(Id);
+                    controllerImage.setSelectedId(Id,isItConnector);
                 } else {
-                    controllerImage.resetSelectedId(Id);
+                    controllerImage.resetSelectedId(Id,isItConnector);
                 }
-                controllerImage.unpressElse(Id);
+                controllerImage.unpressElse(Id,isItConnector);
             }
             
             public void mouseReleased(MouseEvent e) {
                 if (button.isSelected()) {
-                    controllerImage.setSelectedId(Id);
+                    controllerImage.setSelectedId(Id,isItConnector);
                 } else {
-                    controllerImage.resetSelectedId(Id);
+                    controllerImage.resetSelectedId(Id,isItConnector);
                 }
-                controllerImage.unpressElse(Id);
+                controllerImage.unpressElse(Id,isItConnector);
             }
 
             public void mouseEntered(MouseEvent e) {
@@ -97,13 +96,7 @@ public class InvisibleButton extends JToggleButton {
             }
         });
         rootImage.add(this);
-        pathSet = getPathAddedName(path, "Set");
-        URL iconURL = InvisibleButton.class.getClassLoader().getResource(path);
-        image = new ImageIcon(iconURL);
-        iconURL = InvisibleButton.class.getClassLoader().getResource(pathSet);
-        imageSet = new ImageIcon(iconURL);
-        this.setIcon(getScaled(image));
-        this.setSelectedIcon(getScaled(imageSet));
+        this.setImages();
 
     }
 
@@ -139,43 +132,43 @@ public class InvisibleButton extends JToggleButton {
     private void setStartPositionAsConnector(String Id) {
         switch (Id) {
             case "dir04pwm05":
-                this.setBounds(this.controller.getX() + 50, this.controller.getY() + 50, 12, 20);
+                this.setBounds(this.controller.getX() + 60, this.controller.getY() + 80, 12, 20);
                 break;
             case "dir07pwm06":
-                this.setBounds(this.controller.getX() + 50, this.controller.getY() + 150, 12, 20);
+                this.setBounds(this.controller.getX() + 60, this.controller.getY() + 200, 12, 20);
                 break;
             case "d2":
-                this.setBounds(this.controller.getX() + 50, this.controller.getY() + 80, 12, 20);
+                this.setBounds(this.controller.getX() + 60, this.controller.getY() + 120, 20, 12);
                 break;
             case "d3":
-                this.setBounds(this.controller.getX() + 50, this.controller.getY() + 120, 12, 20);
+                this.setBounds(this.controller.getX() + 60, this.controller.getY() + 180, 20, 12);
                 break;
             case "d8":
-                this.setBounds(this.controller.getX() + 70, this.controller.getY() + 50, 12, 20);
+                this.setBounds(this.controller.getX() + 85, this.controller.getY() + 65, 12, 20);
                 break;
             case "d10":
-                this.setBounds(this.controller.getX() + 85, this.controller.getY() + 50, 12, 20);
+                this.setBounds(this.controller.getX() + 105, this.controller.getY() + 65, 12, 20);
                 break;
             case "d9":
-                this.setBounds(this.controller.getX() + 100, this.controller.getY() + 50, 12, 20);
+                this.setBounds(this.controller.getX() + 125, this.controller.getY() + 65, 12, 20);
                 break;
             case "d11":
-                this.setBounds(this.controller.getX() + 115, this.controller.getY() + 50, 12, 20);
+                this.setBounds(this.controller.getX() + 145, this.controller.getY() + 65, 12, 20);
                 break;
             case "a3":
-                this.setBounds(this.controller.getX() + 70, this.controller.getY() + 170, 12, 20);
+                this.setBounds(this.controller.getX() + 85, this.controller.getY() + 215, 12, 20);
                 break;
             case "a2":
-                this.setBounds(this.controller.getX() + 85, this.controller.getY() + 170, 12, 20);
+                this.setBounds(this.controller.getX() + 105, this.controller.getY() + 215, 12, 20);
                 break;
             case "a1":
-                this.setBounds(this.controller.getX() + 100, this.controller.getY() + 170, 12, 20);
+                this.setBounds(this.controller.getX() + 125, this.controller.getY() + 215, 12, 20);
                 break;
             case "a0":
-                this.setBounds(this.controller.getX() + 115, this.controller.getY() + 170, 12, 20);
+                this.setBounds(this.controller.getX() + 145, this.controller.getY() + 215, 12, 20);
                 break;
             case "i2c":
-                this.setBounds(this.controller.getX() + 200, this.controller.getY() + 70, 12, 24);
+                this.setBounds(this.controller.getX() + 230, this.controller.getY() + 80, 12, 24);
                 break;
 
         }
@@ -184,43 +177,43 @@ public class InvisibleButton extends JToggleButton {
     private void setStartPositionAsModule(String Id) {
         switch (Id) {
             case "dir04pwm05":
-                this.setBounds(this.controller.getX() + 10, this.controller.getY() + 50, 35, 35);
+                this.setBounds(this.controller.getX() + 5, this.controller.getY() + 60, 35, 35);
                 break;
             case "dir07pwm06":
-                this.setBounds(this.controller.getX() + 10, this.controller.getY() + 90, 35, 35);
+                this.setBounds(this.controller.getX() + 5, this.controller.getY() + 210, 35, 35);
                 break;
             case "d2":
-                this.setBounds(this.controller.getX() + 10, this.controller.getY() + 130, 35, 35);
+                this.setBounds(this.controller.getX() + 5, this.controller.getY() + 110, 35, 35);
                 break;
             case "d3":
-                this.setBounds(this.controller.getX() + 10, this.controller.getY() + 170, 35, 35);
+                this.setBounds(this.controller.getX() + 5, this.controller.getY() + 160, 35, 35);
                 break;
             case "d8":
-                this.setBounds(this.controller.getX() + 50, this.controller.getY() + 10, 35, 35);
+                this.setBounds(this.controller.getX() + 40, this.controller.getY() + 10, 35, 35);
                 break;
             case "d10":
                 this.setBounds(this.controller.getX() + 90, this.controller.getY() + 10, 35, 35);
                 break;
             case "d9":
-                this.setBounds(this.controller.getX() + 130, this.controller.getY() + 10, 35, 35);
+                this.setBounds(this.controller.getX() + 140, this.controller.getY() + 10, 35, 35);
                 break;
             case "d11":
-                this.setBounds(this.controller.getX() + 170, this.controller.getY() + 10, 35, 35);
+                this.setBounds(this.controller.getX() + 190, this.controller.getY() + 10, 35, 35);
                 break;
             case "a3":
-                this.setBounds(this.controller.getX() + 50, this.controller.getY() + 210, 35, 35);
+                this.setBounds(this.controller.getX() + 40, this.controller.getY() + 255, 35, 35);
                 break;
             case "a2":
-                this.setBounds(this.controller.getX() + 90, this.controller.getY() + 210, 35, 35);
+                this.setBounds(this.controller.getX() + 90, this.controller.getY() + 255, 35, 35);
                 break;
             case "a1":
-                this.setBounds(this.controller.getX() + 130, this.controller.getY() + 210, 35, 35);
+                this.setBounds(this.controller.getX() + 140, this.controller.getY() + 255, 35, 35);
                 break;
             case "a0":
-                this.setBounds(this.controller.getX() + 170, this.controller.getY() + 210, 35, 35);
+                this.setBounds(this.controller.getX() + 190, this.controller.getY() + 255, 35, 35);
                 break;
             case "i2c":
-                this.setBounds(this.controller.getX() + 250, this.controller.getY() + 100, 35, 35);
+                this.setBounds(this.controller.getX() + 260, this.controller.getY() + 100, 35, 35);
                 break;
 
         }
@@ -236,6 +229,7 @@ public class InvisibleButton extends JToggleButton {
 
     public void setNewIconAsModule(String Path) {
         path = Path;
+        this.setImages();
     }
 
     private String getPathAddedName(String base, String adding) {
@@ -269,5 +263,15 @@ public class InvisibleButton extends JToggleButton {
         Image imageRaw = icon.getImage().getScaledInstance(
                 this.getWidth(), this.getHeight(), java.awt.Image.SCALE_SMOOTH);
         return new ImageIcon(imageRaw);
+    }
+    
+    private void setImages(){
+        //pathSet = getPathAddedName(path, "Set");
+        URL iconURL = InvisibleButton.class.getClassLoader().getResource(path);
+        image = new ImageIcon(iconURL);
+        iconURL = InvisibleButton.class.getClassLoader().getResource(getPathAddedName(path, "Set"));
+        imageSet = new ImageIcon(iconURL);
+        this.setIcon(getScaled(image));
+        this.setSelectedIcon(getScaled(imageSet));
     }
 }
