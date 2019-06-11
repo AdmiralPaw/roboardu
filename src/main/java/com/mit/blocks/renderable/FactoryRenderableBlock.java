@@ -19,7 +19,7 @@ import com.mit.blocks.workspace.WorkspaceWidget;
  * created on top of it to receive further mouse events and a new Block instance is created
  * in the background.  
  */
-public class FactoryRenderableBlock extends RenderableBlock {
+public class FactoryRenderableBlock extends RenderableBlock implements Cloneable {
 
     private static final long serialVersionUID = 1L;
     //the RenderableBlock to produce
@@ -29,6 +29,9 @@ public class FactoryRenderableBlock extends RenderableBlock {
     //mouseexited methods to change the cursor appropriately, so that we can make it 
     //"seem" that this block is draggable
     private JComponentDragHandler dragHandler;
+    
+    private WorkspaceWidget wWidget;
+    private Long blidi;
 
     /**
      * Constructs a new FactoryRenderableBlock instance.
@@ -39,7 +42,18 @@ public class FactoryRenderableBlock extends RenderableBlock {
     public FactoryRenderableBlock(Workspace workspace, WorkspaceWidget widget, Long blockID) {
         super(workspace, widget, blockID);
         this.setBlockLabelUneditable();
+        this.wWidget=widget;
+        
         dragHandler = new JComponentDragHandler(workspace, this);
+    }
+    
+    public FactoryRenderableBlock clone() throws CloneNotSupportedException{
+        return (FactoryRenderableBlock) super.clone();
+    }
+    
+    public FactoryRenderableBlock deepClone(){
+        
+        return new FactoryRenderableBlock(this.workspace,this.wWidget,this.blidi);
     }
 
     /**

@@ -22,13 +22,24 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import com.mit.blocks.codeblockutil.CQueryField;
+import com.mit.blocks.codeblockutil.CScrollPane;
+import com.mit.blocks.codeblockutil.RHoverScrollPane;
 import com.mit.blocks.codeblockutil.RQueryField;
+import com.mit.blocks.codeblockutil.Window2Explorer;
+import com.mit.blocks.renderable.FactoryRenderableBlock;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+import javax.swing.JViewport;
 
 /**
  * Contributes a search bar component to the CodeBlocks GUI, which allows the user to find 
  * Searchables such as blocks in the drawers and workspace with a query by name.
  */
 public class SearchBar {
+    
+    private static JComponent fcdir;
 
     private final RQueryField searchPanel;
     private final JTextField searchBar;
@@ -39,6 +50,8 @@ public class SearchBar {
     private static final int SEARCH_UPDATER_DELAY = 5000;
     private Timer searchThrottle;
     private static final int SEARCH_THROTTLE_DELAY = 250;
+    
+    private Map<String,JComponent> dict = new HashMap<String,JComponent>();
 
     private enum SearchRange {
 
@@ -56,6 +69,8 @@ public class SearchBar {
      * presses the Escape key while using the search bar.
      */
     public SearchBar(String defaultText, String tooltip, final Component defaultComponent) {
+        this.dict = Window2Explorer.dictionary;
+        
         this.defaultText = defaultText;
         this.searchPanel = new RQueryField();
         this.searchBar = this.searchPanel.getQueryField();
@@ -92,25 +107,99 @@ public class SearchBar {
 
             public void insertUpdate(DocumentEvent e) {
                 //System.out.println("Called insertUpdate, offset = " + e.getOffset() + ", query length = " + searchBar.getText().length());
-                if (searchBar.getText().equals(SearchBar.this.defaultText)) {
+                String text = searchBar.getText();
+                if (text.equals(SearchBar.this.defaultText)) {
                     return;
                 }
                 // If the search term changed only at the beginning or end, then only
                 // the blocks found already may change.  Remove unmatched blocks from
                 // foundBlocks.
-                if (e.getOffset() == 0 || e.getOffset() + e.getLength() == searchBar.getText().length()) {
+                if (e.getOffset() == 0 || e.getOffset() + e.getLength() == text.length()) {
                     performSearch(SearchRange.REMOVE_FROM_FOUND);
+                    System.out.println("serch");
+                    List<FactoryRenderableBlock> searchedBlocks = getBlocks(text.toUpperCase());
+                    JComponent dir = Window2Explorer.currentDir;
+                    
+                    dir=this.getCurrentPanel();
+                    dir.removeAll();
+                    JViewport jport = new JViewport();
+                    FactoryCanvas fcanvas = new FactoryCanvas("searched canvas",Color.WHITE);
+                    List<JComponent> blcks ;
+                    
+                    
+                    for(FactoryRenderableBlock block:searchedBlocks){
+                        
+                        //Window2Explorer.canvasPanel.add(block);
+                        
+//                        dir.add(block);
+//                        JComponent hvspn = (JComponent)dir.getComponent(0);
+//                        JComponent scrolViewport = (JComponent)hvspn.getComponent(2);
+//                        JComponent jviewport = (JComponent)scrolViewport.getComponent(0);
+//                        JComponent fcanvas = (JComponent)hvspn.getComponent(0);
+                        
+//                        fcanvas.add(block);
+//                        //fcanvas.repaint();
+//                        fcanvas.revalidate();
+
+                        
+
+                        fcanvas.addBlock(block);
+                        System.out.println("added?");
+                    }
+                    JComponent scroll = new RHoverScrollPane(
+                    fcanvas,
+                    CScrollPane.ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
+                    CScrollPane.ScrollPolicy.HORIZONTAL_BAR_AS_NEEDED,
+                    15,Color.BLACK , Color.darkGray);
+                   // Window2Explorer.canvasPanel.repaint();
+                   dir.add(scroll);
+                    dir.validate();
+                    dir.repaint();
                 } else {
                     // If the search term changed in the middle, then the blocks found and
                     // the blocks yet to be found may have changed.  Recheck all blocks.
                     performSearch(SearchRange.CHECK_ALL);
                 }
                 
-                
-                
-                
             }
-
+            
+              
+            //get blocks which partly matches with text in searchbar
+            private List<FactoryRenderableBlock> getBlocks(String text){
+                List<FactoryRenderableBlock> blocks = new ArrayList<FactoryRenderableBlock>() {};
+                Map<String,JComponent> data = Window2Explorer.dictionary;
+                Map<String,JComponent> matchedData = new HashMap<String,JComponent>();
+                
+                text=text.toUpperCase();
+                Set<String> names =  data.keySet();
+                for(int i=0;i<names.size();i++){
+                    if(Pattern.matches(".*"+text+".*", (CharSequence) names.toArray()[i])){
+                        try{
+                        blocks.add(((FactoryRenderableBlock) data.get(names.toArray()[i])).clone()); 
+                        }catch(CloneNotSupportedException e){
+                            System.out.println("clone not upported");
+                        }
+                    }
+                }
+                System.out.println(blocks.size()+"blocks searched size");
+                System.out.println(data.size()+"data size");
+                return blocks;
+            }
+            
+            
+            private JComponent getCurrentPanel(){
+                JComponent component = (JComponent) Window2Explorer.cdir.getComponent(0);
+//                component = (JComponent) Window2Explorer.cdir.getComponent(0);
+//                component = (JComponent) Window2Explorer.cdir.getComponent(2);
+//                component = (JComponent) Window2Explorer.cdir.getComponent(0);
+//                component = (JComponent) Window2Explorer.cdir.getComponent(0);
+                SearchBar.fcdir = component;
+                System.out.println("current panel getted");
+                return component;
+            }
+            
+            
+            
             public void removeUpdate(DocumentEvent e) {
                 //System.out.println("Called removeUpdate, offset = " + e.getOffset() + ", query length = " + searchBar.getText().length());
                 if (searchBar.getText().equals("")) {

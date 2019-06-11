@@ -35,13 +35,16 @@ public class Window2Explorer extends JPanel implements Explorer {
     //и добавление в него компонентов из переменной dictionary соответствующих блоков
     
     
+    public static JComponent cdir;
+    
     //var for knoving current canvas in method set drawers card in kesha code
     private int currentCanvas=0;
     boolean was=false;
     boolean getedParent=false;
     
     public static Map<String,JComponent> dictionary = new HashMap<String,JComponent>();
-    public static JComponent currentDir;
+    public static JComponent currentDir,canvasPanel;
+    //public static JComponent currentCanvas;
 
     private static final long serialVersionUID = 328149080308L;
     private static final int buttonHeight = 13;
@@ -63,6 +66,8 @@ public class Window2Explorer extends JPanel implements Explorer {
      */
     public Window2Explorer() {
         super();
+        
+        
         this.setLayout(new BorderLayout());
         this.canvases = new ArrayList<JComponent>();
         this.canvasPane = new JPanel(new BorderLayout());
@@ -72,7 +77,12 @@ public class Window2Explorer extends JPanel implements Explorer {
         this.add(canvasPane, BorderLayout.CENTER);
         buttonPane.setLayout(new BorderLayout());//VerticalLayout());//GridLayout(0, 2));
         this.add(buttonPane, BorderLayout.NORTH);
+        
+        this.currentDir = this.canvasPane;
+        this.cdir = this;
     }
+    
+    
 
     public boolean anyCanvasSelected() {
         return false;
@@ -97,6 +107,7 @@ public class Window2Explorer extends JPanel implements Explorer {
      * @requires items != null && for each element in item, element!= null
      */
     public void setDrawersCard(List<? extends Canvas> items) {
+        System.out.println("set drawers card");
         canvases.clear();
         buttonPane.removeAll();
         int size = items.size();
@@ -212,7 +223,7 @@ public class Window2Explorer extends JPanel implements Explorer {
     }
     
     
-    //kesha code
+    //kesha code end
     public static JComponent getCurrentDir(){
         
         
@@ -227,6 +238,9 @@ public class Window2Explorer extends JPanel implements Explorer {
             canvasPane.add(scroll);
             canvasPane.revalidate();
             canvasPane.repaint();
+            
+            this.canvasPanel = canvasPane;
+            this.currentDir=scroll;
         }
     }
 
