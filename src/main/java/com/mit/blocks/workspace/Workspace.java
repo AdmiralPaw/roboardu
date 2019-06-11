@@ -127,6 +127,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      */
     public JSplitPane workLayer;
     public JPanel blockCanvasLayer; //Layer with controller
+    private boolean isActiveBasket;
 
     /**
      * MiniMap associated with the blockCanvas
@@ -177,7 +178,8 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
             }
         });
         
-        
+        isActiveBasket = false;
+
         JPanel errPanel = errWindow.getErrPanel();
         
         final JLayeredPane blockCanvasWithDepth = new JLayeredPane();
@@ -396,7 +398,11 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
 
     public void setBasket(boolean status)
     {
-        this.factory.setBasket(status);
+        if (isActiveBasket!=status)
+        {
+            this.factory.setBasket(status);
+            isActiveBasket = status;
+        }
     }
 
     @Override

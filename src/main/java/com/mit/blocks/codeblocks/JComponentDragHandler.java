@@ -218,4 +218,5 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
         myComponent.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         workspace.setBasket(false);
     }
+
 }
