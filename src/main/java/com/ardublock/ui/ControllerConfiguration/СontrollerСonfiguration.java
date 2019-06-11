@@ -36,28 +36,26 @@ public class СontrollerСonfiguration extends JPanel {
         this.componentsPane = new JPanel(new VerticalLayout());
         componentsPane.setBackground(Color.white);
         //buttonPane.setBorder(BorderFactory.createMatteBorder(3, 0, 0, 0, new Color(55, 150, 240)));
-        setBackground(Color.black);
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true,
                 controllerImage, componentsPane);
         splitPane.setDividerLocation(300/*750 / 2*/);
         this.add(splitPane);
-        JButton justButt = new JButton();
         //this.controllerImage.add(justButt);
-        this.addButtons();
+//        this.addButtons();
     }
 
-    public void addButtons() {
-        this.controllerImage.add(callButtons());
-    }
-
-    public Container callButtons() {
-        Container allButtons = new Container();
-        JButton testVisibleButton = new JButton();
-        testVisibleButton.setLayout(null);
-        testVisibleButton.setBounds(10, 10, 100, 100);
-        allButtons.add(testVisibleButton);
-        return allButtons;
-    }
+//    public void addButtons() {
+//        this.controllerImage.add(callButtons());
+//    }
+//
+//    public Container callButtons() {
+//        Container allButtons = new Container();
+//        JButton testVisibleButton = new JButton();
+//        testVisibleButton.setLayout(null);
+//        testVisibleButton.setBounds(10, 10, 100, 100);
+//        allButtons.add(testVisibleButton);
+//        return allButtons;
+//    }
 
     public void addComponent(String pin, String name) {
         this.components.add(new Device(pin, name));

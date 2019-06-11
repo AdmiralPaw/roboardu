@@ -36,6 +36,7 @@ public class InvisibleButton extends JToggleButton {
         setBorderPainted(false);
         setBorder(null);
         setText(null);
+        setFocusable(false);
         this.setBackground(null);
         switch (mode) {
             case "connector":

@@ -637,6 +637,7 @@ public class OpenblocksFrame extends JFrame {
             setBorderPainted(false);
             setBorder(null);
             setText(null);
+            setFocusable(false);
             setSize(image.getWidth(null) - 1, image.getHeight(null) - 1);
             MouseListener mouseListener = new CustomMouseListener();
             addMouseListener(mouseListener);
