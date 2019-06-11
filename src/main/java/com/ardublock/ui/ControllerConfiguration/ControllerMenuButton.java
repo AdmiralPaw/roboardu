@@ -74,7 +74,7 @@ public class ControllerMenuButton extends CButton {
         this.pressed = false;
         repaint();
         this.moduleButton.setNewIconAsModule(
-                "com/ardublock/Images/module/" + deviceName + ".png");
+                "com/ardublock/Images/module/" + deviceName.toLowerCase() + ".png");
     }
 
 }

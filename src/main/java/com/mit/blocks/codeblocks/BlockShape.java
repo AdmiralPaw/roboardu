@@ -12,63 +12,108 @@ import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.codeblocks.rendering.BlockShapeUtil;
 
 /**
- * This class separates block shape from the RenderableBlock class.  BlockShape uses information
- * from RenderableBlock to determine shape and dimensions of the block being drawn.
- * 
+ * This class separates block shape from the RenderableBlock class. BlockShape
+ * uses information from RenderableBlock to determine shape and dimensions of
+ * the block being drawn.
+ *
  * BlockShape does not know where it is in the world -- all coords are local.
  */
 public class BlockShape {
 
-    /** Draws the individual connectors.  Shouldn't need more than one of these */
+    /**
+     * Draws the individual connectors. Shouldn't need more than one of these
+     */
     protected static BlockConnectorShape BCS = new BlockConnectorShape();
-    /** Tools to draw block shape.  Shouldn't need more than one of these */
+    /**
+     * Tools to draw block shape. Shouldn't need more than one of these
+     */
     protected static BlockShapeUtil BSU = new BlockShapeUtil();
-    /** The RenderableBlock associated to this BlockShape */
+    /**
+     * The RenderableBlock associated to this BlockShape
+     */
     protected RenderableBlock rb;
-    /** The blockID associated to this BlockShape */
+    /**
+     * The blockID associated to this BlockShape
+     */
     protected long blockID;
-    /** The Block associated to this BlockShape */
+    /**
+     * The Block associated to this BlockShape
+     */
     protected Block block;
-    /** ArrayList of the CustonBlockShapeSets that are checked */
+    /**
+     * ArrayList of the CustonBlockShapeSets that are checked
+     */
     private static ArrayList<CustomBlockShapeSet> customBlockShapeSets = new ArrayList<CustomBlockShapeSet>();
-    /** left alignment buffer for command ports */
+    /**
+     * left alignment buffer for command ports
+     */
     public static final float COMMAND_PORT_OFFSET = 15f;
-    /** radius of rounded corners */
+    /**
+     * radius of rounded corners
+     */
     public static final float CORNER_RADIUS = 3.0f;
-    /** variable declaration spacer */
+    /**
+     * variable declaration spacer
+     */
     public static final float VARIABLE_DECLARATION_SPACER = 10f;
-    /** spacer for bottom sockets to block sides and other bottom sockets */
+    /**
+     * spacer for bottom sockets to block sides and other bottom sockets
+     */
     public static final float BOTTOM_SOCKET_SIDE_SPACER = 10f;
-    /** spacer for in between bottom sockets */
+    /**
+     * spacer for in between bottom sockets
+     */
     public static final float BOTTOM_SOCKET_MIDDLE_SPACER = 16f;
-    /** spacer on top of bottom sockets to give continuous top */
+    /**
+     * spacer on top of bottom sockets to give continuous top
+     */
     public static final float BOTTOM_SOCKET_UPPER_SPACER = 4f;
-    /** Outline of top-left corner, top edge, and top-right corner */
+    /**
+     * Outline of top-left corner, top edge, and top-right corner
+     */
     private GeneralPath gpTop;
-    /** Outline of right edge */
+    /**
+     * Outline of right edge
+     */
     private GeneralPath gpRight;
-    /** Outline of bottom-left conrner, bottom edge, and bottom-right corner (Counter-Clockwise)*/
+    /**
+     * Outline of bottom-left conrner, bottom edge, and bottom-right corner
+     * (Counter-Clockwise)
+     */
     protected GeneralPath gpBottom;
-    /** Bottom Clockwise */
+    /**
+     * Bottom Clockwise
+     */
     private GeneralPath gpBottomClockwise;
-    /** Outline of left edge (Counter-Clockwise)*/
+    /**
+     * Outline of left edge (Counter-Clockwise)
+     */
     private GeneralPath gpLeft;
-    /** Bottom Clockwise */
+    /**
+     * Bottom Clockwise
+     */
     private GeneralPath gpLeftClockwise;
-    /** Final area of the block */
+    /**
+     * Final area of the block
+     */
     private Area blockArea;
-    /** Body of the block */
+    /**
+     * Body of the block
+     */
     protected Rectangle blockBody;
     protected Point2D topLeftCorner;
     protected Point2D topRightCorner;
     protected Point2D botLeftCorner;
     protected Point2D botRightCorner;
-    /** block properties determining shape */
+    /**
+     * block properties determining shape
+     */
     protected boolean hasCurvedCorners;
     protected float blockCornerRadius;
 
     /**
      * BlockShape constructor
+     *
      * @param rb
      */
     public BlockShape(RenderableBlock rb) {
@@ -86,19 +131,18 @@ public class BlockShape {
         gpBottom = new GeneralPath();
         gpLeft = new GeneralPath();
 
-
         setupProperties();
     }
 
     /**
-     * Determine charactoristics of the block shape depending on properties of the block
+     * Determine charactoristics of the block shape depending on properties of
+     * the block
      */
     private void setupProperties() {
 
         //if isCommandBlock than it has curved corners, else sharp corners
         //note: it won't actually waste time drawing sharp corners,
         //		but cornering method will know to draw a line instead
-
         hasCurvedCorners = block.hasBeforeConnector() || block.hasAfterConnector() || block.isCommandBlock();
         blockCornerRadius = (hasCurvedCorners ? CORNER_RADIUS : 0f);
     }
@@ -128,7 +172,6 @@ public class BlockShape {
             }
         }
 
-
         //if custom shape not found, then continue to derive it
         //as determined by the renderable block
         //POSITIONING FACTORS:
@@ -137,7 +180,6 @@ public class BlockShape {
         //SIZE FACTORS:
         //width: default size of block, size of text
         //height: how many sockets
-
         int width = 0;
         int height = 0;
 
@@ -154,54 +196,59 @@ public class BlockShape {
     }
 
     /**
-     * Determines the width of the block by checking for numerous block characteristics
-     * TODO: this contains a lot of starlogo specific checks - should be refactored into slcodeblocks?
+     * Determines the width of the block by checking for numerous block
+     * characteristics TODO: this contains a lot of starlogo specific checks -
+     * should be refactored into slcodeblocks?
      */
     protected int determineBlockWidth() {
 
         int width = 0;
 
-        //add width for labels
-        width += rb.accomodateLabelsWidth();
-        //add width for sockets
-        width += rb.getMaxSocketShapeWidth();
+        if (rb.getBlock() != null) {
+            //add width for labels
+            width += rb.accomodateLabelsWidth();
+            //add width for sockets
+            width += rb.getMaxSocketShapeWidth();
 
-        if (block.isCommandBlock()) {
-            width += 10;
-        } else if (block.isDataBlock() || block.isFunctionBlock()) {
-            width += 8;
-        } else if (block.isDeclaration()) {
-            width += 20;
-        } else {
-            //assert false : "Block type not found." + block;
-            //treat like a command block
-            width += 10;
+            if (block.isCommandBlock()) {
+                width += 10;
+            } else if (block.isDataBlock() || block.isFunctionBlock()) {
+                width += 8;
+            } else if (block.isDeclaration()) {
+                width += 20;
+            } else {
+                //assert false : "Block type not found." + block;
+                //treat like a command block
+                width += 10;
+            }
+
+            //add some width for the drop down triangle if it has siblings
+            if (block.hasSiblings()) {
+                width += 5;
+            }
+
+            //add image width if the width calculated so far is less than the image width
+            if (width < rb.accomodateImagesWidth()) {
+                width += (rb.accomodateImagesWidth() - width) + 10;
+            }
+
+            //This forces the block to be an even number of pixels wide
+            // Doing so ensures that command ports don't occur at half-pixel locations
+            if (width % 2 == 1) {
+                width++;
+            }
+
+            width = Math.max(width, rb.getBlockWidgetDimension().width);
         }
-
-        //add some width for the drop down triangle if it has siblings
-        if (block.hasSiblings()) {
-            width += 5;
-        }
-
-        //add image width if the width calculated so far is less than the image width
-        if (width < rb.accomodateImagesWidth()) {
-            width += (rb.accomodateImagesWidth() - width) + 10;
-        }
-
-        //This forces the block to be an even number of pixels wide
-        // Doing so ensures that command ports don't occur at half-pixel locations
-        if (width % 2 == 1) {
-            width++;
-        }
-
-        width = Math.max(width, rb.getBlockWidgetDimension().width);
-
         return width;
     }
 
     /**
-     * Returns the total height of this blocks sockets based on connector shape and position type; 0 if this block has no sockets
-     * @return the total height of this blocks sockets based on connector shape and position type; 0 if this block has no sockets
+     * Returns the total height of this blocks sockets based on connector shape
+     * and position type; 0 if this block has no sockets
+     *
+     * @return the total height of this blocks sockets based on connector shape
+     * and position type; 0 if this block has no sockets
      */
     protected int getTotalHeightOfSockets() {
         int heightSum = 0;
@@ -212,7 +259,6 @@ public class BlockShape {
 
         for (BlockConnector socket : block.getSockets()) {
 
-
             Dimension socketDimension = rb.getSocketSpaceDimension(socket);
             //bottom connector stuff
             if (socket.getPositionType() == BlockConnector.PositionType.BOTTOM) {
@@ -222,7 +268,6 @@ public class BlockShape {
                 hasBottomSocket = true;
                 continue;
             }
-
 
             //if the socket has been assigned a dimension...
             if (socketDimension != null) {
@@ -244,53 +289,50 @@ public class BlockShape {
             }
         }
 
-
         //if it has bottom sockets, add extra height
         if (hasBottomSocket) {
             heightSum += maxBottomSocketHeight;
         }
 
-
         return heightSum;
     }
 
     /**
-     * Determines the height of a block by summing it's socket heights OR plug height if no sockets
-     * TODO: this contains a lot of starlogo specific checks - should be refactored into slcodeblocks?
+     * Determines the height of a block by summing it's socket heights OR plug
+     * height if no sockets TODO: this contains a lot of starlogo specific
+     * checks - should be refactored into slcodeblocks?
      */
     protected int determineBlockHeight() {
         int heightSum = 0;
 
-        //has cornered edges?
-        heightSum += (int) (hasCurvedCorners ? 2 * CORNER_RADIUS : 0f);
+        if (rb.getBlock() != null) {
+            //has cornered edges?
+            heightSum += (int) (hasCurvedCorners ? 2 * CORNER_RADIUS : 0f);
 
+            //determine and add socket heights
+            heightSum += getTotalHeightOfSockets();
 
-        //determine and add socket heights
-        heightSum += getTotalHeightOfSockets();
+            //System.out.println("height sum after getting total height of sockets: "+heightSum);
+            //ensure at least height of one data plug
+            if (heightSum < BlockConnectorShape.DATA_PLUG_HEIGHT) {
+                heightSum = (int) BlockConnectorShape.DATA_PLUG_HEIGHT;
+            }
 
-        //System.out.println("height sum after getting total height of sockets: "+heightSum);
+            //get any height of labels other than sockets
+            //page label height
+            heightSum += rb.accomodatePageLabelHeight();
+            //total image height if height so far is less than the total height of images
+            if (heightSum < rb.accomodateImagesHeight()) {
+                heightSum += (rb.accomodateImagesHeight() - heightSum) + 10;
+            }
 
-        //ensure at least height of one data plug
-        if (heightSum < BlockConnectorShape.DATA_PLUG_HEIGHT) {
-            heightSum = (int) BlockConnectorShape.DATA_PLUG_HEIGHT;
+            //System.out.println("returned heightSum: "+heightSum);
+            if (block.isInfix()) {
+                heightSum += BOTTOM_SOCKET_UPPER_SPACER;
+            }
+
+            heightSum = Math.max(heightSum, rb.getBlockWidgetDimension().height);
         }
-
-        //get any height of labels other than sockets
-        //page label height
-        heightSum += rb.accomodatePageLabelHeight();
-        //total image height if height so far is less than the total height of images
-        if (heightSum < rb.accomodateImagesHeight()) {
-            heightSum += (rb.accomodateImagesHeight() - heightSum) + 10;
-        }
-
-        //System.out.println("returned heightSum: "+heightSum);
-
-        if (block.isInfix()) {
-            heightSum += BOTTOM_SOCKET_UPPER_SPACER;
-        }
-
-        heightSum = Math.max(heightSum, rb.getBlockWidgetDimension().height);
-
         return heightSum;
     }
 
@@ -308,10 +350,8 @@ public class BlockShape {
         //gpTop.moveTo((float) topLeftCorner.getX(), (float) topLeftCorner.getY() + blockCornerRadius);
         setEndPoint(gpTop, topLeftCorner, botLeftCorner, true);
 
-
         //curve up and right
         BlockShapeUtil.cornerTo(gpTop, topLeftCorner, topRightCorner, blockCornerRadius);
-
 
         //command socket if necessary
         if (block.isCommandBlock() && block.hasBeforeConnector()) {
@@ -323,7 +363,6 @@ public class BlockShape {
 
             rb.updateSocketPoint(block.getBeforeConnector(), p);
         }
-
 
         //curve down
         BlockShapeUtil.cornerTo(gpTop, topRightCorner, botRightCorner, blockCornerRadius);
@@ -345,12 +384,10 @@ public class BlockShape {
         //gpRight.moveTo((float) topRightCorner.getX(), (float) topRightCorner.getY() + blockCornerRadius);
         setEndPoint(gpRight, topRightCorner, botRightCorner, true);
 
-
         //if page label enabled, extra height
         if (block.hasPageLabel()) {
             BlockShapeUtil.lineToRelative(gpRight, 0, rb.accomodatePageLabelHeight() / 2);
         }
-
 
         //// ADD MIRRORED PLUG ////
         //if it has a mirrored plug, then add it
@@ -361,8 +398,6 @@ public class BlockShape {
 
         }
 
-
-
         //// ADD SOCKETS ////
         //for each socket in the iterator
         for (BlockConnector curSocket : block.getSockets()) {
@@ -370,7 +405,6 @@ public class BlockShape {
             //if it is a single socket (there are no mirrored sockets)
             if (curSocket.getPositionType().equals(BlockConnector.PositionType.SINGLE)) {
                 //add the socket shape to the gpRight
-
 
                 //if it's a command socket
                 if (BlockConnectorShape.isCommandConnector(curSocket)) {
@@ -399,9 +433,6 @@ public class BlockShape {
         }
 
         //if (block.getPlug() != null) System.out.println(block.getPlug().getPositionType());
-
-
-
         //line to the bottom right
         //gpRight.lineTo(blockBody.x + blockBody.width, blockBody.y + blockBody.height - blockCornerRadius);
         //gpRight.lineTo((float) botRightCorner.getX(), (float) botRightCorner.getY() - blockCornerRadius);
@@ -419,7 +450,6 @@ public class BlockShape {
         //gpLeft.moveTo((float) topLeftCorner.getX(), (float) topLeftCorner.getY() + blockCornerRadius);
         setEndPoint(gpLeft, topLeftCorner, botLeftCorner, true);
 
-
         //// ADD PLUG ////
         if (block.getPlug() != null) {
 
@@ -432,10 +462,8 @@ public class BlockShape {
             appendConnectorOffset(gpLeft, topLeftCorner, botLeftCorner, block.getPlug(), false);
         }
 
-
         // end left side
         // gpLeft.lineTo(blockBody.x, blockBody.y + blockBody.height - blockCornerRadius);
-
         setEndPoint(gpLeft, botLeftCorner, topLeftCorner, false);
     }
 
@@ -469,9 +497,9 @@ public class BlockShape {
     }
 
     /**
-     * Sets the end point for a particular side of a block.
-     * firstPointOnSide == true : Used to "moveTo" first point of a side,
-     * firstPointOnSide == false : "lineTo" the last point of a side.
+     * Sets the end point for a particular side of a block. firstPointOnSide ==
+     * true : Used to "moveTo" first point of a side, firstPointOnSide == false
+     * : "lineTo" the last point of a side.
      */
     protected void setEndPoint(GeneralPath gp, Point2D currentCorner, Point2D otherCorner, boolean firstPointOnSide) {
         //save calculation time if cornerRadius is zero
@@ -514,7 +542,6 @@ public class BlockShape {
         //absolute distance
         double Ydiff = Math.abs(topPoint.getY() - botPoint.getY());
 
-
         //check to only offset correctly above or below the connector:
         //offset only above connectors on right slanting sides
         if (Xdiff > 0 && !aboveConnector) {
@@ -534,8 +561,8 @@ public class BlockShape {
     }
 
     /**
-     * Returns the height of the spacer associated with a socket if it exists, else
-     * it returns the given default height.
+     * Returns the height of the spacer associated with a socket if it exists,
+     * else it returns the given default height.
      */
     protected int getSocketSpacerHeight(BlockConnector socket, float defaultHeight) {
         //spacer for block connected to socket
@@ -555,6 +582,7 @@ public class BlockShape {
     ////////////////////////////
     /**
      * Returns the GeneralPath of the bottom side of this block shape.
+     *
      * @return the GeneralPath of the bottom side of this block shape.
      */
     protected GeneralPath getBottomSide() {
@@ -563,6 +591,7 @@ public class BlockShape {
 
     /**
      * Returns the GeneralPath of the left side of this block shape.
+     *
      * @return the GeneralPath of the left side of this block shape.
      */
     protected GeneralPath getLeftSide() {
@@ -571,6 +600,7 @@ public class BlockShape {
 
     /**
      * Returns the GeneralPath of the top side of this block shape.
+     *
      * @return the GeneralPath of the top side of this block shape.
      */
     protected GeneralPath getTopSide() {
@@ -579,6 +609,7 @@ public class BlockShape {
 
     /**
      * Returns the GeneralPath of the right side of this block shape.
+     *
      * @return the GeneralPath of the right side of this block shape.
      */
     protected GeneralPath getRightSide() {
@@ -586,8 +617,10 @@ public class BlockShape {
     }
 
     /**
-     * Reform the BlockShape area.  This is the major procedure that makes all of the sides
-     * combines them in their correct directions, and connects them so they are all one direction.
+     * Reform the BlockShape area. This is the major procedure that makes all of
+     * the sides combines them in their correct directions, and connects them so
+     * they are all one direction.
+     *
      * @return reformed Area of the BlockShape
      */
     public Area reformArea() {
@@ -605,7 +638,6 @@ public class BlockShape {
         makeBottomSide();
         makeLeftSide();
 
-
         //corrected (clockwise) left and bottom
         gpBottomClockwise = new GeneralPath();
         gpLeftClockwise = new GeneralPath();
@@ -615,7 +647,6 @@ public class BlockShape {
                 (float) gpLeft.getCurrentPoint().getY());
         BlockShapeUtil.appendPath(gpBottomClockwise, gpBottom, true);
         BlockShapeUtil.appendPath(gpLeftClockwise, gpLeft, true);
-
 
         //create direction specific paths
         GeneralPath gpClockwise = new GeneralPath();
