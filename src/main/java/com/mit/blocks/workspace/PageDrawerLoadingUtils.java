@@ -248,6 +248,8 @@ public class PageDrawerLoadingUtils {
         Matcher nameMatcher;
         NodeList componentsSetNodes = root.getElementsByTagName("ControllerComponentsSet");
         Node componentSetNode;
+        String componentName = null;
+        String componentInfo = null;
         for (int i = 0; i < componentsSetNodes.getLength(); i++) {
             componentSetNode = componentsSetNodes.item(i);
             if (componentSetNode.getNodeName().equals("ControllerComponentsSet")) {
@@ -262,12 +264,23 @@ public class PageDrawerLoadingUtils {
                         if (nameMatcher.find()) {//will be true
                             pinName = nameMatcher.group(1);
                         }
+
                         NodeList component = componentNode.getChildNodes();
                         for (int k = 0; k < component.getLength(); k++) {
                             componentNode = component.item(k);
                             if (componentNode.getNodeName().equals("Component")) {
-                                String componentName = componentNode.getTextContent();
-                                controller.addComponent(pinName, componentName);
+                                nameMatcher = attrExtractor.matcher(componentNode.getAttributes().getNamedItem("name").toString());
+                                if (nameMatcher.find()) {
+                                    componentName = nameMatcher.group(1);
+                                }
+                                nameMatcher = attrExtractor.matcher(componentNode.getAttributes().getNamedItem("info").toString());
+                                if (nameMatcher.find()) {
+                                    componentInfo = nameMatcher.group(1);
+                                }
+                                controller.addComponent(
+                                        pinName,
+                                        componentNode.getTextContent(),
+                                        componentName, componentInfo);
                             }
                         }
                     }

@@ -13,6 +13,7 @@ public class ControllerButton extends JToggleButton {
     private final СontrollerСonfiguration controller;
     private final String buttonId;
     private String path;
+    private String moduleName = "first";
     //private String pathSet;
     private ImageIcon image;
     private ImageIcon imageSet;
@@ -58,28 +59,18 @@ public class ControllerButton extends JToggleButton {
         }
         this.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
-//                if (button.isSelected()) {
-//                    controllerImage.setSelectedId(Id,isItConnector);
-//                } else {
-//                    controllerImage.resetSelectedId(Id,isItConnector);
-//                }
-//                controllerImage.unpressElse(Id,isItConnector);
+
             }
 
             public void mousePressed(MouseEvent e) {
-//                if (button.isSelected()) {
-//                    controllerImage.setSelectedId(Id,isItConnector);
-//                } else {
-//                    controllerImage.resetSelectedId(Id,isItConnector);
-//                }
-//                controllerImage.unpressElse(Id,isItConnector);
+
             }
             
             public void mouseReleased(MouseEvent e) {
                 if (button.isSelected()) {
                     controllerImage.setSelectedId(Id,isItConnector);
                     if (isItConnector) controller.changeConnectorComponentsPane(buttonId);
-                    else controller.changeModuleComponentsPane(buttonId);
+                    else controller.changeModuleComponentsPane(button.moduleName);
                 } else {
                     controllerImage.resetSelectedId(Id,isItConnector);
                     controller.changeConnectorComponentsPane(null);
@@ -277,5 +268,9 @@ public class ControllerButton extends JToggleButton {
         imageSet = new ImageIcon(iconURL);
         this.setIcon(getScaled(image));
         this.setSelectedIcon(getScaled(imageSet));
+    }
+    
+    public void setModuleName(String moduleName){
+        this.moduleName = moduleName;
     }
 }

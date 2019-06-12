@@ -16,6 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 import javax.swing.JFrame;
 
 import processing.app.Editor;
+import processing.app.Editor;
 import processing.app.EditorStatus;
 import processing.app.EditorTab;
 import processing.app.SketchFile;
@@ -26,6 +27,8 @@ import com.ardublock.ui.ArduBlockToolFrame;
 import com.ardublock.ui.Settings;
 import com.ardublock.ui.listener.OpenblocksFrameListener;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 
 public class Roboscratch implements Tool, OpenblocksFrameListener {

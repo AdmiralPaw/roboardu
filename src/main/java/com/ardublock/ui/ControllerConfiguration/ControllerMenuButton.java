@@ -13,17 +13,19 @@ public class ControllerMenuButton extends CButton {
 
     Color cat_color;
     String deviceName;
+    String deviceNameTranslated;
     String Id;
     ControllerButton moduleButton;
 
-    public ControllerMenuButton(СontrollerСonfiguration controller, String text, String Id) {
-        this(controller, text, Id, Color.black);
+    public ControllerMenuButton(СontrollerСonfiguration controller, String text, String tr, String Id) {
+        this(controller, text, tr, Id, Color.black);
     }
 
-    public ControllerMenuButton(СontrollerСonfiguration controller, String text, String Id, Color cat_col) {
-        super(Color.black, CGraphite.blue, text);
+    public ControllerMenuButton(СontrollerСonfiguration controller, String deviceName, String tr, String Id, Color cat_col) {
+        super(Color.black, CGraphite.blue, tr);
         this.cat_color = cat_col;
-        this.deviceName = text;
+        this.deviceName = deviceName;
+        this.deviceNameTranslated = tr;
         this.Id = Id;
         this.moduleButton = controller.controllerImage.callModuleButton(Id);
         this.setFont(new Font("TimesRoman", Font.PLAIN, 16));
@@ -74,7 +76,8 @@ public class ControllerMenuButton extends CButton {
         this.pressed = false;
         repaint();
         this.moduleButton.setNewIconAsModule(
-                "com/ardublock/Images/module/" + deviceName.toLowerCase() + ".png");
+                "com/ardublock/Images/module/" + deviceName + ".png");
+        this.moduleButton.setModuleName(deviceName);
     }
 
 }

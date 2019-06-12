@@ -24,7 +24,8 @@ public class ControllerImage extends JPanel {
     private String idOfPressedModule;
 
     public ControllerImage(СontrollerСonfiguration controller) {
-        setLayout(null);
+        this.setLayout(null);
+        this.setBackground(Color.WHITE);
         this.controllerConf = controller;
         background = getImage("com/ardublock/Images/PlataBackground1.png",
                 300/*this.getWidth()*/, 300/*this.getHeight()*/);
