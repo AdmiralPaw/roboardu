@@ -31,6 +31,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 import javax.swing.JViewport;
 
 /**
@@ -126,6 +128,10 @@ public class SearchBar {
                     FactoryCanvas fcanvas = new FactoryCanvas("searched canvas",Color.WHITE);
                     List<JComponent> blcks ;
                     
+                    JPanel panel = new JPanel();
+                    
+                    BoxLayout blout = new BoxLayout(fcanvas,BoxLayout.Y_AXIS);
+                    fcanvas.setLayout(blout);
                     
                     for(FactoryRenderableBlock block:searchedBlocks){
                         
