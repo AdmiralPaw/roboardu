@@ -127,43 +127,43 @@ public class ControllerButton extends JToggleButton {
     private void setStartPositionAsConnector(String Id) {
         switch (Id) {
             case "dir04pwm05":
-                this.setBounds(this.controller.getX() + 60, this.controller.getY() + 80, 12, 20);
+                this.setBounds(this.controller.getX() + 54, this.controller.getY() + 88, 16, 27);
                 break;
             case "dir07pwm06":
-                this.setBounds(this.controller.getX() + 60, this.controller.getY() + 200, 12, 20);
+                this.setBounds(this.controller.getX() + 54, this.controller.getY() + 185, 16, 27);
                 break;
             case "d2":
-                this.setBounds(this.controller.getX() + 60, this.controller.getY() + 120, 20, 12);
+                this.setBounds(this.controller.getX() + 54, this.controller.getY() + 120, 25, 16);
                 break;
             case "d3":
-                this.setBounds(this.controller.getX() + 60, this.controller.getY() + 180, 20, 12);
+                this.setBounds(this.controller.getX() + 54, this.controller.getY() + 165, 25, 16);
                 break;
             case "d8":
-                this.setBounds(this.controller.getX() + 85, this.controller.getY() + 65, 12, 20);
+                this.setBounds(this.controller.getX() + 86, this.controller.getY() + 65, 16, 25);
                 break;
             case "d10":
-                this.setBounds(this.controller.getX() + 105, this.controller.getY() + 65, 12, 20);
+                this.setBounds(this.controller.getX() + 106, this.controller.getY() + 65, 16, 25);
                 break;
             case "d9":
-                this.setBounds(this.controller.getX() + 125, this.controller.getY() + 65, 12, 20);
+                this.setBounds(this.controller.getX() + 126, this.controller.getY() + 65, 16, 25);
                 break;
             case "d11":
-                this.setBounds(this.controller.getX() + 145, this.controller.getY() + 65, 12, 20);
+                this.setBounds(this.controller.getX() + 146, this.controller.getY() + 65, 16, 25);
                 break;
             case "a3":
-                this.setBounds(this.controller.getX() + 85, this.controller.getY() + 215, 12, 20);
+                this.setBounds(this.controller.getX() + 86, this.controller.getY() + 210, 16, 25);
                 break;
             case "a2":
-                this.setBounds(this.controller.getX() + 105, this.controller.getY() + 215, 12, 20);
+                this.setBounds(this.controller.getX() + 106, this.controller.getY() + 210, 16, 25);
                 break;
             case "a1":
-                this.setBounds(this.controller.getX() + 125, this.controller.getY() + 215, 12, 20);
+                this.setBounds(this.controller.getX() + 126, this.controller.getY() + 210, 16, 25);
                 break;
             case "a0":
-                this.setBounds(this.controller.getX() + 145, this.controller.getY() + 215, 12, 20);
+                this.setBounds(this.controller.getX() + 146, this.controller.getY() + 210, 16, 25);
                 break;
             case "i2c":
-                this.setBounds(this.controller.getX() + 230, this.controller.getY() + 80, 12, 24);
+                this.setBounds(this.controller.getX() + 228, this.controller.getY() + 90, 16, 30);
                 break;
 
         }
