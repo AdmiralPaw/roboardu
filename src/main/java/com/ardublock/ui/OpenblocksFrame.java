@@ -267,12 +267,21 @@ public class OpenblocksFrame extends JFrame {
         );
         openButton.addActionListener(new OpenButtonListener(this));
 
+        ImageButton verifyButton = new ImageButton("verify program",
+                "com/ardublock/block/buttons/verifyA.jpg",
+                "com/ardublock/block/buttons/verifyB.jpg",
+                infoLabel
+        );
+        verifyButton.setActionCommand("VERIFY_CODE");
+        verifyButton.addActionListener(new GenerateCodeButtonListener(this, context));
+
         ImageButton generateButton = new ImageButton(
                 "upload to Arduino",
                 "com/ardublock/block/buttons/uploadA.jpg",
                 "com/ardublock/block/buttons/uploadB.jpg",
                 infoLabel
         );
+        generateButton.setActionCommand("UPLOAD_CODE");
         generateButton.addActionListener(new GenerateCodeButtonListener(this, context));
 
         ImageButton serialMonitorButton = new ImageButton(
@@ -395,6 +404,7 @@ public class OpenblocksFrame extends JFrame {
         buttons.add(saveAsButton);
         buttons.add(openButton);
         buttons.add(dividerFirst);
+        buttons.add(verifyButton);
         buttons.add(generateButton);
         buttons.add(serialMonitorButton);
         buttons.add(dividerSecond);
