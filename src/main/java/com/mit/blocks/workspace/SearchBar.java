@@ -131,9 +131,12 @@ public class SearchBar {
                     JPanel panel = new JPanel();
                     
                     BoxLayout blout = new BoxLayout(fcanvas,BoxLayout.Y_AXIS);
-                    fcanvas.setLayout(blout);
+                    //fcanvas.setLayout(blout);
                     
                     for(FactoryRenderableBlock block:searchedBlocks){
+                        
+                        
+                        
                         
                         //Window2Explorer.canvasPanel.add(block);
                         
@@ -142,13 +145,16 @@ public class SearchBar {
 //                        JComponent scrolViewport = (JComponent)hvspn.getComponent(2);
 //                        JComponent jviewport = (JComponent)scrolViewport.getComponent(0);
 //                        JComponent fcanvas = (JComponent)hvspn.getComponent(0);
-                        
 //                        fcanvas.add(block);
 //                        //fcanvas.repaint();
 //                        fcanvas.revalidate();
-
                         
 
+                        //без понятия как но если убрать то при поиске будет кривое отображение
+                        block.setBounds(1000, 1000, 1000, 1000);
+                        
+                        
+                        
                         fcanvas.addBlock(block);
                         System.out.println("added?");
                     }
@@ -182,8 +188,8 @@ public class SearchBar {
                     if(Pattern.matches(".*"+text+".*", (CharSequence) names.toArray()[i])){
                         try{
                         blocks.add(((FactoryRenderableBlock) data.get(names.toArray()[i])).clone()); 
-                        }catch(CloneNotSupportedException e){
-                            System.out.println("clone not upported");
+                        }catch(Exception e){
+                            
                         }
                     }
                 }
@@ -191,7 +197,7 @@ public class SearchBar {
                 System.out.println(data.size()+"data size");
                 return blocks;
             }
-            
+           
             
             private JComponent getCurrentPanel(){
                 JComponent component = (JComponent) Window2Explorer.cdir.getComponent(0);

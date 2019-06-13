@@ -238,7 +238,6 @@ public class Window2Explorer extends JPanel implements Explorer {
             canvasPane.add(scroll);
             canvasPane.revalidate();
             canvasPane.repaint();
-            
             this.canvasPanel = canvasPane;
             this.currentDir=scroll;
         }

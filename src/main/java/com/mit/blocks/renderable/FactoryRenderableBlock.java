@@ -32,6 +32,8 @@ public class FactoryRenderableBlock extends RenderableBlock implements Cloneable
     
     private WorkspaceWidget wWidget;
     private Long blidi;
+    
+    
 
     /**
      * Constructs a new FactoryRenderableBlock instance.
@@ -52,8 +54,10 @@ public class FactoryRenderableBlock extends RenderableBlock implements Cloneable
     }
     
     public FactoryRenderableBlock deepClone(){
-        
-        return new FactoryRenderableBlock(this.workspace,this.wWidget,this.blidi);
+        FactoryRenderableBlock block = new FactoryRenderableBlock(this.workspace,this.wWidget,this.blidi);
+        block.setBlockLabelUneditable();
+        block.dragHandler = new JComponentDragHandler(this.workspace, this);
+        return block;
     }
 
     /**
