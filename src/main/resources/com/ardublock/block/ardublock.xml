@@ -2222,7 +2222,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockConnector connector-type="poly" connector-kind="socket" label="bc.variable">
                     <DefaultArg genus-name="variable_poly" label="Char" />
                 </BlockConnector>
-                <BlockConnector connector-type="poly" connector-kind="socket" label="char">
+                <BlockConnector connector-type="poly" connector-kind="socket" label="bс.setter_char">
                     <DefaultArg genus-name="char" label="A" />
                 </BlockConnector>
 
