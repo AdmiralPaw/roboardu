@@ -10,10 +10,10 @@ public class pwmLed extends TranslatorBlock {
 
     public static final String PWM_LED= "void LedPWM(int LED_PIN, int GLOW)\n" +
             "{\n" +
-            "  if(GLOW > 255) GLOW = 255;\n"+
+            "  if(GLOW > 100) GLOW = 100;\n"+
             "  if(GLOW < 0) GLOW = 0;\n"+
             "  pinMode(LED_PIN, OUTPUT);\n" +
-            "  analogWrite(LED_PIN, map(GLOW,0,255,255,0);\n" +
+            "  analogWrite(LED_PIN, map(GLOW,0,100,255,0));\n" +
             "}\n";
 
     public pwmLed(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)

@@ -2222,7 +2222,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockConnector connector-type="poly" connector-kind="socket" label="bc.variable">
                     <DefaultArg genus-name="variable_poly" label="Char" />
                 </BlockConnector>
-                <BlockConnector connector-type="poly" connector-kind="socket" label="char">
+                <BlockConnector connector-type="poly" connector-kind="socket" label="bc.setter_char">
                     <DefaultArg genus-name="char" label="A" />
                 </BlockConnector>
 
@@ -9454,7 +9454,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListAnalogWrite_D3" label="D3" />
+                    <DefaultArg genus-name="pinListAnalog_A0" label="A0" />
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="plug" />
             </BlockConnectors>
@@ -9465,7 +9465,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListAnalogWrite_D3" label="D3" />
+                    <DefaultArg genus-name="pinListAnalog_A0" label="A0" />
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="plug" />
             </BlockConnectors>
@@ -12524,43 +12524,98 @@ initlabel="bg.tft-msg" editable-label="yes">
     <ControllerCompnentsSets>
         <ControllerComponentsSet>
             <ControllerComponents pin="dir04pwm05">
-                <Component name="modules.angle.name" info="modules.angle.info">angle</Component>  
                                 
             </ControllerComponents>
             <ControllerComponents pin="dir07pwm06">
-                <Component name="modules.angle.name" info="modules.angle.info">angle</Component> 
             </ControllerComponents>
             <ControllerComponents pin="d2">
-                <Component name="modules.angle.name" info="modules.angle.info">angle</Component> 
+                <Component name="modules.encoder.name" info="modules.encoder.info">encoder</Component> 
             </ControllerComponents>
             <ControllerComponents pin="d3">
-                <Component name="modules.angle.name" info="modules.angle.info">angle</Component> 
+                <Component name="modules.encoder.name" info="modules.encoder.info">encoder</Component> 
             </ControllerComponents>
             <ControllerComponents pin="d8">
-                <Component name="modules.angle.name" info="modules.angle.info">angle</Component> 
+                <Component name="modules.button.name" info="modules.button.info">button</Component> 
+                <Component name="modules.diod.name" info="modules.diod.info">diod</Component>
+                <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
+                <Component name="modules.line.name" info="modules.line.info">line</Component>
+                <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
+                <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
             </ControllerComponents>
             <ControllerComponents pin="d10">
-                <Component name="modules.angle.name" info="modules.angle.info">angle</Component> 
+                <Component name="modules.button.name" info="modules.button.info">button</Component> 
+                <Component name="modules.diod.name" info="modules.diod.info">diod</Component>
+                <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
+                <Component name="modules.line.name" info="modules.line.info">line</Component>
+                <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
+                <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
             </ControllerComponents>
             <ControllerComponents pin="d9">
-                <Component name="modules.angle.name" info="modules.angle.info">angle</Component>  
+                <Component name="modules.button.name" info="modules.button.info">button</Component> 
+                <Component name="modules.diod.name" info="modules.diod.info">diod</Component>
+                <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
+                <Component name="modules.line.name" info="modules.line.info">line</Component>
+                <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
+                <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
             </ControllerComponents>
             <ControllerComponents pin="d11">
-                <Component name="modules.angle.name" info="modules.angle.info">angle</Component> 
+                <Component name="modules.button.name" info="modules.button.info">button</Component> 
+                <Component name="modules.diod.name" info="modules.diod.info">diod</Component>
+                <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
+                <Component name="modules.line.name" info="modules.line.info">line</Component>
+                <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
+                <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
             </ControllerComponents>
             <ControllerComponents pin="a3">
-                <Component name="modules.angle.name" info="modules.angle.info">angle</Component>   
+                <Component name="modules.angle.name" info="modules.angle.info">angle</Component>
+                <Component name="modules.button.name" info="modules.button.info">button</Component> 
+                <Component name="modules.diod.name" info="modules.diod.info">diod</Component>
+                <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
+                <Component name="modules.hall.name" info="modules.hall.info">hall</Component>
+                <Component name="modules.light.name" info="modules.light.info">light</Component>
+                <Component name="modules.line.name" info="modules.line.info">line</Component>
+                <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
+                <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
+                <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
             </ControllerComponents>
             <ControllerComponents pin="a2">
-                <Component name="modules.angle.name" info="modules.angle.info">angle</Component> 
+                <Component name="modules.angle.name" info="modules.angle.info">angle</Component>
+                <Component name="modules.button.name" info="modules.button.info">button</Component> 
+                <Component name="modules.diod.name" info="modules.diod.info">diod</Component>
+                <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
+                <Component name="modules.hall.name" info="modules.hall.info">hall</Component>
+                <Component name="modules.light.name" info="modules.light.info">light</Component>
+                <Component name="modules.line.name" info="modules.line.info">line</Component>
+                <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
+                <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
+                <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
             </ControllerComponents>
             <ControllerComponents pin="a1">
-                <Component name="modules.angle.name" info="modules.angle.info">angle</Component> 
+                <Component name="modules.angle.name" info="modules.angle.info">angle</Component>
+                <Component name="modules.button.name" info="modules.button.info">button</Component> 
+                <Component name="modules.diod.name" info="modules.diod.info">diod</Component>
+                <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
+                <Component name="modules.hall.name" info="modules.hall.info">hall</Component>
+                <Component name="modules.light.name" info="modules.light.info">light</Component>
+                <Component name="modules.line.name" info="modules.line.info">line</Component>
+                <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
+                <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
+                <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
             </ControllerComponents>
             <ControllerComponents pin="a0">
-                <Component name="modules.angle.name" info="modules.angle.info">angle</Component> 
+                <Component name="modules.angle.name" info="modules.angle.info">angle</Component>
+                <Component name="modules.button.name" info="modules.button.info">button</Component> 
+                <Component name="modules.diod.name" info="modules.diod.info">diod</Component>
+                <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
+                <Component name="modules.hall.name" info="modules.hall.info">hall</Component>
+                <Component name="modules.light.name" info="modules.light.info">light</Component>
+                <Component name="modules.line.name" info="modules.line.info">line</Component>
+                <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
+                <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
+                <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
             </ControllerComponents>
             <ControllerComponents pin="i2c">
+                <Component name="modules.range.name" info="modules.range.info">range</Component> 
                 <!--<Component>ANGLE</Component> 
                 <Component>BUTTON</Component> 
                 <Component>DIOD</Component> 

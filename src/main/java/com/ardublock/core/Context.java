@@ -289,6 +289,15 @@ public class Context
 		}
 	}
 
+
+	public void didVerify(String sourcecode)
+	{
+		for (OpenblocksFrameListener ofl : ofls)
+		{
+			ofl.didVerify(sourcecode);
+		}
+	}
+
 	public String getSaveFileName() {
 		return saveFileName;
 	}

@@ -193,7 +193,15 @@ public class GenerateCodeButtonListener implements ActionListener {
             if (!context.isInArduino()) {
                 System.out.println(codeOut);
             }
-            context.didGenerate(codeOut);
+
+            if (e.getActionCommand() == "UPLOAD_CODE")
+            {
+                context.didGenerate(codeOut);
+            }
+            else if (e.getActionCommand() == "VERIFY_CODE")
+            {
+                context.didVerify(codeOut);
+            }
         }
     }
 }

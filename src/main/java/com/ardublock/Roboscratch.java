@@ -26,6 +26,8 @@ import com.ardublock.core.Context;
 import com.ardublock.ui.ArduBlockToolFrame;
 import com.ardublock.ui.Settings;
 import com.ardublock.ui.listener.OpenblocksFrameListener;
+
+import java.lang.reflect.Method;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -114,6 +116,58 @@ public class Roboscratch implements Tool, OpenblocksFrameListener {
             Roboscratch.editor.getCurrentTab().setText(source);
         }
         Roboscratch.editor.handleExport(false);
+    }
+
+    public void didVerify(String source)
+    {
+        java.lang.reflect.Method method;
+        try {
+            // pre Arduino 1.6.12
+            Class ed = Roboscratch.editor.getClass();
+            Class[] cArg = new Class[1];
+            cArg[0] = String.class;
+            method = ed.getMethod("setText", cArg);
+            method.invoke(Roboscratch.editor, source);
+        } catch (NoSuchMethodException e) {
+            Roboscratch.editor.getCurrentTab().setText(source);
+        } catch (IllegalAccessException e) {
+            Roboscratch.editor.getCurrentTab().setText(source);
+        } catch (SecurityException e) {
+            Roboscratch.editor.getCurrentTab().setText(source);
+        } catch (InvocationTargetException e) {
+            Roboscratch.editor.getCurrentTab().setText(source);
+        }
+        try
+        {
+            Class ed = Roboscratch.editor.getClass();
+            Method reset = Editor.class.getDeclaredMethod("resetHandlers");
+            reset.setAccessible(true);
+            reset.invoke(Roboscratch.editor);
+            System.out.println("1");
+            Field ph = Editor.class.getDeclaredField("presentHandler");
+            ph.setAccessible(true);
+            Runnable run_ph = (Runnable) ph.get(Roboscratch.editor);
+            Field rh = Editor.class.getDeclaredField("runHandler");
+            rh.setAccessible(true);
+            Runnable run_rh = (Runnable) rh.get(Roboscratch.editor);
+            Roboscratch.editor.handleRun(false, run_ph, run_rh);
+        }
+        catch (NoSuchFieldException e)
+        {
+            System.out.println(e.toString());
+        }
+        catch (IllegalAccessException e)
+        {
+            System.out.println(e.toString());
+        }
+        catch (NoSuchMethodException e)
+        {
+            System.out.println(e.toString());
+        }
+        catch (InvocationTargetException e)
+        {
+            System.out.println(e.toString());
+        }
     }
 
     private String getArduinoVersion() {
