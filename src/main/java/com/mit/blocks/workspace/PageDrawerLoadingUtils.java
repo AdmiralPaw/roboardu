@@ -232,7 +232,9 @@ public class PageDrawerLoadingUtils {
                                 //don't link factory blocks to their stubs because they will
                                 //forever remain inside the drawer and never be active
                                 newBlock = new Block(workspace, genusName, false);
-                                drawerRBs.add(new FactoryRenderableBlock(workspace, manager, newBlock.getBlockID()));
+                                FactoryRenderableBlock frb = new FactoryRenderableBlock(workspace, manager, newBlock.getBlockID());
+                                frb.OneSetZoomLevel(0.86f);
+                                drawerRBs.add(frb);
                             }
                         }
                         manager.addStaticBlocks(drawerRBs, drawerName);

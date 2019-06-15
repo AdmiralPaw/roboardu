@@ -40,6 +40,7 @@ public class FactoryRenderableBlock extends RenderableBlock {
         super(workspace, widget, blockID);
         this.setBlockLabelUneditable();
         dragHandler = new JComponentDragHandler(workspace, this);
+
     }
 
     /**
@@ -112,6 +113,11 @@ public class FactoryRenderableBlock extends RenderableBlock {
     public void stopDragging(MouseEvent e, WorkspaceWidget w) {
     }
 
-    public void setZoomLevel(double newZoom) {
+    public void setZoomLevel(double newZoom){
+    }
+
+    public void OneSetZoomLevel(double newZoom)
+    {
+        super.setZoomLevel(newZoom);
     }
 }

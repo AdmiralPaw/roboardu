@@ -188,6 +188,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     // the values of the x and y coordinates of block when zoom = 1.0
     private double unzoomedX;
     private double unzoomedY;
+    private double zoom = 1.0;
 
     /**
      * Constructs a new RenderableBlock instance with the specified parent
@@ -200,6 +201,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     public RenderableBlock(Workspace workspace, WorkspaceWidget parent,
             Long blockID) {
         this(workspace, parent, blockID, false);
+
     }
 
     /**
@@ -292,6 +294,15 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             setBlockToolTip(getBlock().getBlockDescription().trim());
         }
         setCursor(dragHandler.getDragHintCursor());
+    }
+
+
+
+    public RenderableBlock(Workspace workspace, WorkspaceWidget parent,
+                            Long blockID, boolean isLoading, double blockSize)
+    {
+        this(workspace, parent, blockID, isLoading);
+        setZoomLevel(blockSize);
     }
 
     /**
@@ -1610,7 +1621,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         Point oriLocation = rb.getLocation();
 
         Block newBlock = new Block(workspace, rb.getGenus(), rb.blockLabel.getText());
-        RenderableBlock newRb = new RenderableBlock(workspace, parent, newBlock.getBlockID(), false);
+        RenderableBlock newRb = new RenderableBlock(workspace, parent, newBlock.getBlockID(), false, this.zoom);
 
         int i = 0;
         Iterable<BlockConnector> oriSockets = oriBlock.getSockets();
@@ -1657,7 +1668,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         newRb.moveConnectedBlocks();
         parent.addBlock(newRb);
         newRb.linkedDefArgsBefore = true;
-        newRb.setZoomLevel(this.zoom);
+
         return newRb;
     }
 
@@ -2206,7 +2217,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * *************************************
      * Zoom support methods *************************************
      */
-    private double zoom = 1.0;
+
 
     public void setZoomLevel(double newZoom) {
         // create zoom transformers

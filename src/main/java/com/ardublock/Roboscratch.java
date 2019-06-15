@@ -143,7 +143,6 @@ public class Roboscratch implements Tool, OpenblocksFrameListener {
             Method reset = Editor.class.getDeclaredMethod("resetHandlers");
             reset.setAccessible(true);
             reset.invoke(Roboscratch.editor);
-            System.out.println("1");
             Field ph = Editor.class.getDeclaredField("presentHandler");
             ph.setAccessible(true);
             Runnable run_ph = (Runnable) ph.get(Roboscratch.editor);
