@@ -42,6 +42,7 @@ public class СontrollerСonfiguration extends JPanel {
         this.add(splitPane);
         moduleInfoPane = new ModuleInfoPane(this);
         uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
+        this.resetPane();
         //this.controllerImage.add(justButt);
 //        this.addButtons();
     }
@@ -58,7 +59,6 @@ public class СontrollerСonfiguration extends JPanel {
 //        allButtons.add(testVisibleButton);
 //        return allButtons;
 //    }
-    
     public void addComponent(String pin, String name, String pathToTranslate, String info) {
         this.components.add(new Device(
                 pin,
@@ -69,6 +69,9 @@ public class СontrollerСonfiguration extends JPanel {
 
     public void changeConnectorComponentsPane(String buttonPin) {
         componentsPane.removeAll();
+        if (buttonPin == null) {
+            this.resetPane();
+        }
         for (int i = 0; i < components.size(); i++) {
             if (components.get(i).pin.equals(buttonPin)) {
                 componentsPane.add(new ControllerMenuButton(
@@ -84,17 +87,33 @@ public class СontrollerСonfiguration extends JPanel {
 
     public void changeModuleComponentsPane(String moduleName) {
         componentsPane.removeAll();
-        for (Device device : components) {
-            if (device.deviceName.equals(moduleName)
-                    && !moduleName.equals("first")) {
-                this.moduleInfoPane.setModuleImage(device.deviceName);
-                this.moduleInfoPane.setModuleName(device.deviceNameTranslated);
-                this.moduleInfoPane.setModuleInfo(device.deviceInfo);
-                componentsPane.add(this.moduleInfoPane);
+        if (!moduleName.equals("first")) {
+            for (Device device : components) {
+                if (device.deviceName.equals(moduleName)) {
+                    this.moduleInfoPane.setModuleImage(device.deviceName);
+                    this.moduleInfoPane.setModuleName(device.deviceNameTranslated);
+                    this.moduleInfoPane.setModuleInfo(device.deviceInfo);
+                    componentsPane.add(this.moduleInfoPane);
+                }
             }
+        } else {
+            this.resetPane();
         }
         componentsPane.validate();
         componentsPane.repaint();
+    }
+
+    public void resetPane() {
+        componentsPane.removeAll();
+        for (ControllerButton module : this.controllerImage.moduleButtons) {
+            if (!module.moduleName.equals("first")) {
+                componentsPane.add(new ControllerMenu(
+                        this,
+                        module.moduleName,
+                        module.moduleTranslatedName,
+                        module.getId()));
+            }
+        }
     }
 
     /**

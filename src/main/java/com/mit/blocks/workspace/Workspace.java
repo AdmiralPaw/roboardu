@@ -149,7 +149,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
     public final static Integer DRAGGED_BLOCK_LAYER = new Integer(5);
 
     public Workspace() {
-        super();
+        //super();
         setLayout(null);
         setBackground(Color.WHITE);
         setPreferredSize(new Dimension(800, 600));
