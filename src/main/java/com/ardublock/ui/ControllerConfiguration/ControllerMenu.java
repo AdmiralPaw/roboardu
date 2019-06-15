@@ -6,24 +6,30 @@ import com.mit.blocks.codeblockutil.RMenuButton;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
+import javax.swing.SwingUtilities;
 
-public class ControllerMenuButton extends CButton {
+public class ControllerMenu extends CButton {
 
     private static final long serialVersionUID = 328149080229L;
 
-    Color cat_color;
     String deviceName;
     String deviceNameTranslated;
     String Id;
     ControllerButton moduleButton;
+    СontrollerСonfiguration controller;
+    final Color standartColor = new Color(19, 144, 148);
+    final Color pressedColor = new Color(235, 158, 91);
 
-    public ControllerMenuButton(СontrollerСonfiguration controller, String text, String tr, String Id) {
-        this(controller, text, tr, Id, Color.black);
-    }
-
-    public ControllerMenuButton(СontrollerСonfiguration controller, String deviceName, String tr, String Id, Color cat_col) {
+    /**
+     *
+     * @param controller
+     * @param text рабочее имя для блоков
+     * @param tr видимый текст, он же перевод
+     * @param Id ID порта
+     */
+    public ControllerMenu(СontrollerСonfiguration controller, String deviceName, String tr, String Id) {
         super(Color.black, CGraphite.blue, tr);
-        this.cat_color = cat_col;
+        this.controller = controller;
         this.deviceName = deviceName;
         this.deviceNameTranslated = tr;
         this.Id = Id;
@@ -51,7 +57,11 @@ public class ControllerMenuButton extends CButton {
         g2.drawLine(0, buttonHeight / 2, cube_x, buttonHeight / 2);
         g2.drawLine(cube_x / 3, 0, buttonWidth, 0);
         g2.drawLine(cube_x / 3, buttonHeight, buttonWidth, buttonHeight);
-        g2.setPaint(cat_color);
+        if (this.pressed) {
+            g2.setPaint(this.pressedColor);
+        } else {
+            g2.setPaint(this.standartColor);
+        }
         g2.fillRect(cube_x - 5, cube_y - 5, 10, 10);
         if (this.focus) {
             g2.setPaint(new Color(241, 241, 241));
@@ -61,24 +71,49 @@ public class ControllerMenuButton extends CButton {
 
         // Draw the text (if any)
         if (this.getText() != null) {
-            g2.setColor(new Color(19, 144, 148));
+            if (this.pressed) {
+                g2.setColor(this.pressedColor);
+            } else {
+                g2.setColor(this.standartColor);
+            }
             Font font = g2.getFont().deriveFont((float) (((float) buttonHeight) * 0.4));
             g2.setFont(font);
             FontMetrics metrics = g2.getFontMetrics();
             Rectangle2D textBounds = metrics.getStringBounds(this.getText(), g2);
             float x = 60;
             float y = (float) ((1.0 * this.getHeight() - 2.75 * metrics.getDescent()));
-            g2.drawString(this.getText(), x, y);
+            g2.drawString("Порт " + this.Id.toUpperCase() + " :", x, y);
+            x = 112;
+            g2.setColor(Color.GRAY);
+            g2.drawString(this.deviceNameTranslated, x, y);
         }
     }
 
-    public void mouseReleased(MouseEvent e) {
-        this.pressed = false;
+    public void mousePressed(MouseEvent e) {
+        if (this.pressed) {
+            this.pressed = false;
+        } else {
+            this.pressed = true;
+        }
+        //TODO: можно и лучше, но лень
+        for (Component i : controller.componentsPane.getComponents()) {
+            if (i instanceof ControllerMenu) {
+                if (!(((ControllerMenu) i) == this) && ((ControllerMenu) i).pressed) {
+                    ((ControllerMenu) i).pressed = false;
+                    ((ControllerMenu) i).repaint();
+                }
+            }
+        }
         repaint();
-        this.moduleButton.setNewIconAsModule(
-                "com/ardublock/Images/module/" + deviceName + ".png");
-        this.moduleButton.setModuleName(deviceName);
-        this.moduleButton.setTranslatedName(deviceNameTranslated);
     }
 
+    public void mouseReleased(MouseEvent e) {
+        this.controller.controllerImage.unpressElse(Id, false);
+        if (this.moduleButton.isSelected()) {
+            this.moduleButton.setSelected(false);
+        } else {
+            this.moduleButton.setSelected(true);
+        }
+        repaint();
+    }
 }

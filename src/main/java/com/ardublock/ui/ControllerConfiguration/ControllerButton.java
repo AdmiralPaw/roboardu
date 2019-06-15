@@ -13,7 +13,8 @@ public class ControllerButton extends JToggleButton {
     private final СontrollerСonfiguration controller;
     private final String buttonId;
     private String path;
-    private String moduleName = "first";
+    public String moduleName = "first";
+    public String moduleTranslatedName = "none";
     //private String pathSet;
     private ImageIcon image;
     private ImageIcon imageSet;
@@ -272,5 +273,9 @@ public class ControllerButton extends JToggleButton {
     
     public void setModuleName(String moduleName){
         this.moduleName = moduleName;
+    }
+    
+    public void setTranslatedName(String moduleTrName){
+        this.moduleTranslatedName = moduleTrName;
     }
 }
