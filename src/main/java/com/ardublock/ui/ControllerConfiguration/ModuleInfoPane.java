@@ -7,9 +7,12 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.net.URL;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class ModuleInfoPane extends JPanel {
 
@@ -38,7 +41,29 @@ public class ModuleInfoPane extends JPanel {
 
         infoImagePanel.add(moduleIcon);
         infoImagePanel.add(moduleNameLabel);
-        
+        infoImagePanel.addMouseListener(new MouseListener(){
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            public void mousePressed(MouseEvent e) {
+
+            }
+            
+            public void mouseReleased(MouseEvent e) {
+                controller.changeConnectorComponentsPane(null);
+                controller.controllerImage.unpressAll();
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                
+            }
+
+            public void mouseExited(MouseEvent e) {
+                
+            }
+        });
+
         moduleInfoLabel.setFont(new Font("TimesNewRoman", Font.PLAIN, 14));
         moduleInfoLabel.setWrapStyleWord(true);
         moduleInfoLabel.setLineWrap(true);
@@ -66,7 +91,9 @@ public class ModuleInfoPane extends JPanel {
     }
 
     private void setImageURL(String deviceName) {
-        this.imageURL = ModuleInfoPane.class.getClassLoader().getResource(
-                "com/ardublock/Images/module/" + deviceName + ".png");
+        //if (!deviceName.equals("start")) {
+            this.imageURL = ModuleInfoPane.class.getClassLoader().getResource(
+                    "com/ardublock/Images/module/" + deviceName + ".png");
+        //}
     }
 }
