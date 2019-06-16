@@ -56,11 +56,11 @@ public class ModuleInfoPane extends JPanel {
             }
 
             public void mouseEntered(MouseEvent e) {
-                
+                infoImagePanel.setBackground(new Color(235, 158, 91));
             }
 
             public void mouseExited(MouseEvent e) {
-                
+                infoImagePanel.setBackground(Color.LIGHT_GRAY);                
             }
         });
 
