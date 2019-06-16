@@ -80,22 +80,12 @@ public class ControllerButton extends JToggleButton {
             }
 
             public void mouseEntered(MouseEvent e) {
-                if (isItConnector) {
-                    setBounds(getX() - 10, getY() - 10, getWidth() + 20, getHeight() + 20);
-                } else {
-                    setButtonBig(true);
-                }
-                button.rePaint();
+                setModuleBig(true);
                 //setIconAccordingToPress();
             }
 
             public void mouseExited(MouseEvent e) {
-                if (isItConnector) {
-                    setBounds(getX() + 10, getY() + 10, getWidth() - 20, getHeight() - 20);
-                } else {
-                    setButtonBig(false);
-                }
-                button.rePaint();
+                setModuleBig(false);
                 //setIconAccordingToPress();
             }
         });
@@ -104,7 +94,18 @@ public class ControllerButton extends JToggleButton {
 
     }
     
-    public void setButtonBig(boolean isItBig) {
+    public void setModuleBig(boolean isItBig) { //можно лучше, но мозг в такой жаре не работает
+        if (isItConnector) {
+            if(isItBig) setBounds(getX() - 10, getY() - 10, getWidth() + 20, getHeight() + 20);
+            else setBounds(getX() + 10, getY() + 10, getWidth() - 20, getHeight() - 20);
+        } 
+        else {
+            setButtonBig(isItBig);
+        }
+        button.rePaint();
+    }
+    
+    private void setButtonBig(boolean isItBig) {
         if (isItBig) {
             switch (buttonId) {
                 case "dir04pwm05":
