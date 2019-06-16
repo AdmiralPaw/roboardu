@@ -80,13 +80,21 @@ public class ControllerButton extends JToggleButton {
             }
 
             public void mouseEntered(MouseEvent e) {
-                setBounds(getX() - 10, getY() - 10, getWidth() + 20, getHeight() + 20);
+                if (isItConnector) {
+                    setBounds(getX() - 10, getY() - 10, getWidth() + 20, getHeight() + 20);
+                } else {
+                    setButtonBig(true);
+                }
                 button.rePaint();
                 //setIconAccordingToPress();
             }
 
             public void mouseExited(MouseEvent e) {
-                setBounds(getX() + 10, getY() + 10, getWidth() - 20, getHeight() - 20);
+                if (isItConnector) {
+                    setBounds(getX() + 10, getY() + 10, getWidth() - 20, getHeight() - 20);
+                } else {
+                    setButtonBig(false);
+                }
                 button.rePaint();
                 //setIconAccordingToPress();
             }
@@ -94,6 +102,58 @@ public class ControllerButton extends JToggleButton {
         rootImage.add(this);
         this.setImages();
 
+    }
+    
+    public void setButtonBig(boolean isItBig) {
+        if (isItBig) {
+            switch (buttonId) {
+                case "dir04pwm05":
+                case "dir07pwm06":
+                case "d2":
+                case "d3":
+                    setBounds(getX() - 5, getY() - 10, getWidth() + 20, getHeight() + 20);
+                    break;
+                case "d8":
+                case "d10":
+                case "d9":
+                case "d11":
+                    setBounds(getX() - 10, getY() - 10, getWidth() + 20, getHeight() + 20);
+                    break;
+                case "a3":
+                case "a2":
+                case "a1":
+                case "a0":
+                    setBounds(getX() - 10, getY() - 10, getWidth() + 20, getHeight() + 20);
+                    break;
+                case "i2c":
+                    setBounds(getX() - 15, getY() - 10, getWidth() + 20, getHeight() + 20);
+                    break;
+            }
+        } else {
+            switch (buttonId) {
+                case "dir04pwm05":
+                case "dir07pwm06":
+                case "d2":
+                case "d3":
+                    setBounds(getX() + 5, getY() + 10, getWidth() - 20, getHeight() - 20);
+                    break;
+                case "d8":
+                case "d10":
+                case "d9":
+                case "d11":
+                    setBounds(getX() + 10, getY() + 10, getWidth() - 20, getHeight() - 20);
+                    break;
+                case "a3":
+                case "a2":
+                case "a1":
+                case "a0":
+                    setBounds(getX() + 10, getY() + 10, getWidth() - 20, getHeight() - 20);
+                    break;
+                case "i2c":
+                    setBounds(getX() + 15, getY() + 10, getWidth() - 20, getHeight() - 20);
+                    break;
+            }
+        }
     }
 
     //-----------------------------------------------Методы коннекторов------------------------------------------
