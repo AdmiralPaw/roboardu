@@ -80,7 +80,7 @@ public class ControllerMenuButton extends CButton {
     }
 
     public void mouseReleased(MouseEvent e) {
-        this.moduleButton.setModuleBig(false);
+        //this.moduleButton.setModuleBig(false);
         this.pressed = false;
         repaint();
         this.moduleButton.setNewIconAsModule(
@@ -92,12 +92,12 @@ public class ControllerMenuButton extends CButton {
     }
     
     public void mouseEntered(MouseEvent e){
-        this.moduleButton.setModuleBig(true);
+        //this.moduleButton.setModuleBig(true);
         this.moduleButton.setNewIconAsModule(
                 "com/ardublock/Images/module/" + deviceName + ".png");
     }
     
     public void mouseExited(MouseEvent e){
-        this.moduleButton.setModuleBig(false);
+        //this.moduleButton.setModuleBig(false);
     }
 }

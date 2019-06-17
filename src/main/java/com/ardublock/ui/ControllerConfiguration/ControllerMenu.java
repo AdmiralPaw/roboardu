@@ -94,7 +94,7 @@ public class ControllerMenu extends CButton {
     }*/
 
     public void mouseReleased(MouseEvent e) {
-        this.moduleButton.setModuleBig(false);
+        //this.moduleButton.setModuleBig(false);
         controller.changeModuleComponentsPane(this.moduleButton.moduleName);
     }
     
@@ -134,7 +134,7 @@ public class ControllerMenu extends CButton {
         }
         this.controller.controllerImage.unpressElse(Id, false);
         this.moduleButton.setSelected(true);
-        this.moduleButton.setModuleBig(true);
+        //this.moduleButton.setModuleBig(true);
         repaint();
     }
     
@@ -150,7 +150,7 @@ public class ControllerMenu extends CButton {
         }
         this.controller.controllerImage.unpressElse(Id, false);
         this.moduleButton.setSelected(false);
-        this.moduleButton.setModuleBig(false);
+        //this.moduleButton.setModuleBig(false);
         repaint();
     }
 }
