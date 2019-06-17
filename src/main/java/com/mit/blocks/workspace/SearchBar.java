@@ -135,9 +135,6 @@ public class SearchBar {
                     
                     for(FactoryRenderableBlock block:searchedBlocks){
                         
-                        
-                        
-                        
                         //Window2Explorer.canvasPanel.add(block);
                         
 //                        dir.add(block);
