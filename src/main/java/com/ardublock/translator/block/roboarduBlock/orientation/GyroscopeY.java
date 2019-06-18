@@ -12,18 +12,23 @@ public class GyroscopeY extends TranslatorBlock
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    public static final String GYRO_FUNC = "float callGyroY(){\n"
+            + "  Accel.readSensor();\n"
+            + "  return Accel.getGyroY_rads();\n"
+            + "}";
+
     @Override
-    public String toCode() throws SocketNullException, SubroutineNotDeclaredException
-    {
-        String Accel="Accel";
-        translator.addHeaderFile("I2Cdev.h");
-        translator.addHeaderFile("MPU6050.h");
+    public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
+        String Accel = "Accel";
+        translator.addHeaderFile("MPU9250.h");
 
+        translator.addDefinitionCommand("MPU9250 " + Accel + "(Wire, 0x68);");
+        translator.addSetupCommand(Accel + ".begin();\ndelay(100);"
+                + "  " + Accel + ".setAccelRange(MPU9250::ACCEL_RANGE_8G);\n"
+                + "  " + Accel + ".setGyroRange(MPU9250::GYRO_RANGE_500DPS);\n"
+                + "  " + Accel + ".setDlpfBandwidth(MPU9250::DLPF_BANDWIDTH_20HZ);\n"
+                + "  " + Accel + ".setSrd(19);\n");
 
-        translator.addDefinitionCommand("MPU6050 "+Accel+";");
-        translator.addSetupCommand(Accel+".initialize();\ndelay(100);");
-
-
-        return codePrefix + Accel + ".getRotationY()" + codeSuffix;
+        return codePrefix + "callGyroY()" + codeSuffix;
     }
 }
