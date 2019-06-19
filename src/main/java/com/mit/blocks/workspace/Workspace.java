@@ -241,7 +241,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         add(blockCanvasLayer, BLOCK_LAYER);
 
         int size = 45;
-        final double coef = 0.25;
+        final double coef = 0.2f;
         final double max_zoom = 2.5;
         final double min_zoom = 0.5;
         URL iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/block/buttons/zoom+.png");
