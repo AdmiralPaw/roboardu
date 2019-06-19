@@ -107,7 +107,6 @@ public class Window2Explorer extends JPanel implements Explorer {
      * @requires items != null && for each element in item, element!= null
      */
     public void setDrawersCard(List<? extends Canvas> items) {
-        System.out.println("set drawers card");
         canvases.clear();
         buttonPane.removeAll();
         int size = items.size();
@@ -186,7 +185,6 @@ public class Window2Explorer extends JPanel implements Explorer {
                 FactoryRenderableBlock bliner=(FactoryRenderableBlock)blocksCanvas.getComponent(i);
                  bl=bliner;
                  String kye = bl.getKeyword();
-                 System.out.println(kye);
                  this.dictionary.put(bl.getKeyword(),bl);
             }
             }
@@ -201,13 +199,10 @@ public class Window2Explorer extends JPanel implements Explorer {
 //        RHoverScrollPane rh =(RHoverScrollPane)myc.getComponent(2);
 //        JViewport vp = (JViewport)rh.getComponent(0);
         //FactoryCanvas fc = (FactoryCanvas)vp.getComponent(0);
-        System.out.println("my code dont throw exception?");
         
         
         
         this.revalidate();
-        System.out.println(this.canvases.size());
-        System.out.println("cavases size");
     }
     
     

@@ -90,7 +90,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 	protected final Workspace workspace;
 
 	/** BlockID of this. MAY BE Block.NULL */
-	private final Long blockID;
+	protected final Long blockID;
 	/** Parent workspace widget. May be null */
 	private WorkspaceWidget parent;
 	/**

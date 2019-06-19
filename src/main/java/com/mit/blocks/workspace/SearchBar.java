@@ -110,7 +110,7 @@ public class SearchBar {
             }
 
             public void insertUpdate(DocumentEvent e) {
-                //System.out.println("Called insertUpdate, offset = " + e.getOffset() + ", query length = " + searchBar.getText().length());
+                
                 String text = searchBar.getText();
                 if (text.equals(SearchBar.this.defaultText)) {
                     return;
@@ -120,7 +120,7 @@ public class SearchBar {
                 // foundBlocks.
                 if (e.getOffset() == 0 || e.getOffset() + e.getLength() == text.length()) {
                     performSearch(SearchRange.REMOVE_FROM_FOUND);
-                    System.out.println("serch");
+                    
                     List<FactoryRenderableBlock> searchedBlocks = getBlocks(text.toUpperCase());
                     JComponent dir = Window2Explorer.currentDir;
                     
@@ -140,14 +140,8 @@ public class SearchBar {
                     
                     for(FactoryRenderableBlock block:searchedBlocks){
                         
-                        //Window2Explorer.canvasPanel.add(block);
-                     
-                        //без понятия как но если убрать то при поиске будет кривое отображение
-                        block.setBounds(1000, 1000, 1000, 1000);
-                        
-                        fcanvas.addBlock(block);
-                        System.out.println("added?");
-                    }
+                        fcanvas.addBlock(block.deepClone());
+                                            }
                     JComponent scroll = new RHoverScrollPane(
                     fcanvas,
                     CScrollPane.ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
@@ -198,8 +192,6 @@ public class SearchBar {
                         }
                     }
                 }
-                System.out.println(blocks.size()+"blocks searched size");
-                System.out.println(data.size()+"data size");
                 return blocks;
             }
            
@@ -211,14 +203,12 @@ public class SearchBar {
 //                component = (JComponent) Window2Explorer.cdir.getComponent(0);
 //                component = (JComponent) Window2Explorer.cdir.getComponent(0);
                 SearchBar.fcdir = component;
-                System.out.println("current panel getted");
                 return component;
             }
             
             
             
             public void removeUpdate(DocumentEvent e) {
-                //System.out.println("Called removeUpdate, offset = " + e.getOffset() + ", query length = " + searchBar.getText().length());
                 if (searchBar.getText().equals("")) {
                     performSearch(SearchRange.CHECK_ALL);
                 } else if (e.getOffset() == 0 || e.getOffset() == searchBar.getText().length()) {
@@ -379,7 +369,7 @@ public class SearchBar {
     }
 
     private void performSearchTimerHandler() {
-        //System.out.println("performing search... range = " + searchRange);
+        
         if (searchBar.getText().equals("")) {
             clearSearchResults();
             return;
