@@ -27,6 +27,8 @@ import com.mit.blocks.codeblockutil.RHoverScrollPane;
 import com.mit.blocks.codeblockutil.RQueryField;
 import com.mit.blocks.codeblockutil.Window2Explorer;
 import com.mit.blocks.renderable.FactoryRenderableBlock;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -126,31 +128,22 @@ public class SearchBar {
                     dir.removeAll();
                     JViewport jport = new JViewport();
                     FactoryCanvas fcanvas = new FactoryCanvas("searched canvas",Color.WHITE);
+                    
                     List<JComponent> blcks ;
                     
                     JPanel panel = new JPanel();
                     
                     BoxLayout blout = new BoxLayout(fcanvas,BoxLayout.Y_AXIS);
-                    //fcanvas.setLayout(blout);
+                    
+                    fcanvas.setLayout(blout);
+                    
                     
                     for(FactoryRenderableBlock block:searchedBlocks){
                         
                         //Window2Explorer.canvasPanel.add(block);
-                        
-//                        dir.add(block);
-//                        JComponent hvspn = (JComponent)dir.getComponent(0);
-//                        JComponent scrolViewport = (JComponent)hvspn.getComponent(2);
-//                        JComponent jviewport = (JComponent)scrolViewport.getComponent(0);
-//                        JComponent fcanvas = (JComponent)hvspn.getComponent(0);
-//                        fcanvas.add(block);
-//                        //fcanvas.repaint();
-//                        fcanvas.revalidate();
-                        
-
+                     
                         //без понятия как но если убрать то при поиске будет кривое отображение
                         block.setBounds(1000, 1000, 1000, 1000);
-                        
-                        
                         
                         fcanvas.addBlock(block);
                         System.out.println("added?");
@@ -161,9 +154,24 @@ public class SearchBar {
                     CScrollPane.ScrollPolicy.HORIZONTAL_BAR_AS_NEEDED,
                     15,Color.BLACK , Color.darkGray);
                    // Window2Explorer.canvasPanel.repaint();
-                   dir.add(scroll);
+                    dir.add(scroll);
                     dir.validate();
                     dir.repaint();
+                    
+                    //set rbHighlightBlock position as block position
+                    JComponent[] components = (JComponent[]) fcanvas.getComponents();
+                    
+                    for(int i=0;i<components.length;i+=2){
+//                        Point location = components[i].getLocation();
+//                        components[i+1].setLocation(location);
+                          
+                        Rectangle location = components[i].getBounds();
+                        components[i+1].setBounds(location);
+                        
+                    }
+                    dir.validate();
+                    dir.repaint();
+                    
                 } else {
                     // If the search term changed in the middle, then the blocks found and
                     // the blocks yet to be found may have changed.  Recheck all blocks.

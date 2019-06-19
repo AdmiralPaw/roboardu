@@ -150,59 +150,47 @@ public class Window2Explorer extends JPanel implements Explorer {
         if (!canvases.isEmpty()) {
             canvasPane.add(canvases.get(0));
             
-            //kesha code
-//            Component[] mycanvases = canvasPane.getComponents();
-//            RHoverScrollPane[] paness =(RHoverScrollPane[])mycanvases;
-//            Component[] rendBlocks = paness[0].getComponents();
-//            
+           
             
         }
         
         
-        //kesha code
         List<JComponent> mycanvases = canvases;
         RHoverScrollPane myc2;
         if(mycanvases.size()>0){
-            JComponent myc = (JComponent)mycanvases.get(this.currentCanvas);
-            myc2=(RHoverScrollPane)myc;
+            JComponent currentCanvas = (JComponent)mycanvases.get(this.currentCanvas);
+            myc2=(RHoverScrollPane)currentCanvas;
             int siz = myc2.getComponents().length;
             JComponent tc =(JComponent) myc2.getComponent(2);
-            myc=tc;
+            currentCanvas=tc;
             
               
-            int siz2 = myc.getComponents().length;
-            myc=(JComponent)tc.getComponent(0);
+            currentCanvas=(JComponent)tc.getComponent(0);
             
             //geted jviewport
-            JComponent mc5 = myc;
-            JComponent mc6=mc5;
+            JComponent mc6=currentCanvas;
             
             JComponent listcpnts=(JComponent)mc6.getComponent(0);
             
             //geted var with list with blocks
-            mc5=listcpnts;
-            
+            currentCanvas=listcpnts;
+                        JComponent blocksCanvas = currentCanvas;
+
             
             //FactoryRenderableBlock
-            int onebl = (int)mc5.getComponents().length;
+            int onebl = (int)blocksCanvas.getComponents().length;
             
-            for(int i=0;i<mc5.getComponentCount();i+=2){
+            for(int i=0;i<blocksCanvas.getComponentCount();i+=2){
             FactoryRenderableBlock bl;
             if(onebl>0){
-                FactoryRenderableBlock bliner=(FactoryRenderableBlock)mc5.getComponent(i);
+                FactoryRenderableBlock bliner=(FactoryRenderableBlock)blocksCanvas.getComponent(i);
                  bl=bliner;
                  String kye = bl.getKeyword();
                  System.out.println(kye);
                  this.dictionary.put(bl.getKeyword(),bl);
             }
             }
-            int allcpnts = mc5.getComponents().length;
-            int siz3 = myc.getComponents().length;
-            System.out.println(siz);
-            System.out.println(siz2);
-            System.out.println(siz3);
-            System.out.println(allcpnts);
-            System.out.println(onebl);
+            
             if(this.was){
             this.currentCanvas++;
             
