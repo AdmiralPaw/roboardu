@@ -233,7 +233,7 @@ public class PageDrawerLoadingUtils {
                                 //forever remain inside the drawer and never be active
                                 newBlock = new Block(workspace, genusName, false);
                                 FactoryRenderableBlock frb = new FactoryRenderableBlock(workspace, manager, newBlock.getBlockID());
-                                frb.OneSetZoomLevel(0.86f);
+                                frb.OneSetZoomLevel(0.84f);
                                 drawerRBs.add(frb);
                             }
                         }

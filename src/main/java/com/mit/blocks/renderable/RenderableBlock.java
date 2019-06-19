@@ -2242,6 +2242,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         if (this.hasComment()) {
             this.comment.setZoomLevel(newZoom);
         }
+        updateBuffImg();
     }
 
     /**
