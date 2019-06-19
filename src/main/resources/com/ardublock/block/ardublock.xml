@@ -11304,25 +11304,6 @@ initlabel="bg.tft-msg" editable-label="yes">
 
 
         <!--ACCELEROMETER HERE====================================================================== -->
-        <BlockGenus name="Accel" kind="command" color="130 155 252" initlabel="bg.Accel" editable-label="no">
-            <description>
-                <text>Gives 3 variables of acceleration according to 3 oxis</text>
-            </description>
-            <BlockConnectors>
-                <BlockConnector connector-type="number"
-                                connector-kind="socket" label="bc.AccelX">
-                    <DefaultArg genus-name="variable_number" label="AccelX" />
-                </BlockConnector>
-                <BlockConnector connector-type="number"
-                                connector-kind="socket" label="bc.AccelY">
-                    <DefaultArg genus-name="variable_number" label="AccelY" />
-                </BlockConnector>
-                <BlockConnector connector-type="number"
-                                connector-kind="socket" label="bc.AccelZ">
-                    <DefaultArg genus-name="variable_number" label="AccelZ" />
-                </BlockConnector>
-            </BlockConnectors>
-        </BlockGenus>
 
         <BlockGenus name="AccelX" kind="data" color="130 155 252" initlabel="bg.AccelX" editable-label="no">
             <description>
@@ -11353,26 +11334,6 @@ initlabel="bg.tft-msg" editable-label="yes">
             <BlockConnectors>
                 <BlockConnector connector-type="number"
                                                 connector-kind="plug">
-                </BlockConnector>
-            </BlockConnectors>
-        </BlockGenus>
-
-        <BlockGenus name="Gyro" kind="command" color="130 155 252" initlabel="bg.Gyro" editable-label="no">
-            <description>
-                <text>Gives 3 variables of acceleration according to 3 oxis</text>
-            </description>
-            <BlockConnectors>
-                <BlockConnector connector-type="number"
-                                connector-kind="socket" label="bc.GyroX">
-                    <DefaultArg genus-name="variable_number" label="GyroX" />
-                </BlockConnector>
-                <BlockConnector connector-type="number"
-                                connector-kind="socket" label="bc.GyroY">
-                    <DefaultArg genus-name="variable_number" label="GyroY" />
-                </BlockConnector>
-                <BlockConnector connector-type="number"
-                                connector-kind="socket" label="bc.GyroZ">
-                    <DefaultArg genus-name="variable_number" label="GyroZ" />
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -11409,8 +11370,8 @@ initlabel="bg.tft-msg" editable-label="yes">
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
-
-        <BlockGenus name="AccelModule" kind="command" color="130 155 252" initlabel="bg.AccelModule" editable-label="no">
+        
+        <BlockGenus name="MagnetX" kind="data" color="130 155 252" initlabel="bg.MagnetX" editable-label="no">
             <description>
                 <text>Gives variable of module ofacceleration</text>
             </description>
@@ -11421,46 +11382,46 @@ initlabel="bg.tft-msg" editable-label="yes">
             </BlockConnectors>
         </BlockGenus>
 
-        <BlockGenus name="AccelGyroMagnet" kind="command" color="130 155 252" initlabel="bg.AccelGyroMagnet" editable-label="no">
+        <BlockGenus name="MagnetY" kind="data" color="130 155 252" initlabel="bg.MagnetY" editable-label="no">
             <description>
-                <text>Gives 3 variables of acceleration according to 3 oxis</text>
+                <text>Gives variable of module ofacceleration</text>
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number"
-                                                connector-kind="socket" label="bc.AccelX">
-                    <DefaultArg genus-name="variable_number" label="AccelX" />
+                                                connector-kind="plug">
                 </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
+
+        <BlockGenus name="MagnetZ" kind="data" color="130 155 252" initlabel="bg.MagnetZ" editable-label="no">
+            <description>
+                <text>Gives variable of module ofacceleration</text>
+            </description>
+            <BlockConnectors>
                 <BlockConnector connector-type="number"
-                                                connector-kind="socket" label="bc.AccelY">
-                    <DefaultArg genus-name="variable_number" label="AccelY" />
+                                                connector-kind="plug">
                 </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
+        
+        <BlockGenus name="MagnetDir" kind="data" color="130 155 252" initlabel="bg.MagnetDir" editable-label="no">
+            <description>
+                <text>Gives variable of module ofacceleration</text>
+            </description>
+            <BlockConnectors>
                 <BlockConnector connector-type="number"
-                                                connector-kind="socket" label="bc.AccelZ">
-                    <DefaultArg genus-name="variable_number" label="AccelZ" />
+                                                connector-kind="plug">
                 </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
+
+        <BlockGenus name="AccelModule" kind="data" color="130 155 252" initlabel="bg.AccelModule" editable-label="no">
+            <description>
+                <text>Gives variable of module ofacceleration</text>
+            </description>
+            <BlockConnectors>
                 <BlockConnector connector-type="number"
-                                                connector-kind="socket" label="bc.GyroX">
-                    <DefaultArg genus-name="variable_number" label="GyroX" />
-                </BlockConnector>
-                <BlockConnector connector-type="number"
-                                                connector-kind="socket" label="bc.GyroY">
-                    <DefaultArg genus-name="variable_number" label="GyroY" />
-                </BlockConnector>
-                <BlockConnector connector-type="number"
-                                                connector-kind="socket" label="bc.GyroZ">
-                    <DefaultArg genus-name="variable_number" label="GyroZ" />
-                </BlockConnector>
-                <BlockConnector connector-type="number"
-                                                connector-kind="socket" label="bc.MagnetX">
-                    <DefaultArg genus-name="variable_number" label="MagnetX" />
-                </BlockConnector>
-                <BlockConnector connector-type="number"
-                                                connector-kind="socket" label="bc.MagnetY">
-                    <DefaultArg genus-name="variable_number" label="MagnetY" />
-                </BlockConnector>
-                <BlockConnector connector-type="number"
-                                                connector-kind="socket" label="bc.MagnetZ">
-                    <DefaultArg genus-name="variable_number" label="MagnetZ" />
+                                                connector-kind="plug">
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -12436,16 +12397,17 @@ initlabel="bg.tft-msg" editable-label="yes">
             <!-- accel -->
             <!--130 155 252-->
             <BlockDrawer button-color="130 155 252" name="bd.accel">
-                <BlockGenusMember>Accel</BlockGenusMember>
                 <BlockGenusMember>AccelX</BlockGenusMember>
                 <BlockGenusMember>AccelY</BlockGenusMember>
                 <BlockGenusMember>AccelZ</BlockGenusMember>
                 <BlockGenusMember>AccelModule</BlockGenusMember>
-                <BlockGenusMember>Gyro</BlockGenusMember>
                 <BlockGenusMember>GyroX</BlockGenusMember>
                 <BlockGenusMember>GyroY</BlockGenusMember>
                 <BlockGenusMember>GyroZ</BlockGenusMember>
-                <BlockGenusMember>AccelGyroMagnet</BlockGenusMember>
+                <BlockGenusMember>MagnetX</BlockGenusMember>
+                <BlockGenusMember>MagnetY</BlockGenusMember>
+                <BlockGenusMember>MagnetZ</BlockGenusMember>
+                <BlockGenusMember>MagnetDir</BlockGenusMember>
             </BlockDrawer>
             <!-- motors -->
             <!--226 108 160-->

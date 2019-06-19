@@ -25,6 +25,8 @@ public class MagnetZ extends TranslatorBlock {
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
         String Accel = "Accel";
         translator.addHeaderFile("MPU9250.h");
+        
+        translator.addDefinitionCommand(MAGNET_FUNC);
 
         translator.addDefinitionCommand("MPU9250 " + Accel + "(Wire, 0x68);");
         translator.addSetupCommand(Accel + ".begin();\ndelay(100);"
