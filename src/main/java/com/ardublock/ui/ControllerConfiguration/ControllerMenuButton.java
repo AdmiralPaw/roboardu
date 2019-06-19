@@ -95,6 +95,8 @@ public class ControllerMenuButton extends CButton {
         //this.moduleButton.setModuleBig(true);
         this.moduleButton.setNewIconAsModule(
                 "com/ardublock/Images/module/" + deviceName + ".png");
+        this.moduleButton.setModuleName(deviceName);
+        this.moduleButton.setTranslatedName(deviceNameTranslated);
     }
     
     public void mouseExited(MouseEvent e){
