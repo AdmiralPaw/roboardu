@@ -87,7 +87,7 @@ public class СontrollerСonfiguration extends JPanel {
 
     public void changeModuleComponentsPane(String moduleName) {
         componentsPane.removeAll();
-        if (!moduleName.equals("first")) {
+        //if (!moduleName.equals("start")) {
             for (Device device : components) {
                 if (device.deviceName.equals(moduleName)) {
                     this.moduleInfoPane.setModuleImage(device.deviceName);
@@ -96,9 +96,9 @@ public class СontrollerСonfiguration extends JPanel {
                     componentsPane.add(this.moduleInfoPane);
                 }
             }
-        } else {
+        /*} else {
             this.resetPane();
-        }
+        }*/
         componentsPane.validate();
         componentsPane.repaint();
     }
@@ -106,7 +106,7 @@ public class СontrollerСonfiguration extends JPanel {
     public void resetPane() {
         componentsPane.removeAll();
         for (ControllerButton module : this.controllerImage.moduleButtons) {
-            if (!module.moduleName.equals("first")) {
+            if (!module.moduleName.equals("start")) {
                 componentsPane.add(new ControllerMenu(
                         this,
                         module.moduleName,

@@ -16,6 +16,7 @@ public class ControllerMenuButton extends CButton {
     String deviceNameTranslated;
     String Id;
     ControllerButton moduleButton;
+    СontrollerСonfiguration controller;
 
     public ControllerMenuButton(СontrollerСonfiguration controller, String text, String tr, String Id) {
         this(controller, text, tr, Id, Color.black);
@@ -27,6 +28,7 @@ public class ControllerMenuButton extends CButton {
         this.deviceName = deviceName;
         this.deviceNameTranslated = tr;
         this.Id = Id;
+        this.controller=controller;
         this.moduleButton = controller.controllerImage.callModuleButton(Id);
         this.setFont(new Font("TimesRoman", Font.PLAIN, 16));
         this.setPreferredSize(new Dimension(80, 25));
@@ -61,7 +63,12 @@ public class ControllerMenuButton extends CButton {
 
         // Draw the text (if any)
         if (this.getText() != null) {
-            g2.setColor(new Color(19, 144, 148));
+            if (this.deviceName.equals(this.moduleButton.moduleName)) {
+                g2.setColor(new Color(235, 158, 91));
+            } 
+            else {
+                g2.setColor(new Color(19, 144, 148));
+            }
             Font font = g2.getFont().deriveFont((float) (((float) buttonHeight) * 0.4));
             g2.setFont(font);
             FontMetrics metrics = g2.getFontMetrics();
@@ -73,12 +80,26 @@ public class ControllerMenuButton extends CButton {
     }
 
     public void mouseReleased(MouseEvent e) {
+        //this.moduleButton.setModuleBig(false);
         this.pressed = false;
         repaint();
         this.moduleButton.setNewIconAsModule(
                 "com/ardublock/Images/module/" + deviceName + ".png");
         this.moduleButton.setModuleName(deviceName);
         this.moduleButton.setTranslatedName(deviceNameTranslated);
+        this.controller.controllerImage.resetSelectedId(Id, true);
+        this.controller.changeConnectorComponentsPane(null);
     }
-
+    
+    public void mouseEntered(MouseEvent e){
+        //this.moduleButton.setModuleBig(true);
+        this.moduleButton.setNewIconAsModule(
+                "com/ardublock/Images/module/" + deviceName + ".png");
+        this.moduleButton.setModuleName(deviceName);
+        this.moduleButton.setTranslatedName(deviceNameTranslated);
+    }
+    
+    public void mouseExited(MouseEvent e){
+        //this.moduleButton.setModuleBig(false);
+    }
 }

@@ -2112,7 +2112,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 
-        <BlockGenus name="setter_variable_number" kind="command" color="150 190 100" initlabel="bg.setter_variable_number">
+        <BlockGenus name="setter_variable_number" kind="command" color="95 190 50" initlabel="bg.setter_variable_number">
             <description>
                 <text>set integer variable</text>
             </description>
@@ -2126,7 +2126,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 		
-        <BlockGenus name="setter_variable_number_unsigned_long" kind="command" color="150 190 100" initlabel="bg.setter_variable_number_unsigned_long">
+        <BlockGenus name="setter_variable_number_unsigned_long" kind="command" color="95 190 50" initlabel="bg.setter_variable_number_unsigned_long">
             <description>
                 <text>set a large integer variable</text>
             </description>
@@ -2140,7 +2140,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 
-        <BlockGenus name="setter_variable_number_double" kind="command" color="150 190 100" initlabel="bg.setter_variable_number_double">
+        <BlockGenus name="setter_variable_number_double" kind="command" color="95 190 50" initlabel="bg.setter_variable_number_double">
             <description>
                 <text>set decimal variable</text>
             </description>
@@ -2154,7 +2154,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 
-        <BlockGenus name="setter_variable_digital" kind="command" color="150 190 100" initlabel="bg.setter_variable_digital">
+        <BlockGenus name="setter_variable_digital" kind="command" color="95 190 50" initlabel="bg.setter_variable_digital">
             <description>
                 <text>write digital to pin</text>
             </description>
@@ -2182,7 +2182,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 
-        <BlockGenus name="create_variable_vector" kind="command" color="150 190 100" initlabel="bg.create_variable_vector">
+        <BlockGenus name="create_variable_vector" kind="command" color="95 190 50" initlabel="bg.create_variable_vector">
             <description>
                 <text>create a vector of numbers</text>
             </description>
@@ -2197,7 +2197,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 
-        <BlockGenus name="setter_variable_vector" kind="command" color="150 190 100" initlabel="bg.setter_variable_vector">
+        <BlockGenus name="setter_variable_vector" kind="command" color="95 190 50" initlabel="bg.setter_variable_vector">
             <description>
                 <text>Set a vector number</text>
             </description>
@@ -2214,7 +2214,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 
-        <BlockGenus name="setter_variable_char" kind="command" color="150 190 100" initlabel="bg.setter_variable_char">
+        <BlockGenus name="setter_variable_char" kind="command" color="95 190 50" initlabel="bg.setter_variable_char">
             <description>
                 <text>create a vector of numbers</text>
             </description>
@@ -2251,7 +2251,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 		
-        <BlockGenus name="setter_variable_String" kind="command" color="150 190 100" initlabel="bg.setter_variable_String">
+        <BlockGenus name="setter_variable_String" kind="command" color="95 190 50" initlabel="bg.setter_variable_String">
             <description>
                 <text>set String variable</text>
             </description>
@@ -11510,17 +11510,17 @@ initlabel="bg.tft-msg" editable-label="yes">
 
         <!--DISPLAY HERE====================================================================== -->
 
-        <BlockGenus name="DisplayClear" kind="command" color="100 180 100" initlabel="bg.DisplayClear" editable-label="no">
+        <BlockGenus name="DisplayClear" kind="command" color="170 15 60" initlabel="bg.DisplayClear" editable-label="no">
             <description>
                 <text>Clears buffer</text>
             </description>
         </BlockGenus>
-        <BlockGenus name="DisplayShow" kind="command" color="100 180 100" initlabel="bg.DisplayShow" editable-label="no">
+        <BlockGenus name="DisplayShow" kind="command" color="170 15 60" initlabel="bg.DisplayShow" editable-label="no">
             <description>
                 <text>Shows buffer on display</text>
             </description>
         </BlockGenus>
-        <BlockGenus name="DisplayString" kind="command" color="100 180 100" initlabel="bg.DisplayString" editable-label="no">
+        <BlockGenus name="DisplayString" kind="command" color="170 15 60" initlabel="bg.DisplayString" editable-label="no">
             <description>
                 <text>Adds string to buffer</text>
             </description>
@@ -11543,7 +11543,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
-        <BlockGenus name="DisplayLine" kind="command" color="100 180 100" initlabel="bg.DisplayLine" editable-label="no">
+        <BlockGenus name="DisplayLine" kind="command" color="170 15 60" initlabel="bg.DisplayLine" editable-label="no">
             <description>
                 <text>Adds string to buffer</text>
             </description>
@@ -11566,7 +11566,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
-        <BlockGenus name="DisplayRectangle" kind="command" color="100 180 100" initlabel="bg.DisplayRectangle" editable-label="no">
+        <BlockGenus name="DisplayRectangle" kind="command" color="170 15 60" initlabel="bg.DisplayRectangle" editable-label="no">
             <description>
                 <text>Adds string to buffer</text>
             </description>
@@ -12329,8 +12329,8 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <BlockGenusMember>string_empty</BlockGenusMember>
                 <BlockGenusMember>string_toInt</BlockGenusMember>
             </BlockDrawer>
-            <!--150 190 100-->
-            <BlockDrawer button-color="150 190 100" name="bd.number" type="factory">
+            <!--95 190 50-->
+            <BlockDrawer button-color="95 190 50" name="bd.number" type="factory">
                 <BlockGenusMember>number</BlockGenusMember>
                 <BlockGenusMember>setter_variable_number</BlockGenusMember>
                 <BlockGenusMember>variable_number</BlockGenusMember>
@@ -12425,8 +12425,8 @@ initlabel="bg.tft-msg" editable-label="yes">
             </BlockDrawer>
 			
             <!-- display -->
-            <!--100 180 100-->
-            <BlockDrawer button-color="100 180 100" name="bd.display">
+            <!--170 15 60-->
+            <BlockDrawer button-color="170 15 60" name="bd.display">
                 <BlockGenusMember>DisplayClear</BlockGenusMember>
                 <BlockGenusMember>DisplayShow</BlockGenusMember>
                 <BlockGenusMember>DisplayString</BlockGenusMember>
@@ -12524,15 +12524,19 @@ initlabel="bg.tft-msg" editable-label="yes">
     <ControllerCompnentsSets>
         <ControllerComponentsSet>
             <ControllerComponents pin="dir04pwm05">
+                <Component name="modules.start.name" info="modules.start.info">start</Component> 
                                 
             </ControllerComponents>
             <ControllerComponents pin="dir07pwm06">
+                <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="d2">
                 <Component name="modules.encoder.name" info="modules.encoder.info">encoder</Component> 
+                <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="d3">
                 <Component name="modules.encoder.name" info="modules.encoder.info">encoder</Component> 
+                <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="d8">
                 <Component name="modules.button.name" info="modules.button.info">button</Component> 
@@ -12541,6 +12545,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.line.name" info="modules.line.info">line</Component>
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="d10">
                 <Component name="modules.button.name" info="modules.button.info">button</Component> 
@@ -12549,6 +12554,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.line.name" info="modules.line.info">line</Component>
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="d9">
                 <Component name="modules.button.name" info="modules.button.info">button</Component> 
@@ -12557,6 +12563,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.line.name" info="modules.line.info">line</Component>
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="d11">
                 <Component name="modules.button.name" info="modules.button.info">button</Component> 
@@ -12565,6 +12572,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.line.name" info="modules.line.info">line</Component>
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="a3">
                 <Component name="modules.angle.name" info="modules.angle.info">angle</Component>
@@ -12577,6 +12585,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="a2">
                 <Component name="modules.angle.name" info="modules.angle.info">angle</Component>
@@ -12589,6 +12598,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="a1">
                 <Component name="modules.angle.name" info="modules.angle.info">angle</Component>
@@ -12601,6 +12611,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="a0">
                 <Component name="modules.angle.name" info="modules.angle.info">angle</Component>
@@ -12613,9 +12624,11 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="i2c">
                 <Component name="modules.range.name" info="modules.range.info">range</Component> 
+                <Component name="modules.start.name" info="modules.start.info">start</Component> 
                 <!--<Component>ANGLE</Component> 
                 <Component>BUTTON</Component> 
                 <Component>DIOD</Component> 

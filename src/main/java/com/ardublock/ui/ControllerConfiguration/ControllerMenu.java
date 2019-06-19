@@ -89,7 +89,16 @@ public class ControllerMenu extends CButton {
         }
     }
 
-    public void mousePressed(MouseEvent e) {
+    /*public void mousePressed(MouseEvent e) {
+        
+    }*/
+
+    public void mouseReleased(MouseEvent e) {
+        //this.moduleButton.setModuleBig(false);
+        controller.changeModuleComponentsPane(this.moduleButton.moduleName);
+    }
+    
+    /*private void lightThoseComponents(){
         if (this.pressed) {
             this.pressed = false;
         } else {
@@ -104,16 +113,44 @@ public class ControllerMenu extends CButton {
                 }
             }
         }
-        repaint();
-    }
-
-    public void mouseReleased(MouseEvent e) {
         this.controller.controllerImage.unpressElse(Id, false);
         if (this.moduleButton.isSelected()) {
             this.moduleButton.setSelected(false);
         } else {
             this.moduleButton.setSelected(true);
         }
+        repaint();
+    }*/
+    
+    public void mouseEntered(MouseEvent e){
+        this.pressed = true;
+        for (Component i : controller.componentsPane.getComponents()) {
+            if (i instanceof ControllerMenu) {
+                if (!(((ControllerMenu) i) == this) && ((ControllerMenu) i).pressed) {
+                    ((ControllerMenu) i).pressed = false;
+                    ((ControllerMenu) i).repaint();
+                }
+            }
+        }
+        this.controller.controllerImage.unpressElse(Id, false);
+        this.moduleButton.setSelected(true);
+        //this.moduleButton.setModuleBig(true);
+        repaint();
+    }
+    
+    public void mouseExited(MouseEvent e) {
+        this.pressed = false;
+        for (Component i : controller.componentsPane.getComponents()) {
+            if (i instanceof ControllerMenu) {
+                if (!(((ControllerMenu) i) == this) && ((ControllerMenu) i).pressed) {
+                    ((ControllerMenu) i).pressed = false;
+                    ((ControllerMenu) i).repaint();
+                }
+            }
+        }
+        this.controller.controllerImage.unpressElse(Id, false);
+        this.moduleButton.setSelected(false);
+        //this.moduleButton.setModuleBig(false);
         repaint();
     }
 }

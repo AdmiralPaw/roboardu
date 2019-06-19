@@ -20,8 +20,6 @@ public class ControllerImage extends JPanel {
         "d8", "d10", "d9", "d11",
         "a3", "a2", "a1", "a0", 
         "i2c"};
-    private String idOfPressedConnector;
-    private String idOfPressedModule;
 
     public ControllerImage(СontrollerСonfiguration controller) {
         this.setLayout(null);

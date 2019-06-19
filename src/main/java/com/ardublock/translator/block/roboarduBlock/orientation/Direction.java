@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.ardublock.translator.block.roboarduBlock.orientation;
 
 import com.ardublock.translator.Translator;
@@ -5,16 +10,16 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
-public class AccelerometerY extends TranslatorBlock
-{
-    public AccelerometerY (Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
-    {
+public class Direction extends TranslatorBlock {
+
+    public Direction(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
-    public static final String ACCEN_FUNC = "float callAccelY(){\n"
-            + "  Accel.readSensor();\n"
-            + "  return Accel.getAccelY_mss();\n"
+    public static final String DIR_FUNC = "float callDirection(){\n"
+            + "  float mgX = Accel.getMagX_uT();\n"
+            + "  float mgY = Accel.getMagY_uT();\n"
+            + "  float angleOf = 180 * atan2(mgY, mgX) / PI;\n"
             + "}";
 
     @Override
@@ -29,6 +34,6 @@ public class AccelerometerY extends TranslatorBlock
                 + "  " + Accel + ".setDlpfBandwidth(MPU9250::DLPF_BANDWIDTH_20HZ);\n"
                 + "  " + Accel + ".setSrd(19);\n");
 
-        return codePrefix + "callAccelY()" + codeSuffix;
+        return codePrefix + "callDirection()" + codeSuffix;
     }
 }
