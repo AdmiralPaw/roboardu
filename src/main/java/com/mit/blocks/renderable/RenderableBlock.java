@@ -97,7 +97,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     /**
      * BlockID of this. MAY BE Block.NULL
      */
-    private final Long blockID;
+    final Long blockID;
     /**
      * Parent workspace widget. May be null
      */
@@ -218,11 +218,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             Long blockID, boolean isLoading) {
         super();
         this.workspace = workspace;
-        /*
-		 * Sets whether focus traversal keys are enabled for this Component.
-		 * Components for which focus traversal keys are disabled receive key
-		 * events for focus traversal keys.
-         */
+        
         this.setFocusTraversalKeysEnabled(false);
 
         this.parent = parent;

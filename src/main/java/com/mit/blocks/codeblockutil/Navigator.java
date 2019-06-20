@@ -452,9 +452,9 @@ final public class Navigator {
          * @param right
          */
         void switchView(String left, String middle, String right) {
-            leftLabel.setText(left);
-            mainLabel.setText(middle);
-            rightLabel.setText(right);
+           leftLabel.setText(left);
+           mainLabel.setText(middle);
+           rightLabel.setText(right);
         }
 
     }
