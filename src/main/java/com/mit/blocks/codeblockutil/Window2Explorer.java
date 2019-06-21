@@ -39,7 +39,7 @@ public class Window2Explorer extends JPanel implements Explorer {
     
     public static JComponent cdir;
     
-    public static int indexOfCanvas=0;
+    public static int indexOfCanvas;
     
     //var for knoving current canvas in method set drawers card in kesha code
     private int currentCanvas=0;
