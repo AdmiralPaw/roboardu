@@ -9442,7 +9442,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>Button</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="number" connector-kind="socket" label="#">
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListDigital_D0" label="D0" />
                 </BlockConnector>
                 <BlockConnector connector-type="boolean" connector-kind="plug" />
@@ -9688,7 +9688,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>LightSensor</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="number" connector-kind="socket" label="#">
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListAnalog_A0" label="A0" />
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="plug" />
@@ -9717,7 +9717,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>Microphone</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="number" connector-kind="socket" label="#">
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListAnalog_A0" label="A0" />
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="plug" />
