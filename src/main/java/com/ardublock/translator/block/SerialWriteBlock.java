@@ -22,7 +22,7 @@ public class SerialWriteBlock extends TranslatorBlock
 		
 		
 		
-		    ret="Serial.print("+ret+");\n";
+		    ret="Serial.println("+ret+");\n";
 		return ret;
 	}
 }

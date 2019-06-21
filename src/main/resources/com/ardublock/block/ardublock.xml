@@ -12436,10 +12436,8 @@ initlabel="bg.tft-msg" editable-label="yes">
 
             <BlockDrawer button-color="90 110 190" name="bd.communication" type="factory">
                 <BlockGenusMember>serial_write</BlockGenusMember>
-                <BlockGenusMember>serial_print</BlockGenusMember>
                 <BlockGenusMember>glue_sn</BlockGenusMember>
                 <BlockGenusMember>glue_sb</BlockGenusMember>
-                <BlockGenusMember>glue_poly</BlockGenusMember>
                 <BlockGenusMember>ir_setport</BlockGenusMember>
                 <BlockGenusMember>ir_getcode</BlockGenusMember>
                 <BlockGenusMember>wire_write</BlockGenusMember>
