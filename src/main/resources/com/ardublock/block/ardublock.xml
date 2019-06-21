@@ -11434,7 +11434,7 @@ initlabel="bg.tft-msg" editable-label="yes">
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number"
-                                                connector-kind="plug" label="bc.EncoderSimple">
+                                                connector-kind="plug">
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -11444,7 +11444,7 @@ initlabel="bg.tft-msg" editable-label="yes">
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number"
-                                                connector-kind="plug" label="bc.EncoderFull">
+                                                connector-kind="plug">
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -11454,7 +11454,7 @@ initlabel="bg.tft-msg" editable-label="yes">
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number"
-                                                connector-kind="plug" label="bc.EncoderSimple">
+                                                connector-kind="plug">
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -11464,7 +11464,7 @@ initlabel="bg.tft-msg" editable-label="yes">
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number"
-                                                connector-kind="plug" label="bc.EncoderFull">
+                                                connector-kind="plug">
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
