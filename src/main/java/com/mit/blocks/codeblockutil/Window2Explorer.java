@@ -41,6 +41,9 @@ public class Window2Explorer extends JPanel implements Explorer {
     
     public static int indexOfCanvas=0;
     
+    public static JComponent firstCanvas;
+    
+    
     //var for knoving current canvas in method set drawers card in kesha code
     private int currentCanvas=0;
     boolean was=false;
@@ -86,6 +89,9 @@ public class Window2Explorer extends JPanel implements Explorer {
         
         this.currentDir = this.canvasPane;
         this.cdir = this;
+        
+        this.canvasPanel = this.canvasPane;
+        
     }
     
     
@@ -113,6 +119,9 @@ public class Window2Explorer extends JPanel implements Explorer {
      * @requires items != null && for each element in item, element!= null
      */
     public void setDrawersCard(List<? extends Canvas> items) {
+        
+        System.out.println("set drawers card --------------------------------------!!!!!!!!!!!!!!!!!!!");
+        
         canvases.clear();
         buttonPane.removeAll();
         int size = items.size();
@@ -177,14 +186,16 @@ public class Window2Explorer extends JPanel implements Explorer {
         if (!canvases.isEmpty()) {
             canvasPane.add(canvases.get(0));
             
-           
-            
         }
+        //this.firstCanvas = canvases.get(0);
         
         
         List<JComponent> mycanvases = canvases;
         RHoverScrollPane myc2;
         if(mycanvases.size()>0){
+            this.firstCanvas = canvases.get(0);
+            
+            
             JComponent currentCanvas = (JComponent)(mycanvases.get(this.currentCanvas).getComponents()[0]);
             myc2=(RHoverScrollPane)currentCanvas;
             int siz = myc2.getComponents().length;
@@ -213,7 +224,7 @@ public class Window2Explorer extends JPanel implements Explorer {
                 FactoryRenderableBlock bliner=(FactoryRenderableBlock)blocksCanvas.getComponent(i);
                  bl=bliner;
                  String kye = bl.getKeyword();
-                 this.dictionary.put(bl.getKeyword(),bl);
+                 this.dictionary.put(bl.getKeyword().toUpperCase(),bl);
             }
             }
             
@@ -253,6 +264,9 @@ public class Window2Explorer extends JPanel implements Explorer {
             this.canvasPanel = canvasPane;
             this.currentDir=scroll;
             this.indexOfCanvas=index;
+            
+            System.out.println(index);
+            System.out.println("//////////////////////////////////////////");
         }
     }
 
