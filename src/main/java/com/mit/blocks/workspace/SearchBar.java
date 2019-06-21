@@ -206,16 +206,17 @@ public class SearchBar {
             
             public void removeUpdate(DocumentEvent e) {
                 
-                System.out.println("remove u00000000000000000000000000000000");
                 
                 if (searchBar.getText().equals("")) {
-                     System.out.println("remove u00000000000000000000000000000000");
                     performSearch(SearchRange.CHECK_ALL);
                     JComponent scroll = Window2Explorer.canvases.get(Window2Explorer.indexOfCanvas);
                     Window2Explorer.canvasPanel.removeAll();
                     Window2Explorer.canvasPanel.add(scroll);
                     Window2Explorer.canvasPanel.revalidate();
                     Window2Explorer.canvasPanel.repaint();
+                    
+                    System.out.println((scroll==null)?"da":"net");
+                    
                     
                 }else{
                     searchBlocks();
@@ -230,9 +231,7 @@ public class SearchBar {
                     Window2Explorer.canvasPanel.add(scroll);
                     Window2Explorer.canvasPanel.revalidate();
                     Window2Explorer.canvasPanel.repaint();
-                    
-                    
-                    
+                   
                 } else if (e.getOffset() == 0 || e.getOffset() == searchBar.getText().length()) {
                     // If the search term changed only at the beginning or end, then
                     // the blocks found already do not change.  Check for additional blocks
