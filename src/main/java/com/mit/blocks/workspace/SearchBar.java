@@ -119,7 +119,23 @@ public class SearchBar {
                 if (e.getOffset() == 0 || e.getOffset() + e.getLength() == text.length()) {
                     performSearch(SearchRange.REMOVE_FROM_FOUND);
                     
-                    List<FactoryRenderableBlock> searchedBlocks = getBlocks(text.toUpperCase());
+                   searchBlocks();
+                    
+                    //set rbHighlightBlock position as block position
+                   
+                    
+                } else {
+                    // If the search term changed in the middle, then the blocks found and
+                    // the blocks yet to be found may have changed.  Recheck all blocks.
+                    performSearch(SearchRange.CHECK_ALL);
+                }
+                
+            }
+            
+            
+            
+            private void searchBlocks(){
+                 List<FactoryRenderableBlock> searchedBlocks = getBlocks(searchBar.getText().toUpperCase());
                     JComponent dir = Window2Explorer.currentDir;
                     
                     dir=this.getCurrentPanel();
@@ -134,7 +150,7 @@ public class SearchBar {
                     BoxLayout blout = new BoxLayout(fcanvas,BoxLayout.Y_AXIS);
                     
                     fcanvas.setLayout(blout);
-                    
+                    fcanvas.setBackground(Color.WHITE);
                     
                     for(FactoryRenderableBlock block:searchedBlocks){
                         
@@ -149,28 +165,10 @@ public class SearchBar {
                     dir.add(scroll);
                     dir.validate();
                     dir.repaint();
-                    
-                    //set rbHighlightBlock position as block position
-                    JComponent[] components = (JComponent[]) fcanvas.getComponents();
-                    
-                    for(int i=0;i<components.length;i+=2){
-//                        Point location = components[i].getLocation();
-//                        components[i+1].setLocation(location);
-                          
-                        Rectangle location = components[i].getBounds();
-                        components[i+1].setBounds(location);
-                        
-                    }
-                    dir.validate();
-                    dir.repaint();
-                    
-                } else {
-                    // If the search term changed in the middle, then the blocks found and
-                    // the blocks yet to be found may have changed.  Recheck all blocks.
-                    performSearch(SearchRange.CHECK_ALL);
-                }
                 
             }
+            
+            
             
               
             //get blocks which partly matches with text in searchbar
@@ -207,8 +205,34 @@ public class SearchBar {
             
             
             public void removeUpdate(DocumentEvent e) {
+                
+                System.out.println("remove u00000000000000000000000000000000");
+                
+                if (searchBar.getText().equals("")) {
+                     System.out.println("remove u00000000000000000000000000000000");
+                    performSearch(SearchRange.CHECK_ALL);
+                    JComponent scroll = Window2Explorer.canvases.get(Window2Explorer.indexOfCanvas);
+                    Window2Explorer.canvasPanel.removeAll();
+                    Window2Explorer.canvasPanel.add(scroll);
+                    Window2Explorer.canvasPanel.revalidate();
+                    Window2Explorer.canvasPanel.repaint();
+                    
+                }else{
+                    searchBlocks();
+                }
+                
+                
                 if (searchBar.getText().equals("")) {
                     performSearch(SearchRange.CHECK_ALL);
+                    
+                    JComponent scroll = Window2Explorer.canvases.get(Window2Explorer.indexOfCanvas);
+                    Window2Explorer.canvasPanel.removeAll();
+                    Window2Explorer.canvasPanel.add(scroll);
+                    Window2Explorer.canvasPanel.revalidate();
+                    Window2Explorer.canvasPanel.repaint();
+                    
+                    
+                    
                 } else if (e.getOffset() == 0 || e.getOffset() == searchBar.getText().length()) {
                     // If the search term changed only at the beginning or end, then
                     // the blocks found already do not change.  Check for additional blocks
@@ -218,6 +242,9 @@ public class SearchBar {
                     // If the search term changed in the middle, then the blocks found may have
                     // changed.  Recheck all blocks.
                     performSearch(SearchRange.CHECK_ALL);
+                    
+                    searchBlocks();
+                    
                 }
             }
         });

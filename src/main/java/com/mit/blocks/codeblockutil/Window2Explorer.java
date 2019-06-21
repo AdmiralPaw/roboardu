@@ -39,6 +39,8 @@ public class Window2Explorer extends JPanel implements Explorer {
     
     public static JComponent cdir;
     
+    public static int indexOfCanvas=0;
+    
     //var for knoving current canvas in method set drawers card in kesha code
     private int currentCanvas=0;
     boolean was=false;
@@ -53,7 +55,7 @@ public class Window2Explorer extends JPanel implements Explorer {
     /**
      * The set of drawers that wraps each canvas
      */
-    private List<JComponent> canvases;
+    public static List<JComponent> canvases;
     /**
      * Teh canvas portion
      */
@@ -250,6 +252,7 @@ public class Window2Explorer extends JPanel implements Explorer {
             canvasPane.repaint();
             this.canvasPanel = canvasPane;
             this.currentDir=scroll;
+            this.indexOfCanvas=index;
         }
     }
 
