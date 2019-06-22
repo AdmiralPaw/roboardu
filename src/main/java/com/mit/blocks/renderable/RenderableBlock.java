@@ -275,10 +275,10 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         if (!isLoading) {
             // reformBlockShape so as to update socket points to position labels
             // and setBounds of this rb
-            reformBlockShape();
 
             // to cache image upon instantiation, update buffered image here:
-            updateBuffImg();
+            reformBlockShape();
+            //updateBuffImg();
         } else {
             blockArea = new Area();
         }
@@ -1559,7 +1559,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
         revalidate();
         getHighlightHandler().revalidate();
-        updateBuffImg();
+        //updateBuffImg();
         comment.getArrow().updateArrow();
         getParent().repaint();
     }
@@ -1576,7 +1576,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             reformBlockShape();
             revalidate();
             getHighlightHandler().revalidate();
-            updateBuffImg();
+            //updateBuffImg();
             getParent().repaint();
         }
     }
@@ -2238,7 +2238,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         if (this.hasComment()) {
             this.comment.setZoomLevel(newZoom);
         }
-        updateBuffImg();
+        //updateBuffImg();
     }
 
     /**
