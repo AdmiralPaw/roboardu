@@ -16,7 +16,7 @@ public class MagnetZ extends TranslatorBlock {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
-    public static final String MAGNET_FUNC = "float callMagnetZ(){\n"
+    public static final String MAGNET_FUNC = "float callMagnetZ(MPU9250 &Accel){\n"
             + "  Accel.readSensor();\n"
             + "  return Accel.getMagZ_uT();\n"
             + "}";
@@ -35,6 +35,6 @@ public class MagnetZ extends TranslatorBlock {
                 + "  " + Accel + ".setDlpfBandwidth(MPU9250::DLPF_BANDWIDTH_20HZ);\n"
                 + "  " + Accel + ".setSrd(19);\n");
 
-        return codePrefix + "callMagnetZ()" + codeSuffix;
+        return codePrefix + "callMagnetZ(Accel)" + codeSuffix;
     }
 }

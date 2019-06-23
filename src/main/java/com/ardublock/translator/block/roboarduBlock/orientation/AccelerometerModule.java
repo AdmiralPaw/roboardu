@@ -11,17 +11,17 @@ public class AccelerometerModule extends TranslatorBlock {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
-    public static final String ACCEL_FUNCX = "float callAccelX(){\n"
+    public static final String ACCEL_FUNCX = "float callAccelX(MPU9250 &Accel){\n"
             + "  Accel.readSensor();\n"
             + "  return Accel.getAccelX_mss();\n"
             + "}";
     
-    public static final String ACCEL_FUNCY = "float callAccelY(){\n"
+    public static final String ACCEL_FUNCY = "float callAccelY(MPU9250 &Accel){\n"
             + "  Accel.readSensor();\n"
             + "  return Accel.getAccelY_mss();\n"
             + "}";
     
-    public static final String ACCEL_FUNCZ = "float callAccelZ(){\n"
+    public static final String ACCEL_FUNCZ = "float callAccelZ(MPU9250 &Accel){\n"
             + "  Accel.readSensor();\n"
             + "  return Accel.getAccelZ_mss();\n"
             + "}";
@@ -42,8 +42,8 @@ public class AccelerometerModule extends TranslatorBlock {
                 + "  " + Accel + ".setDlpfBandwidth(MPU9250::DLPF_BANDWIDTH_20HZ);\n"
                 + "  " + Accel + ".setSrd(19);\n");
 
-        return codePrefix + "sqrt(" + "pow(callAccelX(),2) + "
-                + "pow(callAccelY(),2) + "
-                + "pow(callAccelZ(),2))" + codeSuffix;
+        return codePrefix + "sqrt(" + "pow(callAccelX(Accel),2) + "
+                + "pow(callAccelY(Accel),2) + "
+                + "pow(callAccelZ(Accel),2))" + codeSuffix;
     }
 }

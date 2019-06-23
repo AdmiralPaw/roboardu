@@ -12,7 +12,7 @@ public class AccelerometerZ extends TranslatorBlock
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
-    public static final String ACCEL_FUNC = "float callAccelZ(){\n"
+    public static final String ACCEL_FUNC = "float callAccelZ(MPU9250 &Accel){\n"
             + "  Accel.readSensor();\n"
             + "  return Accel.getAccelZ_mss();\n"
             + "}";
@@ -31,6 +31,6 @@ public class AccelerometerZ extends TranslatorBlock
                 + "  " + Accel + ".setDlpfBandwidth(MPU9250::DLPF_BANDWIDTH_20HZ);\n"
                 + "  " + Accel + ".setSrd(19);\n");
 
-        return codePrefix + "callAccelZ()" + codeSuffix;
+        return codePrefix + "callAccelZ(Accel)" + codeSuffix;
     }
 }

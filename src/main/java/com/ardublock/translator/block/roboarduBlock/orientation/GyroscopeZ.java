@@ -12,7 +12,7 @@ public class GyroscopeZ extends TranslatorBlock
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
-    public static final String GYRO_FUNC = "float callGyroZ(){\n"
+    public static final String GYRO_FUNC = "float callGyroZ(MPU9250 &Accel){\n"
             + "  Accel.readSensor();\n"
             + "  return Accel.getGyroZ_rads();\n"
             + "}";
@@ -31,6 +31,6 @@ public class GyroscopeZ extends TranslatorBlock
                 + "  " + Accel + ".setDlpfBandwidth(MPU9250::DLPF_BANDWIDTH_20HZ);\n"
                 + "  " + Accel + ".setSrd(19);\n");
 
-        return codePrefix + "callGyroZ()" + codeSuffix;
+        return codePrefix + "callGyroZ(Accel)" + codeSuffix;
     }
 }

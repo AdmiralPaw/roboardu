@@ -16,7 +16,7 @@ public class Direction extends TranslatorBlock {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
-    public static final String DIR_FUNC = "float callDirection(){\n"
+    public static final String DIR_FUNC = "float callDirection(MPU9250 &Accel){\n"
             + "  float mgX = Accel.getMagX_uT();\n"
             + "  float mgY = Accel.getMagY_uT();\n"
             + "  float angleOf = 180 * atan2(mgY, mgX) / PI;\n"
@@ -36,6 +36,6 @@ public class Direction extends TranslatorBlock {
                 + "  " + Accel + ".setDlpfBandwidth(MPU9250::DLPF_BANDWIDTH_20HZ);\n"
                 + "  " + Accel + ".setSrd(19);\n");
 
-        return codePrefix + "callDirection()" + codeSuffix;
+        return codePrefix + "callDirection(Accel)" + codeSuffix;
     }
 }

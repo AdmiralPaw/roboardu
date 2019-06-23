@@ -16,7 +16,7 @@ public class MagnetX extends TranslatorBlock {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
-    public static final String MAGNET_FUNC = "float callMagnetX(){\n"
+    public static final String MAGNET_FUNC = "float callMagnetX(MPU9250 &Accel){\n"
             + "  Accel.readSensor();\n"
             + "  return Accel.getMagX_uT();\n"
             + "}";
@@ -35,6 +35,6 @@ public class MagnetX extends TranslatorBlock {
                 + "  " + Accel + ".setDlpfBandwidth(MPU9250::DLPF_BANDWIDTH_20HZ);\n"
                 + "  " + Accel + ".setSrd(19);\n");
 
-        return codePrefix + "callMagnetX()" + codeSuffix;
+        return codePrefix + "callMagnetX(Accel)" + codeSuffix;
     }
 }
