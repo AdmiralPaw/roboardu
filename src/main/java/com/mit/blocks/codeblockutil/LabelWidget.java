@@ -588,16 +588,29 @@ public abstract class LabelWidget extends JComponent {
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
                 triangle = new GeneralPath();
-                triangle.moveTo(0, this.getHeight() / 4);
-                triangle.lineTo(this.getWidth() - 1, this.getHeight() / 4);
-                triangle.lineTo(this.getWidth() / 2 - 1, this.getHeight() / 4 + LabelWidget.DROP_DOWN_MENU_WIDTH);
-                triangle.lineTo(0, this.getHeight() / 4);
-                triangle.closePath();
+                GeneralPath rect = new GeneralPath();
+                System.out.println(this.getHeight());
+                System.out.println(this.getWidth());
+                System.out.println(LabelWidget.DROP_DOWN_MENU_WIDTH);
+                rect.moveTo(0, this.getHeight() / 4);
+                rect.lineTo(this.getWidth() - 1, this.getHeight() / 4);
+                rect.lineTo(this.getWidth() / 2 - 1, this.getHeight() / 4 + LabelWidget.DROP_DOWN_MENU_WIDTH);
+                rect.lineTo(0, this.getHeight() / 4);
+                rect.closePath();
+                
+                
+                triangle.moveTo(0, this.getHeight() / 5);
+                triangle.lineTo(this.getWidth(), this.getHeight() / 5);
+                triangle.lineTo(this.getWidth(), this.getHeight() / 2 + LabelWidget.DROP_DOWN_MENU_WIDTH);
+                triangle.lineTo(0, this.getHeight() / 2 + LabelWidget.DROP_DOWN_MENU_WIDTH);
+                triangle.lineTo(0, this.getHeight() / 5);
 
-                g2.setColor(new Color(255, 255, 255, 100));
+                g2.setColor(new Color(255,0,0,0));
                 g2.fill(triangle);
+                g2.setColor(new Color(255, 255, 255,100));
+                g2.fill(rect);
                 g2.setColor(Color.BLACK);
-                g2.draw(triangle);
+                g2.draw(rect);
             }
 
         }
