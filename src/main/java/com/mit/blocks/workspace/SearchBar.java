@@ -19,6 +19,7 @@ import javax.swing.event.DocumentListener;
 
 import com.mit.blocks.codeblockutil.CQueryField;
 import com.mit.blocks.codeblockutil.CScrollPane;
+import com.mit.blocks.codeblockutil.Explorer;
 import com.mit.blocks.codeblockutil.RHoverScrollPane;
 import com.mit.blocks.codeblockutil.RQueryField;
 import com.mit.blocks.codeblockutil.Window2Explorer;
@@ -34,13 +35,15 @@ import javax.swing.JPanel;
 import javax.swing.JViewport;
 
 /**
- * Contributes a search bar component to the CodeBlocks GUI, which allows the user to find 
- * Searchables such as blocks in the drawers and workspace with a query by name.
+ * Contributes a search bar component to the CodeBlocks GUI, which allows the
+ * user to find Searchables such as blocks in the drawers and workspace with a
+ * query by name.
  */
 public class SearchBar {
-    
+
     private static JComponent fcdir;
 
+    private Workspace workspace;
     private final RQueryField searchPanel;
     private final JTextField searchBar;
     private final String defaultText;
@@ -50,8 +53,8 @@ public class SearchBar {
     private static final int SEARCH_UPDATER_DELAY = 5000;
     private Timer searchThrottle;
     private static final int SEARCH_THROTTLE_DELAY = 250;
-    
-    private Map<String,JComponent> dict = new HashMap<String,JComponent>();
+
+    private Map<String, JComponent> dict = new HashMap<String, JComponent>();
 
     private enum SearchRange {
 
@@ -61,16 +64,17 @@ public class SearchBar {
 
     /**
      * Contructs a new search bar.
-     * @param defaultText the text to show when the user is not using the search bar, 
-     * such as "Search blocks"
-     * @param tooltip the text to show as a tooltip for the search bar when the user hovers the mouse 
-     * over the search bar.
-     * @param defaultComponent the component for which focus should be requested if the user 
-     * presses the Escape key while using the search bar.
+     *
+     * @param defaultText the text to show when the user is not using the search
+     * bar, such as "Search blocks"
+     * @param tooltip the text to show as a tooltip for the search bar when the
+     * user hovers the mouse over the search bar.
+     * @param defaultComponent the component for which focus should be requested
+     * if the user presses the Escape key while using the search bar.
      */
-    public SearchBar(String defaultText, String tooltip, final Component defaultComponent) {
+    public SearchBar(String defaultText, String tooltip, final Workspace defaultComponent) {
         this.dict = Window2Explorer.dictionary;
-        
+        workspace = defaultComponent;
         this.defaultText = defaultText;
         this.searchPanel = new RQueryField();
         this.searchBar = this.searchPanel.getQueryField();
@@ -108,7 +112,7 @@ public class SearchBar {
             }
 
             public void insertUpdate(DocumentEvent e) {
-                
+
                 String text = searchBar.getText();
                 if (text.equals(SearchBar.this.defaultText)) {
                     return;
@@ -118,81 +122,81 @@ public class SearchBar {
                 // foundBlocks.
                 if (e.getOffset() == 0 || e.getOffset() + e.getLength() == text.length()) {
                     performSearch(SearchRange.REMOVE_FROM_FOUND);
-                    
-                   searchBlocks();
-                    
+
+                    searchBlocks();
+
                     //set rbHighlightBlock position as block position
-                   
-                    
                 } else {
                     // If the search term changed in the middle, then the blocks found and
                     // the blocks yet to be found may have changed.  Recheck all blocks.
                     performSearch(SearchRange.CHECK_ALL);
                 }
-                
+
             }
-            
-            
-            
-            private void searchBlocks(){
-                 List<FactoryRenderableBlock> searchedBlocks = getBlocks(searchBar.getText().toUpperCase());
-                    JComponent dir = Window2Explorer.currentDir;
-                    
-                    dir=this.getCurrentPanel();
-                    dir.removeAll();
-                    JViewport jport = new JViewport();
-                    FactoryCanvas fcanvas = new FactoryCanvas("searched canvas",Color.WHITE);
-                    
-                    List<JComponent> blcks ;
-                    
-                    JPanel panel = new JPanel();
-                    
-                    BoxLayout blout = new BoxLayout(fcanvas,BoxLayout.Y_AXIS);
-                    
-                    fcanvas.setLayout(blout);
-                    fcanvas.setBackground(Color.WHITE);
-                    
-                    for(FactoryRenderableBlock block:searchedBlocks){
-                        
-                        fcanvas.addBlock(block.deepClone());
-                                            }
-                    JComponent scroll = new RHoverScrollPane(
-                    fcanvas,
-                    CScrollPane.ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
-                    CScrollPane.ScrollPolicy.HORIZONTAL_BAR_AS_NEEDED,
-                    15,Color.BLACK , Color.darkGray);
-                   // Window2Explorer.canvasPanel.repaint();
-                    dir.add(scroll);
-                    dir.validate();
-                    dir.repaint();
-                
+
+            private void searchBlocks() {
+                List<FactoryRenderableBlock> searchedBlocks = getBlocks(searchBar.getText().toUpperCase());
+                JComponent dir = Window2Explorer.currentDir;
+
+//                    dir=this.getCurrentPanel();
+//                    dir.removeAll();
+                JViewport jport = new JViewport();
+                FactoryCanvas fcanvas = new FactoryCanvas("searched canvas", Color.WHITE);
+
+                List<JComponent> blcks;
+
+                JPanel panel = new JPanel();
+
+                BoxLayout blout = new BoxLayout(fcanvas, BoxLayout.Y_AXIS);
+
+                fcanvas.setLayout(blout);
+                fcanvas.setBackground(Color.WHITE);
+
+                for (FactoryRenderableBlock block : searchedBlocks) {
+                    FactoryRenderableBlock newBlock = block.deepClone();
+                    newBlock.OneSetZoomLevel(1);
+                    fcanvas.addBlock(newBlock);
+
+                }
+                JComponent scroll = new RHoverScrollPane(
+                        fcanvas,
+                        CScrollPane.ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
+                        CScrollPane.ScrollPolicy.HORIZONTAL_BAR_AS_NEEDED,
+                        15, Color.BLACK, Color.darkGray);
+                // Window2Explorer.canvasPanel.repaint();
+                List<Explorer> exList = workspace.getFactoryManager().getNavigator().getExplorers();
+                for (Explorer ex : exList) {
+                    if (ex instanceof Window2Explorer) {
+                        ((Window2Explorer) ex).setSearchResult(scroll);
+                    }
+                }
+//                    dir.validate();
+//                    dir.repaint();
+
             }
-            
-            
-            
-              
+
             //get blocks which partly matches with text in searchbar
-            private List<FactoryRenderableBlock> getBlocks(String text){
-                List<FactoryRenderableBlock> blocks = new ArrayList<FactoryRenderableBlock>() {};
-                Map<String,JComponent> data = Window2Explorer.dictionary;
-                Map<String,JComponent> matchedData = new HashMap<String,JComponent>();
-                
-                text=text.toUpperCase();
-                Set<String> names =  data.keySet();
-                for(int i=0;i<names.size();i++){
-                    if(Pattern.matches(".*"+text+".*", (CharSequence) names.toArray()[i])){
-                        try{
-                        blocks.add(((FactoryRenderableBlock) data.get(names.toArray()[i])).clone()); 
-                        }catch(Exception e){
-                            
+            private List<FactoryRenderableBlock> getBlocks(String text) {
+                List<FactoryRenderableBlock> blocks = new ArrayList<FactoryRenderableBlock>() {
+                };
+                Map<String, JComponent> data = Window2Explorer.dictionary;
+                Map<String, JComponent> matchedData = new HashMap<String, JComponent>();
+
+                text = text.toUpperCase();
+                Set<String> names = data.keySet();
+                for (int i = 0; i < names.size(); i++) {
+                    if (Pattern.matches(".*" + text + ".*", (CharSequence) names.toArray()[i])) {
+                        try {
+                            blocks.add(((FactoryRenderableBlock) data.get(names.toArray()[i])).clone());
+                        } catch (Exception e) {
+
                         }
                     }
                 }
                 return blocks;
             }
-           
-            
-            private JComponent getCurrentPanel(){
+
+            private JComponent getCurrentPanel() {
                 JComponent component = (JComponent) Window2Explorer.cdir.getComponent(0);
 //                component = (JComponent) Window2Explorer.cdir.getComponent(0);
 //                component = (JComponent) Window2Explorer.cdir.getComponent(2);
@@ -201,37 +205,31 @@ public class SearchBar {
                 SearchBar.fcdir = component;
                 return component;
             }
-            
-            
-            
+
             public void removeUpdate(DocumentEvent e) {
-                
-                
+
                 if (searchBar.getText().equals("")) {
-                    performSearch(SearchRange.CHECK_ALL);
-                    JComponent scroll = Window2Explorer.canvases.get(Window2Explorer.indexOfCanvas);
-                    Window2Explorer.canvasPanel.removeAll();
-                    Window2Explorer.canvasPanel.add(scroll);
-                    Window2Explorer.canvasPanel.revalidate();
-                    Window2Explorer.canvasPanel.repaint();
-                    
-                    System.out.println((scroll==null)?"da":"net");
-                    
-                    
-                }else{
+                    List<Explorer> exList = workspace.getFactoryManager().getNavigator().getExplorers();
+                    for (Explorer ex : exList) {
+                        if (ex instanceof Window2Explorer) {
+                            ((Window2Explorer) ex).setNormalMode();
+                        }
+                    }
+
+                } else {
                     searchBlocks();
                 }
-                
-                
+
                 if (searchBar.getText().equals("")) {
                     performSearch(SearchRange.CHECK_ALL);
-                    
-                    JComponent scroll = Window2Explorer.canvases.get(Window2Explorer.indexOfCanvas);
-                    Window2Explorer.canvasPanel.removeAll();
-                    Window2Explorer.canvasPanel.add(scroll);
-                    Window2Explorer.canvasPanel.revalidate();
-                    Window2Explorer.canvasPanel.repaint();
-                   
+
+                    List<Explorer> exList = workspace.getFactoryManager().getNavigator().getExplorers();
+                    for (Explorer ex : exList) {
+                        if (ex instanceof Window2Explorer) {
+                            ((Window2Explorer) ex).setNormalMode();
+                        }
+                    }
+
                 } else if (e.getOffset() == 0 || e.getOffset() == searchBar.getText().length()) {
                     // If the search term changed only at the beginning or end, then
                     // the blocks found already do not change.  Check for additional blocks
@@ -241,9 +239,9 @@ public class SearchBar {
                     // If the search term changed in the middle, then the blocks found may have
                     // changed.  Recheck all blocks.
                     performSearch(SearchRange.CHECK_ALL);
-                    
+
                     searchBlocks();
-                    
+
                 }
             }
         });
@@ -265,6 +263,7 @@ public class SearchBar {
 
     /**
      * Returns the Swing component representation of the search bar.
+     *
      * @return the Swing the component representation of the search bar.
      */
     public JComponent getComponent() {
@@ -272,9 +271,11 @@ public class SearchBar {
     }
 
     /**
-     * Returns a set of elements representing the search results for a particular
-     * container.
-     * @param container the returned search elements will be from this search container
+     * Returns a set of elements representing the search results for a
+     * particular container.
+     *
+     * @param container the returned search elements will be from this search
+     * container
      * @return search results for a particular container
      */
     public Iterable<SearchableElement> getSearchResults(SearchableContainer container) {
@@ -288,7 +289,9 @@ public class SearchBar {
 
     /**
      * Adds a searchable to the set of searchables queried by this search bar.
-     * If more than one search bar exists, the same searchable should not be added to more than search bar.
+     * If more than one search bar exists, the same searchable should not be
+     * added to more than search bar.
+     *
      * @param searchable the container to add
      */
     public void addSearchableContainer(SearchableContainer searchable) {
@@ -298,7 +301,9 @@ public class SearchBar {
     }
 
     /**
-     * Removes a searchable container from the set of searchables queried by this search bar.
+     * Removes a searchable container from the set of searchables queried by
+     * this search bar.
+     *
      * @param searchable the container to remove
      */
     public void removeSearchableContainer(SearchableContainer searchable) {
@@ -318,8 +323,8 @@ public class SearchBar {
     }
 
     /**
-     * Whenever the search bar loses focus and has an empty document,
-     * put "Search blocks" in gray italics.
+     * Whenever the search bar loses focus and has an empty document, put
+     * "Search blocks" in gray italics.
      */
     private void resetSearchBar() {
         if (searchBar.getText().trim().equals("")) {
@@ -331,9 +336,9 @@ public class SearchBar {
     }
 
     /**
-     * Whenever the search bar gains focus, if the text is "Search Blocks",
-     * then clear the contents and reset the font.  Otherwise, highlight
-     * whatever is there.
+     * Whenever the search bar gains focus, if the text is "Search Blocks", then
+     * clear the contents and reset the font. Otherwise, highlight whatever is
+     * there.
      */
     private void readySearchBar() {
         if (defaultText.equals(searchBar.getText())) {
@@ -362,9 +367,11 @@ public class SearchBar {
     }
 
     /**
-     * Perform a new search for the specified range based on updates to the search bar.
-     * @param range verifies the optimization for search depending on whether the search space 
-     * has become bigger or smaller since the last search.
+     * Perform a new search for the specified range based on updates to the
+     * search bar.
+     *
+     * @param range verifies the optimization for search depending on whether
+     * the search space has become bigger or smaller since the last search.
      */
     private void performSearch(final SearchRange range) {
         // If new requests to search come in during the delay, reset the timer and update the range.
@@ -393,7 +400,7 @@ public class SearchBar {
     }
 
     private void performSearchTimerHandler() {
-        
+
         if (searchBar.getText().equals("")) {
             clearSearchResults();
             return;
