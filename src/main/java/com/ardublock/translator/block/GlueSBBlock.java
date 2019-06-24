@@ -18,7 +18,7 @@ public class GlueSBBlock extends TranslatorBlock
 		TranslatorBlock translatorBlock = this.getTranslatorBlockAtSocket(0, codePrefix, codeSuffix);
 		if (translatorBlock != null)
 		{
-			ret = "+" + translatorBlock.toCode();
+			ret = translatorBlock.toCode();
 		}
 		return ret;
 	}
