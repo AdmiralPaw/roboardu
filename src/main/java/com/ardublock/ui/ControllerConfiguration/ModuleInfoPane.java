@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.Font;
 import java.net.URL;
 import javax.swing.ImageIcon;
@@ -77,8 +78,11 @@ public class ModuleInfoPane extends JPanel {
     }
 
     public void setModuleImage(String deviceName) {
-        setImageURL(deviceName);
-        this.moduleIcon.setIcon(new ImageIcon(this.imageURL));
+        setImageURL(deviceName+"Info");
+        ImageIcon image = new ImageIcon(this.imageURL);
+        Image imageRaw = image.getImage().getScaledInstance(
+                200, 100, java.awt.Image.SCALE_SMOOTH);
+        this.moduleIcon.setIcon(new ImageIcon(imageRaw));
     }
 
     public void setModuleName(String deviceName) {
