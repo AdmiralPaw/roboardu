@@ -191,6 +191,9 @@ public class WorkspaceController {
     private void getAllSuitableBlocks(Document doc){
 
         Map<String,String[]> allsuitableBlocks = new HashMap<String,String[]>(){};
+        Map<String,String[]> parsedSuitableBlocks = new HashMap<String,String[]>(){};
+
+        ResourceBundle resourses = ResourceBundle.getBundle("com/ardublock/block/ardublock");
 
         NodeList elements = doc.getElementsByTagName("SuitableBlocks");
         Element el = (Element) elements.item(0);
@@ -201,27 +204,38 @@ public class WorkspaceController {
             String key = ((Element)keyElements.item(i)).getAttribute("key");
             NodeList blocks = ((Element)keyElements.item(i)).getElementsByTagName("Block");
             String[] values = new String[blocks.getLength()];
+            String[] parsedValues = new String[blocks.getLength()];
 
             for(int q=0;q<blocks.getLength();q++){
                 values[q] = ((Element)blocks.item(q)).getAttribute("value");
+                parsedValues[q] = resourses.getString(values[q]);
+
             }
+            parsedSuitableBlocks.put(key,parsedValues);
             allsuitableBlocks.put(key, values);
         }
 
         suitableBlocks=allsuitableBlocks;
 
 
-        //разкомментить чтоб посмотреть что дает нам xml
-        for(String str:suitableBlocks.keySet()){
-            System.out.println(str);
-            for(int i =0;i<((String[])suitableBlocks.get(str)).length;i++){
-                String[] strs = (String[])suitableBlocks.get(str);
-                for(String s:strs){
-                    System.out.println(s);
-                }
 
-            }
-        }
+
+
+        //разкомментить чтоб посмотреть что дает нам xml
+//        for(String str:suitableBlocks.keySet()){
+//            System.out.println(str);
+//            for(int i =0;i<((String[])suitableBlocks.get(str)).length;i++){
+//                String[] strs = (String[])suitableBlocks.get(str);
+//                String[] parsedStrs = parsedSuitableBlocks.get(str);
+////                for(String s:strs){
+////                    System.out.println(s);
+////                }
+//                for(String s:parsedStrs){
+//                    System.out.println(s);
+//                }
+//
+//            }
+//        }
 
 
     }

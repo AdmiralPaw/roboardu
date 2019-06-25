@@ -30,7 +30,7 @@ public class ModuleInfoPane extends JPanel {
     private JButton closeButton = new JButton();
     private JTextArea moduleInfoLabel = new JTextArea();
 
-    ;
+
 
     public ModuleInfoPane(СontrollerСonfiguration controller) {
         super();

@@ -192,10 +192,6 @@ public class Window2Explorer extends JPanel implements Explorer {
     }
 
     //kesha code end
-    public static JComponent getCurrentDir() {
-
-        return null;
-    }
 
     public void selectCanvas(int index) {
         oldIndex = index;
@@ -208,12 +204,6 @@ public class Window2Explorer extends JPanel implements Explorer {
             currentCanvasWithBasket.setBounds(new Rectangle(0, 0, 300, 300));
             currentCanvasWithBasket.revalidate();
             currentCanvasWithBasket.repaint();
-//            this.canvasPanel = canvasPane;
-//            this.currentDir=scroll;
-//            this.indexOfCanvas=index;
-
-//            System.out.println(index);
-//            System.out.println("//////////////////////////////////////////");
         }
     }
 
