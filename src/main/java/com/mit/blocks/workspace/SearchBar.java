@@ -136,19 +136,7 @@ public class SearchBar {
 
             private void searchBlocks() {
                 List<FactoryRenderableBlock> searchedBlocks = getBlocks(searchBar.getText().toUpperCase());
-                JComponent dir = Window2Explorer.currentDir;
-
-//                    dir=this.getCurrentPanel();
-//                    dir.removeAll();
-                JViewport jport = new JViewport();
                 FactoryCanvas fcanvas = new FactoryCanvas("searched canvas", Color.WHITE);
-
-                List<JComponent> blcks;
-                //JPanel panel = new JPanel();
-
-                //BoxLayout blout = new BoxLayout(fcanvas, BoxLayout.Y_AXIS);
-
-                //fcanvas.setLayout(blout);
                 fcanvas.setBackground(new Color(236, 236, 236));
 
                 for (FactoryRenderableBlock block : searchedBlocks) {
@@ -180,7 +168,6 @@ public class SearchBar {
                 List<FactoryRenderableBlock> blocks = new ArrayList<FactoryRenderableBlock>() {
                 };
                 Map<String, JComponent> data = Window2Explorer.dictionary;
-                Map<String, JComponent> matchedData = new HashMap<String, JComponent>();
 
                 text = text.toUpperCase();
                 Set<String> names = data.keySet();
