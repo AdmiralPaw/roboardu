@@ -188,55 +188,6 @@ public class Window2Explorer extends JPanel implements Explorer {
 
         }
 
-//        this.firstCanvas = canvases.get(0);
-//        List<JComponent> mycanvases = canvases;
-//        RHoverScrollPane myc2;
-//        if(mycanvases.size()>0){
-//            this.firstCanvas = canvases.get(0);
-//            
-//            
-//            JComponent currentCanvas = (JComponent)(mycanvases.get(this.currentCanvas).getComponents()[0]);
-//            myc2=(RHoverScrollPane)currentCanvas;
-//            int siz = myc2.getComponents().length;
-//            JComponent tc =(JComponent) myc2.getComponent(2);
-//            currentCanvas=tc;
-//            
-//              
-//            currentCanvas=(JComponent)tc.getComponent(0);
-//            
-//            //geted jviewport
-//            JComponent mc6=currentCanvas;
-//            
-//            JComponent listcpnts=(JComponent)mc6.getComponent(0);
-//            
-//            //geted var with list with blocks
-//            currentCanvas=listcpnts;
-//                        JComponent blocksCanvas = currentCanvas;
-//
-//            
-//            //FactoryRenderableBlock
-//            int onebl = (int)blocksCanvas.getComponents().length;
-//            
-//            for(int i=0;i<blocksCanvas.getComponentCount();i+=2){
-//            FactoryRenderableBlock bl;
-//            if(onebl>0){
-//                FactoryRenderableBlock bliner=(FactoryRenderableBlock)blocksCanvas.getComponent(i);
-//                 bl=bliner;
-//                 String kye = bl.getKeyword();
-//                 this.dictionary.put(bl.getKeyword().toUpperCase(),bl);
-//            }
-//            }
-//            
-//            if(this.was){
-//            this.currentCanvas++;
-//            
-//            
-//            }
-//            this.was=true;
-//      }
-//        RHoverScrollPane rh =(RHoverScrollPane)myc.getComponent(2);
-//        JViewport vp = (JViewport)rh.getComponent(0);
-//        FactoryCanvas fc = (FactoryCanvas)vp.getComponent(0);
         this.revalidate();
     }
 
