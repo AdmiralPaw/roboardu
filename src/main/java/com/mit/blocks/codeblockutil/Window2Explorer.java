@@ -137,8 +137,6 @@ public class Window2Explorer extends JPanel implements Explorer {
      */
     public void setDrawersCard(List<? extends Canvas> items) {
 
-        System.out.println("set drawers card --------------------------------------!!!!!!!!!!!!!!!!!!!");
-
         canvases.clear();
         buttonPane.removeAll();
         int size = buttonHeight * 24;

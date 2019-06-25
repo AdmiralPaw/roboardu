@@ -13,6 +13,8 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.List;
 
@@ -72,6 +74,8 @@ import com.mit.blocks.workspace.Workspace;
  * @author Ricarose Roque
  */
 public class WorkspaceController {
+
+    public static Map<String,String[]> suitableBlocks;
 
     private Element langDefRoot;
     private boolean isWorkspacePanelInitialized = false;
@@ -171,7 +175,7 @@ public class WorkspaceController {
             // TODO modify the L10N text and style here
             ardublockLocalize(doc);
             ardublockStyling(doc);
-            
+            getAllSuitableBlocks(doc);
             langDefRoot = doc.getDocumentElement();
             langDefDirty = true;
         } catch (ParserConfigurationException e) {
@@ -182,6 +186,47 @@ public class WorkspaceController {
             throw new RuntimeException(e);
         }
     }
+
+
+    private void getAllSuitableBlocks(Document doc){
+
+        Map<String,String[]> allsuitableBlocks = new HashMap<String,String[]>(){};
+
+        NodeList elements = doc.getElementsByTagName("SuitableBlocks");
+        Element el = (Element) elements.item(0);
+
+        NodeList keyElements = el.getElementsByTagName("KeyBlock");
+
+        for(int i=0;i<keyElements.getLength();i++){
+            String key = ((Element)keyElements.item(i)).getAttribute("key");
+            NodeList blocks = ((Element)keyElements.item(i)).getElementsByTagName("Block");
+            String[] values = new String[blocks.getLength()];
+
+            for(int q=0;q<blocks.getLength();q++){
+                values[q] = ((Element)blocks.item(q)).getAttribute("value");
+            }
+            allsuitableBlocks.put(key, values);
+        }
+
+        suitableBlocks=allsuitableBlocks;
+
+
+        //разкомментить чтоб посмотреть что дает нам xml
+        for(String str:suitableBlocks.keySet()){
+            System.out.println(str);
+            for(int i =0;i<((String[])suitableBlocks.get(str)).length;i++){
+                String[] strs = (String[])suitableBlocks.get(str);
+                for(String s:strs){
+                    System.out.println(s);
+                }
+
+            }
+        }
+
+
+    }
+
+
     
     /**
      * Styling the color of the BlockGenus and other elements with color
