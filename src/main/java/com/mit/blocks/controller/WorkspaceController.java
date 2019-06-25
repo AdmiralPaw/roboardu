@@ -215,7 +215,7 @@ public class WorkspaceController {
             allsuitableBlocks.put(key, values);
         }
 
-        suitableBlocks=allsuitableBlocks;
+        suitableBlocks=parsedSuitableBlocks;
 
 
 
