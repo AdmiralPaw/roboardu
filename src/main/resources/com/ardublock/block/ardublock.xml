@@ -4,6 +4,45 @@
 file before genus A is specified./ We impose this requirement so that sanity checks can be made regarding the validity of a default argument when the BlockGenuses are first loaded. -->
 <BlockLangDef>
 
+
+
+    <SuitableBlocks version="rus">
+        <KeyBlock key="Encoder">
+            <Block value="bg.EncoderSimple"/>
+            <Block value="bg.EncoderSimple2" />
+            <Block value="bg.EncoderFull" />
+            <Block value="bg.EncoderFull2" />
+
+        </KeyBlock>
+        <KeyBlock key="Button">
+            <Block value="bg.sensor_button"/>
+        </KeyBlock>
+        <KeyBlock key="Gerkon">
+            <Block value="modules.gerkon.name"/>
+        </KeyBlock>
+        <KeyBlock key="HallSensor">
+            <Block value="bg.magnetic_sensor"/>
+        </KeyBlock>
+        <KeyBlock key="Light Sensor">
+            <Block value="bg.little_bits_lightsensor"/>
+        </KeyBlock>
+        <KeyBlock key="sensor line">
+            <Block value="bg.seeed_line_finder"/>
+        </KeyBlock>
+        <KeyBlock key="touch sensor">
+            <Block value="bg.seeed_touch_sensor"/>
+        </KeyBlock>
+        <KeyBlock key="motor">
+            <Block value="bg.Engine_Basic"/>
+        </KeyBlock>
+
+    </SuitableBlocks>
+    <SuitableBlocks version="lang">
+
+
+    </SuitableBlocks>
+
+
     <BlockConnectorShapes>
         <BlockConnectorShape shape-type="number" shape-number="1" />
         <BlockConnectorShape shape-type="number-list" shape-number="2" />
