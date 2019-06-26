@@ -2060,44 +2060,28 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 
         <BlockGenus name="variable_number" kind="data" initlabel="bg.variable_number" editable-label="yes" is-label-value="yes" color="150 190 100">
-            <description>
-                <text>
-                    Digital Var
-                </text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" />
             </BlockConnectors>
         </BlockGenus>
 		
         <BlockGenus name="variable_number_unsigned_long" kind="data" initlabel="bg.variable_number_unsigned_long" editable-label="yes" is-label-value="yes" color="150 190 100">
-            <description>
-                <text>
-                    Unsigned Long Var
-                </text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" />
             </BlockConnectors>
         </BlockGenus>
 	    
         <BlockGenus name="variable_number_double" kind="data" initlabel="bg.variable_number_double" editable-label="yes" is-label-value="yes" color="150 190 100">
-            <description>
-                <text>
-                    Double
-                </text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" />
             </BlockConnectors>
         </BlockGenus>
 
         <BlockGenus name="variable_digital" kind="data" initlabel="bg.variable_digital" editable-label="yes" is-label-value="yes" color="150 190 100">
-            <description>
-                <text>
-                    Digital Var
-                </text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" />
             </BlockConnectors>
@@ -2230,11 +2214,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 
         <BlockGenus name="variable_poly" kind="data" initlabel="bg.variable_poly" editable-label="yes" is-label-value="yes" color="150 190 100">
-            <description>
-                <text>
-                    character variable
-                </text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="poly" connector-kind="plug" position-type="mirror" />
             </BlockConnectors>
@@ -9438,9 +9418,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </Images>
         </BlockGenus>
         <BlockGenus name="sensor_button" kind="data" color="242 123 99" initlabel="bg.sensor_button">
-            <description>
-                <text>Button</text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListDigital_D0" label="D0" />
