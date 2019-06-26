@@ -32,25 +32,22 @@ import org.jfree.ui.tabbedui.VerticalLayout;
  *
  */
 public class Window2Explorer extends JPanel implements Explorer {
-    
+
     //TODO: добавить поиск - удаление не соответсвующих элементов в тек директории(компоненте)
     //и добавление в него компонентов из переменной dictionary соответствующих блоков
-    
-    
     public static JComponent cdir;
-    
+
     public static int indexOfCanvas;
-    
+
     public static JComponent firstCanvas;
-    
-    
+
     //var for knoving current canvas in method set drawers card in kesha code
-    private int currentCanvas=0;
-    boolean was=false;
-    boolean getedParent=false;
-    
-    public static Map<String,JComponent> dictionary = new HashMap<String,JComponent>();
-    public static JComponent currentDir,canvasPanel;
+    private int currentCanvas = 0;
+    boolean was = false;
+    boolean getedParent = false;
+
+    public static Map<String, JComponent> dictionary = new HashMap<String, JComponent>();
+    public static JComponent currentDir, canvasPanel;
     //public static JComponent currentCanvas;
 
     private static final long serialVersionUID = 328149080308L;
@@ -68,6 +65,7 @@ public class Window2Explorer extends JPanel implements Explorer {
      */
     public JPanel buttonPane;
     public JPanel basketPane;
+    public JLayeredPane currentCanvasWithBasket;
     public int oldIndex;
 
     /**
@@ -75,26 +73,45 @@ public class Window2Explorer extends JPanel implements Explorer {
      */
     public Window2Explorer() {
         super();
-        
-        
+
         this.setLayout(new BorderLayout());
         this.canvases = new ArrayList<JComponent>();
         this.canvasPane = new JPanel(new BorderLayout());
         this.buttonPane = new JPanel();
-        //buttonPane.setBorder(BorderFactory.createMatteBorder(3, 0, 0, 0, new Color(55, 150, 240)));
         buttonPane.setBackground(Color.black);
         this.add(canvasPane, BorderLayout.CENTER);
         buttonPane.setLayout(new BorderLayout());//VerticalLayout());//GridLayout(0, 2));
         this.add(buttonPane, BorderLayout.NORTH);
-        
+
         this.currentDir = this.canvasPane;
         this.cdir = this;
-        
+
         this.canvasPanel = this.canvasPane;
+        currentCanvasWithBasket = new JLayeredPane();
+
+        URL iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/trashcan.png");
+        Image imageRaw = new ImageIcon(iconURL).getImage().getScaledInstance(
+                84, 84, java.awt.Image.SCALE_SMOOTH);
+        ImageIcon button_icon = new ImageIcon(imageRaw);
+        //ImageIcon button_icon = new ImageIcon(iconURL).getImage().getScaledInstance(128,128, java.awt.Image.SCALE_SMOOTH);
+        final JLabel mainLogo = new JLabel(button_icon);
+        basketPane = new JPanel(new BorderLayout());
+        basketPane.add(mainLogo, BorderLayout.CENTER);
+        basketPane.setVisible(false);
         
+        currentCanvasWithBasket.add(basketPane, new Integer(1));
+        currentCanvasWithBasket.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                super.componentResized(e);
+                for (int i = 0; i < currentCanvasWithBasket.getComponentCount(); i++) {
+                    currentCanvasWithBasket.getComponents()[i].setBounds(0, 0, currentCanvasWithBasket.getWidth() - 1, currentCanvasWithBasket.getHeight() - 1);
+                }
+            }
+        });
+        canvasPane.add(currentCanvasWithBasket);
+
     }
-    
-    
 
     public boolean anyCanvasSelected() {
         return false;
@@ -119,54 +136,25 @@ public class Window2Explorer extends JPanel implements Explorer {
      * @requires items != null && for each element in item, element!= null
      */
     public void setDrawersCard(List<? extends Canvas> items) {
-        
-        System.out.println("set drawers card --------------------------------------!!!!!!!!!!!!!!!!!!!");
-        
         canvases.clear();
         buttonPane.removeAll();
-        int size = items.size();
-        if (size % 2 == 1) {
-            size++;
-        }
-        size = buttonHeight * 24;
+        int size = buttonHeight * 24;
         buttonPane.setPreferredSize(new Dimension(60, size));
         JPanel butpan = new JPanel(new VerticalLayout());
         butpan.setBackground(Color.white);
         for (int i = 0; i < items.size(); i++) {
             final int index = i;
             Canvas item = items.get(i);
-            //final CButton button = new CButton(item.getColor(), item.getColor().brighter().brighter().brighter(),item.getName());
             item.getJComponent().setBackground(new Color(236, 236, 236));
             CButton button = new RMenuButton(item.getName(), item.getColor());
             button.setPreferredSize(new Dimension(30, 35));
-            JComponent scrollFLVL = new RHoverScrollPane(
+            JComponent scroll = new RHoverScrollPane(
                     item.getJComponent(),
                     ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
                     ScrollPolicy.HORIZONTAL_BAR_AS_NEEDED,
                     15, item.getColor(), Color.darkGray);
-            final JComponent blockCanvasWithDepth = new JLayeredPane();
-            blockCanvasWithDepth.setPreferredSize(new Dimension(300, 500));
-            blockCanvasWithDepth.add(scrollFLVL, 0);
-            URL iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/trashcan.png");
-            Image imageRaw = new ImageIcon(iconURL).getImage().getScaledInstance(
-                    84, 84, java.awt.Image.SCALE_SMOOTH);
-            ImageIcon button_icon = new ImageIcon(imageRaw);
-            //ImageIcon button_icon = new ImageIcon(iconURL).getImage().getScaledInstance(128,128, java.awt.Image.SCALE_SMOOTH);
-            final JLabel mainLogo = new JLabel(button_icon);
-            basketPane = new JPanel(new BorderLayout());
-            basketPane.add(mainLogo, BorderLayout.CENTER);
-            blockCanvasWithDepth.add(basketPane, 1);
-            blockCanvasWithDepth.addComponentListener(new ComponentAdapter() {
-                @Override
-                public void componentResized(ComponentEvent e) {
-                    super.componentResized(e);
-                    blockCanvasWithDepth.getComponents()[0].setBounds(0, 0, blockCanvasWithDepth.getWidth() - 1, blockCanvasWithDepth.getHeight() - 1);
-                    blockCanvasWithDepth.getComponents()[1].setBounds(0, 0, blockCanvasWithDepth.getWidth() - 1, blockCanvasWithDepth.getHeight() - 1);
 
-                }
-            });
-            blockCanvasWithDepth.getComponents()[1].setVisible(false);
-            canvases.add(blockCanvasWithDepth);
+            canvases.add(scroll);
             button.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e) {
@@ -180,93 +168,39 @@ public class Window2Explorer extends JPanel implements Explorer {
                 butpan,
                 ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
                 ScrollPolicy.HORIZONTAL_BAR_NEVER,
-                15, new Color(255, 133, 8), Color.darkGray);//new JScrollPane(butpan);
-        //buttonScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                15, new Color(255, 133, 8), Color.darkGray);
         buttonPane.add(buttonScroll, BorderLayout.CENTER);
         if (!canvases.isEmpty()) {
-            canvasPane.add(canvases.get(0));
-            
-        }
-        //this.firstCanvas = canvases.get(0);
-        
-        
-        List<JComponent> mycanvases = canvases;
-        RHoverScrollPane myc2;
-        if(mycanvases.size()>0){
-            this.firstCanvas = canvases.get(0);
-            
-            
-            JComponent currentCanvas = (JComponent)(mycanvases.get(this.currentCanvas).getComponents()[0]);
-            myc2=(RHoverScrollPane)currentCanvas;
-            int siz = myc2.getComponents().length;
-            JComponent tc =(JComponent) myc2.getComponent(2);
-            currentCanvas=tc;
-            
-              
-            currentCanvas=(JComponent)tc.getComponent(0);
-            
-            //geted jviewport
-            JComponent mc6=currentCanvas;
-            
-            JComponent listcpnts=(JComponent)mc6.getComponent(0);
-            
-            //geted var with list with blocks
-            currentCanvas=listcpnts;
-                        JComponent blocksCanvas = currentCanvas;
+            selectCanvas(0);
 
-            
-            //FactoryRenderableBlock
-            int onebl = (int)blocksCanvas.getComponents().length;
-            
-            for(int i=0;i<blocksCanvas.getComponentCount();i+=2){
-            FactoryRenderableBlock bl;
-            if(onebl>0){
-                FactoryRenderableBlock bliner=(FactoryRenderableBlock)blocksCanvas.getComponent(i);
-                 bl=bliner;
-                 String kye = bl.getKeyword();
-                 this.dictionary.put(bl.getKeyword().toUpperCase(),bl);
-            }
-            }
-            
-            if(this.was){
-            this.currentCanvas++;
-            
-            
-            }
-            this.was=true;
         }
-//        RHoverScrollPane rh =(RHoverScrollPane)myc.getComponent(2);
-//        JViewport vp = (JViewport)rh.getComponent(0);
-        //FactoryCanvas fc = (FactoryCanvas)vp.getComponent(0);
-        
-        
-        
+        for (Canvas unit : items) {
+            for (Component comp : unit.getJComponent().getComponents()) {
+                if (comp instanceof FactoryRenderableBlock) {
+
+                    FactoryRenderableBlock bl = ((FactoryRenderableBlock) comp).deepClone();
+                    dictionary.put(bl.getKeyword().toUpperCase(), bl);
+
+                }
+            }
+
+        }
         this.revalidate();
     }
-    
-    
-    //kesha code end
-    public static JComponent getCurrentDir(){
-        
-        
-        
-        return null;
-    }
+
 
     public void selectCanvas(int index) {
         oldIndex = index;
         if (index >= 0 && index < canvases.size()) {
-            JComponent scroll = canvases.get(index);
-            canvasPane.removeAll();
-            canvasPane.add(scroll);
-            canvasPane.revalidate();
-            canvasPane.repaint();
-            this.canvasPanel = canvasPane;
-            this.currentDir=scroll;
-            this.indexOfCanvas=index;
             
-            System.out.println(index);
-            System.out.println("//////////////////////////////////////////");
+            JComponent scroll = canvases.get(index);
+            try {
+                currentCanvasWithBasket.remove(currentCanvasWithBasket.getComponentsInLayer(0)[0]);
+            } catch (Exception e) {
+            }
+
+            currentCanvasWithBasket.add(scroll, new Integer(0));
+            currentCanvasWithBasket.setBounds(new Rectangle(0, 0, 300, 300));
         }
     }
 
@@ -279,24 +213,28 @@ public class Window2Explorer extends JPanel implements Explorer {
     }
 
     public void activeBasket() {
-        JComponent scroll = canvases.get(oldIndex);
-        scroll.getComponents()[0].setVisible(false);
-        scroll.getComponents()[1].setVisible(true);
-        canvasPane.removeAll();
-        canvasPane.add(scroll);
-        canvasPane.revalidate();
-        canvasPane.repaint();
+        
+        currentCanvasWithBasket.getComponentsInLayer(0)[0].setVisible(false);
+        currentCanvasWithBasket.getComponentsInLayer(1)[0].setVisible(true);
 
     }
 
     public void deactiveBasket() {
-        JComponent scroll = canvases.get(oldIndex);
-        scroll.getComponents()[0].setVisible(true);
-        scroll.getComponents()[1].setVisible(false);
-        canvasPane.removeAll();
-        canvasPane.add(scroll);
-        canvasPane.revalidate();
-        canvasPane.repaint();
+        currentCanvasWithBasket.getComponentsInLayer(0)[0].setVisible(true);
+        currentCanvasWithBasket.getComponentsInLayer(1)[0].setVisible(false);
+    }
+
+    public void setSearchResult(JComponent panel) {
+        currentCanvasWithBasket.remove(currentCanvasWithBasket.getComponentsInLayer(0)[0]);
+        currentCanvasWithBasket.add(panel, new Integer(0));
+        currentCanvasWithBasket.setBounds(new Rectangle(0, 0, 300, 300));
+        currentCanvasWithBasket.getComponentsInLayer(0)[0].setVisible(true);
+        
+    }
+    
+    public void setNormalMode()
+    {
+        selectCanvas(oldIndex);
     }
 
     /**

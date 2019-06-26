@@ -1,5 +1,6 @@
 package com.mit.blocks.renderable;
 
+import com.mit.blocks.codeblocks.Block;
 import java.awt.Container;
 import java.awt.event.MouseEvent;
 
@@ -54,7 +55,8 @@ public class FactoryRenderableBlock extends RenderableBlock implements Cloneable
     }
     
     public FactoryRenderableBlock deepClone(){
-        FactoryRenderableBlock block = new FactoryRenderableBlock(this.workspace,this.wWidget,this.blockID);
+        Block newBlock = new Block(workspace, this.getGenus(), false);
+        FactoryRenderableBlock block = new FactoryRenderableBlock(workspace, this.wWidget, newBlock.getBlockID());
         return block;
     }
 
