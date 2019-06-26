@@ -1,9 +1,13 @@
 package com.ardublock.ui.ControllerConfiguration;
 
+import com.mit.blocks.codeblockutil.CScrollPane;
+import com.mit.blocks.codeblockutil.Explorer;
+import com.mit.blocks.codeblockutil.RHoverScrollPane;
 import com.mit.blocks.codeblockutil.Window2Explorer;
 import com.mit.blocks.controller.WorkspaceController;
 import com.mit.blocks.renderable.FactoryRenderableBlock;
 import com.mit.blocks.workspace.FactoryCanvas;
+import com.mit.blocks.workspace.SearchBar;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,6 +24,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Insets;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class ModuleInfoPane extends JPanel {
@@ -88,6 +93,19 @@ public class ModuleInfoPane extends JPanel {
                     fcanvas.add(block);
 
                 }
+                JComponent scroll = new RHoverScrollPane(
+                        fcanvas,
+                        CScrollPane.ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
+                        CScrollPane.ScrollPolicy.HORIZONTAL_BAR_AS_NEEDED,
+                        15, Color.BLACK, Color.darkGray);
+
+                List<Explorer> exList = SearchBar.workspace.getFactoryManager().getNavigator().getExplorers();
+                for (Explorer ex : exList) {
+                    if (ex instanceof Window2Explorer) {
+                        ((Window2Explorer) ex).setSearchResult(scroll);
+                    }
+                }
+
 
             }
         });

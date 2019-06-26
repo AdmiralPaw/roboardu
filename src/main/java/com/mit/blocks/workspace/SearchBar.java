@@ -43,7 +43,7 @@ public class SearchBar {
 
     private static JComponent fcdir;
 
-    private Workspace workspace;
+    public static Workspace workspace;
     private final RQueryField searchPanel;
     private final JTextField searchBar;
     private final String defaultText;

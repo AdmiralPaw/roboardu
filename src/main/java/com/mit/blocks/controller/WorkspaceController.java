@@ -219,7 +219,7 @@ public class WorkspaceController {
                 parsedValues[q] = resourses.getString(values[q]);
 
             }
-            parsedSuitableBlocks.put(key,parsedValues);
+            parsedSuitableBlocks.put(key.toUpperCase(),parsedValues);
             allsuitableBlocks.put(key.toUpperCase(), values);
         }
 
