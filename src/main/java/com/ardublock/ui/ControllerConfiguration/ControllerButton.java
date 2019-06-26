@@ -1,11 +1,11 @@
 package com.ardublock.ui.ControllerConfiguration;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.*;
-import java.awt.Image;
-import java.awt.Insets;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ControllerButton extends JToggleButton {
 
@@ -15,6 +15,8 @@ public class ControllerButton extends JToggleButton {
     private String path;
     public String moduleName = "start";
     public String moduleTranslatedName = "modules.start.info";
+    public ArrayList<String> moduleSuitableBlocks = new ArrayList<String>();
+    private String mode;
     //private String pathSet;
     private ImageIcon image;
     private ImageIcon imageSet;
@@ -29,10 +31,13 @@ public class ControllerButton extends JToggleButton {
      * @param mode
      */
     public ControllerButton(СontrollerСonfiguration root, ControllerImage rootImage, String Id, String mode) {
+        moduleSuitableBlocks.add("");
+
         this.button = this;
         this.controller = root;
         this.buttonId = Id;
         this.controllerImage = rootImage;
+        this.mode=mode;
         setMargin(new Insets(0, 0, 0, 0));
         setIconTextGap(0);
         setBorderPainted(false);
@@ -60,6 +65,7 @@ public class ControllerButton extends JToggleButton {
         }
         this.addMouseListener(new MouseListener() {
             public void mouseClicked(MouseEvent e) {
+
 
             }
 
@@ -91,6 +97,10 @@ public class ControllerButton extends JToggleButton {
         });
         rootImage.add(this);
         this.setImages();
+
+    }
+
+    public void setSuitableBlocks(ArrayList<String> paths){
 
     }
     

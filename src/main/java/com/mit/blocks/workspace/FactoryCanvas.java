@@ -24,7 +24,7 @@ import java.awt.ComponentOrientation;
  * various methods for blocks such as searching,
  * highlighting, etc.
  */
-class FactoryCanvas extends JPanel implements Canvas, SearchableContainer, RBParent, ComponentListener {
+public class FactoryCanvas extends JPanel implements Canvas, SearchableContainer, RBParent, ComponentListener {
 
     private static final long serialVersionUID = 328149080291L;
     private static final int BORDER_WIDTH = 15;
@@ -38,7 +38,7 @@ class FactoryCanvas extends JPanel implements Canvas, SearchableContainer, RBPar
      * @param name
      * @param color
      */
-    FactoryCanvas(String name, Color color) {
+    public FactoryCanvas(String name, Color color) {
         super();
         this.setBackground(Color.green);
         this.setName(name);

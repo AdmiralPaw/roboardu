@@ -7,17 +7,17 @@ file before genus A is specified./ We impose this requirement so that sanity che
 
 
     <SuitableBlocks version="rus">
-        <KeyBlock key="Encoder">
+        <KeyBlock key="modules.encoder.name">
             <Block value="bg.EncoderSimple"/>
             <Block value="bg.EncoderSimple2" />
             <Block value="bg.EncoderFull" />
             <Block value="bg.EncoderFull2" />
 
         </KeyBlock>
-        <KeyBlock key="Button">
+        <KeyBlock key="modules.button.name">
             <Block value="bg.sensor_button"/>
         </KeyBlock>
-        <KeyBlock key="Gerkon">
+        <KeyBlock key="modules.gerkon.name">
             <Block value="modules.gerkon.name"/>
         </KeyBlock>
         <KeyBlock key="HallSensor">
@@ -12521,7 +12521,7 @@ initlabel="bg.tft-msg" editable-label="yes">
             </ControllerComponents>
             <ControllerComponents pin="d3">
                 <Component name="modules.encoder.name" info="modules.encoder.info">encoder</Component> 
-                <Component name="modules.start.name" info="modules.start.info">start</Component> 
+                <Component name="modules.start.name" info="modules.start.info" >start</Component>
             </ControllerComponents>
             <ControllerComponents pin="d8">
                 <Component name="modules.button.name" info="modules.button.info">button</Component> 

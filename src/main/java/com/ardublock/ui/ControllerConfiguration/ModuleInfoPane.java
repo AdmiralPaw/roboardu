@@ -1,5 +1,10 @@
 package com.ardublock.ui.ControllerConfiguration;
 
+import com.mit.blocks.codeblockutil.Window2Explorer;
+import com.mit.blocks.controller.WorkspaceController;
+import com.mit.blocks.renderable.FactoryRenderableBlock;
+import com.mit.blocks.workspace.FactoryCanvas;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -7,20 +12,20 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class ModuleInfoPane extends JPanel {
 
     private URL imageURL;
-    private String moduleName;
+    public String moduleName;
     private String moduleInfo;
     private СontrollerСonfiguration controller;
 
@@ -49,6 +54,44 @@ public class ModuleInfoPane extends JPanel {
         nameAndOthers.setLayout(new FlowLayout(FlowLayout.RIGHT));
         nameAndOthers.add(closeButton);
         nameAndOthers.add(moduleNameLabel);
+
+        blocksButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String name = moduleName.toUpperCase();
+                Map<String,String[]> suitableDict = WorkspaceController.suitableBlocks;
+                Map<String, JComponent> blocksDict = Window2Explorer.dictionary;
+                ArrayList<JComponent> blocks = new ArrayList<JComponent>();
+                String[] suitableNames = suitableDict.get(name);
+
+                System.out.println("-------------------");
+                for(String s:suitableDict.keySet()){
+                    System.out.println(s);
+                }
+                System.out.println("-----------------------");
+
+
+                FactoryCanvas fcanvas = new FactoryCanvas("searched canvas", Color.WHITE);
+                BoxLayout blout = new BoxLayout(fcanvas, BoxLayout.Y_AXIS);
+
+                fcanvas.setLayout(blout);
+                fcanvas.setBackground(Color.WHITE);
+
+                System.out.println("button pressed"+name);
+
+                for(String blockName:suitableNames){
+                    System.out.println(blockName);
+                    FactoryRenderableBlock block = (FactoryRenderableBlock)(blocksDict.get(blockName));
+                    block = block.deepClone();
+                    block.setZoomLevel(1);
+                    fcanvas.add(block);
+
+                }
+
+            }
+        });
+
         nameAndOthers.add(blocksButton);
         nameAndOthers.setPreferredSize(new Dimension(
                 50, 100));

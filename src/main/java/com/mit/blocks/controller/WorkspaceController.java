@@ -202,6 +202,14 @@ public class WorkspaceController {
 
         for(int i=0;i<keyElements.getLength();i++){
             String key = ((Element)keyElements.item(i)).getAttribute("key");
+
+            try {
+                key = resourses.getString(key);
+            }catch (Exception e){
+                key = "not found";
+            }
+
+
             NodeList blocks = ((Element)keyElements.item(i)).getElementsByTagName("Block");
             String[] values = new String[blocks.getLength()];
             String[] parsedValues = new String[blocks.getLength()];
@@ -212,30 +220,21 @@ public class WorkspaceController {
 
             }
             parsedSuitableBlocks.put(key,parsedValues);
-            allsuitableBlocks.put(key, values);
+            allsuitableBlocks.put(key.toUpperCase(), values);
         }
 
-        suitableBlocks=parsedSuitableBlocks;
-
-
-
-
+        this.suitableBlocks=parsedSuitableBlocks;
 
         //разкомментить чтоб посмотреть что дает нам xml
-//        for(String str:suitableBlocks.keySet()){
-//            System.out.println(str);
-//            for(int i =0;i<((String[])suitableBlocks.get(str)).length;i++){
-//                String[] strs = (String[])suitableBlocks.get(str);
-//                String[] parsedStrs = parsedSuitableBlocks.get(str);
-////                for(String s:strs){
-////                    System.out.println(s);
-////                }
-//                for(String s:parsedStrs){
-//                    System.out.println(s);
-//                }
-//
-//            }
-//        }
+        for(String key:suitableBlocks.keySet()){
+            System.out.println(key);
+
+            String[] s = suitableBlocks.get(key);
+            for(String val:s){
+                System.out.println(val);
+            }
+
+        }
 
 
     }

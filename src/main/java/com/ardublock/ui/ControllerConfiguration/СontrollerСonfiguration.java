@@ -93,6 +93,7 @@ public class СontrollerСonfiguration extends JPanel {
                     this.moduleInfoPane.setModuleImage(device.deviceName);
                     this.moduleInfoPane.setModuleName(device.deviceNameTranslated);
                     this.moduleInfoPane.setModuleInfo(device.deviceInfo);
+                    this.moduleInfoPane.moduleName = device.deviceName;
                     componentsPane.add(this.moduleInfoPane);
                 }
             }
@@ -122,7 +123,7 @@ public class СontrollerСonfiguration extends JPanel {
     private static class Device {
 
         final String pin;
-        final String deviceName;
+        final public String deviceName;
         final String deviceNameTranslated;
         final String deviceInfo;
 
