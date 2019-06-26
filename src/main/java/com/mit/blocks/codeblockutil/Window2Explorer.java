@@ -78,7 +78,6 @@ public class Window2Explorer extends JPanel implements Explorer {
         this.canvases = new ArrayList<JComponent>();
         this.canvasPane = new JPanel(new BorderLayout());
         this.buttonPane = new JPanel();
-        //buttonPane.setBorder(BorderFactory.createMatteBorder(3, 0, 0, 0, new Color(55, 150, 240)));
         buttonPane.setBackground(Color.black);
         this.add(canvasPane, BorderLayout.CENTER);
         buttonPane.setLayout(new BorderLayout());//VerticalLayout());//GridLayout(0, 2));
@@ -98,8 +97,9 @@ public class Window2Explorer extends JPanel implements Explorer {
         final JLabel mainLogo = new JLabel(button_icon);
         basketPane = new JPanel(new BorderLayout());
         basketPane.add(mainLogo, BorderLayout.CENTER);
-
-        currentCanvasWithBasket.add(basketPane, 1);
+        basketPane.setVisible(false);
+        
+        currentCanvasWithBasket.add(basketPane, new Integer(1));
         currentCanvasWithBasket.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -136,7 +136,6 @@ public class Window2Explorer extends JPanel implements Explorer {
      * @requires items != null && for each element in item, element!= null
      */
     public void setDrawersCard(List<? extends Canvas> items) {
-
         canvases.clear();
         buttonPane.removeAll();
         int size = buttonHeight * 24;
@@ -169,8 +168,7 @@ public class Window2Explorer extends JPanel implements Explorer {
                 butpan,
                 ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
                 ScrollPolicy.HORIZONTAL_BAR_NEVER,
-                15, new Color(255, 133, 8), Color.darkGray);//new JScrollPane(butpan);
-        //buttonScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                15, new Color(255, 133, 8), Color.darkGray);
         buttonPane.add(buttonScroll, BorderLayout.CENTER);
         if (!canvases.isEmpty()) {
             selectCanvas(0);
@@ -187,23 +185,22 @@ public class Window2Explorer extends JPanel implements Explorer {
             }
 
         }
-
         this.revalidate();
     }
 
-    //kesha code end
 
     public void selectCanvas(int index) {
         oldIndex = index;
         if (index >= 0 && index < canvases.size()) {
+            
             JComponent scroll = canvases.get(index);
-            currentCanvasWithBasket.removeAll();
-            currentCanvasWithBasket.add(scroll, 0);
-            currentCanvasWithBasket.add(basketPane, 1);
-            currentCanvasWithBasket.getComponents()[1].setVisible(false);
+            try {
+                currentCanvasWithBasket.remove(currentCanvasWithBasket.getComponentsInLayer(0)[0]);
+            } catch (Exception e) {
+            }
+
+            currentCanvasWithBasket.add(scroll, new Integer(0));
             currentCanvasWithBasket.setBounds(new Rectangle(0, 0, 300, 300));
-            currentCanvasWithBasket.revalidate();
-            currentCanvasWithBasket.repaint();
         }
     }
 
@@ -216,28 +213,23 @@ public class Window2Explorer extends JPanel implements Explorer {
     }
 
     public void activeBasket() {
-        currentCanvasWithBasket.getComponents()[0].setVisible(false);
-        currentCanvasWithBasket.getComponents()[1].setVisible(true);
-        canvasPane.revalidate();
-        canvasPane.repaint();
+        
+        currentCanvasWithBasket.getComponentsInLayer(0)[0].setVisible(false);
+        currentCanvasWithBasket.getComponentsInLayer(1)[0].setVisible(true);
 
     }
 
     public void deactiveBasket() {
-        currentCanvasWithBasket.getComponents()[0].setVisible(true);
-        currentCanvasWithBasket.getComponents()[1].setVisible(false);
-        canvasPane.revalidate();
-        canvasPane.repaint();
+        currentCanvasWithBasket.getComponentsInLayer(0)[0].setVisible(true);
+        currentCanvasWithBasket.getComponentsInLayer(1)[0].setVisible(false);
     }
 
     public void setSearchResult(JComponent panel) {
-        currentCanvasWithBasket.removeAll();
-        currentCanvasWithBasket.add(panel, 0);
-        currentCanvasWithBasket.add(basketPane, 1);
-        currentCanvasWithBasket.getComponents()[1].setVisible(false);
+        currentCanvasWithBasket.remove(currentCanvasWithBasket.getComponentsInLayer(0)[0]);
+        currentCanvasWithBasket.add(panel, new Integer(0));
         currentCanvasWithBasket.setBounds(new Rectangle(0, 0, 300, 300));
-        currentCanvasWithBasket.revalidate();
-        currentCanvasWithBasket.repaint();
+        currentCanvasWithBasket.getComponentsInLayer(0)[0].setVisible(true);
+        
     }
     
     public void setNormalMode()

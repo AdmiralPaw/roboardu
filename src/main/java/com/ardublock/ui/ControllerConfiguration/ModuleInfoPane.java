@@ -211,7 +211,7 @@ public class ModuleInfoPane extends JPanel {
         setImageURL(deviceName+"Info");
         ImageIcon image = new ImageIcon(this.imageURL);
         Image imageRaw = image.getImage().getScaledInstance(
-                200, 100, java.awt.Image.SCALE_SMOOTH);
+                170, 100, java.awt.Image.SCALE_SMOOTH);
         this.moduleIcon.setIcon(new ImageIcon(imageRaw));
     }
 

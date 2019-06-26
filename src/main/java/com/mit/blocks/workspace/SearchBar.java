@@ -137,10 +137,7 @@ public class SearchBar {
             private void searchBlocks() {
                 List<FactoryRenderableBlock> searchedBlocks = getBlocks(searchBar.getText().toUpperCase());
                 FactoryCanvas fcanvas = new FactoryCanvas("searched canvas", Color.WHITE);
-                BoxLayout blout = new BoxLayout(fcanvas, BoxLayout.Y_AXIS);
-
-                fcanvas.setLayout(blout);
-                fcanvas.setBackground(Color.WHITE);
+                fcanvas.setBackground(new Color(236, 236, 236));
 
                 for (FactoryRenderableBlock block : searchedBlocks) {
                     FactoryRenderableBlock newBlock = block.deepClone();
@@ -148,6 +145,7 @@ public class SearchBar {
                     fcanvas.addBlock(newBlock);
 
                 }
+                fcanvas.layoutBlocks();
                 JComponent scroll = new RHoverScrollPane(
                         fcanvas,
                         CScrollPane.ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
