@@ -19,8 +19,8 @@ public class CMenuItem extends JButton implements MouseListener {
 
         CENTER, LEFT
     };
-    private Color background = CGraphite.blue;
-    private Color highlight = CGraphite.white;
+    private Color background = new Color(255, 133, 8);//new Color(193,193,193);
+    private Color highlight = new Color(236, 236, 236);
     private boolean focus = false;
     Position textPosition;
 
@@ -84,4 +84,5 @@ public class CMenuItem extends JButton implements MouseListener {
 
     public void mouseClicked(MouseEvent e) {
     }
+    
 }
