@@ -31,6 +31,7 @@ public class ModuleInfoPane extends JPanel {
 
     private URL imageURL;
     public String moduleName;
+    public String transModuleName;
     private String moduleInfo;
     private СontrollerСonfiguration controller;
 
@@ -64,11 +65,12 @@ public class ModuleInfoPane extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String name = moduleName.toUpperCase();
+                String name = moduleName;
+                String transName = transModuleName;
                 Map<String,String[]> suitableDict = WorkspaceController.suitableBlocks;
                 Map<String, JComponent> blocksDict = Window2Explorer.dictionary;
                 ArrayList<JComponent> blocks = new ArrayList<JComponent>();
-                String[] suitableNames = suitableDict.get(name);
+                String[] suitableNames = suitableDict.get(transName);
 
                 System.out.println("-------------------");
                 for(String s:suitableDict.keySet()){
@@ -83,16 +85,31 @@ public class ModuleInfoPane extends JPanel {
                 fcanvas.setLayout(blout);
                 fcanvas.setBackground(Color.WHITE);
 
-                System.out.println("button pressed"+name);
+                System.out.println("button pressed"+name + transModuleName);
 
                 for(String blockName:suitableNames){
+
                     System.out.println(blockName);
-                    FactoryRenderableBlock block = (FactoryRenderableBlock)(blocksDict.get(blockName));
-                    block = block.deepClone();
-                    block.setZoomLevel(1);
-                    fcanvas.add(block);
+
+                    //крч эту дичь можно изменить (подудалить ненужное), главное правильно заполнить мой XML
+                    boolean contains = blockName.contains("(");
+                    if(contains){
+                        int index = blockName.indexOf("(");
+                        blockName = blockName.substring(0,index);
+                        FactoryRenderableBlock block = (FactoryRenderableBlock)(blocksDict.get(blockName.toUpperCase()));
+                        block = block.deepClone();
+                        block.setZoomLevel(1);
+                        fcanvas.add(block);
+                    }else {
+                        FactoryRenderableBlock block = (FactoryRenderableBlock)(blocksDict.get(blockName.toUpperCase()));
+                        block = block.deepClone();
+                        block.setZoomLevel(1);
+                        fcanvas.add(block);
+                    }
+
 
                 }
+
                 JComponent scroll = new RHoverScrollPane(
                         fcanvas,
                         CScrollPane.ScrollPolicy.VERTICAL_BAR_AS_NEEDED,

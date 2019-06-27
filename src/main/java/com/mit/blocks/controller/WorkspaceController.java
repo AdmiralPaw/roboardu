@@ -199,12 +199,13 @@ public class WorkspaceController {
         Element el = (Element) elements.item(0);
 
         NodeList keyElements = el.getElementsByTagName("KeyBlock");
-
+        System.out.println("keys from xml ***************8");
         for(int i=0;i<keyElements.getLength();i++){
             String key = ((Element)keyElements.item(i)).getAttribute("key");
 
             try {
                 key = resourses.getString(key);
+                System.out.println(key);
             }catch (Exception e){
                 key = "not found";
             }
@@ -219,7 +220,7 @@ public class WorkspaceController {
                 parsedValues[q] = resourses.getString(values[q]);
 
             }
-            parsedSuitableBlocks.put(key.toUpperCase(),parsedValues);
+            parsedSuitableBlocks.put(key,parsedValues);
             allsuitableBlocks.put(key.toUpperCase(), values);
         }
 

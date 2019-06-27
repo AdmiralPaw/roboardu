@@ -174,12 +174,22 @@ public class Window2Explorer extends JPanel implements Explorer {
             selectCanvas(0);
 
         }
+        System.out.println("blocks words @@@@@@@@@@@@@@@@@@@@@@@@@");
         for (Canvas unit : items) {
             for (Component comp : unit.getJComponent().getComponents()) {
                 if (comp instanceof FactoryRenderableBlock) {
 
                     FactoryRenderableBlock bl = ((FactoryRenderableBlock) comp).deepClone();
-                    dictionary.put(bl.getKeyword().toUpperCase(), bl);
+
+                    boolean contains = bl.getKeyword().contains("(");
+                    if(contains){
+                        int index = bl.getKeyword().indexOf("(");
+                        System.out.println(bl.getKeyword().toUpperCase().substring(0,index));
+                        dictionary.put(bl.getKeyword().toUpperCase().substring(0,index), bl);
+                    }else {
+                        System.out.println(bl.getKeyword().toUpperCase());
+                        dictionary.put(bl.getKeyword().toUpperCase(), bl);
+                    }
 
                 }
             }
