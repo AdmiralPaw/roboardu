@@ -17,7 +17,7 @@ public class LineFinder extends TranslatorBlock {
         String pin = translatorBlock.toCode();
         translator.addDefinitionCommand("int LineFinder(int Pin){\n" +
                 "  int value = analogRead(Pin);\n" +
-                "  map(value,0,1024,0,100);\n" +
+                "  value = map(value,0,1024,0,100);\n" +
                 "  return value;\n" +
                 "}");
 
