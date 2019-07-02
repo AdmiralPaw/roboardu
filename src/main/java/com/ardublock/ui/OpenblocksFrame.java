@@ -233,6 +233,8 @@ public class OpenblocksFrame extends JFrame {
         infoLabel.setForeground(Color.white);
 
         //<editor-fold defaultstate="collapsed" desc="Buttons images and listners">
+
+
         ImageButton newButton = new ImageButton(
                 "new",
                 "com/ardublock/block/buttons/newA.jpg",
@@ -241,6 +243,11 @@ public class OpenblocksFrame extends JFrame {
         );
         newButton.addActionListener(new NewButtonListener(this));
 
+        InputMap imap = newButton.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke newButStr = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK);
+        imap.put(newButStr, "newPage");
+        newButton.getActionMap().put("newPage", new ClickAction(newButton));
+
         ImageButton saveButton = new ImageButton(
                 "save",
                 "com/ardublock/block/buttons/saveA.jpg",
@@ -248,6 +255,10 @@ public class OpenblocksFrame extends JFrame {
                 infoLabel
         );
         saveButton.addActionListener(new SaveButtonListener(this));
+        imap = saveButton.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke saveButStr = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK);
+        imap.put(saveButStr, "Save");
+        saveButton.getActionMap().put("Save", new ClickAction(saveButton));
 
         ImageButton saveAsButton = new ImageButton(
                 "saveAs",
@@ -256,6 +267,10 @@ public class OpenblocksFrame extends JFrame {
                 infoLabel
         );
         saveAsButton.addActionListener(new SaveAsButtonListener(this));
+        imap = saveAsButton.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke saveAsButStr = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK);
+        imap.put(saveAsButStr, "SaveAs");
+        saveAsButton.getActionMap().put("SaveAs", new ClickAction(saveAsButton));
 
         ImageButton openButton = new ImageButton(
                 "open",
@@ -264,6 +279,11 @@ public class OpenblocksFrame extends JFrame {
                 infoLabel
         );
         openButton.addActionListener(new OpenButtonListener(this));
+        imap = openButton.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke openButStr = KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK);
+        imap.put(openButStr, "Open");
+        openButton.getActionMap().put("Open", new ClickAction(openButton));
+        
 
         ImageButton verifyButton = new ImageButton("verify program",
                 "com/ardublock/block/buttons/verifyA.jpg",
@@ -272,6 +292,10 @@ public class OpenblocksFrame extends JFrame {
         );
         verifyButton.setActionCommand("VERIFY_CODE");
         verifyButton.addActionListener(new GenerateCodeButtonListener(this, context));
+        imap = verifyButton.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke verifyButStr = KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK);
+        imap.put(verifyButStr, "Verify");
+        verifyButton.getActionMap().put("Verify", new ClickAction(verifyButton));
 
         ImageButton generateButton = new ImageButton(
                 "upload to Arduino",
@@ -281,6 +305,10 @@ public class OpenblocksFrame extends JFrame {
         );
         generateButton.setActionCommand("UPLOAD_CODE");
         generateButton.addActionListener(new GenerateCodeButtonListener(this, context));
+        imap = generateButton.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke generateButStr = KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_DOWN_MASK);
+        imap.put(generateButStr, "Generate");
+        generateButton.getActionMap().put("Generate", new ClickAction(generateButton));
 
         ImageButton serialMonitorButton = new ImageButton(
                 "serialMonitor",
@@ -293,6 +321,11 @@ public class OpenblocksFrame extends JFrame {
                 context.getEditor().handleSerial();
             }
         });
+
+        imap = serialMonitorButton.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke serialMonitorButStr = KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK);
+        imap.put(serialMonitorButStr, "serialMonitor");
+        serialMonitorButton.getActionMap().put("serialMonitor", new ClickAction(serialMonitorButton));
 
         ImageButton saveImageButton = new ImageButton(
                 "save image",
@@ -683,6 +716,20 @@ public class OpenblocksFrame extends JFrame {
             @Override
             public void mouseReleased(MouseEvent e) {
             }
+        }
+    }
+    class ClickAction extends AbstractAction
+    {
+        private JButton button;
+
+        public ClickAction(JButton but)
+        {
+            button = but;
+        }
+
+        public void actionPerformed(ActionEvent e)
+        {
+            button.doClick();
         }
     }
 }
