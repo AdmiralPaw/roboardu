@@ -1,12 +1,7 @@
 package com.mit.blocks.workspace;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,6 +12,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import com.ardublock.ui.OpenblocksFrame;
 import com.mit.blocks.codeblockutil.CQueryField;
 import com.mit.blocks.codeblockutil.CScrollPane;
 import com.mit.blocks.codeblockutil.Explorer;
@@ -84,6 +80,10 @@ public class SearchBar {
         searchBar.setColumns(12);
 
         resetSearchBar();
+        InputMap imap = searchBar.getInputMap(JTextField.WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke searchBarStr = KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK);
+        imap.put(searchBarStr, "search");
+        searchBar.getActionMap().put("search", new ClickAction(this));
         searchBar.addFocusListener(new FocusListener() {
 
             public void focusGained(FocusEvent e) {
@@ -438,4 +438,22 @@ public class SearchBar {
             }
         }
     }
+
+    class ClickAction extends AbstractAction
+    {   private SearchBar textField;
+        public ClickAction(SearchBar textf)
+        {
+            textField = textf;
+        }
+
+        public void actionPerformed(ActionEvent e)
+        {
+            textField.searchBar.requestFocus();
+            textField.readySearchBar();
+        }
+    }
+
+
+
+
 }
