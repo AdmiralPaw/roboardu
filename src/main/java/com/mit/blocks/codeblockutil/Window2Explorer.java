@@ -178,7 +178,7 @@ public class Window2Explorer extends JPanel implements Explorer {
             for (Component comp : unit.getJComponent().getComponents()) {
                 if (comp instanceof FactoryRenderableBlock) {
 
-                    FactoryRenderableBlock bl = ((FactoryRenderableBlock) comp).deepClone();
+                    FactoryRenderableBlock bl = ((FactoryRenderableBlock) comp);
                     dictionary.put(bl.getKeyword().toUpperCase(), bl);
 
                 }
