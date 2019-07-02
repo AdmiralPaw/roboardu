@@ -90,23 +90,12 @@ public class ModuleInfoPane extends JPanel {
                 for(String blockName:suitableNames){
 
                     System.out.println(blockName);
-
                     //крч эту дичь можно изменить (подудалить ненужное), главное правильно заполнить мой XML
-                    boolean contains = blockName.contains("(");
-                    if(contains){
-                        int index = blockName.indexOf("(");
-                        blockName = blockName.substring(0,index);
-                        FactoryRenderableBlock block = (FactoryRenderableBlock)(blocksDict.get(blockName.toUpperCase()));
-                        block = block.deepClone();
-                        block.setZoomLevel(1);
-                        fcanvas.add(block);
-                    }else {
-                        FactoryRenderableBlock block = (FactoryRenderableBlock)(blocksDict.get(blockName.toUpperCase()));
-                        block = block.deepClone();
-                        block.setZoomLevel(1);
-                        fcanvas.add(block);
-                    }
 
+                        FactoryRenderableBlock block = (FactoryRenderableBlock)(blocksDict.get(blockName.toUpperCase()));
+                        block = block.deepClone();
+                        block.setZoomLevel(1);
+                        fcanvas.add(block);
 
                 }
 
@@ -122,7 +111,6 @@ public class ModuleInfoPane extends JPanel {
                         ((Window2Explorer) ex).setSearchResult(scroll);
                     }
                 }
-
 
             }
         });

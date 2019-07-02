@@ -12,11 +12,7 @@ import java.awt.Point;
 import java.awt.PopupMenu;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Point2D;
@@ -26,11 +22,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JToolTip;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -66,7 +58,10 @@ import com.mit.blocks.workspace.WorkspaceWidget;
  * block accordingly.
  */
 public class RenderableBlock extends JComponent implements SearchableElement,
-        MouseListener, MouseMotionListener, ISupportMemento, CommentSource {
+        MouseListener, MouseMotionListener, ISupportMemento, CommentSource, KeyListener {
+
+
+    static JComponent selectedBlock = null;
 
     private static final long serialVersionUID = 1L;
     // The following may be null: parent, lastdragwidget, comment
@@ -201,6 +196,16 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     public RenderableBlock(Workspace workspace, WorkspaceWidget parent,
             Long blockID) {
         this(workspace, parent, blockID, false);
+        setFocusable(true);
+        addKeyListener(this);
+        super.addKeyListener(this);
+
+
+        System.out.println("init?1");
+
+        setFocusable(true);
+        requestFocusInWindow();
+
 
     }
 
@@ -218,7 +223,34 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             Long blockID, boolean isLoading) {
         super();
         this.workspace = workspace;
-        
+
+        System.out.println("init?2");
+
+
+        InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+        ActionMap am = getActionMap();
+
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_1, 0, false), "pressed");
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C | KeyEvent.CTRL_DOWN_MASK, 0, true), "released");
+
+        am.put("pressed", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Pressed2");
+                currentBlock.cloneMe();
+            }
+        });
+
+        am.put("released", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("released");
+            }
+        });
+
+        setFocusable(true);
+        requestFocusInWindow();
+
         this.setFocusTraversalKeysEnabled(false);
 
         this.parent = parent;
@@ -290,6 +322,24 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             setBlockToolTip(getBlock().getBlockDescription().trim());
         }
         setCursor(dragHandler.getDragHintCursor());
+
+
+        setFocusable(true);
+        addKeyListener(this);
+        super.addKeyListener(this);
+
+        InputMap inputMap = this.getInputMap();
+
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_DOWN_MASK |
+                InputEvent.ALT_DOWN_MASK ), "BUTTON ONE ID");
+
+        ActionMap actionMap = this.getActionMap();
+        actionMap.put("BUTTON ONE ID", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("action performed");
+            }
+        });
     }
 
 
@@ -299,6 +349,29 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     {
         this(workspace, parent, blockID, isLoading);
         setZoomLevel(blockSize);
+
+        setFocusable(true);
+        addKeyListener(this);
+        super.addKeyListener(this);
+        System.out.println("init?3");
+
+        //KeyStroke key = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT );
+
+        //this.getInputMap().put(KeyStroke.getKeyStroke(K));
+
+
+        InputMap inputMap = this.getInputMap();
+
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_DOWN_MASK |
+                InputEvent.ALT_DOWN_MASK ), "BUTTON ONE ID");
+
+        ActionMap actionMap = this.getActionMap();
+        actionMap.put("BUTTON ONE ID", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("action performed");
+            }
+        });
     }
 
     /**
@@ -1602,6 +1675,14 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         return location;
     }
 
+    public void cloneMe(RenderableBlock obj) {
+        cloneThis(obj);
+
+        workspace.notifyListeners(new WorkspaceEvent(workspace, this
+                .getParentWidget(), this.getBlockID(),
+                WorkspaceEvent.BLOCK_CLONED, true));
+    }
+
     public void cloneMe() {
         cloneThis(this);
 
@@ -1973,8 +2054,17 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         }
     }
 
+    private static int i = 0;
+    private static RenderableBlock currentBlock;
+
     // show the pulldown icon if hasComboPopup = true
     public void mouseEntered(MouseEvent e) {
+
+        currentBlock = this;
+
+        System.out.println("hovered "+Integer.toString(i));
+        i+=1;
+
         dragHandler.mouseEntered(e);
         // !dragging: don't redraw while dragging
         // !SwingUtilities.isLeftMouseButton: dragging mouse moves into another
@@ -2177,11 +2267,43 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         }
     }
 
+
+
     public String toString() {
         StringBuffer buf = new StringBuffer();
         buf.append("RenderableBlock " + getBlockID() + ": "
                 + getBlock().getBlockLabel());
         return buf.toString();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        System.out.println("event");
+
+
+    }
+
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+        System.out.println("event");
+        
+        switch (e.getKeyCode()){
+            case KeyEvent.VK_DELETE:
+                System.out.println("delete");
+                
+                break;
+
+        }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        System.out.println("event");
+
+
     }
 
     /**
