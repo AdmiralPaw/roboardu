@@ -155,6 +155,7 @@ public class ContextMenu extends PopupMenu implements ActionListener {
         	//notify the renderableblock componenet that lauched the conetxt menu
             if (activeComponent != null && activeComponent instanceof RenderableBlock) {
                 ((RenderableBlock) activeComponent).cloneMe();
+                System.out.println("cloned");
             }
         }
     }

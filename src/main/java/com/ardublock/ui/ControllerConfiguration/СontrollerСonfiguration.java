@@ -93,7 +93,8 @@ public class СontrollerСonfiguration extends JPanel {
                     this.moduleInfoPane.setModuleImage(device.deviceName);
                     this.moduleInfoPane.setModuleName(device.deviceNameTranslated);
                     this.moduleInfoPane.setModuleInfo(device.deviceInfo);
-                    this.moduleInfoPane.moduleName = device.deviceNameTranslated;
+                    this.moduleInfoPane.moduleName = device.deviceName;
+                    this.moduleInfoPane.transModuleName = device.deviceNameTranslated;
                     componentsPane.add(this.moduleInfoPane);
                 }
             }
@@ -132,6 +133,9 @@ public class СontrollerСonfiguration extends JPanel {
             this.deviceName = deviceName;
             this.deviceInfo = deviceInfo;
             this.deviceNameTranslated = deviceNameTranslated;
+
+            System.out.println("!!!!!!!!!!!!!!!  "+pin+" pin "+deviceName+"  "+deviceNameTranslated);
+
         }
     }
 }
