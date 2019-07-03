@@ -121,9 +121,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
         <BlockGenus name="loop" kind="command" color="98 169 171" initlabel="bg.loop" is-starter="yes" is-terminator="yes" label-unique="yes">
             <description>
                 <text>this is the loop of the arduino</text>
-                <arg-description n="2" name="start">
-                    A list of commands to repeat forever.
-                </arg-description>
+
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="cmd" connector-kind="socket" label="bc.do" />
