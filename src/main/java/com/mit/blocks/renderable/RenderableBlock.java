@@ -230,8 +230,11 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = getActionMap();
 
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, 0, false), "pressed");
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C | KeyEvent.CTRL_DOWN_MASK, 0, true), "released");
+
+        KeyStroke keyV = KeyStroke.getKeyStroke(KeyEvent.VK_V,InputEvent.CTRL_DOWN_MASK);
+        im.put(keyV,"pressed");
+
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C & KeyEvent.CTRL_DOWN_MASK, 0, true), "released");
 
         am.put("pressed", new AbstractAction() {
             @Override
@@ -2055,7 +2058,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     }
 
     private static int i = 0;
-    private static RenderableBlock currentBlock;
+    public static RenderableBlock currentBlock;
 
     // show the pulldown icon if hasComboPopup = true
     public void mouseEntered(MouseEvent e) {

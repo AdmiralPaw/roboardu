@@ -9,8 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -20,11 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
-import javax.swing.JComponent;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import javax.swing.JToolTip;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -1131,11 +1126,47 @@ class PageJComponent extends JLayeredPane implements RBParent {
         return image;
     }
 
+
+    PageJComponent(){
+
+        InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+        ActionMap am = getActionMap();
+
+
+        KeyStroke keyDell = KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.CTRL_DOWN_MASK);
+        im.put(keyDell,"delete");
+
+        //im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C & KeyEvent.CTRL_DOWN_MASK, 0, true), "released");
+
+        am.put("delete", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("delete");
+                removeChild(RenderableBlock.currentBlock);
+
+
+            }
+        });
+
+    }
+
+
+    void removeChild(JComponent component){
+        this.remove(component);
+        this.validate();
+        this.repaint();
+    }
+
+
+
     /**
      * renders this JComponent
      */
     @Override
     public void paintComponent(Graphics g) {
+
+
+
         Graphics2D g2 = (Graphics2D) g;
         //paint page
         super.paintComponent(g);
