@@ -53,10 +53,10 @@ public class ModuleInfoPane extends JPanel {
         infoTextPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 35, 0));
         infoImagePanel.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 10));
         infoTextPanel.setBackground(Color.WHITE);
-        infoImagePanel.setBackground(Color.LIGHT_GRAY);
+        infoImagePanel.setBackground(new Color(98,169,171));
         setButtons();
         JPanel nameAndOthers = new JPanel();
-        nameAndOthers.setBackground(Color.LIGHT_GRAY);
+        nameAndOthers.setBackground(new Color(98,169,171));
         nameAndOthers.setLayout(new FlowLayout(FlowLayout.RIGHT));
         nameAndOthers.add(closeButton);
         nameAndOthers.add(moduleNameLabel);
@@ -117,7 +117,7 @@ public class ModuleInfoPane extends JPanel {
 
         nameAndOthers.add(blocksButton);
         nameAndOthers.setPreferredSize(new Dimension(
-                50, 100));
+                80, 100));
         
         infoImagePanel.add(moduleIcon);
         infoImagePanel.add(nameAndOthers);

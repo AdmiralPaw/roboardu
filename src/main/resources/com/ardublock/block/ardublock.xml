@@ -546,10 +546,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 
         <BlockGenus name="no_tone" kind="command" color="95 95 195" initlabel="noTone">
-            <description>
-                <text>Stops the generation of a square wave triggered by tone().
-                </text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListDigital_D0" label="D0" />
@@ -2788,10 +2785,10 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>Write to SD card</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="string" connector-kind="socket" label="File">
+                <BlockConnector connector-type="string" connector-kind="socket" label="bc.sd_write2_File">
                     <DefaultArg genus-name="glue_msg" label="file.txt" />
                 </BlockConnector>
-                <BlockConnector connector-type="string" connector-kind="socket" label="Data">
+                <BlockConnector connector-type="string" connector-kind="socket" label="bc.sd_write2_Data">
                     <DefaultArg genus-name="message" label="Message" />
                 </BlockConnector>
                 <BlockConnector connector-type="boolean" connector-kind="socket" label="bc.ln">
@@ -2889,7 +2886,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
         <BlockGenus name="MaSD_Write" kind="command" color="0 155 139" initlabel="bg.MaSD_Write">
             <BlockConnectors>
-                <BlockConnector connector-type="string" connector-kind="socket" label="Data">
+                <BlockConnector connector-type="string" connector-kind="socket" label="bc.MaSD_Data">
                     <DefaultArg genus-name="message" label="Message" />
                 </BlockConnector>
             </BlockConnectors>
@@ -4781,9 +4778,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 		
         <BlockGenus name="seeed_touch_sensor" kind="data" color="242 123 99" initlabel="bg.seeed_touch_sensor">
-            <description>
-                <text>Read digital from the pin</text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="boolean" connector-kind="plug" />
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
@@ -9463,9 +9458,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
         <BlockGenus name="magnetic_sensor" kind="data" color="242 123 99" initlabel="bg.magnetic_sensor">
-            <description>
-                <text>Magnetic sensor</text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListAnalog_A0" label="A0" />
@@ -9687,9 +9680,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 		
         <BlockGenus name="little_bits_lightsensor" kind="data" color="242 123 99" initlabel="bg.little_bits_lightsensor">
-            <description>
-                <text>LightSensor</text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListAnalog_A0" label="A0" />
@@ -9716,9 +9707,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 		
         <BlockGenus name="little_bits_microphone" kind="data" color="242 123 99" initlabel="bg.little_bits_microphone">
-            <description>
-                <text>Microphone</text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListAnalog_A0" label="A0" />
@@ -11577,9 +11566,7 @@ initlabel="bg.tft-msg" editable-label="yes">
         </BlockGenus>
 
         <BlockGenus name="Potentiometer" kind="data" color="242 123 99" initlabel="bg.Potentiometer" editable-label="no">
-            <description>
-                <text>Gives percentage of potentiometer</text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="number"
                                                 connector-kind="plug">
@@ -11592,9 +11579,7 @@ initlabel="bg.tft-msg" editable-label="yes">
         </BlockGenus>
 
         <BlockGenus name="LineFinder" kind="data" color="242 123 99" initlabel="bg.LineFinder" editable-label="no">
-            <description>
-                <text>Gives percentage of potentiometer</text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="number"
                                                 connector-kind="plug">

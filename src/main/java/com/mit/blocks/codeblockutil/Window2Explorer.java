@@ -174,7 +174,6 @@ public class Window2Explorer extends JPanel implements Explorer {
             selectCanvas(0);
 
         }
-        System.out.println("blocks words @@@@@@@@@@@@@@@@@@@@@@@@@");
         for (Canvas unit : items) {
             for (Component comp : unit.getJComponent().getComponents()) {
                 if (comp instanceof FactoryRenderableBlock) {
@@ -190,6 +189,9 @@ public class Window2Explorer extends JPanel implements Explorer {
                         System.out.println(bl.getKeyword().toUpperCase());
                         dictionary.put(bl.getKeyword().toUpperCase(), bl);
                     }
+
+                     bl = ((FactoryRenderableBlock) comp);
+                    dictionary.put(bl.getKeyword().toUpperCase(), bl);
 
                 }
             }

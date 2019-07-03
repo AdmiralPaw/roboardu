@@ -254,6 +254,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         zoomPlus.setFocusable(false);
         zoomPlus.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                zoomPlus.repaint();
                 double zoom = Page.zoom + coef;
                 if (zoom > max_zoom) {
                     zoom = max_zoom;
@@ -283,6 +284,16 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 repaint();
             }
         });
+        InputMap imap = zoomPlus.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke zoomPlusStr = KeyStroke.getKeyStroke(KeyEvent.VK_ADD, InputEvent.CTRL_DOWN_MASK);
+        imap.put(zoomPlusStr, "workspacePlus");
+        zoomPlus.getActionMap().put("workspacePlus", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                zoomPlus.doClick();
+                zoomPlus.repaint();
+            }
+        });
 
         iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/block/buttons/zoom-.png");
         button_icon = new ImageIcon(
@@ -294,6 +305,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         zoomMinus.setFocusable(false);
         zoomMinus.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                zoomMinus.repaint();
                 double zoom = Page.zoom - coef;
                 if (zoom < min_zoom) {
                     zoom = min_zoom;
@@ -302,27 +314,37 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 PageChangeEventManager.notifyListeners();
             }
         });
-        zoomMinus.addMouseListener(new MouseListener() {
-            public void mouseClicked(MouseEvent e) {
-                repaint();
-            }
-
-            public void mousePressed(MouseEvent e) {
-                repaint();
-            }
-
-            public void mouseReleased(MouseEvent e) {
-                repaint();
-            }
-
-            public void mouseEntered(MouseEvent e) {
-                repaint();
-            }
-
-            public void mouseExited(MouseEvent e) {
-                repaint();
+        imap = zoomMinus.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke zoomMinusStr = KeyStroke.getKeyStroke(KeyEvent.VK_SUBTRACT, InputEvent.CTRL_DOWN_MASK);
+        imap.put(zoomMinusStr, "workspaceMinus");
+        zoomMinus.getActionMap().put("workspaceMinus", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                zoomMinus.doClick();
+                zoomMinus.repaint();
             }
         });
+        zoomMinus.addMouseListener(new MouseListener() {
+                    public void mouseClicked(MouseEvent e) {
+                        repaint();
+                    }
+
+                    public void mousePressed(MouseEvent e) {
+                        repaint();
+                    }
+
+                    public void mouseReleased(MouseEvent e) {
+                        repaint();
+                    }
+
+                    public void mouseEntered(MouseEvent e) {
+                        repaint();
+                    }
+
+                    public void mouseExited(MouseEvent e) {
+                        repaint();
+                    }
+                });
 
         iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/block/buttons/zoomNormal.png");
         button_icon = new ImageIcon(
@@ -357,6 +379,16 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
 
             public void mouseExited(MouseEvent e) {
                 repaint();
+            }
+        });
+        imap = zoomNormal.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke zoomNormalStr = KeyStroke.getKeyStroke(KeyEvent.VK_EQUALS, InputEvent.CTRL_DOWN_MASK);
+        imap.put(zoomNormalStr, "workspaceNormal");
+        zoomNormal.getActionMap().put("workspaceNormal", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                zoomNormal.doClick();
+                zoomNormal.repaint();
             }
         });
 

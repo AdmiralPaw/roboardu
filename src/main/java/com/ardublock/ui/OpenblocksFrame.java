@@ -112,30 +112,63 @@ public class OpenblocksFrame extends JFrame {
         JMenuItem settingsItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.settings"));
         JMenuItem exitItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.exit"));
         JMenu toolsMenu = new JMenu(uiMessageBundle.getString("ardublock.ui.tools"));
+        JMenuItem verifyItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.verify"));
         JMenuItem uploadItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.upload"));
         JMenuItem serialMonitorItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.serialMonitor"));
         JMenuItem saveImageItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveImage"));
 
         newItem.addActionListener(new NewButtonListener(this));
+        KeyStroke newButStr = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK);
+        newItem.setAccelerator(newButStr);
+
         openItem.addActionListener(new OpenButtonListener(this));
+        KeyStroke openButStr = KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK);
+        openItem.setAccelerator(openButStr);
+
         saveItem.addActionListener(new SaveButtonListener(this));
+        KeyStroke saveButStr = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK);
+        saveItem.setAccelerator(saveButStr);
+
         saveAsItem.addActionListener(new SaveAsButtonListener(this));
+        KeyStroke saveAsButStr = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK);
+        saveAsItem.setAccelerator(saveAsButStr);
+
+
+
         settingsItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 settings.setVisible(true);
             }
         });
+        KeyStroke settingStr = KeyStroke.getKeyStroke(KeyEvent.VK_WINDOWS, InputEvent.CTRL_DOWN_MASK);
+        settingsItem.setAccelerator(settingStr);
+
         exitItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
+        KeyStroke exitStr = KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_DOWN_MASK);
+        exitItem.setAccelerator(exitStr);
+
+        verifyItem.addActionListener(new GenerateCodeButtonListener(this, context));
+        verifyItem.setActionCommand("VERIFY_CODE");
+        KeyStroke verifyButStr = KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK);
+        verifyItem.setAccelerator(verifyButStr);
+
         uploadItem.addActionListener(new GenerateCodeButtonListener(this, context));
+        uploadItem.setActionCommand("UPLOAD_CODE");
+        KeyStroke generateButStr = KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_DOWN_MASK);
+        uploadItem.setAccelerator(generateButStr);
+
         serialMonitorItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 context.getEditor().handleSerial();
             }
         });
+        KeyStroke serialMonitorButStr = KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK);
+        serialMonitorItem.setAccelerator(serialMonitorButStr);
+
         saveImageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Dimension size = workspace.getCanvasSize();
@@ -170,6 +203,7 @@ public class OpenblocksFrame extends JFrame {
         fileMenu.add(settingsItem);
         fileMenu.addSeparator();
         fileMenu.add(exitItem);
+        toolsMenu.add(verifyItem);
         toolsMenu.add(uploadItem);
         toolsMenu.add(serialMonitorItem);
 
@@ -233,6 +267,8 @@ public class OpenblocksFrame extends JFrame {
         infoLabel.setForeground(Color.white);
 
         //<editor-fold defaultstate="collapsed" desc="Buttons images and listners">
+
+
         ImageButton newButton = new ImageButton(
                 "new",
                 "com/ardublock/block/buttons/newA.jpg",
@@ -257,6 +293,7 @@ public class OpenblocksFrame extends JFrame {
         );
         saveAsButton.addActionListener(new SaveAsButtonListener(this));
 
+
         ImageButton openButton = new ImageButton(
                 "open",
                 "com/ardublock/block/buttons/openA.jpg",
@@ -264,6 +301,7 @@ public class OpenblocksFrame extends JFrame {
                 infoLabel
         );
         openButton.addActionListener(new OpenButtonListener(this));
+        
 
         ImageButton verifyButton = new ImageButton("verify program",
                 "com/ardublock/block/buttons/verifyA.jpg",
@@ -293,7 +331,6 @@ public class OpenblocksFrame extends JFrame {
                 context.getEditor().handleSerial();
             }
         });
-
         ImageButton saveImageButton = new ImageButton(
                 "save image",
                 "com/ardublock/block/buttons/saveAsImageA.jpg",
@@ -346,14 +383,16 @@ public class OpenblocksFrame extends JFrame {
                 }
             }
         });
+
         ImageButton configButton = new ImageButton(
                 "controller",
                 "com/ardublock/block/buttons/showPanelsA.jpg",
                 "com/ardublock/block/buttons/showPanelsB.jpg",
                 null
         );
-        configButton.addMouseListener(new MouseListener() {
-            public void mouseClicked(MouseEvent e) {
+        configButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 if (controllerIsShown) {
                     workspace.blockCanvasLayer.remove(workspace.controller);
                     northPanel.remove(rightPanel);
@@ -367,34 +406,13 @@ public class OpenblocksFrame extends JFrame {
                 workspace.controller.updateUI();
                 northPanel.updateUI();
             }
-
-            public void mousePressed(MouseEvent e) {
-                workspace.updateUI();
-                workspace.controller.updateUI();
-                northPanel.updateUI();
-            }
-
-            public void mouseReleased(MouseEvent e) {
-                workspace.updateUI();
-                workspace.blockCanvasLayer.updateUI();
-                workspace.controller.updateUI();
-                northPanel.updateUI();
-            }
-
-            public void mouseEntered(MouseEvent e) {
-                workspace.updateUI();
-                workspace.blockCanvasLayer.updateUI();
-                workspace.controller.updateUI();
-                northPanel.updateUI();
-            }
-
-            public void mouseExited(MouseEvent e) {
-                workspace.updateUI();
-                workspace.blockCanvasLayer.updateUI();
-                workspace.controller.updateUI();
-                northPanel.updateUI();
-            }
         });
+
+
+        InputMap imap = configButton.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke configStr = KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_DOWN_MASK);
+        imap.put(configStr, "showPanel");
+        configButton.getActionMap().put("showPanel", new ClickAction(configButton));
         // </editor-fold>
 
         buttons.add(newButton);
@@ -683,6 +701,20 @@ public class OpenblocksFrame extends JFrame {
             @Override
             public void mouseReleased(MouseEvent e) {
             }
+        }
+    }
+    class ClickAction extends AbstractAction
+    {
+        private JButton button;
+
+        public ClickAction(JButton but)
+        {
+            button = but;
+        }
+
+        public void actionPerformed(ActionEvent e)
+        {
+            button.doClick();
         }
     }
 }
