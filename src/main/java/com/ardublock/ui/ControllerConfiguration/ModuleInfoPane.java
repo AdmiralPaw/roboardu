@@ -58,8 +58,10 @@ public class ModuleInfoPane extends JPanel {
         JPanel nameAndOthers = new JPanel();
         nameAndOthers.setBackground(new Color(98,169,171));
         nameAndOthers.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        nameAndOthers.add(closeButton);
-        nameAndOthers.add(moduleNameLabel);
+        JPanel twoButtons = new JPanel();
+        twoButtons.setBackground(new Color(98,169,171));
+        twoButtons.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        twoButtons.add(closeButton);
 
         blocksButton.addActionListener(new ActionListener() {
             @Override
@@ -115,9 +117,14 @@ public class ModuleInfoPane extends JPanel {
             }
         });
 
-        nameAndOthers.add(blocksButton);
+        twoButtons.add(blocksButton);
+        
         nameAndOthers.setPreferredSize(new Dimension(
                 80, 100));
+        
+        
+        nameAndOthers.add(twoButtons);
+        nameAndOthers.add(moduleNameLabel);
         
         infoImagePanel.add(moduleIcon);
         infoImagePanel.add(nameAndOthers);
@@ -161,8 +168,13 @@ public class ModuleInfoPane extends JPanel {
         URL iconURL = ControllerButton.class.getClassLoader().getResource("com/ardublock/Images/closeButton.png");
         ImageIcon image = new ImageIcon(iconURL);
         Image imageRaw = image.getImage().getScaledInstance(
-                30, 20, java.awt.Image.SCALE_SMOOTH);
+                15, 15, java.awt.Image.SCALE_SMOOTH);
         this.closeButton.setIcon(new ImageIcon(imageRaw));
+        iconURL = ControllerButton.class.getClassLoader().getResource("com/ardublock/Images/closeButtonSet.png");
+        image = new ImageIcon(iconURL);
+        imageRaw = image.getImage().getScaledInstance(
+                15, 15, java.awt.Image.SCALE_SMOOTH);
+        this.closeButton.setSelectedIcon(image);
         this.closeButton.addMouseListener(new MouseListener(){
             public void mouseClicked(MouseEvent e) {
 
@@ -186,8 +198,13 @@ public class ModuleInfoPane extends JPanel {
         iconURL = ControllerButton.class.getClassLoader().getResource("com/ardublock/Images/blocksButton.png");
         image = new ImageIcon(iconURL);
         imageRaw = image.getImage().getScaledInstance(
-                30, 20, java.awt.Image.SCALE_SMOOTH);
+                15, 15, java.awt.Image.SCALE_SMOOTH);
         this.blocksButton.setIcon(new ImageIcon(imageRaw));
+        iconURL = ControllerButton.class.getClassLoader().getResource("com/ardublock/Images/blocksButtonSet.png");
+        image = new ImageIcon(iconURL);
+        imageRaw = image.getImage().getScaledInstance(
+                15, 15, java.awt.Image.SCALE_SMOOTH);
+        this.blocksButton.setSelectedIcon(image);
     }
     
     public void setButtonAction(String modules){//просто как пример
