@@ -71,7 +71,6 @@ public class ModuleInfoPane extends JPanel {
                 String transName = transModuleName;
                 Map<String,String[]> suitableDict = WorkspaceController.suitableBlocks;
                 Map<String, JComponent> blocksDict = Window2Explorer.dictionary;
-                ArrayList<JComponent> blocks = new ArrayList<JComponent>();
                 String[] suitableNames = suitableDict.get(transName);
 
                 System.out.println("-------------------");
@@ -80,11 +79,10 @@ public class ModuleInfoPane extends JPanel {
                 }
                 System.out.println("-----------------------");
 
-
                 FactoryCanvas fcanvas = new FactoryCanvas("searched canvas", Color.WHITE);
-                BoxLayout blout = new BoxLayout(fcanvas, BoxLayout.Y_AXIS);
+                //BoxLayout blout = new BoxLayout(fcanvas, BoxLayout.Y_AXIS);
 
-                fcanvas.setLayout(blout);
+                //fcanvas.setLayout(blout);
                 fcanvas.setBackground(Color.WHITE);
 
                 System.out.println("button pressed"+name + transModuleName);
@@ -101,6 +99,7 @@ public class ModuleInfoPane extends JPanel {
 
                 }
 
+                fcanvas.layoutBlocks();
                 JComponent scroll = new RHoverScrollPane(
                         fcanvas,
                         CScrollPane.ScrollPolicy.VERTICAL_BAR_AS_NEEDED,

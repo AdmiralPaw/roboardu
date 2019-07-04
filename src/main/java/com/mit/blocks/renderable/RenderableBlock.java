@@ -174,6 +174,18 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     private final ConnectorTag afterTag;
     private final ConnectorTag beforeTag;
     private List<ConnectorTag> socketTags = new ArrayList<ConnectorTag>();
+
+
+
+    public  void removeChildBlocks(){
+        socketTags = new ArrayList<ConnectorTag>();
+    }
+
+    public List<ConnectorTag> getConnectors(){
+        return this.socketTags;
+    }
+
+
     // //////////////////////////////
     // Collapse Label
     private CollapseLabel collapseLabel;
@@ -199,7 +211,6 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         setFocusable(true);
         addKeyListener(this);
         super.addKeyListener(this);
-
 
         System.out.println("init?1");
 
