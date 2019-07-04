@@ -83,6 +83,8 @@ import com.mit.blocks.renderable.RenderableBlock;
  */
 public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemento {
 
+    public static JComponent blocksContainer;
+
     /** The workspace in use */
     private final Workspace workspace;
 
@@ -151,6 +153,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
     public Page(Workspace workspace, String name, int pageWidth, int pageHeight, String pageDrawer, boolean inFullview, Color defaultColor, boolean isCollapsible) {
         super();
+        blocksContainer = pageJComponent;
         this.workspace = workspace;
         this.defaultColor = defaultColor;
         this.pageJComponent.setLayout(null);
@@ -1106,6 +1109,9 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
  * that wraps it.
  */
 class PageJComponent extends JLayeredPane implements RBParent {
+
+
+
 
     private static final long serialVersionUID = 83982193213L;
     private static final Integer BLOCK_LAYER = new Integer(1);

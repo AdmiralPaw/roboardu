@@ -64,6 +64,8 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
 
     private static final long serialVersionUID = 328149080422L;
 
+    public static JComponent blocksContainer;
+
     // the environment wrapps all the components of a workspace (Blocks, RenderableBlocks, BlockStubs, BlockGenus)
     private final WorkspaceEnvironment env = new WorkspaceEnvironment();
 
@@ -177,12 +179,31 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 workLayer.validate();
             }
         });
-        
+
         isActiveBasket = false;
 
         JPanel errPanel = errWindow.getErrPanel();
-        
+
         final JLayeredPane blockCanvasWithDepth = new JLayeredPane();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         blockCanvasWithDepth.setPreferredSize(new Dimension(300, 500));
         final JPanel level_one = new JPanel();
         level_one.setLayout(new BoxLayout(level_one, BoxLayout.X_AXIS));
@@ -219,7 +240,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 blockCanvasLayer.updateUI();
             }
         });
-       
+
         workLayer = new RSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
                 factory.getJComponent(), centerPane);
         workLayer.setOneTouchExpandable(true);
@@ -409,6 +430,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         zoom_buttons.setBackground(new Color(255, 255, 255, 0));
 
         level_two.add(zoom_buttons, BorderLayout.CENTER);
+
         blockCanvasWithDepth.add(level_two, new Integer(3));
 
         validate();

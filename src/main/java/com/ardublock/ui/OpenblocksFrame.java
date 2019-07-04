@@ -29,11 +29,7 @@ import com.ardublock.ui.listener.SaveButtonListener;
 import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
 
 import com.mit.blocks.controller.WorkspaceController;
-import com.mit.blocks.workspace.ErrWindow;
-import com.mit.blocks.workspace.SearchBar;
-import com.mit.blocks.workspace.ZoomSlider;
-import com.mit.blocks.workspace.SearchableContainer;
-import com.mit.blocks.workspace.Workspace;
+import com.mit.blocks.workspace.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -117,6 +113,11 @@ public class OpenblocksFrame extends JFrame {
         JMenuItem serialMonitorItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.serialMonitor"));
         JMenuItem saveImageItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveImage"));
 
+        //JMenuItem deleteAll = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveImage"));
+
+
+
+
         newItem.addActionListener(new NewButtonListener(this));
         KeyStroke newButStr = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK);
         newItem.setAccelerator(newButStr);
@@ -195,20 +196,21 @@ public class OpenblocksFrame extends JFrame {
             }
         });
 
-        fileMenu.add(newItem);
-        fileMenu.add(openItem);
-        fileMenu.add(saveItem);
-        fileMenu.add(saveAsItem);
-        fileMenu.addSeparator();
-        fileMenu.add(settingsItem);
-        fileMenu.addSeparator();
-        fileMenu.add(exitItem);
-        toolsMenu.add(verifyItem);
-        toolsMenu.add(uploadItem);
-        toolsMenu.add(serialMonitorItem);
-
-        menuBar.add(fileMenu);
-        menuBar.add(toolsMenu);
+//        fileMenu.add(newItem);
+//        fileMenu.add(openItem);
+//        fileMenu.add(saveItem);
+//        fileMenu.add(saveAsItem);
+//        fileMenu.addSeparator();
+//        fileMenu.add(settingsItem);
+//        fileMenu.addSeparator();
+//        fileMenu.add(exitItem);
+//        toolsMenu.add(verifyItem);
+//        toolsMenu.add(uploadItem);
+//        toolsMenu.add(serialMonitorItem);
+//        fileMenu.add(deleteAll);
+//
+//        menuBar.add(fileMenu);
+//        menuBar.add(toolsMenu);
         // </editor-fold>
 
         //Panels------------------------------------------------------//
@@ -268,6 +270,21 @@ public class OpenblocksFrame extends JFrame {
 
         //<editor-fold defaultstate="collapsed" desc="Buttons images and listners">
 
+        ImageButton deleteAll = new ImageButton(
+          "deleteAllBlocks",
+                "com/ardublock/block/buttons/newA.jpg",
+                "com/ardublock/block/buttons/newB.jpg",
+                new JLabel()
+        );
+
+        deleteAll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Page.blocksContainer.removeAll();
+                Page.blocksContainer.revalidate();
+                Page.blocksContainer.repaint();
+            }
+        });
 
         ImageButton newButton = new ImageButton(
                 "new",
@@ -427,6 +444,7 @@ public class OpenblocksFrame extends JFrame {
         buttons.add(saveImageButton);
         buttons.add(websiteButton);
         buttons.add(infoLabel);
+        buttons.add(deleteAll);
         panelWithConfigButton.add(configButton);
 
         workspace.workLayer.addPropertyChangeListener(new PropertyChangeListener() {
