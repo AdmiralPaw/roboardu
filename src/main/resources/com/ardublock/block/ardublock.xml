@@ -5,6 +5,26 @@ file before genus A is specified./ We impose this requirement so that sanity che
 <BlockLangDef>
 
 
+                <BlockGenusMember>sensor_button</BlockGenusMember>
+                <BlockGenusMember>little_bits_lightsensor</BlockGenusMember>
+                <BlockGenusMember>little_bits_microphone</BlockGenusMember>
+                <BlockGenusMember>little_bits_pulse</BlockGenusMember>
+                <BlockGenusMember>df_digital_viberation_sensor</BlockGenusMember>
+                <BlockGenusMember>df_joystick_module_button</BlockGenusMember>
+                <BlockGenusMember>df_joystick_module_x</BlockGenusMember>
+                <BlockGenusMember>df_joystick_module_y</BlockGenusMember>
+                <BlockGenusMember>df_analog_gp2y0a21</BlockGenusMember>
+                <BlockGenusMember>df_line_tracking_sensor</BlockGenusMember>
+                <BlockGenusMember>sensorTemperature</BlockGenusMember>
+                <BlockGenusMember>seeed_mag_switch</BlockGenusMember>
+                <BlockGenusMember>seeed_touch_sensor</BlockGenusMember>
+                <BlockGenusMember>obstacle_sensor</BlockGenusMember>
+                <BlockGenusMember>magnetic_sensor</BlockGenusMember>
+                <BlockGenusMember>rangefinderCombined</BlockGenusMember>
+                <BlockGenusMember>lightCombined</BlockGenusMember>
+                <BlockGenusMember>LineFinder</BlockGenusMember>
+                <BlockGenusMember>Potentiometer</BlockGenusMember>
+    
 
     <SuitableBlocks version="rus">
         <KeyBlock key="modules.encoder.name">
@@ -18,23 +38,33 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <Block value="bg.sensor_button"/>
         </KeyBlock>
         <KeyBlock key="modules.gerkon.name">
-            <Block value="modules.gerkon.name"/>
+            <Block value=""/>
         </KeyBlock>
-        <KeyBlock key="HallSensor">
+        <KeyBlock key="modules.hall.name">
             <Block value="bg.magnetic_sensor"/>
         </KeyBlock>
-        <KeyBlock key="Light Sensor">
+        <KeyBlock key="modules.light.name">
             <Block value="bg.little_bits_lightsensor"/>
         </KeyBlock>
-        <KeyBlock key="sensor line">
+        <KeyBlock key="modules.line.name">
             <Block value="bg.seeed_line_finder"/>
+        </KeyBlock>
+        <KeyBlock key="modules.touch.name">
+            <Block value="bg.seeed_touch_sensor"/>
+        </KeyBlock>
+        <KeyBlock key="modules.range.name">
+            <Block value="bg.seeed_touch_sensor"/>
         </KeyBlock>
         <KeyBlock key="touch sensor">
             <Block value="bg.seeed_touch_sensor"/>
         </KeyBlock>
-        <KeyBlock key="motor">
-            <Block value="bg.Engine_Basic"/>
+        <KeyBlock key="touch sensor">
+            <Block value="bg.seeed_touch_sensor"/>
         </KeyBlock>
+        <KeyBlock key="touch sensor">
+            <Block value="bg.seeed_touch_sensor"/>
+        </KeyBlock>
+        
 
     </SuitableBlocks>
     <SuitableBlocks version="lang">

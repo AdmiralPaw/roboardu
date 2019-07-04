@@ -58,8 +58,9 @@ public class ModuleInfoPane extends JPanel {
         JPanel nameAndOthers = new JPanel();
         nameAndOthers.setBackground(new Color(98,169,171));
         nameAndOthers.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        nameAndOthers.add(closeButton);
-        nameAndOthers.add(moduleNameLabel);
+        JPanel twoButtons = new JPanel();
+        twoButtons.setBackground(new Color(98,169,171));
+        twoButtons.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
         blocksButton.addActionListener(new ActionListener() {
             @Override
@@ -114,9 +115,15 @@ public class ModuleInfoPane extends JPanel {
             }
         });
 
-        nameAndOthers.add(blocksButton);
+        twoButtons.add(blocksButton);
+        twoButtons.add(closeButton);
+        
         nameAndOthers.setPreferredSize(new Dimension(
                 80, 100));
+        
+        
+        nameAndOthers.add(twoButtons);
+        nameAndOthers.add(moduleNameLabel);
         
         infoImagePanel.add(moduleIcon);
         infoImagePanel.add(nameAndOthers);
@@ -157,11 +164,23 @@ public class ModuleInfoPane extends JPanel {
     }
     
     private void setButtons(){
+        closeButton.setPreferredSize(new Dimension(23,23));
+        blocksButton.setPreferredSize(new Dimension(23,23));
         URL iconURL = ControllerButton.class.getClassLoader().getResource("com/ardublock/Images/closeButton.png");
         ImageIcon image = new ImageIcon(iconURL);
         Image imageRaw = image.getImage().getScaledInstance(
-                30, 20, java.awt.Image.SCALE_SMOOTH);
+                23, 23, java.awt.Image.SCALE_SMOOTH);
         this.closeButton.setIcon(new ImageIcon(imageRaw));
+        iconURL = ControllerButton.class.getClassLoader().getResource("com/ardublock/Images/closeButtonSet.png");
+        image = new ImageIcon(iconURL);
+        imageRaw = image.getImage().getScaledInstance(
+                23, 23, java.awt.Image.SCALE_SMOOTH);
+        image = new ImageIcon(imageRaw);
+        //this.closeButton.setSelectedIcon(image);
+
+        this.closeButton.setPressedIcon(image);
+        this.closeButton.setSelectedIcon(image);
+        this.closeButton.setRolloverIcon(image);
         this.closeButton.addMouseListener(new MouseListener(){
             public void mouseClicked(MouseEvent e) {
 
@@ -177,16 +196,47 @@ public class ModuleInfoPane extends JPanel {
             }
 
             public void mouseEntered(MouseEvent e) {
+                closeButton.setSelected(true);
             }
 
-            public void mouseExited(MouseEvent e) {                
+            public void mouseExited(MouseEvent e) {    
+                closeButton.setSelected(false);            
             }
         });
         iconURL = ControllerButton.class.getClassLoader().getResource("com/ardublock/Images/blocksButton.png");
         image = new ImageIcon(iconURL);
         imageRaw = image.getImage().getScaledInstance(
-                30, 20, java.awt.Image.SCALE_SMOOTH);
+                23, 23, java.awt.Image.SCALE_SMOOTH);
         this.blocksButton.setIcon(new ImageIcon(imageRaw));
+        iconURL = ControllerButton.class.getClassLoader().getResource("com/ardublock/Images/blocksButtonSet.png");
+        image = new ImageIcon(iconURL);
+        imageRaw = image.getImage().getScaledInstance(
+                23, 23, java.awt.Image.SCALE_SMOOTH);
+        image = new ImageIcon(imageRaw);
+        this.blocksButton.setPressedIcon(image);
+        this.blocksButton.setSelectedIcon(image);
+        this.blocksButton.setRolloverIcon(image);
+        /*this.blocksButton.addMouseListener(new MouseListener(){
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            public void mousePressed(MouseEvent e) {
+
+            }
+            
+            public void mouseReleased(MouseEvent e) {
+                
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                blocksButton.setSelected(true);
+            }
+
+            public void mouseExited(MouseEvent e) {    
+                blocksButton.setSelected(false);            
+            }
+        });*/
     }
     
     public void setButtonAction(String modules){//просто как пример
