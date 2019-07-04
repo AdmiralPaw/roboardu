@@ -125,7 +125,7 @@ public class FactoryCanvas extends JPanel implements Canvas, SearchableContainer
         block.removeComponentListener(this);
     }
 
-    void layoutBlocks() {
+    public void layoutBlocks() {
         RenderableBlock rb;
         int maxWidth = 20;
         int tx = BORDER_WIDTH;
