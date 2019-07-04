@@ -73,7 +73,6 @@ public class Window2Explorer extends JPanel implements Explorer {
      */
     public Window2Explorer() {
         super();
-
         this.setLayout(new BorderLayout());
         this.canvases = new ArrayList<JComponent>();
         this.canvasPane = new JPanel(new BorderLayout());

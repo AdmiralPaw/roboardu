@@ -1127,14 +1127,29 @@ class PageJComponent extends JLayeredPane implements RBParent {
     }
 
 
+    void removeChilds(JComponent[] components){
+
+        for(JComponent component:components){
+            this.remove(component);
+        }
+        this.revalidate();
+        this.repaint();
+    }
+
+
     PageJComponent(){
 
         InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = getActionMap();
 
 
+
+
+
         KeyStroke keyDell = KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.CTRL_DOWN_MASK);
-        im.put(keyDell,"delete");
+        //im.put(keyDell,"delete");
+
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,0,true),"delete");
 
         //im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C & KeyEvent.CTRL_DOWN_MASK, 0, true), "released");
 
@@ -1142,21 +1157,26 @@ class PageJComponent extends JLayeredPane implements RBParent {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("delete");
+
+                //RenderableBlock.currentBlock.removeChildBlocks();
+
                 removeChild(RenderableBlock.currentBlock);
 
 
             }
         });
-
     }
 
 
     void removeChild(JComponent component){
+
+        //List<JComponent> connectors = RenderableBlock.currentBlock.getConnectors();
+
+
         this.remove(component);
-        this.validate();
+        this.invalidate();
         this.repaint();
     }
-
 
 
     /**
