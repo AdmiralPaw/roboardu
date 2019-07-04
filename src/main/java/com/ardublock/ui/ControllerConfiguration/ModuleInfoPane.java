@@ -69,7 +69,6 @@ public class ModuleInfoPane extends JPanel {
                 String transName = transModuleName;
                 Map<String,String[]> suitableDict = WorkspaceController.suitableBlocks;
                 Map<String, JComponent> blocksDict = Window2Explorer.dictionary;
-                ArrayList<JComponent> blocks = new ArrayList<JComponent>();
                 String[] suitableNames = suitableDict.get(transName);
 
                 System.out.println("-------------------");
@@ -98,7 +97,6 @@ public class ModuleInfoPane extends JPanel {
 
                 }
 
-
                 fcanvas.layoutBlocks();
                 JComponent scroll = new RHoverScrollPane(
                         fcanvas,
@@ -112,33 +110,6 @@ public class ModuleInfoPane extends JPanel {
                         ((Window2Explorer) ex).setSearchResult(scroll);
                     }
                 }
-
-
-
-
-//                FactoryCanvas fcanvas = new FactoryCanvas("searched canvas", Color.WHITE);
-//                fcanvas.setBackground(new Color(236, 236, 236));
-//
-//                for (FactoryRenderableBlock block : searchedBlocks) {
-//                    FactoryRenderableBlock newBlock = block.deepClone();
-//                    newBlock.OneSetZoomLevel(1);
-//                    fcanvas.addBlock(newBlock);
-//
-//                }
-//                fcanvas.layoutBlocks();
-//                JComponent scroll = new RHoverScrollPane(
-//                        fcanvas,
-//                        CScrollPane.ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
-//                        CScrollPane.ScrollPolicy.HORIZONTAL_BAR_AS_NEEDED,
-//                        15, Color.BLACK, Color.darkGray);
-//                // Window2Explorer.canvasPanel.repaint();
-//                List<Explorer> exList = workspace.getFactoryManager().getNavigator().getExplorers();
-//                for (Explorer ex : exList) {
-//                    if (ex instanceof Window2Explorer) {
-//                        ((Window2Explorer) ex).setSearchResult(scroll);
-//                    }
-//                }
-
 
             }
         });
