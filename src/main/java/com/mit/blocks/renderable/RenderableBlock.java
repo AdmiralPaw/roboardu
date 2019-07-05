@@ -96,7 +96,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     /**
      * Parent workspace widget. May be null
      */
-    private static WorkspaceWidget parent;
+    private WorkspaceWidget parent;
     /**
      * The previous known workspacewidget this block was dragged over. May be
      * null
