@@ -207,7 +207,11 @@ public class OpenblocksFrame extends JFrame {
         toolsMenu.add(verifyItem);
         toolsMenu.add(uploadItem);
         toolsMenu.add(serialMonitorItem);
+<<<<<<< HEAD
 //        fileMenu.add(deleteAll);
+=======
+        //fileMenu.add(deleteAll);
+>>>>>>> d59477cb4e3bb14f7e90217434258f46a4ebeafa
 
         menuBar.add(fileMenu);
         menuBar.add(toolsMenu);
