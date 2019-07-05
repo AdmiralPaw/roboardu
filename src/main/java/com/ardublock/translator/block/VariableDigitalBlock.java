@@ -12,7 +12,6 @@ public class VariableDigitalBlock extends TranslatorBlock
     @Override
     public String toCode() {
 
-        if (label.chars().anyMatch(Character::isLetter)) {
             String internalVariableName = translator.getBooleanVariable(label);
             if (internalVariableName == null) {
                 internalVariableName = translator.buildVariableName(label);
@@ -21,8 +20,6 @@ public class VariableDigitalBlock extends TranslatorBlock
             }
             String ret = internalVariableName;
             return codePrefix + ret + codeSuffix;
-        }
-        return codePrefix + label + codeSuffix;
     }
 
 }

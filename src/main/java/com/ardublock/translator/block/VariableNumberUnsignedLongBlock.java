@@ -22,7 +22,7 @@ public class VariableNumberUnsignedLongBlock extends TranslatorBlock
             }
             return codePrefix + internalVariableName + codeSuffix;
         }
-        return codePrefix + label + codeSuffix;
+        return codePrefix + label + "UL" + codeSuffix;
     }
 
 }
