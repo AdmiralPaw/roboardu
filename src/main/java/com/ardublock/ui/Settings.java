@@ -2,18 +2,14 @@ package com.ardublock.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import static java.awt.Frame.MAXIMIZED_BOTH;
-import java.awt.Image;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
-import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.WindowConstants;
 
 public class Settings extends JFrame {
 

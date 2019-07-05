@@ -34,6 +34,7 @@ import com.mit.blocks.workspace.SearchBar;
 import com.mit.blocks.workspace.ZoomSlider;
 import com.mit.blocks.workspace.SearchableContainer;
 import com.mit.blocks.workspace.Workspace;
+import java.awt.geom.Area;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -132,8 +133,6 @@ public class OpenblocksFrame extends JFrame {
         saveAsItem.addActionListener(new SaveAsButtonListener(this));
         KeyStroke saveAsButStr = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK);
         saveAsItem.setAccelerator(saveAsButStr);
-
-
 
         settingsItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -267,8 +266,6 @@ public class OpenblocksFrame extends JFrame {
         infoLabel.setForeground(Color.white);
 
         //<editor-fold defaultstate="collapsed" desc="Buttons images and listners">
-
-
         ImageButton newButton = new ImageButton(
                 "new",
                 "com/ardublock/block/buttons/newA.jpg",
@@ -293,7 +290,6 @@ public class OpenblocksFrame extends JFrame {
         );
         saveAsButton.addActionListener(new SaveAsButtonListener(this));
 
-
         ImageButton openButton = new ImageButton(
                 "open",
                 "com/ardublock/block/buttons/openA.jpg",
@@ -301,7 +297,6 @@ public class OpenblocksFrame extends JFrame {
                 infoLabel
         );
         openButton.addActionListener(new OpenButtonListener(this));
-        
 
         ImageButton verifyButton = new ImageButton("verify program",
                 "com/ardublock/block/buttons/verifyA.jpg",
@@ -408,7 +403,6 @@ public class OpenblocksFrame extends JFrame {
             }
         });
 
-
         InputMap imap = configButton.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
         KeyStroke configStr = KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_DOWN_MASK);
         imap.put(configStr, "showPanel");
@@ -446,9 +440,44 @@ public class OpenblocksFrame extends JFrame {
 
         northPanel.updateUI();
         workspace.updateUI();
+
+        JPanel GlobalPanel = new JPanel(new BorderLayout());
+        JLayeredPane GlobalLayaredPane = new JLayeredPane();
+
         this.setJMenuBar(menuBar);
-        this.add(northPanel, BorderLayout.NORTH);
-        this.add(workspace, BorderLayout.CENTER);
+        GlobalPanel.add(northPanel, BorderLayout.NORTH);
+        GlobalPanel.add(workspace, BorderLayout.CENTER);
+//        this.add(northPanel, BorderLayout.NORTH); 
+//        this.add(workspace, BorderLayout.CENTER);
+        JLabel figure1 = new JLabel("ЭТА ХРЕНЬ СВЕРХУ");
+        figure1.setBackground(new Color(0, 0, 0, 160));
+        figure1.setBounds(100, 100, 200, 200);
+        figure1.setOpaque(false);
+        JPanel pan = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                final Graphics2D g2d = (Graphics2D) g.create();
+                g2d.setColor(new Color(0, 0, 0, 128));
+                g2d.fill(new Area(new Rectangle(new Point(0, 0), getSize())));
+                g2d.dispose();
+            }
+        };;
+        pan.setOpaque(false);
+        pan.add(figure1);
+        figure1.setForeground(Color.white);
+        GlobalLayaredPane.add(GlobalPanel, JLayeredPane.DEFAULT_LAYER, -1);
+        GlobalLayaredPane.add(pan, JLayeredPane.DEFAULT_LAYER + 50, -1);
+        this.add(GlobalLayaredPane, BorderLayout.CENTER);
+        //this.setGlassPane(pan);
+        GlobalLayaredPane.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                GlobalPanel.setSize(e.getComponent().getSize());
+                pan.setSize(e.getComponent().getSize());
+            }
+        });
+        //this.add(GlobalLayaredPane, BorderLayout.CENTER);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Buttons listners">
@@ -703,17 +732,16 @@ public class OpenblocksFrame extends JFrame {
             }
         }
     }
-    class ClickAction extends AbstractAction
-    {
+
+    class ClickAction extends AbstractAction {
+
         private JButton button;
 
-        public ClickAction(JButton but)
-        {
+        public ClickAction(JButton but) {
             button = but;
         }
 
-        public void actionPerformed(ActionEvent e)
-        {
+        public void actionPerformed(ActionEvent e) {
             button.doClick();
         }
     }
