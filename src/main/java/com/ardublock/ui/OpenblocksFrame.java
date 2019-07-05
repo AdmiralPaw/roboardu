@@ -173,7 +173,7 @@ public class OpenblocksFrame extends JFrame {
         saveImageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Dimension size = workspace.getCanvasSize();
-                System.out.println("size: " + size);
+                //System.out.println("size: " + size);
                 BufferedImage bi = new BufferedImage(2560, 2560, BufferedImage.TYPE_INT_RGB);
                 Graphics2D g = (Graphics2D) bi.createGraphics();
                 double theScaleFactor = (300d / 72d);
@@ -196,21 +196,21 @@ public class OpenblocksFrame extends JFrame {
             }
         });
 
-//        fileMenu.add(newItem);
-//        fileMenu.add(openItem);
-//        fileMenu.add(saveItem);
-//        fileMenu.add(saveAsItem);
-//        fileMenu.addSeparator();
-//        fileMenu.add(settingsItem);
-//        fileMenu.addSeparator();
-//        fileMenu.add(exitItem);
-//        toolsMenu.add(verifyItem);
-//        toolsMenu.add(uploadItem);
-//        toolsMenu.add(serialMonitorItem);
+        fileMenu.add(newItem);
+        fileMenu.add(openItem);
+        fileMenu.add(saveItem);
+        fileMenu.add(saveAsItem);
+        fileMenu.addSeparator();
+        fileMenu.add(settingsItem);
+        fileMenu.addSeparator();
+        fileMenu.add(exitItem);
+        toolsMenu.add(verifyItem);
+        toolsMenu.add(uploadItem);
+        toolsMenu.add(serialMonitorItem);
 //        fileMenu.add(deleteAll);
-//
-//        menuBar.add(fileMenu);
-//        menuBar.add(toolsMenu);
+
+        menuBar.add(fileMenu);
+        menuBar.add(toolsMenu);
         // </editor-fold>
 
         //Panels------------------------------------------------------//
@@ -357,7 +357,7 @@ public class OpenblocksFrame extends JFrame {
         saveImageButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Dimension size = workspace.getCanvasSize();
-                System.out.println("size: " + size);
+                //System.out.println("size: " + size);
                 BufferedImage bi = new BufferedImage(2560, 2560, BufferedImage.TYPE_INT_RGB);
                 Graphics2D g = (Graphics2D) bi.createGraphics();
                 double theScaleFactor = (300d / 72d);

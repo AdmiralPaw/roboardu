@@ -317,13 +317,13 @@ public class BlockShapeUtil {
         while (!i.isDone()) {
             type = i.currentSegment(segment);
             if (type == PathIterator.SEG_MOVETO) {
-                System.out.println("m: (" + segment[0] + ", " + segment[1] + ")");
+//                System.out.println("m: (" + segment[0] + ", " + segment[1] + ")");
             } else if (type == PathIterator.SEG_LINETO) {
-                System.out.println("l: (" + segment[0] + ", " + segment[1] + ")");
+//                System.out.println("l: (" + segment[0] + ", " + segment[1] + ")");
             } else if (type == PathIterator.SEG_QUADTO) {
-                System.out.println("q: (" + segment[0] + ", " + segment[1] + "), (" + segment[2] + ", " + segment[3] + ")");
+//                System.out.println("q: (" + segment[0] + ", " + segment[1] + "), (" + segment[2] + ", " + segment[3] + ")");
             } else if (type == PathIterator.SEG_CUBICTO) {
-                System.out.println("c: (" + segment[0] + ", " + segment[1] + "), (" + segment[2] + ", " + segment[3] + "), (" + segment[4] + ", " + segment[5] + ")");
+//                System.out.println("c: (" + segment[0] + ", " + segment[1] + "), (" + segment[2] + ", " + segment[3] + "), (" + segment[4] + ", " + segment[5] + ")");
             }
             i.next();
         }

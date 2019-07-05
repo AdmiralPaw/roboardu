@@ -72,11 +72,11 @@ public class ModuleInfoPane extends JPanel {
                 Map<String, JComponent> blocksDict = Window2Explorer.dictionary;
                 String[] suitableNames = suitableDict.get(transName);
 
-                System.out.println("-------------------");
+                /*System.out.println("-------------------");
                 for(String s:suitableDict.keySet()){
                     System.out.println(s);
                 }
-                System.out.println("-----------------------");
+                System.out.println("-----------------------");*/
 
                 FactoryCanvas fcanvas = new FactoryCanvas("searched canvas", Color.WHITE);
                 //BoxLayout blout = new BoxLayout(fcanvas, BoxLayout.Y_AXIS);
@@ -84,11 +84,11 @@ public class ModuleInfoPane extends JPanel {
                 //fcanvas.setLayout(blout);
                 fcanvas.setBackground(Color.WHITE);
 
-                System.out.println("button pressed"+name + transModuleName);
+                //System.out.println("button pressed"+name + transModuleName);
 
                 for(String blockName:suitableNames){
 
-                    System.out.println(blockName);
+                    //System.out.println(blockName);
                     //крч эту дичь можно изменить (подудалить ненужное), главное правильно заполнить мой XML
 
                         FactoryRenderableBlock block = (FactoryRenderableBlock)(blocksDict.get(blockName.toUpperCase()));
