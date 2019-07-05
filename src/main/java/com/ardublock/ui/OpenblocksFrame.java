@@ -196,21 +196,21 @@ public class OpenblocksFrame extends JFrame {
             }
         });
 
-//        fileMenu.add(newItem);
-//        fileMenu.add(openItem);
-//        fileMenu.add(saveItem);
-//        fileMenu.add(saveAsItem);
-//        fileMenu.addSeparator();
-//        fileMenu.add(settingsItem);
-//        fileMenu.addSeparator();
-//        fileMenu.add(exitItem);
-//        toolsMenu.add(verifyItem);
-//        toolsMenu.add(uploadItem);
-//        toolsMenu.add(serialMonitorItem);
-//        fileMenu.add(deleteAll);
-//
-//        menuBar.add(fileMenu);
-//        menuBar.add(toolsMenu);
+        fileMenu.add(newItem);
+        fileMenu.add(openItem);
+        fileMenu.add(saveItem);
+        fileMenu.add(saveAsItem);
+        fileMenu.addSeparator();
+        fileMenu.add(settingsItem);
+        fileMenu.addSeparator();
+        fileMenu.add(exitItem);
+        toolsMenu.add(verifyItem);
+        toolsMenu.add(uploadItem);
+        toolsMenu.add(serialMonitorItem);
+        //fileMenu.add(deleteAll);
+
+        menuBar.add(fileMenu);
+        menuBar.add(toolsMenu);
         // </editor-fold>
 
         //Panels------------------------------------------------------//
