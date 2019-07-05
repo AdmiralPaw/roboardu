@@ -80,7 +80,7 @@ public class ControllerMenuButton extends CButton {
     }
 
     public void mouseReleased(MouseEvent e) {
-        System.out.println("mouseReleased");
+        //System.out.println("mouseReleased");
         //this.moduleButton.setModuleBig(false);
         this.pressed = false;
         repaint();

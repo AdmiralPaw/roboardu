@@ -24,6 +24,10 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockGenusMember>lightCombined</BlockGenusMember>
                 <BlockGenusMember>LineFinder</BlockGenusMember>
                 <BlockGenusMember>Potentiometer</BlockGenusMember>
+                <BlockGenusMember>tone</BlockGenusMember>
+                <BlockGenusMember>tone_time</BlockGenusMember>
+                <BlockGenusMember>no_tone</BlockGenusMember>
+                <BlockGenusMember>melody</BlockGenusMember>
     
 
     <SuitableBlocks version="rus">
@@ -38,7 +42,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <Block value="bg.sensor_button"/>
         </KeyBlock>
         <KeyBlock key="modules.gerkon.name">
-            <Block value=""/>
+            <Block value="bg.seeed_mag_switch"/>
         </KeyBlock>
         <KeyBlock key="modules.hall.name">
             <Block value="bg.magnetic_sensor"/>
@@ -47,7 +51,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <Block value="bg.little_bits_lightsensor"/>
         </KeyBlock>
         <KeyBlock key="modules.line.name">
-            <Block value="bg.seeed_line_finder"/>
+            <Block value="bg.LineFinder"/>
         </KeyBlock>
         <KeyBlock key="modules.touch.name">
             <Block value="bg.seeed_touch_sensor"/>
@@ -55,8 +59,26 @@ file before genus A is specified./ We impose this requirement so that sanity che
         <KeyBlock key="modules.range.name">
             <Block value="bg.seeed_touch_sensor"/>
         </KeyBlock>
-        <KeyBlock key="touch sensor">
-            <Block value="bg.seeed_touch_sensor"/>
+        <KeyBlock key="modules.angle.name">
+            <Block value="bg.Potentiometer"/>
+        </KeyBlock>
+        <KeyBlock key="modules.diod.name">
+            <Block value="bg.justled"/>
+            <Block value="bg.pwmled"/>
+            <Block value="bg.led_blink"/>
+            <Block value="bg.rgb_led"/>
+            <Block value="bg.rgb_led_blink"/>
+            <Block value="bg.rgb_led_pwm"/>
+        </KeyBlock>
+        <KeyBlock key="modules.combined.name">
+            <Block value="bg.rangefinderCombined"/>
+            <Block value="bg.lightCombined"/>
+        </KeyBlock>
+        <KeyBlock key="modules.piezzo.name">
+            <Block value="bg.tone"/>
+            <Block value="bg.tone_time"/>
+            <Block value="bg.noTone"/>
+            <Block value="bg.melody"/>
         </KeyBlock>
         <KeyBlock key="touch sensor">
             <Block value="bg.seeed_touch_sensor"/>
@@ -64,6 +86,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
         <KeyBlock key="touch sensor">
             <Block value="bg.seeed_touch_sensor"/>
         </KeyBlock>
+        
         
 
     </SuitableBlocks>
@@ -537,7 +560,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 		
-        <BlockGenus name="tone" kind="command" color="95 95 195" initlabel="tone">
+        <BlockGenus name="tone" kind="command" color="95 95 195" initlabel="bg.tone">
             <description>
                 <text>Generates a square wave of the specified frequency (and 50%
                     duty cycle) on a pin.
@@ -554,7 +577,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 
-        <BlockGenus name="tone_time" kind="command" color="95 95 195" initlabel="tone">
+        <BlockGenus name="tone_time" kind="command" color="95 95 195" initlabel="bg.tone">
             <description>
                 <text>Generates a square wave of the specified frequency (and 50%
                     duty cycle) on a pin.
@@ -573,7 +596,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 
-        <BlockGenus name="no_tone" kind="command" color="95 95 195" initlabel="noTone">
+        <BlockGenus name="no_tone" kind="command" color="95 95 195" initlabel="bg.noTone">
 
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
@@ -12603,7 +12626,8 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="i2c">
-                <Component name="modules.range.name" info="modules.range.info">range</Component> 
+                <!--<Component name="modules.range.name" info="modules.range.info">range</Component> -->
+                <Component name="modules.combined.name" info="modules.combined.info">combined</Component>
                 <Component name="modules.start.name" info="modules.start.info">start</Component> 
                 <!--<Component>ANGLE</Component> 
                 <Component>BUTTON</Component> 

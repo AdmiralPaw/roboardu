@@ -17,6 +17,7 @@ public class ServoDegreesToDegrees extends TranslatorBlock {
             "  int PosOld = ServoMotor.read();\n" +
             "\n" +
             "  if(Speed > 100) Speed = 100;\n" +
+            "  if(Speed < 0) Speed = 0;" +
             "  \n" +
             "  if(Pos - PosOld > 0)\n" +
             "  {\n" +

@@ -173,7 +173,7 @@ public class OpenblocksFrame extends JFrame {
         saveImageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Dimension size = workspace.getCanvasSize();
-                System.out.println("size: " + size);
+                //System.out.println("size: " + size);
                 BufferedImage bi = new BufferedImage(2560, 2560, BufferedImage.TYPE_INT_RGB);
                 Graphics2D g = (Graphics2D) bi.createGraphics();
                 double theScaleFactor = (300d / 72d);
@@ -207,7 +207,7 @@ public class OpenblocksFrame extends JFrame {
         toolsMenu.add(verifyItem);
         toolsMenu.add(uploadItem);
         toolsMenu.add(serialMonitorItem);
-        //fileMenu.add(deleteAll);
+//        fileMenu.add(deleteAll);
 
         menuBar.add(fileMenu);
         menuBar.add(toolsMenu);
@@ -357,7 +357,7 @@ public class OpenblocksFrame extends JFrame {
         saveImageButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Dimension size = workspace.getCanvasSize();
-                System.out.println("size: " + size);
+                //System.out.println("size: " + size);
                 BufferedImage bi = new BufferedImage(2560, 2560, BufferedImage.TYPE_INT_RGB);
                 Graphics2D g = (Graphics2D) bi.createGraphics();
                 double theScaleFactor = (300d / 72d);
@@ -444,7 +444,7 @@ public class OpenblocksFrame extends JFrame {
         buttons.add(saveImageButton);
         buttons.add(websiteButton);
         buttons.add(infoLabel);
-        buttons.add(deleteAll);
+        //buttons.add(deleteAll);
         panelWithConfigButton.add(configButton);
 
         workspace.workLayer.addPropertyChangeListener(new PropertyChangeListener() {
