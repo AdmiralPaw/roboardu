@@ -12,6 +12,7 @@ public class VariableNumberBlock extends TranslatorBlock
 	@Override
 	public String toCode()
 	{
+            //if(label.)
 		String internalVariableName = translator.getNumberVariable(label);
 		if (internalVariableName == null)
 		{

@@ -96,7 +96,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     /**
      * Parent workspace widget. May be null
      */
-    private WorkspaceWidget parent;
+    private static WorkspaceWidget parent;
     /**
      * The previous known workspacewidget this block was dragged over. May be
      * null
@@ -212,7 +212,6 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         addKeyListener(this);
         super.addKeyListener(this);
 
-        System.out.println("init?1");
 
         setFocusable(true);
         requestFocusInWindow();
@@ -235,7 +234,6 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         super();
         this.workspace = workspace;
 
-        System.out.println("init?2");
 
 
         InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
