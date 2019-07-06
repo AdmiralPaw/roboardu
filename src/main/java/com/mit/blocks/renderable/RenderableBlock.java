@@ -249,7 +249,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             @Override
             public void actionPerformed(ActionEvent e) {
                 //System.out.println("Pressed2");
-                currentBlock.cloneMe();
+                if(currentBlock!=null) currentBlock.cloneMe();
             }
         });
 
@@ -2090,6 +2090,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     }
 
     public void mouseExited(MouseEvent e) {
+        currentBlock = null;
         dragHandler.mouseExited(e);
         // !dragging: don't redraw while dragging
         // !SwingUtilities.isLeftMouseButton: dragging mouse moves into another
