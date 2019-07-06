@@ -10,16 +10,17 @@ public class VariableNumberDoubleBlock extends TranslatorBlock
   }
 
   @Override
-  public String toCode()
-  {
-    String internalVariableName = translator.getNumberVariable(label);
-    if (internalVariableName == null)
-    {
-      internalVariableName = translator.buildVariableName(label);
-      translator.addNumberVariable(label, internalVariableName);
-      translator.addDefinitionCommand("double " + internalVariableName + " = 0.0 ;");
+    public String toCode() {
+        if (label.chars().anyMatch(Character::isLetter)) {
+            String internalVariableName = translator.getNumberVariable(label);
+            if (internalVariableName == null) {
+                internalVariableName = translator.buildVariableName(label);
+                translator.addNumberVariable(label, internalVariableName);
+                translator.addDefinitionCommand("double " + internalVariableName + " = 0.0 ;");
+            }
+            return codePrefix + internalVariableName + codeSuffix;
+        }
+        return codePrefix + label + codeSuffix;
     }
-    return codePrefix + internalVariableName + codeSuffix;
-  }
 
 }

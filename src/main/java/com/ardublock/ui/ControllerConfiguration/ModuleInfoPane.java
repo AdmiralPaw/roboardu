@@ -72,11 +72,11 @@ public class ModuleInfoPane extends JPanel {
                 Map<String, JComponent> blocksDict = Window2Explorer.dictionary;
                 String[] suitableNames = suitableDict.get(transName);
 
-                System.out.println("-------------------");
+                /*System.out.println("-------------------");
                 for(String s:suitableDict.keySet()){
                     //System.out.println(s);
                 }
-                System.out.println("-----------------------");
+                System.out.println("-----------------------");*/
 
                 FactoryCanvas fcanvas = new FactoryCanvas("searched canvas", Color.WHITE);
                 //BoxLayout blout = new BoxLayout(fcanvas, BoxLayout.Y_AXIS);
