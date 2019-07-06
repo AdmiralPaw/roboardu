@@ -34,6 +34,8 @@ import com.mit.blocks.workspace.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
+
 public class OpenblocksFrame extends JFrame {
 
     private static final long serialVersionUID = 2841155965906223806L;
@@ -50,6 +52,13 @@ public class OpenblocksFrame extends JFrame {
 
     public void addListener(OpenblocksFrameListener ofl) {
         context.registerOpenblocksFrameListener(ofl);
+    }
+
+
+    public static void deleteAllBlocks(){
+        Page.blocksContainer.removeAll();
+        Page.blocksContainer.revalidate();
+        Page.blocksContainer.repaint();
     }
 
     public String makeFrameTitle() {
@@ -92,6 +101,31 @@ public class OpenblocksFrame extends JFrame {
     }
 
     private void initOpenBlocks() {
+
+
+//        need inheritance
+//        InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+//        ActionMap am = getActionMap();
+//
+//
+//        KeyStroke keyV = KeyStroke.getKeyStroke(KeyEvent.VK_V,InputEvent.CTRL_DOWN_MASK);
+//        im.put(keyV,"pressed");
+//
+//        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C & KeyEvent.CTRL_DOWN_MASK, 0, true), "released");
+//
+//        am.put("pressed", new AbstractAction() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                System.out.println("Pressed2");
+//
+//            }
+//        });
+
+
+
+
+
+
         final Context context = Context.getContext();
         final Workspace workspace = context.getWorkspace();
         errWindow = workspace.getErrWindow();
@@ -280,11 +314,11 @@ public class OpenblocksFrame extends JFrame {
         deleteAll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Page.blocksContainer.removeAll();
-                Page.blocksContainer.revalidate();
-                Page.blocksContainer.repaint();
+                deleteAllBlocks();
             }
         });
+
+
 
         ImageButton newButton = new ImageButton(
                 "new",
@@ -426,7 +460,7 @@ public class OpenblocksFrame extends JFrame {
         });
 
 
-        InputMap imap = configButton.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        InputMap imap = configButton.getInputMap(WHEN_IN_FOCUSED_WINDOW);
         KeyStroke configStr = KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_DOWN_MASK);
         imap.put(configStr, "showPanel");
         configButton.getActionMap().put("showPanel", new ClickAction(configButton));
