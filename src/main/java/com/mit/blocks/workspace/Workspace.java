@@ -441,6 +441,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         this.focusManager = new FocusTraversalManager(this);
 
         this.typeBlockManager = new TypeBlockManager(this, blockCanvas);
+
     }
 
     /*

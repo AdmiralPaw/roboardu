@@ -248,7 +248,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         am.put("pressed", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Pressed2");
+                //System.out.println("Pressed2");
                 currentBlock.cloneMe();
             }
         });
@@ -256,7 +256,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         am.put("released", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("released");
+//                System.out.println("released");
             }
         });
 
@@ -365,7 +365,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         setFocusable(true);
         addKeyListener(this);
         super.addKeyListener(this);
-        System.out.println("init?3");
+//        System.out.println("init?3");
 
         //KeyStroke key = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT );
 
@@ -381,7 +381,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         actionMap.put("BUTTON ONE ID", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("action performed");
+//                System.out.println("action performed");
             }
         });
     }
@@ -900,7 +900,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             return tag.getPixelLocation();
         }
 
-        System.out.println("Error, Socket has no connector tag: " + socket);
+//        System.out.println("Error, Socket has no connector tag: " + socket);
         return new Point(0, -100); // JBT hopefully this doesn't hurt anything,
         // this is masking a bug that needs to be
         // tracked down, why is the connector tag
@@ -2074,7 +2074,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
         currentBlock = this;
 
-        System.out.println("hovered "+Integer.toString(i));
+//        System.out.println("hovered "+Integer.toString(i));
         i+=1;
 
         dragHandler.mouseEntered(e);
