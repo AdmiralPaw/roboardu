@@ -103,29 +103,6 @@ public class OpenblocksFrame extends JFrame {
     private void initOpenBlocks() {
 
 
-//        need inheritance
-//        InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
-//        ActionMap am = getActionMap();
-//
-//
-//        KeyStroke keyV = KeyStroke.getKeyStroke(KeyEvent.VK_V,InputEvent.CTRL_DOWN_MASK);
-//        im.put(keyV,"pressed");
-//
-//        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C & KeyEvent.CTRL_DOWN_MASK, 0, true), "released");
-//
-//        am.put("pressed", new AbstractAction() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                System.out.println("Pressed2");
-//
-//            }
-//        });
-
-
-
-
-
-
         final Context context = Context.getContext();
         final Workspace workspace = context.getWorkspace();
         errWindow = workspace.getErrWindow();
@@ -241,10 +218,10 @@ public class OpenblocksFrame extends JFrame {
         toolsMenu.add(verifyItem);
         toolsMenu.add(uploadItem);
         toolsMenu.add(serialMonitorItem);
-//        fileMenu.add(deleteAll);
 
         menuBar.add(fileMenu);
         menuBar.add(toolsMenu);
+
         // </editor-fold>
 
         //Panels------------------------------------------------------//
@@ -304,8 +281,9 @@ public class OpenblocksFrame extends JFrame {
 
         //<editor-fold defaultstate="collapsed" desc="Buttons images and listners">
 
+
         ImageButton deleteAll = new ImageButton(
-          "deleteAllBlocks",
+                "deleteAllBlocks",
                 "com/ardublock/block/buttons/newA.jpg",
                 "com/ardublock/block/buttons/newB.jpg",
                 new JLabel()
@@ -317,7 +295,6 @@ public class OpenblocksFrame extends JFrame {
                 deleteAllBlocks();
             }
         });
-
 
 
         ImageButton newButton = new ImageButton(
@@ -478,7 +455,10 @@ public class OpenblocksFrame extends JFrame {
         buttons.add(saveImageButton);
         buttons.add(websiteButton);
         buttons.add(infoLabel);
-        //buttons.add(deleteAll);
+
+        //TODO: нужна иконка для этой кнопки
+        buttons.add(deleteAll);
+
         panelWithConfigButton.add(configButton);
 
         workspace.workLayer.addPropertyChangeListener(new PropertyChangeListener() {

@@ -154,7 +154,22 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         //super();
         setLayout(null);
         setBackground(Color.WHITE);
-        setPreferredSize(new Dimension(800, 600));
+
+
+        InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+        ActionMap am = getActionMap();
+
+
+        KeyStroke keyV = KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,InputEvent.CTRL_DOWN_MASK);
+        im.put(keyV,"deleteAllBlocks");
+
+        am.put("deleteAllBlocks", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OpenblocksFrame.deleteAllBlocks();
+            }
+        });
+
 
         this.controller = new СontrollerСonfiguration();
         controller.setMinimumSize(new Dimension(100, 100));
@@ -185,20 +200,6 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         JPanel errPanel = errWindow.getErrPanel();
 
         final JLayeredPane blockCanvasWithDepth = new JLayeredPane();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
