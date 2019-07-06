@@ -38,7 +38,6 @@ import com.mit.blocks.workspace.Workspace;
 import java.awt.geom.Area;
 import com.mit.blocks.workspace.*;
 
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -122,10 +121,6 @@ public class OpenblocksFrame extends JFrame {
         JMenuItem saveImageItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveImage"));
 
         //JMenuItem deleteAll = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveImage"));
-
-
-
-
         newItem.addActionListener(new NewButtonListener(this));
         KeyStroke newButStr = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK);
         newItem.setAccelerator(newButStr);
@@ -218,7 +213,6 @@ public class OpenblocksFrame extends JFrame {
 //        menuBar.add(fileMenu);
 //        menuBar.add(toolsMenu);
         // </editor-fold>
-
         //Panels------------------------------------------------------//
         final int standartNorthPanelSize = 24;  //TODO: make like constant
 
@@ -242,6 +236,7 @@ public class OpenblocksFrame extends JFrame {
         mainLogo.setIcon(mLogo);
         logo.add(mainLogo);
         logo.setBackground(new Color(0, 151, 157));
+        Dimension size = workspace.getFactorySize();
         logo.setPreferredSize(workspace.getFactorySize());
         logo.setBounds(38, 0, workspace.getFactorySize().width, workspace.getFactorySize().height);
 
@@ -275,12 +270,11 @@ public class OpenblocksFrame extends JFrame {
         infoLabel.setForeground(Color.white);
 
         //<editor-fold defaultstate="collapsed" desc="Buttons images and listners">
-
         ImageButton deleteAll = new ImageButton(
-          "deleteAllBlocks",
+                "deleteAllBlocks",
                 "com/ardublock/block/buttons/newA.jpg",
                 "com/ardublock/block/buttons/newB.jpg",
-                new JLabel()
+                infoLabel
         );
 
         deleteAll.addActionListener(new ActionListener() {
@@ -446,8 +440,9 @@ public class OpenblocksFrame extends JFrame {
         buttons.add(dividerSecond);
         buttons.add(saveImageButton);
         buttons.add(websiteButton);
-        buttons.add(infoLabel);
         buttons.add(deleteAll);
+        buttons.add(infoLabel);
+
         panelWithConfigButton.add(configButton);
 
         workspace.workLayer.addPropertyChangeListener(new PropertyChangeListener() {
@@ -470,40 +465,27 @@ public class OpenblocksFrame extends JFrame {
 
         JPanel GlobalPanel = new JPanel(new BorderLayout());
         JLayeredPane GlobalLayaredPane = new JLayeredPane();
-
-        this.setJMenuBar(menuBar);
-        GlobalPanel.add(northPanel, BorderLayout.NORTH);
-        GlobalPanel.add(workspace, BorderLayout.CENTER);
-//        this.add(northPanel, BorderLayout.NORTH); 
-//        this.add(workspace, BorderLayout.CENTER);
-        JLabel figure1 = new JLabel("ЭТА ХРЕНЬ СВЕРХУ");
-        figure1.setBackground(new Color(0, 0, 0, 160));
-        figure1.setBounds(100, 100, 200, 200);
-        figure1.setOpaque(false);
-        JPanel pan = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                final Graphics2D g2d = (Graphics2D) g.create();
-                g2d.setColor(new Color(0, 0, 0, 128));
-                g2d.fill(new Area(new Rectangle(new Point(0, 0), getSize())));
-                g2d.dispose();
-            }
-        };;
-        pan.setOpaque(false);
-        pan.add(figure1);
-        figure1.setForeground(Color.white);
-        GlobalLayaredPane.add(GlobalPanel, JLayeredPane.DEFAULT_LAYER, -1);
-        GlobalLayaredPane.add(pan, JLayeredPane.DEFAULT_LAYER + 50, -1);
-        this.add(GlobalLayaredPane, BorderLayout.CENTER);
-        //this.setGlassPane(pan);
         GlobalLayaredPane.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 GlobalPanel.setSize(e.getComponent().getSize());
-                pan.setSize(e.getComponent().getSize());
+                //pan.setSize(e.getComponent().getSize());
             }
         });
+        this.add(GlobalLayaredPane, BorderLayout.CENTER);
+        this.setJMenuBar(menuBar);
+        GlobalPanel.add(northPanel, BorderLayout.NORTH);
+        GlobalPanel.add(workspace, BorderLayout.CENTER);
+        this.setVisible(true);
+//        this.add(northPanel, BorderLayout.NORTH); 
+//        this.add(workspace, BorderLayout.CENTER);
+
+        GlobalLayaredPane.add(GlobalPanel, JLayeredPane.DEFAULT_LAYER, -1);
+
+        TutorialPane pan = new TutorialPane(this);
+        GlobalLayaredPane.add(pan, JLayeredPane.DEFAULT_LAYER + 50, -1);
+        this.validate();
+        //this.setGlassPane(pan);
         //this.add(GlobalLayaredPane, BorderLayout.CENTER);
     }
 
@@ -697,6 +679,10 @@ public class OpenblocksFrame extends JFrame {
         }
     }
     // </editor-fold>
+
+    public Context getContext() {
+        return this.context;
+    }
 
     class ImageButton extends JButton {
 

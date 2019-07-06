@@ -74,7 +74,7 @@ public class ModuleInfoPane extends JPanel {
 
                 System.out.println("-------------------");
                 for(String s:suitableDict.keySet()){
-                    System.out.println(s);
+                    //System.out.println(s);
                 }
                 System.out.println("-----------------------");
 
@@ -84,11 +84,11 @@ public class ModuleInfoPane extends JPanel {
                 //fcanvas.setLayout(blout);
                 fcanvas.setBackground(Color.WHITE);
 
-                System.out.println("button pressed"+name + transModuleName);
+                //System.out.println("button pressed"+name + transModuleName);
 
                 for(String blockName:suitableNames){
 
-                    System.out.println(blockName);
+                    //System.out.println(blockName);
                     //крч эту дичь можно изменить (подудалить ненужное), главное правильно заполнить мой XML
 
                         FactoryRenderableBlock block = (FactoryRenderableBlock)(blocksDict.get(blockName.toUpperCase()));

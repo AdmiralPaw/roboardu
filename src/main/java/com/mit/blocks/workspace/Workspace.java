@@ -185,25 +185,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         JPanel errPanel = errWindow.getErrPanel();
 
         final JLayeredPane blockCanvasWithDepth = new JLayeredPane();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
         blockCanvasWithDepth.setPreferredSize(new Dimension(300, 500));
         final JPanel level_one = new JPanel();
         level_one.setLayout(new BoxLayout(level_one, BoxLayout.X_AXIS));
