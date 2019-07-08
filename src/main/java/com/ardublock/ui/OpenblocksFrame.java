@@ -34,6 +34,8 @@ import com.mit.blocks.workspace.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
+
 public class OpenblocksFrame extends JFrame {
 
     private static final long serialVersionUID = 2841155965906223806L;
@@ -50,6 +52,13 @@ public class OpenblocksFrame extends JFrame {
 
     public void addListener(OpenblocksFrameListener ofl) {
         context.registerOpenblocksFrameListener(ofl);
+    }
+
+
+    public static void deleteAllBlocks(){
+        Page.blocksContainer.removeAll();
+        Page.blocksContainer.revalidate();
+        Page.blocksContainer.repaint();
     }
 
     public String makeFrameTitle() {
@@ -92,6 +101,8 @@ public class OpenblocksFrame extends JFrame {
     }
 
     private void initOpenBlocks() {
+
+
         final Context context = Context.getContext();
         final Workspace workspace = context.getWorkspace();
         errWindow = workspace.getErrWindow();
@@ -173,7 +184,7 @@ public class OpenblocksFrame extends JFrame {
         saveImageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Dimension size = workspace.getCanvasSize();
-                System.out.println("size: " + size);
+                //System.out.println("size: " + size);
                 BufferedImage bi = new BufferedImage(2560, 2560, BufferedImage.TYPE_INT_RGB);
                 Graphics2D g = (Graphics2D) bi.createGraphics();
                 double theScaleFactor = (300d / 72d);
@@ -196,21 +207,21 @@ public class OpenblocksFrame extends JFrame {
             }
         });
 
-//        fileMenu.add(newItem);
-//        fileMenu.add(openItem);
-//        fileMenu.add(saveItem);
-//        fileMenu.add(saveAsItem);
-//        fileMenu.addSeparator();
-//        fileMenu.add(settingsItem);
-//        fileMenu.addSeparator();
-//        fileMenu.add(exitItem);
-//        toolsMenu.add(verifyItem);
-//        toolsMenu.add(uploadItem);
-//        toolsMenu.add(serialMonitorItem);
-//        fileMenu.add(deleteAll);
-//
-//        menuBar.add(fileMenu);
-//        menuBar.add(toolsMenu);
+        fileMenu.add(newItem);
+        fileMenu.add(openItem);
+        fileMenu.add(saveItem);
+        fileMenu.add(saveAsItem);
+        fileMenu.addSeparator();
+        fileMenu.add(settingsItem);
+        fileMenu.addSeparator();
+        fileMenu.add(exitItem);
+        toolsMenu.add(verifyItem);
+        toolsMenu.add(uploadItem);
+        toolsMenu.add(serialMonitorItem);
+
+        menuBar.add(fileMenu);
+        menuBar.add(toolsMenu);
+
         // </editor-fold>
 
         //Panels------------------------------------------------------//
@@ -270,8 +281,9 @@ public class OpenblocksFrame extends JFrame {
 
         //<editor-fold defaultstate="collapsed" desc="Buttons images and listners">
 
+
         ImageButton deleteAll = new ImageButton(
-          "deleteAllBlocks",
+                "deleteAllBlocks",
                 "com/ardublock/block/buttons/newA.jpg",
                 "com/ardublock/block/buttons/newB.jpg",
                 new JLabel()
@@ -280,11 +292,10 @@ public class OpenblocksFrame extends JFrame {
         deleteAll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Page.blocksContainer.removeAll();
-                Page.blocksContainer.revalidate();
-                Page.blocksContainer.repaint();
+                deleteAllBlocks();
             }
         });
+
 
         ImageButton newButton = new ImageButton(
                 "new",
@@ -357,7 +368,7 @@ public class OpenblocksFrame extends JFrame {
         saveImageButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Dimension size = workspace.getCanvasSize();
-                System.out.println("size: " + size);
+                //System.out.println("size: " + size);
                 BufferedImage bi = new BufferedImage(2560, 2560, BufferedImage.TYPE_INT_RGB);
                 Graphics2D g = (Graphics2D) bi.createGraphics();
                 double theScaleFactor = (300d / 72d);
@@ -426,7 +437,7 @@ public class OpenblocksFrame extends JFrame {
         });
 
 
-        InputMap imap = configButton.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        InputMap imap = configButton.getInputMap(WHEN_IN_FOCUSED_WINDOW);
         KeyStroke configStr = KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_DOWN_MASK);
         imap.put(configStr, "showPanel");
         configButton.getActionMap().put("showPanel", new ClickAction(configButton));
@@ -444,7 +455,10 @@ public class OpenblocksFrame extends JFrame {
         buttons.add(saveImageButton);
         buttons.add(websiteButton);
         buttons.add(infoLabel);
+
+        //TODO: нужна иконка для этой кнопки
         buttons.add(deleteAll);
+
         panelWithConfigButton.add(configButton);
 
         workspace.workLayer.addPropertyChangeListener(new PropertyChangeListener() {

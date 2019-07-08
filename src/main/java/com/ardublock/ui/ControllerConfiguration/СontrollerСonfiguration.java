@@ -134,7 +134,7 @@ public class СontrollerСonfiguration extends JPanel {
             this.deviceInfo = deviceInfo;
             this.deviceNameTranslated = deviceNameTranslated;
 
-            System.out.println("!!!!!!!!!!!!!!!  "+pin+" pin "+deviceName+"  "+deviceNameTranslated);
+            //System.out.println("!!!!!!!!!!!!!!!  "+pin+" pin "+deviceName+"  "+deviceNameTranslated);
 
         }
     }
