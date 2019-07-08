@@ -4,8 +4,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Formatter;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
@@ -33,6 +35,8 @@ import com.mit.blocks.workspace.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
 
@@ -76,6 +80,10 @@ public class OpenblocksFrame extends JFrame {
 
     }
 
+
+
+
+
     public OpenblocksFrame() {
         context = Context.getContext();
         settings = new Settings();
@@ -98,6 +106,42 @@ public class OpenblocksFrame extends JFrame {
         fileChooser.addChoosableFileFilter(ffilter);
 
         initOpenBlocks();
+
+
+        try {
+            File file = new File("C:\\Users\\Public\\saver.abp");
+            if(file.exists()){
+
+            }else {
+                Formatter fileCreator = new Formatter("C:\\Users\\Public\\saver.abp");
+                fileCreator.close();
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        //TODO: ok all, funcs i need to save and load in this class , see in docs TimerTask is asynchronous or not?
+        //make public static var to set time to timer
+        //see screenshots on my phone
+        Thread timeToSave = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Timer timer = new Timer();
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    @Override
+                    public void run() {
+
+                        writeFileAndUpdateFrame(getArduBlockString(), new File("C:\\Users\\Public\\saver.abp"));
+                        System.out.println("delayed and worked successfully");
+                    }
+                },1000*15,1000*10*10);
+            }
+        });
+        //timeToSave.start();
+
+
     }
 
     private void initOpenBlocks() {
@@ -286,7 +330,7 @@ public class OpenblocksFrame extends JFrame {
                 "deleteAllBlocks",
                 "com/ardublock/block/buttons/newA.jpg",
                 "com/ardublock/block/buttons/newB.jpg",
-                new JLabel()
+                 infoLabel
         );
 
         deleteAll.addActionListener(new ActionListener() {
@@ -557,6 +601,7 @@ public class OpenblocksFrame extends JFrame {
 
     private boolean chooseFileAndSave(String ardublockString) {
         File saveFile = letUserChooseSaveFile();
+        System.out.println(saveFile.getAbsolutePath());
         saveFile = checkFileSuffix(saveFile);
         if (saveFile == null) {
             return false;
@@ -565,6 +610,8 @@ public class OpenblocksFrame extends JFrame {
         if (saveFile.exists() && !askUserOverwriteExistedFile()) {
             return false;
         }
+
+        System.out.println(ardublockString+saveFile.getPath().toString());
 
         writeFileAndUpdateFrame(ardublockString, saveFile);
         return true;
@@ -749,4 +796,19 @@ public class OpenblocksFrame extends JFrame {
             button.doClick();
         }
     }
+
+    Thread timerSave = new Thread(new Runnable() {
+        @Override
+        public void run() {
+
+
+            chooseFileAndSave("backupSave.abp");
+        }
+    });
+
+
+
+
+
+
 }
