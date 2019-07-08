@@ -30,7 +30,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathConstants;
 
-import com.mit.blocks.codeblockutil.RSplitPane;
+import com.mit.blocks.codeblockutil.*;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -40,9 +40,6 @@ import org.w3c.dom.NodeList;
 import com.mit.blocks.workspace.ZoomSlider;
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.codeblocks.ProcedureOutputManager;
-import com.mit.blocks.codeblockutil.Explorer;
-import com.mit.blocks.codeblockutil.ExplorerEvent;
-import com.mit.blocks.codeblockutil.ExplorerListener;
 import com.mit.blocks.renderable.BlockUtilities;
 import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.typeblocking.FocusTraversalManager;
@@ -68,6 +65,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
 
     // the environment wrapps all the components of a workspace (Blocks, RenderableBlocks, BlockStubs, BlockGenus)
     private final WorkspaceEnvironment env = new WorkspaceEnvironment();
+    private CPopupMenu activeMenu = null;
 
     public WorkspaceEnvironment getEnv() {
         return this.env;
@@ -1269,6 +1267,20 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      * State Saving Stuff for Undo/Redo *
      **********************************
      */
+
+    public void setActiveCPopupMenu(CPopupMenu menu)
+    {
+        activeMenu = menu;
+    }
+
+    public void deactiveCPopupMenu()
+    {
+        if (activeMenu != null)
+        {
+            activeMenu.superSetVisible(false);
+        }
+    }
+
     private class WorkspaceState {
 
         public Map<Long, Object> blockStates;

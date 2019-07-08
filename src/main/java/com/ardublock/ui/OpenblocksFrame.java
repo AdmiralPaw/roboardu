@@ -49,7 +49,6 @@ public class OpenblocksFrame extends JFrame {
     private ResourceBundle uiMessageBundle;
 
     private boolean controllerIsShown = true;
-
     public void addListener(OpenblocksFrameListener ofl) {
         context.registerOpenblocksFrameListener(ofl);
     }
@@ -96,6 +95,7 @@ public class OpenblocksFrame extends JFrame {
         ffilter = new FileNameExtensionFilter(uiMessageBundle.getString("ardublock.file.suffix"), "abp");
         fileChooser.setFileFilter(ffilter);
         fileChooser.addChoosableFileFilter(ffilter);
+
 
         initOpenBlocks();
     }
@@ -481,6 +481,41 @@ public class OpenblocksFrame extends JFrame {
         this.setJMenuBar(menuBar);
         this.add(northPanel, BorderLayout.NORTH);
         this.add(workspace, BorderLayout.CENTER);
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowActivated(WindowEvent e) {
+                super.windowActivated(e);
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                super.windowDeactivated(e);
+                workspace.deactiveCPopupMenu();
+            }
+        });
+
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+        });
     }
 
     // <editor-fold defaultstate="collapsed" desc="Buttons listners">
@@ -672,6 +707,8 @@ public class OpenblocksFrame extends JFrame {
             return new File(filePath + ".abp");
         }
     }
+
+
     // </editor-fold>
 
     class ImageButton extends JButton {

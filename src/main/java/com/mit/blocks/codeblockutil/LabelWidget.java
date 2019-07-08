@@ -1,5 +1,7 @@
 package com.mit.blocks.codeblockutil;
 
+import com.mit.blocks.workspace.Workspace;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -91,12 +93,13 @@ public abstract class LabelWidget extends JComponent {
     private Color tooltipBackground = new Color(255, 255, 225);
     private double zoom = 1.5;
 
+    protected Workspace workspace;
     /**
      * BlockLabel Constructor that takes in BlockID as well. Unfortunately
      * BlockID is needed, so the label can redirect mouse actions.
      *
      */
-    public LabelWidget(String initLabelText, Color fieldColor, Color tooltipBackground) {
+    public LabelWidget(String initLabelText, Color fieldColor, Color tooltipBackground, Workspace work) {
         if (initLabelText == null) {
             initLabelText = "";
         }
@@ -104,6 +107,8 @@ public abstract class LabelWidget extends JComponent {
         this.setLayout(new BorderLayout());
         this.tooltipBackground = tooltipBackground;
         this.labelBeforeEdit = initLabelText;
+
+        workspace = work;
 
         //set up textfield colors
         textField.setForeground(Color.WHITE);//white text
@@ -549,7 +554,7 @@ public abstract class LabelWidget extends JComponent {
             this.addMouseListener(this);
             this.addMouseMotionListener(this);
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-            this.popupmenu = new CPopupMenu();
+            this.popupmenu = new CPopupMenu(workspace);
         }
 
         /**
@@ -557,7 +562,7 @@ public abstract class LabelWidget extends JComponent {
          * label}, {genus, label}, {genus, label} ....}
          */
         private void setSiblings(String[][] siblings) {
-            popupmenu = new CPopupMenu();
+            popupmenu = new CPopupMenu(workspace);
             //if connected to a block, add self and add siblings
             for (int i = 0; i < siblings.length; i++) {
                 final String selfGenus = siblings[i][0];
@@ -589,9 +594,6 @@ public abstract class LabelWidget extends JComponent {
 
                 triangle = new GeneralPath();
                 GeneralPath rect = new GeneralPath();
-                System.out.println(this.getHeight());
-                System.out.println(this.getWidth());
-                System.out.println(LabelWidget.DROP_DOWN_MENU_WIDTH);
                 rect.moveTo(0, this.getHeight() / 4);
                 rect.lineTo(this.getWidth() - 1, this.getHeight() / 4);
                 rect.lineTo(this.getWidth() / 2 - 1, this.getHeight() / 4 + LabelWidget.DROP_DOWN_MENU_WIDTH);
