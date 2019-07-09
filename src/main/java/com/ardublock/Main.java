@@ -5,9 +5,11 @@ import java.awt.event.WindowEvent;
 import com.ardublock.core.Context;
 import com.ardublock.ui.ConsoleFrame;
 import com.ardublock.ui.OpenblocksFrame;
+import com.ardublock.ui.TutorialPane;
 import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLayeredPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -47,11 +49,18 @@ public class Main {
                 openblocksFrame.doCloseArduBlockFile();
             }
         });
-
+        
         Context context = Context.getContext();
         context.setInArduino(false);
         openblocksFrame.setMinimumSize(new Dimension(1140, 460));
         openblocksFrame.setVisible(true);
+        openblocksFrame.repaint();
+        
+        TutorialPane pan = new TutorialPane(openblocksFrame);
+        openblocksFrame.setGlassPane(pan);
+        pan.setOpaque(false);
+        pan.setVisible(true);
+        openblocksFrame.getGlassPane().setVisible(true);
     }
 
     public void shutdown() {

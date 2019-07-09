@@ -52,17 +52,21 @@ public class OpenblocksFrame extends JFrame {
     private FileFilter ffilter;
     private ErrWindow errWindow;
     private Settings settings;
-
+    public JLayeredPane GlobalLayaredPane;
+    
+    public JPanel northPanelCenter = null;
+    public JPanel logo;
+    public JPanel rightPanel;
+    
     private ResourceBundle uiMessageBundle;
-
+    
     private boolean controllerIsShown = true;
 
     public void addListener(OpenblocksFrameListener ofl) {
         context.registerOpenblocksFrameListener(ofl);
     }
 
-
-    public static void deleteAllBlocks(){
+    public static void deleteAllBlocks() {
         Page.blocksContainer.removeAll();
         Page.blocksContainer.revalidate();
         Page.blocksContainer.repaint();
@@ -103,12 +107,11 @@ public class OpenblocksFrame extends JFrame {
         ffilter = new FileNameExtensionFilter(uiMessageBundle.getString("ardublock.file.suffix"), "abp");
         fileChooser.setFileFilter(ffilter);
         fileChooser.addChoosableFileFilter(ffilter);
-
+        
         initOpenBlocks();
     }
 
     private void initOpenBlocks() {
-
 
         final Context context = Context.getContext();
         final Workspace workspace = context.getWorkspace();
@@ -228,11 +231,11 @@ public class OpenblocksFrame extends JFrame {
         final int standartNorthPanelSize = 24;  //TODO: make like constant
 
         final JPanel northPanel = new JPanel();
-        final JPanel logo = new JPanel();
-        final JPanel northPanelCenter = new JPanel();
+        logo = new JPanel();
+        northPanelCenter = new JPanel();
         final JPanel buttons = new JPanel();
         final JPanel panelWithConfigButton = new JPanel();
-        final JPanel rightPanel = new JPanel();
+        rightPanel = new JPanel();
         final JLabel dividerFirst = new JLabel();
         final JLabel dividerSecond = new JLabel();
 
@@ -281,7 +284,6 @@ public class OpenblocksFrame extends JFrame {
         infoLabel.setForeground(Color.white);
 
         //<editor-fold defaultstate="collapsed" desc="Buttons images and listners">
-
         ImageButton deleteAll = new ImageButton(
                 "deleteAllBlocks",
                 "com/ardublock/block/buttons/newA.jpg",
@@ -295,7 +297,6 @@ public class OpenblocksFrame extends JFrame {
                 deleteAllBlocks();
             }
         });
-
 
         ImageButton newButton = new ImageButton(
                 "new",
@@ -459,12 +460,7 @@ public class OpenblocksFrame extends JFrame {
         workspace.workLayer.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent e) {
                 Dimension s = workspace.getFactorySize();
-                Dimension q = workspace.getCanvasSize();
                 logo.setPreferredSize(new Dimension(s.width, standartNorthPanelSize));
-//                        if (workspace.workLayer.getDividerLocation() > 380)
-//                            workspace.workLayer.setDividerLocation(380);
-//                        else if (workspace.workLayer.getDividerLocation() < 120)
-//                            workspace.workLayer.setDividerLocation(120);
                 northPanel.updateUI();
                 workspace.updateUI();
                 workspace.validate();
@@ -475,27 +471,23 @@ public class OpenblocksFrame extends JFrame {
         workspace.updateUI();
 
         JPanel GlobalPanel = new JPanel(new BorderLayout());
-        JLayeredPane GlobalLayaredPane = new JLayeredPane();
-        GlobalLayaredPane.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                GlobalPanel.setSize(e.getComponent().getSize());
-                //pan.setSize(e.getComponent().getSize());
-            }
-        });
-        this.add(GlobalLayaredPane, BorderLayout.CENTER);
+        //GlobalLayaredPane = new JLayeredPane();
+        //GlobalLayaredPane.addComponentListener(new ComponentAdapter() {
+//            @Override
+//            public void componentResized(ComponentEvent e) {
+//                GlobalPanel.setSize(e.getComponent().getSize());
+//                //pan.setSize(e.getComponent().getSize());
+//            }
+//        });
+        //this.add(GlobalLayaredPane, BorderLayout.CENTER);
         this.setJMenuBar(menuBar);
-        GlobalPanel.add(northPanel, BorderLayout.NORTH);
-        GlobalPanel.add(workspace, BorderLayout.CENTER);
-        this.setVisible(true);
-//        this.add(northPanel, BorderLayout.NORTH); 
-//        this.add(workspace, BorderLayout.CENTER);
+        //GlobalPanel.add(northPanel, BorderLayout.NORTH);
+        //GlobalPanel.add(workspace, BorderLayout.CENTER);
+        this.add(northPanel, BorderLayout.NORTH);
+        this.add(workspace, BorderLayout.CENTER);
 
-        GlobalLayaredPane.add(GlobalPanel, JLayeredPane.DEFAULT_LAYER, -1);
+        //GlobalLayaredPane.add(GlobalPanel, JLayeredPane.DEFAULT_LAYER, -1);
 
-        TutorialPane pan = new TutorialPane(this);
-        GlobalLayaredPane.add(pan, JLayeredPane.DEFAULT_LAYER + 50, -1);
-        this.validate();
         //this.setGlassPane(pan);
         //this.add(GlobalLayaredPane, BorderLayout.CENTER);
     }
