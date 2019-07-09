@@ -230,7 +230,7 @@ public class OpenblocksFrame extends JFrame {
         ImageIcon mLogo = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(
                 "com/ardublock/block/mainLogo2.png")
         );
-        Image image = mLogo.getImage().getScaledInstance(180, standartNorthPanelSize,
+        Image image = mLogo.getImage().getScaledInstance(137, standartNorthPanelSize,
                 java.awt.Image.SCALE_SMOOTH);
         mLogo = new ImageIcon(image);
         mainLogo.setIcon(mLogo);
