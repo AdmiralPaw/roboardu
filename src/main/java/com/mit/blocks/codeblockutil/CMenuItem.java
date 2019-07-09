@@ -21,7 +21,7 @@ public class CMenuItem extends JButton implements MouseListener {
     };
     private Color background = new Color(255, 133, 8);//new Color(193,193,193);
     private Color highlight = new Color(236, 236, 236);
-    private boolean focus = false;
+    public boolean focus = false;
     Position textPosition;
 
     public CMenuItem(String text) {

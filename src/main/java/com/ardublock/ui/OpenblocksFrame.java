@@ -34,6 +34,8 @@ import com.mit.blocks.workspace.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
+
 public class OpenblocksFrame extends JFrame {
 
     private static final long serialVersionUID = 2841155965906223806L;
@@ -47,9 +49,15 @@ public class OpenblocksFrame extends JFrame {
     private ResourceBundle uiMessageBundle;
 
     private boolean controllerIsShown = true;
-
     public void addListener(OpenblocksFrameListener ofl) {
         context.registerOpenblocksFrameListener(ofl);
+    }
+
+
+    public static void deleteAllBlocks(){
+        Page.blocksContainer.removeAll();
+        Page.blocksContainer.revalidate();
+        Page.blocksContainer.repaint();
     }
 
     public String makeFrameTitle() {
@@ -88,10 +96,13 @@ public class OpenblocksFrame extends JFrame {
         fileChooser.setFileFilter(ffilter);
         fileChooser.addChoosableFileFilter(ffilter);
 
+
         initOpenBlocks();
     }
 
     private void initOpenBlocks() {
+
+
         final Context context = Context.getContext();
         final Workspace workspace = context.getWorkspace();
         errWindow = workspace.getErrWindow();
@@ -207,10 +218,10 @@ public class OpenblocksFrame extends JFrame {
         toolsMenu.add(verifyItem);
         toolsMenu.add(uploadItem);
         toolsMenu.add(serialMonitorItem);
-//        fileMenu.add(deleteAll);
 
         menuBar.add(fileMenu);
         menuBar.add(toolsMenu);
+
         // </editor-fold>
 
         //Panels------------------------------------------------------//
@@ -270,8 +281,9 @@ public class OpenblocksFrame extends JFrame {
 
         //<editor-fold defaultstate="collapsed" desc="Buttons images and listners">
 
+
         ImageButton deleteAll = new ImageButton(
-          "deleteAllBlocks",
+                "deleteAllBlocks",
                 "com/ardublock/block/buttons/newA.jpg",
                 "com/ardublock/block/buttons/newB.jpg",
                 new JLabel()
@@ -280,11 +292,10 @@ public class OpenblocksFrame extends JFrame {
         deleteAll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Page.blocksContainer.removeAll();
-                Page.blocksContainer.revalidate();
-                Page.blocksContainer.repaint();
+                deleteAllBlocks();
             }
         });
+
 
         ImageButton newButton = new ImageButton(
                 "new",
@@ -426,7 +437,7 @@ public class OpenblocksFrame extends JFrame {
         });
 
 
-        InputMap imap = configButton.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        InputMap imap = configButton.getInputMap(WHEN_IN_FOCUSED_WINDOW);
         KeyStroke configStr = KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_DOWN_MASK);
         imap.put(configStr, "showPanel");
         configButton.getActionMap().put("showPanel", new ClickAction(configButton));
@@ -444,7 +455,10 @@ public class OpenblocksFrame extends JFrame {
         buttons.add(saveImageButton);
         buttons.add(websiteButton);
         buttons.add(infoLabel);
-        //buttons.add(deleteAll);
+
+        //TODO: нужна иконка для этой кнопки
+        buttons.add(deleteAll);
+
         panelWithConfigButton.add(configButton);
 
         workspace.workLayer.addPropertyChangeListener(new PropertyChangeListener() {
@@ -467,6 +481,41 @@ public class OpenblocksFrame extends JFrame {
         this.setJMenuBar(menuBar);
         this.add(northPanel, BorderLayout.NORTH);
         this.add(workspace, BorderLayout.CENTER);
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowActivated(WindowEvent e) {
+                super.windowActivated(e);
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                super.windowDeactivated(e);
+                workspace.deactiveCPopupMenu();
+            }
+        });
+
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+        });
     }
 
     // <editor-fold defaultstate="collapsed" desc="Buttons listners">
@@ -658,6 +707,8 @@ public class OpenblocksFrame extends JFrame {
             return new File(filePath + ".abp");
         }
     }
+
+
     // </editor-fold>
 
     class ImageButton extends JButton {
