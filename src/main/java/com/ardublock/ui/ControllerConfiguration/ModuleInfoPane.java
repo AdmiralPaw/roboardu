@@ -35,7 +35,7 @@ public class ModuleInfoPane extends JPanel {
     private String moduleInfo;
     private СontrollerСonfiguration controller;
 
-    private JLabel moduleNameLabel = new JLabel();
+    private JTextArea moduleNameLabel = new JTextArea();
     private JLabel moduleIcon = new JLabel();
     private JButton blocksButton = new JButton();
     private JButton closeButton = new JButton();
@@ -119,10 +119,19 @@ public class ModuleInfoPane extends JPanel {
         twoButtons.add(closeButton);
         
         nameAndOthers.setPreferredSize(new Dimension(
-                80, 100));
+                90, 100));
         
         
         nameAndOthers.add(twoButtons);
+        
+        moduleNameLabel.setFont(new Font("TimesNewRoman", Font.PLAIN, 12));
+        moduleNameLabel.setForeground(Color.WHITE);
+        moduleNameLabel.setBackground(new Color(98,169,171));
+        moduleNameLabel.setWrapStyleWord(true);
+        moduleNameLabel.setLineWrap(true);
+        moduleNameLabel.setEditable(false);
+        moduleNameLabel.setPreferredSize(new Dimension(
+                80, 50));
         nameAndOthers.add(moduleNameLabel);
         
         infoImagePanel.add(moduleIcon);

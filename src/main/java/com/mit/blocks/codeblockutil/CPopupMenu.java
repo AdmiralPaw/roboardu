@@ -1,10 +1,6 @@
 package com.mit.blocks.codeblockutil;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.BorderFactory;
@@ -13,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
 import com.mit.blocks.codeblockutil.CScrollPane.ScrollPolicy;
-import java.awt.FlowLayout;
+import com.mit.blocks.workspace.Workspace;
 
 public class CPopupMenu extends JPopupMenu implements ActionListener {
 
@@ -24,6 +20,9 @@ public class CPopupMenu extends JPopupMenu implements ActionListener {
     private JComponent view;
     private double zoom = 1.0;
     private int items = 0;
+    private Workspace workspace;
+    private boolean mouseInComponent;
+    private boolean mouseInItem;
     //private int MARGIN = 20;
 
     CPopupMenu() {
@@ -40,6 +39,28 @@ public class CPopupMenu extends JPopupMenu implements ActionListener {
                 ScrollPolicy.HORIZONTAL_BAR_NEVER,
                 12, new Color(255, 133, 8), Color.darkGray);
         this.add(scroll);
+        mouseInComponent = false;
+        mouseInItem = false;
+
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                mouseInComponent = true;
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                mouseInComponent = false;
+            }
+        });
+    }
+
+    CPopupMenu(Workspace work)
+    {
+        this();
+        workspace = work;
     }
 
     @Override
@@ -51,6 +72,17 @@ public class CPopupMenu extends JPopupMenu implements ActionListener {
         items++;
         item.addActionListener(this);
         view.add(item);
+        item.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                mouseInItem = true;
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                mouseInItem = false;
+            }
+        });
     }
 
     public void setZoomLevel(double zoom) {
@@ -63,11 +95,50 @@ public class CPopupMenu extends JPopupMenu implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (this.isVisible()) {
-            this.setVisible(false);
+            this.superSetVisible(false);
         }
     }
 
+    public void show(Component c, int x, int y)
+    {
+        deactiveAllItems();
+        super.show(c, x, y);
+        workspace.setActiveCPopupMenu(this);
+        mouseInComponent = false;
+        mouseInItem = false;
+    }
 
+    public void setVisible(boolean e)
+    {
+        if (!e)
+        {
+            if (!mouseInComponent && !mouseInItem)
+            {
+                superSetVisible(e);
+            }
+        }
+        else
+        {
+            superSetVisible(e);
+        }
+    }
+
+    public void superSetVisible(boolean e)
+    {
+        super.setVisible(e);
+    }
+
+    public void deactiveAllItems()
+    {
+        for (Component item:view.getComponents())
+        {
+            if (item instanceof CMenuItem)
+            {
+                System.out.println(1);
+                ((CMenuItem) item).focus = false;
+            }
+        }
+    }
 
 
 }

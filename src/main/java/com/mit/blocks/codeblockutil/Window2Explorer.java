@@ -134,7 +134,9 @@ public class Window2Explorer extends JPanel implements Explorer {
      *
      * @requires items != null && for each element in item, element!= null
      */
+    int iterationCount = 0;
     public void setDrawersCard(List<? extends Canvas> items) {
+        iterationCount++;
         canvases.clear();
         buttonPane.removeAll();
         int size = buttonHeight * 24;
@@ -173,23 +175,27 @@ public class Window2Explorer extends JPanel implements Explorer {
             selectCanvas(0);
 
         }
-        for (Canvas unit : items) {
-            for (Component comp : unit.getJComponent().getComponents()) {
-                if (comp instanceof FactoryRenderableBlock) {
+        if(iterationCount==16) {
+            long time1 = System.currentTimeMillis();
+            for (Canvas unit : items) {
+                for (Component comp : unit.getJComponent().getComponents()) {
+                    if (comp instanceof FactoryRenderableBlock) {
 
-                    FactoryRenderableBlock bl = ((FactoryRenderableBlock) comp).deepClone();
+                        FactoryRenderableBlock bl = ((FactoryRenderableBlock) comp).deepClone();
 
-                    boolean contains = bl.getKeyword().contains("(");
-                    if(contains){
-                        int index = bl.getKeyword().indexOf("(");
-                        //System.out.println(bl.getKeyword().toUpperCase().substring(0,index));
-                        dictionary.put(bl.getKeyword().toUpperCase().substring(0,index), bl);
-                    }else {
-                        //System.out.println(bl.getKeyword().toUpperCase());
-                        dictionary.put(bl.getKeyword().toUpperCase(), bl);
+                        boolean contains = bl.getKeyword().contains("(");
+                        if (contains) {
+                            int index = bl.getKeyword().indexOf("(");
+                            //System.out.println(bl.getKeyword().toUpperCase().substring(0,index));
+                            dictionary.put(bl.getKeyword().toUpperCase().substring(0, index), bl);
+                        } else {
+                            //System.out.println(bl.getKeyword().toUpperCase());
+                            dictionary.put(bl.getKeyword().toUpperCase(), bl);
+                        }
                     }
                 }
             }
+            iterationCount = 0;
         }
         this.revalidate();
     }

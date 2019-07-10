@@ -78,7 +78,7 @@ public class BlockLabel implements MouseListener, MouseMotionListener, KeyListen
         }
         this.blockID = blockID;
         this.labelType = labelType;
-        widget = new LabelWidget(initLabelText, workspace.getEnv().getBlock(blockID).getColor().darker(), tooltipBackground) {
+        widget = new LabelWidget(initLabelText, workspace.getEnv().getBlock(blockID).getColor().darker(), tooltipBackground, workspace) {
             private static final long serialVersionUID = 328149080424L;
             protected void fireTextChanged(String text) {
                 textChanged(text);

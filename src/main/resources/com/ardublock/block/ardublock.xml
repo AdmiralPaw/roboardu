@@ -5,29 +5,6 @@ file before genus A is specified./ We impose this requirement so that sanity che
 <BlockLangDef>
 
 
-                <BlockGenusMember>sensor_button</BlockGenusMember>
-                <BlockGenusMember>little_bits_lightsensor</BlockGenusMember>
-                <BlockGenusMember>little_bits_microphone</BlockGenusMember>
-                <BlockGenusMember>little_bits_pulse</BlockGenusMember>
-                <BlockGenusMember>df_digital_viberation_sensor</BlockGenusMember>
-                <BlockGenusMember>df_joystick_module_button</BlockGenusMember>
-                <BlockGenusMember>df_joystick_module_x</BlockGenusMember>
-                <BlockGenusMember>df_joystick_module_y</BlockGenusMember>
-                <BlockGenusMember>df_analog_gp2y0a21</BlockGenusMember>
-                <BlockGenusMember>df_line_tracking_sensor</BlockGenusMember>
-                <BlockGenusMember>sensorTemperature</BlockGenusMember>
-                <BlockGenusMember>seeed_mag_switch</BlockGenusMember>
-                <BlockGenusMember>seeed_touch_sensor</BlockGenusMember>
-                <BlockGenusMember>obstacle_sensor</BlockGenusMember>
-                <BlockGenusMember>magnetic_sensor</BlockGenusMember>
-                <BlockGenusMember>rangefinderCombined</BlockGenusMember>
-                <BlockGenusMember>lightCombined</BlockGenusMember>
-                <BlockGenusMember>LineFinder</BlockGenusMember>
-                <BlockGenusMember>Potentiometer</BlockGenusMember>
-                <BlockGenusMember>tone</BlockGenusMember>
-                <BlockGenusMember>tone_time</BlockGenusMember>
-                <BlockGenusMember>no_tone</BlockGenusMember>
-                <BlockGenusMember>melody</BlockGenusMember>
     
 
     <SuitableBlocks version="rus">
@@ -1324,12 +1301,12 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 </text>
             </description>
             <BlockConnectors>
-                <BlockConnector label="" connector-kind="plug" connector-type="number" position-type="mirror" >
+                <BlockConnector label="" connector-kind="plug" connector-type="number">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector label="" connector-kind="socket" connector-type="number" position-type="bottom" />
-                <BlockConnector label="" connector-kind="socket" connector-type="number" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 
@@ -1344,12 +1321,12 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 </text>
             </description>
             <BlockConnectors>
-                <BlockConnector label="" connector-kind="plug" connector-type="number" position-type="mirror" >
+                <BlockConnector label="" connector-kind="plug" connector-type="number">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector label="" connector-kind="socket" connector-type="number" position-type="bottom" />
-                <BlockConnector label="" connector-kind="socket" connector-type="number" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 
@@ -1364,12 +1341,12 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 </text>
             </description>
             <BlockConnectors>
-                <BlockConnector label="" connector-kind="plug" connector-type="number" position-type="mirror" >
+                <BlockConnector label="" connector-kind="plug" connector-type="number">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector label="" connector-kind="socket" connector-type="number" position-type="bottom" />
-                <BlockConnector label="" connector-kind="socket" connector-type="number" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 
@@ -1384,23 +1361,23 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 </text>
             </description>
             <BlockConnectors>
-                <BlockConnector label="" connector-kind="plug" connector-type="number" position-type="mirror" >
+                <BlockConnector label="" connector-kind="plug" connector-type="number">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector label="" connector-kind="socket" connector-type="number" position-type="bottom" />
-                <BlockConnector label="" connector-kind="socket" connector-type="number" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 
         <BlockGenus name="modulo" kind="function" color="71 198 145" initlabel="bg.modulo">
             <BlockConnectors>
-                <BlockConnector label="" connector-kind="plug" connector-type="number" position-type="mirror" >
+                <BlockConnector label="" connector-kind="plug" connector-type="number">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector label="" connector-kind="socket" connector-type="number" position-type="bottom" />
-                <BlockConnector label="" connector-kind="socket" connector-type="number" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 
@@ -1484,23 +1461,23 @@ file before genus A is specified./ We impose this requirement so that sanity che
 		
         <BlockGenus name="min" kind="function" color="71 198 145" initlabel="bg.min">
             <BlockConnectors>
-                <BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" >
+                <BlockConnector connector-type="number" connector-kind="plug">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
-                <BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 
         <BlockGenus name="max" kind="function" color="71 198 145" initlabel="bg.max">
             <BlockConnectors>
-                <BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" >
+                <BlockConnector connector-type="number" connector-kind="plug">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
-                <BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
         <BlockGenus name="map_common" kind="data" color="71 198 145" initlabel="bg.map_common">
@@ -1568,12 +1545,12 @@ file before genus A is specified./ We impose this requirement so that sanity che
 
         <BlockGenus name="greater" kind="function" color="90 160 85" initlabel="bg.greater">
             <BlockConnectors>
-                <BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" >
+                <BlockConnector connector-type="boolean" connector-kind="plug" >
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
-                <BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 
@@ -1582,12 +1559,12 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>is upper number less then lower?</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" >
+                <BlockConnector connector-type="boolean" connector-kind="plug">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
-                <BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 
@@ -1596,12 +1573,12 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>is upper number greater then lower?</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" >
+                <BlockConnector connector-type="boolean" connector-kind="plug" >
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
-                <BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
         <BlockGenus name="equal_digital" kind="function" color="90 160 85" initlabel="bg.equal_digital">
@@ -1609,23 +1586,23 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>is upper number greater then lower?</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" >
+                <BlockConnector connector-type="boolean" connector-kind="plug" >
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="boolean" connector-kind="socket" position-type="bottom" />
-                <BlockConnector connector-type="boolean" connector-kind="socket" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 
-        <BlockGenus name="greater_equal" kind="function" color="90 160 85" initlabel="bg.greater_equal">
+        <BlockGenus name="greater_equal" kind="function" color="90 160 85" >
             <BlockConnectors>
-                <BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" >
+                <BlockConnector connector-type="boolean" connector-kind="plug">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
-                <BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 
@@ -1634,12 +1611,12 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>is upper number greater then lower?</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" >
+                <BlockConnector connector-type="boolean" connector-kind="plug" >
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
-                <BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 
@@ -1648,12 +1625,12 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>is upper number greater then lower?</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" >
+                <BlockConnector connector-type="boolean" connector-kind="plug" >
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
-                <BlockConnector connector-type="number" connector-kind="socket" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 
@@ -1662,12 +1639,12 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>is upper number greater then lower?</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" >
+                <BlockConnector connector-type="boolean" connector-kind="plug" >
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="boolean" connector-kind="socket" position-type="bottom" />
-                <BlockConnector connector-type="boolean" connector-kind="socket" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 
@@ -1869,12 +1846,12 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>is upper number greater then lower?</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" >
+                <BlockConnector connector-type="boolean" connector-kind="plug">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="poly" connector-kind="socket" position-type="bottom" />
-                <BlockConnector connector-type="poly" connector-kind="socket" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 		
@@ -1885,12 +1862,12 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>is upper number greater then lower?</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" >
+                <BlockConnector connector-type="boolean" connector-kind="plug" >
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="poly" connector-kind="socket" position-type="bottom" />
-                <BlockConnector connector-type="poly" connector-kind="socket" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 		
@@ -1899,12 +1876,12 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>is upper number greater then lower?</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" >
+                <BlockConnector connector-type="boolean" connector-kind="plug">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="string" connector-kind="socket" position-type="bottom" />
-                <BlockConnector connector-type="string" connector-kind="socket" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 		
@@ -1925,12 +1902,12 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>is upper number greater then lower?</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" >
+                <BlockConnector connector-type="boolean" connector-kind="plug">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="string" connector-kind="socket" position-type="bottom" />
-                <BlockConnector connector-type="string" connector-kind="socket" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>	
 		
@@ -1939,12 +1916,12 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>is upper number greater then lower?</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" >
+                <BlockConnector connector-type="boolean" connector-kind="plug">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="string" connector-kind="socket" position-type="bottom" />
-                <BlockConnector connector-type="string" connector-kind="socket" position-type="bottom" />
+                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>	
 
@@ -11657,6 +11634,45 @@ initlabel="bg.tft-msg" editable-label="yes">
             </BlockConnectors>
         </BlockGenus>
 
+        <BlockGenus name="buttonD12" kind="data" color="242 123 99" initlabel="bg.buttonD12" editable-label="no">
+            <description>
+                <text>buttonD12</text>
+            </description>
+            <BlockConnectors>
+                <BlockConnector connector-type="number"
+                                                connector-kind="plug">
+                </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
+        
+        <BlockGenus name="ledD13" kind="command" color="190 30 180" initlabel="bg.ledD13" editable-label="no">
+            <description>
+                <text>ledD13</text>
+            </description>
+            
+            <BlockConnectors>
+                <BlockConnector connector-type="boolean" connector-kind="socket" label="bc.status">
+                    <DefaultArg genus-name="digital-high" label="HIGH" />
+                </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
+        
+        <BlockGenus name="blink_ledD13" kind="command" color="190 30 180" initlabel="bg.blink_ledD13" editable-label="no">
+            <description>
+                <text>blink_ledD13</text>
+            </description>
+            <BlockConnectors>
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.led_blink_time1">
+                    <DefaultArg genus-name="number" label="1000" />
+                </BlockConnector>
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.led_blink_time2">
+                    <DefaultArg genus-name="number" label="1000" />
+                </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
+        
+        
+
     </BlockGenuses>
 
 
@@ -11668,42 +11684,42 @@ initlabel="bg.tft-msg" editable-label="yes">
             <FamilyMember>digital-high</FamilyMember>
             <FamilyMember>digital-low</FamilyMember>
         </BlockFamily>
-        <BlockFamily>
+<!--        <BlockFamily>
             <FamilyMember>and</FamilyMember>
             <FamilyMember>or</FamilyMember>
-        </BlockFamily>
+        </BlockFamily>-->
         <BlockFamily>
             <FamilyMember>true</FamilyMember>
             <FamilyMember>false</FamilyMember>
         </BlockFamily>
-        <BlockFamily>
+<!--        <BlockFamily>
             <FamilyMember>addition</FamilyMember>
             <FamilyMember>subtraction</FamilyMember>
             <FamilyMember>multiplication</FamilyMember>
             <FamilyMember>division</FamilyMember>
             <FamilyMember>modulo</FamilyMember>
-        </BlockFamily>
-        <BlockFamily>
+        </BlockFamily>-->
+<!--        <BlockFamily>
             <FamilyMember>min</FamilyMember>
             <FamilyMember>max</FamilyMember>
-        </BlockFamily>
-        <BlockFamily>
+        </BlockFamily>-->
+<!--        <BlockFamily>
             <FamilyMember>greater</FamilyMember>
             <FamilyMember>less</FamilyMember>
             <FamilyMember>equal</FamilyMember>
             <FamilyMember>greater_equal</FamilyMember>
             <FamilyMember>less_equal</FamilyMember>
             <FamilyMember>not_equal</FamilyMember>
-        </BlockFamily>
-        <BlockFamily>
+        </BlockFamily>-->
+<!--        <BlockFamily>
             <FamilyMember>equal_digital</FamilyMember>
             <FamilyMember>not_equal_digital</FamilyMember>
-        </BlockFamily>
-        <BlockFamily>
+        </BlockFamily>-->
+<!--        <BlockFamily>
             <FamilyMember>equal_poly</FamilyMember>
             <FamilyMember>not_equal_poly</FamilyMember>
-        </BlockFamily>
-        <BlockFamily>
+        </BlockFamily>-->
+<!--        <BlockFamily>
             <FamilyMember>string_greater</FamilyMember>
             <FamilyMember>string_less</FamilyMember>
             <FamilyMember>string_equal</FamilyMember>
@@ -11713,16 +11729,16 @@ initlabel="bg.tft-msg" editable-label="yes">
             <FamilyMember>string_equals</FamilyMember>
             <FamilyMember>string_equalsIgnoreCase</FamilyMember>
             <FamilyMember>string_compareTo</FamilyMember>
-        </BlockFamily>
+        </BlockFamily>-->
         <BlockFamily>
             <FamilyMember>equal_string</FamilyMember>
             <FamilyMember>not_equal_string</FamilyMember>
         </BlockFamily>
-        <BlockFamily>
+<!--        <BlockFamily>
             <FamilyMember>sin</FamilyMember>
             <FamilyMember>cos</FamilyMember>
             <FamilyMember>tan</FamilyMember>
-        </BlockFamily>
+        </BlockFamily>-->
         <BlockFamily>
             <FamilyMember>code_head</FamilyMember>
             <FamilyMember>code_setup</FamilyMember>
@@ -11732,7 +11748,7 @@ initlabel="bg.tft-msg" editable-label="yes">
             <FamilyMember>digital-on</FamilyMember>
             <FamilyMember>digital-off</FamilyMember>
         </BlockFamily>
-        <BlockFamily>
+<!--        <BlockFamily>
             <FamilyMember>LCD_I2C_Sainsmart_20by4</FamilyMember>
             <FamilyMember>LCD_I2C_Sainsmart_16by2</FamilyMember>
         </BlockFamily>
@@ -11745,12 +11761,7 @@ initlabel="bg.tft-msg" editable-label="yes">
             <FamilyMember>LCD_command_cursorOff</FamilyMember>
             <FamilyMember>LCD_command_blinkOn</FamilyMember>
             <FamilyMember>LCD_command_blinkOff</FamilyMember>
-        </BlockFamily>
-        <BlockFamily>
-            <FamilyMember>servo_default</FamilyMember>
-            <FamilyMember>servo_sg90</FamilyMember>
-            <FamilyMember>servo_mg996r</FamilyMember>
-        </BlockFamily>
+        </BlockFamily>-->
 		
         <!--****************** Pin Dropdown List Groups *************** -->
         <BlockFamily>
@@ -11767,14 +11778,6 @@ initlabel="bg.tft-msg" editable-label="yes">
             <FamilyMember>pinListDigital_D9</FamilyMember>
             <FamilyMember>pinListDigital_D10</FamilyMember>
             <FamilyMember>pinListDigital_D11</FamilyMember>
-            <FamilyMember>pinListDigital_D12</FamilyMember>
-            <FamilyMember>pinListDigital_D13</FamilyMember>
-            <FamilyMember>pinListDigital_D14</FamilyMember>
-            <FamilyMember>pinListDigital_D15</FamilyMember>
-            <FamilyMember>pinListDigital_D16</FamilyMember>
-            <FamilyMember>pinListDigital_D17</FamilyMember>
-            <FamilyMember>pinListDigital_D18</FamilyMember>
-            <FamilyMember>pinListDigital_D19</FamilyMember>
             <!--****************** Digital pins on Arduino Mega only *************** -->
 
             <!--****************** Analog pins that can be used as digital pins. *************** -->
@@ -11809,7 +11812,7 @@ initlabel="bg.tft-msg" editable-label="yes">
             <!--****************** Extra 'Analog' PWM pins on Arduino Mega only *************** -->
         </BlockFamily>
 		
-        <BlockFamily>
+<!--        <BlockFamily>
             <FamilyMember>df_joystick_module_x</FamilyMember>
             <FamilyMember>df_joystick_module_y</FamilyMember>
         </BlockFamily>
@@ -12256,7 +12259,7 @@ initlabel="bg.tft-msg" editable-label="yes">
             <FamilyMember>Midi_A</FamilyMember>
             <FamilyMember>Midi_AS</FamilyMember>
             <FamilyMember>Midi_B</FamilyMember>
-        </BlockFamily>
+        </BlockFamily>-->
         <!--MOTORS-->
         <BlockFamily>
             <FamilyMember>Engine_ForwardDistance</FamilyMember>
@@ -12378,6 +12381,7 @@ initlabel="bg.tft-msg" editable-label="yes">
             <!--242 123 99-->
             <BlockDrawer button-color="242 123 99" name="bd.sensors">
                 <BlockGenusMember>sensor_button</BlockGenusMember>
+                <BlockGenusMember>buttonD12</BlockGenusMember>
                 <BlockGenusMember>little_bits_lightsensor</BlockGenusMember>
                 <BlockGenusMember>little_bits_microphone</BlockGenusMember>
                 <BlockGenusMember>little_bits_pulse</BlockGenusMember>
@@ -12409,6 +12413,8 @@ initlabel="bg.tft-msg" editable-label="yes">
             <BlockDrawer button-color="190 30 180" name="bd.diode">
                 <BlockGenusMember>justled</BlockGenusMember>
                 <BlockGenusMember>led_blink</BlockGenusMember>
+                <BlockGenusMember>ledD13</BlockGenusMember>
+                <BlockGenusMember>blink_ledD13</BlockGenusMember>
                 <BlockGenusMember>pwmled</BlockGenusMember>
                 <BlockGenusMember>rgb_led</BlockGenusMember>
                 <BlockGenusMember>rgb_led_blink</BlockGenusMember>

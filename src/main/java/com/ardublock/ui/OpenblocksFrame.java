@@ -4,8 +4,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Formatter;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
@@ -40,12 +42,17 @@ import com.mit.blocks.workspace.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
 
 public class OpenblocksFrame extends JFrame {
 
     private static final long serialVersionUID = 2841155965906223806L;
+
+    //время для функции вызова автосохранения
+    public static int timeDelay = 5;
 
     private Context context;
     private JFileChooser fileChooser;
@@ -61,7 +68,6 @@ public class OpenblocksFrame extends JFrame {
     private ResourceBundle uiMessageBundle;
 
     private boolean controllerIsShown = true;
-
     public void addListener(OpenblocksFrameListener ofl) {
         context.registerOpenblocksFrameListener(ofl);
     }
@@ -86,6 +92,10 @@ public class OpenblocksFrame extends JFrame {
         return title;
 
     }
+
+
+
+    String user;
 
     public OpenblocksFrame() {
         context = Context.getContext();
@@ -114,7 +124,51 @@ public class OpenblocksFrame extends JFrame {
         fileChooser.setFileFilter(ffilter);
         fileChooser.addChoosableFileFilter(ffilter);
 
+
         initOpenBlocks();
+
+
+        user = System.getProperty("user.name");
+        System.out.println(user);
+
+
+        try {
+            File file = new File("C:\\Users\\"+user+"\\Documents\\saver.abp");
+
+            if(file.exists()){
+
+            }else {
+                Formatter fileCreator = new Formatter("C:\\Users\\"+user+"\\Documents\\saver.abp");
+                fileCreator.close();
+                Formatter fileCreator2 = new Formatter("C:\\Users\\"+user+"\\Documents\\beforeDelete.abp");
+                fileCreator2.close();
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        //TODO: ok all, funcs i need to save and load in this class , see in docs TimerTask is asynchronous or not?
+        //make public static var to set time to timer
+        //see screenshots on my phone
+        Thread timeToSave = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Timer timer = new Timer();
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    @Override
+                    public void run() {
+
+                        writeFileAndUpdateFrame(getArduBlockString(), new File("C:\\Users\\Public\\saver.abp"));
+                        System.out.println("delayed and worked successfully");
+                    }
+                },1000*60*2,1000*60*timeDelay);
+            }
+        });
+        //timeToSave.start();
+
+
     }
 
     private void initOpenBlocks() {
@@ -140,7 +194,6 @@ public class OpenblocksFrame extends JFrame {
         JMenuItem serialMonitorItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.serialMonitor"));
         JMenuItem saveImageItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveImage"));
 
-        //JMenuItem deleteAll = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveImage"));
         newItem.addActionListener(new NewButtonListener(this));
         KeyStroke newButStr = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK);
         newItem.setAccelerator(newButStr);
@@ -250,7 +303,7 @@ public class OpenblocksFrame extends JFrame {
         ImageIcon mLogo = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(
                 "com/ardublock/block/mainLogo2.png")
         );
-        Image image = mLogo.getImage().getScaledInstance(180, standartNorthPanelSize,
+        Image image = mLogo.getImage().getScaledInstance(137, standartNorthPanelSize,
                 java.awt.Image.SCALE_SMOOTH);
         mLogo = new ImageIcon(image);
         mainLogo.setIcon(mLogo);
@@ -290,6 +343,27 @@ public class OpenblocksFrame extends JFrame {
         infoLabel.setForeground(Color.white);
 
         //<editor-fold defaultstate="collapsed" desc="Buttons images and listners">
+        ImageButton reloadDeleted = new ImageButton(
+                "reloadDeleted",
+                "com/ardublock/block/buttons/newA.jpg",
+                "com/ardublock/block/buttons/newB.jpg",
+                infoLabel
+        );
+
+        reloadDeleted.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    context.loadArduBlockFile(new File("C:\\Users\\"+user+"\\Documents\\beforeDelete.abp"));
+                    context.setWorkspaceChanged(false);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+
         ImageButton deleteAll = new ImageButton(
                 "deleteAllBlocks",
                 "com/ardublock/block/buttons/newA.jpg",
@@ -300,6 +374,7 @@ public class OpenblocksFrame extends JFrame {
         deleteAll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                writeFileAndUpdateFrame(getArduBlockString(), new File("C:\\Users\\"+user+"\\Documents\\beforeDelete.abp"));
                 deleteAllBlocks();
             }
         });
@@ -492,10 +567,43 @@ public class OpenblocksFrame extends JFrame {
         this.add(northPanel, BorderLayout.NORTH);
         this.add(workspace, BorderLayout.CENTER);
 
-        //GlobalLayaredPane.add(GlobalPanel, JLayeredPane.DEFAULT_LAYER, -1);
-        //this.setGlassPane(pan);
-        //this.add(GlobalLayaredPane, BorderLayout.CENTER);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowActivated(WindowEvent e) {
+                super.windowActivated(e);
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                super.windowDeactivated(e);
+                workspace.deactiveCPopupMenu();
+            }
+        });
+
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+        });
     }
+
+
 
     // <editor-fold defaultstate="collapsed" desc="Buttons listners">
     public void doOpenArduBlockFile() {
@@ -571,6 +679,7 @@ public class OpenblocksFrame extends JFrame {
 
     private boolean chooseFileAndSave(String ardublockString) {
         File saveFile = letUserChooseSaveFile();
+        System.out.println(saveFile.getAbsolutePath());
         saveFile = checkFileSuffix(saveFile);
         if (saveFile == null) {
             return false;
@@ -579,6 +688,8 @@ public class OpenblocksFrame extends JFrame {
         if (saveFile.exists() && !askUserOverwriteExistedFile()) {
             return false;
         }
+
+        System.out.println(ardublockString+saveFile.getPath().toString());
 
         writeFileAndUpdateFrame(ardublockString, saveFile);
         return true;
@@ -686,6 +797,8 @@ public class OpenblocksFrame extends JFrame {
             return new File(filePath + ".abp");
         }
     }
+
+
     // </editor-fold>
 
     public Context getContext() {
@@ -766,4 +879,19 @@ public class OpenblocksFrame extends JFrame {
             button.doClick();
         }
     }
+
+    Thread timerSave = new Thread(new Runnable() {
+        @Override
+        public void run() {
+
+
+            chooseFileAndSave("backupSave.abp");
+        }
+    });
+
+
+
+
+
+
 }
