@@ -21,6 +21,9 @@ import java.util.TreeSet;
 
 import javax.swing.*;
 
+import com.mit.blocks.codeblocks.BlockConnector;
+import com.mit.blocks.codeblocks.BlockLink;
+import com.mit.blocks.codeblocks.BlockLinkChecker;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -1156,40 +1159,38 @@ class PageJComponent extends JLayeredPane implements RBParent {
         InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = getActionMap();
 
-
-
-
-
-        KeyStroke keyDell = KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.CTRL_DOWN_MASK);
-        //im.put(keyDell,"delete");
-
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,0,true),"delete");
-
-        //im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C & KeyEvent.CTRL_DOWN_MASK, 0, true), "released");
 
         am.put("delete", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("delete");
-
                 //RenderableBlock.currentBlock.removeChildBlocks();
-
                 removeChild(RenderableBlock.currentBlock);
-
 
             }
         });
     }
 
 
-    void removeChild(JComponent component){
+    void removeChild(RenderableBlock component){
 
         //List<JComponent> connectors = RenderableBlock.currentBlock.getConnectors();
+        component.dellAction = true;
 
-
+        BlockConnector plug = BlockLinkChecker.getPlugEquivalent(component.draggedBlock);
+        if(plug!=null) {
+            Block parent = RenderableBlock.workspaceref.getEnv().getBlock(
+                    plug.getBlockID());
+            BlockConnector socket = parent.getConnectorTo(component.blockID);
+            BlockLink link = BlockLink.getBlockLink(RenderableBlock.workspaceref, component.draggedBlock,
+                    parent, plug, socket);
+            link.disconnect();
+        }
         this.remove(component);
         this.invalidate();
         this.repaint();
+        component.dellAction = false;
     }
 
 
@@ -1198,8 +1199,6 @@ class PageJComponent extends JLayeredPane implements RBParent {
      */
     @Override
     public void paintComponent(Graphics g) {
-
-
 
         Graphics2D g2 = (Graphics2D) g;
         //paint page
