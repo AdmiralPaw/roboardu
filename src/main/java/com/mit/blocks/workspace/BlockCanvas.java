@@ -1,6 +1,7 @@
 package com.mit.blocks.workspace;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -78,6 +79,7 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
         canvas.setBackground(Color.white);
         canvas.setOpaque(true);
         PageChangeEventManager.addPageChangeListener(this);
+
     }
 
     /**

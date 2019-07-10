@@ -1923,6 +1923,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         }
     }
 
+
     // /////////////////
     // MOUSE EVENTS //
     // /////////////////
@@ -1951,6 +1952,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 if (link == null) {
                     widget = lastDragWidget;
                     stopDragging(this, widget);
+                    workspace.setBasket(false);
                 } // otherwise, if a link WAS found...
                 else {
 
@@ -1974,6 +1976,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                     }
 
                     // drop the block and connect its link
+                    workspace.setBasket(false);
                     stopDragging(this, widget);
                     link.connect();
                     workspace.notifyListeners(new WorkspaceEvent(workspace,
@@ -2055,6 +2058,8 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                             widget, link, WorkspaceEvent.BLOCKS_DISCONNECTED));
                 }
                 startDragging(this, widget);
+                workspace.setBasket(true);
+
             }
 
             // drag this block and all attached to it
