@@ -84,7 +84,7 @@ public class OpenblocksFrame extends JFrame {
 
 
 
-
+    String user;
 
     public OpenblocksFrame() {
         context = Context.getContext();
@@ -111,19 +111,19 @@ public class OpenblocksFrame extends JFrame {
         initOpenBlocks();
 
 
-        String user = System.getProperty("user.name");
+        user = System.getProperty("user.name");
         System.out.println(user);
 
 
         try {
-            File file = new File("C:\\Users\\Public\\saver.abp");
+            File file = new File("C:\\Users\\"+user+"\\Documents\\saver.abp");
 
             if(file.exists()){
 
             }else {
-                Formatter fileCreator = new Formatter("C:\\Users\\Public\\saver.abp");
+                Formatter fileCreator = new Formatter("C:\\Users\\"+user+"\\Documents\\saver.abp");
                 fileCreator.close();
-                Formatter fileCreator2 = new Formatter("C:\\Users\\Public\\beforeDelete.abp");
+                Formatter fileCreator2 = new Formatter("C:\\Users\\"+user+"\\Documents\\beforeDelete.abp");
                 fileCreator2.close();
             }
 
@@ -346,7 +346,7 @@ public class OpenblocksFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
 //                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
-                    context.loadArduBlockFile(new File("C:\\Users\\Public\\beforeDelete.abp"));
+                    context.loadArduBlockFile(new File("C:\\Users\\"+user+"\\Documents\\beforeDelete.abp"));
                     context.setWorkspaceChanged(false);
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -365,7 +365,7 @@ public class OpenblocksFrame extends JFrame {
         deleteAll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                writeFileAndUpdateFrame(getArduBlockString(), new File("C:\\Users\\Public\\beforeDelete.abp"));
+                writeFileAndUpdateFrame(getArduBlockString(), new File("C:\\Users\\"+user+"\\Documents\\beforeDelete.abp"));
                 deleteAllBlocks();
             }
         });
