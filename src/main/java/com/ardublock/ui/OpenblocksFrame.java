@@ -51,15 +51,15 @@ public class OpenblocksFrame extends JFrame {
     private JFileChooser fileChooser;
     private FileFilter ffilter;
     private ErrWindow errWindow;
-    private Settings settings;
+    public Settings settings;
     public JLayeredPane GlobalLayaredPane;
-    
+
     public JPanel northPanelCenter = null;
     public JPanel logo;
     public JPanel rightPanel;
-    
+
     private ResourceBundle uiMessageBundle;
-    
+
     private boolean controllerIsShown = true;
 
     public void addListener(OpenblocksFrameListener ofl) {
@@ -89,10 +89,16 @@ public class OpenblocksFrame extends JFrame {
 
     public OpenblocksFrame() {
         context = Context.getContext();
-        settings = new Settings();
+        settings = new Settings(this);
         this.setTitle(makeFrameTitle());
         this.setSize(new Dimension(1024, 760));
+        // Определяем разрешение экрана монитора
+        Dimension sSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Задаем размер
+        this.setSize(sSize);
         this.setExtendedState(MAXIMIZED_BOTH);
+        //this.setResizable(false);
+        //this.setUndecorated(true);
         this.setLayout(new BorderLayout());
         //put the frame to the center of screen
         this.setLocationRelativeTo(null);
@@ -107,7 +113,7 @@ public class OpenblocksFrame extends JFrame {
         ffilter = new FileNameExtensionFilter(uiMessageBundle.getString("ardublock.file.suffix"), "abp");
         fileChooser.setFileFilter(ffilter);
         fileChooser.addChoosableFileFilter(ffilter);
-        
+
         initOpenBlocks();
     }
 
@@ -487,7 +493,6 @@ public class OpenblocksFrame extends JFrame {
         this.add(workspace, BorderLayout.CENTER);
 
         //GlobalLayaredPane.add(GlobalPanel, JLayeredPane.DEFAULT_LAYER, -1);
-
         //this.setGlassPane(pan);
         //this.add(GlobalLayaredPane, BorderLayout.CENTER);
     }

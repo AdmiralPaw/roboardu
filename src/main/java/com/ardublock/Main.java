@@ -5,6 +5,7 @@ import java.awt.event.WindowEvent;
 import com.ardublock.core.Context;
 import com.ardublock.ui.ConsoleFrame;
 import com.ardublock.ui.OpenblocksFrame;
+import com.ardublock.ui.Settings;
 import com.ardublock.ui.TutorialPane;
 import java.awt.Dimension;
 import java.util.logging.Level;
@@ -56,11 +57,14 @@ public class Main {
         openblocksFrame.setVisible(true);
         openblocksFrame.repaint();
         
-        TutorialPane pan = new TutorialPane(openblocksFrame);
-        openblocksFrame.setGlassPane(pan);
-        pan.setOpaque(false);
-        pan.setVisible(true);
-        openblocksFrame.getGlassPane().setVisible(true);
+//        Settings settings = openblocksFrame.settings;
+//        if (settings.isFirstLaunch()) {
+//            TutorialPane pan = new TutorialPane(openblocksFrame);
+//            openblocksFrame.setGlassPane(pan);
+//            pan.setOpaque(false);
+//            pan.setVisible(true);
+//            openblocksFrame.getGlassPane().setVisible(true);
+//        }
     }
 
     public void shutdown() {

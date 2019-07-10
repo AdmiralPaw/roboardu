@@ -18,7 +18,7 @@ import javax.swing.Timer;
  *
  * @author User
  */
-public class myPanel extends JPanel {
+public class AnimPanel extends JPanel {
 
     private double time = 1;
     private double fps = time * 24;
@@ -29,7 +29,7 @@ public class myPanel extends JPanel {
     
     private OpenblocksFrame openblocksFrame;
     
-    public myPanel(OpenblocksFrame openblocksFrame, JComponent component,
+    public AnimPanel(OpenblocksFrame openblocksFrame, JComponent component,
             Dimension size, Point point) {
         this.openblocksFrame = openblocksFrame;
         this.myColor = new Color(0, 0, 0, 128);
@@ -43,9 +43,6 @@ public class myPanel extends JPanel {
         this.setOpaque(false);
         this.setSize(size);
         this.setPreferredSize(size);
-        int x = component.getLocation().x;
-        int y = component.getLocation().y + 
-                openblocksFrame.getJMenuBar().getSize().height;
         this.setLocation(point);
         this.repaint();
     }
@@ -69,7 +66,14 @@ public class myPanel extends JPanel {
         }
         this.updateUI();
     }
-
+    
+    public void repaintPanel(Dimension size, Point location){
+        this.setSize(size);
+        this.setPreferredSize(size);
+        this.setLocation(location);
+        this.repaint();
+    }
+    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
