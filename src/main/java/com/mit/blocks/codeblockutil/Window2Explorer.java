@@ -137,7 +137,6 @@ public class Window2Explorer extends JPanel implements Explorer {
     int iterationCount = 0;
     public void setDrawersCard(List<? extends Canvas> items) {
         iterationCount++;
-        System.out.println("set drawers card");
         canvases.clear();
         buttonPane.removeAll();
         int size = buttonHeight * 24;
@@ -176,8 +175,8 @@ public class Window2Explorer extends JPanel implements Explorer {
             selectCanvas(0);
 
         }
-        System.out.println(items.size());
         if(iterationCount==16) {
+            long time1 = System.currentTimeMillis();
             for (Canvas unit : items) {
                 for (Component comp : unit.getJComponent().getComponents()) {
                     if (comp instanceof FactoryRenderableBlock) {
