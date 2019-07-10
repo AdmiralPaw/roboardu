@@ -56,7 +56,6 @@ public class OpenblocksFrame extends JFrame {
     private ResourceBundle uiMessageBundle;
 
     private boolean controllerIsShown = true;
-
     public void addListener(OpenblocksFrameListener ofl) {
         context.registerOpenblocksFrameListener(ofl);
     }
@@ -107,6 +106,7 @@ public class OpenblocksFrame extends JFrame {
         ffilter = new FileNameExtensionFilter(uiMessageBundle.getString("ardublock.file.suffix"), "abp");
         fileChooser.setFileFilter(ffilter);
         fileChooser.addChoosableFileFilter(ffilter);
+
 
         initOpenBlocks();
 
@@ -294,7 +294,7 @@ public class OpenblocksFrame extends JFrame {
         ImageIcon mLogo = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(
                 "com/ardublock/block/mainLogo2.png")
         );
-        Image image = mLogo.getImage().getScaledInstance(180, standartNorthPanelSize,
+        Image image = mLogo.getImage().getScaledInstance(137, standartNorthPanelSize,
                 java.awt.Image.SCALE_SMOOTH);
         mLogo = new ImageIcon(image);
         mainLogo.setIcon(mLogo);
@@ -557,6 +557,41 @@ public class OpenblocksFrame extends JFrame {
         this.setJMenuBar(menuBar);
         this.add(northPanel, BorderLayout.NORTH);
         this.add(workspace, BorderLayout.CENTER);
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowActivated(WindowEvent e) {
+                super.windowActivated(e);
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                super.windowDeactivated(e);
+                workspace.deactiveCPopupMenu();
+            }
+        });
+
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+        });
     }
 
 
@@ -753,6 +788,8 @@ public class OpenblocksFrame extends JFrame {
             return new File(filePath + ".abp");
         }
     }
+
+
     // </editor-fold>
 
     class ImageButton extends JButton {
