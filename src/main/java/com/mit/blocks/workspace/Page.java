@@ -176,6 +176,12 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
             this.pageJComponent.add(collapse);
         }
         this.pageJComponent.setFullView(inFullview);
+        this.pageJComponent.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+        });
 
 
     }
@@ -599,6 +605,8 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
             mouseIsInPage = true;
             this.pageJComponent.repaint();
         }
+        workspace.deactiveCPopupMenu();
+
     }
 
     /** @overrides WorkspaceWidget.blockEntered() */

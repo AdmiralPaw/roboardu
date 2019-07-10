@@ -101,6 +101,7 @@ public class CPopupMenu extends JPopupMenu implements ActionListener {
 
     public void show(Component c, int x, int y)
     {
+        workspace.deactiveCPopupMenu();
         deactiveAllItems();
         super.show(c, x, y);
         workspace.setActiveCPopupMenu(this);
@@ -134,7 +135,6 @@ public class CPopupMenu extends JPopupMenu implements ActionListener {
         {
             if (item instanceof CMenuItem)
             {
-                System.out.println(1);
                 ((CMenuItem) item).focus = false;
             }
         }
