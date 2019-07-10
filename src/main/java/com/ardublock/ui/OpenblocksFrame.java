@@ -149,7 +149,6 @@ public class OpenblocksFrame extends JFrame {
         });
         timeToSave.start();
 
-
     }
 
     private void initOpenBlocks() {

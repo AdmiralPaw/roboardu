@@ -88,11 +88,12 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * The workspace in use
      */
     protected final Workspace workspace;
+    public  static Workspace workspaceref ;
 
     /**
      * BlockID of this. MAY BE Block.NULL
      */
-    final Long blockID;
+    final public Long blockID;
     /**
      * Parent workspace widget. May be null
      */
@@ -233,6 +234,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             Long blockID, boolean isLoading) {
         super();
         this.workspace = workspace;
+        workspaceref= this.workspace;
 
         InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = getActionMap();
@@ -2006,6 +2008,10 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         workspace.getMiniMap().repaint();
     }
 
+
+
+
+    public Block draggedBlock;
     public void mouseDragged(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {
             if (!pickedUp) {
@@ -2036,11 +2042,13 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
             // if this is the first call to mouseDragged
             if (!dragging) {
+                System.out.println("drag");
                 Block block = getBlock();
+                draggedBlock = block;
                 BlockConnector plug = BlockLinkChecker.getPlugEquivalent(block);
                 if (plug != null && plug.hasBlock()) {
                     Block parent = workspace.getEnv().getBlock(
-                            plug.getBlockID());
+                    plug.getBlockID());
                     BlockConnector socket = parent.getConnectorTo(blockID);
                     BlockLink link = BlockLink.getBlockLink(workspace, block,
                             parent, plug, socket);
@@ -2069,6 +2077,8 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
     // show the pulldown icon if hasComboPopup = true
     public void mouseEntered(MouseEvent e) {
+
+        draggedBlock = getBlock();
 
         currentBlock = this;
 
@@ -2517,7 +2527,10 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         }
     }
 
+    public boolean dellAction = false;
     private ConnectorTag getConnectorTag(BlockConnector socket) {
+
+
         if (socket == null) {
             throw new RuntimeException("Socket may not be null");
         }
@@ -2535,6 +2548,8 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 return tag;
             }
         }
+
+
         return null;
     }
 
