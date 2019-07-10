@@ -234,8 +234,6 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         super();
         this.workspace = workspace;
 
-
-
         InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = getActionMap();
 

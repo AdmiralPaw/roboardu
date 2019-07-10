@@ -44,6 +44,9 @@ public class OpenblocksFrame extends JFrame {
 
     private static final long serialVersionUID = 2841155965906223806L;
 
+    //время для функции вызова автосохранения
+    public static int timeDelay = 5;
+
     private Context context;
     private JFileChooser fileChooser;
     private FileFilter ffilter;
@@ -108,13 +111,20 @@ public class OpenblocksFrame extends JFrame {
         initOpenBlocks();
 
 
+        String user = System.getProperty("user.name");
+        System.out.println(user);
+
+
         try {
             File file = new File("C:\\Users\\Public\\saver.abp");
+
             if(file.exists()){
 
             }else {
                 Formatter fileCreator = new Formatter("C:\\Users\\Public\\saver.abp");
                 fileCreator.close();
+                Formatter fileCreator2 = new Formatter("C:\\Users\\Public\\beforeDelete.abp");
+                fileCreator2.close();
             }
 
         } catch (FileNotFoundException e) {
@@ -136,7 +146,7 @@ public class OpenblocksFrame extends JFrame {
                         writeFileAndUpdateFrame(getArduBlockString(), new File("C:\\Users\\Public\\saver.abp"));
                         System.out.println("delayed and worked successfully");
                     }
-                },1000*15,1000*10*10);
+                },1000*60*2,1000*60*timeDelay);
             }
         });
         //timeToSave.start();
@@ -168,7 +178,6 @@ public class OpenblocksFrame extends JFrame {
         JMenuItem serialMonitorItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.serialMonitor"));
         JMenuItem saveImageItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveImage"));
 
-        //JMenuItem deleteAll = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveImage"));
 
 
 
@@ -325,6 +334,26 @@ public class OpenblocksFrame extends JFrame {
 
         //<editor-fold defaultstate="collapsed" desc="Buttons images and listners">
 
+        ImageButton reloadDeleted = new ImageButton(
+                "reloadDeleted",
+                "com/ardublock/block/buttons/newA.jpg",
+                "com/ardublock/block/buttons/newB.jpg",
+                infoLabel
+        );
+
+        reloadDeleted.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    context.loadArduBlockFile(new File("C:\\Users\\Public\\beforeDelete.abp"));
+                    context.setWorkspaceChanged(false);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+        });
 
         ImageButton deleteAll = new ImageButton(
                 "deleteAllBlocks",
@@ -336,6 +365,7 @@ public class OpenblocksFrame extends JFrame {
         deleteAll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                writeFileAndUpdateFrame(getArduBlockString(), new File("C:\\Users\\Public\\beforeDelete.abp"));
                 deleteAllBlocks();
             }
         });
@@ -500,8 +530,10 @@ public class OpenblocksFrame extends JFrame {
         buttons.add(websiteButton);
         buttons.add(infoLabel);
 
+
         //TODO: нужна иконка для этой кнопки
         buttons.add(deleteAll);
+        buttons.add(reloadDeleted);
 
         panelWithConfigButton.add(configButton);
 
@@ -526,6 +558,8 @@ public class OpenblocksFrame extends JFrame {
         this.add(northPanel, BorderLayout.NORTH);
         this.add(workspace, BorderLayout.CENTER);
     }
+
+
 
     // <editor-fold defaultstate="collapsed" desc="Buttons listners">
     public void doOpenArduBlockFile() {
