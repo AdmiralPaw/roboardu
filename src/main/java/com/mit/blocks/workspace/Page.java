@@ -1174,10 +1174,12 @@ class PageJComponent extends JLayeredPane implements RBParent {
         if(plug!=null) {
             Block parent = RenderableBlock.workspaceref.getEnv().getBlock(
                     plug.getBlockID());
-            BlockConnector socket = parent.getConnectorTo(component.blockID);
-            BlockLink link = BlockLink.getBlockLink(RenderableBlock.workspaceref, component.draggedBlock,
-                    parent, plug, socket);
-            link.disconnect();
+            if (parent!=null) {
+                BlockConnector socket = parent.getConnectorTo(component.blockID);
+                BlockLink link = BlockLink.getBlockLink(RenderableBlock.workspaceref, component.draggedBlock,
+                        parent, plug, socket);
+                link.disconnect();
+            }
         }
         this.remove(component);
         this.invalidate();
