@@ -37,14 +37,6 @@ public class Window2Explorer extends JPanel implements Explorer {
     //и добавление в него компонентов из переменной dictionary соответствующих блоков
     public static JComponent cdir;
 
-    public static int indexOfCanvas;
-
-    public static JComponent firstCanvas;
-
-    //var for knoving current canvas in method set drawers card in kesha code
-    private int currentCanvas = 0;
-    boolean was = false;
-    boolean getedParent = false;
 
     public static Map<String, JComponent> dictionary = new HashMap<String, JComponent>();
     public static JComponent currentDir, canvasPanel;
