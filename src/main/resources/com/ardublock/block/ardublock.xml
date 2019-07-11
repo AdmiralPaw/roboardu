@@ -11637,7 +11637,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <text>buttonD12</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="number"
+                <BlockConnector connector-type="boolean"
                                                 connector-kind="plug">
                 </BlockConnector>
             </BlockConnectors>
