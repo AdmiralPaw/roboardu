@@ -3,12 +3,9 @@ package com.ardublock.ui;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
-import java.util.Formatter;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -36,7 +33,6 @@ import com.mit.blocks.workspace.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
 
@@ -85,9 +81,25 @@ public class OpenblocksFrame extends JFrame {
 
 
 
+    //TODO: доделать список последних файлов
     String user;
-
+    public static String recentFile;
     public OpenblocksFrame() {
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("recentFiles.txt");
+        Scanner scanner = new Scanner(inputStream);
+
+
+        try {
+            if (scanner.hasNextLine()) {
+                String recentFileName = scanner.nextLine();
+                recentFile = recentFileName;
+            }
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         context = Context.getContext();
         settings = new Settings();
         this.setTitle(makeFrameTitle());
