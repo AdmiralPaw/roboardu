@@ -24,6 +24,7 @@ import javax.swing.*;
 import com.mit.blocks.codeblocks.BlockConnector;
 import com.mit.blocks.codeblocks.BlockLink;
 import com.mit.blocks.codeblocks.BlockLinkChecker;
+import com.mit.blocks.renderable.ConnectorTag;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -1175,13 +1176,31 @@ class PageJComponent extends JLayeredPane implements RBParent {
 
     void removeChild(RenderableBlock component){
 
-        //List<JComponent> connectors = RenderableBlock.currentBlock.getConnectors();
+        //component.blockDisconnected();
+
+        List<ConnectorTag> connectors =  component.getConnectors();
+
+        for(ConnectorTag conn:connectors){
+            System.out.println("_"+conn.getSocket().getKind()+"_");
+
+                if (conn.getSocket().getKind().equals("number")) {
+                    System.out.println("delete connectored");
+                    RenderableBlock block = RenderableBlock.workspaceref.getEnv().getRenderableBlock(
+                            conn.getSocket().getBlockID());
+                    try {
+                        this.remove(block);
+                    }catch (Exception e){
+                        System.out.println("exptn bleaa");
+                    }
+                }
+
+        }
+
         component.dellAction = true;
 
         BlockConnector plug = BlockLinkChecker.getPlugEquivalent(component.draggedBlock);
         if(plug!=null) {
-            Block parent = RenderableBlock.workspaceref.getEnv().getBlock(
-                    plug.getBlockID());
+            Block parent = RenderableBlock.workspaceref.getEnv().getBlock(plug.getBlockID());
             if (parent!=null) {
                 BlockConnector socket = parent.getConnectorTo(component.blockID);
                 BlockLink link = BlockLink.getBlockLink(RenderableBlock.workspaceref, component.draggedBlock,

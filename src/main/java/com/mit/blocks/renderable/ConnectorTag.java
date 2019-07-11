@@ -6,7 +6,7 @@ import java.awt.geom.Point2D;
 
 import com.mit.blocks.codeblocks.BlockConnector;
 
-class ConnectorTag  {
+public class ConnectorTag  {
 
     private double zoom = 1.0;
     private SocketLabel label;
@@ -31,7 +31,7 @@ class ConnectorTag  {
         return (int) (x * zoom);
     }
 
-    BlockConnector getSocket() {
+    public BlockConnector getSocket() {
         return connector;
     }
 
