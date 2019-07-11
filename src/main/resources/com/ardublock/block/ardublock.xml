@@ -1590,12 +1590,12 @@ file before genus A is specified./ We impose this requirement so that sanity che
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
-                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
+                <BlockConnector connector-type="boolean" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="boolean" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 
-        <BlockGenus name="greater_equal" kind="function" color="90 160 85" >
+        <BlockGenus name="greater_equal" kind="function" color="90 160 85" initlabel="bg.greater_equal">
             <BlockConnectors>
                 <BlockConnector connector-type="boolean" connector-kind="plug">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
@@ -1643,8 +1643,8 @@ file before genus A is specified./ We impose this requirement so that sanity che
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
-                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
+                <BlockConnector connector-type="boolean" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="boolean" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 
@@ -1850,8 +1850,8 @@ file before genus A is specified./ We impose this requirement so that sanity che
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
-                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
+                <BlockConnector connector-type="poly" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="poly" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 		
@@ -1866,8 +1866,8 @@ file before genus A is specified./ We impose this requirement so that sanity che
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
-                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
+                <BlockConnector connector-type="poly" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="poly" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 		
@@ -1880,8 +1880,8 @@ file before genus A is specified./ We impose this requirement so that sanity che
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
-                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
+                <BlockConnector connector-type="string" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="string" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>
 		
@@ -1906,8 +1906,8 @@ file before genus A is specified./ We impose this requirement so that sanity che
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
-                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
+                <BlockConnector connector-type="string" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="string" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>	
 		
@@ -1920,8 +1920,8 @@ file before genus A is specified./ We impose this requirement so that sanity che
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="a"/>
-                <BlockConnector connector-type="number" connector-kind="socket" label="b"/>
+                <BlockConnector connector-type="string" connector-kind="socket" label="a"/>
+                <BlockConnector connector-type="string" connector-kind="socket" label="b"/>
             </BlockConnectors>
         </BlockGenus>	
 
