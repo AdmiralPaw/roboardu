@@ -731,7 +731,8 @@ public class OpenblocksFrame extends JFrame {
                 //break;
                 case JOptionPane.NO_OPTION:
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    context.resetWorksapce();
+                    //context.resetWorksapce();
+                    context.loadFreshWorkSpace();
                     context.setWorkspaceChanged(false);
                     this.setTitle(this.makeFrameTitle());
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -742,7 +743,8 @@ public class OpenblocksFrame extends JFrame {
         } else {
             // If workspace unchanged just start a new Ardublock
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            context.resetWorksapce();
+            //context.resetWorksapce();
+            context.loadFreshWorkSpace();
             context.setWorkspaceChanged(false);
             this.setTitle(this.makeFrameTitle());
             this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
