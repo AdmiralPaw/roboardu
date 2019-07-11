@@ -25,6 +25,8 @@ public class WorkspaceEnvironment {
 
 	private final Map<Long, RenderableBlock> allRenderableBlocks = new HashMap<Long, RenderableBlock>();
 
+
+
     // RenderableBlock
 
     /**

@@ -11620,9 +11620,7 @@ initlabel="bg.tft-msg" editable-label="yes">
         </BlockGenus>
                 
         <BlockGenus name="sensorTemperature" kind="data" color="242 123 99" initlabel="bg.sensorTemperature" editable-label="no">
-            <description>
-                <text>Gives percentage of potentiometer</text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="number"
                                                 connector-kind="plug">

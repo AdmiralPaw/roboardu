@@ -176,11 +176,13 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     private final ConnectorTag beforeTag;
     private List<ConnectorTag> socketTags = new ArrayList<ConnectorTag>();
 
-
-
-    public  void removeChildBlocks(){
-        socketTags = new ArrayList<ConnectorTag>();
-    }
+//    public void deleteConnectors(){
+//
+//    }
+//
+//    public  void removeChildBlocks(){
+//        socketTags = new ArrayList<ConnectorTag>();
+//    }
 
     public List<ConnectorTag> getConnectors(){
         return this.socketTags;
@@ -213,17 +215,13 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         addKeyListener(this);
         super.addKeyListener(this);
 
-
         setFocusable(true);
         requestFocusInWindow();
-
-
     }
 
     /**
      * Constructs a new RenderableBlock instance with the specified parent
      * WorkspaceWidget and Long blockID of its associated Block
-     *
      * @param workspace The workspace in use
      * @param parent the WorkspaceWidget containing this
      * @param blockID Long Block id of associated with this
@@ -240,10 +238,10 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         ActionMap am = getActionMap();
 
 
-        KeyStroke keyV = KeyStroke.getKeyStroke(KeyEvent.VK_V,InputEvent.CTRL_DOWN_MASK);
+        KeyStroke keyV = KeyStroke.getKeyStroke(KeyEvent.VK_C,InputEvent.CTRL_DOWN_MASK);
         im.put(keyV,"pressed");
 
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C & KeyEvent.CTRL_DOWN_MASK, 0, true), "released");
+        //im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C & KeyEvent.CTRL_DOWN_MASK, 0, true), "released");
 
         am.put("pressed", new AbstractAction() {
             @Override
@@ -2045,7 +2043,6 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
             // if this is the first call to mouseDragged
             if (!dragging) {
-                System.out.println("drag");
                 Block block = getBlock();
                 draggedBlock = block;
                 BlockConnector plug = BlockLinkChecker.getPlugEquivalent(block);
