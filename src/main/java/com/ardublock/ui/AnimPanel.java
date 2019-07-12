@@ -27,7 +27,7 @@ public class AnimPanel extends JPanel {
     private Timer animationTimerStart = null;
     private Timer animationTimerBack = null;
     private double countOfFrames = fps;
-    boolean animationIsFinished = false;
+    boolean animationIsFinished = true;
     //public TPanel tutorPanel;
     
     private OpenblocksFrame openblocksFrame;

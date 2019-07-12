@@ -33,6 +33,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class Roboscratch implements Tool, OpenblocksFrameListener {
 
@@ -41,6 +43,19 @@ public class Roboscratch implements Tool, OpenblocksFrameListener {
     private Preferences userPrefs;
 
     public void init(Editor editor) {
+        try {
+            UIManager.setLookAndFeel(
+                    UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         if (Roboscratch.editor == null) {
             Roboscratch.editor = editor;
             Roboscratch.openblocksFrame = new ArduBlockToolFrame();
@@ -58,8 +73,8 @@ public class Roboscratch implements Tool, OpenblocksFrameListener {
             //ArduBlockTool.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
             Settings settings = openblocksFrame.settings;
-            TutorialPane tutorialPane = new TutorialPane(openblocksFrame);
             if (settings.isFirstLaunch()) {
+                TutorialPane tutorialPane = new TutorialPane(openblocksFrame);
                 openblocksFrame.setGlassPane(tutorialPane);
                 openblocksFrame.getGlassPane().setVisible(true);
                 openblocksFrame.repaint();

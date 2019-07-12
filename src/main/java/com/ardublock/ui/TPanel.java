@@ -19,8 +19,8 @@ public class TPanel extends JPanel {
     private JTextArea tutorialText;
     private JButton prevButton;
     private JButton nextButton;
-    private int width = 260;
-    private int height = 160;
+    private int width = 300;
+    private int height = 500;
 
     public TPanel(TutorialPane tutorialPane) {
         this.setLayout(null);
@@ -57,20 +57,22 @@ public class TPanel extends JPanel {
         nextButton.setFont(new Font("Impact", Font.PLAIN, 14));
         nextButton.setBorderPainted(false);
         nextButton.setBorder(null);
-        nextButton.setFocusable(false);
+        nextButton.setFocusable(true);
         nextButton.setBackground(Color.white);
         nextButton.setSize(new Dimension(width / 2 - 10, 30));
         nextButton.setPreferredSize(new Dimension(width / 2 - 10, 30));
         this.add(nextButton);
         nextButton.setLocation(width / 2, height - 40);
         //---------------------------------------------
-        this.setSize(new Dimension(300, 250));
+        this.setSize(new Dimension(width, height));
         this.setPreferredSize(new Dimension(300, 250));
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (tutorialPane.activeAnimPanels.get(tutorialPane.iter).animationIsFinished) {
-                    if (tutorialPane.iter < 5) {
+                    if (tutorialPane.iter < tutorialPane.activeAnimPanels.size()) {
+                        tutorialPane.lastIter = tutorialPane.iter; 
                         tutorialPane.iter++;
+                        
                     }
                     tutorialPane.nextTutor();
                 }
@@ -81,6 +83,7 @@ public class TPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (tutorialPane.activeAnimPanels.get(tutorialPane.iter).animationIsFinished) {
                     if (tutorialPane.iter != 0) {
+                        tutorialPane.lastIter = tutorialPane.iter; 
                         tutorialPane.iter--;
                     }
                     tutorialPane.nextTutor();

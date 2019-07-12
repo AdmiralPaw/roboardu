@@ -56,6 +56,7 @@ public class Settings extends JFrame {
                 openblocksFrame.setGlassPane(pan);
                 openblocksFrame.getGlassPane().setVisible(true);
                 openblocksFrame.repaint();
+                openblocksFrame.settings.setVisible(false);
             }
         });
         this.add(panel, BorderLayout.NORTH);
