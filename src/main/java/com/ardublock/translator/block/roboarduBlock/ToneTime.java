@@ -21,7 +21,7 @@ public class ToneTime extends TranslatorBlock
         public static final String TONETIME_FUNC = "void Tone(int port, int frequency, int length)\n" +
             "{\n" +
             "  if(frequency > 20000) frequency = 20000;\n" +
-            "  if(frequency < 0) frequency = 0;\n" +
+            "  if(frequency < 100) frequency = 100;\n" +
             "  tone(port, frequency, length);\n" +
             "}";
 
