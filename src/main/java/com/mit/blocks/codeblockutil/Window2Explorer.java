@@ -168,7 +168,7 @@ public class Window2Explorer extends JPanel implements Explorer {
             selectCanvas(0);
 
         }
-        if(iterationCount==16) {
+        if(iterationCount==18) {
             long time1 = System.currentTimeMillis();
             for (Canvas unit : items) {
                 for (Component comp : unit.getJComponent().getComponents()) {
