@@ -127,8 +127,9 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      */
     public JSplitPane workLayer;
     public JPanel blockCanvasLayer; //Layer with controller
+    public JSplitPane centerPane; 
     private boolean isActiveBasket;
-
+    
     /**
      * MiniMap associated with the blockCanvas
      */
@@ -198,11 +199,6 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         JPanel errPanel = errWindow.getErrPanel();
 
         final JLayeredPane blockCanvasWithDepth = new JLayeredPane();
-
-
-
-
-
         blockCanvasWithDepth.setPreferredSize(new Dimension(300, 500));
         final JPanel level_one = new JPanel();
         level_one.setLayout(new BoxLayout(level_one, BoxLayout.X_AXIS));
@@ -226,7 +222,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
 
         //blockCanvas.getJComponent().setMinimumSize(new Dimension(0, 100));
         //blockCanvas.getJComponent().setPreferredSize(new Dimension(0, 600));
-        final JSplitPane centerPane = new RSplitPane(JSplitPane.VERTICAL_SPLIT, true,
+        centerPane = new RSplitPane(JSplitPane.VERTICAL_SPLIT, true,
                 blockCanvasWithDepth, errPanel);
         centerPane.setOneTouchExpandable(true);
         centerPane.setDividerSize(6);

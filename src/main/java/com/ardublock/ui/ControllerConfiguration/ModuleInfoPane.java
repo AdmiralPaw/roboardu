@@ -74,7 +74,7 @@ public class ModuleInfoPane extends JPanel {
 
                 /*System.out.println("-------------------");
                 for(String s:suitableDict.keySet()){
-                    System.out.println(s);
+                    //System.out.println(s);
                 }
                 System.out.println("-----------------------");*/
 

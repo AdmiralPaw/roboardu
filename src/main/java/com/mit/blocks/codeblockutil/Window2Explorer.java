@@ -152,6 +152,7 @@ public class Window2Explorer extends JPanel implements Explorer {
 
                 public void actionPerformed(ActionEvent e) {
                     selectCanvas(index);
+                    deactiveBasket();
                 }
             });
             butpan.add(button);

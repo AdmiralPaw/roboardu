@@ -31,6 +31,13 @@ import com.ardublock.ui.listener.SaveButtonListener;
 import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
 
 import com.mit.blocks.controller.WorkspaceController;
+
+import com.mit.blocks.workspace.ErrWindow;
+import com.mit.blocks.workspace.SearchBar;
+import com.mit.blocks.workspace.ZoomSlider;
+import com.mit.blocks.workspace.SearchableContainer;
+import com.mit.blocks.workspace.Workspace;
+import java.awt.geom.Area;
 import com.mit.blocks.workspace.*;
 
 import java.beans.PropertyChangeEvent;
@@ -52,7 +59,12 @@ public class OpenblocksFrame extends JFrame {
     private JFileChooser fileChooser;
     private FileFilter ffilter;
     private ErrWindow errWindow;
-    private Settings settings;
+    public Settings settings;
+    public JLayeredPane GlobalLayaredPane;
+
+    public JPanel northPanelCenter = null;
+    public JPanel logo;
+    public JPanel rightPanel;
 
     private ResourceBundle uiMessageBundle;
 
@@ -61,8 +73,7 @@ public class OpenblocksFrame extends JFrame {
         context.registerOpenblocksFrameListener(ofl);
     }
 
-
-    public static void deleteAllBlocks(){
+    public static void deleteAllBlocks() {
         Page.blocksContainer.removeAll();
         Page.blocksContainer.revalidate();
         Page.blocksContainer.repaint();
@@ -89,10 +100,16 @@ public class OpenblocksFrame extends JFrame {
 
     public OpenblocksFrame() {
         context = Context.getContext();
-        settings = new Settings();
+        settings = new Settings(this);
         this.setTitle(makeFrameTitle());
         this.setSize(new Dimension(1024, 760));
+        // Определяем разрешение экрана монитора
+        Dimension sSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Задаем размер
+        this.setSize(sSize);
         this.setExtendedState(MAXIMIZED_BOTH);
+        //this.setResizable(false);
+        //this.setUndecorated(true);
         this.setLayout(new BorderLayout());
         //put the frame to the center of screen
         this.setLocationRelativeTo(null);
@@ -153,7 +170,6 @@ public class OpenblocksFrame extends JFrame {
 
     private void initOpenBlocks() {
 
-
         final Context context = Context.getContext();
         final Workspace workspace = context.getWorkspace();
         errWindow = workspace.getErrWindow();
@@ -175,10 +191,6 @@ public class OpenblocksFrame extends JFrame {
         JMenuItem serialMonitorItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.serialMonitor"));
         JMenuItem saveImageItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveImage"));
 
-
-
-
-
         newItem.addActionListener(new NewButtonListener(this));
         KeyStroke newButStr = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK);
         newItem.setAccelerator(newButStr);
@@ -194,8 +206,6 @@ public class OpenblocksFrame extends JFrame {
         saveAsItem.addActionListener(new SaveAsButtonListener(this));
         KeyStroke saveAsButStr = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK);
         saveAsItem.setAccelerator(saveAsButStr);
-
-
 
         settingsItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -273,16 +283,15 @@ public class OpenblocksFrame extends JFrame {
         menuBar.add(toolsMenu);
 
         // </editor-fold>
-
         //Panels------------------------------------------------------//
         final int standartNorthPanelSize = 24;  //TODO: make like constant
 
         final JPanel northPanel = new JPanel();
-        final JPanel logo = new JPanel();
-        final JPanel northPanelCenter = new JPanel();
+        logo = new JPanel();
+        northPanelCenter = new JPanel();
         final JPanel buttons = new JPanel();
         final JPanel panelWithConfigButton = new JPanel();
-        final JPanel rightPanel = new JPanel();
+        rightPanel = new JPanel();
         final JLabel dividerFirst = new JLabel();
         final JLabel dividerSecond = new JLabel();
 
@@ -297,6 +306,7 @@ public class OpenblocksFrame extends JFrame {
         mainLogo.setIcon(mLogo);
         logo.add(mainLogo);
         logo.setBackground(new Color(0, 151, 157));
+        Dimension size = workspace.getFactorySize();
         logo.setPreferredSize(workspace.getFactorySize());
         logo.setBounds(38, 0, workspace.getFactorySize().width, workspace.getFactorySize().height);
 
@@ -330,7 +340,6 @@ public class OpenblocksFrame extends JFrame {
         infoLabel.setForeground(Color.white);
 
         //<editor-fold defaultstate="collapsed" desc="Buttons images and listners">
-
         ImageButton reloadDeleted = new ImageButton(
                 "reloadDeleted",
                 "com/ardublock/block/buttons/newA.jpg",
@@ -356,7 +365,7 @@ public class OpenblocksFrame extends JFrame {
                 "deleteAllBlocks",
                 "com/ardublock/block/buttons/newA.jpg",
                 "com/ardublock/block/buttons/newB.jpg",
-                 infoLabel
+                infoLabel
         );
 
         deleteAll.addActionListener(new ActionListener() {
@@ -366,7 +375,6 @@ public class OpenblocksFrame extends JFrame {
                 deleteAllBlocks();
             }
         });
-
 
         ImageButton newButton = new ImageButton(
                 "new",
@@ -392,7 +400,6 @@ public class OpenblocksFrame extends JFrame {
         );
         saveAsButton.addActionListener(new SaveAsButtonListener(this));
 
-
         ImageButton openButton = new ImageButton(
                 "open",
                 "com/ardublock/block/buttons/openA.jpg",
@@ -400,7 +407,6 @@ public class OpenblocksFrame extends JFrame {
                 infoLabel
         );
         openButton.addActionListener(new OpenButtonListener(this));
-        
 
         ImageButton verifyButton = new ImageButton("verify program",
                 "com/ardublock/block/buttons/verifyA.jpg",
@@ -507,7 +513,6 @@ public class OpenblocksFrame extends JFrame {
             }
         });
 
-
         InputMap imap = configButton.getInputMap(WHEN_IN_FOCUSED_WINDOW);
         KeyStroke configStr = KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_DOWN_MASK);
         imap.put(configStr, "showPanel");
@@ -525,24 +530,15 @@ public class OpenblocksFrame extends JFrame {
         buttons.add(dividerSecond);
         buttons.add(saveImageButton);
         buttons.add(websiteButton);
-        buttons.add(infoLabel);
-
-
-        //TODO: нужна иконка для этой кнопки
         buttons.add(deleteAll);
-        buttons.add(reloadDeleted);
+        buttons.add(infoLabel);
 
         panelWithConfigButton.add(configButton);
 
         workspace.workLayer.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent e) {
                 Dimension s = workspace.getFactorySize();
-                Dimension q = workspace.getCanvasSize();
                 logo.setPreferredSize(new Dimension(s.width, standartNorthPanelSize));
-//                        if (workspace.workLayer.getDividerLocation() > 380)
-//                            workspace.workLayer.setDividerLocation(380);
-//                        else if (workspace.workLayer.getDividerLocation() < 120)
-//                            workspace.workLayer.setDividerLocation(120);
                 northPanel.updateUI();
                 workspace.updateUI();
                 workspace.validate();
@@ -551,7 +547,20 @@ public class OpenblocksFrame extends JFrame {
 
         northPanel.updateUI();
         workspace.updateUI();
+
+        JPanel GlobalPanel = new JPanel(new BorderLayout());
+        //GlobalLayaredPane = new JLayeredPane();
+        //GlobalLayaredPane.addComponentListener(new ComponentAdapter() {
+//            @Override
+//            public void componentResized(ComponentEvent e) {
+//                GlobalPanel.setSize(e.getComponent().getSize());
+//                //pan.setSize(e.getComponent().getSize());
+//            }
+//        });
+        //this.add(GlobalLayaredPane, BorderLayout.CENTER);
         this.setJMenuBar(menuBar);
+        //GlobalPanel.add(northPanel, BorderLayout.NORTH);
+        //GlobalPanel.add(workspace, BorderLayout.CENTER);
         this.add(northPanel, BorderLayout.NORTH);
         this.add(workspace, BorderLayout.CENTER);
 
@@ -795,6 +804,10 @@ public class OpenblocksFrame extends JFrame {
 
     // </editor-fold>
 
+    public Context getContext() {
+        return this.context;
+    }
+
     class ImageButton extends JButton {
 
         private String name;
@@ -856,17 +869,16 @@ public class OpenblocksFrame extends JFrame {
             }
         }
     }
-    class ClickAction extends AbstractAction
-    {
+
+    class ClickAction extends AbstractAction {
+
         private JButton button;
 
-        public ClickAction(JButton but)
-        {
+        public ClickAction(JButton but) {
             button = but;
         }
 
-        public void actionPerformed(ActionEvent e)
-        {
+        public void actionPerformed(ActionEvent e) {
             button.doClick();
         }
     }
