@@ -22,6 +22,8 @@ public class ControllerButton extends JToggleButton {
     private ImageIcon imageSet;
     private boolean isItConnector;
     private ControllerButton button;
+    private boolean mouseIsOnThis;
+    private boolean mouseIsPressedThis;
     //private boolean canBePressed;
 
     /**
@@ -70,28 +72,49 @@ public class ControllerButton extends JToggleButton {
             }
 
             public void mousePressed(MouseEvent e) {
-
+                mouseIsPressedThis=true;
             }
             
             public void mouseReleased(MouseEvent e) {
+                mouseIsPressedThis=false;
+                if(mouseIsOnThis){
                 if (button.isSelected()) {
-                    controllerImage.setSelectedId(Id,isItConnector);
-                    if (isItConnector) controller.changeConnectorComponentsPane(buttonId);
-                    else controller.changeModuleComponentsPane(button.moduleName);
-                } else {
-                    controllerImage.resetSelectedId(Id,isItConnector);
-                    controller.changeConnectorComponentsPane(null);
+                        controllerImage.setSelectedId(Id, isItConnector);
+                        if (isItConnector) {
+                            controller.changeConnectorComponentsPane(buttonId);
+                        } else {
+                            controller.changeModuleComponentsPane(button.moduleName);
+                        }
+                    } else {
+                        controllerImage.resetSelectedId(Id, isItConnector);
+                        controller.changeConnectorComponentsPane(null);
+                    }
+                    controllerImage.unpressElse(Id, isItConnector);
                 }
-                controllerImage.unpressElse(Id,isItConnector);
+                else{
+                    controllerImage.resetSelectedId(Id, isItConnector);
+                }
             }
 
             public void mouseEntered(MouseEvent e) {
+                mouseIsOnThis=true;
+//                System.out.println(buttonId+moduleName+mouseIsOnThis);
                 setModuleBig(true);
                 //setIconAccordingToPress();
             }
 
             public void mouseExited(MouseEvent e) {
+                mouseIsOnThis=false;
+//                System.out.println(buttonId+moduleName+mouseIsOnThis);
                 setModuleBig(false);
+                if(mouseIsPressedThis) {
+//                    System.out.println(buttonId + moduleName + mouseIsOnThis + " must be clear!!!");
+
+                    //controllerImage.resetSelectedId(Id, isItConnector);
+                    setNewIconAsModule("com/ardublock/Images/module/start.png");
+                    setModuleName("start");
+                    setTranslatedName("modules.start.info");
+                }
                 //setIconAccordingToPress();
             }
         });
