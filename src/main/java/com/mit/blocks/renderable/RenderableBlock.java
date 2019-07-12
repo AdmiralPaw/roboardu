@@ -88,11 +88,12 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * The workspace in use
      */
     protected final Workspace workspace;
+    public  static Workspace workspaceref ;
 
     /**
      * BlockID of this. MAY BE Block.NULL
      */
-    final Long blockID;
+    final public Long blockID;
     /**
      * Parent workspace widget. May be null
      */
@@ -175,11 +176,13 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     private final ConnectorTag beforeTag;
     private List<ConnectorTag> socketTags = new ArrayList<ConnectorTag>();
 
-
-
-    public  void removeChildBlocks(){
-        socketTags = new ArrayList<ConnectorTag>();
-    }
+//    public void deleteConnectors(){
+//
+//    }
+//
+//    public  void removeChildBlocks(){
+//        socketTags = new ArrayList<ConnectorTag>();
+//    }
 
     public List<ConnectorTag> getConnectors(){
         return this.socketTags;
@@ -212,17 +215,13 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         addKeyListener(this);
         super.addKeyListener(this);
 
-
         setFocusable(true);
         requestFocusInWindow();
-
-
     }
 
     /**
      * Constructs a new RenderableBlock instance with the specified parent
      * WorkspaceWidget and Long blockID of its associated Block
-     *
      * @param workspace The workspace in use
      * @param parent the WorkspaceWidget containing this
      * @param blockID Long Block id of associated with this
@@ -233,15 +232,16 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             Long blockID, boolean isLoading) {
         super();
         this.workspace = workspace;
+        workspaceref= this.workspace;
 
         InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = getActionMap();
 
 
-        KeyStroke keyV = KeyStroke.getKeyStroke(KeyEvent.VK_V,InputEvent.CTRL_DOWN_MASK);
+        KeyStroke keyV = KeyStroke.getKeyStroke(KeyEvent.VK_C,InputEvent.CTRL_DOWN_MASK);
         im.put(keyV,"pressed");
 
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C & KeyEvent.CTRL_DOWN_MASK, 0, true), "released");
+        //im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C & KeyEvent.CTRL_DOWN_MASK, 0, true), "released");
 
         am.put("pressed", new AbstractAction() {
             @Override
@@ -1923,6 +1923,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         }
     }
 
+
     // /////////////////
     // MOUSE EVENTS //
     // /////////////////
@@ -1951,6 +1952,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 if (link == null) {
                     widget = lastDragWidget;
                     stopDragging(this, widget);
+                    workspace.setBasket(false);
                 } // otherwise, if a link WAS found...
                 else {
 
@@ -1974,6 +1976,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                     }
 
                     // drop the block and connect its link
+                    workspace.setBasket(false);
                     stopDragging(this, widget);
                     link.connect();
                     workspace.notifyListeners(new WorkspaceEvent(workspace,
@@ -2006,6 +2009,10 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         workspace.getMiniMap().repaint();
     }
 
+
+
+
+    public Block draggedBlock;
     public void mouseDragged(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {
             if (!pickedUp) {
@@ -2037,10 +2044,11 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             // if this is the first call to mouseDragged
             if (!dragging) {
                 Block block = getBlock();
+                draggedBlock = block;
                 BlockConnector plug = BlockLinkChecker.getPlugEquivalent(block);
                 if (plug != null && plug.hasBlock()) {
                     Block parent = workspace.getEnv().getBlock(
-                            plug.getBlockID());
+                    plug.getBlockID());
                     BlockConnector socket = parent.getConnectorTo(blockID);
                     BlockLink link = BlockLink.getBlockLink(workspace, block,
                             parent, plug, socket);
@@ -2055,6 +2063,8 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                             widget, link, WorkspaceEvent.BLOCKS_DISCONNECTED));
                 }
                 startDragging(this, widget);
+                workspace.setBasket(true);
+
             }
 
             // drag this block and all attached to it
@@ -2069,6 +2079,8 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
     // show the pulldown icon if hasComboPopup = true
     public void mouseEntered(MouseEvent e) {
+
+        draggedBlock = getBlock();
 
         currentBlock = this;
 
@@ -2517,7 +2529,10 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         }
     }
 
+    public boolean dellAction = false;
     private ConnectorTag getConnectorTag(BlockConnector socket) {
+
+
         if (socket == null) {
             throw new RuntimeException("Socket may not be null");
         }
@@ -2535,6 +2550,8 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 return tag;
             }
         }
+
+
         return null;
     }
 

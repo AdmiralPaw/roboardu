@@ -113,6 +113,16 @@ public class Context
 		saveFileName = "untitled";
 		workspaceEmpty = true;
 	}
+
+	public void loadFreshWorkSpace()
+	{
+		//workspaceController.loadFreshWorkspace();
+		loadDefaultArdublockProgram();
+
+		saveFilePath = null;
+		saveFileName = "untitled";
+		workspaceEmpty = true;
+	}
 	
 	private void loadDefaultArdublockProgram()
 	{

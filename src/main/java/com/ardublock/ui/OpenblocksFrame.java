@@ -53,6 +53,7 @@ public class OpenblocksFrame extends JFrame {
 
     //время для функции вызова автосохранения
     public static int timeDelay = 5;
+    private File fileToSave;
 
     private Context context;
     private JFileChooser fileChooser;
@@ -124,13 +125,10 @@ public class OpenblocksFrame extends JFrame {
         fileChooser.setFileFilter(ffilter);
         fileChooser.addChoosableFileFilter(ffilter);
 
-
         initOpenBlocks();
-
 
         user = System.getProperty("user.name");
         System.out.println(user);
-
 
         try {
             File file = new File("C:\\Users\\"+user+"\\Documents\\saver.abp");
@@ -160,14 +158,13 @@ public class OpenblocksFrame extends JFrame {
                     @Override
                     public void run() {
 
-                        writeFileAndUpdateFrame(getArduBlockString(), new File("C:\\Users\\Public\\saver.abp"));
+                        writeFileAndUpdateFrame(getArduBlockString(), new File("C:\\Users\\"+user+"\\Documents\\saver.abp"));
                         System.out.println("delayed and worked successfully");
                     }
-                },1000*60*2,1000*60*timeDelay);
+                },1000*60*4,1000*60*timeDelay);
             }
         });
-        //timeToSave.start();
-
+        timeToSave.start();
 
     }
 
@@ -661,6 +658,7 @@ public class OpenblocksFrame extends JFrame {
             return chooseFileAndSave(saveString);
         } else {
             File saveFile = new File(context.getSaveFilePath());
+            fileToSave = saveFile;
             writeFileAndUpdateFrame(saveString, saveFile);
             return true;
         }
@@ -679,6 +677,7 @@ public class OpenblocksFrame extends JFrame {
 
     private boolean chooseFileAndSave(String ardublockString) {
         File saveFile = letUserChooseSaveFile();
+        fileToSave = saveFile;
         System.out.println(saveFile.getAbsolutePath());
         saveFile = checkFileSuffix(saveFile);
         if (saveFile == null) {
@@ -741,7 +740,9 @@ public class OpenblocksFrame extends JFrame {
                 //break;
                 case JOptionPane.NO_OPTION:
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    context.resetWorksapce();
+                    //context.resetWorksapce();
+                    deleteAllBlocks();
+                    context.loadFreshWorkSpace();
                     context.setWorkspaceChanged(false);
                     this.setTitle(this.makeFrameTitle());
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -752,7 +753,9 @@ public class OpenblocksFrame extends JFrame {
         } else {
             // If workspace unchanged just start a new Ardublock
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            context.resetWorksapce();
+            //context.resetWorksapce();
+            deleteAllBlocks();
+            context.loadFreshWorkSpace();
             context.setWorkspaceChanged(false);
             this.setTitle(this.makeFrameTitle());
             this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));

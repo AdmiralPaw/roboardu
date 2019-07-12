@@ -1274,6 +1274,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         if (activeMenu != null)
         {
             activeMenu.superSetVisible(false);
+            activeMenu = null;
         }
     }
 
