@@ -20,12 +20,15 @@ import javax.swing.Timer;
  */
 public class AnimPanel extends JPanel {
 
-    private double time = 1;
+    private double time = 0.7;
     private double fps = time * 24;
     private Thread threadAnimate = null;
     private Color myColor;
-    private Timer animationTimer = null;
+    private Timer animationTimerStart = null;
+    private Timer animationTimerBack = null;
     private double countOfFrames = fps;
+    boolean animationIsFinished = false;
+    //public TPanel tutorPanel;
     
     private OpenblocksFrame openblocksFrame;
     
@@ -33,10 +36,18 @@ public class AnimPanel extends JPanel {
             Dimension size, Point point) {
         this.openblocksFrame = openblocksFrame;
         this.myColor = new Color(0, 0, 0, 128);
-        animationTimer = new Timer((int) (time * 1000 / fps), new ActionListener() {
+        animationTimerStart = new Timer((int) (time * 1000 / fps), new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                anima();
+                animationIsFinished = false;
+                animaStart();
+            }
+        });
+        animationTimerBack = new Timer((int) (time * 1000 / fps), new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                animationIsFinished = false;
+                animaBack();
             }
         });
         this.setLayout(null);
@@ -45,33 +56,66 @@ public class AnimPanel extends JPanel {
         this.setPreferredSize(size);
         this.setLocation(point);
         this.repaint();
+        //--------------
+        //this.tutorPanel = new TPanel();
+        //tutorPanel.setLocation(0, 0);
+        //tutorPanel.setVisible(false);
+        //this.add(tutorPanel);
     }
 
     public void setColorAlpha(int i) {
         this.myColor = new Color(0, 0, 0, i);
+        this.updateUI();
     }
 
     public void startAnimation() {
-        animationTimer.start();
+        animationTimerStart.start();
+    }
+    
+    public void backAnimation() {
+        animationTimerBack.start();
     }
 
-    public void anima() {
+    public void animaStart() {
         countOfFrames = countOfFrames - 1;
         if (countOfFrames < 0) {
-            animationTimer.stop();
+            animationTimerStart.stop();
             countOfFrames = fps;
             this.setColorAlpha(0);
+            animationIsFinished = true;
         } else {
             this.setColorAlpha((int) (countOfFrames * 128 / fps));
         }
         this.updateUI();
     }
     
+    public void animaBack() {
+        countOfFrames = countOfFrames - 1;
+        if (countOfFrames > fps) {
+            animationTimerStart.stop();
+            countOfFrames = 0;
+            this.setColorAlpha(128);
+            animationIsFinished = true;
+        } else {
+            this.setColorAlpha((int) (countOfFrames * 128 / fps));
+        }
+        this.updateUI();
+    }
+    
+    
     public void repaintPanel(Dimension size, Point location){
         this.setSize(size);
         this.setPreferredSize(size);
         this.setLocation(location);
         this.repaint();
+    }
+    
+    public void activateTutor(){
+        //this.tutorPanel.setVisible(true);
+    }
+    
+    public void deactivateTutor(){
+        //this.tutorPanel.setVisible(false);
     }
     
     @Override
