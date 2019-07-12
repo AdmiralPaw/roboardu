@@ -168,7 +168,6 @@ public class SearchBar {
                 List<FactoryRenderableBlock> blocks = new ArrayList<FactoryRenderableBlock>() {
                 };
                 Map<String, JComponent> data = Window2Explorer.dictionary;
-
                 text = text.toUpperCase();
                 Set<String> names = data.keySet();
                 for (int i = 0; i < names.size(); i++) {
