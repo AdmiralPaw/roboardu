@@ -67,12 +67,13 @@ public class TPanel extends JPanel {
         this.setSize(new Dimension(width, height));
         this.setPreferredSize(new Dimension(300, 250));
         nextButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (tutorialPane.activeAnimPanels.get(tutorialPane.iter).get(0).animationIsFinished) {
+            public void actionPerformed(ActionEvent e) { 
+                if (tutorialPane.activeAnimPanels.get(tutorialPane.iter).get(0).animationIsFinished
+                        && tutorialPane.tutorIllumPanels.get(tutorialPane.iter).animationIsFinished) {
                     if (tutorialPane.iter < tutorialPane.activeAnimPanels.size()) {
-                        tutorialPane.lastIter = tutorialPane.iter; 
+                        tutorialPane.lastIter = tutorialPane.iter;
                         tutorialPane.iter++;
-                        
+
                     }
                     tutorialPane.nextTutor();
                 }
@@ -81,9 +82,10 @@ public class TPanel extends JPanel {
 
         prevButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (tutorialPane.activeAnimPanels.get(tutorialPane.iter).get(0).animationIsFinished) {
+                if (tutorialPane.activeAnimPanels.get(tutorialPane.iter).get(0).animationIsFinished
+                        && tutorialPane.tutorIllumPanels.get(tutorialPane.iter).animationIsFinished) {
                     if (tutorialPane.iter != 0) {
-                        tutorialPane.lastIter = tutorialPane.iter; 
+                        tutorialPane.lastIter = tutorialPane.iter;
                         tutorialPane.iter--;
                     }
                     tutorialPane.nextTutor();
@@ -107,7 +109,7 @@ public class TPanel extends JPanel {
     }
 
     private void startAnimation() {
-        ((AnimPanel) this.getParent()).startAnimation();
+        ((DarkPanel) this.getParent()).startAnimation();
     }
 
 }

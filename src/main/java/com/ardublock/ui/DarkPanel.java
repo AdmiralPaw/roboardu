@@ -18,32 +18,33 @@ import javax.swing.Timer;
  *
  * @author User
  */
-public class AnimPanel extends JPanel {
+public class DarkPanel extends JPanel {
 
     private double time = 0.7;
-    private double fps = time * 24;
-    private Thread threadAnimate = null;
-    private Color myColor;
-    private Timer animationTimerStart = null;
-    private Timer animationTimerBack = null;
-    private double countOfFrames = fps;
+    private int fps = 30;
+    private double frames = time * fps;
+    private double iteratorOfFrames = frames;
     boolean animationIsFinished = true;
-    //public TPanel tutorPanel;
-    
-    private OpenblocksFrame openblocksFrame;
-    
-    public AnimPanel(OpenblocksFrame openblocksFrame, JComponent component,
+    public Timer animationTimerStart = null;
+    public Timer animationTimerBack = null;
+
+    private Color myColor = new Color(0, 0, 0, 128);
+
+    private final OpenblocksFrame openblocksFrame;
+    private final TutorialPane tutorialPane;
+
+    public DarkPanel(OpenblocksFrame openblocksFrame, TutorialPane tutorialPane,
             Dimension size, Point point) {
         this.openblocksFrame = openblocksFrame;
-        this.myColor = new Color(0, 0, 0, 128);
-        animationTimerStart = new Timer((int) (time * 1000 / fps), new ActionListener() {
+        this.tutorialPane = tutorialPane;
+        animationTimerStart = new Timer((int) (time * 1000 / frames), new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 animationIsFinished = false;
                 animaStart();
             }
         });
-        animationTimerBack = new Timer((int) (time * 1000 / fps), new ActionListener() {
+        animationTimerBack = new Timer((int) (time * 1000 / frames), new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 animationIsFinished = false;
@@ -56,11 +57,6 @@ public class AnimPanel extends JPanel {
         this.setPreferredSize(size);
         this.setLocation(point);
         this.repaint();
-        //--------------
-        //this.tutorPanel = new TPanel();
-        //tutorPanel.setLocation(0, 0);
-        //tutorPanel.setVisible(false);
-        //this.add(tutorPanel);
     }
 
     public void setColorAlpha(int i) {
@@ -71,53 +67,44 @@ public class AnimPanel extends JPanel {
     public void startAnimation() {
         animationTimerStart.start();
     }
-    
+
     public void backAnimation() {
         animationTimerBack.start();
     }
 
-    public void animaStart() {
-        countOfFrames = countOfFrames - 1;
-        if (countOfFrames < 0) {
+    private void animaStart() {
+        iteratorOfFrames = iteratorOfFrames - 1;
+        if (iteratorOfFrames < 0) {
             animationTimerStart.stop();
-            countOfFrames = fps;
+            iteratorOfFrames = frames;
             this.setColorAlpha(0);
             animationIsFinished = true;
         } else {
-            this.setColorAlpha((int) (countOfFrames * 128 / fps));
+            this.setColorAlpha((int) (iteratorOfFrames * 128 / frames));
         }
         this.updateUI();
     }
-    
-    public void animaBack() {
-        countOfFrames = countOfFrames - 1;
-        if (countOfFrames > fps) {
+
+    private void animaBack() {
+        iteratorOfFrames = iteratorOfFrames - 1;
+        if (iteratorOfFrames > frames) {
             animationTimerStart.stop();
-            countOfFrames = 0;
+            iteratorOfFrames = 0;
             this.setColorAlpha(128);
             animationIsFinished = true;
         } else {
-            this.setColorAlpha((int) (countOfFrames * 128 / fps));
+            this.setColorAlpha((int) (iteratorOfFrames * 128 / frames));
         }
         this.updateUI();
     }
-    
-    
-    public void repaintPanel(Dimension size, Point location){
+
+    public void repaintPanel(Dimension size, Point location) {
         this.setSize(size);
         this.setPreferredSize(size);
         this.setLocation(location);
         this.repaint();
     }
-    
-    public void activateTutor(){
-        //this.tutorPanel.setVisible(true);
-    }
-    
-    public void deactivateTutor(){
-        //this.tutorPanel.setVisible(false);
-    }
-    
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

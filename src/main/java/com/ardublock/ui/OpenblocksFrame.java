@@ -54,7 +54,7 @@ public class OpenblocksFrame extends JFrame {
     //время для функции вызова автосохранения
     public static int timeDelay = 5;
     private File fileToSave;
-
+    
     private Context context;
     private JFileChooser fileChooser;
     private FileFilter ffilter;
@@ -65,7 +65,10 @@ public class OpenblocksFrame extends JFrame {
     public JPanel northPanelCenter = null;
     public JPanel logo;
     public JPanel rightPanel;
-
+    //Just for Tutorial Pane (не бейте, не знал как по-другому)
+    public ImageButton generateButton;
+    public ImageButton verifyButton;
+    
     private ResourceBundle uiMessageBundle;
 
     private boolean controllerIsShown = true;
@@ -408,7 +411,7 @@ public class OpenblocksFrame extends JFrame {
         );
         openButton.addActionListener(new OpenButtonListener(this));
 
-        ImageButton verifyButton = new ImageButton("verify program",
+        verifyButton = new ImageButton("verify program",
                 "com/ardublock/block/buttons/verifyA.jpg",
                 "com/ardublock/block/buttons/verifyB.jpg",
                 infoLabel
@@ -416,7 +419,7 @@ public class OpenblocksFrame extends JFrame {
         verifyButton.setActionCommand("VERIFY_CODE");
         verifyButton.addActionListener(new GenerateCodeButtonListener(this, context));
 
-        ImageButton generateButton = new ImageButton(
+        generateButton = new ImageButton(
                 "upload to Arduino",
                 "com/ardublock/block/buttons/uploadA.jpg",
                 "com/ardublock/block/buttons/uploadB.jpg",

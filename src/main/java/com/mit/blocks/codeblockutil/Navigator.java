@@ -69,7 +69,7 @@ final public class Navigator {
      * The index of the active explorer being viewed. 0<=position<explorers.size
      */
     private int position;
-
+    
     /**
      * Ordered set of explorers
      */
@@ -100,7 +100,9 @@ final public class Navigator {
      * The workspace in use
      */
     private final Workspace workspace;
-
+    
+    public SearchBar sb;
+    
     /**
      * Constructs new navigator with an empty collection of canvases.
      */
@@ -272,7 +274,7 @@ final public class Navigator {
                 ex.setDrawersCard(canvases);
             }
             if (ex instanceof Window2Explorer) {
-                final SearchBar sb = new SearchBar(
+                sb = new SearchBar(
                         "Search blocks", "Search for blocks in the drawers and workspace", workspace);
                 for (SearchableContainer con : workspace.getAllSearchableContainers()) {
                     sb.addSearchableContainer(con);
@@ -366,7 +368,19 @@ final public class Navigator {
     public JComponent getSwitcher() {
         return this.switcher;
     }
-
+    
+    public JComponent getCanvasPane() {
+        return ((Window2Explorer) this.explorers.get(0)).canvasPane;
+    }
+    
+    public JComponent getButtonsPane() {
+        return ((Window2Explorer) this.explorers.get(0)).buttonPane;
+    }
+    
+    public JComponent getSearchBar(){
+        return this.sb.searchPanel;
+    }
+    
     /**
      * Switching tool pane that provides the graphical interface for switching
      * between different explorers within this navigator

@@ -51,10 +51,11 @@ public class Window2Explorer extends JPanel implements Explorer {
     /**
      * Teh canvas portion
      */
-    private JPanel canvasPane;
+    public JPanel canvasPane;
     /**
      * The tab portion
      */
+    public JPanel butpan;
     public JPanel buttonPane;
     public JPanel basketPane;
     public JLayeredPane currentCanvasWithBasket;
@@ -133,7 +134,7 @@ public class Window2Explorer extends JPanel implements Explorer {
         buttonPane.removeAll();
         int size = buttonHeight * 24;
         buttonPane.setPreferredSize(new Dimension(60, size));
-        JPanel butpan = new JPanel(new VerticalLayout());
+        butpan = new JPanel(new VerticalLayout());
         butpan.setBackground(Color.white);
         for (int i = 0; i < items.size(); i++) {
             final int index = i;

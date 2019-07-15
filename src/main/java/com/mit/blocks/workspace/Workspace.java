@@ -1,4 +1,4 @@
-package com.mit.blocks.workspace;
+    package com.mit.blocks.workspace;
 
 import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
 import com.ardublock.ui.OpenblocksFrame;
@@ -45,12 +45,10 @@ import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.typeblocking.FocusTraversalManager;
 import com.mit.blocks.workspace.typeblocking.TypeBlockManager;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.URL;
 
-import org.jfree.ui.tabbedui.VerticalLayout;
 
 /**
  * The Workspace is the main block area, where blocks are manipulated and
@@ -150,7 +148,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
     public final static Integer DRAGGED_BLOCK_LAYER = new Integer(5);
 
     public Workspace() {
-        //super();
+        super();
         setLayout(null);
         setBackground(Color.WHITE);
 
