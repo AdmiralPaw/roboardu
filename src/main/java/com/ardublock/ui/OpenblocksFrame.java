@@ -238,7 +238,7 @@ public class OpenblocksFrame extends JFrame {
                     name2 += chars[i];
                 }
 
-                item.setText(s.split("Documents")[1]);
+                item.setText(name2);
                 recentItems.add(item);
             }
 
