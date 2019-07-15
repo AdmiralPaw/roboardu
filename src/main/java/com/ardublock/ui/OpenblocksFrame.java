@@ -5,6 +5,9 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.Format;
 import java.util.*;
 
 import javax.imageio.ImageIO;
@@ -32,6 +35,7 @@ import com.mit.blocks.workspace.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.List;
 import java.util.Timer;
 
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
@@ -57,6 +61,10 @@ public class OpenblocksFrame extends JFrame {
         context.registerOpenblocksFrameListener(ofl);
     }
 
+
+    void print(String s){
+        System.out.println(s);
+    }
 
     public static void deleteAllBlocks(){
         Page.blocksContainer.removeAll();
@@ -84,20 +92,27 @@ public class OpenblocksFrame extends JFrame {
     //TODO: доделать список последних файлов
     String user;
     public static String recentFile;
+    List<String> recentFiles = new ArrayList<>();
     public OpenblocksFrame() {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("recentFiles.txt");
         Scanner scanner = new Scanner(inputStream);
 
-
         try {
             if (scanner.hasNextLine()) {
                 String recentFileName = scanner.nextLine();
+                recentFiles.add(recentFileName);
+                System.out.println(recentFileName);
                 recentFile = recentFileName;
             }
             inputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
+            try {
+                inputStream.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
 
         context = Context.getContext();
@@ -188,6 +203,49 @@ public class OpenblocksFrame extends JFrame {
         JMenuItem saveImageItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveImage"));
 
 
+        //JMenuItem recentFiles = new JMenuItem("open recent");
+        JMenu recentItems = new JMenu("recent");
+
+        try{
+            File recentFiles = new File("C:\\Users\\Public\\recentFiles.txt");
+            List<String> files = new ArrayList<>();
+            Scanner scanner = new Scanner(recentFiles);
+            while (scanner.hasNextLine()){
+                files.add(scanner.nextLine());
+            }
+           //tring ch = "\ ";
+            //s.split("Documents")[1])
+            for(String s:files){
+                JMenuItem item = new JMenuItem(new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+
+                        try {
+                            context.loadArduBlockFile(new File(s));
+                            remakeRecentFiles(s);
+                            //посоветоваться и узнать изменять ли сразу или только при загрузке
+
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+                );
+                String name = s.split("Documents")[1];
+                String name2 = "";
+                char[] chars = name.toCharArray();
+                for(int i=1;i<name.length();i++){
+                    name2 += chars[i];
+                }
+
+                item.setText(s.split("Documents")[1]);
+                recentItems.add(item);
+            }
+
+        }catch (Exception e){
+
+        }
+
 
 
 
@@ -277,6 +335,9 @@ public class OpenblocksFrame extends JFrame {
         fileMenu.add(settingsItem);
         fileMenu.addSeparator();
         fileMenu.add(exitItem);
+        fileMenu.add(recentItems);
+
+
         toolsMenu.add(verifyItem);
         toolsMenu.add(uploadItem);
         toolsMenu.add(serialMonitorItem);
@@ -678,10 +739,64 @@ public class OpenblocksFrame extends JFrame {
 
     }
 
+    private void remakeRecentFiles(String path){
+        //файл для хранения всех недавних файлов
+        File recentFilesData = new File("C:\\Users\\Public\\recentFiles.txt");
+        if(recentFilesData.exists()){
+            try {
+                Scanner scanner = new Scanner(recentFilesData);
+                recentFiles = new ArrayList<>();
+                while (scanner.hasNextLine()){
+                    recentFiles.add(scanner.nextLine());
+                }
+                if(recentFiles.size()>=5){
+                    List<String> files = new ArrayList<>();
+                    files.add(path);
+                    for(int i = 0;i<4;i++){
+                        files.add(recentFiles.get(i));
+                    }
+                    Formatter writer = new Formatter("C:\\Users\\Public\\recentFiles.txt");
+                    for(String s:files){
+                        writer.format("%s",s+"\r\n");
+                    }
+                    writer.close();
+                }else {
+                    List<String> files = new ArrayList<>();
+                    files.add(path);
+                    for(int i = 0;i<recentFiles.size();i++){
+                        files.add(recentFiles.get(i));
+                    }
+                    Formatter writer = new Formatter("C:\\Users\\Public\\recentFiles.txt");
+                    for(String s:files){
+                        writer.format("%s",s+"\r\n");
+                    }
+                    writer.close();
+                }
+
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }else {
+            try {
+                Formatter writer = new Formatter("C:\\Users\\Public\\recentFiles.txt");
+                writer.format("%s",path+"\r\n");
+                writer.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private boolean chooseFileAndSave(String ardublockString) {
         File saveFile = letUserChooseSaveFile();
         fileToSave = saveFile;
         System.out.println(saveFile.getAbsolutePath());
+
+        //файл для хранения всех недавних файлов
+        remakeRecentFiles(saveFile.getAbsolutePath());
+
         saveFile = checkFileSuffix(saveFile);
         if (saveFile == null) {
             return false;
@@ -691,7 +806,7 @@ public class OpenblocksFrame extends JFrame {
             return false;
         }
 
-        System.out.println(ardublockString+saveFile.getPath().toString());
+        //System.out.println(ardublockString+saveFile.getPath().toString());
 
         writeFileAndUpdateFrame(ardublockString, saveFile);
         return true;
