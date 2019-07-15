@@ -116,7 +116,7 @@ public class Context
 
 	public void loadFreshWorkSpace()
 	{
-		workspaceController.loadFreshWorkspace();
+		//workspaceController.loadFreshWorkspace();
 		loadDefaultArdublockProgram();
 
 		saveFilePath = null;
@@ -235,8 +235,7 @@ public class Context
 		{
 			saveFilePath = savedFile.getAbsolutePath();
 			saveFileName = savedFile.getName();
-			//workspaceController.resetWorkspace();
-			workspaceController.loadFreshWorkspace();
+			workspaceController.resetWorkspace();
 			workspaceController.loadProjectFromPath(saveFilePath);
 			didLoad();
 		}

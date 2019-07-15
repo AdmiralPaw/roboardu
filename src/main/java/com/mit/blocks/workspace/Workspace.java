@@ -1,4 +1,4 @@
-package com.mit.blocks.workspace;
+    package com.mit.blocks.workspace;
 
 import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
 import com.ardublock.ui.OpenblocksFrame;
@@ -45,12 +45,10 @@ import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.typeblocking.FocusTraversalManager;
 import com.mit.blocks.workspace.typeblocking.TypeBlockManager;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.URL;
 
-import org.jfree.ui.tabbedui.VerticalLayout;
 
 /**
  * The Workspace is the main block area, where blocks are manipulated and
@@ -127,8 +125,9 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      */
     public JSplitPane workLayer;
     public JPanel blockCanvasLayer; //Layer with controller
+    public JSplitPane centerPane; 
     private boolean isActiveBasket;
-
+    
     /**
      * MiniMap associated with the blockCanvas
      */
@@ -149,7 +148,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
     public final static Integer DRAGGED_BLOCK_LAYER = new Integer(5);
 
     public Workspace() {
-        //super();
+        super();
         setLayout(null);
         setBackground(Color.WHITE);
 
@@ -198,11 +197,6 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         JPanel errPanel = errWindow.getErrPanel();
 
         final JLayeredPane blockCanvasWithDepth = new JLayeredPane();
-
-
-
-
-
         blockCanvasWithDepth.setPreferredSize(new Dimension(300, 500));
         final JPanel level_one = new JPanel();
         level_one.setLayout(new BoxLayout(level_one, BoxLayout.X_AXIS));
@@ -226,7 +220,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
 
         //blockCanvas.getJComponent().setMinimumSize(new Dimension(0, 100));
         //blockCanvas.getJComponent().setPreferredSize(new Dimension(0, 600));
-        final JSplitPane centerPane = new RSplitPane(JSplitPane.VERTICAL_SPLIT, true,
+        centerPane = new RSplitPane(JSplitPane.VERTICAL_SPLIT, true,
                 blockCanvasWithDepth, errPanel);
         centerPane.setOneTouchExpandable(true);
         centerPane.setDividerSize(6);

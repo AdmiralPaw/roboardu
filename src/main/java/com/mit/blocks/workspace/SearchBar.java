@@ -40,7 +40,7 @@ public class SearchBar {
     private static JComponent fcdir;
 
     public static Workspace workspace;
-    private final RQueryField searchPanel;
+    public final RQueryField searchPanel;
     private final JTextField searchBar;
     private final String defaultText;
     private Set<SearchableContainer> containerSet = new HashSet<SearchableContainer>();
@@ -168,7 +168,6 @@ public class SearchBar {
                 List<FactoryRenderableBlock> blocks = new ArrayList<FactoryRenderableBlock>() {
                 };
                 Map<String, JComponent> data = Window2Explorer.dictionary;
-
                 text = text.toUpperCase();
                 Set<String> names = data.keySet();
                 for (int i = 0; i < names.size(); i++) {

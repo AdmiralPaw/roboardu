@@ -25,6 +25,7 @@ import processing.app.tools.Tool;
 import com.ardublock.core.Context;
 import com.ardublock.ui.ArduBlockToolFrame;
 import com.ardublock.ui.Settings;
+import com.ardublock.ui.TutorialPane;
 import com.ardublock.ui.listener.OpenblocksFrameListener;
 
 import java.lang.reflect.Method;
@@ -32,14 +33,29 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class Roboscratch implements Tool, OpenblocksFrameListener {
-    
+
     static Editor editor;
     static ArduBlockToolFrame openblocksFrame;
     private Preferences userPrefs;
-    
+
     public void init(Editor editor) {
+        try {
+            UIManager.setLookAndFeel(
+                    UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         if (Roboscratch.editor == null) {
             Roboscratch.editor = editor;
             Roboscratch.openblocksFrame = new ArduBlockToolFrame();
@@ -55,6 +71,15 @@ public class Roboscratch implements Tool, OpenblocksFrameListener {
             // Note to self: Code here only affects behaviour when we're an Arduino Tool,
             // not when run directly - See Main.java for that.
             //ArduBlockTool.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+            Settings settings = openblocksFrame.settings;
+            if (settings.isFirstLaunch()) {
+                TutorialPane tutorialPane = new TutorialPane(openblocksFrame);
+                openblocksFrame.setGlassPane(tutorialPane);
+                openblocksFrame.getGlassPane().setVisible(true);
+                openblocksFrame.repaint();
+            }
+
             Roboscratch.openblocksFrame.addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent e) {
                     Roboscratch.openblocksFrame.doCloseArduBlockFile();
@@ -118,8 +143,7 @@ public class Roboscratch implements Tool, OpenblocksFrameListener {
         Roboscratch.editor.handleExport(false);
     }
 
-    public void didVerify(String source)
-    {
+    public void didVerify(String source) {
         java.lang.reflect.Method method;
         try {
             // pre Arduino 1.6.12
@@ -137,8 +161,7 @@ public class Roboscratch implements Tool, OpenblocksFrameListener {
         } catch (InvocationTargetException e) {
             Roboscratch.editor.getCurrentTab().setText(source);
         }
-        try
-        {
+        try {
             Class ed = Roboscratch.editor.getClass();
             Method reset = Editor.class.getDeclaredMethod("resetHandlers");
             reset.setAccessible(true);
@@ -150,21 +173,13 @@ public class Roboscratch implements Tool, OpenblocksFrameListener {
             rh.setAccessible(true);
             Runnable run_rh = (Runnable) rh.get(Roboscratch.editor);
             Roboscratch.editor.handleRun(false, run_ph, run_rh);
-        }
-        catch (NoSuchFieldException e)
-        {
+        } catch (NoSuchFieldException e) {
             System.out.println(e.toString());
-        }
-        catch (IllegalAccessException e)
-        {
+        } catch (IllegalAccessException e) {
             System.out.println(e.toString());
-        }
-        catch (NoSuchMethodException e)
-        {
+        } catch (NoSuchMethodException e) {
             System.out.println(e.toString());
-        }
-        catch (InvocationTargetException e)
-        {
+        } catch (InvocationTargetException e) {
             System.out.println(e.toString());
         }
     }
