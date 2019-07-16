@@ -1,49 +1,29 @@
 package com.ardublock.ui;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.text.Format;
-import java.util.*;
+import com.ardublock.core.Context;
+import com.ardublock.ui.listener.*;
+import com.mit.blocks.controller.WorkspaceController;
+import com.mit.blocks.workspace.ErrWindow;
+import com.mit.blocks.workspace.Page;
+import com.mit.blocks.workspace.Workspace;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.Dimension;
-
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import com.ardublock.core.Context;
-import com.ardublock.ui.listener.ArdublockWorkspaceListener;
-import com.ardublock.ui.listener.GenerateCodeButtonListener;
-import com.ardublock.ui.listener.NewButtonListener;
-import com.ardublock.ui.listener.OpenButtonListener;
-import com.ardublock.ui.listener.OpenblocksFrameListener;
-import com.ardublock.ui.listener.SaveAsButtonListener;
-import com.ardublock.ui.listener.SaveButtonListener;
-import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
-
-import com.mit.blocks.controller.WorkspaceController;
-
-import com.mit.blocks.workspace.ErrWindow;
-import com.mit.blocks.workspace.SearchBar;
-import com.mit.blocks.workspace.ZoomSlider;
-import com.mit.blocks.workspace.SearchableContainer;
-import com.mit.blocks.workspace.Workspace;
-import java.awt.geom.Area;
-import com.mit.blocks.workspace.*;
-
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 import java.util.Timer;
+import java.util.*;
 
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
 
@@ -432,9 +412,8 @@ public class OpenblocksFrame extends JFrame {
                 deleteAllBlocks();
             }
         });
-
         ImageButton newButton = new ImageButton(
-                "new",
+                uiMessageBundle.getString("ardublock.ui.new"),
                 "com/ardublock/block/buttons/newA.jpg",
                 "com/ardublock/block/buttons/newB.jpg",
                 infoLabel
@@ -442,7 +421,7 @@ public class OpenblocksFrame extends JFrame {
         newButton.addActionListener(new NewButtonListener(this));
 
         ImageButton saveButton = new ImageButton(
-                "save",
+                uiMessageBundle.getString("ardublock.ui.save"),
                 "com/ardublock/block/buttons/saveA.jpg",
                 "com/ardublock/block/buttons/saveB.jpg",
                 infoLabel
@@ -450,7 +429,7 @@ public class OpenblocksFrame extends JFrame {
         saveButton.addActionListener(new SaveButtonListener(this));
 
         ImageButton saveAsButton = new ImageButton(
-                "saveAs",
+                uiMessageBundle.getString("ardublock.ui.saveAs"),
                 "com/ardublock/block/buttons/saveAsA.jpg",
                 "com/ardublock/block/buttons/saveAsB.jpg",
                 infoLabel
@@ -458,14 +437,15 @@ public class OpenblocksFrame extends JFrame {
         saveAsButton.addActionListener(new SaveAsButtonListener(this));
 
         ImageButton openButton = new ImageButton(
-                "open",
+                uiMessageBundle.getString("ardublock.ui.open"),
                 "com/ardublock/block/buttons/openA.jpg",
                 "com/ardublock/block/buttons/openB.jpg",
                 infoLabel
         );
         openButton.addActionListener(new OpenButtonListener(this));
 
-        verifyButton = new ImageButton("verify program",
+        verifyButton = new ImageButton(
+                uiMessageBundle.getString("ardublock.ui.verify"),
                 "com/ardublock/block/buttons/verifyA.jpg",
                 "com/ardublock/block/buttons/verifyB.jpg",
                 infoLabel
@@ -474,7 +454,7 @@ public class OpenblocksFrame extends JFrame {
         verifyButton.addActionListener(new GenerateCodeButtonListener(this, context));
 
         generateButton = new ImageButton(
-                "upload to Arduino",
+                uiMessageBundle.getString("ardublock.ui.upload"),
                 "com/ardublock/block/buttons/uploadA.jpg",
                 "com/ardublock/block/buttons/uploadB.jpg",
                 infoLabel
@@ -483,7 +463,7 @@ public class OpenblocksFrame extends JFrame {
         generateButton.addActionListener(new GenerateCodeButtonListener(this, context));
 
         ImageButton serialMonitorButton = new ImageButton(
-                "serialMonitor",
+                uiMessageBundle.getString("ardublock.ui.serialMonitor"),
                 "com/ardublock/block/buttons/monitorA.jpg",
                 "com/ardublock/block/buttons/monitorB.jpg",
                 infoLabel
@@ -494,7 +474,7 @@ public class OpenblocksFrame extends JFrame {
             }
         });
         ImageButton saveImageButton = new ImageButton(
-                "save image",
+                uiMessageBundle.getString("ardublock.ui.saveImage"),
                 "com/ardublock/block/buttons/saveAsImageA.jpg",
                 "com/ardublock/block/buttons/saveAsImageB.jpg",
                 infoLabel
