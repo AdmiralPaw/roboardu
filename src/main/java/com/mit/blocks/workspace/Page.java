@@ -1183,10 +1183,12 @@ class PageJComponent extends JLayeredPane implements RBParent {
         for(ConnectorTag conn:connectors){
             System.out.println("_"+conn.getSocket().getKind()+"_");
 
-                if (conn.getSocket().getKind().equals("number")) {
+                String kind = conn.getSocket().getKind();
+                if (kind.equals("number")||kind.equals("boolean")) {
                     System.out.println("delete connectored");
                     RenderableBlock block = RenderableBlock.workspaceref.getEnv().getRenderableBlock(
                             conn.getSocket().getBlockID());
+                    removeChild(block);
                     try {
                         this.remove(block);
                     }catch (Exception e){
