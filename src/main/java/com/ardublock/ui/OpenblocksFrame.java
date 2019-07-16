@@ -51,6 +51,8 @@ public class OpenblocksFrame extends JFrame {
 
     private static final long serialVersionUID = 2841155965906223806L;
 
+    JMenu recentMenu;
+
     //время для функции вызова автосохранения
     public static int timeDelay = 5;
     private File fileToSave;
@@ -199,6 +201,8 @@ public class OpenblocksFrame extends JFrame {
 
     }
 
+
+
     private void initOpenBlocks() {
 
         final Context context = Context.getContext();
@@ -225,6 +229,7 @@ public class OpenblocksFrame extends JFrame {
 
         //JMenuItem recentFiles = new JMenuItem("open recent");
         JMenu recentItems = new JMenu("recent");
+        this.recentMenu = recentItems;
 
         try{
             File recentFiles = new File("C:\\Users\\Public\\recentFiles.txt");
@@ -233,34 +238,8 @@ public class OpenblocksFrame extends JFrame {
             while (scanner.hasNextLine()){
                 files.add(scanner.nextLine());
             }
-           //tring ch = "\ ";
-            //s.split("Documents")[1])
-            for(String s:files){
-                JMenuItem item = new JMenuItem(new AbstractAction() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
 
-                        try {
-                            context.loadArduBlockFile(new File(s));
-                            remakeRecentFiles(s);
-                            //посоветоваться и узнать изменять ли сразу или только при загрузке
-
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                }
-                );
-                String name = s.split("Documents")[1];
-                String name2 = "";
-                char[] chars = name.toCharArray();
-                for(int i=1;i<name.length();i++){
-                    name2 += chars[i];
-                }
-
-                item.setText(name2);
-                recentItems.add(item);
-            }
+            remakeRecentItems(files);
 
         }catch (Exception e){
 
@@ -756,7 +735,57 @@ public class OpenblocksFrame extends JFrame {
 
     }
 
+
+
+    private void remakeRecentItems(List<String> recentFiles) {
+        File recentfiles = new File("C:\\Users\\Public\\recentFiles.txt");
+        List<String> files = new ArrayList<>();
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(recentfiles);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("eeerrrroooorrr");
+            return;
+        }
+        while (scanner.hasNextLine()){
+            files.add(scanner.nextLine());
+        }
+
+
+        for (String s : files) {
+            JMenuItem item = new JMenuItem(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    try {
+                        context.loadArduBlockFile(new File(s));
+                        remakeRecentFiles(s);
+                        //посоветоваться и узнать изменять ли сразу или только при загрузке
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            });
+
+            String name = s.split("Documents")[1];
+            String name2 = "";
+            char[] chars = name.toCharArray();
+            for (int i = 1; i < name.length(); i++) {
+                name2 += chars[i];
+            }
+
+            item.setText(name2);
+            recentMenu.add(item);
+            System.out.println(s);
+        }
+        recentMenu.revalidate();
+        recentMenu.repaint();
+    }
+
     private void remakeRecentFiles(String path){
+
         //файл для хранения всех недавних файлов
         File recentFilesData = new File("C:\\Users\\Public\\recentFiles.txt");
         if(recentFilesData.exists()){
@@ -766,30 +795,58 @@ public class OpenblocksFrame extends JFrame {
                 while (scanner.hasNextLine()){
                     recentFiles.add(scanner.nextLine());
                 }
-                if(recentFiles.size()>=5){
-                    List<String> files = new ArrayList<>();
-                    files.add(path);
-                    for(int i = 0;i<4;i++){
-                        files.add(recentFiles.get(i));
-                    }
-                    Formatter writer = new Formatter("C:\\Users\\Public\\recentFiles.txt");
-                    for(String s:files){
-                        writer.format("%s",s+"\r\n");
-                    }
-                    writer.close();
-                }else {
-                    List<String> files = new ArrayList<>();
-                    files.add(path);
-                    for(int i = 0;i<recentFiles.size();i++){
-                        files.add(recentFiles.get(i));
-                    }
-                    Formatter writer = new Formatter("C:\\Users\\Public\\recentFiles.txt");
-                    for(String s:files){
-                        writer.format("%s",s+"\r\n");
-                    }
-                    writer.close();
-                }
 
+                if(!recentFiles.contains(path)) {
+
+
+                    if (recentFiles.size() >= 5) {
+                        List<String> files = new ArrayList<>();
+                        files.add(path);
+                        for (int i = 0; i < 4; i++) {
+                            files.add(recentFiles.get(i));
+                        }
+                        Formatter writer = new Formatter("C:\\Users\\Public\\recentFiles.txt");
+                        for (String s : files) {
+                            writer.format("%s", s + "\r\n");
+                        }
+                        writer.close();
+                    } else {
+                        List<String> files = new ArrayList<>();
+                        files.add(path);
+                        for (int i = 0; i < recentFiles.size(); i++) {
+                            files.add(recentFiles.get(i));
+                        }
+                        Formatter writer = new Formatter("C:\\Users\\Public\\recentFiles.txt");
+                        for (String s : files) {
+                            writer.format("%s", s + "\r\n");
+                        }
+                        writer.close();
+                    }
+
+                    recentMenu.removeAll();
+                    remakeRecentItems(recentFiles);
+                }else {
+                        int index = recentFiles.indexOf(path);
+                        List<String> rlist = new ArrayList<>();
+                        rlist.add(path);
+                        for (int i = 0; i <recentFiles.size();i++){
+                            if(i!=index){
+                                rlist.add(recentFiles.get(i));
+                            }else {
+                                System.out.println("wtf");
+                            }
+                        }
+
+                    Formatter writer = new Formatter("C:\\Users\\Public\\recentFiles.txt");
+                    for (String s : rlist) {
+                        writer.format("%s", s + "\r\n");
+                    }
+                    writer.close();
+                    recentFiles = rlist;
+                    recentMenu.removeAll();
+                    remakeRecentItems(rlist);
+
+                }
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -804,17 +861,18 @@ public class OpenblocksFrame extends JFrame {
                 e.printStackTrace();
             }
         }
+
+
+
     }
 
     private boolean chooseFileAndSave(String ardublockString) {
         File saveFile = letUserChooseSaveFile();
         fileToSave = saveFile;
         System.out.println(saveFile.getAbsolutePath());
-
         //файл для хранения всех недавних файлов
-        remakeRecentFiles(saveFile.getAbsolutePath());
-
         saveFile = checkFileSuffix(saveFile);
+        remakeRecentFiles(saveFile.getAbsolutePath());
         if (saveFile == null) {
             return false;
         }
