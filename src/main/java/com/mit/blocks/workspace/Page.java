@@ -1165,7 +1165,7 @@ class PageJComponent extends JLayeredPane implements RBParent {
         am.put("delete", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("delete");
+                //System.out.println("delete");
                 //RenderableBlock.currentBlock.removeChildBlocks();
                 removeChild(RenderableBlock.currentBlock);
 
@@ -1181,11 +1181,11 @@ class PageJComponent extends JLayeredPane implements RBParent {
         List<ConnectorTag> connectors =  component.getConnectors();
 
         for(ConnectorTag conn:connectors){
-            System.out.println("_"+conn.getSocket().getKind()+"_");
+            //System.out.println("_"+conn.getSocket().getKind()+"_");
 
                 String kind = conn.getSocket().getKind();
                 if (kind.equals("number")||kind.equals("boolean")) {
-                    System.out.println("delete connectored");
+                    //System.out.println("delete connectored");
                     RenderableBlock block = RenderableBlock.workspaceref.getEnv().getRenderableBlock(
                             conn.getSocket().getBlockID());
                     try {
@@ -1196,7 +1196,7 @@ class PageJComponent extends JLayeredPane implements RBParent {
                     try {
                         this.remove(block);
                     }catch (Exception e){
-                        System.out.println("exptn bleaa");
+                        //System.out.println("exptn bleaa");
                     }
                 }
 

@@ -79,15 +79,12 @@ public class OpenblocksFrame extends JFrame {
     }
 
 
-    void print(String s){
-        System.out.println(s);
-    }
-
     public static void deleteAllBlocks(){
         Page.blocksContainer.removeAll();
         Page.blocksContainer.revalidate();
         Page.blocksContainer.repaint();
     }
+
 
     public String makeFrameTitle() {
         String title;
@@ -161,7 +158,7 @@ public class OpenblocksFrame extends JFrame {
         initOpenBlocks();
 
         user = System.getProperty("user.name");
-        System.out.println(user);
+        //System.out.println(user);
 
         try {
             File file = new File("C:\\Users\\"+user+"\\Documents\\saver.abp");
@@ -745,7 +742,7 @@ public class OpenblocksFrame extends JFrame {
             scanner = new Scanner(recentfiles);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            System.out.println("eeerrrroooorrr");
+            //System.out.println("eeerrrroooorrr");
             return;
         }
         while (scanner.hasNextLine()){
@@ -778,7 +775,7 @@ public class OpenblocksFrame extends JFrame {
 
             item.setText(name2);
             recentMenu.add(item);
-            System.out.println(s);
+            //System.out.println(s);
         }
         recentMenu.revalidate();
         recentMenu.repaint();
@@ -797,7 +794,6 @@ public class OpenblocksFrame extends JFrame {
                 }
 
                 if(!recentFiles.contains(path)) {
-
 
                     if (recentFiles.size() >= 5) {
                         List<String> files = new ArrayList<>();
@@ -832,8 +828,6 @@ public class OpenblocksFrame extends JFrame {
                         for (int i = 0; i <recentFiles.size();i++){
                             if(i!=index){
                                 rlist.add(recentFiles.get(i));
-                            }else {
-                                System.out.println("wtf");
                             }
                         }
 
@@ -862,14 +856,12 @@ public class OpenblocksFrame extends JFrame {
             }
         }
 
-
-
     }
 
     private boolean chooseFileAndSave(String ardublockString) {
         File saveFile = letUserChooseSaveFile();
         fileToSave = saveFile;
-        System.out.println(saveFile.getAbsolutePath());
+        //System.out.println(saveFile.getAbsolutePath());
         //файл для хранения всех недавних файлов
         saveFile = checkFileSuffix(saveFile);
         remakeRecentFiles(saveFile.getAbsolutePath());
