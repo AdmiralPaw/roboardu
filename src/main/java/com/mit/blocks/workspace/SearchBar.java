@@ -1,34 +1,17 @@
 package com.mit.blocks.workspace;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import com.mit.blocks.codeblockutil.*;
+import com.mit.blocks.renderable.FactoryRenderableBlock;
 
+import javax.swing.Timer;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-
-import com.ardublock.ui.OpenblocksFrame;
-import com.mit.blocks.codeblockutil.CQueryField;
-import com.mit.blocks.codeblockutil.CScrollPane;
-import com.mit.blocks.codeblockutil.Explorer;
-import com.mit.blocks.codeblockutil.RHoverScrollPane;
-import com.mit.blocks.codeblockutil.RQueryField;
-import com.mit.blocks.codeblockutil.Window2Explorer;
-import com.mit.blocks.renderable.FactoryRenderableBlock;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-import javax.swing.JViewport;
 
 /**
  * Contributes a search bar component to the CodeBlocks GUI, which allows the
