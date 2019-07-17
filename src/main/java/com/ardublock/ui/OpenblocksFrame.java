@@ -373,7 +373,10 @@ public class OpenblocksFrame extends JFrame {
         northPanel.add(rightPanel, BorderLayout.EAST);
 
         JLabel infoLabel = new JLabel(); //displays text
-        infoLabel.setPreferredSize(new Dimension(150, 20));
+        //TODO может сделать авто размер лейбла от текста в нем?
+        //+ нужно изменить минимальные размеры проги, а то кнопки друг на друга залезут
+        //либо как идея: сделать "прячущиеся" кнопки
+        infoLabel.setPreferredSize(new Dimension(230, 20));
         infoLabel.setForeground(Color.white);
 
         //<editor-fold defaultstate="collapsed" desc="Buttons images and listners">
