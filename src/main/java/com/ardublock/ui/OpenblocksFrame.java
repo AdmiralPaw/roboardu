@@ -792,7 +792,7 @@ public class OpenblocksFrame extends JFrame {
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         }
         settings.dispose();
-
+        System.exit(0);
     }
 
     private File checkFileSuffix(File saveFile) {
