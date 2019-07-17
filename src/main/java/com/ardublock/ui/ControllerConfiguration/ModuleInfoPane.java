@@ -55,9 +55,6 @@ public class ModuleInfoPane extends JPanel {
         infoTextPanel.setBackground(Color.WHITE);
         infoImagePanel.setBackground(new Color(98,169,171));
         setButtons();
-        JPanel nameAndOthers = new JPanel();
-        nameAndOthers.setBackground(new Color(98,169,171));
-        nameAndOthers.setLayout(new FlowLayout(FlowLayout.RIGHT));
         JPanel twoButtons = new JPanel();
         twoButtons.setBackground(new Color(98,169,171));
         twoButtons.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -117,25 +114,24 @@ public class ModuleInfoPane extends JPanel {
 
         twoButtons.add(blocksButton);
         twoButtons.add(closeButton);
+        twoButtons.setPreferredSize(new Dimension(80,100));
+        twoButtons.setAlignmentX(RIGHT_ALIGNMENT);
+        twoButtons.setAlignmentY(TOP_ALIGNMENT);
         
-        nameAndOthers.setPreferredSize(new Dimension(
-                90, 100));
         
         
-        nameAndOthers.add(twoButtons);
-        
-        moduleNameLabel.setFont(new Font("TimesNewRoman", Font.PLAIN, 12));
-        moduleNameLabel.setForeground(Color.WHITE);
-        moduleNameLabel.setBackground(new Color(98,169,171));
+        moduleNameLabel.setFont(new Font("TimesNewRoman", Font.PLAIN, 16));
+        moduleNameLabel.setForeground(Color.BLACK);
+        moduleNameLabel.setBackground(Color.WHITE);
         moduleNameLabel.setWrapStyleWord(true);
         moduleNameLabel.setLineWrap(true);
         moduleNameLabel.setEditable(false);
         moduleNameLabel.setPreferredSize(new Dimension(
-                80, 50));
-        nameAndOthers.add(moduleNameLabel);
+                260, 30));
+        infoTextPanel.add(moduleNameLabel);
         
         infoImagePanel.add(moduleIcon);
-        infoImagePanel.add(nameAndOthers);
+        infoImagePanel.add(twoButtons);
         
         /*infoImagePanel.addMouseListener(new MouseListener(){
             public void mouseClicked(MouseEvent e) {
@@ -165,7 +161,7 @@ public class ModuleInfoPane extends JPanel {
         moduleInfoLabel.setLineWrap(true);
         moduleInfoLabel.setEditable(false);
         moduleInfoLabel.setPreferredSize(new Dimension(
-                260, 200));
+                260, 170));
         infoTextPanel.add(moduleInfoLabel);
 
         this.add(infoImagePanel, BorderLayout.NORTH);
