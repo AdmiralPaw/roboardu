@@ -1,17 +1,17 @@
 package com.mit.blocks.renderable;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.PopupMenu;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
+import com.mit.blocks.codeblocks.*;
+import com.mit.blocks.codeblocks.rendering.BlockShapeUtil;
+import com.mit.blocks.codeblockutil.CToolTip;
+import com.mit.blocks.codeblockutil.GraphicsManager;
+import com.mit.blocks.renderable.BlockImageIcon.ImageLocation;
+import com.mit.blocks.workspace.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
@@ -21,34 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.swing.*;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import com.mit.blocks.codeblocks.Block;
-import com.mit.blocks.codeblocks.BlockConnector;
-import com.mit.blocks.codeblocks.BlockConnectorShape;
-import com.mit.blocks.codeblocks.BlockLink;
-import com.mit.blocks.codeblocks.BlockLinkChecker;
-import com.mit.blocks.codeblocks.BlockShape;
-import com.mit.blocks.codeblocks.InfixBlockShape;
-import com.mit.blocks.codeblocks.JComponentDragHandler;
-import com.mit.blocks.codeblocks.rendering.BlockShapeUtil;
-import com.mit.blocks.codeblockutil.CToolTip;
-import com.mit.blocks.codeblockutil.GraphicsManager;
-import com.mit.blocks.renderable.BlockImageIcon.ImageLocation;
-import com.mit.blocks.workspace.ContextMenu;
-import com.mit.blocks.workspace.FactoryManager;
-import com.mit.blocks.workspace.ISupportMemento;
-import com.mit.blocks.workspace.MiniMap;
-import com.mit.blocks.workspace.RBParent;
-import com.mit.blocks.workspace.SearchableElement;
-import com.mit.blocks.workspace.Workspace;
-import com.mit.blocks.workspace.WorkspaceEvent;
-import com.mit.blocks.workspace.WorkspaceWidget;
 
 /**
  * RenderableBlock is responsible for all graphical rendering of a code Block.
@@ -140,7 +112,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     /**
      * HighlightManager that manages drawing of highlights around this block
      */
-    private RBHighlightHandler highlighter;
+    //private RBHighlightHandler highlighter;
     /**
      * dragHandler keeps the block within the workspace area. It manages
      * relocating the block.
@@ -325,7 +297,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             blockArea = new Area();
         }
 
-        highlighter = new RBHighlightHandler(this);
+        //highlighter = new RBHighlightHandler(this);
 
         String blockDescription = getBlock().getBlockDescription();
         if (blockDescription != null) {
@@ -1355,7 +1327,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             // as during the redraw, it will try to access location information
             // of this
             repaint();
-            highlighter.repaint();
+            //highlighter.repaint();
         }
     }
 
@@ -1557,14 +1529,14 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * @param color the desired highlight Color
      */
     public void setBlockHighlightColor(Color color) {
-        highlighter.setHighlightColor(color);
+        //highlighter.setHighlightColor(color);
     }
 
     /**
      * Hides highlighting for this block.
      */
     public void resetHighlight() {
-        highlighter.resetHighlight();
+        //highlighter.resetHighlight();
     }
 
     /**
@@ -1574,7 +1546,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * @param parent the RBParent that is the RB's new parent
      */
     public void setHighlightParent(RBParent parent) {
-        highlighter.setParent(parent);
+        //highlighter.setParent(parent);
     }
 
     /**
@@ -1912,7 +1884,8 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         // translate highlight along with the block - this would happen
         // automatically,
         // but putting the call here takes out any lag.
-        renderable.highlighter.repaint();
+        //renderable.highlighter.repaint();
+
         // Propagate the drag event to anything plugged into this block
         for (BlockConnector socket : BlockLinkChecker
                 .getSocketEquivalents(renderable.getBlock())) {
@@ -2147,7 +2120,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
     public void updateInSearchResults(boolean inSearchResults) {
         isSearchResult = inSearchResults;
-        highlighter.setIsSearchResult(isSearchResult);
+        //highlighter.setIsSearchResult(isSearchResult);
         // repaintBlock();
     }
 
@@ -2608,7 +2581,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * @return the highlighter
      */
     RBHighlightHandler getHighlightHandler() {
-        return highlighter;
+        return null;//highlighter;
     }
 
     /**

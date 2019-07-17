@@ -1,5 +1,11 @@
 package com.mit.blocks.codeblockutil;
 
+import com.mit.blocks.codeblockutil.CScrollPane.ScrollPolicy;
+import com.mit.blocks.renderable.FactoryRenderableBlock;
+import com.mit.blocks.workspace.Workspace;
+import org.jfree.ui.tabbedui.VerticalLayout;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,20 +13,9 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.*;
-
-import com.ardublock.ui.OpenblocksFrame;
-import com.mit.blocks.codeblockutil.CScrollPane.ScrollPolicy;
-import com.mit.blocks.renderable.FactoryRenderableBlock;
-import com.mit.blocks.workspace.SearchBar;
-import com.mit.blocks.workspace.SearchableContainer;
-import com.mit.blocks.workspace.Workspace;
-import java.awt.Component;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import org.jfree.ui.tabbedui.VerticalLayout;
 
 /**
  * A WindowExplorer is an Explorer that explores its set of canvases by
@@ -208,6 +203,8 @@ public class Window2Explorer extends JPanel implements Explorer {
             currentCanvasWithBasket.add(scroll, new Integer(0));
             currentCanvasWithBasket.setBounds(new Rectangle(0, 0, 300, 300));
         }
+        this.revalidate();
+        this.repaint();
     }
 
     /**

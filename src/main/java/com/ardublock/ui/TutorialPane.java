@@ -25,8 +25,6 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-import jdk.internal.org.jline.terminal.Size;
-import static jdk.nashorn.internal.objects.NativeMap.clear;
 
 /**
  *
