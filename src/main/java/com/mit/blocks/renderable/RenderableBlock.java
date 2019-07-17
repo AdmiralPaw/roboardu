@@ -112,7 +112,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     /**
      * HighlightManager that manages drawing of highlights around this block
      */
-    //private RBHighlightHandler highlighter;
+    private RBHighlightHandler highlighter;
     /**
      * dragHandler keeps the block within the workspace area. It manages
      * relocating the block.
@@ -297,7 +297,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             blockArea = new Area();
         }
 
-        //highlighter = new RBHighlightHandler(this);
+        highlighter = new RBHighlightHandler(this);
 
         String blockDescription = getBlock().getBlockDescription();
         if (blockDescription != null) {
@@ -1327,7 +1327,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             // as during the redraw, it will try to access location information
             // of this
             repaint();
-            //highlighter.repaint();
+            highlighter.repaint();
         }
     }
 
@@ -1529,14 +1529,14 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * @param color the desired highlight Color
      */
     public void setBlockHighlightColor(Color color) {
-        //highlighter.setHighlightColor(color);
+        highlighter.setHighlightColor(color);
     }
 
     /**
      * Hides highlighting for this block.
      */
     public void resetHighlight() {
-        //highlighter.resetHighlight();
+        highlighter.resetHighlight();
     }
 
     /**
@@ -1546,7 +1546,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * @param parent the RBParent that is the RB's new parent
      */
     public void setHighlightParent(RBParent parent) {
-        //highlighter.setParent(parent);
+        highlighter.setParent(parent);
     }
 
     /**
@@ -1884,7 +1884,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         // translate highlight along with the block - this would happen
         // automatically,
         // but putting the call here takes out any lag.
-        //renderable.highlighter.repaint();
+        renderable.highlighter.repaint();
 
         // Propagate the drag event to anything plugged into this block
         for (BlockConnector socket : BlockLinkChecker
@@ -2120,7 +2120,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
     public void updateInSearchResults(boolean inSearchResults) {
         isSearchResult = inSearchResults;
-        //highlighter.setIsSearchResult(isSearchResult);
+        highlighter.setIsSearchResult(isSearchResult);
         // repaintBlock();
     }
 
@@ -2581,7 +2581,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * @return the highlighter
      */
     RBHighlightHandler getHighlightHandler() {
-        return null;//highlighter;
+        return highlighter;
     }
 
     /**
