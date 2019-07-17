@@ -77,8 +77,8 @@ public class ControllerButton extends JToggleButton {
             
             public void mouseReleased(MouseEvent e) {
                 mouseIsPressedThis=false;
-                if(mouseIsOnThis){
-                if (button.isSelected()) {
+                if(mouseIsOnThis) {
+                    if (button.isSelected()) {
                         controllerImage.setSelectedId(Id, isItConnector);
                         if (isItConnector) {
                             controller.changeConnectorComponentsPane(buttonId);
@@ -90,9 +90,12 @@ public class ControllerButton extends JToggleButton {
                         controller.changeConnectorComponentsPane(null);
                     }
                     controllerImage.unpressElse(Id, isItConnector);
-                }
-                else{
-                    controllerImage.resetSelectedId(Id, isItConnector);
+                } else if (!isItConnector) {
+//                    controllerImage.resetSelectedId(Id, isItConnector);
+                    setNewIconAsModule("com/ardublock/Images/module/start.png");
+                    setModuleName("start");
+                    setTranslatedName("modules.start.info");
+                    controller.changeConnectorComponentsPane(null);
                 }
             }
 
@@ -100,6 +103,18 @@ public class ControllerButton extends JToggleButton {
                 mouseIsOnThis=true;
 //                System.out.println(buttonId+moduleName+mouseIsOnThis);
                 setModuleBig(true);
+                if(!isItConnector) if(mouseIsPressedThis) {
+//                    System.out.println(buttonId + moduleName + mouseIsOnThis + " must be clear!!!");
+
+                    //controllerImage.resetSelectedId(Id, isItConnector);
+                    setNewIconAsModule("com/ardublock/Images/module/" + moduleName + ".png");
+//                    setModuleName("start");
+//                    setTranslatedName("modules.start.info");
+                }
+                else{
+                    
+                }
+//                if(mouseIsPressedThis)
                 //setIconAccordingToPress();
             }
 
@@ -107,13 +122,16 @@ public class ControllerButton extends JToggleButton {
                 mouseIsOnThis=false;
 //                System.out.println(buttonId+moduleName+mouseIsOnThis);
                 setModuleBig(false);
-                if(mouseIsPressedThis) {
+                if(!isItConnector) if(mouseIsPressedThis) {
 //                    System.out.println(buttonId + moduleName + mouseIsOnThis + " must be clear!!!");
 
                     //controllerImage.resetSelectedId(Id, isItConnector);
-                    setNewIconAsModule("com/ardublock/Images/module/start.png");
-                    setModuleName("start");
-                    setTranslatedName("modules.start.info");
+                    setNewIconAsModule("com/ardublock/Images/module/trash.png");
+//                    setModuleName("start");
+//                    setTranslatedName("modules.start.info");
+                }
+                else{
+                    
                 }
                 //setIconAccordingToPress();
             }
