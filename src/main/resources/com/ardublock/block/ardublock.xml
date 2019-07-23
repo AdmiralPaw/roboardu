@@ -1544,6 +1544,9 @@ file before genus A is specified./ We impose this requirement so that sanity che
         <!--****************** Logical Operators *************** -->
 
         <BlockGenus name="greater" kind="function" color="90 160 85" initlabel="bg.greater">
+            <description>
+                <text>is upper number greater then lower?</text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="boolean" connector-kind="plug" >
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
@@ -1596,6 +1599,9 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 
         <BlockGenus name="greater_equal" kind="function" color="90 160 85" initlabel="bg.greater_equal">
+            <description>
+                <text>is upper number greater or equal?</text>
+            </description>            
             <BlockConnectors>
                 <BlockConnector connector-type="boolean" connector-kind="plug">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
@@ -1942,11 +1948,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 		
         <BlockGenus name="pinListDigital_D0" kind="data" color="239 168 104 " initlabel="bg.pinListDigital_D0" editable-label="no">
-            <description>
-                <text>
-                    Digital Pin Constant
-                </text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="plug"  />
             </BlockConnectors>
@@ -2006,22 +2008,14 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
         <BlockGenus name="pinListAnalog_A0" kind="data" color="239 168 104 " initlabel="bg.pinListAnalog_D0" editable-label="no">
-            <description>
-                <text>
-                    Analog Pin Constant
-                </text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="plug"  />
             </BlockConnectors>
         </BlockGenus>
 		
         <BlockGenus name="pinListAnalogWrite_D3" kind="data" color="239 168 104 " initlabel="bg." editable-label="no">
-            <description>
-                <text>
-                    PWM Pin Constant
-                </text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="plug"  />
             </BlockConnectors>
@@ -2252,9 +2246,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 
         <BlockGenus name="setter_variable_char" kind="command" color="95 190 50" initlabel="bg.setter_variable_char">
-            <description>
-                <text>create a vector of numbers</text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="poly" connector-kind="socket" label="bc.variable">
                     <DefaultArg genus-name="variable_poly" label="Char" />
@@ -2285,9 +2277,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 		
         <BlockGenus name="setter_variable_String" kind="command" color="95 190 50" initlabel="bg.setter_variable_String">
-            <description>
-                <text>set String variable</text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="string" connector-kind="socket" label="bc.variable">
                     <DefaultArg genus-name="variable_String" label="STRING" />
