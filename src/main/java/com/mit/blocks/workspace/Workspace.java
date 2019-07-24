@@ -1143,7 +1143,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         ProcedureOutputManager.finishLoad();
 
         if (newRoot != null) {
-            PageDrawerLoadingUtils.loadBlockDrawerSets(this, originalLangRoot, factory, controller); //
+            //PageDrawerLoadingUtils.loadBlockDrawerSets(this, originalLangRoot, factory, controller); //
             //PageDrawerLoadingUtils.loadComponentsSets(this, originalLangRoot, controller);
             //load pages, page drawers, and their blocks from save file
             blockCanvas.loadSaveString(newRoot);

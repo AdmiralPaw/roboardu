@@ -205,7 +205,7 @@ public class Context {
         if (savedFile != null) {
             saveFilePath = savedFile.getAbsolutePath();
             saveFileName = savedFile.getName();
-            workspaceController.resetWorkspace();
+            //workspaceController.resetWorkspace();
             workspaceController.loadProjectFromPath(saveFilePath);
             didLoad();
         }
