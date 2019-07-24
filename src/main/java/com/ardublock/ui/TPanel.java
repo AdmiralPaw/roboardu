@@ -67,28 +67,35 @@ public class TPanel extends JPanel {
         this.setSize(new Dimension(width, height));
         this.setPreferredSize(new Dimension(300, 250));
         nextButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) { 
-                if (tutorialPane.activeAnimPanels.get(tutorialPane.iter).get(0).animationIsFinished
-                        && tutorialPane.tutorIllumPanels.get(tutorialPane.iter).animationIsFinished) {
-                    if (tutorialPane.iter < tutorialPane.activeAnimPanels.size()) {
+            public void actionPerformed(ActionEvent e) {
+                if (tutorialPane.iter < tutorialPane.activeAnimPanels.size()) {
+                    if (tutorialPane.activeAnimPanels.get(tutorialPane.iter).get(0).animationIsFinished) {
+                        if (!tutorialPane.tutorIllumPanels.get(tutorialPane.iter).get(0).animationIsFinished) {
+                            for (IllumPanel pane : tutorialPane.tutorIllumPanels.get(tutorialPane.iter)) {
+                                pane.stopAnimation();
+                            }
+                        }
                         tutorialPane.lastIter = tutorialPane.iter;
                         tutorialPane.iter++;
-
+                        tutorialPane.nextTutor();
                     }
-                    tutorialPane.nextTutor();
                 }
             }
         });
 
         prevButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (tutorialPane.activeAnimPanels.get(tutorialPane.iter).get(0).animationIsFinished
-                        && tutorialPane.tutorIllumPanels.get(tutorialPane.iter).animationIsFinished) {
-                    if (tutorialPane.iter != 0) {
+                if (tutorialPane.iter < tutorialPane.activeAnimPanels.size()) {
+                    if (tutorialPane.activeAnimPanels.get(tutorialPane.iter).get(0).animationIsFinished) {
+                        if (!tutorialPane.tutorIllumPanels.get(tutorialPane.iter).get(0).animationIsFinished) {
+                            for (IllumPanel pane : tutorialPane.tutorIllumPanels.get(tutorialPane.iter)) {
+                                pane.stopAnimation();
+                            }
+                        }
                         tutorialPane.lastIter = tutorialPane.iter;
                         tutorialPane.iter--;
+                        tutorialPane.nextTutor();
                     }
-                    tutorialPane.nextTutor();
                 }
             }
         });
@@ -106,6 +113,10 @@ public class TPanel extends JPanel {
     public void changeDimension(int width, int height) {
         this.setSize(width, height);
         this.getParent().repaint();
+    }
+
+    public void setTextColor(Color newColor) {
+        this.tutorialText.setForeground(newColor);
     }
 
     private void startAnimation() {

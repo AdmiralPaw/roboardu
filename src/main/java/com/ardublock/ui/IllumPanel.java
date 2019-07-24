@@ -19,14 +19,15 @@ import javax.swing.Timer;
  */
 public class IllumPanel extends JPanel {
 
-    private double time = 0.3;
+    private double time = 0.4;
     private int fps = 30;
     private double frames = time * fps;
     private double iteratorOfFrames = 0;
     boolean animationIsFinished = true;
     public Timer animationTimerStart = null;
 
-    private int pulsingCount = 2 * 2; //3-и вспышки и 3 затухания
+    private int pulses = 8;
+    private int pulsingCount = pulses * 2; //3-и вспышки и 3 затухания
 
     private Color myColor = new Color(255, 255, 255, 0);
 
@@ -68,7 +69,7 @@ public class IllumPanel extends JPanel {
             } else {
                 animationTimerStart.stop();
                 animationIsFinished = true;
-                pulsingCount = 2 * 2;
+                pulsingCount = pulses * 2;
                 tutorialPane.remove(this);
             }
         }
@@ -76,6 +77,13 @@ public class IllumPanel extends JPanel {
 
     public void startAnimation() {
         animationTimerStart.start();
+    }
+
+    public void stopAnimation() {
+        animationTimerStart.stop();
+        animationIsFinished = true;
+        pulsingCount = pulses * 2;
+        tutorialPane.remove(this);
     }
 
     private void startPulse() {

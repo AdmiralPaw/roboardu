@@ -1,28 +1,17 @@
 package com.ardublock.ui;
 
-import java.awt.BorderLayout;
+import com.ardublock.ui.ControllerConfiguration.ControllerButton;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.geom.Area;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
@@ -42,13 +31,14 @@ public class TutorialPane extends JPanel {
     public TutorialPane tutorialPane;
     public IllumPanel dummy;
 
-    public List<List<DarkPanel>> activeAnimPanels = new ArrayList<List<DarkPanel>>();
-    public List<DarkPanel> inactiveTutorPanels = new ArrayList<DarkPanel>();
-    public List<Point> tutorLocations = new ArrayList<Point>();
-    public List<Dimension> tutorDimensions = new ArrayList<Dimension>();
-    public List<String> tutorTexts = new ArrayList<String>();
-    public List<Color> tutorColor = new ArrayList<Color>();
-    public List<IllumPanel> tutorIllumPanels = new ArrayList<IllumPanel>();
+    public List<List<DarkPanel>> activeAnimPanels = new ArrayList<>();
+    public List<DarkPanel> inactiveTutorPanels = new ArrayList<>();
+    public List<Point> tutorLocations = new ArrayList<>();
+    public List<Dimension> tutorDimensions = new ArrayList<>();
+    public List<String> tutorTexts = new ArrayList<>();
+    public List<Color> tutorColors = new ArrayList<>();
+    public List<Color> tutorTextColors = new ArrayList<>();
+    public List<List<IllumPanel>> tutorIllumPanels = new ArrayList<>();
 
     public TPanel tutorTextPanel;
 
@@ -110,7 +100,7 @@ public class TutorialPane extends JPanel {
 
     public void nextTutor() {
         this.repaintPanels();
-        if (iter == 0) {
+        if ((iter == 0) || (iter == this.inactiveTutorPanels.size() - 1)) {
             this.resetPanels();
             this.inactiveTutorPanels.get(iter).add(tutorTextPanel);
             tutorTextPanel.setText(this.tutorTexts.get(iter));
@@ -118,13 +108,10 @@ public class TutorialPane extends JPanel {
             tutorialPane.removeAll();
             openblocksFrame.repaint();
             return;
-        } else if (iter == this.inactiveTutorPanels.size() - 1) {
-            this.resetPanels();
-            this.inactiveTutorPanels.get(iter).add(tutorTextPanel);
-            tutorTextPanel.setText(this.tutorTexts.get(iter));
         } else {
             this.inactiveTutorPanels.get(iter).add(tutorTextPanel);
             tutorTextPanel.setText(this.tutorTexts.get(iter));
+            tutorTextPanel.setTextColor(tutorColors.get(iter));
 
             if (this.activeAnimPanels.get(iter).get(0) != this.activeAnimPanels.get(lastIter).get(0)
                     || iter == 1) {
@@ -133,9 +120,11 @@ public class TutorialPane extends JPanel {
                     pane.startAnimation();
                 }
             }
-            if (this.tutorIllumPanels.get(iter) != dummy) {
-                this.add(tutorIllumPanels.get(iter));
-                this.tutorIllumPanels.get(iter).startAnimation();
+            if (this.tutorIllumPanels.get(iter).get(0) != dummy) {
+                for (IllumPanel pane : this.tutorIllumPanels.get(iter)) {
+                    this.add(pane);
+                    pane.startAnimation();
+                }
             }
 //        if (!this.tutorDimensions.get(iter).equals(null)) {
 //            tutorTextPanel.setSize(this.tutorDimensions.get(iter));
@@ -258,177 +247,248 @@ public class TutorialPane extends JPanel {
         //1
         temp.add(factoryPanel);
         activeAnimPanels.add(temp);
+        temp = new ArrayList();
+        temp.add(dummy);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
-        tutorIllumPanels.add(dummy);
         tutorTexts.add("Обучение. Нажмите на \"крестик\" для выхода из обучения. Кнопки \"Далее\" и \"Назад\" используются для перехда к следующему шагу или возвращения к предыдущему. Во время обучения можно использовать все элементы интерфейса.");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //2
         temp = new ArrayList();
         temp.add(factoryPanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(dummy);
+        temp = new ArrayList();
+        temp.add(dummy);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
         tutorTexts.add("Панель для выбора блоков.");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //3
         temp = new ArrayList();
         temp.add(workspacePanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(dummy);
+        temp = new ArrayList();
+        temp.add(dummy);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(factoryPanel);
         tutorTexts.add("Холст, где будет писаться программа. ВНИМАНИЕ: выполняются только те блоки, которые подключены в \"ЦИКЛ\" или \"ПРОГРАММА\". Дополнительные детали работы с блоками описаны в методичке.");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //4
         temp = new ArrayList();
         temp.add(controllerPanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(dummy);
+        temp = new ArrayList();
+        temp.add(dummy);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
         tutorTexts.add("Подключения к контроллеру. Здесь указаны/отражены/обозначены подсказки при составлении программы.");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //5
         temp = new ArrayList();
         temp.add(buttonsPanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(dummy);
+        temp = new ArrayList();
+        temp.add(dummy);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
         tutorTexts.add("Кнопки для работы с программой.");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //6
         temp = new ArrayList();
         temp.add(factoryPanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(blocksChoice);
+        temp = new ArrayList();
+        temp.add(blocksChoice);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
         tutorTexts.add("Перейдем к выбору блоков. Любой блок разделяется на 3 типа - изначальный блок, управляющий блок, блок-команда и блок-переменная. Блоки-команды нужно подключать с помощью разъемов-выемок друг к другу, блоки-переменные подключаются к блокам-командам справа с помощью разъема. Изначальные блоки - это \"ЦИКЛ\" и \"ПРОГРАММА\". Они никуда не подключаются, к ним подключаются все остальные блоки.");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //7
         temp = new ArrayList();
         temp.add(workspacePanel);
         temp.add(factoryPanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(dummy);
+        temp = new ArrayList();
+        temp.add(dummy);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(controllerPanel);
         tutorTexts.add("Попробуйте вытащить любой блок-команду и подключите его к циклу. ПОДСКАЗКА: ориентируйтесь по форме блоков.");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //8
         temp = new ArrayList();
         temp.add(workspacePanel);
         temp.add(factoryPanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(cathegoryChoice);
+        temp = new ArrayList();
+        temp.add(cathegoryChoice);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(controllerPanel);
         tutorTexts.add("Выберите категорию \"СЕРВОПРИВОД\" и подключите к своей программе понравившийся блок.");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //9
         temp = new ArrayList();
         temp.add(factoryPanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(searchBar);
+        temp = new ArrayList();
+        temp.add(searchBar);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
         tutorTexts.add("Для поиска нужного блока можно обратиться к \"Поиску\" - без забыли и точно без лень искать. Например, вы можете написать в строку поиска \"задержка\" и получите блоки-команды, которые выполняют функцию задержки перед следующими командами. Добавьте понравившийся блок в программу. - еще на счет обращений не уверена, возможно все нужно будет писать \"обезличенно\", но это нужно будет подумать и уточнить как лучше");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //10
         temp = new ArrayList();
         temp.add(workspacePanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(dummy);
+        temp = new ArrayList();
+        temp.add(dummy);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(factoryPanel);
         tutorTexts.add("Да у вас уже столько блоков в программе! Попробуйте отдалить или приблизить камеру. ПОДСКАЗКА: Знак \"=\" - это изначальный масштаб.");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //11
         temp = new ArrayList();
         temp.add(buttonsPanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(dummy);
+        temp = new ArrayList();
+        temp.add(dummy);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
         tutorTexts.add("Теперь попробуем сгенерировать код программы. Обратите внимание, что при генерации в всплывающем окне Arduino IDE появляется код, соответствующий составленной вами программе.");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //12
         temp = new ArrayList();
         temp.add(buttonsPanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(verifyButton);
+        temp = new ArrayList();
+        temp.add(verifyButton);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
         tutorTexts.add("Нажмите на кнопку \"Сгенерировать код\" - тут надо будет картинку кнопки или она будет подсвечиватся тоже?. Если вы все сделали правильно (тут сразу возникает вопрос а что все сделали правильно? все правильно слишком общее мне кажется. Может написать как-то: \"Произойдет компиляция кода, если блоки подобраны правильно/по правилам (ведь писали до этого что там надо чтобы они сответствовали друг другу), то код просто скомпилируется. Это значит, что код будет работать и его можно загрузить на контроллер.");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //13
         temp = new ArrayList();
         temp.add(controllerPanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(dummy);
+        temp = new ArrayList();
+        temp.add(dummy);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
         tutorTexts.add("Попробуем собрать нашего робота. Возьмите плату ОмегаБота и Светодиод.");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //14
         temp = new ArrayList();
         temp.add(controllerPanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(dummy); //TODO
+        temp = new ArrayList();
+        for (ControllerButton pane : openblocksFrame.getContext().getWorkspace().controller.controllerImage.connectorButtons) {
+            temp.add(new IllumPanel(
+                    openblocksFrame, this,
+                    new Dimension(pane.getWidth(), pane.getHeight()),
+                    new Point(pane.getX() + openblocksFrame.getContext().getWorkspace().controller.getX() + 1,
+                            pane.getY() + openblocksFrame.getContext().getWorkspace().controller.getY()
+                            + logoPanel.getHeight() + menuHeight + 1)));
+        }
+        tutorIllumPanels.add(temp); //TODO
         inactiveTutorPanels.add(workspacePanel);
         tutorTexts.add("Нажатием на коннектор (разъем) вы откроете список модулей, которые можно к нему подключить. Схема в программе соответствует реальной плате, поэтому подключать модули можно ориентируясь на нее.");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //15
         temp = new ArrayList();
         temp.add(controllerPanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(dummy); //TODO
+        temp = new ArrayList();
+        for (ControllerButton pane : openblocksFrame.getContext().getWorkspace().controller.controllerImage.moduleButtons) {
+            temp.add(new IllumPanel(
+                    openblocksFrame, this,
+                    new Dimension(pane.getWidth(), pane.getHeight()),
+                    new Point(pane.getX() + openblocksFrame.getContext().getWorkspace().controller.getX() + 1,
+                            pane.getY() + openblocksFrame.getContext().getWorkspace().controller.getY()
+                            + logoPanel.getHeight() + menuHeight + 1)));
+        }
+        tutorIllumPanels.add(temp); //TODO
         inactiveTutorPanels.add(workspacePanel);
         tutorTexts.add("Нажмите на сам модуль в изображении или на его название в списке. Вы получите краткое описание модуля и его изображение о модуле и как он примерно выглядит в реальности. Так же в панели вы можете получить блоки, которые могут взаимодействовать с модулем.");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //16
         temp = new ArrayList();
         temp.add(workspacePanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(dummy);
+        temp = new ArrayList();
+        temp.add(dummy);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(controllerPanel);
         tutorTexts.add("Теперь удалите ранее написанную вами программу, но не блок \"ЦИКЛ\". Хотя, если вы и его удалили, то можете его достать в категории \"УПРАВЛЕНИЕ\". - не понимаю к чему это..про удалите это, не удаляйте то\n"
                 + "Если здесь про возможность удалять блоки, то можно просто написать вот так то и так то можно удалять блоки.");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //17
         temp = new ArrayList();
         temp.add(controllerPanel); //ВАЖНО: если панель новая, то стоит начинать не с предыдущей панели
         temp.add(workspacePanel);  //поэтому первая тут controllerPanel а не workspacePanel
         temp.add(factoryPanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(dummy);
+        temp = new ArrayList();
+        temp.add(dummy);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
         tutorTexts.add("Перейдем к небольшой тренировке. Найдите блок \"СВЕТОДИОД\". Добавьте его в программу, в номере порта укажите тот порт, к которому подключен светодиод на плате, а в состоянии укажите \"ВЫСОКИЙ\". Под высоким подразумевается сигнал - то есть светодиод будет гореть.");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.BLACK);
         //18
         temp = new ArrayList();
         temp.add(buttonsPanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(generateButton);
+        temp = new ArrayList();
+        temp.add(generateButton);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
         tutorTexts.add("Теперь подключите к компьютеру вашу плату с подключенным к ней светодиодом. Нажмите на кнопку \"Отправить в Ардуино\" - картинка кнопки или подсветка. Если вы все сделали верно, то в окне с кодом в выводе вы получите либо сообщение о удачной загрузке, либо ошибку о загрузке в плату. Во втором случае вам нужно будет открыть \"Инструменты\", выбрать \"Порт\" и в выпадающем списке выбрать существующий COM-порт.  - но нужно продумать что реально делать если это так и случится...как вариант сделать на сайте раздел \"вопросы и ошибки\" чтобы если что понимат что может идти не так, если у нас не предусмотрены сообщения об ошибках которые отпраляются");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
         //19
         temp = new ArrayList();
         temp.add(logoPanel);
         activeAnimPanels.add(temp);
-        tutorIllumPanels.add(dummy);
+        temp = new ArrayList();
+        temp.add(dummy);
+        tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
         tutorTexts.add("Если светодиод на вашей плате загорелся, то поздравляем! Вы прошли обучение и готовы писать собственные программы для своего ОмегаБота!");
         tutorLocations.add(null);
         tutorDimensions.add(null);
+        tutorColors.add(Color.WHITE);
     }
 }
