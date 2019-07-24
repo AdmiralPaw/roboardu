@@ -39,7 +39,7 @@ public class ControllerButton extends JToggleButton {
         this.controller = root;
         this.buttonId = Id;
         this.controllerImage = rootImage;
-        this.mode=mode;
+        this.mode = mode;
         setMargin(new Insets(0, 0, 0, 0));
         setIconTextGap(0);
         setBorderPainted(false);
