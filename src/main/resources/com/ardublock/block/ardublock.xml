@@ -514,7 +514,11 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 
         <BlockGenus name="no_tone" kind="command" color="95 95 195" initlabel="bg.noTone">
-
+            <description>
+                <text>
+                    Turn off the sound
+                </text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListDigital_D0" label="D0" />
@@ -1255,7 +1259,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>
                     Reports the difference of two numbers (
                     <arg n="1" />
-                    -
+                    a-b
                     <arg n="2" />
                     ).
                 </text>
