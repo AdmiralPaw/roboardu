@@ -32,9 +32,9 @@ public class OpenblocksFrame extends JFrame {
     private static final long serialVersionUID = 2841155965906223806L;
 
     JMenu recentMenu;
-
+    private OpenblocksFrame thisFrame;
     //время для функции вызова автосохранения
-    public static int timeDelay = 5;
+    public int timeDelay = 5;
     private File fileToSave;
     
     private Context context;
@@ -88,6 +88,7 @@ public class OpenblocksFrame extends JFrame {
     public static String recentFile;
     List<String> recentFiles = new ArrayList<>();
     public OpenblocksFrame() {
+        thisFrame = this;
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("recentFiles.txt");
         Scanner scanner = new Scanner(inputStream);
@@ -110,6 +111,7 @@ public class OpenblocksFrame extends JFrame {
         }
 
         context = Context.getContext();
+        uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
         settings = new Settings(this);
         this.setTitle(makeFrameTitle());
         this.setSize(new Dimension(1024, 760));
@@ -123,7 +125,7 @@ public class OpenblocksFrame extends JFrame {
         this.setLayout(new BorderLayout());
         //put the frame to the center of screen
         this.setLocationRelativeTo(null);
-        uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
+
         //25.03.2019
         Image icon = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(
                 "com/ardublock/block/mainIcon.png")).getImage();
@@ -178,6 +180,10 @@ public class OpenblocksFrame extends JFrame {
 
     }
 
+    public void setAutosaveInterval(int interval)
+    {
+        timeDelay = interval;
+    }
 
 
     private void initOpenBlocks() {
@@ -202,6 +208,8 @@ public class OpenblocksFrame extends JFrame {
         JMenuItem uploadItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.upload"));
         JMenuItem serialMonitorItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.serialMonitor"));
         JMenuItem saveImageItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveImage"));
+        JMenuItem tutorialItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.tutorial"));
+
 
 
         //JMenuItem recentFiles = new JMenuItem("open recent");
@@ -301,6 +309,17 @@ public class OpenblocksFrame extends JFrame {
             }
         });
 
+        tutorialItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TutorialPane pan = new TutorialPane(thisFrame);
+                setGlassPane(pan);
+                getGlassPane().setVisible(true);
+                repaint();
+                settings.setVisible(false);
+            }
+        });
+
         fileMenu.add(newItem);
         fileMenu.add(openItem);
         fileMenu.add(saveItem);
@@ -315,6 +334,7 @@ public class OpenblocksFrame extends JFrame {
         toolsMenu.add(verifyItem);
         toolsMenu.add(uploadItem);
         toolsMenu.add(serialMonitorItem);
+        toolsMenu.add(tutorialItem);
 
         menuBar.add(fileMenu);
         menuBar.add(toolsMenu);
@@ -715,7 +735,10 @@ public class OpenblocksFrame extends JFrame {
 
     }
 
-
+    public ResourceBundle getResource()
+    {
+        return uiMessageBundle;
+    }
 
     private void remakeRecentItems(List<String> recentFiles) {
         File recentfiles = new File("C:\\Users\\Public\\recentFiles.txt");
