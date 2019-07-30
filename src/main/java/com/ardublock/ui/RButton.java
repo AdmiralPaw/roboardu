@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 public class RButton extends JButton {
+
+    private Font currentFont;
     public RButton(String text)
     {
         super(text);
@@ -12,6 +14,7 @@ public class RButton extends JButton {
         setContentAreaFilled(false);
         setFocusable(false);
         setBorder(BorderFactory.createEmptyBorder());
+        currentFont = new Font(Font.DIALOG_INPUT, Font.PLAIN, 15);
     }
 
     public void paint(Graphics g)
@@ -22,13 +25,17 @@ public class RButton extends JButton {
 
         if (this.getText() != null) {
             g2.setColor(Color.white);
-            Font font = new Font(Font.DIALOG_INPUT, Font.PLAIN, 15);
-            g2.setFont(font);
+            g2.setFont(currentFont);
             FontMetrics metrics = g2.getFontMetrics();
             Rectangle2D textBounds = metrics.getStringBounds(this.getText(), g2);
             float x = (float)(getWidth() / 2 - textBounds.getWidth()/2);
-            float y = (float) ((1.0*this.getHeight() - 2.75 * metrics.getDescent()));
+            float y = (float) ((1.0*this.getHeight() - 3.75 * metrics.getDescent()));
             g2.drawString(this.getText(), x, y);
         }
+    }
+
+    public void setFont(Font newFont)
+    {
+        currentFont = newFont;
     }
 }

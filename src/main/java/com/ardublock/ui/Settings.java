@@ -14,6 +14,7 @@ public class Settings extends JFrame {
     private ResourceBundle uiMessageBundle;
     private final Preferences userPrefs;
     private Settings thisFrame;
+    private String mainFont = "TimesNewRoman";
     boolean beginDrag;
     int mousePressX;
     int mousePressY;
@@ -114,7 +115,7 @@ public class Settings extends JFrame {
 
         JLabel text = new JLabel(uiMessageBundle.getString("ardublock.ui.settings"));
         text.setVerticalAlignment(SwingConstants.CENTER);
-        text.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 15));
+        text.setFont(new Font(mainFont, Font.BOLD, 15));
         windowCapPanel.add(text);
         text.setBounds(leftOffset,0,100,windowCapPanel.getHeight());
 
@@ -133,7 +134,7 @@ public class Settings extends JFrame {
         text.setVerticalAlignment(SwingConstants.CENTER);
         windowBodyPanel.add(text);
         text.setBounds(leftOffset,position,300,40);
-        text.setFont(new Font(Font.DIALOG_INPUT, Font.PLAIN, 15));
+        text.setFont(new Font(mainFont, Font.PLAIN, 15));
 
         RCheckBox autostart = new RCheckBox();
         autostart.setSelected(userPrefs.getBoolean("ardublock.ui.autostart", false));
@@ -146,8 +147,10 @@ public class Settings extends JFrame {
         text.setVerticalAlignment(SwingConstants.CENTER);
         windowBodyPanel.add(text);
         text.setBounds(leftOffset,position,300,40);
-        text.setFont(new Font(Font.DIALOG_INPUT, Font.PLAIN, 15));
-        RSpinner autosaveInterval = new RSpinner(new SpinnerNumberModel(userPrefs.getInt("ardublock.ui.autosaveInterval", 10),5,120,5));
+        text.setFont(new Font(mainFont, Font.PLAIN, 15));
+        RSpinner autosaveInterval = new RSpinner(new SpinnerNumberModel(userPrefs.getInt("ardublock.ui.autosaveInterval", 10)
+                                    ,5,120,5));
+
         windowBodyPanel.add(autosaveInterval);
         autosaveInterval.setBounds(getWidth()-80-rigthOffset, position + offset/2 - spinnerHeigth/2, 80,spinnerHeigth);
         openblocksFrame.setAutosaveInterval(autosaveInterval.getIntValue());
@@ -158,13 +161,14 @@ public class Settings extends JFrame {
         text.setVerticalAlignment(SwingConstants.CENTER);
         windowBodyPanel.add(text);
         text.setBounds(leftOffset,position,300,40);
-        text.setFont(new Font(Font.DIALOG_INPUT, Font.PLAIN, 15));
+        text.setFont(new Font(mainFont, Font.PLAIN, 15));
 
         RSpinner queueSize = new RSpinner(new SpinnerNumberModel(userPrefs.getInt("ardublock.ui.ctrlzLength", 10),5,120,5));
         windowBodyPanel.add(queueSize);
         queueSize.setBounds(getWidth()-80-rigthOffset, position + offset/2 - spinnerHeigth/2, 80,spinnerHeigth);
 
         JButton saveBtn = new RButton(uiMessageBundle.getString("ardublock.ui.saveAndClose"));
+        saveBtn.setFont(new Font(mainFont, Font.PLAIN, 15));
         windowBodyPanel.add(saveBtn);
         saveBtn.setBounds(1,windowBodyPanel.getHeight()-40,getWidth()-1, 39);
         saveBtn.addActionListener(new ActionListener() {

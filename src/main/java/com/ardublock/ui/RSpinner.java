@@ -29,6 +29,7 @@ public class RSpinner extends JSpinner {
 
     }
 
+
     public int getIntValue()
     {
         return Integer.parseInt(getValue().toString());
@@ -62,7 +63,6 @@ class RSpinnerUI extends BasicSpinnerUI
 
     public JComponent createEditor()
     {
-
         return  new SpinEditor(super.spinner);
     }
 
@@ -89,7 +89,8 @@ class RSpinnerUI extends BasicSpinnerUI
         public void stateChanged(ChangeEvent e)
         {
             JSpinner spinner = (JSpinner)(e.getSource());
-            editor.setText(spinner.getValue().toString());
+            String text = spinner.getValue().toString();
+            editor.setText(text);
         }
     }
 
