@@ -1316,6 +1316,15 @@ file before genus A is specified./ We impose this requirement so that sanity che
 
         <BlockGenus name="modulo" kind="function" color="71 198 145" initlabel="bg.modulo">
             <BlockConnectors>
+            <description>
+                <text>
+                Reports the % of two numbers (
+                    <arg n="1" />
+                    %
+                    <arg n="2" />
+                    ).
+                </text>
+            </description>
                 <BlockConnector label="" connector-kind="plug" connector-type="number">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
@@ -9717,7 +9726,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>Pulse</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="number" connector-kind="socket" label="#">
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListAnalog_A0" label="A0" />
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="plug" />
@@ -11697,15 +11706,15 @@ initlabel="bg.tft-msg" editable-label="yes">
 		
         <!--****************** Pin Dropdown List Groups *************** -->
         <BlockFamily>
-            <!--****************** Digital pins on all Arduino Boards *************** -->
+<!--            ****************** Digital pins on all Arduino Boards *************** 
             <FamilyMember>pinListDigital_D0</FamilyMember>
             <FamilyMember>pinListDigital_D1</FamilyMember>
             <FamilyMember>pinListDigital_D2</FamilyMember>
-            <FamilyMember>pinListDigital_D3</FamilyMember>
-            <FamilyMember>pinListDigital_D4</FamilyMember>
+            <FamilyMember>pinListDigital_D3</FamilyMember>-->
+<!--            <FamilyMember>pinListDigital_D4</FamilyMember>
             <FamilyMember>pinListDigital_D5</FamilyMember>
             <FamilyMember>pinListDigital_D6</FamilyMember>
-            <FamilyMember>pinListDigital_D7</FamilyMember>
+            <FamilyMember>pinListDigital_D7</FamilyMember>-->
             <FamilyMember>pinListDigital_D8</FamilyMember>
             <FamilyMember>pinListDigital_D9</FamilyMember>
             <FamilyMember>pinListDigital_D10</FamilyMember>
@@ -11718,8 +11727,8 @@ initlabel="bg.tft-msg" editable-label="yes">
             <FamilyMember>pinListAnalog_A1</FamilyMember>
             <FamilyMember>pinListAnalog_A2</FamilyMember>
             <FamilyMember>pinListAnalog_A3</FamilyMember>
-            <FamilyMember>pinListAnalog_A4</FamilyMember>
-            <FamilyMember>pinListAnalog_A5</FamilyMember>		
+<!--            <FamilyMember>pinListAnalog_A4</FamilyMember>
+            <FamilyMember>pinListAnalog_A5</FamilyMember>		-->
         </BlockFamily>
 		
         <BlockFamily>
@@ -11728,16 +11737,16 @@ initlabel="bg.tft-msg" editable-label="yes">
             <FamilyMember>pinListAnalog_A1</FamilyMember>
             <FamilyMember>pinListAnalog_A2</FamilyMember>
             <FamilyMember>pinListAnalog_A3</FamilyMember>
-            <FamilyMember>pinListAnalog_A4</FamilyMember>
-            <FamilyMember>pinListAnalog_A5</FamilyMember>
+<!--            <FamilyMember>pinListAnalog_A4</FamilyMember>
+            <FamilyMember>pinListAnalog_A5</FamilyMember>-->
             <!--****************** Extra Analog DAC pins on Mega/Nano Boards *************** -->
         </BlockFamily>
 		
         <BlockFamily>
             <!--****************** 'Analog' PWM pins on All Arduino Boards *************** -->
-            <FamilyMember>pinListAnalogWrite_D3</FamilyMember>
+<!--            <FamilyMember>pinListAnalogWrite_D3</FamilyMember>
             <FamilyMember>pinListAnalogWrite_D5</FamilyMember>
-            <FamilyMember>pinListAnalogWrite_D6</FamilyMember>
+            <FamilyMember>pinListAnalogWrite_D6</FamilyMember>-->
             <FamilyMember>pinListAnalogWrite_D9</FamilyMember>
             <FamilyMember>pinListAnalogWrite_D10</FamilyMember>
             <FamilyMember>pinListAnalogWrite_D11</FamilyMember>
@@ -12315,21 +12324,21 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <BlockGenusMember>sensor_button</BlockGenusMember>
                 <BlockGenusMember>buttonD12</BlockGenusMember>
                 <BlockGenusMember>little_bits_lightsensor</BlockGenusMember>
-                <BlockGenusMember>little_bits_microphone</BlockGenusMember>
-                <BlockGenusMember>little_bits_pulse</BlockGenusMember>
+                <!--<BlockGenusMember>little_bits_microphone</BlockGenusMember>-->
+                <!--<BlockGenusMember>little_bits_pulse</BlockGenusMember>-->
                 <BlockGenusMember>df_digital_viberation_sensor</BlockGenusMember>
-                <BlockGenusMember>df_joystick_module_button</BlockGenusMember>
-                <BlockGenusMember>df_joystick_module_x</BlockGenusMember>
-                <BlockGenusMember>df_joystick_module_y</BlockGenusMember>
+                <!--<BlockGenusMember>df_joystick_module_button</BlockGenusMember>-->
+                <!--<BlockGenusMember>df_joystick_module_x</BlockGenusMember>-->
+                <!--<BlockGenusMember>df_joystick_module_y</BlockGenusMember>-->
                 <BlockGenusMember>df_analog_gp2y0a21</BlockGenusMember>
                 <BlockGenusMember>df_line_tracking_sensor</BlockGenusMember>
                 <BlockGenusMember>sensorTemperature</BlockGenusMember>
                 <BlockGenusMember>seeed_mag_switch</BlockGenusMember>
                 <BlockGenusMember>seeed_touch_sensor</BlockGenusMember>
-                <BlockGenusMember>obstacle_sensor</BlockGenusMember>
+                <!--<BlockGenusMember>obstacle_sensor</BlockGenusMember>-->
                 <BlockGenusMember>magnetic_sensor</BlockGenusMember>
-                <BlockGenusMember>rangefinderCombined</BlockGenusMember>
-                <BlockGenusMember>lightCombined</BlockGenusMember>
+                <!--<BlockGenusMember>rangefinderCombined</BlockGenusMember>-->
+                <!--<BlockGenusMember>lightCombined</BlockGenusMember>-->
                 <BlockGenusMember>LineFinder</BlockGenusMember>
                 <BlockGenusMember>Potentiometer</BlockGenusMember>
             </BlockDrawer>
