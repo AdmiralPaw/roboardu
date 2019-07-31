@@ -1,18 +1,6 @@
 package com.ardublock.core;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Set;
-
-import processing.app.Editor;
-
 import com.ardublock.ui.listener.OpenblocksFrameListener;
-
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.controller.WorkspaceController;
 import com.mit.blocks.renderable.FactoryRenderableBlock;
@@ -20,6 +8,12 @@ import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.FactoryManager;
 import com.mit.blocks.workspace.Page;
 import com.mit.blocks.workspace.Workspace;
+import processing.app.Editor;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.*;
 
 public class Context {
 
@@ -39,6 +33,7 @@ public class Context {
     private boolean isInArduino = false;
     private String arduinoVersionString = ARDUINO_VERSION_UNKNOWN;
     private OsType osType;
+    private String defaultFileName = "untitled";
 
     final public static String APP_NAME = "Roboscratch";
 
@@ -101,16 +96,21 @@ public class Context {
         loadDefaultArdublockProgram();
 
         saveFilePath = null;
-        saveFileName = "untitled";
+        saveFileName = defaultFileName;
         workspaceEmpty = true;
     }
 
+    public void setDefaultFileName(String name)
+    {
+        defaultFileName = name;
+        saveFileName = name;
+    }
     public void loadFreshWorkSpace() {
         //workspaceController.loadFreshWorkspace();
         loadDefaultArdublockProgram();
 
         saveFilePath = null;
-        saveFileName = "untitled";
+        saveFileName = defaultFileName;
         workspaceEmpty = true;
     }
 

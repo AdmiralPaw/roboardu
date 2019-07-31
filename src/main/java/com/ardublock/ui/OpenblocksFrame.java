@@ -8,6 +8,7 @@ import com.mit.blocks.workspace.Page;
 import com.mit.blocks.workspace.Workspace;
 
 import javax.imageio.ImageIO;
+import javax.swing.Timer;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -21,8 +22,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Timer;
 import java.util.*;
 
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
@@ -43,6 +44,7 @@ public class OpenblocksFrame extends JFrame {
     private ErrWindow errWindow;
     public Settings settings;
     public JLayeredPane GlobalLayaredPane;
+    private Timer timer = null;
 
     public JPanel northPanelCenter = null;
     public JPanel logo;
@@ -112,6 +114,8 @@ public class OpenblocksFrame extends JFrame {
 
         context = Context.getContext();
         uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
+        context.setDefaultFileName(uiMessageBundle.getString("ardublock.ui.untitled"));
+
         settings = new Settings(this);
         this.setTitle(makeFrameTitle());
         this.setSize(new Dimension(1024, 760));
@@ -162,27 +166,52 @@ public class OpenblocksFrame extends JFrame {
         //TODO: ok all, funcs i need to save and load in this class , see in docs TimerTask is asynchronous or not?
         //make public static var to set time to timer
         //see screenshots on my phone
-        Thread timeToSave = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Timer timer = new Timer();
-                timer.scheduleAtFixedRate(new TimerTask() {
-                    @Override
-                    public void run() {
+//        Thread timeToSave = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Timer timer = new Timer();
+//                timer.scheduleAtFixedRate(new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        String text = getContext().getSaveFileName();
+//                        writeFileAndUpdateFrame(getArduBlockString(), new File(text + "_autosave.abp"));
+//                        System.out.println(text);
+//                        setTitle(makeFrameTitle());
+//                        System.out.println("delayed and worked successfully");
+//                    }
+//                },1000*60*4,1000*60*timeDelay);
+//            }
+//        });
 
-                        writeFileAndUpdateFrame(getArduBlockString(), new File("C:\\Users\\"+user+"\\Documents\\saver.abp"));
-                        System.out.println("delayed and worked successfully");
-                    }
-                },1000*60*4,1000*60*timeDelay);
+        timer = new Timer(1000 * 60 * timeDelay, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String text = getContext().getSaveFileName();
+                String newText = text.replace(".abp", "");
+                boolean isWorkspaceChanged = context.isWorkspaceChanged();
+                writeFileAndUpdateFrame(getArduBlockString(), new File(newText + "_autosave.abp"));
+                context.setSaveFileName(newText);
+                context.setWorkspaceChanged(isWorkspaceChanged);
+                setTitle(makeFrameTitle());
+                Date dateNow = new Date();
+                SimpleDateFormat formatForDateNow = new SimpleDateFormat("hh:mm:ss");
+
+                System.out.println("Текущая дата " + formatForDateNow.format(dateNow));
+                errWindow.setErrText("[" + formatForDateNow.format(dateNow) + "] " +
+                                    uiMessageBundle.getString("ardublock.ui.compledAutosave") + newText + "_autosave.abp");
             }
         });
-        timeToSave.start();
+        timer.start();
 
     }
 
     public void setAutosaveInterval(int interval)
     {
         timeDelay = interval;
+        if (timer != null) {
+            timer.setDelay(1000 * 60 * timeDelay);
+            timer.restart();
+        }
     }
 
 
