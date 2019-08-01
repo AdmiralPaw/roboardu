@@ -2125,9 +2125,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 
         <BlockGenus name="setter_variable_number_double" kind="command" color="95 190 50" initlabel="bg.setter_variable_number_double">
-            <description>
-                <text>set decimal variable</text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.variable">
                     <DefaultArg genus-name="variable_number_double" label="Double" />
