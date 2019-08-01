@@ -3754,9 +3754,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 
         <BlockGenus name="df_analog_gp2y0a21" kind="data" color="242 123 99" initlabel="bg.df_analog_gp2y0a21">
-            <description>
-                <text>Read analog value from pin</text>
-            </description>
+
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListAnalog_A0" label="A0" />
