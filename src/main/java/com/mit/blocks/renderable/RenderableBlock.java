@@ -1663,15 +1663,13 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     }
 
     public void cloneMe(RenderableBlock obj) {
-        cloneThis(obj);
-
-        workspace.notifyListeners(new WorkspaceEvent(workspace, this
-                .getParentWidget(), this.getBlockID(),
-                WorkspaceEvent.BLOCK_CLONED, true));
+        obj.cloneMe();
     }
 
     public void cloneMe() {
+        parent.startDragged(this);
         cloneThis(this);
+        parent.stopDragged(this);
         workspace.notifyListeners(new WorkspaceEvent(workspace, this
                 .getParentWidget(), this.getBlockID(),
                 WorkspaceEvent.BLOCK_CLONED, true));
