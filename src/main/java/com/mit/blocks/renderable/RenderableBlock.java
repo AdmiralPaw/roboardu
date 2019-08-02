@@ -1672,7 +1672,6 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
     public void cloneMe() {
         cloneThis(this);
-
         workspace.notifyListeners(new WorkspaceEvent(workspace, this
                 .getParentWidget(), this.getBlockID(),
                 WorkspaceEvent.BLOCK_CLONED, true));
@@ -1745,7 +1744,6 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         newRb.moveConnectedBlocks();
         parent.addBlock(newRb);
         newRb.linkedDefArgsBefore = true;
-
         return newRb;
     }
 
@@ -1910,6 +1908,16 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 //        startDragging(renderable, widget, 0);
 //
 //    }
+
+    public boolean hasBlockParent()
+    {
+        BlockConnector plug = BlockLinkChecker.getPlugEquivalent(this.getBlock());
+        if (plug != null && plug.hasBlock()) {
+            return true;
+        }
+        return false;
+
+    }
 
     private void startDragging(RenderableBlock renderable,
                                WorkspaceWidget widget) {
@@ -2105,7 +2113,11 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             popup.show(this, e.getX(), e.getY());
         }
         workspace.getMiniMap().repaint();
-        parent.stopDragged(this);
+        if (parent!=null)
+        {
+            parent.stopDragged(this);
+        }
+
     }
 
 

@@ -52,7 +52,7 @@ public class BlocksKeeper {
         Collection<RenderableBlock> screen = new ArrayList<RenderableBlock>();
         for (RenderableBlock block : blocks) {
             long blockID = block.getBlockID();
-            if (!alreadyAdd.containsKey(blockID)) {
+            if (!alreadyAdd.containsKey(blockID) && !block.hasBlockParent()) {
                 ArrayList<Long> idList = block.getIDList();
                 for (Long id : idList) {
                     alreadyAdd.put(id, 1l);
@@ -76,7 +76,7 @@ public class BlocksKeeper {
         Collection<RenderableBlock> screen = new ArrayList<RenderableBlock>();
         for (RenderableBlock block : blocks) {
             long blockID = block.getBlockID();
-            if (!alreadyAdd.containsKey(blockID)) {
+            if (!alreadyAdd.containsKey(blockID) && !block.hasBlockParent()) {
                 ArrayList<Long> idList = block.getIDList();
                 for (Long id : idList) {
                     alreadyAdd.put(id, 1l);
