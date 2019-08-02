@@ -411,6 +411,11 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         return blockShape;
     }
 
+    public boolean isDragging()
+    {
+        return dragging;
+    }
+
     /**
      * @return the abstractBlockArea
      */
@@ -1672,8 +1677,9 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 .getParentWidget(), this.getBlockID(),
                 WorkspaceEvent.BLOCK_CLONED, true));
     }
+    
 
-    private RenderableBlock cloneThis(RenderableBlock rb) {
+    public RenderableBlock cloneThis(RenderableBlock rb) {
         Block oriBlock = rb.getBlock();
         oriBlock.getSockets();
 
@@ -1729,6 +1735,103 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         newRb.linkedDefArgsBefore = true;
 
         return newRb;
+    }
+
+    public RenderableBlock cloneThisWithID(RenderableBlock rb) {
+        Block oriBlock = rb.getBlock();
+        oriBlock.getSockets();
+        Point oriLocation = rb.getLocation();
+
+        Block newBlock = new Block(workspace, rb.getGenus(), rb.blockLabel.getText());
+        RenderableBlock newRb = new RenderableBlock(workspace, parent, newBlock.getBlockID(), false, this.zoom);
+
+        int i = 0;
+        Iterable<BlockConnector> oriSockets = oriBlock.getSockets();
+        Iterator<BlockConnector> newSockets = newBlock.getSockets().iterator();
+
+        for (BlockConnector oriSocket : oriSockets) {
+            BlockConnector newSocket = newSockets.next();
+            if (oriSocket.hasBlock()) {
+                oriSocket.getBlockID();
+                RenderableBlock subRb = workspace.getEnv().getRenderableBlock(oriSocket.getBlockID());
+                RenderableBlock newSubRb = cloneThisWithID(subRb);
+
+                if (newSubRb.getBlock().isFunctionBlock()) {
+                    newSubRb.getBlock().getPlug().setConnectorBlockID(newRb.getBlockID());
+                    newSocket.setConnectorBlockID(newSubRb.getBlockID());
+                }
+                if (newSubRb.getBlock().isDataBlock()) {
+                    newSubRb.getBlock().getPlug().setConnectorBlockID(newRb.getBlockID());
+                    newSocket.setConnectorBlockID(newSubRb.getBlockID());
+                }
+                if (newSubRb.getBlock().isCommandBlock()) {
+                    newSubRb.getBlock().getBeforeConnector().setConnectorBlockID(newRb.getBlockID());
+                    newSocket.setConnectorBlockID(newSubRb.getBlockID());
+                }
+
+            }
+            ++i;
+        }
+
+        if (rb.getBlock().isCommandBlock()) {
+            BlockConnector oriAfterConnector = rb.getBlock().getAfterConnector();
+            if (oriAfterConnector != null) {
+                if (oriAfterConnector.hasBlock()) {
+                    RenderableBlock oriAfterRb = workspace.getEnv().getRenderableBlock(oriAfterConnector.getBlockID());
+                    RenderableBlock newAfterRb = cloneThisWithID(oriAfterRb);
+
+                    newAfterRb.getBlock().getBeforeConnector().setConnectorBlockID(newRb.getBlockID());
+                    newRb.getBlock().getAfterConnector().setConnectorBlockID(newAfterRb.getBlockID());
+                }
+            }
+        }
+
+        newRb.setLocation(oriLocation.x + (int) (NEARBY_RADIUS), oriLocation.y + (int) (NEARBY_RADIUS));
+        newRb.moveConnectedBlocks();
+        newRb.linkedDefArgsBefore = true;
+
+        return newRb;
+    }
+
+    public ArrayList<Long> getIDList()
+    {
+        ArrayList<Long> result = new ArrayList<Long>();
+        Block oriBlock = getBlock();
+        oriBlock.getSockets();
+        result.add(getBlockID());
+
+        int i = 0;
+        Iterable<BlockConnector> oriSockets = oriBlock.getSockets();
+
+        for (BlockConnector oriSocket : oriSockets) {
+            if (oriSocket.hasBlock()) {
+                oriSocket.getBlockID();
+                RenderableBlock subRb = workspace.getEnv().getRenderableBlock(oriSocket.getBlockID());
+                ArrayList<Long>tempList = subRb.getIDList();
+                for (Long l : tempList)
+                {
+                    result.add(l);
+                }
+            }
+        }
+
+
+
+        if (getBlock().isCommandBlock()) {
+            BlockConnector oriAfterConnector = getBlock().getAfterConnector();
+            if (oriAfterConnector != null) {
+                if (oriAfterConnector.hasBlock()) {
+                    RenderableBlock oriAfterRb = workspace.getEnv().getRenderableBlock(oriAfterConnector.getBlockID());
+                    ArrayList<Long>tempList = oriAfterRb.getIDList();;
+                    for (Long l : tempList)
+                    {
+                        result.add(l);
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 
     // ////////////////////////////////
@@ -1792,6 +1895,13 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
     private void startDragging(RenderableBlock renderable,
             WorkspaceWidget widget) {
+        widget.startDragged(renderable);
+        startDragging(renderable, widget, 0);
+
+    }
+
+    private void startDragging(RenderableBlock renderable,
+                               WorkspaceWidget widget, int r) {
         renderable.pickedUp = true;
         renderable.lastDragWidget = widget;
         if (renderable.hasComment()) {
@@ -1809,11 +1919,10 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             if (socket.hasBlock()) {
                 startDragging(
                         workspace.getEnv().getRenderableBlock(
-                                socket.getBlockID()), widget);
+                                socket.getBlockID()), widget, r+1);
             }
         }
     }
-
     /**
      * This method is called when this RenderableBlock is plugged into another
      * RenderableBlock that has finished dragging.
@@ -1821,8 +1930,11 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * @param widget the WorkspaceWidget where this RenderableBlock is being
      * dropped.
      */
+
+
     public static void stopDragging(RenderableBlock renderable,
-            WorkspaceWidget widget) {
+                                    WorkspaceWidget widget)
+    {
         if (!renderable.dragging) {
             throw new RuntimeException("dropping without prior dragging?");
         }
@@ -1834,10 +1946,11 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                         .getRenderableBlock(socket.getBlockID()), widget);
             }
         }
-        // drop this block on its widget (if w is null it'll throw an exception)
-        widget.blockDropped(renderable);
+
         // stop rendering as transparent
         renderable.dragging = false;
+        // drop this block on its widget (if w is null it'll throw an exception)
+        widget.blockDropped(renderable);
         // move comment
         if (renderable.hasComment()) {
             if (renderable.getParentWidget() != null) {

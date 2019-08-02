@@ -1,14 +1,13 @@
 package com.mit.blocks.renderable;
 
 import com.mit.blocks.codeblocks.Block;
-import java.awt.Container;
-import java.awt.event.MouseEvent;
-
-import javax.swing.SwingUtilities;
-
 import com.mit.blocks.codeblocks.JComponentDragHandler;
 import com.mit.blocks.workspace.Workspace;
 import com.mit.blocks.workspace.WorkspaceWidget;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 
 /**
  * FactoryRenderableBlock extends RenderableBlock and is used within FactoryBlockDrawers.
@@ -86,6 +85,7 @@ public class FactoryRenderableBlock extends RenderableBlock implements Cloneable
         MouseEvent newE = SwingUtilities.convertMouseEvent(this, e, createdRB);
         createdRB.mousePressed(newE);
         mouseDragged(e); // immediately make the RB appear under the mouse cursor
+        workspace.getPageNamed("Main").saveScreen();
     }
 
     public void mouseDragged(MouseEvent e) {
@@ -125,6 +125,7 @@ public class FactoryRenderableBlock extends RenderableBlock implements Cloneable
     }
 
     public void startDragging(MouseEvent e) {
+
     }
 
     public void stopDragging(MouseEvent e, WorkspaceWidget w) {

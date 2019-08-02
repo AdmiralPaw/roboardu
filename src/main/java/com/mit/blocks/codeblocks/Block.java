@@ -1,26 +1,22 @@
 package com.mit.blocks.codeblocks;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import com.mit.blocks.codeblocks.BlockConnector.PositionType;
 import com.mit.blocks.renderable.BlockImageIcon;
 import com.mit.blocks.renderable.BlockImageIcon.ImageLocation;
 import com.mit.blocks.workspace.ISupportMemento;
 import com.mit.blocks.workspace.Workspace;
 import com.mit.blocks.workspace.WorkspaceEnvironment;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import java.awt.*;
+import java.util.List;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Block holds the mutable prop (data) of a particular block.  These mutable
@@ -467,6 +463,8 @@ public class Block implements ISupportMemento {
         // remove it. (We also can't remove it if they're both -1, obviously.)
         return false;
     }
+
+
 
     /**
      * Informs this Block that a block with id connectedBlockID has connected to the specified
