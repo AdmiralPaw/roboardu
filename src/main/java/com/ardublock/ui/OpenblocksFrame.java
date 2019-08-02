@@ -54,7 +54,7 @@ public class OpenblocksFrame extends JFrame {
     public ImageButton verifyButton;
     
     private ResourceBundle uiMessageBundle;
-
+    private String autosavePath = "";
     private boolean controllerIsShown = true;
     public void addListener(OpenblocksFrameListener ofl) {
         context.registerOpenblocksFrameListener(ofl);
@@ -99,7 +99,6 @@ public class OpenblocksFrame extends JFrame {
             if (scanner.hasNextLine()) {
                 String recentFileName = scanner.nextLine();
                 recentFiles.add(recentFileName);
-                System.out.println(recentFileName);
                 recentFile = recentFileName;
             }
             inputStream.close();
@@ -144,23 +143,31 @@ public class OpenblocksFrame extends JFrame {
         initOpenBlocks();
 
         user = System.getProperty("user.name");
+        autosavePath = "C:\\Users\\"+user+"\\Documents\\RoboScratch\\";
+
+        File directory = new File(autosavePath);
+        if (!directory.exists())
+        {
+            directory.mkdir();
+        }
         //System.out.println(user);
 
         try {
-            File file = new File("C:\\Users\\"+user+"\\Documents\\saver.abp");
+            File file = new File(autosavePath + "saver.abp");
 
             if(file.exists()){
 
             }else {
-                Formatter fileCreator = new Formatter("C:\\Users\\"+user+"\\Documents\\saver.abp");
+                Formatter fileCreator = new Formatter(autosavePath + "saver.abp");
                 fileCreator.close();
-                Formatter fileCreator2 = new Formatter("C:\\Users\\"+user+"\\Documents\\beforeDelete.abp");
+                Formatter fileCreator2 = new Formatter(autosavePath + "beforeDelete.abp");
                 fileCreator2.close();
             }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
 
 
         //TODO: ok all, funcs i need to save and load in this class , see in docs TimerTask is asynchronous or not?
@@ -188,17 +195,17 @@ public class OpenblocksFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String text = getContext().getSaveFileName();
                 String newText = text.replace(".abp", "");
+                String oldPath = context.getSaveFilePath();
                 boolean isWorkspaceChanged = context.isWorkspaceChanged();
-                writeFileAndUpdateFrame(getArduBlockString(), new File(newText + "_autosave.abp"));
+                writeFileAndUpdateFrame(getArduBlockString(), new File(autosavePath + newText + "_autosave.abp"));
                 context.setSaveFileName(newText);
                 context.setWorkspaceChanged(isWorkspaceChanged);
+                context.setSaveFilePath(oldPath);
                 setTitle(makeFrameTitle());
                 Date dateNow = new Date();
-                SimpleDateFormat formatForDateNow = new SimpleDateFormat("hh:mm:ss");
-
-                System.out.println("Текущая дата " + formatForDateNow.format(dateNow));
+                SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss");
                 errWindow.setErrText("[" + formatForDateNow.format(dateNow) + "] " +
-                                    uiMessageBundle.getString("ardublock.ui.compledAutosave") + newText + "_autosave.abp");
+                                    uiMessageBundle.getString("ardublock.ui.compledAutosave") + autosavePath + newText + "_autosave.abp");
             }
         });
         timer.start();
@@ -801,7 +808,7 @@ public class OpenblocksFrame extends JFrame {
                 }
             });
 
-            String name = s.split("Documents")[1];
+            String name = s.substring(s.lastIndexOf("\\"), s.length()-1);
             String name2 = "";
             char[] chars = name.toCharArray();
             for (int i = 1; i < name.length(); i++) {
