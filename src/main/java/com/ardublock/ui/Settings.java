@@ -1,5 +1,6 @@
 package com.ardublock.ui;
 
+import com.mit.blocks.workspace.BlockKeeper;
 import com.mit.blocks.workspace.Workspace;
 
 import javax.swing.*;
@@ -166,6 +167,7 @@ public class Settings extends JFrame {
         RSpinner queueSize = new RSpinner(new SpinnerNumberModel(userPrefs.getInt("ardublock.ui.ctrlzLength", 10),5,120,5));
         windowBodyPanel.add(queueSize);
         queueSize.setBounds(getWidth()-80-rigthOffset, position + offset/2 - spinnerHeigth/2, 80,spinnerHeigth);
+        BlockKeeper.setSize(queueSize.getIntValue());
 
         JButton saveBtn = new RButton(uiMessageBundle.getString("ardublock.ui.saveAndClose"));
         saveBtn.setFont(new Font(mainFont, Font.PLAIN, 15));
@@ -179,6 +181,7 @@ public class Settings extends JFrame {
                 userPrefs.putInt("ardublock.ui.autosaveInterval", autosaveInterval.getIntValue());
                 userPrefs.putInt("ardublock.ui.ctrlzLength", queueSize.getIntValue());
                 openblocksFrame.setAutosaveInterval(autosaveInterval.getIntValue());
+                BlockKeeper.setSize(queueSize.getIntValue());
             }
         });
 
