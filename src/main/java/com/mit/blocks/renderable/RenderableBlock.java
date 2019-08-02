@@ -1905,15 +1905,14 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         }
     }
 
-    private void startDragging(RenderableBlock renderable,
-            WorkspaceWidget widget) {
-        widget.startDragged(renderable);
-        startDragging(renderable, widget, 0);
+//    private void startDragging(RenderableBlock renderable,
+//            WorkspaceWidget widget) {
+//        startDragging(renderable, widget, 0);
+//
+//    }
 
-    }
-
     private void startDragging(RenderableBlock renderable,
-                               WorkspaceWidget widget, int r) {
+                               WorkspaceWidget widget) {
         renderable.pickedUp = true;
         renderable.lastDragWidget = widget;
         if (renderable.hasComment()) {
@@ -1931,7 +1930,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             if (socket.hasBlock()) {
                 startDragging(
                         workspace.getEnv().getRenderableBlock(
-                                socket.getBlockID()), widget, r+1);
+                                socket.getBlockID()), widget);
             }
         }
     }
@@ -2141,6 +2140,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
             // if this is the first call to mouseDragged
             if (!dragging) {
+                widget.startDragged(this);
                 Block block = getBlock();
                 draggedBlock = block;
                 BlockConnector plug = BlockLinkChecker.getPlugEquivalent(block);

@@ -177,6 +177,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
         InputMap im = this.pageJComponent.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = this.pageJComponent.getActionMap();
+
         KeyStroke ctrlZ = KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK);
         im.put(ctrlZ, "undoAct");
         am.put("undoAct", new AbstractAction() {
@@ -195,6 +196,34 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
                         }
                         System.out.println("Undo completed");
+                    }
+                    catch (Exception r)
+                    {
+                        System.out.println("error");
+                    }
+                }
+
+            }
+        });
+
+        KeyStroke ctrlY = KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_DOWN_MASK);
+        im.put(ctrlY, "redoAct");
+        am.put("redoAct", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Collection<RenderableBlock> screen = blockKeeper.redoAct();
+                if (screen != null)
+                {
+                    clearPage();
+                    try
+                    {
+                        for (RenderableBlock block : screen)
+                        {
+                            block.setParentWidget(currentPage);
+                            block.cloneMeWithZeroOffset();
+
+                        }
+                        System.out.println("Redo completed");
                     }
                     catch (Exception r)
                     {
