@@ -191,7 +191,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
                         for (RenderableBlock block : screen)
                         {
                             block.setParentWidget(currentPage);
-                            block.cloneMe();
+                            block.cloneMeWithZeroOffset();
 
                         }
                         System.out.println("Undo completed");

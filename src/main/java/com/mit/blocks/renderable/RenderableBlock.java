@@ -1677,9 +1677,21 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 .getParentWidget(), this.getBlockID(),
                 WorkspaceEvent.BLOCK_CLONED, true));
     }
-    
 
-    public RenderableBlock cloneThis(RenderableBlock rb) {
+    public void cloneMeWithZeroOffset()
+    {
+        cloneThis(this, 0);
+        workspace.notifyListeners(new WorkspaceEvent(workspace, this
+                .getParentWidget(), this.getBlockID(),
+                WorkspaceEvent.BLOCK_CLONED, true));
+    }
+
+    public RenderableBlock cloneThis(RenderableBlock rb)
+    {
+        return cloneThis(rb,(int) (NEARBY_RADIUS));
+    }
+
+    public RenderableBlock cloneThis(RenderableBlock rb, int offset) {
         Block oriBlock = rb.getBlock();
         oriBlock.getSockets();
 
@@ -1697,7 +1709,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             if (oriSocket.hasBlock()) {
                 oriSocket.getBlockID();
                 RenderableBlock subRb = workspace.getEnv().getRenderableBlock(oriSocket.getBlockID());
-                RenderableBlock newSubRb = cloneThis(subRb);
+                RenderableBlock newSubRb = cloneThis(subRb, offset);
 
                 if (newSubRb.getBlock().isFunctionBlock()) {
                     newSubRb.getBlock().getPlug().setConnectorBlockID(newRb.getBlockID());
@@ -1721,7 +1733,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             if (oriAfterConnector != null) {
                 if (oriAfterConnector.hasBlock()) {
                     RenderableBlock oriAfterRb = workspace.getEnv().getRenderableBlock(oriAfterConnector.getBlockID());
-                    RenderableBlock newAfterRb = cloneThis(oriAfterRb);
+                    RenderableBlock newAfterRb = cloneThis(oriAfterRb, offset);
 
                     newAfterRb.getBlock().getBeforeConnector().setConnectorBlockID(newRb.getBlockID());
                     newRb.getBlock().getAfterConnector().setConnectorBlockID(newAfterRb.getBlockID());
@@ -1729,7 +1741,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             }
         }
 
-        newRb.setLocation(oriLocation.x + (int) (NEARBY_RADIUS), oriLocation.y + (int) (NEARBY_RADIUS));
+        newRb.setLocation(oriLocation.x + offset, oriLocation.y + offset);
         newRb.moveConnectedBlocks();
         parent.addBlock(newRb);
         newRb.linkedDefArgsBefore = true;
@@ -1737,7 +1749,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         return newRb;
     }
 
-    public RenderableBlock cloneThisWithID(RenderableBlock rb) {
+    public RenderableBlock cloneThisNoParent(RenderableBlock rb) {
         Block oriBlock = rb.getBlock();
         oriBlock.getSockets();
         Point oriLocation = rb.getLocation();
@@ -1754,7 +1766,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             if (oriSocket.hasBlock()) {
                 oriSocket.getBlockID();
                 RenderableBlock subRb = workspace.getEnv().getRenderableBlock(oriSocket.getBlockID());
-                RenderableBlock newSubRb = cloneThisWithID(subRb);
+                RenderableBlock newSubRb = cloneThisNoParent(subRb);
 
                 if (newSubRb.getBlock().isFunctionBlock()) {
                     newSubRb.getBlock().getPlug().setConnectorBlockID(newRb.getBlockID());
@@ -1778,7 +1790,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             if (oriAfterConnector != null) {
                 if (oriAfterConnector.hasBlock()) {
                     RenderableBlock oriAfterRb = workspace.getEnv().getRenderableBlock(oriAfterConnector.getBlockID());
-                    RenderableBlock newAfterRb = cloneThisWithID(oriAfterRb);
+                    RenderableBlock newAfterRb = cloneThisNoParent(oriAfterRb);
 
                     newAfterRb.getBlock().getBeforeConnector().setConnectorBlockID(newRb.getBlockID());
                     newRb.getBlock().getAfterConnector().setConnectorBlockID(newAfterRb.getBlockID());
@@ -1786,7 +1798,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             }
         }
 
-        newRb.setLocation(oriLocation.x + (int) (NEARBY_RADIUS), oriLocation.y + (int) (NEARBY_RADIUS));
+        newRb.setLocation(oriLocation.x, oriLocation.y);
         newRb.moveConnectedBlocks();
         newRb.linkedDefArgsBefore = true;
 

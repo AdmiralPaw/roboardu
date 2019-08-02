@@ -37,11 +37,10 @@ public class BlockKeeper {
                 for (Long id : idList) {
                     alreadyAdd.put(id, 1l);
                 }
-                screen.add(block.cloneThisWithID(block));
+                screen.add(block.cloneThisNoParent(block));
 
             }
         }
-        System.out.println(screen.size());
         if (screen.size() > 0) {
             undoList.add(screen);
         }
