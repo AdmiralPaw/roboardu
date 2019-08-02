@@ -95,6 +95,7 @@ public class ControllerButton extends JToggleButton {
                     setNewIconAsModule("com/ardublock/Images/module/start.png");
                     setModuleName("start");
                     setTranslatedName("modules.start.info");
+                    controllerImage.resetSelectedId(Id, isItConnector);
                     controller.changeConnectorComponentsPane(null);
                 }
             }

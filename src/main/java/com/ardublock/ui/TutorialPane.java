@@ -3,13 +3,16 @@ package com.ardublock.ui;
 import com.ardublock.ui.ControllerConfiguration.ControllerButton;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -66,9 +69,17 @@ public class TutorialPane extends JPanel {
         this.add(logoPanel);
         this.add(rightTopPanel);
 
-        JButton exitButton = new JButton("выйти");
-        exitButton.setSize(new Dimension(70, 30));
-        exitButton.setLocation(0, 0);
+        URL iconURL = TutorialPane.class.getClassLoader().getResource("com/ardublock/Images/tutorClose.png");
+        ImageIcon image = new ImageIcon(iconURL);
+        Image imageRaw = image.getImage().getScaledInstance(
+                140, 20, java.awt.Image.SCALE_SMOOTH);
+        JButton exitButton = new JButton();
+        exitButton.setSize(new Dimension(140, 20));
+        exitButton.setIcon(new ImageIcon(imageRaw));
+        exitButton.setLocation(0/*this.openblocksFrame.rightPanel.getX()*/, 0/*this.openblocksFrame.rightPanel.getY()-this.openblocksFrame.rightPanel.getHeight()*/);
+//        exitButton.set
+        
+//        this.openblocksFrame.
         this.factoryPanel.add(exitButton);
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
