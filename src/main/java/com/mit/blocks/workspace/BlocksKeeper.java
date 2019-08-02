@@ -23,7 +23,8 @@ public class BlocksKeeper {
         if (undoList.size() > 0) {
             Collection<RenderableBlock> screen = undoList.get(undoList.size() - 1);
             undoList.remove(undoList.size() - 1);
-            redoList.add(screen);
+            redoList.add(currentScreen);
+            currentScreen = screen;
             System.out.println(String.valueOf(undoList.size()) + ":" + String.valueOf(redoList.size()));
             return screen;
         }
@@ -37,7 +38,8 @@ public class BlocksKeeper {
         if (redoList.size() > 0) {
             Collection<RenderableBlock> screen = redoList.get(redoList.size() - 1);
             redoList.remove(redoList.size() - 1);
-            undoList.add(screen);
+            undoList.add(currentScreen);
+            currentScreen = screen;
             System.out.println(String.valueOf(undoList.size()) + ":" + String.valueOf(redoList.size()));
             return screen;
         }
@@ -69,8 +71,7 @@ public class BlocksKeeper {
 
     }
 
-    public void setCurrentState(Collection<RenderableBlock> blocks)
-    {
+    public void setCurrentState(Collection<RenderableBlock> blocks) {
         HashMap<Long, Long> alreadyAdd = new HashMap<Long, Long>();
         Collection<RenderableBlock> screen = new ArrayList<RenderableBlock>();
         for (RenderableBlock block : blocks) {
@@ -87,16 +88,14 @@ public class BlocksKeeper {
         currentScreen = screen;
     }
 
-    public void normalizeListSize()
-    {
-        if (undoList.size()>maxSize)
-        {
+    public void normalizeListSize() {
+        if (undoList.size() > maxSize) {
             undoList.remove(0);
             normalizeListSize();
         }
     }
-    public static void setSize(int s)
-    {
+
+    public static void setSize(int s) {
         maxSize = s;
     }
 

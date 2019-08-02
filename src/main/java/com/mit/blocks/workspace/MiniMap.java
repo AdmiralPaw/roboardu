@@ -34,7 +34,7 @@ import java.util.Collection;
  * ratio : Double					//the aspect ratio that this should maintain
  * 									//		when rendering this.blocks and this.comments
  */
-public class MiniMap extends JPanel implements WorkspaceWidget, MouseListener, MouseMotionListener, SearchableContainer, PageChangeListener {
+public class MiniMap extends JPanel implements MouseListener, MouseMotionListener, SearchableContainer, PageChangeListener, WorkspaceWidget {
     /*
      * Implementation Notes:
      * -should be initialized BEFORE blockCanvas (that is, should initialize miniMap
@@ -372,6 +372,8 @@ public class MiniMap extends JPanel implements WorkspaceWidget, MouseListener, M
     }
 
     public void startDragged(RenderableBlock b){}
+
+    public void stopDragged(RenderableBlock b){}
 
     /**
      * @param block

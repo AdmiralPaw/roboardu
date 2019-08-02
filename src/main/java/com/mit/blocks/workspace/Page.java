@@ -113,7 +113,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     private boolean hideMinimize = false;
     private Page currentPage;
 
-    private BlockKeeper blockKeeper;
+    private BlocksKeeper blocksKeeper;
     //////////////////////////////
     //Constructor/ Destructor	//
     //////////////////////////////
@@ -173,7 +173,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
         currentPage = this;
 
-        blockKeeper = new BlockKeeper();
+        blocksKeeper = new BlocksKeeper(this);
 
         InputMap im = this.pageJComponent.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = this.pageJComponent.getActionMap();
@@ -183,7 +183,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         am.put("undoAct", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Collection<RenderableBlock> screen = blockKeeper.undoAct();
+                Collection<RenderableBlock> screen = blocksKeeper.undoAct();
                 if (screen != null)
                 {
                     clearPage();
@@ -211,7 +211,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         am.put("redoAct", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Collection<RenderableBlock> screen = blockKeeper.redoAct();
+                Collection<RenderableBlock> screen = blocksKeeper.redoAct();
                 if (screen != null)
                 {
                     clearPage();
@@ -654,9 +654,13 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         System.out.println(block.toString());
     }
 
+    public void stopDragged(RenderableBlock b){
+        blocksKeeper.setCurrentState(getBlocks());
+    }
+
     public void saveScreen()
     {
-        blockKeeper.addAct(getBlocks());
+        blocksKeeper.addAct(getBlocks());
         System.out.println("Act saved");
     }
 

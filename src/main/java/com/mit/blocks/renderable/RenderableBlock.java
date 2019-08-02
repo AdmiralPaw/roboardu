@@ -2041,6 +2041,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
             // if the block was dragged before...then
             if (dragging) {
+
                 BlockLink link = getNearbyLink(); // look for nearby link
                 // opportunities
                 WorkspaceWidget widget = null;
@@ -2104,6 +2105,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             popup.show(this, e.getX(), e.getY());
         }
         workspace.getMiniMap().repaint();
+        parent.stopDragged(this);
     }
 
 
