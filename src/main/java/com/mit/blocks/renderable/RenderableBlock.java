@@ -17,9 +17,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -1801,11 +1799,15 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         return newRb;
     }
 
+    public void blockRenamed()
+    {
+        parent.blockRenamed(this);
+    }
+
     public ArrayList<Long> getIDList()
     {
         ArrayList<Long> result = new ArrayList<Long>();
         Block oriBlock = getBlock();
-        oriBlock.getSockets();
         result.add(getBlockID());
 
         int i = 0;
@@ -1813,7 +1815,6 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
         for (BlockConnector oriSocket : oriSockets) {
             if (oriSocket.hasBlock()) {
-                oriSocket.getBlockID();
                 RenderableBlock subRb = workspace.getEnv().getRenderableBlock(oriSocket.getBlockID());
                 ArrayList<Long>tempList = subRb.getIDList();
                 for (Long l : tempList)
@@ -2411,7 +2412,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
     @Override
     public void keyTyped(KeyEvent e) {
-        System.out.println("event");
+
 
 
     }
@@ -2420,7 +2421,6 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     @Override
     public void keyPressed(KeyEvent e) {
 
-        System.out.println("event");
         
         switch (e.getKeyCode()){
             case KeyEvent.VK_DELETE:
@@ -2434,7 +2434,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println("event");
+
 
 
     }

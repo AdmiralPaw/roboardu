@@ -655,7 +655,10 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     }
 
     public void stopDragged(RenderableBlock b){
-        blocksKeeper.setCurrentState(getBlocks());
+    }
+
+    public void blockRenamed(RenderableBlock block){
+        saveScreen();
     }
 
     public void saveScreen()

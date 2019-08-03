@@ -798,6 +798,8 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
 
     public void stopDragged(RenderableBlock b){}
 
+    public void blockRenamed(RenderableBlock block){}
+
     public void removeBlock(RenderableBlock block) {
     }
 

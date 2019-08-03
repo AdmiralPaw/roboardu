@@ -20,6 +20,8 @@ public interface WorkspaceWidget {
     public void startDragged(RenderableBlock block);
 
     public void stopDragged(RenderableBlock block);
+
+    public void blockRenamed(RenderableBlock block);
     /**
      * Called by RenderableBlocks as they are dragged over this Widget.
      * @param block the RenderableBlock being dragged

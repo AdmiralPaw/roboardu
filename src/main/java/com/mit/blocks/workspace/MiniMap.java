@@ -375,6 +375,8 @@ public class MiniMap extends JPanel implements MouseListener, MouseMotionListene
 
     public void stopDragged(RenderableBlock b){}
 
+    public void blockRenamed(RenderableBlock block){}
+
     /**
      * @param block
      * @modifies block
