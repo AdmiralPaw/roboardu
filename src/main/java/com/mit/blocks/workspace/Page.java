@@ -26,7 +26,7 @@ import java.util.*;
  * and a set of blocks.  How it renders these abstract fields
  * depends on the state of the page, including: zoom level,
  * and minimumPixelWidth.
- *
+ * <p>
  * A Page exists as a WorkspaceWidget, a SearchableContainer,
  * ISupportMemento, an RBParent, a Zoomable object, and a JPanel.
  * As a WorkspaceWidget, it can add, remove, blocks and manage
@@ -34,13 +34,13 @@ import java.util.*;
  * it can notify users that certain blocks have been queried.
  * As an ISupportMomento, it can undo the current values of
  * abstract fields.  As an RBParent, it can highlight blocks.
- *
+ * <p>
  * Since a Page is both a Zoomable object and JPanel, Pages
  * separate its abstract model and view by allowing clients
  * to mutate its abstract fields directly.  But clients must
  * remember to reform the pages in order to synchronize the
  * data between the model and view.
- *
+ * <p>
  * A page's abstract color is rendered the same no matter
  * what state the page is in.  A page's abstract name is
  * rendered thrice centered at every fourth of the page.
@@ -56,7 +56,7 @@ import java.util.*;
  * the abstract width to be.  Finally the set of blocks are
  * rendered directly onto the page with the same transformation
  * as the ones imposed on the width and height of the page.
- *
+ * <p>
  * As an implementation detail, a page tries to maintain a
  * separation between its abstract states and its view.
  * Clients of Pages should use reform*() methods to validate
@@ -64,7 +64,7 @@ import java.util.*;
  * of Pages are warned against accessing Page.getJComponent(),
  * as the method provides clients a way to unintentionally mutate
  * an implementation specific detail of Pages.
- *
+ * <p>
  * A Page implements ExplorerListener i.e. it listens for possible changes in
  * an explorer that affects the display of the page. When an explorer event
  * happens the page changes its display accordingly
@@ -73,43 +73,79 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
     public static JComponent blocksContainer;
 
-    /** The workspace in use */
+    /**
+     * The workspace in use
+     */
     private final Workspace workspace;
 
-    /** Width while in collapsed mode */
+    /**
+     * Width while in collapsed mode
+     */
     private static final int COLLAPSED_WIDTH = 20;
-    /** The smallest value that this.minimumPixelWidth/zoom can be */
+    /**
+     * The smallest value that this.minimumPixelWidth/zoom can be
+     */
     private static final int DEFAULT_MINUMUM_WIDTH = 100;
-    /** The default abstract width */
+    /**
+     * The default abstract width
+     */
     private static final int DEFAULT_ABSTRACT_WIDTH = 1500;
-    /** The default abstract height */
+    /**
+     * The default abstract height
+     */
     public static final int DEFAULT_ABSTRACT_HEIGHT = 3000;
-    /** An empty string */
+    /**
+     * An empty string
+     */
     private static final String emptyString = "";
-    /** this.zoomLevel: zoom level state */
+    /**
+     * this.zoomLevel: zoom level state
+     */
     static double zoom = 1.5;
-    /** The JComponent of this page */
+    /**
+     * The JComponent of this page
+     */
     private final PageJComponent pageJComponent = new PageJComponent();
-    /** The abstract width of this page */
+    /**
+     * The abstract width of this page
+     */
     private double abstractWidth;
-    /** The abstract height of this page */
+    /**
+     * The abstract height of this page
+     */
     private double abstractHeight;
-    /** The name of the drawer that this page refers to */
+    /**
+     * The name of the drawer that this page refers to
+     */
     private String pageDrawer;
-    /** The default page color.  OVERRIDED BY BLOCK CANVAS */
+    /**
+     * The default page color.  OVERRIDED BY BLOCK CANVAS
+     */
     private final Color defaultColor;
-    /** MouseIn Flag: true if and only if the mouse is in this page */
+    /**
+     * MouseIn Flag: true if and only if the mouse is in this page
+     */
     private boolean mouseIsInPage = false;
-    /** The minimum width of the page in pixels */
+    /**
+     * The minimum width of the page in pixels
+     */
     private int minimumPixelWidth = 0;
-    /** Fullview */
+    /**
+     * Fullview
+     */
     private boolean fullview;
-    /** The GUI component for interfacing with the user
-     * to help the user collapse or restore the page */
+    /**
+     * The GUI component for interfacing with the user
+     * to help the user collapse or restore the page
+     */
     private CollapseButton collapse;
-    /** The user-time unique id of this page. Once set, cannot be changed. */
+    /**
+     * The user-time unique id of this page. Once set, cannot be changed.
+     */
     private String pageId = null;
-    /** Toggles to show/hide minimize page button. */
+    /**
+     * Toggles to show/hide minimize page button.
+     */
     private boolean hideMinimize = false;
     private Page currentPage;
 
@@ -121,22 +157,21 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     /**
      * Constructs a new Page
      *
-     * @param name - name of this page (this.name)
-     * @param pageWidth - the abstract width of this page (this.width)
+     * @param name       - name of this page (this.name)
+     * @param pageWidth  - the abstract width of this page (this.width)
      * @param pageHeight - the abstract height of this page (this.height)
      * @param pageDrawer - the name of the page drawer that this page refers to
-     *
      * @requires name != null && pageDrawer != null
      * @effects constructs a new Page such that:
-     * 			1) The name of this page equals the argument "name".
-     * 			2) The abstract width of this page equals "pageWidth".
-     * 			   If "pageWidth is <= to zero, then set the
-     * 			   width to the DEFAULT_ABSTRACT_WIDTH.
-     * 			3) The abstract height of this page equals DEFAULT_ABSTRACT_HEIGHT.
-     * 			4) The drawer name equals pageDrawer if and only if Workspace.everyPageHasDrawer==true.
-     * 			5) The color of this page is null.
-     * 			6) The font of this page is "Default", PLAIN, and 12.
-     * 			7) The set of blocks is empty.
+     * 1) The name of this page equals the argument "name".
+     * 2) The abstract width of this page equals "pageWidth".
+     * If "pageWidth is <= to zero, then set the
+     * width to the DEFAULT_ABSTRACT_WIDTH.
+     * 3) The abstract height of this page equals DEFAULT_ABSTRACT_HEIGHT.
+     * 4) The drawer name equals pageDrawer if and only if Workspace.everyPageHasDrawer==true.
+     * 5) The color of this page is null.
+     * 6) The font of this page is "Default", PLAIN, and 12.
+     * 7) The set of blocks is empty.
      */
     public Page(Workspace workspace, String name, int pageWidth, int pageHeight, String pageDrawer) {
         this(workspace, name, pageWidth, pageHeight, pageDrawer, true, null, true);
@@ -184,23 +219,21 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
             @Override
             public void actionPerformed(ActionEvent e) {
                 Collection<RenderableBlock> screen = blocksKeeper.undoAct();
-                if (screen != null)
-                {
+                if (screen != null) {
                     clearPage();
-                    try
-                    {
-                        for (RenderableBlock block : screen)
-                        {
-                            block.setParentWidget(currentPage);
-                            block.cloneMeWithZeroOffset();
 
-                        }
-                        System.out.println("Undo completed");
+                    for (RenderableBlock block : screen) {
+                        block.setParentWidget(currentPage);
+                        block.cloneMeWithZeroOffset();
                     }
-                    catch (Exception r)
-                    {
-                        System.out.println("error");
+
+                    for (RenderableBlock block : getBlocks()) {
+                        double coef = block.getZoom() / zoom;
+                        block.setLocation((int) ((double) block.getLocation().x / coef), (int) ((double) block.getLocation().y / coef));
+                        block.setZoomLevel(zoom);
                     }
+                    System.out.println("Undo completed");
+
                 }
 
             }
@@ -212,21 +245,21 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
             @Override
             public void actionPerformed(ActionEvent e) {
                 Collection<RenderableBlock> screen = blocksKeeper.redoAct();
-                if (screen != null)
-                {
+                if (screen != null) {
                     clearPage();
-                    try
-                    {
-                        for (RenderableBlock block : screen)
-                        {
+                    try {
+                        for (RenderableBlock block : screen) {
                             block.setParentWidget(currentPage);
                             block.cloneMeWithZeroOffset();
 
                         }
+                        for (RenderableBlock block : getBlocks()) {
+                            double coef = block.getZoom() / zoom;
+                            block.setLocation((int) ((double) block.getLocation().x / coef), (int) ((double) block.getLocation().y / coef));
+                            block.setZoomLevel(zoom);
+                        }
                         System.out.println("Redo completed");
-                    }
-                    catch (Exception r)
-                    {
+                    } catch (Exception r) {
                         System.out.println("error");
                     }
                 }
@@ -234,6 +267,11 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
             }
         });
 
+    }
+
+    public void newKeeper()
+    {
+        blocksKeeper = new BlocksKeeper(this);
     }
 
     public void disableMinimize() {
@@ -255,17 +293,16 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
      * Constructs a new Page
      *
      * @param workspace The workspace in use
-     * @param name - name of this page (this.name)
-     *
+     * @param name      - name of this page (this.name)
      * @requires name != null
      * @effects constructs a new Page such that:
-     * 			1) The name of this page equals the argument "name".
-     * 			2) The abstract width of this page equals DEFAULT_ABSTRACT_WIDTH.
-     * 			3) The abstract height of this page equals DEFAULT_ABSTRACT_HEIGHT.
-     * 			4) The drawer name equals "name"
-     * 			5) The color of this page is null.
-     * 			6) The font of this page is "Default", PLAIN, and 12.
-     * 			7) The set of blocks is empty.
+     * 1) The name of this page equals the argument "name".
+     * 2) The abstract width of this page equals DEFAULT_ABSTRACT_WIDTH.
+     * 3) The abstract height of this page equals DEFAULT_ABSTRACT_HEIGHT.
+     * 4) The drawer name equals "name"
+     * 5) The color of this page is null.
+     * 6) The font of this page is "Default", PLAIN, and 12.
+     * 7) The set of blocks is empty.
      */
     public Page(Workspace workspace, String name) {
         this(workspace, name, -1, -1, name);
@@ -277,13 +314,13 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
      * @param workspace The workspace in use
      * @requires none
      * @effects constructs a new Page such that:
-     * 			1) The name of this page equals the argument "".
-     * 			2) The abstract width of this page equals DEFAULT_ABSTRACT_WIDTH.
-     * 			3) The abstract height of this page equals DEFAULT_ABSTRACT_HEIGHT.
-     * 			4) The drawer name equals ""
-     * 			5) The color of this page is null.
-     * 			6) The font of this page is "Default", PLAIN, and 12.
-     * 			7) The set of blocks is empty.
+     * 1) The name of this page equals the argument "".
+     * 2) The abstract width of this page equals DEFAULT_ABSTRACT_WIDTH.
+     * 3) The abstract height of this page equals DEFAULT_ABSTRACT_HEIGHT.
+     * 4) The drawer name equals ""
+     * 5) The color of this page is null.
+     * 6) The font of this page is "Default", PLAIN, and 12.
+     * 7) The set of blocks is empty.
      */
     public static Page getBlankPage(Workspace workspace) {
         return new Page(workspace, emptyString);
@@ -325,6 +362,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     //////////////////////////////
     //Public Accessor			//
     //////////////////////////////
+
     /**
      * @return all the RenderableBlocks that reside within this page
      */
@@ -341,8 +379,8 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
     /**
      * @return a collection of top level blocks within this page (blocks with no
-     * 			parents that and are the first block of each stack) or an empty
-     * 			collection if no blocks are found on this page.
+     * parents that and are the first block of each stack) or an empty
+     * collection if no blocks are found on this page.
      */
     public Collection<RenderableBlock> getTopLevelBlocks() {
         List<RenderableBlock> topBlocks = new ArrayList<RenderableBlock>();
@@ -402,7 +440,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
     /**
      * @return this page drawer that this page refers to or null if non exists.
-     * 			MAY RETURN NULL.
+     * MAY RETURN NULL.
      */
     public String getPageDrawer() {
         return pageDrawer;
@@ -422,9 +460,9 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     //////////////////////////////
     //Rendering Mutators		//
     //////////////////////////////
+
     /**
      * @param newName - the new name of this page.
-     *
      * @requires newName != null
      * @modifies this.name
      * @effects sets the name of this page to be newName.
@@ -450,7 +488,6 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
     /**
      * @param image - the new icon of this.  May be null
-     *
      * @requires NONE
      * @modifies this.icon
      * @effects change this.icon to specified icon.  The new icon may be null
@@ -461,11 +498,10 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
     /**
      * @param newColor - the new color of this page
-     *
      * @requires none
      * @modifies this.color
      * @effects Set the color of this page tobe newColor.
-     * 			If newColor is null, sets the color to the deafult gray.
+     * If newColor is null, sets the color to the deafult gray.
      */
     public void setPageColor(Color newColor) {
         this.pageJComponent.setBackground(newColor);
@@ -473,11 +509,10 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
     /**
      * @param deltaPixelWidth
-     *
      * @requires Integer.MIN_VAL <= deltaPixelWidth <= Integer.MAX_VAL
      * @modifies this.width
      * @effects Adds deltaPixelWidth to the abstract width taking into
-     * 			account the zoom level.  May need to convert form pixel to abstract model.
+     * account the zoom level.  May need to convert form pixel to abstract model.
      */
     public void addPixelWidth(int deltaPixelWidth) {
         if (fullview) {
@@ -489,8 +524,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
      * @requires Integer.MIN_VAL <= pixelWidth <= Integer.MAX_VAL
      * @modifies this.width
      * @effects sets abstract width to pixelWidth taking into account the zoom level.
-     * 			May need to convert form pixel to abstract model.
-
+     * May need to convert form pixel to abstract model.
      */
     public void setPixelWidth(int pixelWidth) {
         if (pixelWidth < this.minimumPixelWidth) {
@@ -503,15 +537,16 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     //////////////////////////////
     //Reforming Mutators		//
     //////////////////////////////
+
     /**
      * @param pixelXCor - the new X location of page's JComponent in terms of pixels
-     * @requires none
      * @return the current width of this page in terms of pixels
+     * @requires none
      * @modifies this.JComponent.size
      * @effects Reforms this page's JComponent in order to synchronize the
-     * 			abstract width and height with the graphical view.
-     * 			This process includes moving this page's JComponent to (pixelXCor,0)
-     * 			and setting this page's JComponent size to (this.abstractwidth*zoom, this.abstractheight*zoom)
+     * abstract width and height with the graphical view.
+     * This process includes moving this page's JComponent to (pixelXCor,0)
+     * and setting this page's JComponent size to (this.abstractwidth*zoom, this.abstractheight*zoom)
      */
     public int reformBounds(double pixelXCor) {
         if (fullview) {
@@ -536,12 +571,11 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
     /**
      * @param block - the new block being added whose position must be revalidated
-     *
      * @requires block != null
      * @modifies block.location or this page's abstract width
      * @effects shifts this block into the page or increases the
-     * 			width of this page to fit the new block.  It must then
-     * 			notify listeners that the page's size may have changed
+     * width of this page to fit the new block.  It must then
+     * notify listeners that the page's size may have changed
      */
     public void reformBlockPosition(RenderableBlock block) {
         //move blocks in
@@ -578,9 +612,9 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     /**
      * @modifies this.miniPixelWidth
      * @effects sets the minimumPixelWidth such that the following condition holds:
-     * 			DEFAULT_MINIMUMWIDTH < new minimumPixelWidth &&
-     * 			for each block, b, in this page's set of blocks {
-     * 				b.x+b.width < new minimumPixelWidth}
+     * DEFAULT_MINIMUMWIDTH < new minimumPixelWidth &&
+     * for each block, b, in this page's set of blocks {
+     * b.x+b.width < new minimumPixelWidth}
      */
     public void reformMinimumPixelWidth() {
         minimumPixelWidth = 0; // reset min to 0
@@ -616,9 +650,9 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     //////////////////////////////
     //Zoomable Interface		//
     //////////////////////////////
+
     /**
      * @param newZoom - the new zoom level
-     *
      * @requires zoom != 0
      * @modifies zoom level
      * @effects Sets all the Zoomable Pages in contained in this BlockCanvas and
@@ -628,7 +662,9 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         Page.zoom = newZoom;
     }
 
-    /** @overrides Zoomable.getZoomLevel() */
+    /**
+     * @overrides Zoomable.getZoomLevel()
+     */
     public static double getZoomLevel() {
         return Page.zoom;
     }
@@ -636,7 +672,10 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     //////////////////////////////
     //WORKSPACEWIDGET METHODS 	//
     //////////////////////////////
-    /** @overrides WorkspaceWidget.blockDropped() */
+
+    /**
+     * @overrides WorkspaceWidget.blockDropped()
+     */
     @Override
     public void blockDropped(RenderableBlock block) {
         //add to view at the correct location
@@ -648,26 +687,26 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         this.pageJComponent.revalidate();
     }
 
-    public void startDragged(RenderableBlock block)
-    {
+    public void startDragged(RenderableBlock block) {
         workspace.deactiveCPopupMenu();
         saveScreen();
         //System.out.println(block.toString());
     }
 
-    public void stopDragged(RenderableBlock b){
+    public void stopDragged(RenderableBlock b) {
     }
 
-    public void blockRenamed(RenderableBlock block){
+    public void blockRenamed(RenderableBlock block) {
         saveScreen();
     }
 
-    public void saveScreen()
-    {
+    public void saveScreen() {
         blocksKeeper.addAct(getBlocks());
     }
 
-    /** @overrides WorkspaceWidget.blockDragged() */
+    /**
+     * @overrides WorkspaceWidget.blockDragged()
+     */
     @Override
     public void blockDragged(RenderableBlock block) {
         if (mouseIsInPage == false) {
@@ -677,7 +716,9 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
     }
 
-    /** @overrides WorkspaceWidget.blockEntered() */
+    /**
+     * @overrides WorkspaceWidget.blockEntered()
+     */
     @Override
     public void blockEntered(RenderableBlock block) {
         if (mouseIsInPage == false) {
@@ -686,14 +727,18 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         }
     }
 
-    /** @overrides WorkspaceWidget.blockExited() */
+    /**
+     * @overrides WorkspaceWidget.blockExited()
+     */
     @Override
     public void blockExited(RenderableBlock block) {
         mouseIsInPage = false;
         this.pageJComponent.repaint();
     }
 
-    /** @overrides WorkspaceWidget.addBlock() */
+    /**
+     * @overrides WorkspaceWidget.addBlock()
+     */
     @Override
     public void addBlock(RenderableBlock block) {
         //update parent widget if dropped block
@@ -736,11 +781,10 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
     /**
      * @param blocks the Collection of RenderableBlocks to add
-     *
      * @requires blocks != null
      * @modifies this page's set of blocks
      * @effects Add the collection of blocks internally and graphically,
-     * 			delaying graphicalupdates until all of the blocks have been added.
+     * delaying graphicalupdates until all of the blocks have been added.
      * @overrides WorkspaceWidget.blockEntered()
      */
     @Override
@@ -752,13 +796,17 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         this.pageJComponent.revalidate();
     }
 
-    /** @overrides WorkspaceWidget.removeBlock() */
+    /**
+     * @overrides WorkspaceWidget.removeBlock()
+     */
     @Override
     public void removeBlock(RenderableBlock block) {
         this.pageJComponent.remove(block);
     }
 
-    /** @overrides WorkspaceWidget.getJComponent() */
+    /**
+     * @overrides WorkspaceWidget.getJComponent()
+     */
     @Override
     public JComponent getJComponent() {
         return this.pageJComponent;
@@ -771,18 +819,24 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         return (RBParent) this.pageJComponent;
     }
 
-    /** @overrides WorkspaceWidget.contains() */
+    /**
+     * @overrides WorkspaceWidget.contains()
+     */
     @Override
     public boolean contains(int x, int y) {
         return this.pageJComponent.contains(x, y);
     }
 
-    /** @overrides WorkspaceWidget.contains() */
+    /**
+     * @overrides WorkspaceWidget.contains()
+     */
     public boolean contains(Point p) {
         return this.contains(p.x, p.y);
     }
 
-    /** Returns string representation of this */
+    /**
+     * Returns string representation of this
+     */
     @Override
     public String toString() {
         return "Page name: " + getPageName() + " page color " + getPageColor() + " page width " + getAbstractWidth() + " page drawer " + pageDrawer;
@@ -791,13 +845,18 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     //////////////////////////////////
     // SearchableContainer Methods	//
     //////////////////////////////////
-    /** @overrides SearchableContainer.getSearchableElements */
+
+    /**
+     * @overrides SearchableContainer.getSearchableElements
+     */
     @Override
     public Iterable<RenderableBlock> getSearchableElements() {
         return getBlocks();
     }
 
-    /** @overrides SearchableContainer.updateContainerSearchResults */
+    /**
+     * @overrides SearchableContainer.updateContainerSearchResults
+     */
     @Override
     public void updateContainsSearchResults(boolean containsSearchResults) {
         // Do nothing, at least for now
@@ -842,7 +901,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
                 //add internallly
                 workspace.notifyListeners(new WorkspaceEvent(workspace, this, rb.getBlockID(), WorkspaceEvent.BLOCK_ADDED));
                 if (importingPage) {
-                	workspace.getEnv().getBlock(rb.getBlockID()).setFocus(false);
+                    workspace.getEnv().getBlock(rb.getBlockID()).setFocus(false);
                     rb.resetHighlight();
                     rb.clearBufferedImage();
                 }
@@ -867,11 +926,11 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     }
 
     public Node getSaveNode(Document document) {
-    	Element pageElement = document.createElement("Page");
+        Element pageElement = document.createElement("Page");
 
-    	pageElement.setAttribute("page-name", getPageName());
-    	pageElement.setAttribute("page-color", getPageColor().getRed() + " " + getPageColor().getGreen() + " " + getPageColor().getBlue());
-    	pageElement.setAttribute("page-width", String.valueOf((int)getAbstractWidth()));
+        pageElement.setAttribute("page-name", getPageName());
+        pageElement.setAttribute("page-color", getPageColor().getRed() + " " + getPageColor().getGreen() + " " + getPageColor().getBlue());
+        pageElement.setAttribute("page-width", String.valueOf((int) getAbstractWidth()));
         if (fullview) {
             pageElement.setAttribute("page-infullview", "yes");
         } else {
@@ -893,12 +952,13 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
             }
             pageElement.appendChild(pageBlocksElement);
         }
-    	return pageElement;
+        return pageElement;
     }
 
     ////////////////////////////////////
     //State Saving Stuff for Undo/Redo//
     ////////////////////////////////////
+
     /**
      * a data structure that holds the name, width, color, set of blocks,
      * and set of renderable blocks in this page.
@@ -914,7 +974,9 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         public Map<Long, Object> renderableBlocks = new HashMap<Long, Object>();
     }
 
-    /** @overrides ISupportMomento.getState */
+    /**
+     * @overrides ISupportMomento.getState
+     */
     @Override
     public Object getState() {
         PageState state = new PageState();
@@ -930,7 +992,9 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         return state;
     }
 
-    /** @overrides ISupportMomento.loadState() */
+    /**
+     * @overrides ISupportMomento.loadState()
+     */
     @Override
     public void loadState(Object memento) {
         assert (memento instanceof PageState) : "ISupportMemento contract violated in Page";
@@ -1190,8 +1254,6 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 class PageJComponent extends JLayeredPane implements RBParent {
 
 
-
-
     private static final long serialVersionUID = 83982193213L;
     private static final Integer BLOCK_LAYER = new Integer(1);
     private static final Integer HIGHLIGHT_LAYER = new Integer(0);
@@ -1212,9 +1274,9 @@ class PageJComponent extends JLayeredPane implements RBParent {
     }
 
 
-    void removeChilds(JComponent[] components){
+    void removeChilds(JComponent[] components) {
 
-        for(JComponent component:components){
+        for (JComponent component : components) {
             this.remove(component);
         }
         this.revalidate();
@@ -1222,12 +1284,12 @@ class PageJComponent extends JLayeredPane implements RBParent {
     }
 
 
-    PageJComponent(){
+    PageJComponent() {
 
         InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = getActionMap();
 
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,0,true),"delete");
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0, true), "delete");
 
         am.put("delete", new AbstractAction() {
             @Override
@@ -1241,40 +1303,40 @@ class PageJComponent extends JLayeredPane implements RBParent {
     }
 
 
-    void removeChild(RenderableBlock component){
+    void removeChild(RenderableBlock component) {
 
         //component.blockDisconnected();
 
-        List<ConnectorTag> connectors =  component.getConnectors();
+        List<ConnectorTag> connectors = component.getConnectors();
 
-        for(ConnectorTag conn:connectors){
+        for (ConnectorTag conn : connectors) {
             //System.out.println("_"+conn.getSocket().getKind()+"_");
 
-                String kind = conn.getSocket().getKind();
-                if (kind.equals("number")||kind.equals("boolean")) {
-                    //System.out.println("delete connectored");
-                    RenderableBlock block = RenderableBlock.workspaceref.getEnv().getRenderableBlock(
-                            conn.getSocket().getBlockID());
-                    try {
-                        removeChild(block);
-                    }catch (Exception e){
+            String kind = conn.getSocket().getKind();
+            if (kind.equals("number") || kind.equals("boolean")) {
+                //System.out.println("delete connectored");
+                RenderableBlock block = RenderableBlock.workspaceref.getEnv().getRenderableBlock(
+                        conn.getSocket().getBlockID());
+                try {
+                    removeChild(block);
+                } catch (Exception e) {
 
-                    }
-                    try {
-                        this.remove(block);
-                    }catch (Exception e){
-                        //System.out.println("exptn bleaa");
-                    }
                 }
+                try {
+                    this.remove(block);
+                } catch (Exception e) {
+                    //System.out.println("exptn bleaa");
+                }
+            }
 
         }
 
         component.dellAction = true;
 
         BlockConnector plug = BlockLinkChecker.getPlugEquivalent(component.draggedBlock);
-        if(plug!=null) {
+        if (plug != null) {
             Block parent = RenderableBlock.workspaceref.getEnv().getBlock(plug.getBlockID());
-            if (parent!=null) {
+            if (parent != null) {
                 BlockConnector socket = parent.getConnectorTo(component.blockID);
                 BlockLink link = BlockLink.getBlockLink(RenderableBlock.workspaceref, component.draggedBlock,
                         parent, plug, socket);
@@ -1320,36 +1382,39 @@ class PageJComponent extends JLayeredPane implements RBParent {
             g.drawImage(this.getImage(), imageX, getHeight() * 3 / 4 + 5, imageWidth, imageWidth, null);
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
         }
-                        int startWidth = 0;
-                int startHeight = 0;
-                int width = this.getWidth();
-                int height = this.getHeight();
-                g.setColor(new Color(255,255,255));
-                g.fillRect(startWidth,startHeight, width, height);
-                g.setColor(new Color(237,237,237));
-                for (int i=startWidth;i<width;i+=25*Page.zoom)
-                {
-                    g.drawLine(i,startHeight,i,height);
-                }
+        int startWidth = 0;
+        int startHeight = 0;
+        int width = this.getWidth();
+        int height = this.getHeight();
+        g.setColor(new Color(255, 255, 255));
+        g.fillRect(startWidth, startHeight, width, height);
+        g.setColor(new Color(237, 237, 237));
+        for (int i = startWidth; i < width; i += 25 * Page.zoom) {
+            g.drawLine(i, startHeight, i, height);
+        }
 
-                for (int i=startHeight;i<height;i+=25*Page.zoom)
-                {
-                    g.drawLine(startWidth,i,width,i);
-                }
+        for (int i = startHeight; i < height; i += 25 * Page.zoom) {
+            g.drawLine(startWidth, i, width, i);
+        }
 
     }
 
     //////////////////////////////////
     //RBParent implemented methods	//
     //////////////////////////////////
-    /** @overrides RBParent.addToBlockLayer() */
+
+    /**
+     * @overrides RBParent.addToBlockLayer()
+     */
     @Override
     public void addToBlockLayer(Component c) {
         this.add(c, BLOCK_LAYER);
 
     }
 
-    /** @overrides RBParent.addToHighlightLayer() */
+    /**
+     * @overrides RBParent.addToHighlightLayer()
+     */
     @Override
     public void addToHighlightLayer(Component c) {
         this.add(c, HIGHLIGHT_LAYER);
@@ -1362,33 +1427,39 @@ class PageJComponent extends JLayeredPane implements RBParent {
  */
 class BlockStackSorterUtil {
 
-    /** The minimum bounds between blocks */
+    /**
+     * The minimum bounds between blocks
+     */
     private static final int BUFFER_BETWEEN_BLOCKS = 20;
-    /** A helper rectangle that maintains the bounds between blocks */
+    /**
+     * A helper rectangle that maintains the bounds between blocks
+     */
     private static final Rectangle positioningBounds = new Rectangle(BUFFER_BETWEEN_BLOCKS, BUFFER_BETWEEN_BLOCKS, 0, 0);
-    /** An ordered set of blocks.  Blocks are ordered from closest to furthest (relative to x=0 axis) */
+    /**
+     * An ordered set of blocks.  Blocks are ordered from closest to furthest (relative to x=0 axis)
+     */
     private static final TreeSet<RenderableBlock> blocksToArrange = new TreeSet<RenderableBlock>(
             //TODO ria for now they are ordered in y-coor order
             //this naive ordering will also fail if two blocks have the same coordinates
             new Comparator<RenderableBlock>() {
 
-        @Override
-        public int compare(RenderableBlock rb1, RenderableBlock rb2) {
-            if (rb1 == rb2) {
-                return 0;
-            } else {
-                //translate points to a common reference: the parent of rb1
-                Point pt1 = rb1.getLocation();
-                Point pt2 = SwingUtilities.convertPoint(rb2.getParentWidget().getJComponent(),
-                        rb2.getLocation(), rb1.getParentWidget().getJComponent());
-                if (pt1.getY() < pt2.getY()) {
-                    return -1;
-                } else {
-                    return 1;
+                @Override
+                public int compare(RenderableBlock rb1, RenderableBlock rb2) {
+                    if (rb1 == rb2) {
+                        return 0;
+                    } else {
+                        //translate points to a common reference: the parent of rb1
+                        Point pt1 = rb1.getLocation();
+                        Point pt2 = SwingUtilities.convertPoint(rb2.getParentWidget().getJComponent(),
+                                rb2.getLocation(), rb1.getParentWidget().getJComponent());
+                        if (pt1.getY() < pt2.getY()) {
+                            return -1;
+                        } else {
+                            return 1;
+                        }
+                    }
                 }
-            }
-        }
-    });
+            });
 
     /**
      * This method serves to help clients sort blocks within a page
@@ -1396,7 +1467,6 @@ class BlockStackSorterUtil {
      *
      * @param page
      * @param topLevelBlocks
-     *
      * @requires page != null && topLevelBlocks != null
      * @modifies the location of all topLevelBlocks
      * @effects sort the topLevelBlocks and move them to an order location on the page

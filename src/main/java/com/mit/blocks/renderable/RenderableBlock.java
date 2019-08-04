@@ -1670,6 +1670,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         obj.cloneMe();
     }
 
+
     public void cloneMe() {
         parent.startDragged(this);
         cloneThis(this);
@@ -1680,7 +1681,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     }
 
     public void cloneMeWithZeroOffset() {
-        cloneThis(this, 0);
+        RenderableBlock newBlock = cloneThis(this, 0);
         workspace.notifyListeners(new WorkspaceEvent(workspace, this
                 .getParentWidget(), this.getBlockID(),
                 WorkspaceEvent.BLOCK_CLONED, true));
