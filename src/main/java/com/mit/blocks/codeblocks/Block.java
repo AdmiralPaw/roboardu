@@ -524,6 +524,11 @@ public class Block implements ISupportMemento {
         return Collections.unmodifiableList(new ArrayList<BlockConnector>(sockets));
     }
 
+    public ArrayList<BlockConnector> getScoketsList()
+    {
+        return new ArrayList<BlockConnector>(sockets);
+    }
+
     /**
      * Returns the number of sockets of this
      * @return the number of sockets of this

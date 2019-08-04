@@ -550,9 +550,10 @@ public abstract class LabelWidget extends JComponent {
                 selfItem.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e) {
+                        workspace.getEnv().getRenderableBlock(blockID).blockRenamed();
                         fireGenusChanged(selfGenus);
                         showMenuIcon(false);
-                        workspace.getEnv().getRenderableBlock(blockID).blockRenamed();
+
                     }
                 });
                 popupmenu.add(selfItem);

@@ -7,23 +7,30 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class BlocksKeeper {
-    private ArrayList<Collection<RenderableBlock>> undoList;
-    private ArrayList<Collection<RenderableBlock>> redoList;
+    private ArrayList<ArrayList<RenderableBlock>> undoList;
+    private ArrayList<ArrayList<RenderableBlock>> redoList;
     private static int maxSize;
     private Page parent;
 
     public BlocksKeeper(Page p) {
-        undoList = new ArrayList<Collection<RenderableBlock>>();
-        redoList = new ArrayList<Collection<RenderableBlock>>();
+        undoList = new ArrayList<ArrayList<RenderableBlock>>();
+        redoList = new ArrayList<ArrayList<RenderableBlock>>();
         parent = p;
     }
 
     public Collection<RenderableBlock> undoAct() {
         if (undoList.size() > 0) {
-            Collection<RenderableBlock> screen = undoList.get(undoList.size() - 1);
+            ArrayList<RenderableBlock> screen = undoList.get(undoList.size() - 1);
+            ArrayList<RenderableBlock> currentScreen = getScreen(parent.getBlocks());
+            if (undoList.size() > 1 && equalsCollection(screen, currentScreen))
+            {
+                screen = undoList.get(undoList.size()-2);
+                currentScreen = undoList.get(undoList.size()-1);
+                undoList.remove(undoList.size()-2);
+            }
             undoList.remove(undoList.size() - 1);
-            redoList.add(getScreen(parent.getBlocks()));
-            System.out.println(String.valueOf(undoList.size()) + ":" + String.valueOf(redoList.size()));
+            redoList.add(currentScreen);
+            //System.out.println(String.valueOf(undoList.size()) + ":" + String.valueOf(redoList.size()));
             return screen;
         }
 
@@ -37,7 +44,7 @@ public class BlocksKeeper {
             Collection<RenderableBlock> screen = redoList.get(redoList.size() - 1);
             redoList.remove(redoList.size() - 1);
             undoList.add(getScreen(parent.getBlocks()));
-            System.out.println(String.valueOf(undoList.size()) + ":" + String.valueOf(redoList.size()));
+            //System.out.println(String.valueOf(undoList.size()) + ":" + String.valueOf(redoList.size()));
             return screen;
         }
 
@@ -45,15 +52,27 @@ public class BlocksKeeper {
     }
 
     public void addAct(Collection<RenderableBlock> blocks) {
-        undoList.add(getScreen(blocks));
-        redoList.clear();
+        ArrayList<RenderableBlock> screen = getScreen(blocks);
+        if (undoList.size()!=0)
+        {
+            if (!equalsCollection(undoList.get(undoList.size()-1), screen))
+            {
+                undoList.add(screen);
+                redoList.clear();
+            }
+        }
+        else
+        {
+            undoList.add(screen);
+            redoList.clear();
+        }
         normalizeListSize();
-        System.out.println(undoList.size());
+        //System.out.println("Act saved: " + undoList.size());
     }
 
-    public Collection<RenderableBlock> getScreen(Collection<RenderableBlock> blocks) {
+    public ArrayList<RenderableBlock> getScreen(Collection<RenderableBlock> blocks) {
         HashMap<Long, Long> alreadyAdd = new HashMap<Long, Long>();
-        Collection<RenderableBlock> screen = new ArrayList<RenderableBlock>();
+        ArrayList<RenderableBlock> screen = new ArrayList<RenderableBlock>();
         for (RenderableBlock block : blocks) {
             long blockID = block.getBlockID();
             if (!alreadyAdd.containsKey(blockID) && !block.hasBlockParent()) {
@@ -65,6 +84,24 @@ public class BlocksKeeper {
             }
         }
         return screen;
+    }
+
+    public boolean equalsCollection(ArrayList<RenderableBlock> a, ArrayList<RenderableBlock> b)
+    {
+        if (a.size()!= b.size())
+        {
+            return false;
+        }
+
+        for (int i=0;i<a.size();i++)
+        {
+            if (!a.get(i).equals(b.get(i)))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 

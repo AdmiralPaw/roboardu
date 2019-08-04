@@ -650,8 +650,9 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
     public void startDragged(RenderableBlock block)
     {
+        workspace.deactiveCPopupMenu();
         saveScreen();
-        System.out.println(block.toString());
+        //System.out.println(block.toString());
     }
 
     public void stopDragged(RenderableBlock b){
@@ -664,7 +665,6 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     public void saveScreen()
     {
         blocksKeeper.addAct(getBlocks());
-        System.out.println("Act saved");
     }
 
     /** @overrides WorkspaceWidget.blockDragged() */
@@ -674,7 +674,6 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
             mouseIsInPage = true;
             this.pageJComponent.repaint();
         }
-        workspace.deactiveCPopupMenu();
 
     }
 

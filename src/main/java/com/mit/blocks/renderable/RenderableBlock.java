@@ -58,7 +58,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * The workspace in use
      */
     protected final Workspace workspace;
-    public  static Workspace workspaceref ;
+    public static Workspace workspaceref;
 
     /**
      * BlockID of this. MAY BE Block.NULL
@@ -154,7 +154,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 //        socketTags = new ArrayList<ConnectorTag>();
 //    }
 
-    public List<ConnectorTag> getConnectors(){
+    public List<ConnectorTag> getConnectors() {
         return this.socketTags;
     }
 
@@ -175,11 +175,11 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * WorkspaceWidget and Long blockID of its associated Block
      *
      * @param workspace The workspace in use
-     * @param parent the WorkspaceWidget containing this
-     * @param blockID Long Block id of associated with this
+     * @param parent    the WorkspaceWidget containing this
+     * @param blockID   Long Block id of associated with this
      */
     public RenderableBlock(Workspace workspace, WorkspaceWidget parent,
-            Long blockID) {
+                           Long blockID) {
         this(workspace, parent, blockID, false);
         setFocusable(true);
         addKeyListener(this);
@@ -192,24 +192,25 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     /**
      * Constructs a new RenderableBlock instance with the specified parent
      * WorkspaceWidget and Long blockID of its associated Block
+     *
      * @param workspace The workspace in use
-     * @param parent the WorkspaceWidget containing this
-     * @param blockID Long Block id of associated with this
+     * @param parent    the WorkspaceWidget containing this
+     * @param blockID   Long Block id of associated with this
      * @param isLoading indicates if this block is still waiting for all
-     * information needed to properly construct it
+     *                  information needed to properly construct it
      */
     private RenderableBlock(Workspace workspace, WorkspaceWidget parent,
-            Long blockID, boolean isLoading) {
+                            Long blockID, boolean isLoading) {
         super();
         this.workspace = workspace;
-        workspaceref= this.workspace;
+        workspaceref = this.workspace;
 
         InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = getActionMap();
 
 
-        KeyStroke keyV = KeyStroke.getKeyStroke(KeyEvent.VK_C,InputEvent.CTRL_DOWN_MASK);
-        im.put(keyV,"pressed");
+        KeyStroke keyV = KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK);
+        im.put(keyV, "pressed");
 
         //im.put(KeyStroke.getKeyStroke(KeyEvent.VK_C & KeyEvent.CTRL_DOWN_MASK, 0, true), "released");
 
@@ -217,7 +218,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             @Override
             public void actionPerformed(ActionEvent e) {
                 //System.out.println("Pressed2");
-                if(currentBlock!=null) currentBlock.cloneMe();
+                if (currentBlock != null) currentBlock.cloneMe();
             }
         });
 
@@ -311,7 +312,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         InputMap inputMap = this.getInputMap();
 
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_DOWN_MASK |
-                InputEvent.ALT_DOWN_MASK ), "BUTTON ONE ID");
+                InputEvent.ALT_DOWN_MASK), "BUTTON ONE ID");
 
         ActionMap actionMap = this.getActionMap();
         actionMap.put("BUTTON ONE ID", new AbstractAction() {
@@ -323,10 +324,8 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     }
 
 
-
     public RenderableBlock(Workspace workspace, WorkspaceWidget parent,
-                            Long blockID, boolean isLoading, double blockSize)
-    {
+                           Long blockID, boolean isLoading, double blockSize) {
         this(workspace, parent, blockID, isLoading);
         setZoomLevel(blockSize);
 
@@ -343,7 +342,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         InputMap inputMap = this.getInputMap();
 
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_DOWN_MASK |
-                InputEvent.ALT_DOWN_MASK ), "BUTTON ONE ID");
+                InputEvent.ALT_DOWN_MASK), "BUTTON ONE ID");
 
         ActionMap actionMap = this.getActionMap();
         actionMap.put("BUTTON ONE ID", new AbstractAction() {
@@ -409,8 +408,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         return blockShape;
     }
 
-    public boolean isDragging()
-    {
+    public boolean isDragging() {
         return dragging;
     }
 
@@ -434,9 +432,9 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * in the coordinate space of this component's parent.
      *
      * @param x the <i>x</i>-coordinate of the new location's top-left corner in
-     * the parent's coordinate space
+     *          the parent's coordinate space
      * @param y the <i>y</i>-coordinate of the new location's top-left corner in
-     * the parent's coordinate space
+     *          the parent's coordinate space
      */
     @Override
     public void setLocation(int x, int y) {
@@ -460,7 +458,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * given in the parent's coordinate space.
      *
      * @param p the point defining the top-left corner of the new location,
-     * given in the coordinate space of this component's parent
+     *          given in the coordinate space of this component's parent
      */
     @Override
     public void setLocation(Point p) {
@@ -504,7 +502,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                     .getRenderableBlock(rb.getBlock().getAfterBlockID()));
             return new Dimension(Math.max(
                     rb.getBlockWidth()
-                    + rb.getMaxWidthOfSockets(rb.getBlockID()),
+                            + rb.getMaxWidthOfSockets(rb.getBlockID()),
                     dim.width), rb.getBlockHeight() + dim.height);
         } else {
             return new Dimension(rb.getBlockWidth()
@@ -550,7 +548,6 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
     /**
      * @param blockWidget
-     *
      * @requires none
      * @modifies this.blockWidget
      * @effects sets block widget to the input argument "blockWidget" and
@@ -587,6 +584,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     // /////////////////
     // LABEL METHODS //
     // /////////////////
+
     /**
      * Synchronizes this RenderableBlock's socket components (including tags,
      * labels) with the associated Block's list of sockets. Complexity: Running
@@ -724,7 +722,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                             + getBlock().getBlockLabel()
                             + " to "
                             + workspace.getEnv().getBlock(blockID)
-                                    .getBlockLabel());
+                            .getBlockLabel());
                 }
                 workspace
                         .getEnv()
@@ -791,6 +789,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     // //////////////////////////////////////
     // BLOCK IMAGE MANAGEMENT AND METHODS //
     // //////////////////////////////////////
+
     /**
      * Returns the total height of all the images to draw on this block
      *
@@ -823,6 +822,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     // ////////////////////////////////////////////
     // BLOCK LINKING CHECKS ON OTHER RENDERABLES //
     // ////////////////////////////////////////////
+
     /**
      * Looks for links between this RenderableBlock and others.
      *
@@ -837,6 +837,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     // /////////////////////
     // / SOCKET METHODS ////
     // /////////////////////
+
     /**
      * Returns the maximum width between all the socket connectors of this or 0
      * if this does not have any sockets
@@ -899,10 +900,9 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * Updates the center point location of this socket
      *
      * @param socket - the socket whose point we will update. Socket MAY NOT BE
-     * NULL
-     * @param point - the ABSTRACT location of socket's center. ABSTRACT
-     * LOCATION!!!
-     *
+     *               NULL
+     * @param point  - the ABSTRACT location of socket's center. ABSTRACT
+     *               LOCATION!!!
      * @requires socket != null and there exist a matching tag for the socket
      */
     public void updateSocketPoint(BlockConnector socket, Point2D point) {
@@ -927,6 +927,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     // ///////////////////////////////////
     // PARENT WORKSPACE WIDGET METHODS //
     // ///////////////////////////////////
+
     /**
      * Returns the parent WorkspaceWidget containing this
      *
@@ -963,6 +964,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     // ////////////////////
     // BLOCK MANAGEMENT //
     // ////////////////////
+
     /**
      * Shortcut to get block with current BlockID of this renderable block.
      */
@@ -1010,14 +1012,14 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                             .getPlug());
                     arg.setLocation(
                             (int) (socketPt.getX() + myLocation.x - plugPt
-                            .getX()), (int) (socketPt.getY()
-                            + myLocation.y - plugPt.getY()));
+                                    .getX()), (int) (socketPt.getY()
+                                    + myLocation.y - plugPt.getY()));
                     // update the socket space of at this socket
                     this.getConnectorTag(socket)
                             .setDimension(
                                     new Dimension(
                                             arg.getBlockWidth()
-                                            - (int) BlockConnectorShape.NORMAL_DATA_PLUG_WIDTH,
+                                                    - (int) BlockConnectorShape.NORMAL_DATA_PLUG_WIDTH,
                                             arg.getBlockHeight()));
                     // drop each block to this parent's widget/component
                     // getParentWidget().blockDropped(arg);
@@ -1065,6 +1067,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     // //////////////////////
     // // BLOCK RESIZING ////
     // //////////////////////
+
     /**
      * Returns the dimension associated with a socket. If a socket dimension has
      * not yet been set, this will return null.
@@ -1084,15 +1087,15 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * use these dimensions to determine the appropriate bounds to stretch the
      * connectedSocket by.
      *
-     * @param connectedSocket BlockConnector which block
-     * connection/disconnection occurred
+     * @param connectedSocket    BlockConnector which block
+     *                           connection/disconnection occurred
      * @param connectedToBlockID the Long block ID of the block
-     * connected/disconnected to the specified connectedSocket
-     * @param isConnected boolean flag to determine if a block connected or
-     * disconnected to the connectedSocket
+     *                           connected/disconnected to the specified connectedSocket
+     * @param isConnected        boolean flag to determine if a block connected or
+     *                           disconnected to the connectedSocket
      */
     private void updateSocketSpace(BlockConnector connectedSocket,
-            long connectedToBlockID, boolean isConnected) {
+                                   long connectedToBlockID, boolean isConnected) {
         // System.out.println("updating socket space of :" +
         // connectedSocket.getLabel() +" of rb: "+this);
         if (!isConnected) {
@@ -1270,12 +1273,13 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     // ///////////////////
     // BLOCK CONNECTION //
     // ///////////////////
+
     /**
      * Notifies this renderable block that ITS socket connectedSocket was
      * connected to ANOTHER block with ID connectedBlockID.
      */
     public void blockConnected(BlockConnector connectedSocket,
-            long connectedBlockID) {
+                               long connectedBlockID) {
         // notify block first so that we will only need to repaint this block
         // once
         getBlock().blockConnected(connectedSocket, connectedBlockID);
@@ -1307,6 +1311,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     // /////////////////
     // BLOCK RENDERING//
     // /////////////////
+
     /**
      * Clears the BufferedImage of this
      */
@@ -1475,7 +1480,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     /**
      * Draws the BlockImageIcon instances of this onto itself
      *
-     * @param width the current width of the buffered image
+     * @param width  the current width of the buffered image
      * @param height the current height of the buffered image
      */
     private void repositionBlockImages(int width, int height) {
@@ -1516,7 +1521,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                     && (img.getImageLocation() != ImageLocation.EAST
                     || img.getImageLocation() != ImageLocation.NORTHEAST || img
                     .getImageLocation() != ImageLocation.SOUTHEAST))
-				;
+                ;
             imgLoc.x += 4; // need to nudge it a little more because of plug
             img.setLocation(imgLoc.x, imgLoc.y);
         }
@@ -1567,6 +1572,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     // //////////////////////
     // COMMENT MANAGEMENT //
     // //////////////////////
+
     /**
      * @return true iff this.comment !=null
      */
@@ -1673,18 +1679,17 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 WorkspaceEvent.BLOCK_CLONED, true));
     }
 
-    public void cloneMeWithZeroOffset()
-    {
+    public void cloneMeWithZeroOffset() {
         cloneThis(this, 0);
         workspace.notifyListeners(new WorkspaceEvent(workspace, this
                 .getParentWidget(), this.getBlockID(),
                 WorkspaceEvent.BLOCK_CLONED, true));
     }
 
-    public RenderableBlock cloneThis(RenderableBlock rb)
-    {
-        return cloneThis(rb,(int) (NEARBY_RADIUS));
+    public RenderableBlock cloneThis(RenderableBlock rb) {
+        return cloneThis(rb, (int) (NEARBY_RADIUS));
     }
+
 
     public RenderableBlock cloneThis(RenderableBlock rb, int offset) {
         Block oriBlock = rb.getBlock();
@@ -1799,13 +1804,85 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         return newRb;
     }
 
-    public void blockRenamed()
-    {
-        parent.blockRenamed(this);
+
+    public boolean equals(RenderableBlock b) {
+        RenderableBlock a = this;
+        //System.out.println(":::" + a.toString() + "::: VS :::" + b.toString() + ":::");
+
+        if (!a.getGenus().equals(b.getGenus())) {
+            return false;
+        }
+
+
+        BlockConnector plug = BlockLinkChecker.getPlugEquivalent(a.getBlock());
+        if (plug == null || !plug.hasBlock()) {
+            Point aLoc = a.getLocation();
+            Point bLoc = b.getLocation();
+            if (aLoc.x != bLoc.x || aLoc.y != bLoc.y) {
+                //System.out.println("::: Loc != :::" + aLoc.toString() + " : " + bLoc.toString());
+                return false;
+            }
+        }
+
+        if (!a.getBlock().getBlockLabel().equals(b.getBlock().getBlockLabel())) {
+            //System.out.println("::: BL != :::" + a.getBlock().getBlockLabel() + " : " + b.getBlock().getBlockLabel());
+            return false;
+        }
+
+        ArrayList<BlockConnector> aSockets = a.getBlock().getScoketsList();
+        ArrayList<BlockConnector> bSockets = b.getBlock().getScoketsList();
+
+        if (aSockets.size() != bSockets.size()) {
+            //System.out.println("::: Soc 1 size != :::" + aSockets.size() + " : " + bSockets.size());
+            return false;
+        } else if (aSockets.size() != 0) {
+            for (int i = 0; i < aSockets.size(); i++) {
+                RenderableBlock newA = workspace.getEnv().getRenderableBlock(aSockets.get(i).getBlockID());
+                RenderableBlock newB = workspace.getEnv().getRenderableBlock(bSockets.get(i).getBlockID());
+
+                if ((aSockets.get(i).getBlockID() == -1 || bSockets.get(i).getBlockID() == -1) && aSockets.get(i).getBlockID() != bSockets.get(i).getBlockID())
+                {
+                    return false;
+                }
+
+                if (newA != null && newB != null) {
+                    if (!newA.equals(newB)) {
+                        //System.out.println("::: Soc 1 BLOCK #" + i + " != ::: " + newA.toString() + " : " + newB.toString());
+                        return false;
+                    }
+                }
+
+            }
+        }
+
+        if (a.getBlock().isCommandBlock() && b.getBlock().isCommandBlock()) {
+            BlockConnector aAfterConnector = a.getBlock().getAfterConnector();
+            BlockConnector bAfterConnector = b.getBlock().getAfterConnector();
+
+            if (aAfterConnector != null && bAfterConnector != null) {
+                if (aAfterConnector.hasBlock() && bAfterConnector.hasBlock()) {
+                    RenderableBlock aAfterRb = workspace.getEnv().getRenderableBlock(aAfterConnector.getBlockID());
+                    RenderableBlock bAfterRb = workspace.getEnv().getRenderableBlock(bAfterConnector.getBlockID());
+                    return aAfterRb.equals(bAfterRb);
+                } else if (aAfterConnector.hasBlock() != bAfterConnector.hasBlock()) {
+                    //System.out.println("::: No block in connection :::");
+                    return false;
+                }
+            } else if (aAfterConnector != bAfterConnector) {
+                //System.out.println("::: No connection block :::");
+                return false;
+            }
+        } else if (!a.getBlock().isCommandBlock() != !b.getBlock().isCommandBlock()) {
+            //System.out.println("::: No command block :::");
+            return false;
+        }
+        //System.out.println("::: Blocks equal");
+        return true;
+
     }
 
-    public ArrayList<Long> getIDList()
-    {
+
+    public ArrayList<Long> getIDList() {
         ArrayList<Long> result = new ArrayList<Long>();
         Block oriBlock = getBlock();
         result.add(getBlockID());
@@ -1816,14 +1893,12 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         for (BlockConnector oriSocket : oriSockets) {
             if (oriSocket.hasBlock()) {
                 RenderableBlock subRb = workspace.getEnv().getRenderableBlock(oriSocket.getBlockID());
-                ArrayList<Long>tempList = subRb.getIDList();
-                for (Long l : tempList)
-                {
+                ArrayList<Long> tempList = subRb.getIDList();
+                for (Long l : tempList) {
                     result.add(l);
                 }
             }
         }
-
 
 
         if (getBlock().isCommandBlock()) {
@@ -1831,9 +1906,9 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             if (oriAfterConnector != null) {
                 if (oriAfterConnector.hasBlock()) {
                     RenderableBlock oriAfterRb = workspace.getEnv().getRenderableBlock(oriAfterConnector.getBlockID());
-                    ArrayList<Long>tempList = oriAfterRb.getIDList();;
-                    for (Long l : tempList)
-                    {
+                    ArrayList<Long> tempList = oriAfterRb.getIDList();
+                    ;
+                    for (Long l : tempList) {
                         result.add(l);
                     }
                 }
@@ -1846,6 +1921,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     // ////////////////////////////////
     // MOVEMENT OF CONNECTED BLOCKS //
     // ////////////////////////////////
+
     /**
      * Aligns all RenderableBlocks plugged into this one with the current
      * location of this RenderableBlock. These RenderableBlocks to move include
@@ -1908,8 +1984,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 //
 //    }
 
-    public boolean hasBlockParent()
-    {
+    public boolean hasBlockParent() {
         BlockConnector plug = BlockLinkChecker.getPlugEquivalent(this.getBlock());
         if (plug != null && plug.hasBlock()) {
             return true;
@@ -1941,18 +2016,21 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             }
         }
     }
+
+    public void blockRenamed() {
+        parent.blockRenamed(this);
+    }
+
     /**
      * This method is called when this RenderableBlock is plugged into another
      * RenderableBlock that has finished dragging.
      *
      * @param widget the WorkspaceWidget where this RenderableBlock is being
-     * dropped.
+     *               dropped.
      */
 
-
     public static void stopDragging(RenderableBlock renderable,
-                                    WorkspaceWidget widget)
-    {
+                                    WorkspaceWidget widget) {
         if (!renderable.dragging) {
             throw new RuntimeException("dropping without prior dragging?");
         }
@@ -1989,7 +2067,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     }
 
     private void drag(RenderableBlock renderable, int dx, int dy,
-            WorkspaceWidget widget, boolean isTopLevelBlock) {
+                      WorkspaceWidget widget, boolean isTopLevelBlock) {
         if (!renderable.pickedUp) {
             throw new RuntimeException("dragging without prior pickup");
         }
@@ -2031,6 +2109,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     // /////////////////
     // MOUSE EVENTS //
     // /////////////////
+
     /**
      * Makes public the protected processMouseEvent() method from Component so
      * that the children within this block may pass mouse events to this
@@ -2062,9 +2141,9 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 else {
 
                     /*
-					 * Make sure that no matter who's connecting to whom, the
-					 * block that's being dragged gets dropped on the parent
-					 * widget of the block that's already on the canvas.
+                     * Make sure that no matter who's connecting to whom, the
+                     * block that's being dragged gets dropped on the parent
+                     * widget of the block that's already on the canvas.
                      */
                     if (blockID.equals(link.getSocketBlockID())) {
                         // dragged block is the socket block, so take plug's
@@ -2112,17 +2191,15 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             popup.show(this, e.getX(), e.getY());
         }
         workspace.getMiniMap().repaint();
-        if (parent!=null)
-        {
+        if (parent != null) {
             parent.stopDragged(this);
         }
 
     }
 
 
-
-
     public Block draggedBlock;
+
     public void mouseDragged(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {
             if (!pickedUp) {
@@ -2159,7 +2236,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 BlockConnector plug = BlockLinkChecker.getPlugEquivalent(block);
                 if (plug != null && plug.hasBlock()) {
                     Block parent = workspace.getEnv().getBlock(
-                    plug.getBlockID());
+                            plug.getBlockID());
                     BlockConnector socket = parent.getConnectorTo(blockID);
                     BlockLink link = BlockLink.getBlockLink(workspace, block,
                             parent, plug, socket);
@@ -2196,7 +2273,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         currentBlock = this;
 
 //        System.out.println("hovered "+Integer.toString(i));
-        i+=1;
+        i += 1;
 
         dragHandler.mouseEntered(e);
         // !dragging: don't redraw while dragging
@@ -2269,6 +2346,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     // //////////////
     // SAVING AND LOADING
     // //////////////
+
     /**
      * Returns the node of this
      *
@@ -2297,14 +2375,14 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      *
      * @param workspace The workspace to use
      * @param blockNode Node containing information to load into a
-     * RenderableBlock instance
-     * @param parent WorkspaceWidget to contain the block to load
+     *                  RenderableBlock instance
+     * @param parent    WorkspaceWidget to contain the block to load
      * @return RenderableBlock instance holding the information in blockNode;
      * null if no RenderableBlock loaded
      */
     public static RenderableBlock loadBlockNode(Workspace workspace,
-            Node blockNode, WorkspaceWidget parent,
-            HashMap<Long, Long> idMapping) {
+                                                Node blockNode, WorkspaceWidget parent,
+                                                HashMap<Long, Long> idMapping) {
         boolean isBlock = blockNode.getNodeName().equals("Block");
         boolean isBlockStub = blockNode.getNodeName().equals("BlockStub");
 
@@ -2402,7 +2480,6 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     }
 
 
-
     public String toString() {
         StringBuffer buf = new StringBuffer();
         buf.append("RenderableBlock " + getBlockID() + ": "
@@ -2414,18 +2491,17 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     public void keyTyped(KeyEvent e) {
 
 
-
     }
 
 
     @Override
     public void keyPressed(KeyEvent e) {
 
-        
-        switch (e.getKeyCode()){
+
+        switch (e.getKeyCode()) {
             case KeyEvent.VK_DELETE:
                 System.out.println("delete");
-                
+
                 break;
 
         }
@@ -2434,7 +2510,6 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
     @Override
     public void keyReleased(KeyEvent e) {
-
 
 
     }
@@ -2622,7 +2697,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     }
 
     protected boolean processKeyBinding(KeyStroke ks, KeyEvent e,
-            int condition, boolean pressed) {
+                                        int condition, boolean pressed) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
                 return false;
@@ -2640,6 +2715,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     }
 
     public boolean dellAction = false;
+
     private ConnectorTag getConnectorTag(BlockConnector socket) {
 
 
