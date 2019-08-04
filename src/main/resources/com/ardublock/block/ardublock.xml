@@ -408,7 +408,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="#">
-                    <DefaultArg genus-name="pinListDigital_D6" label="D6" />
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8" />
                 </BlockConnector>
                 <BlockConnector connector-type="boolean" connector-kind="plug" />
             </BlockConnectors>
@@ -421,7 +421,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="#">
-                    <DefaultArg genus-name="pinListDigital_D6" label="D6" />
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8" />
                 </BlockConnector>
                 <BlockConnector connector-type="boolean" connector-kind="plug" />
             </BlockConnectors>
@@ -444,7 +444,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="#">
-                    <DefaultArg genus-name="pinListDigital_D13" label="D13" />
+                    <DefaultArg genus-name="pinListDigital_D11" label="D11" />
                 </BlockConnector>
                 <BlockConnector connector-type="boolean" connector-kind="socket">
                     <DefaultArg genus-name="digital-high" label="HIGH" />
@@ -458,7 +458,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="#">
-                    <DefaultArg genus-name="pinListAnalogWrite_D3" label="D3" />
+                    <DefaultArg genus-name="pinListAnalogWrite_D9" label="D9" />
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="socket">
                     <DefaultArg genus-name="number" label="255" />
@@ -472,7 +472,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="#">
-                    <DefaultArg genus-name="pinListDigital_D13" label="D13" />
+                    <DefaultArg genus-name="pinListDigital_D11" label="D11" />
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -485,7 +485,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D0" label="D0" />
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8" />
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.frequency">
                     <DefaultArg genus-name="number" label="440" />
@@ -502,7 +502,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D0" label="D0" />
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8" />
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.frequency">
                     <DefaultArg genus-name="number" label="440" />
@@ -521,7 +521,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D0" label="D0" />
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8" />
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -3510,7 +3510,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <BlockConnectors>
                 <BlockConnector connector-type="boolean" connector-kind="plug" />
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D0" label="D0" />
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8" />
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -3575,7 +3575,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <BlockConnectors>
                 <BlockConnector connector-type="boolean" connector-kind="plug" />
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D0" label="D0" />
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8" />
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -4749,7 +4749,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <BlockConnectors>
                 <BlockConnector connector-type="boolean" connector-kind="plug" />
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D0" label="D0" />
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8" />
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -4761,7 +4761,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <BlockConnectors>
                 <BlockConnector connector-type="boolean" connector-kind="plug" />
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D0" label="D0" />
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8" />
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -9408,7 +9408,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
 
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D0" label="D0" />
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8" />
                 </BlockConnector>
                 <BlockConnector connector-type="boolean" connector-kind="plug" />
             </BlockConnectors>
@@ -9473,7 +9473,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D0" label="D0" />
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8" />
                 </BlockConnector>
                 <BlockConnector connector-type="boolean" connector-kind="socket" label="bc.status">
                     <DefaultArg genus-name="digital-high" label="HIGH" />
@@ -9487,7 +9487,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListAnalogWrite_D3" label="D3" />
+                    <DefaultArg genus-name="pinListAnalogWrite_D9" label="D9" />
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.level">
                     <DefaultArg genus-name="number" label="255" />
@@ -9501,7 +9501,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D0" label="D0" />
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8" />
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.led_blink_time1">
                     <DefaultArg genus-name="number" label="10" />
@@ -9518,13 +9518,13 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D0" label="D0" />
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8" />
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D1" label="D1" />
+                    <DefaultArg genus-name="pinListDigital_D9" label="D9" />
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D2" label="D2" />
+                    <DefaultArg genus-name="pinListDigital_D10" label="D10" />
                 </BlockConnector>
                 <BlockConnector connector-type="boolean" connector-kind="socket" label="bc.status">
                     <DefaultArg genus-name="digital-high" label="HIGH" />
@@ -9544,13 +9544,13 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListAnalogWrite_D3" label="D3" />
-                </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListAnalogWrite_D6" label="D6" />
-                </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListAnalogWrite_D9" label="D9" />
+                </BlockConnector>
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+                    <DefaultArg genus-name="pinListAnalogWrite_D10" label="D10" />
+                </BlockConnector>
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+                    <DefaultArg genus-name="pinListAnalogWrite_D11" label="D11" />
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.level">
                     <DefaultArg genus-name="number" label="100" />
@@ -9576,13 +9576,13 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListAnalogWrite_D3" label="D3" />
-                </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListAnalogWrite_D6" label="D6" />
-                </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListAnalogWrite_D9" label="D9" />
+                </BlockConnector>
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+                    <DefaultArg genus-name="pinListAnalogWrite_D10" label="D10" />
+                </BlockConnector>
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+                    <DefaultArg genus-name="pinListAnalogWrite_D11" label="D11" />
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.level">
                     <DefaultArg genus-name="number" label="100" />
@@ -9604,7 +9604,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D0" label="D0" />
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8" />
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -11566,7 +11566,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 </BlockConnector>
                 <BlockConnector connector-type="number"
                                                 connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D6" label="D6" />
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8" />
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -12244,9 +12244,9 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <BlockGenusMember>pin-read-digital-pullup</BlockGenusMember>
                 <BlockGenusMember>pin-read-analog</BlockGenusMember>
                 <BlockGenusMember>pin-write-analog</BlockGenusMember>
-                <BlockGenusMember>pinListDigital_D0</BlockGenusMember>
+                <BlockGenusMember>pinListDigital_D8</BlockGenusMember>
                 <BlockGenusMember>pinListAnalog_A0</BlockGenusMember>
-                <BlockGenusMember>pinListAnalogWrite_D3</BlockGenusMember>
+                <BlockGenusMember>pinListAnalogWrite_D9</BlockGenusMember>
             </BlockDrawer>
             <!--90 160 85-->
             <BlockDrawer button-color="90 160 85" name="bd.logic" type="factory">
@@ -12326,7 +12326,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <!--<BlockGenusMember>df_joystick_module_button</BlockGenusMember>-->
                 <!--<BlockGenusMember>df_joystick_module_x</BlockGenusMember>-->
                 <!--<BlockGenusMember>df_joystick_module_y</BlockGenusMember>-->
-                <BlockGenusMember>df_analog_gp2y0a21</BlockGenusMember>
+                <!--<BlockGenusMember>df_analog_gp2y0a21</BlockGenusMember>-->
                 <BlockGenusMember>df_line_tracking_sensor</BlockGenusMember>
                 <BlockGenusMember>sensorTemperature</BlockGenusMember>
                 <BlockGenusMember>seeed_mag_switch</BlockGenusMember>
