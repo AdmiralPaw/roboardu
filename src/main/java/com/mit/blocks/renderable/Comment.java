@@ -1,80 +1,76 @@
 package com.mit.blocks.renderable;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.RenderingHints;
-import java.awt.Shape;
-import java.awt.Toolkit;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.RoundRectangle2D;
-
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.undo.CannotRedoException;
-import javax.swing.undo.CannotUndoException;
-import javax.swing.undo.UndoManager;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
-
 import com.mit.blocks.codeblocks.JComponentDragHandler;
 import com.mit.blocks.codeblockutil.CScrollPane.ScrollPolicy;
 import com.mit.blocks.codeblockutil.CTracklessScrollPane;
 import com.mit.blocks.workspace.Workspace;
 import com.mit.blocks.workspace.WorkspaceEvent;
+import org.w3c.dom.*;
+
+import javax.swing.*;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
+import javax.swing.undo.UndoManager;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.RoundRectangle2D;
 
 /**
  * Comment stores and displays user-generated text that
  * can be edited by the user. Comments begin in 'editable' state.
- *
+ * <p>
  * Comments are associated with a parent source of type JComponent.
  * It should "tag" along with that component.  Note, however, that
  * this feature should be ensured by the parent source.  The
  * parent source can guarantee this by invoking the methods
  * setPosition, translatePosition, and setParent when
  * appropriate.
- *
+ * <p>
  * text : String //the text stored in this Comment and edited by the user
  */
 public class Comment extends JPanel {
 
     private static final long serialVersionUID = 328149080425L;
-    /**Background color of all comments*/
+    /**
+     * Background color of all comments
+     */
     private static final Color background = new Color(255, 255, 150);
-    /**border color*/
+    /**
+     * border color
+     */
     private final Color borderColor;
-    /**Text field UI*/
+    /**
+     * Text field UI
+     */
     private JTextArea textArea;//textArea belonging to editingPane
-    /**ScrollPane UI*/
+    /**
+     * ScrollPane UI
+     */
     private CTracklessScrollPane scrollPane;
-    /**Dragging handler of this Comment*/
+    /**
+     * Dragging handler of this Comment
+     */
     private JComponentDragHandler jCompDH;
-    /**Manager for arrow drawn from this to parent while in editing mode**/
+    /**
+     * Manager for arrow drawn from this to parent while in editing mode
+     **/
     private CommentArrow arrow;
-    /**Manages Undo-able Events in this comment's text editor*/
+    /**
+     * Manages Undo-able Events in this comment's text editor
+     */
     private UndoManager undoManager;
-    /** The JComponent this comment and comment label is connected to */
+    /**
+     * The JComponent this comment and comment label is connected to
+     */
     private CommentSource commentSource;
-    /** The commentLabel linked to this Comment and placed on the commentSource 	 */
+    /**
+     * The commentLabel linked to this Comment and placed on the commentSource
+     */
     private CommentLabel commentLabel;
-    /** true if this comment should not be able to have a location outside of its parent's bounds, false if it may be located outside of its parent's bounds */
+    /**
+     * true if this comment should not be able to have a location outside of its parent's bounds, false if it may be located outside of its parent's bounds
+     */
     private boolean constrainComment = true;
     static int FONT_SIZE = 14;
     static int MINIMUM_WIDTH = FONT_SIZE * 4;
@@ -91,26 +87,28 @@ public class Comment extends JPanel {
     private boolean pressed = false;
     private boolean active = false;
     private final Workspace workspace;
+    private RenderableBlock parent;
 
     /**
      * Constructs a Comment
      * with belonging to source, with text of initText, and initial zoom
      * The comment's borders will have the color borderColor.
-     *
+     * <p>
      * Note that initializing a comment only constructs
      * all of the necessary structures.  To graphically display a comment,
      * the implementor must then add the comment using the proper
      * Swing methods OR through the convenience method Comment.setParent()
      *
-     * @param workspace The workspace in use
-     * @param initText  initial text of comment
-     * @param source where the comment is linked to.
+     * @param workspace   The workspace in use
+     * @param initText    initial text of comment
+     * @param source      where the comment is linked to.
      * @param borderColor the color that the border of the comment should be
-     * @param zoom  initial zoom
+     * @param zoom        initial zoom
      */
-    public Comment(Workspace workspace, String initText, CommentSource source, Color borderColor, double zoom) {
+    public Comment(Workspace workspace, String initText, CommentSource source, Color borderColor, double zoom, RenderableBlock rb) {
         this.workspace = workspace;
         //set up important fields
+        this.parent = rb;
         this.zoom = zoom;
         this.setLayout(null);
         this.setOpaque(false);
@@ -208,6 +206,7 @@ public class Comment extends JPanel {
 
     /**
      * returns the CommentSource for this comment
+     *
      * @return
      */
     CommentSource getCommentSource() {
@@ -216,6 +215,7 @@ public class Comment extends JPanel {
 
     /**
      * returns the commentLabel for this comment
+     *
      * @return
      */
     CommentLabel getCommentLabel() {
@@ -224,6 +224,7 @@ public class Comment extends JPanel {
 
     /**
      * Returns the width of the comment label for this comment
+     *
      * @return
      */
     public int getCommentLabelWidth() {
@@ -234,7 +235,7 @@ public class Comment extends JPanel {
     }
 
     /**
-     * Updates the comment and commentLabel 
+     * Updates the comment and commentLabel
      */
     public void update() {
         if (commentLabel != null) {
@@ -248,6 +249,7 @@ public class Comment extends JPanel {
 
     /**
      * Sets the active state of the commentLabel and updates the comment and commentLabel
+     *
      * @param visibleState
      */
     public void update(boolean visibleState) {
@@ -259,6 +261,7 @@ public class Comment extends JPanel {
 
     /**
      * Set a new zoom level, changes font size, label size, location, shape of comment, and arrow for this comment
+     *
      * @param newZoom
      */
     public void setZoomLevel(double newZoom) {
@@ -274,7 +277,7 @@ public class Comment extends JPanel {
     }
 
     /**
-     * Recalculate the shape of this comment 
+     * Recalculate the shape of this comment
      */
     public void reformComment() {
         int w = textArea.isEditable() ? (int) (this.width * zoom) : (int) (Comment.MINIMUM_WIDTH * zoom);
@@ -311,6 +314,7 @@ public class Comment extends JPanel {
     /**
      * returns the descaled x based on the current zoom
      * that is given a scaled x it returns what that position would be when zoom == 1
+     *
      * @param x
      * @return
      */
@@ -320,53 +324,55 @@ public class Comment extends JPanel {
 
     /**
      * Returns the node for this comment.
+     *
      * @return
      */
     public Node getSaveNode(Document document) {
-    	Element commentElement = document.createElement("Comment");
-    	
-    	// Text
-    	Element textElement = document.createElement("Text");
-    	Text text = document.createTextNode(this.getText().replaceAll("`", "'"));
-    	textElement.appendChild(text);
-    	commentElement.appendChild(textElement);
-    	
-    	// Location
-    	Element locationElement = document.createElement("Location");
-    	Element xElement = document.createElement("X");
-    	xElement.appendChild(document.createTextNode(String.valueOf(descale(getLocation().getX()))));
-    	locationElement.appendChild(xElement);
-    	
-    	Element yElement = document.createElement("Y");
-    	yElement.appendChild(document.createTextNode(String.valueOf(descale(getLocation().getY()))));
-    	locationElement.appendChild(yElement);
-    	
-    	commentElement.appendChild(locationElement);
-    	
-    	// Box size
-    	Element boxSizeElement = document.createElement("BoxSize");
-    	Element widthElement = document.createElement("Width");
-    	widthElement.appendChild(document.createTextNode(String.valueOf(descale(getWidth()))));
-    	boxSizeElement.appendChild(widthElement);
-    	
-    	Element heightElement = document.createElement("Height");
-    	heightElement.appendChild(document.createTextNode(String.valueOf(descale(getHeight()))));
-    	boxSizeElement.appendChild(heightElement);
-    	
-    	commentElement.appendChild(boxSizeElement);
-    	
-    	// Collapse
-    	if (!commentLabel.isActive()) {
-    		Element collapsedElement = document.createElement("Collapsed");
-    		commentElement.appendChild(collapsedElement);
-    	}
-    	
-    	return commentElement;
+        Element commentElement = document.createElement("Comment");
+
+        // Text
+        Element textElement = document.createElement("Text");
+        Text text = document.createTextNode(this.getText().replaceAll("`", "'"));
+        textElement.appendChild(text);
+        commentElement.appendChild(textElement);
+
+        // Location
+        Element locationElement = document.createElement("Location");
+        Element xElement = document.createElement("X");
+        xElement.appendChild(document.createTextNode(String.valueOf(descale(getLocation().getX()))));
+        locationElement.appendChild(xElement);
+
+        Element yElement = document.createElement("Y");
+        yElement.appendChild(document.createTextNode(String.valueOf(descale(getLocation().getY()))));
+        locationElement.appendChild(yElement);
+
+        commentElement.appendChild(locationElement);
+
+        // Box size
+        Element boxSizeElement = document.createElement("BoxSize");
+        Element widthElement = document.createElement("Width");
+        widthElement.appendChild(document.createTextNode(String.valueOf(descale(getWidth()))));
+        boxSizeElement.appendChild(widthElement);
+
+        Element heightElement = document.createElement("Height");
+        heightElement.appendChild(document.createTextNode(String.valueOf(descale(getHeight()))));
+        boxSizeElement.appendChild(heightElement);
+
+        commentElement.appendChild(boxSizeElement);
+
+        // Collapse
+        if (!commentLabel.isActive()) {
+            Element collapsedElement = document.createElement("Collapsed");
+            commentElement.appendChild(collapsedElement);
+        }
+
+        return commentElement;
     }
 
     /**
      * Loads the comment from a NodeList of comment parts
-     * @param workspace The workspace in use
+     *
+     * @param workspace       The workspace in use
      * @param commentChildren
      * @param rb
      * @return
@@ -396,7 +402,7 @@ public class Comment extends JPanel {
         }
 
         if (text != null) {
-            comment = new Comment(workspace, text, rb, rb.getBlock().getColor(), rb.getZoom());
+            comment = new Comment(workspace, text, rb, rb.getBlock().getColor(), rb.getZoom(), null);
             comment.setLocation(commentLoc.x, commentLoc.y);
             comment.update(!commentCollapsed);
             comment.setMyWidth((int) boxSize.getWidth());
@@ -450,24 +456,25 @@ public class Comment extends JPanel {
     }
 
     /**
+     * @param text
      * @modifies editingPane, labelPane
      * @effects modify eiditngPane such that the next call to
-     * 			editingPane.getText().trim() equals text.trim() &&
-     * 			modify labelPane such that the next call to
-     * 			labelPane.getText().trim() equals text.trim()
-     * @param text
+     * editingPane.getText().trim() equals text.trim() &&
+     * modify labelPane such that the next call to
+     * labelPane.getText().trim() equals text.trim()
      */
     public void setText(String text) {
         textArea.setText(text);
     }
 
     /**
-     *  moves this to a new position at (x,y) but not outside of its parent Container
+     * moves this to a new position at (x,y) but not outside of its parent Container
+     *
      * @modifies this.location
-     * @effects  Set this.location.x to x, if x is within bounds of this.parent.
-     * 			if not, then set this.location.x to closest boundary value.
-     *      	Set this.location.y to y, if y is within bounds of this.parent.
-     * 			if not, then set this.location.y to closest boundary value.
+     * @effects Set this.location.x to x, if x is within bounds of this.parent.
+     * if not, then set this.location.x to closest boundary value.
+     * Set this.location.y to y, if y is within bounds of this.parent.
+     * if not, then set this.location.y to closest boundary value.
      * Override javax.Swing.JComponent.setLocation()
      */
     public void setLocation(int x, int y) {
@@ -495,12 +502,13 @@ public class Comment extends JPanel {
 
     /**
      * moves this to a new position at (x,y) but not outside of its parent Container
-     * @modifies this.location
-     * @effects  Set this.location.x to x, if x is within bounds of this.parent.
-     * 			if not, then set this.location.x to closest boundary value.
-     *      	Set this.location.y to y, if y is within bounds of this.parent.
-     * 			if not, then set this.location.y to closest boundary value.
      *
+     * @modifies this.location
+     * @effects Set this.location.x to x, if x is within bounds of this.parent.
+     * if not, then set this.location.x to closest boundary value.
+     * Set this.location.y to y, if y is within bounds of this.parent.
+     * if not, then set this.location.y to closest boundary value.
+     * <p>
      * Override javax.Swing.JComponent.setLocation()
      */
     public void setLocation(Point p) {
@@ -508,11 +516,11 @@ public class Comment extends JPanel {
     }
 
     /**
-     * @modifies this
-     * @effects translate this.location
-     * 		by dx in the x-direction and dy in the y-direction
      * @param dx
      * @param dy
+     * @modifies this
+     * @effects translate this.location
+     * by dx in the x-direction and dy in the y-direction
      */
     public void translatePosition(int dx, int dy) {
         this.setLocation(this.getX() + dx, this.getY() + dy);
@@ -522,12 +530,13 @@ public class Comment extends JPanel {
      * Moves this comment from it's old parent Container to
      * a new Container.  Removal and addition applies only
      * if the Containers are non-null
+     *
+     * @param newparent
      * @modifies the current this.parent and newparent
      * @effects First, remove this from current this.parent ONLY if
-     * 		current this.parent is non-null.  Second, add this to
-     * 		newparent container ONLY if newparent is non-null.
-     * 		Third, repaint both modified parent containers.
-     * @param newparent
+     * current this.parent is non-null.  Second, add this to
+     * newparent container ONLY if newparent is non-null.
+     * Third, repaint both modified parent containers.
      */
     public void setParent(Container newparent) {
         this.setParent(newparent, 0);
@@ -546,13 +555,14 @@ public class Comment extends JPanel {
     /**
      * Moves this comment from it's old parent Container to
      * a new Container with given constrain.
-     * @modifies the current this.parent and newparent
-     * @effects First, remove this from current this.parent ONLY if
-     * 		current this.parent is non-null.  Second, add this to
-     * 		newparent container ONLY if newparent is non-null.
-     * 		Third, repaint both modified parent containers.
+     *
      * @param newparent
      * @param constraints
+     * @modifies the current this.parent and newparent
+     * @effects First, remove this from current this.parent ONLY if
+     * current this.parent is non-null.  Second, add this to
+     * newparent container ONLY if newparent is non-null.
+     * Third, repaint both modified parent containers.
      */
     public void setParent(Container newparent, Object constraints) {
         //though it's tempting to just write "this.setParent(newparent)"
@@ -605,19 +615,28 @@ public class Comment extends JPanel {
      */
     private class CommentEventListener implements FocusListener, MouseListener, MouseMotionListener {
 
-        /**When focus lost, force a repaint**/
+        /**
+         * When focus lost, force a repaint
+         **/
         public void focusGained(FocusEvent e) {
+            if (parent != null) {
+                parent.blockRenamed();
+            }
             active = true;
             repaint();
         }
 
-        /**When focuses gained, force a repaint**/
+        /**
+         * When focuses gained, force a repaint
+         **/
         public void focusLost(FocusEvent e) {
             active = false;
             repaint();
         }
 
-        /**when clicked upon, switch to editing mode*/
+        /**
+         * when clicked upon, switch to editing mode
+         */
         public void mouseClicked(MouseEvent e) {
             //prevent users from clicking multiple times and crashing the system
             if (e.getClickCount() > 1) {
@@ -625,13 +644,17 @@ public class Comment extends JPanel {
             }
         }
 
-        /**highlight this comment when a mouse begins to hover over this*/
+        /**
+         * highlight this comment when a mouse begins to hover over this
+         */
         public void mouseEntered(MouseEvent e) {
             showOnTop();
             jCompDH.mouseEntered(e);
         }
 
-        /**highlight this comment when a mouse hovers over this*/
+        /**
+         * highlight this comment when a mouse hovers over this
+         */
         public void mouseMoved(MouseEvent e) {
             if (textArea.isEditable()) {
                 if (e.getX() > (width - 2 * margin) && e.getY() > (height - 2 * margin)) {
@@ -644,12 +667,16 @@ public class Comment extends JPanel {
             }
         }
 
-        /**stop highlighting this comment when a mouse leaves this*/
+        /**
+         * stop highlighting this comment when a mouse leaves this
+         */
         public void mouseExited(MouseEvent e) {
             jCompDH.mouseExited(e);
         }
 
-        /**prepare for a drag when mouse is pressed down*/
+        /**
+         * prepare for a drag when mouse is pressed down
+         */
         public void mousePressed(MouseEvent e) {
             Comment.this.grabFocus();  //atimer.stop();
             showOnTop();
@@ -668,7 +695,9 @@ public class Comment extends JPanel {
             repaint();
         }
 
-        /**when mouse is released*/
+        /**
+         * when mouse is released
+         */
         public void mouseReleased(MouseEvent e) {
             jCompDH.mouseReleased(e);
             setResizing(false);
@@ -676,7 +705,9 @@ public class Comment extends JPanel {
             repaint();
         }
 
-        /**drag this when mouse is dragged*/
+        /**
+         * drag this when mouse is dragged
+         */
         public void mouseDragged(MouseEvent e) {
             if (isResizing()) {
                 double ww = e.getX() > MINIMUM_WIDTH * zoom ? e.getX() : MINIMUM_WIDTH * zoom;
@@ -695,6 +726,7 @@ public class Comment extends JPanel {
 
     /**
      * Returns the comment background color
+     *
      * @return
      */
     Color getBackgroundColor() {
@@ -703,6 +735,7 @@ public class Comment extends JPanel {
 
     /**
      * Returns the borderColor of this comment
+     *
      * @return
      */
     Color getBorderColor() {
@@ -711,6 +744,7 @@ public class Comment extends JPanel {
 
     /**
      * access to the comment arrow object
+     *
      * @return
      */
     public CommentArrow getArrow() {
@@ -789,6 +823,7 @@ public class Comment extends JPanel {
 
     /**
      * returns whether this comment should be constrained to its parent's bounds
+     *
      * @return the constrainComment
      */
     public boolean isConstrainComment() {
@@ -797,6 +832,7 @@ public class Comment extends JPanel {
 
     /**
      * sets whether this comment should be constrained to its parent's bounds
+     *
      * @param constrainComment the constrainComment to set
      */
     public void setConstrainComment(boolean constrainComment) {

@@ -59,6 +59,7 @@ public class BlocksKeeper {
             {
                 undoList.add(screen);
                 redoList.clear();
+                System.out.println("Act saved: " + undoList.size());
             }
         }
         else
@@ -80,7 +81,7 @@ public class BlocksKeeper {
                 for (Long id : idList) {
                     alreadyAdd.put(id, 1l);
                 }
-                screen.add(block.cloneThisNoParent(block));
+                screen.add(block.cloneThisForKeeper(block, null));
             }
         }
         return screen;

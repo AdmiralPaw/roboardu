@@ -1604,14 +1604,33 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * Container at a point (10,-20) away from upper-right hand corner. Modify
      * such that this.hasComment will now return true.
      */
-    public void addComment() {
+
+    public void newZoomReposition(double newZoom) {
+        if (zoom != newZoom) {
+            double coef = zoom / newZoom;
+            int cDX = getX();
+            int cDY = getY();
+            setLocation((int) ((double) getX() / coef), (int) ((double) getY() / coef));
+            if (hasComment()) {
+
+                cDX = (int) (getX() + getWidth() / coef + 40 / coef);
+                cDY = (int) (getY() - 40 / coef);
+                getComment().setLocation(cDX, cDY);
+
+                getComment().getArrow().updateArrow();
+            }
+            setZoomLevel(newZoom);
+        }
+    }
+
+    public void addCommentNoAct() {
         if (hasComment()) {
             // a renderable block may only have ONE comment
         } else {
-            int x = this.getX() + this.getWidth() + 30;
+            int x = this.getX() + this.getWidth() + 40;
             int y = this.getY() - 40;
             comment = new Comment(workspace, "", this, this.getBlock()
-                    .getColor(), zoom);
+                    .getColor(), zoom, this);
             if (this.getParentWidget() != null) {
                 comment.setParent(this.getParentWidget().getJComponent());
             } else {
@@ -1623,9 +1642,23 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
         revalidate();
         getHighlightHandler().revalidate();
-        //updateBuffImg();
+        updateBuffImg();
         comment.getArrow().updateArrow();
-        getParent().repaint();
+        if (getParent() != null) {
+            getParent().repaint();
+        }
+    }
+
+    public void addComment() {
+        if (hasComment()) {
+            // a renderable block may only have ONE comment
+        } else {
+            if (parent != null) {
+                parent.blockRenamed(this);
+            }
+            addCommentNoAct();
+        }
+
     }
 
     /**
@@ -1634,13 +1667,24 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      */
     public void removeComment() {
         if (hasComment()) {
+            if (parent!= null)
+            {
+                parent.blockRenamed(this);
+            }
+            removeCommentNoAct();
+        }
+    }
+
+    public void removeCommentNoAct()
+    {
+        if (hasComment()) {
             comment.delete();
             comment = null;
             commentLabelChanged = true;
             reformBlockShape();
             revalidate();
             getHighlightHandler().revalidate();
-            //updateBuffImg();
+            updateBuffImg();
             getParent().repaint();
         }
     }
@@ -1680,12 +1724,6 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 WorkspaceEvent.BLOCK_CLONED, true));
     }
 
-    public void cloneMeWithZeroOffset() {
-        RenderableBlock newBlock = cloneThis(this, 0);
-        workspace.notifyListeners(new WorkspaceEvent(workspace, this
-                .getParentWidget(), this.getBlockID(),
-                WorkspaceEvent.BLOCK_CLONED, true));
-    }
 
     public RenderableBlock cloneThis(RenderableBlock rb) {
         return cloneThis(rb, (int) (NEARBY_RADIUS));
@@ -1749,7 +1787,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         return newRb;
     }
 
-    public RenderableBlock cloneThisNoParent(RenderableBlock rb) {
+    public RenderableBlock cloneThisForKeeper(RenderableBlock rb, WorkspaceWidget parent) {
         Block oriBlock = rb.getBlock();
         oriBlock.getSockets();
         Point oriLocation = rb.getLocation();
@@ -1766,7 +1804,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             if (oriSocket.hasBlock()) {
                 oriSocket.getBlockID();
                 RenderableBlock subRb = workspace.getEnv().getRenderableBlock(oriSocket.getBlockID());
-                RenderableBlock newSubRb = cloneThisNoParent(subRb);
+                RenderableBlock newSubRb = cloneThisForKeeper(subRb, parent);
 
                 if (newSubRb.getBlock().isFunctionBlock()) {
                     newSubRb.getBlock().getPlug().setConnectorBlockID(newRb.getBlockID());
@@ -1790,7 +1828,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             if (oriAfterConnector != null) {
                 if (oriAfterConnector.hasBlock()) {
                     RenderableBlock oriAfterRb = workspace.getEnv().getRenderableBlock(oriAfterConnector.getBlockID());
-                    RenderableBlock newAfterRb = cloneThisNoParent(oriAfterRb);
+                    RenderableBlock newAfterRb = cloneThisForKeeper(oriAfterRb, parent);
 
                     newAfterRb.getBlock().getBeforeConnector().setConnectorBlockID(newRb.getBlockID());
                     newRb.getBlock().getAfterConnector().setConnectorBlockID(newAfterRb.getBlockID());
@@ -1798,8 +1836,24 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             }
         }
 
+
+        newRb.setParentWidget(parent);
+        newRb.setZoomLevel(rb.getZoom());
         newRb.setLocation(oriLocation.x, oriLocation.y);
         newRb.moveConnectedBlocks();
+
+        if (rb.hasComment()) {
+            newRb.addCommentNoAct();
+            newRb.getComment().getCommentLabel().setActive(rb.getComment().isVisible());
+            newRb.getComment().setVisible(rb.getComment().isVisible());
+            newRb.getComment().setText(rb.getComment().getText());
+        }
+
+
+        if (parent != null) {
+            parent.addBlock(newRb);
+        }
+
         newRb.linkedDefArgsBefore = true;
 
         return newRb;
@@ -1812,6 +1866,18 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
         if (!a.getGenus().equals(b.getGenus())) {
             return false;
+        }
+
+        if (a.hasComment() != b.hasComment()) {
+            return false;
+        } else if (a.hasComment()) {
+            if (!a.getComment().getText().equals(b.getComment().getText())) {
+                return false;
+            }
+            if (a.getComment().isVisible() != b.getComment().isVisible())
+            {
+                return false;
+            }
         }
 
 
@@ -1841,8 +1907,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 RenderableBlock newA = workspace.getEnv().getRenderableBlock(aSockets.get(i).getBlockID());
                 RenderableBlock newB = workspace.getEnv().getRenderableBlock(bSockets.get(i).getBlockID());
 
-                if ((aSockets.get(i).getBlockID() == -1 || bSockets.get(i).getBlockID() == -1) && aSockets.get(i).getBlockID() != bSockets.get(i).getBlockID())
-                {
+                if ((aSockets.get(i).getBlockID() == -1 || bSockets.get(i).getBlockID() == -1) && aSockets.get(i).getBlockID() != bSockets.get(i).getBlockID()) {
                     return false;
                 }
 
@@ -2569,6 +2634,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         if (this.hasComment()) {
             this.comment.setZoomLevel(newZoom);
         }
+
         //updateBuffImg();
     }
 

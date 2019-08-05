@@ -218,24 +218,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         am.put("undoAct", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Collection<RenderableBlock> screen = blocksKeeper.undoAct();
-                if (screen != null) {
-                    clearPage();
-
-                    for (RenderableBlock block : screen) {
-                        block.setParentWidget(currentPage);
-                        block.cloneMeWithZeroOffset();
-                    }
-
-                    for (RenderableBlock block : getBlocks()) {
-                        double coef = block.getZoom() / zoom;
-                        block.setLocation((int) ((double) block.getLocation().x / coef), (int) ((double) block.getLocation().y / coef));
-                        block.setZoomLevel(zoom);
-                    }
-                    System.out.println("Undo completed");
-
-                }
-
+                setScreen(blocksKeeper.undoAct());
             }
         });
 
@@ -244,29 +227,24 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         am.put("redoAct", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Collection<RenderableBlock> screen = blocksKeeper.redoAct();
-                if (screen != null) {
-                    clearPage();
-                    try {
-                        for (RenderableBlock block : screen) {
-                            block.setParentWidget(currentPage);
-                            block.cloneMeWithZeroOffset();
-
-                        }
-                        for (RenderableBlock block : getBlocks()) {
-                            double coef = block.getZoom() / zoom;
-                            block.setLocation((int) ((double) block.getLocation().x / coef), (int) ((double) block.getLocation().y / coef));
-                            block.setZoomLevel(zoom);
-                        }
-                        System.out.println("Redo completed");
-                    } catch (Exception r) {
-                        System.out.println("error");
-                    }
-                }
-
+                setScreen(blocksKeeper.redoAct());
             }
         });
 
+    }
+
+    public void setScreen(Collection<RenderableBlock> screen)
+    {
+        if (screen != null) {
+            clearPage();
+            for (RenderableBlock block : screen) {
+                block.cloneThisForKeeper(block, currentPage);
+            }
+
+            for (RenderableBlock block : getBlocks()) {
+                block.newZoomReposition(zoom);
+            }
+        }
     }
 
     public void newKeeper()
@@ -343,7 +321,12 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
      */
     public void clearPage() {
         for (RenderableBlock block : this.getBlocks()) {
+            if (block.hasComment())
+            {
+                block.removeCommentNoAct();
+            }
             this.pageJComponent.remove(block);
+            pageJComponent.repaint();
         }
     }
 
