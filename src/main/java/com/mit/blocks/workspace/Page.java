@@ -149,6 +149,8 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     private boolean hideMinimize = false;
     private Page currentPage;
 
+    public static Page currentpage;
+
     private BlocksKeeper blocksKeeper;
     //////////////////////////////
     //Constructor/ Destructor	//
@@ -209,6 +211,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
 
         currentPage = this;
+        currentpage = this;
 
         blocksKeeper = new BlocksKeeper(this);
 
@@ -1288,8 +1291,7 @@ class PageJComponent extends JLayeredPane implements RBParent {
         am.put("delete", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //System.out.println("delete");
-                //RenderableBlock.currentBlock.removeChildBlocks();
+                Page.currentpage.saveScreen();
                 removeChild(RenderableBlock.currentBlock);
 
             }

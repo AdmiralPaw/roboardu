@@ -62,6 +62,7 @@ public class OpenblocksFrame extends JFrame {
 
 
     public static void deleteAllBlocks(){
+        Page.currentpage.saveScreen();
         Page.blocksContainer.removeAll();
         Page.blocksContainer.revalidate();
         Page.blocksContainer.repaint();
