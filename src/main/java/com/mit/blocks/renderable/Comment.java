@@ -679,6 +679,7 @@ public class Comment extends JPanel {
          */
         public void mousePressed(MouseEvent e) {
             Comment.this.grabFocus();  //atimer.stop();
+            parent.blockRenamed();
             showOnTop();
             jCompDH.mousePressed(e);
             if (textArea.isEditable()) {

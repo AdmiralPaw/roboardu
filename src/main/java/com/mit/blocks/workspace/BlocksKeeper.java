@@ -59,7 +59,6 @@ public class BlocksKeeper {
             {
                 undoList.add(screen);
                 redoList.clear();
-                System.out.println("Act saved: " + undoList.size());
             }
         }
         else

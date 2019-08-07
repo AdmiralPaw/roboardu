@@ -1,53 +1,29 @@
     package com.mit.blocks.workspace;
 
-import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
-import com.ardublock.ui.OpenblocksFrame;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+    import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
+    import com.ardublock.ui.OpenblocksFrame;
+    import com.mit.blocks.codeblocks.Block;
+    import com.mit.blocks.codeblocks.ProcedureOutputManager;
+    import com.mit.blocks.codeblockutil.*;
+    import com.mit.blocks.renderable.BlockUtilities;
+    import com.mit.blocks.renderable.RenderableBlock;
+    import com.mit.blocks.workspace.typeblocking.FocusTraversalManager;
+    import com.mit.blocks.workspace.typeblocking.TypeBlockManager;
+    import org.w3c.dom.*;
 
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import javax.xml.xpath.XPathFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathConstants;
-
-import com.mit.blocks.codeblockutil.*;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import com.mit.blocks.workspace.ZoomSlider;
-import com.mit.blocks.codeblocks.Block;
-import com.mit.blocks.codeblocks.ProcedureOutputManager;
-import com.mit.blocks.renderable.BlockUtilities;
-import com.mit.blocks.renderable.RenderableBlock;
-import com.mit.blocks.workspace.typeblocking.FocusTraversalManager;
-import com.mit.blocks.workspace.typeblocking.TypeBlockManager;
-import java.awt.BorderLayout;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.net.URL;
+    import javax.swing.*;
+    import javax.swing.event.ChangeEvent;
+    import javax.swing.event.ChangeListener;
+    import javax.xml.xpath.*;
+    import java.awt.*;
+    import java.awt.event.*;
+    import java.beans.PropertyChangeEvent;
+    import java.beans.PropertyChangeListener;
+    import java.net.URL;
+    import java.util.List;
+    import java.util.*;
+    import java.util.regex.Matcher;
+    import java.util.regex.Pattern;
 
 
 /**
@@ -834,9 +810,9 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         for (Page p : getBlockCanvas().getPages()) {
             for (RenderableBlock block : p.getTopLevelBlocks()) {
 
-                // checks if the x and y position has not been set yet, this happens when
-                // a previously saved project is just opened and the blocks have not been
-                // moved yet. otherwise, the unzoomed X and Y are calculated in RenderableBlock
+//                 checks if the x and y position has not been set yet, this happens when
+//                 a previously saved project is just opened and the blocks have not been
+//                 moved yet. otherwise, the unzoomed X and Y are calculated in RenderableBlock
                 if (block.getUnzoomedX() == 0.0 && block.getUnzoomedY() == 0.0) {
                     if (newZoom == 1.0) {
                         block.setUnzoomedX(block.getX());
@@ -848,19 +824,15 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 } else {
                 }
 
-                if (block.hasComment()) {
-                    //determine the new relative position of the comment based on the current relative position
-                    cDX = (int) ((block.getComment().getX() - block.getX()) / oldZoom * newZoom);
-                    cDY = (int) ((block.getComment().getY() - block.getY()) / oldZoom * newZoom);
-                }
                 // calculates the new position based on the initial position when zoom is at 1.0
-                block.setLocation((int) (block.getUnzoomedX() * this.zoom), (int) (block.getUnzoomedY() * this.zoom));
-                if (block.hasComment()) {
-                    //Set the comment location to the new relative position
-                    block.getComment().setLocation(block.getX() + cDX, block.getY() + cDY);
-                }
+                double coef = oldZoom / newZoom;
+                block.setLocation((int) ((double) block.getX() / coef), (int) ((double) block.getY() / coef));
+//
+
                 block.redrawFromTop();
                 block.repaint();
+
+
             }
         }
         Page.setZoomLevel(newZoom);

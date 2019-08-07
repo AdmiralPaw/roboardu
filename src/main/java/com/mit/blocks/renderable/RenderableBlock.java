@@ -1210,7 +1210,9 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * loading of blocks to update the socket dimensions of this and set the
      * isLoading flag to false
      */
+
     public void redrawFromTop() {
+
         if (GraphicsEnvironment.isHeadless()) {
             return;
         }
@@ -1349,7 +1351,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         Graphics2D g2 = (Graphics2D) g;
         if (!isLoading) {
             // if buffImg is null, redraw block shape
-            reformBlockShape();
+//            reformBlockShape();
             if (buffImg == null) {
                 updateBuffImg();// this method also moves connected blocks
             }
@@ -1371,7 +1373,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * update the shape and socket positions while avoiding a full
      * updateBuffImg.
      */
-    private void reformBlockShape() {
+    public void reformBlockShape() {
         if (getBlock() != null) {
             abstractBlockArea = blockShape.reformArea();
             // TODO for zooming, create an AffineTransform to scale the block shape
@@ -1454,9 +1456,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 .getSize());
 
         // get size of block to determine size needed for bevel image
-        Image bevelImage = BlockShapeUtil.getBevelImage(
-                updatedDimensionRect.width, updatedDimensionRect.height,
-                blockArea);
+
 
         // need antialiasing to remove color fill artifacts outside the bevel
         buffImgG2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -1470,6 +1470,9 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
         // draw the bevel on the shape -- comment this line to not apply
         // beveling
+        Image bevelImage = BlockShapeUtil.getBevelImage(
+                updatedDimensionRect.width, updatedDimensionRect.height,
+                blockArea);
         buffImgG2.drawImage(bevelImage, 0, 0, null);
 
         // DRAW BLOCK IMAGES
@@ -1605,23 +1608,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * such that this.hasComment will now return true.
      */
 
-    public void newZoomReposition(double newZoom) {
-        if (zoom != newZoom) {
-            double coef = zoom / newZoom;
-            int cDX = getX();
-            int cDY = getY();
-            setLocation((int) ((double) getX() / coef), (int) ((double) getY() / coef));
-            if (hasComment()) {
 
-                cDX = (int) (getX() + getWidth() / coef + 40 / coef);
-                cDY = (int) (getY() - 40 / coef);
-                getComment().setLocation(cDX, cDY);
-
-                getComment().getArrow().updateArrow();
-            }
-            setZoomLevel(newZoom);
-        }
-    }
 
     public void addCommentNoAct() {
         if (hasComment()) {
@@ -1667,16 +1654,14 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      */
     public void removeComment() {
         if (hasComment()) {
-            if (parent!= null)
-            {
+            if (parent != null) {
                 parent.blockRenamed(this);
             }
             removeCommentNoAct();
         }
     }
 
-    public void removeCommentNoAct()
-    {
+    public void removeCommentNoAct() {
         if (hasComment()) {
             comment.delete();
             comment = null;
@@ -1847,12 +1832,17 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             newRb.getComment().getCommentLabel().setActive(rb.getComment().isVisible());
             newRb.getComment().setVisible(rb.getComment().isVisible());
             newRb.getComment().setText(rb.getComment().getText());
+            newRb.getComment().setLocation(rb.getComment().getLocation());
+            newRb.getComment().setMyHeight(rb.getComment().getMyHeight());
+            newRb.getComment().setMyWidth(rb.getComment().getMyWidth());
         }
+
 
 
         if (parent != null) {
             parent.addBlock(newRb);
         }
+
 
         newRb.linkedDefArgsBefore = true;
 
@@ -1871,10 +1861,27 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         if (a.hasComment() != b.hasComment()) {
             return false;
         } else if (a.hasComment()) {
-            if (!a.getComment().getText().equals(b.getComment().getText())) {
+            Comment ac = a.getComment();
+            Comment bc = b.getComment();
+            if (!ac.getText().equals(bc.getText())) {
                 return false;
             }
-            if (a.getComment().isVisible() != b.getComment().isVisible())
+            if (ac.isVisible() != bc.isVisible()) {
+                return false;
+            }
+            if (ac.getLocation().x != bc.getLocation().x)
+            {
+                return false;
+            }
+            if (ac.getLocation().y != bc.getLocation().y)
+            {
+                return false;
+            }
+            if (ac.getMyHeight() != bc.getMyHeight())
+            {
+                return false;
+            }
+            if (ac.getMyWidth() != bc.getMyHeight())
             {
                 return false;
             }
@@ -2613,6 +2620,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
     public void setZoomLevel(double newZoom) {
         // create zoom transformers
+        double oldZoom = this.zoom;
         this.zoom = newZoom;
 
         // rescale internal components
@@ -2632,7 +2640,11 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             tag.setZoomLevel(newZoom);
         }
         if (this.hasComment()) {
+            double coef = oldZoom / newZoom;
+            int dx = (int)((double)(comment.getLocation().x - getX()) / coef);
+            int dy = (int)((double)(comment.getLocation().y - getY()) / coef);
             this.comment.setZoomLevel(newZoom);
+            this.comment.setLocation(getX() + dx, getY()+dy);
         }
 
         //updateBuffImg();

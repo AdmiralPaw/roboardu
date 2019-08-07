@@ -203,8 +203,10 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
             @Override
             public void mousePressed(MouseEvent e) {
                 workspace.deactiveCPopupMenu();
+                pageJComponent.grabFocus();
             }
         });
+
 
         currentPage = this;
 
@@ -233,22 +235,31 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
     }
 
-    public void setScreen(Collection<RenderableBlock> screen)
-    {
+    public void setScreen(Collection<RenderableBlock> screen) {
         if (screen != null) {
             clearPage();
+            double oldZoom = zoom;
+            double newZoom = zoom;
             for (RenderableBlock block : screen) {
                 block.cloneThisForKeeper(block, currentPage);
+                oldZoom = block.getZoom();
             }
 
             for (RenderableBlock block : getBlocks()) {
-                block.newZoomReposition(zoom);
+                block.setZoomLevel(zoom);
             }
+            for (RenderableBlock block : getTopLevelBlocks()) {
+                double coef = oldZoom / newZoom;
+                block.setLocation((int) ((double) block.getX() / coef), (int) ((double) block.getY() / coef));
+                block.redrawFromTop();
+                block.repaint();
+            }
+
+            pageJComponent.repaint();
         }
     }
 
-    public void newKeeper()
-    {
+    public void newKeeper() {
         blocksKeeper = new BlocksKeeper(this);
     }
 
@@ -321,8 +332,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
      */
     public void clearPage() {
         for (RenderableBlock block : this.getBlocks()) {
-            if (block.hasComment())
-            {
+            if (block.hasComment()) {
                 block.removeCommentNoAct();
             }
             this.pageJComponent.remove(block);
@@ -1268,6 +1278,7 @@ class PageJComponent extends JLayeredPane implements RBParent {
 
 
     PageJComponent() {
+
 
         InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = getActionMap();
