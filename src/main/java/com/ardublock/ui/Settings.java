@@ -41,7 +41,6 @@ public class Settings extends JFrame {
         this.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                System.out.println(123);
                 if (e.getKeyCode() != KeyEvent.VK_ENTER) {
                     keyBuf.add(e.getKeyCode());
                     if (keyBuf.size() == 11) {
@@ -71,7 +70,6 @@ public class Settings extends JFrame {
                         }
                     }
                 }
-                System.out.println(keyBuf.size());
             }
         });
 
