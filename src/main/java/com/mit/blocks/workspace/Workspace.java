@@ -444,6 +444,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
             int b = rnd.nextInt(255);
             bl.randomColor = new Color(r,g,b);
             bl.updateBuffImg();
+            bl.repaint();
         }
         for (RenderableBlock bl : getPageNamed("Main").getBlocks()) {
             int r = rnd.nextInt(255);
@@ -451,6 +452,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
             int b = rnd.nextInt(255);
             bl.randomColor = new Color(r,g,b);
             bl.updateBuffImg();
+            bl.repaint();
         }
     }
 
