@@ -12322,7 +12322,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <BlockGenusMember>little_bits_lightsensor</BlockGenusMember>
                 <!--<BlockGenusMember>little_bits_microphone</BlockGenusMember>-->
                 <!--<BlockGenusMember>little_bits_pulse</BlockGenusMember>-->
-                <BlockGenusMember>df_digital_viberation_sensor</BlockGenusMember>
+                <!--<BlockGenusMember>df_digital_viberation_sensor</BlockGenusMember>-->
                 <!--<BlockGenusMember>df_joystick_module_button</BlockGenusMember>-->
                 <!--<BlockGenusMember>df_joystick_module_x</BlockGenusMember>-->
                 <!--<BlockGenusMember>df_joystick_module_y</BlockGenusMember>-->
@@ -12333,7 +12333,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <BlockGenusMember>seeed_touch_sensor</BlockGenusMember>
                 <!--<BlockGenusMember>obstacle_sensor</BlockGenusMember>-->
                 <BlockGenusMember>magnetic_sensor</BlockGenusMember>
-                <!--<BlockGenusMember>rangefinderCombined</BlockGenusMember>-->
+                <BlockGenusMember>rangefinderCombined</BlockGenusMember>
                 <!--<BlockGenusMember>lightCombined</BlockGenusMember>-->
                 <BlockGenusMember>LineFinder</BlockGenusMember>
                 <BlockGenusMember>Potentiometer</BlockGenusMember>
