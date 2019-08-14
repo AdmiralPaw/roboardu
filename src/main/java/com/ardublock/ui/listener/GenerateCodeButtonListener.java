@@ -1,14 +1,5 @@
 package com.ardublock.ui.listener;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.HashSet;
-import java.util.ResourceBundle;
-import java.util.Set;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import com.ardublock.core.Context;
 import com.ardublock.translator.AutoFormat;
 import com.ardublock.translator.Translator;
@@ -16,10 +7,16 @@ import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNameDuplicatedException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
-
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.Workspace;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashSet;
+import java.util.ResourceBundle;
+import java.util.Set;
 
 public class GenerateCodeButtonListener implements ActionListener {
 

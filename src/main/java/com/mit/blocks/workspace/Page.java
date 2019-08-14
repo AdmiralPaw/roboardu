@@ -1,38 +1,22 @@
 package com.mit.blocks.workspace;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
-
-import javax.swing.*;
-
+import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.codeblocks.BlockConnector;
 import com.mit.blocks.codeblocks.BlockLink;
 import com.mit.blocks.codeblocks.BlockLinkChecker;
+import com.mit.blocks.codeblockutil.CToolTip;
 import com.mit.blocks.renderable.ConnectorTag;
+import com.mit.blocks.renderable.RenderableBlock;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.mit.blocks.codeblocks.Block;
-import com.mit.blocks.codeblockutil.CToolTip;
-import com.mit.blocks.renderable.RenderableBlock;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.List;
+import java.util.*;
 
 /**
  * A Page serves as both an abstract container of blocks
@@ -127,6 +111,8 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     private String pageId = null;
     /** Toggles to show/hide minimize page button. */
     private boolean hideMinimize = false;
+
+    public static Page thisPage;
     //////////////////////////////
     //Constructor/ Destructor	//
     //////////////////////////////
@@ -157,6 +143,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
     public Page(Workspace workspace, String name, int pageWidth, int pageHeight, String pageDrawer, boolean inFullview, Color defaultColor, boolean isCollapsible) {
         super();
+        thisPage = this;
         blocksContainer = pageJComponent;
         this.workspace = workspace;
         this.defaultColor = defaultColor;
@@ -1156,7 +1143,6 @@ class PageJComponent extends JLayeredPane implements RBParent {
 
 
     PageJComponent(){
-
         InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = getActionMap();
 
@@ -1171,6 +1157,9 @@ class PageJComponent extends JLayeredPane implements RBParent {
 
             }
         });
+
+
+
     }
 
 

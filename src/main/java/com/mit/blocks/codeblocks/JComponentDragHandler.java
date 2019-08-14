@@ -1,23 +1,14 @@
 package com.mit.blocks.codeblocks;
 
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.Transparency;
+import com.mit.blocks.codeblockutil.GraphicsManager;
+import com.mit.blocks.workspace.Workspace;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.SwingUtilities;
-
-import com.mit.blocks.workspace.Workspace;
-import com.mit.blocks.codeblockutil.GraphicsManager;
 
 /**
  * This class can be used to add dragging capability to any JComponents.
@@ -83,7 +74,7 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
         closedHandCursor = createHandCursor("/com/ardublock/closed_hand.png", "closedHandCursor");
     }
 
-    private static Cursor createHandCursor(String location, String cursorName) {
+    public static Cursor createHandCursor(String location, String cursorName) {
         if (GraphicsEnvironment.isHeadless()) {
             // return default hand cursor if headless
             return Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);

@@ -1,32 +1,22 @@
 package com.mit.blocks.workspace;
 
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import javax.swing.*;
-
+import com.mit.blocks.codeblocks.JComponentDragHandler;
+import com.mit.blocks.codeblockutil.CScrollPane;
+import com.mit.blocks.codeblockutil.CScrollPane.ScrollPolicy;
 import com.mit.blocks.codeblockutil.RHoverScrollPane;
+import com.mit.blocks.renderable.RenderableBlock;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.mit.blocks.codeblockutil.CGraphite;
-import com.mit.blocks.codeblockutil.CHoverScrollPane;
-import com.mit.blocks.codeblockutil.CScrollPane;
-import com.mit.blocks.codeblockutil.CScrollPane.ScrollPolicy;
-import com.mit.blocks.renderable.RenderableBlock;
-import org.w3c.dom.NodeList;
-
-import com.mit.blocks.codeblocks.ProcedureOutputManager;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.List;
+import java.util.*;
 
 /**
  * A BlockCanvas is a container of Pages and is a scrollable
@@ -562,16 +552,34 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
 
         private static final long serialVersionUID = 438974092314L;
         private Point p;
+        private Cursor defaultCursor = null;
+        private Cursor closedHandCursor = null;
 
         public Canvas() {
             super();
             this.p = null;
             this.addMouseListener(this);
             this.addMouseMotionListener(this);
+            initHandCursors();
+        }
 
+        private void initHandCursors() {
+            closedHandCursor = JComponentDragHandler.createHandCursor("/com/ardublock/closed_hand.png", "closedHandCursor");
+        }
+
+        public Component add(Component c, int index)
+        {
+            if (c instanceof JComponent)
+            {
+                c.addMouseListener(this);
+                c.addMouseMotionListener(this);
+            }
+            return super.add(c, index);
         }
 
         public void mousePressed(MouseEvent e) {
+            defaultCursor = this.getCursor();
+            this.setCursor(closedHandCursor);
             p = e.getPoint();
         }
 
@@ -593,10 +601,12 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
                 hModel.setValue(hModel.getValue() + (p.x - e.getX()));
                 vModel.setValue(vModel.getValue() + (p.y - e.getY()));
             }
+            System.out.println(111);
         }
 
         public void mouseReleased(MouseEvent e) {
             this.p = null;
+            this.setCursor(defaultCursor);
         }
 
         public void mouseMoved(MouseEvent e) {
@@ -606,6 +616,8 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
         }
 
         public void mouseExited(MouseEvent e) {
+            this.p = null;
+            this.setCursor(defaultCursor);
         }
 
     }

@@ -17,10 +17,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
+import java.util.*;
 
 /**
  * RenderableBlock is responsible for all graphical rendering of a code Block.
@@ -118,6 +116,9 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * relocating the block.
      */
     private JComponentDragHandler dragHandler;
+
+    public Color randomColor;
+    public static boolean useRandomColor = false;
     // //////////////////////
     // ATTRIBUTE FIELDS
     /**
@@ -232,7 +233,11 @@ public class RenderableBlock extends JComponent implements SearchableElement,
 
         setFocusable(true);
         requestFocusInWindow();
-
+        Random rnd = new Random();
+        int r = rnd.nextInt(255);
+        int g = rnd.nextInt(255);
+        int b = rnd.nextInt(255);
+        randomColor = new Color(r,g,b);
         this.setFocusTraversalKeysEnabled(false);
 
         this.parent = parent;
@@ -1421,7 +1426,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * Redraws the entire buffer on a Graphics2D, called by paintCompnent() only
      * if the buffer has been cleared.
      */
-    private void updateBuffImg() {
+    public void updateBuffImg() {
         if (GraphicsEnvironment.isHeadless()) {
             return;
         }
@@ -1455,8 +1460,33 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
         // ADD BLOCK COLOR
-        Color blockColor = this.getBLockColor();
+        //Color blockColor = this.getBLockColor();
         //Color new_block_color = new Color(blockColor.getRed(), blockColor.getGreen(), blockColor.getBlue(), 255);
+
+//        if (parent instanceof Page)
+//        {
+//            Page page  = (Page)parent;
+//            for (RenderableBlock block:page.getBlocks())
+//            {
+//                if (block.blockColor.getRed() == blockColor.getRed() && block.blockColor.getGreen() == blockColor.getGreen() &&block.blockColor.getBlue() == blockColor.getBlue())
+//                {
+//                    if (block.getBlockID() != getBlockID())
+//                    {
+//                        buffImgG2.setColor(blockColor);
+//                    }
+//                }
+//            }
+//        }
+        //buffImgG2.setColor(new Color(blockColor.getRed(), blockColor.getGreen(), blockColor.getBlue(), 50));
+        Color blockColor;
+        if (useRandomColor)
+        {
+            blockColor = randomColor;
+        }
+        else
+        {
+            blockColor = getBlock().getColor();
+        }
         buffImgG2.setColor(blockColor);
         buffImgG2.fill(blockArea);
 

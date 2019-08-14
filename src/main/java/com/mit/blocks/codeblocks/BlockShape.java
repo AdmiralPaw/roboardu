@@ -1,15 +1,13 @@
 package com.mit.blocks.codeblocks;
 
-import java.awt.Dimension;
-import java.awt.Rectangle;
+import com.mit.blocks.codeblocks.rendering.BlockShapeUtil;
+import com.mit.blocks.renderable.RenderableBlock;
+
+import java.awt.*;
 import java.awt.geom.Area;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-
-import com.mit.blocks.renderable.RenderableBlock;
-
-import com.mit.blocks.codeblocks.rendering.BlockShapeUtil;
 
 /**
  * This class separates block shape from the RenderableBlock class. BlockShape
