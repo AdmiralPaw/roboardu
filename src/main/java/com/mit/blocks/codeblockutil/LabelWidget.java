@@ -133,6 +133,7 @@ public abstract class LabelWidget extends JComponent {
      */
     public void setEditingState(boolean editing) {
         if (editing) {
+            workspace.setActiveWidget(this);
             editingText = true;
             textField.setText(textLabel.getText().trim());
             labelBeforeEdit = textLabel.getText();
@@ -317,6 +318,7 @@ public abstract class LabelWidget extends JComponent {
         textLabel.setSize(updatedDimension);
         this.setSize(updatedDimension);
         this.fireDimensionsChanged(this.getSize());
+
     }
 
     /**

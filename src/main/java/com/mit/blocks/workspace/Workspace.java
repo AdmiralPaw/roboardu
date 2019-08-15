@@ -40,6 +40,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
     // the environment wrapps all the components of a workspace (Blocks, RenderableBlocks, BlockStubs, BlockGenus)
     private final WorkspaceEnvironment env = new WorkspaceEnvironment();
     private CPopupMenu activeMenu = null;
+    private LabelWidget activeWidget = null;
 
     public WorkspaceEnvironment getEnv() {
         return this.env;
@@ -442,7 +443,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
             int r = rnd.nextInt(255);
             int g = rnd.nextInt(255);
             int b = rnd.nextInt(255);
-            bl.randomColor = new Color(r,g,b);
+            bl.randomColor = new Color(r, g, b);
             bl.updateBuffImg();
             bl.repaint();
         }
@@ -450,7 +451,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
             int r = rnd.nextInt(255);
             int g = rnd.nextInt(255);
             int b = rnd.nextInt(255);
-            bl.randomColor = new Color(r,g,b);
+            bl.randomColor = new Color(r, g, b);
             bl.updateBuffImg();
             bl.repaint();
         }
@@ -1278,6 +1279,16 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         if (activeMenu != null) {
             activeMenu.superSetVisible(false);
             activeMenu = null;
+        }
+    }
+
+    public void setActiveWidget(LabelWidget wid) {
+        activeWidget = wid;
+    }
+
+    public void deactiveLabelWidget() {
+        if (activeWidget != null) {
+            activeWidget.setEditingState(false);
         }
     }
 

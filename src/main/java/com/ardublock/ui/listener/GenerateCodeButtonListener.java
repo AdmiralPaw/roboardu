@@ -7,6 +7,7 @@ import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNameDuplicatedException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
+import com.ardublock.ui.OpenblocksFrame;
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.Workspace;
@@ -45,6 +46,10 @@ public class GenerateCodeButtonListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        if (parentFrame instanceof OpenblocksFrame)
+        {
+            ((OpenblocksFrame) parentFrame).getContext().getWorkspace().deactiveLabelWidget();  
+        }
         boolean success;
         success = true;
         Translator translator = new Translator(workspace);

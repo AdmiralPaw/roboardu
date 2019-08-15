@@ -1064,6 +1064,13 @@ public class OpenblocksFrame extends JFrame {
             setSize(image.getWidth(null) - 1, image.getHeight(null) - 1);
             MouseListener mouseListener = new CustomMouseListener();
             addMouseListener(mouseListener);
+            addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ImageButton.this.grabFocus();
+                }
+            });
+
         }
 
         public class CustomMouseListener implements MouseListener {
