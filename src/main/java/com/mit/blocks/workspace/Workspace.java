@@ -454,6 +454,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
             bl.updateBuffImg();
             bl.repaint();
         }
+
     }
 
     @Override

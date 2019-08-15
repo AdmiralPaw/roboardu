@@ -39,17 +39,18 @@ public class SearchBar {
 
         CHECK_ALL, REMOVE_FROM_FOUND, ADD_FROM_NOT_FOUND
     }
+
     private SearchRange searchRange;
 
     /**
      * Contructs a new search bar.
      *
-     * @param defaultText the text to show when the user is not using the search
-     * bar, such as "Search blocks"
-     * @param tooltip the text to show as a tooltip for the search bar when the
-     * user hovers the mouse over the search bar.
+     * @param defaultText      the text to show when the user is not using the search
+     *                         bar, such as "Search blocks"
+     * @param tooltip          the text to show as a tooltip for the search bar when the
+     *                         user hovers the mouse over the search bar.
      * @param defaultComponent the component for which focus should be requested
-     * if the user presses the Escape key while using the search bar.
+     *                         if the user presses the Escape key while using the search bar.
      */
     public SearchBar(String defaultText, String tooltip, final Workspace defaultComponent) {
         this.dict = Window2Explorer.dictionary;
@@ -244,7 +245,7 @@ public class SearchBar {
      * particular container.
      *
      * @param container the returned search elements will be from this search
-     * container
+     *                  container
      * @return search results for a particular container
      */
     public Iterable<SearchableElement> getSearchResults(SearchableContainer container) {
@@ -340,7 +341,7 @@ public class SearchBar {
      * search bar.
      *
      * @param range verifies the optimization for search depending on whether
-     * the search space has become bigger or smaller since the last search.
+     *              the search space has become bigger or smaller since the last search.
      */
     private void performSearch(final SearchRange range) {
         // If new requests to search come in during the delay, reset the timer and update the range.
@@ -421,21 +422,18 @@ public class SearchBar {
         }
     }
 
-    class ClickAction extends AbstractAction
-    {   private SearchBar textField;
-        public ClickAction(SearchBar textf)
-        {
+    class ClickAction extends AbstractAction {
+        private SearchBar textField;
+
+        public ClickAction(SearchBar textf) {
             textField = textf;
         }
 
-        public void actionPerformed(ActionEvent e)
-        {
+        public void actionPerformed(ActionEvent e) {
             textField.searchBar.requestFocus();
             textField.readySearchBar();
         }
     }
-
-
 
 
 }
