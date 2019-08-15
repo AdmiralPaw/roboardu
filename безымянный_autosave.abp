@@ -3,6 +3,45 @@
     <Pages collapsible-pages="yes" drawer-with-page="yes">
         <Page page-color="225 225 225" page-drawer="Main" page-infullview="yes" page-name="Main" page-width="1366">
             <PageBlocks>
+                <Block genus-name="or" id="349">
+                    <Location>
+                        <X>101</X>
+                        <Y>142</Y>
+                    </Location>
+                    <Plug>
+                        <BlockConnector connector-kind="plug" connector-type="boolean" init-type="boolean" label="" position-type="single"/>
+                    </Plug>
+                    <Sockets num-sockets="2">
+                        <BlockConnector con-block-id="351" connector-kind="socket" connector-type="boolean" init-type="boolean" label="" position-type="single"/>
+                        <BlockConnector connector-kind="socket" connector-type="boolean" init-type="boolean" label="" position-type="single"/>
+                    </Sockets>
+                </Block>
+                <Block genus-name="and" id="351">
+                    <Location>
+                        <X>157</X>
+                        <Y>142</Y>
+                    </Location>
+                    <Plug>
+                        <BlockConnector con-block-id="349" connector-kind="plug" connector-type="boolean" init-type="boolean" label="" position-type="single"/>
+                    </Plug>
+                    <Sockets num-sockets="2">
+                        <BlockConnector con-block-id="347" connector-kind="socket" connector-type="boolean" init-type="boolean" label="" position-type="single"/>
+                        <BlockConnector connector-kind="socket" connector-type="boolean" init-type="boolean" label="" position-type="single"/>
+                    </Sockets>
+                </Block>
+                <Block genus-name="and" id="347">
+                    <Location>
+                        <X>195</X>
+                        <Y>142</Y>
+                    </Location>
+                    <Plug>
+                        <BlockConnector con-block-id="351" connector-kind="plug" connector-type="boolean" init-type="boolean" label="" position-type="single"/>
+                    </Plug>
+                    <Sockets num-sockets="2">
+                        <BlockConnector connector-kind="socket" connector-type="boolean" init-type="boolean" label="" position-type="single"/>
+                        <BlockConnector connector-kind="socket" connector-type="boolean" init-type="boolean" label="" position-type="single"/>
+                    </Sockets>
+                </Block>
                 <Block genus-name="loop" id="346">
                     <Location>
                         <X>100</X>
