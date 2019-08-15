@@ -1,16 +1,12 @@
 package com.mit.blocks.codeblocks.rendering;
 
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.PathIterator;
-import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-
 import com.mit.blocks.codeblockutil.GraphicsManager;
 import com.mit.blocks.codeblockutil.LRUCache;
+
+import java.awt.*;
+import java.awt.geom.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class BlockShapeUtil {
 	

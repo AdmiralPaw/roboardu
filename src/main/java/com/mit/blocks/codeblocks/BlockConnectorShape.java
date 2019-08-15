@@ -1,18 +1,17 @@
 package com.mit.blocks.codeblocks;
 
-import java.awt.Dimension;
+import com.mit.blocks.codeblocks.rendering.BlockShapeUtil;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import com.mit.blocks.codeblocks.rendering.BlockShapeUtil;
 
 
 /**

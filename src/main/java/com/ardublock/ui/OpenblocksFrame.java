@@ -37,7 +37,7 @@ public class OpenblocksFrame extends JFrame {
     //время для функции вызова автосохранения
     public int timeDelay = 5;
     private File fileToSave;
-    
+
     private Context context;
     private JFileChooser fileChooser;
     private FileFilter ffilter;
@@ -52,16 +52,17 @@ public class OpenblocksFrame extends JFrame {
     //Just for Tutorial Pane (не бейте, не знал как по-другому)
     public ImageButton generateButton;
     public ImageButton verifyButton;
-    
-    private ResourceBundle uiMessageBundle;
 
+    private ResourceBundle uiMessageBundle;
+    private String autosavePath = "";
     private boolean controllerIsShown = true;
+
     public void addListener(OpenblocksFrameListener ofl) {
         context.registerOpenblocksFrameListener(ofl);
     }
 
 
-    public static void deleteAllBlocks(){
+    public static void deleteAllBlocks() {
         Page.blocksContainer.removeAll();
         Page.blocksContainer.revalidate();
         Page.blocksContainer.repaint();
@@ -84,11 +85,11 @@ public class OpenblocksFrame extends JFrame {
     }
 
 
-
     //TODO: доделать список последних файлов
     String user;
     public static String recentFile;
     List<String> recentFiles = new ArrayList<>();
+
     public OpenblocksFrame() {
         thisFrame = this;
         ClassLoader classLoader = getClass().getClassLoader();
@@ -99,7 +100,6 @@ public class OpenblocksFrame extends JFrame {
             if (scanner.hasNextLine()) {
                 String recentFileName = scanner.nextLine();
                 recentFiles.add(recentFileName);
-                System.out.println(recentFileName);
                 recentFile = recentFileName;
             }
             inputStream.close();
@@ -144,17 +144,23 @@ public class OpenblocksFrame extends JFrame {
         initOpenBlocks();
 
         user = System.getProperty("user.name");
+        autosavePath = "C:\\Users\\" + user + "\\Documents\\RoboScratch\\";
+
+        File directory = new File(autosavePath);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
         //System.out.println(user);
 
         try {
-            File file = new File("C:\\Users\\"+user+"\\Documents\\saver.abp");
+            File file = new File(autosavePath + "saver.abp");
 
-            if(file.exists()){
+            if (file.exists()) {
 
-            }else {
-                Formatter fileCreator = new Formatter("C:\\Users\\"+user+"\\Documents\\saver.abp");
+            } else {
+                Formatter fileCreator = new Formatter(autosavePath + "saver.abp");
                 fileCreator.close();
-                Formatter fileCreator2 = new Formatter("C:\\Users\\"+user+"\\Documents\\beforeDelete.abp");
+                Formatter fileCreator2 = new Formatter(autosavePath + "beforeDelete.abp");
                 fileCreator2.close();
             }
 
@@ -188,25 +194,24 @@ public class OpenblocksFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String text = getContext().getSaveFileName();
                 String newText = text.replace(".abp", "");
+                String oldPath = context.getSaveFilePath();
                 boolean isWorkspaceChanged = context.isWorkspaceChanged();
-                writeFileAndUpdateFrame(getArduBlockString(), new File(newText + "_autosave.abp"));
+                writeFileAndUpdateFrame(getArduBlockString(), new File(autosavePath + newText + "_autosave.abp"));
                 context.setSaveFileName(newText);
                 context.setWorkspaceChanged(isWorkspaceChanged);
+                context.setSaveFilePath(oldPath);
                 setTitle(makeFrameTitle());
                 Date dateNow = new Date();
-                SimpleDateFormat formatForDateNow = new SimpleDateFormat("hh:mm:ss");
-
-                System.out.println("Текущая дата " + formatForDateNow.format(dateNow));
+                SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss");
                 errWindow.setErrText("[" + formatForDateNow.format(dateNow) + "] " +
-                                    uiMessageBundle.getString("ardublock.ui.compledAutosave") + newText + "_autosave.abp");
+                        uiMessageBundle.getString("ardublock.ui.compledAutosave") + autosavePath + newText + "_autosave.abp");
             }
         });
         timer.start();
 
     }
 
-    public void setAutosaveInterval(int interval)
-    {
+    public void setAutosaveInterval(int interval) {
         timeDelay = interval;
         if (timer != null) {
             timer.setDelay(1000 * 60 * timeDelay);
@@ -240,26 +245,23 @@ public class OpenblocksFrame extends JFrame {
         JMenuItem tutorialItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.tutorial"));
 
 
-
         //JMenuItem recentFiles = new JMenuItem("open recent");
         JMenu recentItems = new JMenu("recent");
         this.recentMenu = recentItems;
 
-        try{
+        try {
             File recentFiles = new File("C:\\Users\\Public\\recentFiles.txt");
             List<String> files = new ArrayList<>();
             Scanner scanner = new Scanner(recentFiles);
-            while (scanner.hasNextLine()){
+            while (scanner.hasNextLine()) {
                 files.add(scanner.nextLine());
             }
 
             remakeRecentItems(files);
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
-
-
 
 
         newItem.addActionListener(new NewButtonListener(this));
@@ -288,7 +290,7 @@ public class OpenblocksFrame extends JFrame {
 
         exitItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+//                System.exit(0);
             }
         });
         KeyStroke exitStr = KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_DOWN_MASK);
@@ -441,7 +443,7 @@ public class OpenblocksFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
 //                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 try {
-                    context.loadArduBlockFile(new File("C:\\Users\\"+user+"\\Documents\\beforeDelete.abp"));
+                    context.loadArduBlockFile(new File("C:\\Users\\" + user + "\\Documents\\beforeDelete.abp"));
                     context.setWorkspaceChanged(false);
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -460,7 +462,7 @@ public class OpenblocksFrame extends JFrame {
         deleteAll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                writeFileAndUpdateFrame(getArduBlockString(), new File("C:\\Users\\"+user+"\\Documents\\beforeDelete.abp"));
+                writeFileAndUpdateFrame(getArduBlockString(), new File("C:\\Users\\" + user + "\\Documents\\beforeDelete.abp"));
                 deleteAllBlocks();
             }
         });
@@ -690,7 +692,6 @@ public class OpenblocksFrame extends JFrame {
     }
 
 
-
     // <editor-fold defaultstate="collapsed" desc="Buttons listners">
     public void doOpenArduBlockFile() {
         if (context.isWorkspaceChanged()) {
@@ -764,8 +765,7 @@ public class OpenblocksFrame extends JFrame {
 
     }
 
-    public ResourceBundle getResource()
-    {
+    public ResourceBundle getResource() {
         return uiMessageBundle;
     }
 
@@ -780,7 +780,7 @@ public class OpenblocksFrame extends JFrame {
             //System.out.println("eeerrrroooorrr");
             return;
         }
-        while (scanner.hasNextLine()){
+        while (scanner.hasNextLine()) {
             files.add(scanner.nextLine());
         }
 
@@ -801,7 +801,7 @@ public class OpenblocksFrame extends JFrame {
                 }
             });
 
-            String name = s.split("Documents")[1];
+            String name = s.substring(s.lastIndexOf("\\"), s.length() - 1);
             String name2 = "";
             char[] chars = name.toCharArray();
             for (int i = 1; i < name.length(); i++) {
@@ -816,19 +816,19 @@ public class OpenblocksFrame extends JFrame {
         recentMenu.repaint();
     }
 
-    private void remakeRecentFiles(String path){
+    private void remakeRecentFiles(String path) {
 
         //файл для хранения всех недавних файлов
         File recentFilesData = new File("C:\\Users\\Public\\recentFiles.txt");
-        if(recentFilesData.exists()){
+        if (recentFilesData.exists()) {
             try {
                 Scanner scanner = new Scanner(recentFilesData);
                 recentFiles = new ArrayList<>();
-                while (scanner.hasNextLine()){
+                while (scanner.hasNextLine()) {
                     recentFiles.add(scanner.nextLine());
                 }
 
-                if(!recentFiles.contains(path)) {
+                if (!recentFiles.contains(path)) {
 
                     if (recentFiles.size() >= 5) {
                         List<String> files = new ArrayList<>();
@@ -856,15 +856,15 @@ public class OpenblocksFrame extends JFrame {
 
                     recentMenu.removeAll();
                     remakeRecentItems(recentFiles);
-                }else {
-                        int index = recentFiles.indexOf(path);
-                        List<String> rlist = new ArrayList<>();
-                        rlist.add(path);
-                        for (int i = 0; i <recentFiles.size();i++){
-                            if(i!=index){
-                                rlist.add(recentFiles.get(i));
-                            }
+                } else {
+                    int index = recentFiles.indexOf(path);
+                    List<String> rlist = new ArrayList<>();
+                    rlist.add(path);
+                    for (int i = 0; i < recentFiles.size(); i++) {
+                        if (i != index) {
+                            rlist.add(recentFiles.get(i));
                         }
+                    }
 
                     Formatter writer = new Formatter("C:\\Users\\Public\\recentFiles.txt");
                     for (String s : rlist) {
@@ -881,10 +881,10 @@ public class OpenblocksFrame extends JFrame {
                 e.printStackTrace();
             }
 
-        }else {
+        } else {
             try {
                 Formatter writer = new Formatter("C:\\Users\\Public\\recentFiles.txt");
-                writer.format("%s",path+"\r\n");
+                writer.format("%s", path + "\r\n");
                 writer.close();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -896,10 +896,6 @@ public class OpenblocksFrame extends JFrame {
     private boolean chooseFileAndSave(String ardublockString) {
         File saveFile = letUserChooseSaveFile();
         fileToSave = saveFile;
-        //System.out.println(saveFile.getAbsolutePath());
-        //файл для хранения всех недавних файлов
-        saveFile = checkFileSuffix(saveFile);
-        remakeRecentFiles(saveFile.getAbsolutePath());
         if (saveFile == null) {
             return false;
         }
@@ -907,6 +903,11 @@ public class OpenblocksFrame extends JFrame {
         if (saveFile.exists() && !askUserOverwriteExistedFile()) {
             return false;
         }
+        //System.out.println(saveFile.getAbsolutePath());
+        //файл для хранения всех недавних файлов
+        saveFile = checkFileSuffix(saveFile);
+        remakeRecentFiles(saveFile.getAbsolutePath());
+
 
         //System.out.println(ardublockString+saveFile.getPath().toString());
 
@@ -957,7 +958,7 @@ public class OpenblocksFrame extends JFrame {
             switch (optionValue) {
                 case JOptionPane.YES_OPTION:
                     doSaveArduBlockFile();
-                //break;
+                    //break;
                 case JOptionPane.NO_OPTION:
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     //context.resetWorksapce();
@@ -994,22 +995,27 @@ public class OpenblocksFrame extends JFrame {
                 case JOptionPane.YES_OPTION:
                     if (doSaveArduBlockFile()) {
                         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//                        System.exit(0);
                     } else {
                         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                     }
                     break;
                 case JOptionPane.NO_OPTION:
                     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//                    System.exit(0);
                     break;
                 case JOptionPane.CANCEL_OPTION:
                     setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                     break;
             }
         } else {
+
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//            System.exit(0);
+
         }
         settings.dispose();
-        System.exit(0);
+
     }
 
     private File checkFileSuffix(File saveFile) {
@@ -1111,10 +1117,6 @@ public class OpenblocksFrame extends JFrame {
             chooseFileAndSave("backupSave.abp");
         }
     });
-
-
-
-
 
 
 }

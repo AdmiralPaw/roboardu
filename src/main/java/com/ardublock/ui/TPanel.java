@@ -3,9 +3,12 @@ package com.ardublock.ui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -20,7 +23,7 @@ public class TPanel extends JPanel {
     private JButton prevButton;
     private JButton nextButton;
     private int width = 300;
-    private int height = 500;
+    private int height = 300;
 
     public TPanel(TutorialPane tutorialPane) {
         this.setLayout(null);
@@ -28,7 +31,7 @@ public class TPanel extends JPanel {
         //-------------------------------------------
         tutorialText = new JTextArea();
         tutorialText.setOpaque(false);
-        tutorialText.setFont(new Font("Impact", Font.PLAIN, 18));
+        tutorialText.setFont(new Font("Impact", Font.PLAIN, 14));
         tutorialText.setForeground(Color.white);
         tutorialText.setWrapStyleWord(true);
         tutorialText.setLineWrap(true);
@@ -40,7 +43,11 @@ public class TPanel extends JPanel {
         this.add(tutorialText);
         tutorialText.setLocation(0, 0);
         //--------------------------------------------
-        prevButton = new JButton("НАЗАД");
+        URL iconURL = TutorialPane.class.getClassLoader().getResource("com/ardublock/Images/tutorPrev.png");
+        ImageIcon image = new ImageIcon(iconURL);
+        Image imageRaw = image.getImage().getScaledInstance(
+                width / 2 - 10, 30, java.awt.Image.SCALE_SMOOTH);
+        prevButton = new JButton(new ImageIcon(imageRaw)/*"< НАЗАД"*/);
         prevButton.setFont(new Font("Impact", Font.PLAIN, 14));
 //        prevButton.setMargin(new Insets(0, 0, 0, 0));
 //        prevButton.setIconTextGap(0);
@@ -51,10 +58,14 @@ public class TPanel extends JPanel {
         prevButton.setSize(new Dimension(width / 2 - 10, 30));
         prevButton.setPreferredSize(new Dimension(width / 2 - 10, 30));
         this.add(prevButton);
-        prevButton.setLocation(0, height - 40);
+        prevButton.setLocation(0, this.tutorialText.getHeight()/*height - 40*/);
         //---------------------------------------------
-        nextButton = new JButton("ПОНЯТНО");
-        nextButton.setFont(new Font("Impact", Font.PLAIN, 14));
+        iconURL = TutorialPane.class.getClassLoader().getResource("com/ardublock/Images/tutorNext.png");
+        image = new ImageIcon(iconURL);
+        imageRaw = image.getImage().getScaledInstance(
+                width / 2 - 10, 30, java.awt.Image.SCALE_SMOOTH);
+        nextButton = new JButton(new ImageIcon(imageRaw)/*"ДАЛЕЕ >"*/);
+//        nextButton.setFont(new Font("Impact", Font.PLAIN, 14));
         nextButton.setBorderPainted(false);
         nextButton.setBorder(null);
         nextButton.setFocusable(true);
@@ -62,7 +73,7 @@ public class TPanel extends JPanel {
         nextButton.setSize(new Dimension(width / 2 - 10, 30));
         nextButton.setPreferredSize(new Dimension(width / 2 - 10, 30));
         this.add(nextButton);
-        nextButton.setLocation(width / 2, height - 40);
+        nextButton.setLocation(width / 2, this.tutorialText.getHeight()/*height - 40*/);
         //---------------------------------------------
         this.setSize(new Dimension(width, height));
         this.setPreferredSize(new Dimension(300, 250));
