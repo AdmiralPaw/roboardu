@@ -7,10 +7,7 @@ import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNameDuplicatedException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
-//<<<<<<< HEAD
-//import com.ardublock.ui.OpenblocksFrame;
-//=======
-//>>>>>>> lerofaCtrlZ
+import com.ardublock.ui.OpenblocksFrame;
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.Workspace;
@@ -21,6 +18,11 @@ import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
+
+//<<<<<<< HEAD
+//import com.ardublock.ui.OpenblocksFrame;
+//=======
+//>>>>>>> lerofaCtrlZ
 
 public class GenerateCodeButtonListener implements ActionListener {
 
@@ -49,14 +51,10 @@ public class GenerateCodeButtonListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-//<<<<<<< HEAD
-//        if (parentFrame instanceof OpenblocksFrame)
-//        {
-//            ((OpenblocksFrame) parentFrame).getContext().getWorkspace().deactiveLabelWidget();  
-//        }
-//=======
-        workspace.grabFocus();
-//>>>>>>> lerofaCtrlZ
+        if (parentFrame instanceof OpenblocksFrame)
+        {
+            ((OpenblocksFrame) parentFrame).getContext().getWorkspace().deactiveLabelWidget();
+        }
         boolean success;
         success = true;
         Translator translator = new Translator(workspace);

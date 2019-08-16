@@ -137,11 +137,8 @@ public abstract class LabelWidget extends JComponent {
      */
     public void setEditingState(boolean editing) {
         if (editing) {
-//<<<<<<< HEAD
-//            workspace.setActiveWidget(this);
-//=======
+            workspace.setActiveWidget(this);
             workspace.getEnv().getRenderableBlock(blockID).blockRenamed();
-//>>>>>>> lerofaCtrlZ
             editingText = true;
             textField.setText(textLabel.getText().trim());
             labelBeforeEdit = textLabel.getText();
