@@ -118,11 +118,11 @@ public class Context {
 
         Workspace workspace = workspaceController.getWorkspace();
         Page page = workspace.getPageNamed("Main");
-//<<<<<<< HEAD
-//        workspace.setWorkspaceZoomToDefault();
-//=======
+
+        workspace.setWorkspaceZoomToDefault();
+
         page.newKeeper();
-//>>>>>>> lerofaCtrlZ
+
         FactoryManager manager = workspace.getFactoryManager();
         Block newBlock;
         newBlock = new Block(workspace, "loop", false);
