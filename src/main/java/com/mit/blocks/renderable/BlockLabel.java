@@ -1,25 +1,16 @@
 package com.mit.blocks.renderable;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Point;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.util.List;
-
-import javax.swing.JComponent;
-import javax.swing.SwingUtilities;
-
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.codeblocks.BlockConnector;
 import com.mit.blocks.codeblocks.BlockStub;
 import com.mit.blocks.codeblockutil.LabelWidget;
 import com.mit.blocks.workspace.Workspace;
 import com.mit.blocks.workspace.WorkspaceEvent;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.List;
 
 /**
  * BlockLabel is a region on a block in which text is displayed and possibly edited.  The
@@ -78,7 +69,7 @@ public class BlockLabel implements MouseListener, MouseMotionListener, KeyListen
         }
         this.blockID = blockID;
         this.labelType = labelType;
-        widget = new LabelWidget(initLabelText, workspace.getEnv().getBlock(blockID).getColor().darker(), tooltipBackground, workspace) {
+        widget = new LabelWidget(initLabelText, workspace.getEnv().getBlock(blockID).getColor().darker(), tooltipBackground, workspace, blockID) {
             private static final long serialVersionUID = 328149080424L;
             protected void fireTextChanged(String text) {
                 textChanged(text);

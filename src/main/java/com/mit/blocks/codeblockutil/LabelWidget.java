@@ -69,15 +69,19 @@ public abstract class LabelWidget extends JComponent {
     private double zoom = 1.5;
 
     protected Workspace workspace;
+
+    protected long blockID;
     /**
      * BlockLabel Constructor that takes in BlockID as well. Unfortunately
      * BlockID is needed, so the label can redirect mouse actions.
      *
      */
-    public LabelWidget(String initLabelText, Color fieldColor, Color tooltipBackground, Workspace work) {
+    public LabelWidget(String initLabelText, Color fieldColor, Color tooltipBackground, Workspace work, long id) {
         if (initLabelText == null) {
             initLabelText = "";
         }
+
+        blockID = id;
         this.setFocusTraversalKeysEnabled(false);//MOVE DEFAULT FOCUS TRAVERSAL KEYS SUCH AS TABS
         this.setLayout(new BorderLayout());
         this.tooltipBackground = tooltipBackground;
@@ -133,7 +137,11 @@ public abstract class LabelWidget extends JComponent {
      */
     public void setEditingState(boolean editing) {
         if (editing) {
-            workspace.setActiveWidget(this);
+//<<<<<<< HEAD
+//            workspace.setActiveWidget(this);
+//=======
+            workspace.getEnv().getRenderableBlock(blockID).blockRenamed();
+//>>>>>>> lerofaCtrlZ
             editingText = true;
             textField.setText(textLabel.getText().trim());
             labelBeforeEdit = textLabel.getText();
@@ -547,8 +555,10 @@ public abstract class LabelWidget extends JComponent {
                 selfItem.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e) {
+                        workspace.getEnv().getRenderableBlock(blockID).blockRenamed();
                         fireGenusChanged(selfGenus);
                         showMenuIcon(false);
+
                     }
                 });
                 popupmenu.add(selfItem);

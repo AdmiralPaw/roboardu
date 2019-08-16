@@ -1,6 +1,10 @@
 package com.ardublock.ui;
 
+//<<<<<<< HEAD
 import com.mit.blocks.renderable.RenderableBlock;
+//=======
+import com.mit.blocks.workspace.BlocksKeeper;
+//>>>>>>> lerofaCtrlZ
 import com.mit.blocks.workspace.Workspace;
 
 import javax.swing.*;
@@ -206,33 +210,38 @@ public class Settings extends JFrame {
 
         RSpinner queueSize = new RSpinner(new SpinnerNumberModel(userPrefs.getInt("ardublock.ui.ctrlzLength", 10), 5, 120, 5));
         windowBodyPanel.add(queueSize);
-        queueSize.setBounds(getWidth() - 80 - rigthOffset, position + offset / 2 - spinnerHeigth / 2, 80, spinnerHeigth);
-
-        position += offset;
-        eggText = new JLabel(uiMessageBundle.getString("ardublock.ui.randomColor"));
-        eggText.setVerticalAlignment(SwingConstants.CENTER);
-        windowBodyPanel.add(eggText);
-        eggText.setBounds(leftOffset, position, 300, 40);
-        eggText.setFont(new Font(mainFont, Font.PLAIN, 15));
-        eggText.setVisible(false);
-
-        egg = new RCheckBox();
-        egg.setSelected(false);
-        windowBodyPanel.add(egg);
-        egg.setBounds(windowWidth - 44 - rigthOffset, position, 44, 40);
-        egg.setVisible(false);
-        egg.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (!egg.isSelected()) {
-                    egg.setVisible(false);
-                    eggText.setVisible(false);
-                    RenderableBlock.useRandomColor = false;
-                    openblocksFrame.getContext().getWorkspace().fullRandomBlocksRepaint();
-                }
-
-            }
-        });
+//<<<<<<< HEAD
+//        queueSize.setBounds(getWidth() - 80 - rigthOffset, position + offset / 2 - spinnerHeigth / 2, 80, spinnerHeigth);
+//
+//        position += offset;
+//        eggText = new JLabel(uiMessageBundle.getString("ardublock.ui.randomColor"));
+//        eggText.setVerticalAlignment(SwingConstants.CENTER);
+//        windowBodyPanel.add(eggText);
+//        eggText.setBounds(leftOffset, position, 300, 40);
+//        eggText.setFont(new Font(mainFont, Font.PLAIN, 15));
+//        eggText.setVisible(false);
+//
+//        egg = new RCheckBox();
+//        egg.setSelected(false);
+//        windowBodyPanel.add(egg);
+//        egg.setBounds(windowWidth - 44 - rigthOffset, position, 44, 40);
+//        egg.setVisible(false);
+//        egg.addItemListener(new ItemListener() {
+//            @Override
+//            public void itemStateChanged(ItemEvent e) {
+//                if (!egg.isSelected()) {
+//                    egg.setVisible(false);
+//                    eggText.setVisible(false);
+//                    RenderableBlock.useRandomColor = false;
+//                    openblocksFrame.getContext().getWorkspace().fullRandomBlocksRepaint();
+//                }
+//
+//            }
+//        });
+//=======
+        queueSize.setBounds(getWidth()-80-rigthOffset, position + offset/2 - spinnerHeigth/2, 80,spinnerHeigth);
+        BlocksKeeper.setSize(queueSize.getIntValue());
+//>>>>>>> lerofaCtrlZ
 
         JButton saveBtn = new RButton(uiMessageBundle.getString("ardublock.ui.saveAndClose"));
         saveBtn.setFont(new Font(mainFont, Font.PLAIN, 15));
@@ -246,6 +255,7 @@ public class Settings extends JFrame {
                 userPrefs.putInt("ardublock.ui.autosaveInterval", autosaveInterval.getIntValue());
                 userPrefs.putInt("ardublock.ui.ctrlzLength", queueSize.getIntValue());
                 openblocksFrame.setAutosaveInterval(autosaveInterval.getIntValue());
+                BlocksKeeper.setSize(queueSize.getIntValue());
             }
         });
         this.requestFocus();

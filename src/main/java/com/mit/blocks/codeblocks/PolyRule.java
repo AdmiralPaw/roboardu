@@ -1,15 +1,10 @@
 package com.mit.blocks.codeblocks;
 
-import java.util.ArrayList;
-
-import com.mit.blocks.codeblocks.Block;
-import com.mit.blocks.codeblocks.BlockConnector;
-import com.mit.blocks.codeblocks.BlockLink;
-import com.mit.blocks.codeblocks.BlockStub;
-import com.mit.blocks.codeblocks.LinkRule;
 import com.mit.blocks.workspace.Workspace;
 import com.mit.blocks.workspace.WorkspaceEvent;
 import com.mit.blocks.workspace.WorkspaceListener;
+
+import java.util.ArrayList;
 
 /*** About poly rule *****************************************************************************************************
  * 
@@ -225,9 +220,7 @@ public class PolyRule implements LinkRule, WorkspaceListener {
 			revertPoly(workspace.getEnv().getBlock(link.getSocketBlockID()), link.getSocket());
 		}
 		// Calls POM to deal with changes in output block types.
-		if (link != null){
-		System.out.println(link.toString());
-		}
+
 		ProcedureOutputManager.procedureUpdateInfo(e);
 	}
 	

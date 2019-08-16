@@ -1,10 +1,9 @@
 package com.mit.blocks.workspace;
 
-import java.util.Collection;
-
-import javax.swing.JComponent;
-
 import com.mit.blocks.renderable.RenderableBlock;
+
+import javax.swing.*;
+import java.util.Collection;
 
 /** WorkspaceWidgets are components within the workspace other than blocks that
  * include bars, buttons, factory drawers, and single instance widgets such as
@@ -18,6 +17,11 @@ public interface WorkspaceWidget {
      */
     public void blockDropped(RenderableBlock block);
 
+    public void startDragged(RenderableBlock block);
+
+    public void stopDragged(RenderableBlock block);
+
+    public void blockRenamed(RenderableBlock block);
     /**
      * Called by RenderableBlocks as they are dragged over this Widget.
      * @param block the RenderableBlock being dragged

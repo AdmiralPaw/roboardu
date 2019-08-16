@@ -62,7 +62,12 @@ public class OpenblocksFrame extends JFrame {
     }
 
 
-    public static void deleteAllBlocks() {
+//<<<<<<< HEAD
+//    public static void deleteAllBlocks() {
+//=======
+    public static void deleteAllBlocks(){
+        Page.currentpage.saveScreen();
+//>>>>>>> lerofaCtrlZ
         Page.blocksContainer.removeAll();
         Page.blocksContainer.revalidate();
         Page.blocksContainer.repaint();
