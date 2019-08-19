@@ -118,7 +118,11 @@ public class Context {
 
         Workspace workspace = workspaceController.getWorkspace();
         Page page = workspace.getPageNamed("Main");
+
         workspace.setWorkspaceZoomToDefault();
+
+        page.newKeeper();
+
         FactoryManager manager = workspace.getFactoryManager();
         Block newBlock;
         newBlock = new Block(workspace, "loop", false);

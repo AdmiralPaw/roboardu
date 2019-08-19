@@ -1,6 +1,10 @@
 package com.ardublock.ui;
 
+//<<<<<<< HEAD
 import com.mit.blocks.renderable.RenderableBlock;
+//=======
+import com.mit.blocks.workspace.BlocksKeeper;
+//>>>>>>> lerofaCtrlZ
 import com.mit.blocks.workspace.Workspace;
 
 import javax.swing.*;
@@ -20,7 +24,8 @@ public class Settings extends JFrame {
     boolean beginDrag;
     int mousePressX;
     int mousePressY;
-
+    JLabel eggText;
+    RCheckBox egg;
     int windowWidth = 400;
     int windowHeight = 300;
     private ArrayList<Integer> keyBuf;
@@ -41,12 +46,12 @@ public class Settings extends JFrame {
         this.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() != KeyEvent.VK_ENTER) {
+                if (e.getKeyCode() != KeyEvent.VK_ENTER && e.getKeyCode() != KeyEvent.VK_ESCAPE) {
                     keyBuf.add(e.getKeyCode());
                     if (keyBuf.size() == 11) {
                         keyBuf.remove(0);
                     }
-                } else {
+                } else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     if (keyBuf.size() == 10) {
                         if (keyBuf.get(0) == KeyEvent.VK_UP &&
                                 keyBuf.get(1) == KeyEvent.VK_UP &&
@@ -59,16 +64,18 @@ public class Settings extends JFrame {
                                 keyBuf.get(8) == KeyEvent.VK_B &&
                                 keyBuf.get(9) == KeyEvent.VK_A) {
 
-                            if (RenderableBlock.useRandomColor) {
-                                RenderableBlock.useRandomColor = false;
-                            }
-                            else {
-                                RenderableBlock.useRandomColor = true;
-                            }
+
+                            RenderableBlock.useRandomColor = true;
+                            egg.setVisible(true);
+                            eggText.setVisible(true);
+                            egg.setSelected(true);
+
                             openblocksFrame.getContext().getWorkspace().fullRandomBlocksRepaint();
                             keyBuf.clear();
                         }
                     }
+                } else {
+                    setVisible(false);
                 }
             }
         });
@@ -204,6 +211,34 @@ public class Settings extends JFrame {
         RSpinner queueSize = new RSpinner(new SpinnerNumberModel(userPrefs.getInt("ardublock.ui.ctrlzLength", 10), 5, 120, 5));
         windowBodyPanel.add(queueSize);
         queueSize.setBounds(getWidth() - 80 - rigthOffset, position + offset / 2 - spinnerHeigth / 2, 80, spinnerHeigth);
+        queueSize.setBounds(getWidth()-80-rigthOffset, position + offset/2 - spinnerHeigth/2, 80,spinnerHeigth);
+        BlocksKeeper.setSize(queueSize.getIntValue());
+
+        position += offset;
+        eggText = new JLabel(uiMessageBundle.getString("ardublock.ui.randomColor"));
+        eggText.setVerticalAlignment(SwingConstants.CENTER);
+        windowBodyPanel.add(eggText);
+        eggText.setBounds(leftOffset, position, 300, 40);
+        eggText.setFont(new Font(mainFont, Font.PLAIN, 15));
+        eggText.setVisible(false);
+
+        egg = new RCheckBox();
+        egg.setSelected(false);
+        windowBodyPanel.add(egg);
+        egg.setBounds(windowWidth - 44 - rigthOffset, position, 44, 40);
+        egg.setVisible(false);
+        egg.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (!egg.isSelected()) {
+                    egg.setVisible(false);
+                    eggText.setVisible(false);
+                    RenderableBlock.useRandomColor = false;
+                    openblocksFrame.getContext().getWorkspace().fullRandomBlocksRepaint();
+                }
+
+            }
+        });
 
         JButton saveBtn = new RButton(uiMessageBundle.getString("ardublock.ui.saveAndClose"));
         saveBtn.setFont(new Font(mainFont, Font.PLAIN, 15));
@@ -217,6 +252,7 @@ public class Settings extends JFrame {
                 userPrefs.putInt("ardublock.ui.autosaveInterval", autosaveInterval.getIntValue());
                 userPrefs.putInt("ardublock.ui.ctrlzLength", queueSize.getIntValue());
                 openblocksFrame.setAutosaveInterval(autosaveInterval.getIntValue());
+                BlocksKeeper.setSize(queueSize.getIntValue());
             }
         });
         this.requestFocus();

@@ -1,21 +1,5 @@
 package com.mit.blocks.workspace;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.codeblocks.BlockStub;
 import com.mit.blocks.codeblockutil.CBorderlessButton;
@@ -24,6 +8,17 @@ import com.mit.blocks.codeblockutil.Canvas;
 import com.mit.blocks.codeblockutil.Navigator;
 import com.mit.blocks.renderable.FactoryRenderableBlock;
 import com.mit.blocks.renderable.RenderableBlock;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * ***********************OVERVIEW************************** The FactoryManager
@@ -798,6 +793,12 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
 
     public void blockDragged(RenderableBlock block) {
     }
+
+    public void startDragged(RenderableBlock b){}
+
+    public void stopDragged(RenderableBlock b){}
+
+    public void blockRenamed(RenderableBlock block){}
 
     public void removeBlock(RenderableBlock block) {
     }

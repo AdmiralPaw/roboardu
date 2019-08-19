@@ -13,8 +13,8 @@ public class rangefinderCombined extends TranslatorBlock {
         String sensor = "sensorCombined";
 
 
-        translator.addHeaderDefinition("Wire.h");
-        translator.addHeaderDefinition("SparkFun_VL6180X.h");
+        translator.addHeaderFile("Wire.h");
+        translator.addHeaderFile("SparkFun_VL6180X.h");
         translator.addDefinitionCommand("#define VL6180X_ADDRESS 0x29\n" +
                 "\n" +
                 "VL6180xIdentification identification;\n" +

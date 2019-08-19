@@ -1,22 +1,16 @@
 package com.mit.blocks.workspace;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
+import com.mit.blocks.renderable.BlockUtilities;
+import com.mit.blocks.renderable.RenderableBlock;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.swing.JComponent;
-
-import com.mit.blocks.renderable.BlockUtilities;
-import com.mit.blocks.renderable.RenderableBlock;
 
 public class TrashCan extends JComponent implements MouseListener, WorkspaceWidget, ComponentListener {
 
@@ -82,6 +76,12 @@ public class TrashCan extends JComponent implements MouseListener, WorkspaceWidg
         this.revalidate();
         this.repaint();
     }
+
+    public void startDragged(RenderableBlock b){}
+
+    public void stopDragged(RenderableBlock b){}
+
+    public void blockRenamed(RenderableBlock block){}
 
     public void addBlock(RenderableBlock block) {
     }

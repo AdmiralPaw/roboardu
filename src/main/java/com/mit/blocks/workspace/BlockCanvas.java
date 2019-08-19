@@ -601,7 +601,6 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
                 hModel.setValue(hModel.getValue() + (p.x - e.getX()));
                 vModel.setValue(vModel.getValue() + (p.y - e.getY()));
             }
-            System.out.println(111);
         }
 
         public void mouseReleased(MouseEvent e) {

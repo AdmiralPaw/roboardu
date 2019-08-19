@@ -1,28 +1,13 @@
 package com.mit.blocks.workspace;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import com.mit.blocks.codeblocks.BlockConnector;
+import com.mit.blocks.renderable.RenderableBlock;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.Timer;
-
-import com.mit.blocks.codeblocks.BlockConnector;
-import com.mit.blocks.renderable.Comment;
-import com.mit.blocks.renderable.RenderableBlock;
 
 /**
  * A MiniMap is a miniturized representation of the
@@ -49,7 +34,7 @@ import com.mit.blocks.renderable.RenderableBlock;
  * ratio : Double					//the aspect ratio that this should maintain
  * 									//		when rendering this.blocks and this.comments
  */
-public class MiniMap extends JPanel implements WorkspaceWidget, MouseListener, MouseMotionListener, SearchableContainer, PageChangeListener {
+public class MiniMap extends JPanel implements MouseListener, MouseMotionListener, SearchableContainer, PageChangeListener, WorkspaceWidget {
     /*
      * Implementation Notes:
      * -should be initialized BEFORE blockCanvas (that is, should initialize miniMap
@@ -385,6 +370,12 @@ public class MiniMap extends JPanel implements WorkspaceWidget, MouseListener, M
         block.moveConnectedBlocks();
         this.repaint();
     }
+
+    public void startDragged(RenderableBlock b){}
+
+    public void stopDragged(RenderableBlock b){}
+
+    public void blockRenamed(RenderableBlock block){}
 
     /**
      * @param block

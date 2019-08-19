@@ -62,7 +62,12 @@ public class OpenblocksFrame extends JFrame {
     }
 
 
-    public static void deleteAllBlocks() {
+//<<<<<<< HEAD
+//    public static void deleteAllBlocks() {
+//=======
+    public static void deleteAllBlocks(){
+        Page.currentpage.saveScreen();
+//>>>>>>> lerofaCtrlZ
         Page.blocksContainer.removeAll();
         Page.blocksContainer.revalidate();
         Page.blocksContainer.repaint();
@@ -1064,6 +1069,13 @@ public class OpenblocksFrame extends JFrame {
             setSize(image.getWidth(null) - 1, image.getHeight(null) - 1);
             MouseListener mouseListener = new CustomMouseListener();
             addMouseListener(mouseListener);
+            addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ImageButton.this.grabFocus();
+                }
+            });
+
         }
 
         public class CustomMouseListener implements MouseListener {
