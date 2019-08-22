@@ -248,10 +248,9 @@ public class OpenblocksFrame extends JFrame {
         JMenuItem serialMonitorItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.serialMonitor"));
         JMenuItem saveImageItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveImage"));
         JMenuItem tutorialItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.tutorial"));
-
+        JMenu recentItems = new JMenu(uiMessageBundle.getString("ardublock.ui.recent"));
 
         //JMenuItem recentFiles = new JMenuItem("open recent");
-        JMenu recentItems = new JMenu("recent");
         this.recentMenu = recentItems;
 
         try {
@@ -360,11 +359,11 @@ public class OpenblocksFrame extends JFrame {
         fileMenu.add(openItem);
         fileMenu.add(saveItem);
         fileMenu.add(saveAsItem);
+        fileMenu.add(recentItems);
         fileMenu.addSeparator();
         fileMenu.add(settingsItem);
         fileMenu.addSeparator();
         fileMenu.add(exitItem);
-        fileMenu.add(recentItems);
 
 
         toolsMenu.add(verifyItem);
@@ -457,20 +456,20 @@ public class OpenblocksFrame extends JFrame {
             }
         });
 
-        ImageButton deleteAll = new ImageButton(
-                "deleteAllBlocks",
-                "com/ardublock/block/buttons/newA.jpg",
-                "com/ardublock/block/buttons/newB.jpg",
-                infoLabel
-        );
+//        ImageButton deleteAll = new ImageButton(
+//                "deleteAllBlocks",
+//                "com/ardublock/block/buttons/newA.jpg",
+//                "com/ardublock/block/buttons/newB.jpg",
+//                infoLabel
+//        );
 
-        deleteAll.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                writeFileAndUpdateFrame(getArduBlockString(), new File("C:\\Users\\" + user + "\\Documents\\beforeDelete.abp"));
-                deleteAllBlocks();
-            }
-        });
+//        deleteAll.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                writeFileAndUpdateFrame(getArduBlockString(), new File("C:\\Users\\" + user + "\\Documents\\beforeDelete.abp"));
+//                deleteAllBlocks();
+//            }
+//        });
         ImageButton newButton = new ImageButton(
                 uiMessageBundle.getString("ardublock.ui.new"),
                 "com/ardublock/block/buttons/newA.jpg",
@@ -626,7 +625,6 @@ public class OpenblocksFrame extends JFrame {
         buttons.add(dividerSecond);
         buttons.add(saveImageButton);
         buttons.add(websiteButton);
-        buttons.add(deleteAll);
         buttons.add(infoLabel);
 
         panelWithConfigButton.add(configButton);
