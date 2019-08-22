@@ -208,7 +208,6 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <BlockConnectors>
                 <BlockConnector label="bc.do_while_commands" connector-kind="socket" connector-type="cmd" />
                 <BlockConnector label="bc.condition" connector-kind="socket" connector-type="boolean">
-                    <DefaultArg genus-name="less" label="Pick a test" />
                 </BlockConnector>    
             </BlockConnectors>
         </BlockGenus> 

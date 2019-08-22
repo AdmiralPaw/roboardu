@@ -32,7 +32,7 @@ public class ledD13 extends TranslatorBlock {
 
         translator.addDefinitionCommand(LED_GLOW);
 
-        String ret ="LedGlow(" + "13" +", " + glow_time + ");\n";
+        String ret ="LedGlow(" + "13" +", !" + glow_time + ");\n";
 
         return codePrefix + ret + codeSuffix;
     }
