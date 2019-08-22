@@ -14,11 +14,10 @@ public class Engine_LeftTurnDegrees extends TranslatorBlock
             super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 	
-        private static final String MOTORS_DEFINE_PIN = "" +
-                "#define M_DIR_PIN_1               4\n" +
-                "#define M_DIR_PIN_2               7\n" +
-                "#define M_SPEED_PIN_1             5\n" +
-                "#define M_SPEED_PIN_2             6\n";
+        private static final String MOTORS_DEFINE_PIN = "#define M_DIR_PIN_2               4\n" +
+"#define M_DIR_PIN_1               7\n" +
+"#define M_SPEED_PIN_2             5\n" +
+"#define M_SPEED_PIN_1             6";
         private static final String ENCODER_DEFINE_PIN = "" +
                 "#define ENCODER_PIN_1             2\n" +
                 "#define ENCODER_PIN_2             3\n";

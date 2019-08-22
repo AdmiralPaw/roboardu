@@ -20,34 +20,22 @@ public class lightSensor extends TranslatorBlock
 	}
 	
         
-        private static final String lightSensor = "" +
-                "void MotorsRightDegrees(int Speed, int Deegree)\n" +
-                "{\n" +
-                "  unsigned long long nEncoder1Start = nEncoder1;\n" +
-                "  unsigned long long nEncoder2Start = nEncoder2;\n" +
-                "\n" +
-                "  unsigned long long TimeStart = millis();\n" +
-                "\n" +
-                "  Motors(Speed,-Speed);\n" +
-                "\n" +
-                "  while(nEncoder1 - nEncoder1Start < Deegree*0.3 || nEncoder2 - nEncoder2Start < Deegree*0.3)\n" +
-                "  {\n" +
-                "    delay(1);\n" +
-                "  }\n" +
-                "\n" +
-                "  MotorsStop();\n" +
-                "}\n";
+        private static final String lightSensor = "int lightSensor(int Pin) {\n"
+            + "  pinMode(Pin, INPUT);\n"
+            + "  int arr[5];\n"
+            + "  for (int i = 0; i < 5; i++) {\n"
+            + "    arr[i] = analogRead(Pin);\n"
+            + "    delay(10);\n"
+            + "  }\n"
+            + "  return map((arr[0] + arr[1] + arr[2] + arr[3] + arr[4]) / 5, 0, 1024, 100, 0);\n"
+            + "}";
 
 	@Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
             translator.addDefinitionCommand(lightSensor);
-            translator.addSetupCommand("InitMotors();");
-            translator.addSetupCommand("InitEnc(ON);");
             TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
-            String ret = "MotorsRightDegrees(" + translatorBlock.toCode() + ", ";
-            translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
-            ret = ret + translatorBlock.toCode() + ");";
+            String ret = "lightSensor(" + translatorBlock.toCode() + ")";
             return codePrefix + ret + codeSuffix;
         }
 }
