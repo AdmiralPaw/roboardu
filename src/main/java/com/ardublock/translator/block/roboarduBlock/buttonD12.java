@@ -41,7 +41,7 @@ public class buttonD12 extends TranslatorBlock
     {
         translator.addDefinitionCommand(ARDUBLOCK_ANALOG_READ_DEFINE);
 
-        String ret = "GetButton(12)";
+        String ret = "!GetButton(12)";
         return codePrefix + ret + codeSuffix;
     }
 }
