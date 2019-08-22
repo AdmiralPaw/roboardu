@@ -117,38 +117,33 @@ public class Engine_BackDistance extends TranslatorBlock
         private static final String MOTORS_STOP = "" +
                 "void MotorsStop()\n" +
                 "{\n" +
-                "  Motors(0, 0);\n" +
-                "}\n";
-        private static final String MOTORS_BACK_DISTANCE = "" +
-                "void MotorsBackDistance(int Speed, int Dist)\n" +
-                "{\n" +
-                "  unsigned long long nEncoder1Start = nEncoder1;\n" +
-                "  unsigned long long nEncoder2Start = nEncoder2;\n" +
-                "\n" +
-                "  unsigned long long TimeStart = millis();\n" +
-                "  int MaxTime = Dist / Speed * 1;\n" +
-                "\n" +
-                "  MotorsBack(Speed);\n" +
-                "\n" +
-                "  while(nEncoder1 - nEncoder1Start < Dist/2 || nEncoder2 - nEncoder2Start < Dist/2)\n" +
-                "  {\n" +
-                "    if(millis() - TimeStart > MaxTime)\n" +
-                "    {\n" +
-                "      break;\n" +
-                "    }\n" +
-                "  }\n" +
-                "\n" +
-                "  MotorsStop();\n" +
-                "}\n";
-        
-	@Override
-	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
-	{
-            translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
-            translator.addHeaderDefinition(ENCODER_DEFINE_PIN);
-            translator.addHeaderDefinition(ENCODER_DEFINE_SWITCH);
-            translator.addHeaderDefinition(MOTORS_DEFINE_VAR);
-            translator.addHeaderDefinition(ENCODER_DEFINE_VAR);
+                "  Motors(0, 0);\n"
+            + "}\n";
+    private static final String MOTORS_BACK_DISTANCE = "void MotorsBackDistance(int Speed, int Dist)\n"
+            + "{\n"
+            + "  unsigned long long nEncoder1Start = nEncoder1;\n"
+            + "  unsigned long long nEncoder2Start = nEncoder2;\n"
+            + "\n"
+            + "  unsigned long long TimeStart = millis();\n"
+            + "  int MaxTime = Dist / Speed * 1;\n"
+            + "\n"
+            + "  MotorsBack(Speed);\n"
+            + "\n"
+            + "  while (nEncoder1 - nEncoder1Start < Dist / 5 || nEncoder2 - nEncoder2Start < Dist / 5 )\n"
+            + "  {\n"
+            + "    delay(10);\n"
+            + "  }\n"
+            + "\n"
+            + "  MotorsStop();\n"
+            + "}\n";
+
+    @Override
+    public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
+        translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
+        translator.addHeaderDefinition(ENCODER_DEFINE_PIN);
+        translator.addHeaderDefinition(ENCODER_DEFINE_SWITCH);
+        translator.addHeaderDefinition(MOTORS_DEFINE_VAR);
+        translator.addHeaderDefinition(ENCODER_DEFINE_VAR);
             translator.addDefinitionCommand(MOTORS_DEFINE);
             translator.addDefinitionCommand(MOTORS_BACK);
             translator.addDefinitionCommand(MOTORS_STOP);
