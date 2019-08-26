@@ -25,13 +25,13 @@ public class EncoderFull2 extends TranslatorBlock {
             "{\n" +
             "  if(fEn == ON)\n" +
             "  {\n" +
-            "    attachInterrupt(ENCODER_PIN_1, Encoder1, CHANGE);\n" +
-            "    attachInterrupt(ENCODER_PIN_2, Encoder2, CHANGE);\n" +
+            "    attachInterrupt(digitalPinToInterrupt(ENCODER_PIN_1), Encoder1, CHANGE);\n" +
+            "    attachInterrupt(digitalPinToInterrupt(ENCODER_PIN_2), Encoder2, CHANGE);\n" +
             "  }\n" +
             "  if(fEn == OFF)\n" +
             "  {\n" +
-            "    detachInterrupt(ENCODER_PIN_1);\n" +
-            "    detachInterrupt(ENCODER_PIN_2);\n" +
+            "    detachInterrupt(digitalPinToInterrupt(ENCODER_PIN_1));\n" +
+            "    detachInterrupt(digitalPinToInterrupt(ENCODER_PIN_2));\n" +
             "  }\n" +
             "}\n" +
             "\n" +
