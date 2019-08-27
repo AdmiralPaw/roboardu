@@ -2059,14 +2059,22 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 
         <BlockGenus name="variable_number" kind="data" initlabel="bg.variable_number" editable-label="yes" is-label-value="yes" color="150 190 100">
-
+            <description>
+                <text>
+                    Name variable number
+                </text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" />
             </BlockConnectors>
         </BlockGenus>
 		
         <BlockGenus name="variable_number_unsigned_long" kind="data" initlabel="bg.variable_number_unsigned_long" editable-label="yes" is-label-value="yes" color="150 190 100">
-
+            <description>
+                <text>
+                    Name variable number long
+                </text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" />
             </BlockConnectors>
@@ -2477,6 +2485,9 @@ file before genus A is specified./ We impose this requirement so that sanity che
         <!-- ******************** Communication *************** -->
 
         <BlockGenus name="serial_read" kind="data" color="90 110 190" initlabel="bg.serial_read">
+            <description>
+                <text>Serial read</text>
+            </description>            
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" />
             </BlockConnectors>
@@ -2495,12 +2506,18 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 
         <BlockGenus name="serial_available" kind="data" color="90 110 190" initlabel="bg.serial_available">
+                        <description>
+                <text>verify the connection</text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" />
             </BlockConnectors>
         </BlockGenus>
 		
         <BlockGenus name="serial_available2" kind="data" color="90 110 190" initlabel="bg.serial_available2">
+                        <description>
+                <text>verify the connection2</text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" />
             </BlockConnectors>
@@ -3571,6 +3588,10 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 
         <BlockGenus name="df_line_tracking_sensor" kind="data" color="242 123 99" initlabel="bg.df_line_tracking_sensor">
+             <description>
+                <text>Line tracking sensor
+                </text>
+            </description>           
             <BlockConnectors>
                 <BlockConnector connector-type="boolean" connector-kind="plug" />
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
@@ -4744,7 +4765,9 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 		
         <BlockGenus name="seeed_touch_sensor" kind="data" color="242 123 99" initlabel="bg.seeed_touch_sensor">
-
+            <description>
+                <text>Touch sensor</text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="boolean" connector-kind="plug" />
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
@@ -9404,7 +9427,9 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </Images>
         </BlockGenus>
         <BlockGenus name="sensor_button" kind="data" color="242 123 99" initlabel="bg.sensor_button">
-
+    <description>
+                <text>Button</text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListDigital_D8" label="D8" />
@@ -9424,7 +9449,9 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
         <BlockGenus name="magnetic_sensor" kind="data" color="242 123 99" initlabel="bg.magnetic_sensor">
-
+          <description>
+                <text>Magnetic sensor</text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListAnalog_A0" label="A0" />
@@ -9646,7 +9673,9 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 		
         <BlockGenus name="little_bits_lightsensor" kind="data" color="242 123 99" initlabel="bg.little_bits_lightsensor">
-
+            <description>
+                <text>Lightsensor</text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListAnalog_A0" label="A0" />
@@ -11532,7 +11561,9 @@ initlabel="bg.tft-msg" editable-label="yes">
         </BlockGenus>
 
         <BlockGenus name="Potentiometer" kind="data" color="242 123 99" initlabel="bg.Potentiometer" editable-label="no">
-
+            <description>
+                <text>This is potentiometer</text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number"
                                                 connector-kind="plug">
@@ -11545,7 +11576,9 @@ initlabel="bg.tft-msg" editable-label="yes">
         </BlockGenus>
 
         <BlockGenus name="LineFinder" kind="data" color="242 123 99" initlabel="bg.LineFinder" editable-label="no">
-
+            <description>
+                <text>This is  line finder</text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number"
                                                 connector-kind="plug">
@@ -11558,7 +11591,9 @@ initlabel="bg.tft-msg" editable-label="yes">
         </BlockGenus>
                 
         <BlockGenus name="sensorTemperature" kind="data" color="242 123 99" initlabel="bg.sensorTemperature" editable-label="no">
-
+            <description>
+                <text>Temperature sensor</text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number"
                                                 connector-kind="plug">
