@@ -14,11 +14,10 @@ public class Engine_LeftTurnDegrees extends TranslatorBlock
             super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 	
-        private static final String MOTORS_DEFINE_PIN = "" +
-                "#define M_DIR_PIN_1               4\n" +
-                "#define M_DIR_PIN_2               7\n" +
-                "#define M_SPEED_PIN_1             5\n" +
-                "#define M_SPEED_PIN_2             6\n";
+        private static final String MOTORS_DEFINE_PIN = "#define M_DIR_PIN_2               4\n" +
+"#define M_DIR_PIN_1               7\n" +
+"#define M_SPEED_PIN_2             5\n" +
+"#define M_SPEED_PIN_1             6";
         private static final String ENCODER_DEFINE_PIN = "" +
                 "#define ENCODER_PIN_1             2\n" +
                 "#define ENCODER_PIN_2             3\n";
@@ -27,32 +26,32 @@ public class Engine_LeftTurnDegrees extends TranslatorBlock
                 "#define OFF                       0\n";
         private static final String ENCODER_DEFINE_VAR = "" +
                 "unsigned long long nEncoder1, nEncoder2;\n";
-        private static final String MOTORS_DEFINE_VAR = "" + 
-                "int SpeedMotor1, SpeedMotor2;\n";        
-        private static final String ENCODER_DEFINE = "" +
-                "void InitEnc(int fEn)\n" +
-                "{\n" +
-                "  if(fEn == ON)\n" +
-                "  {\n" +
-                "    attachInterrupt(ENCODER_PIN_1, Encoder1, CHANGE);\n" +
-                "    attachInterrupt(ENCODER_PIN_2, Encoder2, CHANGE);\n" +
-                "  }\n" +
-                "  if(fEn == OFF)\n" +
-                "  {\n" +
-                "    detachInterrupt(ENCODER_PIN_1);\n" +
-                "    detachInterrupt(ENCODER_PIN_2);\n" +
-                "  }\n" +
-                "}\n" +
-                "\n" +
-                "void Encoder1()\n" +
-                "{\n" +
-                "  nEncoder1++;\n" +
-                "}\n" +
-                "\n" +
-                "void Encoder2()\n" +
-                "{\n" +
-                "  nEncoder2++;\n" + 
-                "}\n";
+        private static final String MOTORS_DEFINE_VAR = ""
+            + "int SpeedMotor1, SpeedMotor2;\n";
+    private static final String ENCODER_DEFINE = "" +
+            "void InitEnc(int fEn)\n" +
+            "{\n" +
+            "  if(fEn == ON)\n" +
+            "  {\n" +
+            "    attachInterrupt(digitalPinToInterrupt(ENCODER_PIN_1), Encoder1, CHANGE);\n" +
+            "    attachInterrupt(digitalPinToInterrupt(ENCODER_PIN_2), Encoder2, CHANGE);\n" +
+            "  }\n" +
+            "  if(fEn == OFF)\n" +
+            "  {\n" +
+            "    detachInterrupt(digitalPinToInterrupt(ENCODER_PIN_1));\n" +
+            "    detachInterrupt(digitalPinToInterrupt(ENCODER_PIN_2));\n" +
+            "  }\n" +
+            "}\n" +
+            "\n" +
+            "void Encoder1()\n" +
+            "{\n" +
+            "  nEncoder1++;\n" +
+            "}\n" +
+            "\n" +
+            "void Encoder2()\n" +
+            "{\n" +
+            "  nEncoder2++;\n" +
+            "}\n";
         private static final String MOTORS_DEFINE = "" +
                 "void InitMotors()\n" +
                 "{\n" +

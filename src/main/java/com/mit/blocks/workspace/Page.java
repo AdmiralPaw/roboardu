@@ -229,7 +229,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         am.put("undoAct", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setScreen(blocksKeeper.undoAct());
+                setUndoScreen();
             }
         });
 
@@ -238,10 +238,20 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         am.put("redoAct", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setScreen(blocksKeeper.redoAct());
+                setRedoScreen();
             }
         });
 
+    }
+
+    public void setUndoScreen()
+    {
+        setScreen(blocksKeeper.undoAct());
+    }
+
+    public void setRedoScreen()
+    {
+        setScreen(blocksKeeper.redoAct());
     }
 
     public void setScreen(Collection<RenderableBlock> screen) {

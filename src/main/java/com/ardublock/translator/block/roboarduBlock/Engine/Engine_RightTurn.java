@@ -13,11 +13,10 @@ public class Engine_RightTurn extends TranslatorBlock
 	{   
             super(blockId, translator, codePrefix, codeSuffix, label);
 	}
-	private static final String MOTORS_DEFINE_PIN = "" +
-                "#define M_DIR_PIN_1               4\n" +
-                "#define M_DIR_PIN_2               7\n" +
-                "#define M_SPEED_PIN_1             5\n" +
-                "#define M_SPEED_PIN_2             6\n";
+	private static final String MOTORS_DEFINE_PIN = "#define M_DIR_PIN_2               4\n" +
+"#define M_DIR_PIN_1               7\n" +
+"#define M_SPEED_PIN_2             5\n" +
+"#define M_SPEED_PIN_1             6";
         private static final String MOTORS_DEFINE_VAR = "" + 
                 "int SpeedMotor1, SpeedMotor2;\n";
         
