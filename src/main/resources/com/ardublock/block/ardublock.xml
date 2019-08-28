@@ -1348,14 +1348,6 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.exponent" />
             </BlockConnectors>
         </BlockGenus>
-                
-        <BlockGenus name="pow2" kind="function" color="71 198 145" initlabel="bg.pow">
-            <BlockConnectors>
-                <BlockConnector connector-type="number" connector-kind="plug" />
-                <BlockConnector connector-type="number" connector-kind="socket" label="bc.base" />
-                <BlockConnector connector-type="number" connector-kind="socket" label="bc.exponent" />
-            </BlockConnectors>
-        </BlockGenus>
 
         <BlockGenus name="sqrt" kind="function" color="71 198 145" initlabel="bg.sqrt">
             <BlockConnectors>
@@ -12304,7 +12296,6 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <BlockGenusMember>modulo</BlockGenusMember>
                 <BlockGenusMember>abs</BlockGenusMember>
                 <BlockGenusMember>pow</BlockGenusMember>
-                <BlockGenusMember>pow2</BlockGenusMember>
                 <BlockGenusMember>sqrt</BlockGenusMember>
                 <BlockGenusMember>sin</BlockGenusMember>
                 <BlockGenusMember>cos</BlockGenusMember>
