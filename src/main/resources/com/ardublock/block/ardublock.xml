@@ -2081,14 +2081,22 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 	    
         <BlockGenus name="variable_number_double" kind="data" initlabel="bg.variable_number_double" editable-label="yes" is-label-value="yes" color="150 190 100">
-
+            <description>
+                <text>
+                    Name variable number double
+                </text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" />
             </BlockConnectors>
         </BlockGenus>
 
         <BlockGenus name="variable_digital" kind="data" initlabel="bg.variable_digital" editable-label="yes" is-label-value="yes" color="150 190 100">
-
+            <description>
+                <text>
+                  Variable digital
+                </text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="boolean" connector-kind="plug" position-type="mirror" />
             </BlockConnectors>
@@ -2204,7 +2212,9 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 
         <BlockGenus name="setter_variable_char" kind="command" color="95 190 50" initlabel="bg.setter_variable_char">
-
+            <description>
+                <text>Set variable char</text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="poly" connector-kind="socket" label="bc.variable">
                     <DefaultArg genus-name="variable_poly" label="Char" />
@@ -2217,7 +2227,9 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 
         <BlockGenus name="variable_poly" kind="data" initlabel="bg.variable_poly" editable-label="yes" is-label-value="yes" color="150 190 100">
-
+            <description>
+                <text>Set variable poly</text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="poly" connector-kind="plug" position-type="mirror" />
             </BlockConnectors>
@@ -2235,7 +2247,11 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 		
         <BlockGenus name="setter_variable_String" kind="command" color="95 190 50" initlabel="bg.setter_variable_String">
-
+            <description>
+                <text>
+                    Set variable string
+                </text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="string" connector-kind="socket" label="bc.variable">
                     <DefaultArg genus-name="variable_String" label="STRING" />
