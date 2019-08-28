@@ -1314,7 +1314,6 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 
         <BlockGenus name="modulo" kind="function" color="71 198 145" initlabel="bg.modulo">
-            <BlockConnectors>
             <description>
                 <text>
                 Reports the % of two numbers (
@@ -1324,6 +1323,8 @@ file before genus A is specified./ We impose this requirement so that sanity che
                     ).
                 </text>
             </description>
+            <BlockConnectors>
+
                 <BlockConnector label="" connector-kind="plug" connector-type="number">
                     <!-- CLUDGE:: This apparently daft line enables 'clone' to work correctly on this BlockGenus -->
                     <DefaultArg genus-name="dummy" label="" />
