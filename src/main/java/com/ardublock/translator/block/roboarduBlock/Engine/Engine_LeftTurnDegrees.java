@@ -119,7 +119,7 @@ public class Engine_LeftTurnDegrees extends TranslatorBlock
                 "\n" +
                 "  Motors(-Speed, Speed);\n" +
                 "\n" +
-                "  while(nEncoder1 - nEncoder1Start < Deegree*0.3 || nEncoder2 - nEncoder2Start < Deegree*0.3)\n" +
+                "  while(nEncoder1 - nEncoder1Start < Deegree*0.36 || nEncoder2 - nEncoder2Start < Deegree*0.36)\n" +
                 "  {\n" +
                 "    delay(1);\n" +
                 "  }\n" +
