@@ -131,7 +131,12 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
     public JPanel blockCanvasLayer; //Layer with controller
     public JSplitPane centerPane;
     private boolean isActiveBasket;
-
+    public JButton zoomPlus;
+    public JButton zoomMinus;
+    public JButton zoomNormal;
+    public JPanel action_buttons;
+    public JPanel level_two;
+    
     /**
      * MiniMap associated with the blockCanvas
      */
@@ -267,7 +272,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         ImageIcon button_icon = new ImageIcon(
                 new ImageIcon(iconURL).getImage()
                         .getScaledInstance(size, size, java.awt.Image.SCALE_SMOOTH));
-        JButton zoomPlus = new JButton(button_icon);
+        zoomPlus = new JButton(button_icon);
         zoomPlus.setBorder(BorderFactory.createEmptyBorder());
         zoomPlus.setContentAreaFilled(false);
         zoomPlus.setFocusable(false);
@@ -327,7 +332,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         button_icon = new ImageIcon(
                 new ImageIcon(iconURL).getImage()
                         .getScaledInstance(size, size, java.awt.Image.SCALE_SMOOTH));
-        JButton zoomMinus = new JButton(button_icon);
+        zoomMinus = new JButton(button_icon);
         zoomMinus.setBorder(BorderFactory.createEmptyBorder());
         zoomMinus.setContentAreaFilled(false);
         zoomMinus.setFocusable(false);
@@ -387,7 +392,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         button_icon = new ImageIcon(
                 new ImageIcon(iconURL).getImage()
                         .getScaledInstance(size, size, java.awt.Image.SCALE_SMOOTH));
-        JButton zoomNormal = new JButton(button_icon);
+        zoomNormal = new JButton(button_icon);
         zoomNormal.setBorder(BorderFactory.createEmptyBorder());
         zoomNormal.setContentAreaFilled(false);
         zoomNormal.setFocusable(false);
@@ -517,10 +522,10 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
             }
         });
 
-        JPanel level_two = new JPanel();
+        level_two = new JPanel();
         level_two.setLayout(new BorderLayout());
         level_two.setBackground(new Color(0, 0, 0, 0));
-        JPanel action_buttons = new JPanel();
+        action_buttons = new JPanel();
         action_buttons.setLayout(new FlowLayout(FlowLayout.LEFT,0,1));
         //action_buttons.setLayout(new BoxLayout(action_buttons, BoxLayout.Y_AXIS));
 

@@ -9,6 +9,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -27,17 +28,19 @@ public class IllumPanel extends JPanel {
     public Timer animationTimerStart = null;
 
     private int pulses = 8;
-    private int pulsingCount = pulses * 2; //3-и вспышки и 3 затухания
+    private int pulsingCount = pulses * 2;
 
-    private Color myColor = new Color(255, 255, 255, 0);
+    public Color myColor = new Color(254, 254, 254, 0);
 
     private OpenblocksFrame openblocksFrame;
     private TutorialPane tutorialPane;
+    private Boolean rectangle;
 
     public IllumPanel(OpenblocksFrame openblocksFrame, TutorialPane tutorialPane,
-            Dimension size, Point point) {
+            Dimension size, Point point, Boolean rectangle) {
         this.openblocksFrame = openblocksFrame;
         this.tutorialPane = tutorialPane;
+        this.rectangle = rectangle;
         animationTimerStart = new Timer((int) (time * 1000 / frames), new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -54,7 +57,7 @@ public class IllumPanel extends JPanel {
     }
 
     public void setColorAlpha(int i) {
-        this.myColor = new Color(255, 255, 255, i);
+        this.myColor = new Color(myColor.getRed(), myColor.getGreen(), myColor.getBlue(), i);
         this.updateUI();
     }
 
@@ -117,11 +120,15 @@ public class IllumPanel extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        //super.paintComponent(g);
         final Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setColor(myColor);
-        g2d.fill(new Area(new Rectangle(super.getSize())));
-        //openblocksFrame.getContext().getWorkspace().getFactorySize())));
+        if (rectangle) {
+            g2d.setColor(myColor);
+            g2d.fill(new Area(new Rectangle(super.getSize())));
+        } else {
+            g2d.setColor(myColor);
+            g2d.fill(new Area(new Ellipse2D.Double(0, 0, super.getSize().width + 1, super.getSize().height + 1)));
+        }
         g2d.dispose();
     }
 }

@@ -99,7 +99,7 @@ public class TPanel extends JPanel {
 
         prevButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (tutorialPane.iter > -1) {
+                if (tutorialPane.iter > 0) {
                     if (tutorialPane.activeAnimPanels.get(tutorialPane.iter).get(0).animationIsFinished) {
                         if (!tutorialPane.tutorIllumPanels.get(tutorialPane.iter).get(0).animationIsFinished) {
                             for (IllumPanel pane : tutorialPane.tutorIllumPanels.get(tutorialPane.iter)) {

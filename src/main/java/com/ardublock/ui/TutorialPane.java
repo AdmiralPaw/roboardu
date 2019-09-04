@@ -190,6 +190,7 @@ public class TutorialPane extends JPanel {
         tutorTextPanel = new TPanel(this);
 
         JComponent component = openblocksFrame.logo;
+        JComponent component2;
         //----------------------------------------------------------------------
         logoPanel = new DarkPanel(openblocksFrame, this,
                 new Dimension(component.getWidth(), component.getHeight()),
@@ -228,31 +229,66 @@ public class TutorialPane extends JPanel {
         component = openblocksFrame.getContext().getWorkspace().getFactoryManager().getNavigator().getCanvasPane();
         IllumPanel blocksChoice = new IllumPanel(openblocksFrame, this,
                 new Dimension(component.getWidth(), component.getHeight()),
-                new Point(component.getX(), component.getY() + menuHeight + logoPanel.getHeight()));
+                new Point(component.getX(), component.getY() + menuHeight + logoPanel.getHeight()),
+                true);
 
         component = openblocksFrame.getContext().getWorkspace().getFactoryManager().getNavigator().getButtonsPane();
         IllumPanel cathegoryChoice = new IllumPanel(openblocksFrame, this,
                 new Dimension(component.getWidth(), component.getHeight()),
-                new Point(component.getX(), component.getY() + menuHeight + logoPanel.getHeight()));
+                new Point(component.getX(), component.getY() + menuHeight + logoPanel.getHeight()),
+                true);
 
         component = openblocksFrame.getContext().getWorkspace().getFactoryManager().getNavigator().getSearchBar();
         IllumPanel searchBar = new IllumPanel(openblocksFrame, this,
                 new Dimension(component.getWidth(), component.getHeight()),
-                new Point(component.getX(), component.getY() + menuHeight + logoPanel.getHeight()));
+                new Point(component.getX(), component.getY() + menuHeight + logoPanel.getHeight()),
+                true);
 
         component = openblocksFrame.verifyButton;
         IllumPanel verifyButton = new IllumPanel(openblocksFrame, this,
                 new Dimension(component.getWidth(), component.getHeight()),
-                new Point(component.getX() + logoPanel.getWidth(), component.getY() + menuHeight));
+                new Point(component.getX() + logoPanel.getWidth(), component.getY() + menuHeight),
+                true);
 
         component = openblocksFrame.generateButton;
         IllumPanel generateButton = new IllumPanel(openblocksFrame, this,
                 new Dimension(component.getWidth(), component.getHeight()),
-                new Point(component.getX() + logoPanel.getWidth(), component.getY() + menuHeight));
-
+                new Point(component.getX() + logoPanel.getWidth(), component.getY() + menuHeight),
+                true);
+        
+        component = openblocksFrame.getContext().getWorkspace().zoomPlus;
+        component2 = openblocksFrame.getContext().getWorkspace().level_two;
+        IllumPanel ZPlus = new IllumPanel(openblocksFrame, this,
+                new Dimension(
+                        component.getWidth(),
+                        component.getHeight()),
+                new Point(
+                        component2.getX() + component.getX() + logoPanel.getWidth() + 2,
+                        component2.getY() + component.getY() + logoPanel.getHeight() + menuHeight), false);
+        
+        component = openblocksFrame.getContext().getWorkspace().zoomMinus;
+        IllumPanel ZMinus = new IllumPanel(openblocksFrame, this,
+                new Dimension(
+                        component.getWidth(),
+                        component.getHeight()),
+                new Point(
+                        component2.getX() + component.getX() + logoPanel.getWidth() + 2,
+                        component2.getY() + component.getY() + logoPanel.getHeight() + menuHeight),
+                false);
+        
+        component = openblocksFrame.getContext().getWorkspace().zoomNormal;
+        IllumPanel ZNormal = new IllumPanel(openblocksFrame, this,
+                new Dimension(
+                        component.getWidth(),
+                        component.getHeight()),
+                new Point(
+                        component2.getX() + component.getX() + logoPanel.getWidth() + 2,
+                        component2.getY() + component.getY() + logoPanel.getHeight() + menuHeight),
+                false);
+        
         dummy = new IllumPanel(openblocksFrame, this,
                 new Dimension(0, 0),
-                new Point(0, 0));
+                new Point(0, 0), true);
 
         ArrayList temp = new ArrayList();
         //1
@@ -387,7 +423,9 @@ public class TutorialPane extends JPanel {
         temp.add(workspacePanel);
         activeAnimPanels.add(temp);
         temp = new ArrayList();
-        temp.add(dummy);
+        temp.add(ZPlus);
+        temp.add(ZMinus);
+        temp.add(ZNormal);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(factoryPanel);
         tutorTexts.add("Да у вас уже столько блоков в программе! Попробуйте отдалить или приблизить камеру. ПОДСКАЗКА: Знак \"=\" - это изначальный масштаб.");
@@ -449,7 +487,7 @@ public class TutorialPane extends JPanel {
                     new Dimension(pane.getWidth(), pane.getHeight()),
                     new Point(pane.getX() + openblocksFrame.getContext().getWorkspace().controller.getX() + 1,
                             pane.getY() + openblocksFrame.getContext().getWorkspace().controller.getY()
-                            + logoPanel.getHeight() + menuHeight + 1)));
+                            + logoPanel.getHeight() + menuHeight + 1), true));
         }
         tutorIllumPanels.add(temp); //TODO
         inactiveTutorPanels.add(workspacePanel);
@@ -470,7 +508,7 @@ public class TutorialPane extends JPanel {
                     new Dimension(pane.getWidth(), pane.getHeight()),
                     new Point(pane.getX() + openblocksFrame.getContext().getWorkspace().controller.getX() + 1,
                             pane.getY() + openblocksFrame.getContext().getWorkspace().controller.getY()
-                            + logoPanel.getHeight() + menuHeight + 1)));
+                            + logoPanel.getHeight() + menuHeight + 1), true));
         }
         tutorIllumPanels.add(temp); //TODO
         inactiveTutorPanels.add(workspacePanel);
