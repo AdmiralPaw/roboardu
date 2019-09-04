@@ -286,6 +286,26 @@ public class TutorialPane extends JPanel {
                         component2.getY() + component.getY() + logoPanel.getHeight() + menuHeight),
                 false);
         
+        component = openblocksFrame.getContext().getWorkspace().undoAct;
+        IllumPanel CtrlZ = new IllumPanel(openblocksFrame, this,
+                new Dimension(
+                        component.getWidth(),
+                        component.getHeight()),
+                new Point(
+                        component2.getX() + component.getX() + logoPanel.getWidth() + 2,
+                        component2.getY() + component.getY() + logoPanel.getHeight() + menuHeight),
+                false);
+        
+        component = openblocksFrame.getContext().getWorkspace().redoAct;
+        IllumPanel CtrlY = new IllumPanel(openblocksFrame, this,
+                new Dimension(
+                        component.getWidth(),
+                        component.getHeight()),
+                new Point(
+                        component2.getX() + component.getX() + logoPanel.getWidth() + 2,
+                        component2.getY() + component.getY() + logoPanel.getHeight() + menuHeight),
+                false);
+        
         dummy = new IllumPanel(openblocksFrame, this,
                 new Dimension(0, 0),
                 new Point(0, 0), true);
@@ -298,7 +318,7 @@ public class TutorialPane extends JPanel {
         temp.add(dummy);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
-        tutorTexts.add("Обучение. Нажмите на \"крестик\" для выхода из обучения. Кнопки \"Далее\" и \"Назад\" используются для перехда к следующему шагу или возвращения к предыдущему. Во время обучения можно использовать все элементы интерфейса.");
+        tutorTexts.add("Обучение. Нажмите на \"Закрыть обучение\" для выхода из обучения. Кнопки \"Далее\" и \"Назад\" используются для перехда к следующему шагу или возвращения к предыдущему. Во время обучения можно использовать все элементы интерфейса.");
         tutorLocations.add(new Point(
                 (workspacePanel.getWidth() - 300) / 2,
                 (workspacePanel.getHeight() - 150) / 3));
@@ -368,7 +388,7 @@ public class TutorialPane extends JPanel {
         temp.add(blocksChoice);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
-        tutorTexts.add("Перейдем к выбору блоков. Любой блок разделяется на 3 типа - изначальный блок, управляющий блок, блок-команда и блок-переменная. Блоки-команды нужно подключать с помощью разъемов-выемок друг к другу, блоки-переменные подключаются к блокам-командам справа с помощью разъема. Изначальные блоки - это \"ЦИКЛ\" и \"ПРОГРАММА\". Они никуда не подключаются, к ним подключаются все остальные блоки.");
+        tutorTexts.add("Перейдем к выбору блоков. Блоки разделяются на 3 типа - изначальный блок, управляющий блок, блок-команда и блок-переменная. Блоки-команды нужно подключать с помощью разъемов-выемок друг к другу, блоки-переменные подключаются к блокам-командам справа с помощью разъема. Изначальные блоки - это \"ЦИКЛ\" и \"ПРОГРАММА\". Они никуда не подключаются, к ним подключаются все остальные блоки.");
         tutorLocations.add(new Point(
                 (workspacePanel.getWidth() - 300) / 10,
                 (workspacePanel.getHeight() - 300) / 3));
@@ -412,7 +432,7 @@ public class TutorialPane extends JPanel {
         temp.add(searchBar);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
-        tutorTexts.add("Для поиска нужного блока можно обратиться к \"Поиску\" - без забыли и точно без лень искать. Например, вы можете написать в строку поиска \"задержка\" и получите блоки-команды, которые выполняют функцию задержки перед следующими командами. Добавьте понравившийся блок в программу. - еще на счет обращений не уверена, возможно все нужно будет писать \"обезличенно\", но это нужно будет подумать и уточнить как лучше");
+        tutorTexts.add("Для поиска нужного блока можно обратиться к \"Поиску\". Например, вы можете написать в строку поиска \"задержка\" и получите блоки-команды, которые выполняют функцию задержки перед следующими командами. Добавьте понравившийся блок в программу.");
         tutorLocations.add(new Point(
                 (workspacePanel.getWidth() - 300) / 10,
                 (workspacePanel.getHeight() - 300) / 3));
@@ -426,9 +446,11 @@ public class TutorialPane extends JPanel {
         temp.add(ZPlus);
         temp.add(ZMinus);
         temp.add(ZNormal);
+        temp.add(CtrlZ);
+        temp.add(CtrlY);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(factoryPanel);
-        tutorTexts.add("Да у вас уже столько блоков в программе! Попробуйте отдалить или приблизить камеру. ПОДСКАЗКА: Знак \"=\" - это изначальный масштаб.");
+        tutorTexts.add("Попробуйте отдалить или приблизить камеру, отменить и повторить действие. Знак \"=\" - это изначальный масштаб. ");
         tutorLocations.add(new Point(
                 (factoryPanel.getWidth() - 300) / 2,
                 (factoryPanel.getHeight() - 170) / 3));                
@@ -456,7 +478,7 @@ public class TutorialPane extends JPanel {
         temp.add(verifyButton);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
-        tutorTexts.add("Нажмите на кнопку \"Сгенерировать код\" - тут надо будет картинку кнопки или она будет подсвечиватся тоже?. Если вы все сделали правильно (тут сразу возникает вопрос а что все сделали правильно? все правильно слишком общее мне кажется. Может написать как-то: \"Произойдет компиляция кода, если блоки подобраны правильно/по правилам (ведь писали до этого что там надо чтобы они сответствовали друг другу), то код просто скомпилируется. Это значит, что код будет работать и его можно загрузить на контроллер.");
+        tutorTexts.add("Нажмите на кнопку \"Сгенерировать код\". Произойдет компиляция кода, если блоки подобраны правильно. Это значит, что код будет работать и его можно загрузить на контроллер.");
         tutorLocations.add(new Point(
                 (workspacePanel.getWidth() - 300) / 10,
                 (workspacePanel.getHeight() - 300) / 15));
@@ -526,8 +548,7 @@ public class TutorialPane extends JPanel {
         temp.add(dummy);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(controllerPanel);
-        tutorTexts.add("Теперь удалите ранее написанную вами программу, но не блок \"ЦИКЛ\". Хотя, если вы и его удалили, то можете его достать в категории \"УПРАВЛЕНИЕ\". - не понимаю к чему это..про удалите это, не удаляйте то\n"
-                + "Если здесь про возможность удалять блоки, то можно просто написать вот так то и так то можно удалять блоки.");
+        tutorTexts.add("Составим новую программу. Оставьте на холсте только блок \"ЦИКЛ\".");
         tutorLocations.add(new Point(
                 (controllerPanel.getWidth() - 300) / 2,
                 (controllerPanel.getHeight() - 300) / 10 * 2));
@@ -543,7 +564,7 @@ public class TutorialPane extends JPanel {
         temp.add(dummy);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
-        tutorTexts.add("Перейдем к небольшой тренировке. Найдите блок \"СВЕТОДИОД\". Добавьте его в программу, в номере порта укажите тот порт, к которому подключен светодиод на плате, а в состоянии укажите \"ВЫСОКИЙ\". Под высоким подразумевается сигнал - то есть светодиод будет гореть.");
+        tutorTexts.add("Найдите блок \"СВЕТОДИОД\". Добавьте его в программу, в номере порта укажите тот порт, к которому подключен светодиод на плате, а в состоянии укажите \"ВЫСОКИЙ\". Под высоким подразумевается сигнал - то есть светодиод будет гореть.");
         tutorLocations.add(new Point(
                 (workspacePanel.getWidth() - 300) / 15 * 14,
                 (workspacePanel.getHeight() - 300) / 10 * 2));
@@ -557,7 +578,7 @@ public class TutorialPane extends JPanel {
         temp.add(generateButton);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
-        tutorTexts.add("Теперь подключите к компьютеру вашу плату с подключенным к ней светодиодом. Нажмите на кнопку \"Отправить в Ардуино\" - картинка кнопки или подсветка. Если вы все сделали верно, то в окне с кодом в выводе вы получите либо сообщение о удачной загрузке, либо ошибку о загрузке в плату. Во втором случае вам нужно будет открыть \"Инструменты\", выбрать \"Порт\" и в выпадающем списке выбрать существующий COM-порт.  - но нужно продумать что реально делать если это так и случится...как вариант сделать на сайте раздел \"вопросы и ошибки\" чтобы если что понимат что может идти не так, если у нас не предусмотрены сообщения об ошибках которые отпраляются");
+        tutorTexts.add("Теперь подключите к компьютеру вашу плату с подключенным к ней светодиодом. Нажмите на кнопку \"Отправить в Ардуино\". Если вы все сделали верно, то в окне с кодом в выводе вы получите либо сообщение о удачной загрузке, либо ошибку о загрузке в плату. Во втором случае вам нужно будет открыть \"Инструменты\", выбрать \"Порт\" и в выпадающем списке выбрать существующий COM-порт.");
         tutorLocations.add(new Point(
                 (workspacePanel.getWidth() - 300) / 10,
                 (workspacePanel.getHeight() - 300) / 15));

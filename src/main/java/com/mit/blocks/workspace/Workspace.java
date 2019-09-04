@@ -134,6 +134,8 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
     public JButton zoomPlus;
     public JButton zoomMinus;
     public JButton zoomNormal;
+    public JButton undoAct;
+    public JButton redoAct;
     public JPanel action_buttons;
     public JPanel level_two;
     
@@ -444,7 +446,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         button_icon = new ImageIcon(
                 new ImageIcon(iconURL).getImage()
                         .getScaledInstance(size, size, java.awt.Image.SCALE_SMOOTH));
-        JButton undoAct = new JButton(button_icon);
+        undoAct = new JButton(button_icon);
         undoAct.setBorder(BorderFactory.createEmptyBorder());
         undoAct.setContentAreaFilled(false);
         undoAct.setFocusable(false);
@@ -485,7 +487,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         button_icon = new ImageIcon(
                 new ImageIcon(iconURL).getImage()
                         .getScaledInstance(size, size, java.awt.Image.SCALE_SMOOTH));
-        JButton redoAct = new JButton(button_icon);
+        redoAct = new JButton(button_icon);
         redoAct.setBorder(BorderFactory.createEmptyBorder());
         redoAct.setContentAreaFilled(false);
         redoAct.setFocusable(false);

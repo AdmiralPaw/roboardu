@@ -12263,7 +12263,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <BlockGenusMember>loop</BlockGenusMember>
                 <BlockGenusMember>program</BlockGenusMember>
                 <BlockGenusMember>delay</BlockGenusMember>
-                <BlockGenusMember>delay_microseconds</BlockGenusMember>
+                <!--<BlockGenusMember>delay_microseconds</BlockGenusMember>-->
                 <BlockGenusMember>millis</BlockGenusMember>
                 <BlockGenusMember>if</BlockGenusMember>
                 <BlockGenusMember>ifelse</BlockGenusMember>
