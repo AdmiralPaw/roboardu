@@ -1887,6 +1887,9 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 
         <BlockGenus name="number" kind="data" color="150 190 100" initlabel="bg.number" editable-label="yes">
+            <description>
+                <text>Integer const</text>
+            </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="plug" position-type="mirror" />
             </BlockConnectors>
