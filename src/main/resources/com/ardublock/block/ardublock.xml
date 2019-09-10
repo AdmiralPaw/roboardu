@@ -10409,11 +10409,11 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" 
-                                                connector-kind="socket" label="bc.speed_number">
+                                                connector-kind="socket" label="bc.speed_number1">
                     <DefaultArg genus-name="number" label="100" />
                 </BlockConnector>
                 <BlockConnector connector-type="number" 
-                                                connector-kind="socket" label="bc.speed_number">
+                                                connector-kind="socket" label="bc.speed_number2">
                     <DefaultArg genus-name="number" label="100" />
                 </BlockConnector>
             </BlockConnectors>
