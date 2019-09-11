@@ -12381,7 +12381,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <!--<BlockGenusMember>df_joystick_module_x</BlockGenusMember>-->
                 <!--<BlockGenusMember>df_joystick_module_y</BlockGenusMember>-->
                 <!--<BlockGenusMember>df_analog_gp2y0a21</BlockGenusMember>-->
-                <!--<BlockGenusMember>df_line_tracking_sensor</BlockGenusMember>-->
+                <BlockGenusMember>df_line_tracking_sensor</BlockGenusMember>
                 <BlockGenusMember>sensorTemperature</BlockGenusMember>
                 <BlockGenusMember>seeed_mag_switch</BlockGenusMember>
                 <BlockGenusMember>seeed_touch_sensor</BlockGenusMember>
@@ -12474,15 +12474,15 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <BlockGenusMember>serial_print</BlockGenusMember>
                 <BlockGenusMember>glue_sn</BlockGenusMember>
                 <BlockGenusMember>glue_sb</BlockGenusMember>
-<!--                <BlockGenusMember>ir_setport</BlockGenusMember>
+                <BlockGenusMember>ir_setport</BlockGenusMember>
                 <BlockGenusMember>ir_getcode</BlockGenusMember>
                 <BlockGenusMember>wire_write</BlockGenusMember>
                 <BlockGenusMember>wire_read</BlockGenusMember>
-                <BlockGenusMember>wire_isread</BlockGenusMember>-->
+                <BlockGenusMember>wire_isread</BlockGenusMember>
                 <BlockGenusMember>serial_available</BlockGenusMember>
                 <BlockGenusMember>serial_available2</BlockGenusMember>
                 <BlockGenusMember>serial_read</BlockGenusMember>
-                <!--<BlockGenusMember>serial_parseInt</BlockGenusMember>-->
+                <BlockGenusMember>serial_parseInt</BlockGenusMember>
             </BlockDrawer>
 
             <BlockDrawer button-color="0 155 139" name="bd.storage" type="factory">
@@ -12492,20 +12492,20 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <BlockGenusMember>eeprom_write_long</BlockGenusMember>
                 <BlockGenusMember>eeprom_read</BlockGenusMember>
                 <BlockGenusMember>eeprom_write</BlockGenusMember>
-<!--                <BlockGenusMember>sd_write2</BlockGenusMember>
+                <BlockGenusMember>sd_write2</BlockGenusMember>
                 <BlockGenusMember>MaSD_Connect</BlockGenusMember>
                 <BlockGenusMember>MaSD_file</BlockGenusMember>
                 <BlockGenusMember>MaSD_Write</BlockGenusMember>
                 <BlockGenusMember>MaSD_NewLine</BlockGenusMember>
-                <BlockGenusMember>MaSD_separator</BlockGenusMember>-->
+                <BlockGenusMember>MaSD_separator</BlockGenusMember>
 
             </BlockDrawer>
-<!--            <BlockDrawer button-color="169 148 212" name="bd.network" type="factory">
+            <BlockDrawer button-color="169 148 212" name="bd.network" type="factory">
                 <BlockGenusMember>bleshield</BlockGenusMember>
                 <BlockGenusMember>bleshield_available</BlockGenusMember>
                 <BlockGenusMember>bleshield_read_poly</BlockGenusMember>
                 <BlockGenusMember>bleshield_compare</BlockGenusMember>
-            </BlockDrawer>-->
+            </BlockDrawer>
             <BlockDrawer button-color="120 120 120" name="bd.especial" type="factory">
                 <BlockGenusMember>code_head</BlockGenusMember>
                 <BlockGenusMember>code_setup</BlockGenusMember>
