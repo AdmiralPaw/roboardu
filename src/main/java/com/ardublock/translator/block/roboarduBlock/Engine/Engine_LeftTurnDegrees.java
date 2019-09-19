@@ -45,6 +45,7 @@ public class Engine_LeftTurnDegrees extends TranslatorBlock
             "\n" +
             "void Encoder1()\n" +
             "{\n" +
+            "  noInterrupts();\n" +
             "  nEncoder1++;\n" +
             "}\n" +
             "\n" +
@@ -103,27 +104,27 @@ public class Engine_LeftTurnDegrees extends TranslatorBlock
                 "\n" +
                 "  SpeedMotor2 = Speed;\n" +
                 "}\n" +
-                "\n" +
-                "void Motors(int Speed1, int Speed2)\n" +
-                "{\n" +
-                "  Motor1(Speed1);\n" +
-                "  Motor2(Speed2);\n" +
-                "}\n";
-        private static final String MOTORS_LEFT_DEGREES_DEFINE = "" +
-                "void MotorsLeftDegrees(int Speed, int Deegree)\n" +
-                "{\n" +
-                "  unsigned long long nEncoder1Start = nEncoder1;\n" +
-                "  unsigned long long nEncoder2Start = nEncoder2;\n" +
-                "\n" +
-                "  Motors(Speed, -Speed);\n" +
-                "\n" +
-                "  while(nEncoder1 - nEncoder1Start < Deegree*0.36 || nEncoder2 - nEncoder2Start < Deegree*0.36)\n" +
-                "  {\n" +
-                "    delay(1);\n" +
-                "  }\n" +
-                "\n" +
-                "  MotorsStop();\n" +
-                "}\n";
+                "\n"
+            + "void Motors(int Speed1, int Speed2)\n"
+            + "{\n"
+            + "  Motor1(Speed1);\n"
+            + "  Motor2(Speed2);\n"
+            + "}\n";
+    private static final String MOTORS_LEFT_DEGREES_DEFINE = ""
+            + "void MotorsLeftDegrees(int Speed, int Deegree)\n"
+            + "{\n"
+            + "  unsigned long long nEncoder1Start = nEncoder1;\n"
+            + "  unsigned long long nEncoder2Start = nEncoder2;\n"
+            + "\n"
+            + "  Motors(Speed, -Speed);\n"
+            + "\n"
+            + "  while(nEncoder1 - nEncoder1Start < Deegree*0.36 || nEncoder2 - nEncoder2Start < Deegree*0.36)\n"
+            + "  {\n"
+            + "    interrupts();"
+            + "  }\n"
+            + "\n"
+            + "  MotorsStop();\n"
+            + "}\n";
 
 	@Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException

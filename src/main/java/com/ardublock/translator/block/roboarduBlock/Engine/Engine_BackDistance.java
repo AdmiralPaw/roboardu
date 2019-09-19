@@ -45,6 +45,7 @@ public class Engine_BackDistance extends TranslatorBlock
             "\n" +
             "void Encoder1()\n" +
             "{\n" +
+            "  noInterrupts();\n" +
             "  nEncoder1++;\n" +
             "}\n" +
             "\n" +
@@ -128,7 +129,7 @@ public class Engine_BackDistance extends TranslatorBlock
             + "\n"
             + "  while (nEncoder1 - nEncoder1Start < Dist * 0.13 || nEncoder2 - nEncoder2Start < Dist * 0.13 )\n"
             + "  {\n"
-            + "    delay(1);\n"
+            + "    interrupts();"
             + "  }\n"
             + "\n"
             + "  MotorsStop();\n"
