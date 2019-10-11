@@ -27,7 +27,7 @@ public class touchSensor extends TranslatorBlock {
                 + "    touchCount[i] = digitalRead(Pin);\n"
                 + "    delay(40);\n"
                 + "  }\n"
-                + "  if ((touchCount[0] && touchCount[1] && touchCount[2] && touchCount[3] && touchCount[4]) || !(touchCount[0] || touchCount[1] || touchCount[2] || touchCount[3] || touchCount[4])) {\n"
+                + "  if ((touchCount[0] && touchCount[1] && touchCount[2] && touchCount[3] && touchCount[4])) {\n"
                 + "    return true;\n"
                 + "  }\n"
                 + "  return false;\n"
