@@ -11,7 +11,7 @@
 ; Имя исполняемого модуля
 #define   ExeName    ""
 ; Путь до приложения
-#define		Sourse	 "C:\Users\User\Documents\GitHub\roboardu"
+#define		Sourse	 "C:\Users\Jesus\roboardu"
 
 
 
@@ -87,11 +87,11 @@ Name: "libs\SparkFun_ToF_Range_FinderVL6180";  Description: "SparkFun_ToF_Range_
 [Files]
 
 ; Прилагающиеся ресурсы
-Source: "{#Sourse}\ArduinoLibraries\Adafruit_SSD1306-master"; Components: libs\Adafruit_SSD1306; DestDir: "{userdocs}\Arduino\libraries"; Flags: recursesubdirs createallsubdirs ignoreversion
-Source: "{#Sourse}\ArduinoLibraries\Adafruit-GFX-Library-master"; Components: libs\AdafruitGFX; DestDir: "{userdocs}\Arduino\libraries"; Flags: recursesubdirs createallsubdirs ignoreversion
-Source: "{#Sourse}\ArduinoLibraries\I2Cdev"; Components: libs\I2Cdev; DestDir: "{userdocs}\Arduino\libraries"; Flags: recursesubdirs createallsubdirs ignoreversion
-Source: "{#Sourse}\ArduinoLibraries\MPU9250-master"; Components: libs\MPU9250; DestDir: "{userdocs}\Arduino\libraries"; Flags: recursesubdirs createallsubdirs ignoreversion
-Source: "{#Sourse}\ArduinoLibraries\SparkFun_ToF_Range_Finder-VL6180_Arduino_Library-master"; Components: libs\SparkFun_ToF_Range_FinderVL6180; DestDir: "{userdocs}\Arduino\libraries"; Flags: recursesubdirs createallsubdirs ignoreversion
+Source: "{#Sourse}\ArduinoLibraries\Adafruit_SSD1306-master\*"; Components: libs\Adafruit_SSD1306; DestDir: "{userdocs}\Arduino\libraries\Adafruit_SSD1306-master"; Flags: recursesubdirs createallsubdirs ignoreversion
+Source: "{#Sourse}\ArduinoLibraries\Adafruit-GFX-Library-master\*"; Components: libs\AdafruitGFX; DestDir: "{userdocs}\Arduino\libraries\Adafruit-GFX-Library-master"; Flags: recursesubdirs createallsubdirs ignoreversion
+Source: "{#Sourse}\ArduinoLibraries\I2Cdev\*"; Components: libs\I2Cdev; DestDir: "{userdocs}\Arduino\libraries\I2Cdev"; Flags: recursesubdirs createallsubdirs ignoreversion
+Source: "{#Sourse}\ArduinoLibraries\MPU9250-master\*"; Components: libs\MPU9250; DestDir: "{userdocs}\Arduino\libraries\MPU9250-master"; Flags: recursesubdirs createallsubdirs ignoreversion
+Source: "{#Sourse}\ArduinoLibraries\SparkFun_ToF_Range_Finder-VL6180_Arduino_Library-master\*"; Components: libs\SparkFun_ToF_Range_FinderVL6180; DestDir: "{userdocs}\Arduino\libraries\SparkFun_ToF_Range_Finder-VL6180_Arduino_Library-master"; Flags: recursesubdirs createallsubdirs ignoreversion
 
 Source: "{#Sourse}\target\roboscratch-tool.jar"; Components: programm; DestDir: "{app}\tools\{#Name}\tool"; Flags: ignoreversion
 
