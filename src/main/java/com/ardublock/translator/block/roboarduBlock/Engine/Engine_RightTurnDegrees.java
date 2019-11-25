@@ -116,7 +116,7 @@ public class Engine_RightTurnDegrees extends TranslatorBlock
             + "  unsigned long long nEncoder1Start = nEncoder1;\n"
             + "  unsigned long long nEncoder2Start = nEncoder2;\n"
             + "\n"
-            + "  Motors(-Speed, Speed);\n"
+            + "  Motors(Speed, -Speed);\n"
             + "\n"
             + "  while(nEncoder1 - nEncoder1Start < Deegree*0.36 || nEncoder2 - nEncoder2Start < Deegree*0.36)\n"
             + "  {\n"
