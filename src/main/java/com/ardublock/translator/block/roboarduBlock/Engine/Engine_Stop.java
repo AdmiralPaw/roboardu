@@ -19,7 +19,7 @@ public class Engine_Stop extends TranslatorBlock
 "#define M_SPEED_PIN_2             5\n" +
 "#define M_SPEED_PIN_1             6";
         private static final String MOTORS_DEFINE_VAR = "" + 
-                "int SpeedMotor1, SpeedMotor2;\n";
+                "int SpeedMotorLeft, SpeedMotorRight;\n";
         private static final String MOTORS_DEFINE = "" +
                 "void InitMotors()\n" +
                 "{\n" +
@@ -28,18 +28,18 @@ public class Engine_Stop extends TranslatorBlock
                 "  pinMode(M_SPEED_PIN_1, OUTPUT);\n" +
                 "  pinMode(M_SPEED_PIN_2, OUTPUT);\n" +
                 "\n" +
-                "  SpeedMotor1 = 0;\n" +
-                "  SpeedMotor2 = 0;\n" +
+                "  SpeedMotorLeft = 0;\n" +
+                "  SpeedMotorRight = 0;\n" +
                 "}\n" +
                 "\n" +
-                "void Motor1(int Speed)\n" +
+                "void Motor1Left(int Speed)\n" +
                 "{\n" +
                 "  int Dir = 0;\n" +
                 "\n" +
                 "  if(Speed > 100)  Speed = 100;\n" +
                 "  if(Speed < -100)  Speed = -100;\n" +
                 "\n" +
-                "  map(Speed,-100,100,-255,255);\n" +
+                "  Speed = map(Speed,-100,100,-255,255);\n" +
                 "  if(Speed < 0)\n" +
                 "  {\n" +
                 "    Dir = 1;\n" +
@@ -49,17 +49,17 @@ public class Engine_Stop extends TranslatorBlock
                 "  digitalWrite(M_DIR_PIN_1, Dir);\n" +
                 "  analogWrite(M_SPEED_PIN_1, Speed);\n" +
                 "\n" +
-                "  SpeedMotor1 = Speed;\n" +
+                "  SpeedMotorLeft = Speed;\n" +
                 "}\n" +
                 "\n" +
-                "void Motor2(int Speed)\n" +
+                "void Motor2Right(int Speed)\n" +
                 "{\n" +
                 "  int Dir = 0;\n" +
                 "\n" +
                 "  if(Speed > 100)  Speed = 100;\n" +
                 "  if(Speed < -100)  Speed = -100;\n" +
                 "\n" +
-                "  map(Speed,-100,100,-255,255);\n" +
+                "  Speed = map(Speed,-100,100,-255,255);\n" +
                 "  if(Speed < 0)\n" +
                 "  {\n" +
                 "    Dir = 1;\n" +
@@ -69,13 +69,13 @@ public class Engine_Stop extends TranslatorBlock
                 "  digitalWrite(M_DIR_PIN_2, Dir);\n" +
                 "  analogWrite(M_SPEED_PIN_2, Speed);\n" +
                 "\n" +
-                "  SpeedMotor2 = Speed;\n" +
+                "  SpeedMotorRight = Speed;\n" +
                 "}\n" +
                 "\n" +
-                "void Motors(int Speed1, int Speed2)\n" +
+                "void Motors(int Speed1Left, int Speed2Right)\n" +
                 "{\n" +
-                "  Motor1(Speed1);\n" +
-                "  Motor2(Speed2);\n" +
+                "  Motor1Left(Speed1Left);\n" +
+                "  Motor2Right(Speed2Right);\n" +
                 "}\n";
         private static final String MOTORS_STOP_DEFINE = "" +
                 "void MotorsStop()\n" +
