@@ -7,7 +7,7 @@
 ; Фирма-разработчик
 #define   Publisher  "Omega-lab"
 ; Сафт фирмы разработчика
-#define   URL        ""
+#define   URL        "https://omegabot.ru/"
 ; Имя исполняемого модуля
 #define   ExeName    ""
 ; Путь до приложения
@@ -33,7 +33,7 @@ AppSupportURL={#URL}
 AppUpdatesURL={#URL}
 
 ; Путь установки по-умолчанию 
-DefaultDirName={pf}\Arduino
+DefaultDirName={commonpf32}\Arduino
 
 ; Имя группы в меню "Пуск"
 DefaultGroupName={#Name}
