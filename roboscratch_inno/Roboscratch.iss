@@ -9,7 +9,7 @@
 ; Сафт фирмы разработчика
 #define   URL        "https://omegabot.ru/"
 ; Имя исполняемого модуля
-#define   ExeName    ""
+#define   ExeName    "Roboscratch"
 ; Путь до приложения
 #define		Sourse	 "C:\Users\Jesus\roboardu"
 
@@ -22,7 +22,7 @@
 
 ; Уникальный идентификатор приложения, 
 ;сгенерированный через Tools -> Generate GUID
-AppId= {{9C684550-AF99-4C14-B4A6-4C2DA36FAA40}
+AppId= {{8B598797-275D-4E06-83DA-CF5DAEE9DB23}
 
 ; Прочая информация, отображаемая при установке
 AppName={#Name}
@@ -33,7 +33,7 @@ AppSupportURL={#URL}
 AppUpdatesURL={#URL}
 
 ; Путь установки по-умолчанию 
-DefaultDirName={commonpf32}\Arduino
+DefaultDirName={userdocs}\Arduino
 
 ; Имя группы в меню "Пуск"
 DefaultGroupName={#Name}
