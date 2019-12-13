@@ -17,7 +17,7 @@ public class Potentiometer extends TranslatorBlock {
         String pin = translatorBlock.toCode();
         translator.addDefinitionCommand("int Potentiometer(int Pin){\n" +
                 "  int value = analogRead(Pin);\n" +
-                "  value = map(value,0,1024,0,100);\n" +
+                "  value = map(value,0,1023,0,100);\n" +
                 "  return value;\n" +
                 "}");
 
