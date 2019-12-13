@@ -814,6 +814,8 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         WorkspaceWidget oldParent = block.getParentWidget();
         if (oldParent != null) {
             oldParent.removeBlock(block);
+            //block = null;
+            //System.gc();
         }
 
         Container parent = block.getParent();
@@ -823,11 +825,13 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
             parent.repaint();
             block.setParentWidget(null);
         }
-
+        
         //fire to workspace that block was removed
         //DO FIRE AN EVENT IF BLOCK IS REMOVED BY USER!!!!
         //NOTE however that we do not throw na event for adding internally
+        
         workspace.notifyListeners(new WorkspaceEvent(workspace, this, block.getBlockID(), WorkspaceEvent.BLOCK_REMOVED));
+        //block = null;
     }
 
     public JComponent getJComponent() {
@@ -881,7 +885,8 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
                         //rb.getParent() should not be null
                         rb.getParent().remove(rb);
                         rb.setParentWidget(null);
-
+                        //NEW 
+                        rb = null;
                     }
                 }
             }

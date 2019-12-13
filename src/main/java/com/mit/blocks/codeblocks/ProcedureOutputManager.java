@@ -120,7 +120,8 @@ public class ProcedureOutputManager
             return;
             
         case WorkspaceEvent.BLOCK_REMOVED:
-            if (b != null && b.isProcedureDeclBlock()) {
+            if (b != null){ 
+                //NEW && b.isProcedureDeclBlock()) {
             	// System.out.println("procedure of type "+myProcInfo.get(b.getBlockID()).type+" removed.");
                 // Remove our entry.
                 myProcInfo.remove(b.getBlockID());
@@ -129,6 +130,7 @@ public class ProcedureOutputManager
                 			link.getSocketBlockID(),
                 			link.getPlugBlockID());
                 }
+                b = null;
             }
             return;
         }

@@ -2296,7 +2296,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             add(popup);
             popup.show(this, e.getX(), e.getY());
         }
-        workspace.getMiniMap().repaint();
+        //workspace.getMiniMap().repaint();
         if (parent != null) {
             parent.stopDragged(this);
         }
@@ -2364,7 +2364,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             // drag this block and all attached to it
             drag(this, dragHandler.dragDX, dragHandler.dragDY, widget, true);
 
-            workspace.getMiniMap().repaint();
+            //workspace.getMiniMap().repaint();
         }
     }
 

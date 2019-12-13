@@ -197,6 +197,7 @@ public class OpenblocksFrame extends JFrame {
         timer = new Timer(1000 * 60 * timeDelay, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //System.gc();
                 String text = getContext().getSaveFileName();
                 String newText = text.replace(".abp", "");
                 String oldPath = context.getSaveFilePath();
