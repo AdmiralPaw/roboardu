@@ -41,6 +41,6 @@ public class temperatureSensor extends TranslatorBlock {
 
 
 
-        return codePrefix + "catchTemperature(&" + tempSens + ")" + codeSuffix;
+        return codePrefix + "catchTemperature(" + tempSens + ")" + codeSuffix;
     }
 }

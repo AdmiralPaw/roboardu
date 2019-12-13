@@ -80,7 +80,7 @@ public class Engine_RightTurn extends TranslatorBlock
         private static final String MOTORS_RIGHT_DEFINE = "" +
                 "void MotorsRight(int Speed)\n" +
                 "{\n" +
-                "  Motors(-Speed, Speed);\n" +
+                "  Motors(Speed, -Speed);\n" +
                 "}\n";
         
 	@Override
