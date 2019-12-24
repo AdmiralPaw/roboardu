@@ -16,7 +16,7 @@ public class Ultrasonic extends TranslatorBlock {
 
         String sensor = "Ultrasonic";
 
-        translator.addHeaderDefinition("NewPing.h");
+        translator.addHeaderFile("NewPing.h");
         translator.addDefinitionCommand("#define TRIGGER_PIN  A4\n"
                 + "#define ECHO_PIN     A5\n"
                 + "#define MAX_DISTANCE 200"
