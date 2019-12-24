@@ -7,7 +7,7 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
 public class sensor_trailer extends TranslatorBlock
 {
-    public static final String BUTTON_FUNC_DEFINE =
+    public static final String TRAILER_FUNC_DEFINE =
             /* If the pin was previously OUTPUT and is **quickly** analog read, the charge on the pin
              *  and the lack of "settling time" does affect the likely result of analogRead.
              * Always introducing a delay to settle the pin is not done here as it is overwhelmingly
@@ -35,7 +35,7 @@ public class sensor_trailer extends TranslatorBlock
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
-        translator.addDefinitionCommand(BUTTON_FUNC_DEFINE);
+        translator.addDefinitionCommand(TRAILER_FUNC_DEFINE);
 
         String ret = "GetTrailer(";
         ret = ret + translatorBlock.toCode();

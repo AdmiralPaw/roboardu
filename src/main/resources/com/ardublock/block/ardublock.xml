@@ -11680,7 +11680,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <text>Trailer sensor</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="number"
+                <BlockConnector connector-type="boolean"
                                                 connector-kind="plug">
                 </BlockConnector>
                 <BlockConnector connector-type="number"
