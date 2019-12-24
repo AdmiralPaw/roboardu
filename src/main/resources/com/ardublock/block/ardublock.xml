@@ -11581,7 +11581,7 @@ initlabel="bg.tft-msg" editable-label="yes">
             </BlockConnectors>
         </BlockGenus>
         
-        <BlockGenus name="Ultrasonic" kind="data" color="242 123 99" initlabel="bg.ultrasonic" editable-label="no">
+        <BlockGenus name="ultrasonicRange" kind="data" color="242 123 99" initlabel="bg.ultrasonicRange" editable-label="no">
             <description>
                 <text>Gives distance to object</text>
             </description>
@@ -11673,6 +11673,23 @@ initlabel="bg.tft-msg" editable-label="yes">
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
+        
+        
+        <BlockGenus name="sensor_trailer" kind="data" color="242 123 99" initlabel="bg.sensor_trailer" editable-label="no">
+            <description>
+                <text>Trailer sensor</text>
+            </description>
+            <BlockConnectors>
+                <BlockConnector connector-type="number"
+                                                connector-kind="plug">
+                </BlockConnector>
+                <BlockConnector connector-type="number"
+                                                connector-kind="socket" label="bc.pin_number">
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8" />
+                </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
+        
         
         
 
@@ -11773,14 +11790,16 @@ initlabel="bg.tft-msg" editable-label="yes">
             <FamilyMember>pinListDigital_D1</FamilyMember>
 -->            <FamilyMember>pinListDigital_D2</FamilyMember>
             <FamilyMember>pinListDigital_D3</FamilyMember>
-<!--            <FamilyMember>pinListDigital_D4</FamilyMember>
+            <FamilyMember>pinListDigital_D4</FamilyMember>
             <FamilyMember>pinListDigital_D5</FamilyMember>
             <FamilyMember>pinListDigital_D6</FamilyMember>
-            <FamilyMember>pinListDigital_D7</FamilyMember>-->
+            <FamilyMember>pinListDigital_D7</FamilyMember>
             <FamilyMember>pinListDigital_D8</FamilyMember>
             <FamilyMember>pinListDigital_D9</FamilyMember>
             <FamilyMember>pinListDigital_D10</FamilyMember>
             <FamilyMember>pinListDigital_D11</FamilyMember>
+            <FamilyMember>pinListDigital_D12</FamilyMember>
+            <FamilyMember>pinListDigital_D13</FamilyMember>
             <!--****************** Digital pins on Arduino Mega only *************** -->
 
             <!--****************** Analog pins that can be used as digital pins. *************** -->
@@ -12264,7 +12283,7 @@ initlabel="bg.tft-msg" editable-label="yes">
             <FamilyMember>Midi_B</FamilyMember>
         </BlockFamily>-->
         <!--MOTORS-->
-        <BlockFamily>
+<!--        <BlockFamily>
             <FamilyMember>Engine_ForwardDistance</FamilyMember>
             <FamilyMember>Engine_BackDistance</FamilyMember>
         </BlockFamily>
@@ -12275,7 +12294,7 @@ initlabel="bg.tft-msg" editable-label="yes">
         <BlockFamily>
             <FamilyMember>Engine_RightTurn</FamilyMember>
             <FamilyMember>Engine_LeftTurn</FamilyMember>
-        </BlockFamily>
+        </BlockFamily>-->
     </BlockFamilies>
 	
 	
@@ -12383,6 +12402,7 @@ initlabel="bg.tft-msg" editable-label="yes">
             <!--242 123 99-->
             <BlockDrawer button-color="242 123 99" name="bd.sensors">
                 <BlockGenusMember>sensor_button</BlockGenusMember>
+                <BlockGenusMember>sensor_trailer</BlockGenusMember>
                 <BlockGenusMember>buttonD12</BlockGenusMember>
                 <BlockGenusMember>little_bits_lightsensor</BlockGenusMember>
                 <!--<BlockGenusMember>little_bits_microphone</BlockGenusMember>-->
@@ -12398,11 +12418,11 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <BlockGenusMember>seeed_touch_sensor</BlockGenusMember>
                 <!--<BlockGenusMember>obstacle_sensor</BlockGenusMember>-->
                 <BlockGenusMember>magnetic_sensor</BlockGenusMember>
-                <BlockGenusMember>rangefinderCombined</BlockGenusMember>
+                <!--<BlockGenusMember>rangefinderCombined</BlockGenusMember>-->
                 <!--<BlockGenusMember>lightCombined</BlockGenusMember>-->
                 <BlockGenusMember>LineFinder</BlockGenusMember>
                 <BlockGenusMember>Potentiometer</BlockGenusMember>
-                <BlockGenusMember>Ultrasonic</BlockGenusMember>
+                <BlockGenusMember>ultrasonicRange</BlockGenusMember>
             </BlockDrawer>
 			
             <!-- servo -->
@@ -12419,9 +12439,9 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <BlockGenusMember>ledD13</BlockGenusMember>
                 <BlockGenusMember>blink_ledD13</BlockGenusMember>
                 <BlockGenusMember>pwmled</BlockGenusMember>
-                <BlockGenusMember>rgb_led</BlockGenusMember>
+<!--                <BlockGenusMember>rgb_led</BlockGenusMember>
                 <BlockGenusMember>rgb_led_blink</BlockGenusMember>
-                <BlockGenusMember>rgb_led_pwm</BlockGenusMember>
+                <BlockGenusMember>rgb_led_pwm</BlockGenusMember>-->
             </BlockDrawer>
 			
             <!-- sound -->

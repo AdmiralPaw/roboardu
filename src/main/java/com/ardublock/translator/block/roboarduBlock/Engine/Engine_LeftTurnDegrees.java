@@ -125,10 +125,16 @@ public class Engine_LeftTurnDegrees extends TranslatorBlock
             + "\n"
             + "  MotorsStop();\n"
             + "}\n";
+    private static final String MOTORS_STOP_DEFINE = "" +
+                "void MotorsStop()\n" +
+                "{\n" +
+                "  Motors(0, 0);\n" +
+                "}\n";
 
 	@Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
+            
             translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
             translator.addHeaderDefinition(ENCODER_DEFINE_PIN);
             translator.addHeaderDefinition(ENCODER_DEFINE_SWITCH);
@@ -136,6 +142,7 @@ public class Engine_LeftTurnDegrees extends TranslatorBlock
             translator.addHeaderDefinition(ENCODER_DEFINE_VAR);
             translator.addDefinitionCommand(ENCODER_DEFINE);
             translator.addDefinitionCommand(MOTORS_DEFINE);
+            translator.addDefinitionCommand(MOTORS_STOP_DEFINE);
             
             translator.addDefinitionCommand(MOTORS_LEFT_DEGREES_DEFINE);
             translator.addSetupCommand("InitMotors();");
