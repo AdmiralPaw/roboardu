@@ -27,7 +27,7 @@ public class lightSensor extends TranslatorBlock
             + "    arr[i] = analogRead(Pin);\n"
             + "    delay(10);\n"
             + "  }\n"
-            + "  return map((arr[0] + arr[1] + arr[2] + arr[3] + arr[4]) / 5, 0, 1024, 100, 0);\n"
+            + "  return map((arr[0] + arr[1] + arr[2] + arr[3] + arr[4]) / 5, 0, 1023, 100, 0);\n"
             + "}";
 
 	@Override

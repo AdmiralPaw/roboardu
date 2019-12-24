@@ -11580,6 +11580,17 @@ initlabel="bg.tft-msg" editable-label="yes">
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
+        
+        <BlockGenus name="Ultrasonic" kind="data" color="242 123 99" initlabel="bg.ultrasonic" editable-label="no">
+            <description>
+                <text>Gives distance to object</text>
+            </description>
+            <BlockConnectors>
+                <BlockConnector connector-type="number"
+                                                connector-kind="plug">
+                </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
 
         <BlockGenus name="Potentiometer" kind="data" color="242 123 99" initlabel="bg.Potentiometer" editable-label="no">
             <description>
@@ -12391,6 +12402,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <!--<BlockGenusMember>lightCombined</BlockGenusMember>-->
                 <BlockGenusMember>LineFinder</BlockGenusMember>
                 <BlockGenusMember>Potentiometer</BlockGenusMember>
+                <BlockGenusMember>Ultrasonic</BlockGenusMember>
             </BlockDrawer>
 			
             <!-- servo -->
