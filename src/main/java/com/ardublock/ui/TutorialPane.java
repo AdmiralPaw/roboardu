@@ -318,7 +318,7 @@ public class TutorialPane extends JPanel {
         temp.add(dummy);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
-        tutorTexts.add("Обучение. Нажмите на \"Закрыть обучение\" для выхода из обучения. Кнопки \"Далее\" и \"Назад\" используются для перехда к следующему шагу или возвращения к предыдущему. Во время обучения можно использовать все элементы интерфейса.");
+        tutorTexts.add("Обучение. Для выхода из обучения нажмите на \"Закрыть обучение\" . Кнопки \"Далее\" и \"Назад\" используются для перехда к следующему шагу или возвращения к предыдущему. Во время обучения можно использовать все элементы интерфейса.");
         tutorLocations.add(new Point(
                 (workspacePanel.getWidth() - 300) / 2,
                 (workspacePanel.getHeight() - 150) / 3));
@@ -346,7 +346,7 @@ public class TutorialPane extends JPanel {
         temp.add(dummy);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(factoryPanel);
-        tutorTexts.add("Холст, где будет писаться программа. ВНИМАНИЕ: выполняются только те блоки, которые подключены в \"ЦИКЛ\" или \"ПРОГРАММА\". Дополнительные детали работы с блоками описаны в методичке.");
+        tutorTexts.add("Холст, где будет писаться программа. ВНИМАНИЕ: выполняются только те блоки, которые подключены в \"ЦИКЛ\" или \"ПРОГРАММА\".");
         tutorLocations.add(new Point(
                 (factoryPanel.getWidth() - 300) / 2,
                 (factoryPanel.getHeight() - 200) / 3));
@@ -360,7 +360,7 @@ public class TutorialPane extends JPanel {
         temp.add(dummy);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
-        tutorTexts.add("Подключения к контроллеру. Здесь указаны/отражены/обозначены подсказки при составлении программы.");
+        tutorTexts.add("Подключения к контроллеру. Здесь отражены подсказки при составлении программы.");
         tutorLocations.add(new Point(
                 (workspacePanel.getWidth() - 300) / 10 * 9,
                 (workspacePanel.getHeight() - 150) / 3));
@@ -388,7 +388,7 @@ public class TutorialPane extends JPanel {
         temp.add(blocksChoice);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
-        tutorTexts.add("Перейдем к выбору блоков. Блоки разделяются на 3 типа - изначальный блок, управляющий блок, блок-команда и блок-переменная. Блоки-команды нужно подключать с помощью разъемов-выемок друг к другу, блоки-переменные подключаются к блокам-командам справа с помощью разъема. Изначальные блоки - это \"ЦИКЛ\" и \"ПРОГРАММА\". Они никуда не подключаются, к ним подключаются все остальные блоки.");
+        tutorTexts.add("Перейдем к выбору блоков. Блоки разделяются на 3 типа - изначальный блок, управляющий блок, блок-команда и блок-переменная. Блоки-команды нужно подключать с помощью разъемов-выемок друг к другу, блоки-переменные подключаются к блокам-командам справа с помощью разъема. Изначальные блоки - это \"ЦИКЛ\" и \"ПРОГРАММА\". Все блоки подключаются к ним.");
         tutorLocations.add(new Point(
                 (workspacePanel.getWidth() - 300) / 10,
                 (workspacePanel.getHeight() - 300) / 3));
@@ -403,7 +403,7 @@ public class TutorialPane extends JPanel {
         temp.add(dummy);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(controllerPanel);
-        tutorTexts.add("Попробуйте вытащить любой блок-команду и подключите его к циклу. ПОДСКАЗКА: ориентируйтесь по форме блоков.");
+        tutorTexts.add("Попробуйте вытащить любой блок-команду и подключить его к циклу. ПОДСКАЗКА: ориентируйтесь по форме блоков.");
         tutorLocations.add(new Point(
                 (controllerPanel.getWidth() - 300) / 2,
                 (controllerPanel.getHeight() - 150) / 3));
@@ -450,7 +450,7 @@ public class TutorialPane extends JPanel {
         temp.add(CtrlY);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(factoryPanel);
-        tutorTexts.add("Попробуйте отдалить или приблизить камеру, отменить и повторить действие. Знак \"=\" - это изначальный масштаб. ");
+        tutorTexts.add("Попробуйте отдалить или приблизить камеру. Знак \"=\" - это изначальный масштаб. ");
         tutorLocations.add(new Point(
                 (factoryPanel.getWidth() - 300) / 2,
                 (factoryPanel.getHeight() - 170) / 3));                
@@ -513,7 +513,7 @@ public class TutorialPane extends JPanel {
         }
         tutorIllumPanels.add(temp); //TODO
         inactiveTutorPanels.add(workspacePanel);
-        tutorTexts.add("Нажатием на коннектор (разъем) вы откроете список модулей, которые можно к нему подключить. Схема в программе соответствует реальной плате, поэтому подключать модули можно ориентируясь на нее.");
+        tutorTexts.add("Нажатием на коннектор (разъем) вы откроете список модулей, которые можно к нему подключить. Вы можете подключать модули, ориентируяс на нее.");
         tutorLocations.add(new Point(
                 (workspacePanel.getWidth() - 300) / 10 * 9,
                 (workspacePanel.getHeight() - 200) / 10 * 2));
@@ -534,7 +534,7 @@ public class TutorialPane extends JPanel {
         }
         tutorIllumPanels.add(temp); //TODO
         inactiveTutorPanels.add(workspacePanel);
-        tutorTexts.add("Нажмите на сам модуль в изображении или на его название в списке. Вы получите краткое описание модуля и его изображение о модуле и как он примерно выглядит в реальности. Так же в панели вы можете получить блоки, которые могут взаимодействовать с модулем.");
+        tutorTexts.add("Нажмите на сам модуль в изображении или на его название в списке. Вы увидите краткое описание модуля и его изображение, приближенное к реальности. Также в панели вы можете открыть блоки, которые могут взаимодействовать с модулем.");
         tutorLocations.add(new Point(
                 (workspacePanel.getWidth() - 300) / 10 * 9,
                 (workspacePanel.getHeight() - 200) / 10 * 2));
@@ -578,7 +578,7 @@ public class TutorialPane extends JPanel {
         temp.add(generateButton);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
-        tutorTexts.add("Теперь подключите к компьютеру вашу плату с подключенным к ней светодиодом. Нажмите на кнопку \"Отправить в Ардуино\". Если вы все сделали верно, то в окне с кодом в выводе вы получите либо сообщение о удачной загрузке, либо ошибку о загрузке в плату. Во втором случае вам нужно будет открыть \"Инструменты\", выбрать \"Порт\" и в выпадающем списке выбрать существующий COM-порт.");
+        tutorTexts.add("Теперь подключите к компьютеру вашу плату с подключенным к ней светодиодом. Нажмите на кнопку \"Загрузить в Ардуино\". Если вы все сделали верно, то в окне с кодом под ним вы получите либо сообщение об удачной загрузке, либо ошибку о загрузке в плату. Во втором случае вам нужно будет открыть \"Инструменты\", выбрать \"Порт\" и в выпадающем списке выбрать существующий COM-порт.");
         tutorLocations.add(new Point(
                 (workspacePanel.getWidth() - 300) / 10,
                 (workspacePanel.getHeight() - 300) / 15));
@@ -592,7 +592,7 @@ public class TutorialPane extends JPanel {
         temp.add(dummy);
         tutorIllumPanels.add(temp);
         inactiveTutorPanels.add(workspacePanel);
-        tutorTexts.add("Если светодиод на вашей плате загорелся, то поздравляем! Вы прошли обучение и готовы писать собственные программы для своего ОмегаБота!");
+        tutorTexts.add("Если светодиод на вашей плате загорелся, то поздравляем! Вы прошли обучение и готовы составлять собственные программы для своего ОмегаБота!");
         tutorLocations.add(new Point(
                 (workspacePanel.getWidth() - 300) / 2,
                 (workspacePanel.getHeight() - 150) / 3));
