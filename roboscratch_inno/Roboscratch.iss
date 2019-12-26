@@ -81,7 +81,7 @@ Name: "libs\I2Cdev"; 													 Description: "I2Cdev"; Types: full
 Name: "libs\MPU9250";													 Description: "MPU9250"; Types: full
 Name: "libs\SparkFun_ToF_Range_FinderVL6180";  Description: "SparkFun_ToF_Range_Finder-VL6180"; Types: full
 Name: "libs\NewPing";                          Description: "NewPing"; Types: full
-Name: "libs\OneWire-2.3.5";                    Description: "OneWire-2.3.5"; Types: full
+Name: "libs\OneWire";                          Description: "OneWire-2.3.5"; Types: full
 
 ;------------------------------------------------------------------------------
 ;   Файлы, которые надо включить в пакет установщика
@@ -95,7 +95,7 @@ Source: "{#Sourse}\ArduinoLibraries\I2Cdev\*"; Components: libs\I2Cdev; DestDir:
 Source: "{#Sourse}\ArduinoLibraries\MPU9250-master\*"; Components: libs\MPU9250; DestDir: "{userdocs}\Arduino\libraries\MPU9250-master"; Flags: recursesubdirs createallsubdirs ignoreversion
 Source: "{#Sourse}\ArduinoLibraries\SparkFun_ToF_Range_Finder-VL6180_Arduino_Library-master\*"; Components: libs\SparkFun_ToF_Range_FinderVL6180; DestDir: "{userdocs}\Arduino\libraries\SparkFun_ToF_Range_Finder-VL6180_Arduino_Library-master"; Flags: recursesubdirs createallsubdirs ignoreversion
 Source: "{#Sourse}\ArduinoLibraries\NewPing\*"; Components: libs\NewPing; DestDir: "{userdocs}\Arduino\libraries\NewPing"; Flags: recursesubdirs createallsubdirs ignoreversion
-Source: "{#Sourse}\ArduinoLibraries\OneWire-2.3.5\*"; Components: libs\OneWire-2.3.5; DestDir: "{userdocs}\Arduino\libraries\OneWire-2.3.5"; Flags: recursesubdirs createallsubdirs ignoreversion
+Source: "{#Sourse}\ArduinoLibraries\OneWire-2.3.5\*"; Components: libs\OneWire; DestDir: "{userdocs}\Arduino\libraries\OneWire-2.3.5"; Flags: recursesubdirs createallsubdirs ignoreversion
 
 
 Source: "{#Sourse}\target\OmegaBot_IDE-tool.jar"; Components: programm; DestDir: "{app}\tools\{#Name}\tool"; Flags: ignoreversion
