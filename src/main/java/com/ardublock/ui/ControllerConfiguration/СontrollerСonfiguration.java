@@ -32,7 +32,7 @@ public class СontrollerСonfiguration extends JPanel {
         super();
         this.setLayout(new BorderLayout());
         this.components = new ArrayList<>();
-        this.controllerImage = new ControllerImage(this);
+        this.controllerImage = new ControllerImage(this,0);
         this.componentsPane = new JPanel(new VerticalLayout());
         componentsPane.setBackground(Color.white);
         //buttonPane.setBorder(BorderFactory.createMatteBorder(3, 0, 0, 0, new Color(55, 150, 240)));

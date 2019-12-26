@@ -9,6 +9,7 @@ import java.net.URL;
 
 public class ControllerImage extends JPanel {
 
+    private int type_of_plate;
     private СontrollerСonfiguration controllerConf;
     private Image background;
     public ArrayList<ControllerButton> moduleButtons;
@@ -21,22 +22,27 @@ public class ControllerImage extends JPanel {
         "a3", "a2", "a1", "a0", 
         "i2c"};
 
-    public ControllerImage(СontrollerСonfiguration controller) {
+    public ControllerImage(СontrollerСonfiguration controller, int type_of_plate) {
         this.setLayout(null);
         this.setBackground(Color.WHITE);
         this.controllerConf = controller;
+        
         background = getImage("com/ardublock/Images/PlataBackground1.png",
                 300/*this.getWidth()*/, 300/*this.getHeight()*/);
-        this.initArrays();
+        this.initArrays(type_of_plate);
     }
 
-    private void initArrays() {
+    private void initArrays(int type_of_plate) {
         this.moduleButtons = new ArrayList<ControllerButton>();
         this.connectorButtons = new ArrayList<ControllerButton>();
         for (String i : names) {
-            this.moduleButtons.add(new ControllerButton(controllerConf, this, i, "module"));
-            this.connectorButtons.add(new ControllerButton(controllerConf, this, i, "connector"));
+            this.moduleButtons.add(new ControllerButton(controllerConf, this, i, "module",type_of_plate));
+            this.connectorButtons.add(new ControllerButton(controllerConf, this, i, "connector",type_of_plate));
         }
+    }
+    
+    public void setPlate(int plate_in){
+        this.type_of_plate = plate_in;
     }
 
     //-------------------------------------ДЛЯ УСТАНОВКИ ИЗОБРАЖЕНИЯ В МОДУЛЬ----------------------------------------------
