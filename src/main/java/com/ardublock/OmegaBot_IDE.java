@@ -36,7 +36,7 @@ import java.util.prefs.Preferences;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-public class Roboscratch implements Tool, OpenblocksFrameListener {
+public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
 
     static Editor editor;
     static ArduBlockToolFrame openblocksFrame;
@@ -56,17 +56,17 @@ public class Roboscratch implements Tool, OpenblocksFrameListener {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        if (Roboscratch.editor == null) {
-            Roboscratch.editor = editor;
-            Roboscratch.openblocksFrame = new ArduBlockToolFrame();
-            Roboscratch.openblocksFrame.addListener(this);
+        if (OmegaBot_IDE.editor == null) {
+            OmegaBot_IDE.editor = editor;
+            OmegaBot_IDE.openblocksFrame = new ArduBlockToolFrame();
+            OmegaBot_IDE.openblocksFrame.addListener(this);
             Context context = Context.getContext();
             String arduinoVersion = this.getArduinoVersion();
             context.setInArduino(true);
             context.setArduinoVersionString(arduinoVersion);
             context.setEditor(editor);
             System.out.println("Arduino Version: " + arduinoVersion);
-            userPrefs = Preferences.userRoot().node("roboscratch");
+            userPrefs = Preferences.userRoot().node("OmegaBot_IDE");
             // Don't just "close" Ardublock, see if there's something to save first.
             // Note to self: Code here only affects behaviour when we're an Arduino Tool,
             // not when run directly - See Main.java for that.
@@ -80,23 +80,23 @@ public class Roboscratch implements Tool, OpenblocksFrameListener {
                 openblocksFrame.repaint();
             }
 
-            Roboscratch.openblocksFrame.addWindowListener(new WindowAdapter() {
+            OmegaBot_IDE.openblocksFrame.addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent e) {
-                    Roboscratch.openblocksFrame.doCloseArduBlockFile();
+                    OmegaBot_IDE.openblocksFrame.doCloseArduBlockFile();
                 }
             });
             if (userPrefs.getBoolean("ardublock.ui.autostart", false)) {
-                Roboscratch.openblocksFrame.setVisible(true);
+                OmegaBot_IDE.openblocksFrame.setVisible(true);
             }
         }
     }
 
     public void run() {
         try {
-            Roboscratch.editor.toFront();
-            Roboscratch.openblocksFrame.setVisible(true);
-            Roboscratch.openblocksFrame.toFront();
-            Roboscratch.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            OmegaBot_IDE.editor.toFront();
+            OmegaBot_IDE.openblocksFrame.setVisible(true);
+            OmegaBot_IDE.openblocksFrame.toFront();
+            OmegaBot_IDE.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         } catch (Exception e) {
 
         }
@@ -126,53 +126,53 @@ public class Roboscratch implements Tool, OpenblocksFrameListener {
         java.lang.reflect.Method method;
         try {
             // pre Arduino 1.6.12
-            Class ed = Roboscratch.editor.getClass();
+            Class ed = OmegaBot_IDE.editor.getClass();
             Class[] cArg = new Class[1];
             cArg[0] = String.class;
             method = ed.getMethod("setText", cArg);
-            method.invoke(Roboscratch.editor, source);
+            method.invoke(OmegaBot_IDE.editor, source);
         } catch (NoSuchMethodException e) {
-            Roboscratch.editor.getCurrentTab().setText(source);
+            OmegaBot_IDE.editor.getCurrentTab().setText(source);
         } catch (IllegalAccessException e) {
-            Roboscratch.editor.getCurrentTab().setText(source);
+            OmegaBot_IDE.editor.getCurrentTab().setText(source);
         } catch (SecurityException e) {
-            Roboscratch.editor.getCurrentTab().setText(source);
+            OmegaBot_IDE.editor.getCurrentTab().setText(source);
         } catch (InvocationTargetException e) {
-            Roboscratch.editor.getCurrentTab().setText(source);
+            OmegaBot_IDE.editor.getCurrentTab().setText(source);
         }
-        Roboscratch.editor.handleExport(false);
+        OmegaBot_IDE.editor.handleExport(false);
     }
 
     public void didVerify(String source) {
         java.lang.reflect.Method method;
         try {
             // pre Arduino 1.6.12
-            Class ed = Roboscratch.editor.getClass();
+            Class ed = OmegaBot_IDE.editor.getClass();
             Class[] cArg = new Class[1];
             cArg[0] = String.class;
             method = ed.getMethod("setText", cArg);
-            method.invoke(Roboscratch.editor, source);
+            method.invoke(OmegaBot_IDE.editor, source);
         } catch (NoSuchMethodException e) {
-            Roboscratch.editor.getCurrentTab().setText(source);
+            OmegaBot_IDE.editor.getCurrentTab().setText(source);
         } catch (IllegalAccessException e) {
-            Roboscratch.editor.getCurrentTab().setText(source);
+            OmegaBot_IDE.editor.getCurrentTab().setText(source);
         } catch (SecurityException e) {
-            Roboscratch.editor.getCurrentTab().setText(source);
+            OmegaBot_IDE.editor.getCurrentTab().setText(source);
         } catch (InvocationTargetException e) {
-            Roboscratch.editor.getCurrentTab().setText(source);
+            OmegaBot_IDE.editor.getCurrentTab().setText(source);
         }
         try {
-            Class ed = Roboscratch.editor.getClass();
+            Class ed = OmegaBot_IDE.editor.getClass();
             Method reset = Editor.class.getDeclaredMethod("resetHandlers");
             reset.setAccessible(true);
-            reset.invoke(Roboscratch.editor);
+            reset.invoke(OmegaBot_IDE.editor);
             Field ph = Editor.class.getDeclaredField("presentHandler");
             ph.setAccessible(true);
-            Runnable run_ph = (Runnable) ph.get(Roboscratch.editor);
+            Runnable run_ph = (Runnable) ph.get(OmegaBot_IDE.editor);
             Field rh = Editor.class.getDeclaredField("runHandler");
             rh.setAccessible(true);
-            Runnable run_rh = (Runnable) rh.get(Roboscratch.editor);
-            Roboscratch.editor.handleRun(false, run_ph, run_rh);
+            Runnable run_rh = (Runnable) rh.get(OmegaBot_IDE.editor);
+            OmegaBot_IDE.editor.handleRun(false, run_ph, run_rh);
         } catch (NoSuchFieldException e) {
             System.out.println(e.toString());
         } catch (IllegalAccessException e) {

@@ -1,5 +1,5 @@
 ; Имя приложения
-#define   Name       "Roboscratch"
+#define   Name       "OmegaBot_IDE"
 ; Путь установки по стандарту
 #define   Path 			 "Arduino\tools"
 ; Версия приложения
@@ -9,7 +9,7 @@
 ; Сафт фирмы разработчика
 #define   URL        "https://omegabot.ru/"
 ; Имя исполняемого модуля
-#define   ExeName    "Roboscratch"
+#define   ExeName    "OmegaBot_IDE"
 ; Путь до приложения
 #define		Sourse	 "C:\Users\Jesus\roboardu"
 
@@ -40,7 +40,7 @@ DefaultGroupName={#Name}
 
 ; Каталог, куда будет записан собранный setup и имя исполняемого файла
 OutputDir={#Sourse}\roboscratch_inno
-OutputBaseFileName=Roboscratch-setup
+OutputBaseFileName=OmegaBot_IDE-setup
 
 ; Файл иконки
 SetupIconFile={#Sourse}\roboscratch_inno\icon.ico
@@ -93,6 +93,6 @@ Source: "{#Sourse}\ArduinoLibraries\I2Cdev\*"; Components: libs\I2Cdev; DestDir:
 Source: "{#Sourse}\ArduinoLibraries\MPU9250-master\*"; Components: libs\MPU9250; DestDir: "{userdocs}\Arduino\libraries\MPU9250-master"; Flags: recursesubdirs createallsubdirs ignoreversion
 Source: "{#Sourse}\ArduinoLibraries\SparkFun_ToF_Range_Finder-VL6180_Arduino_Library-master\*"; Components: libs\SparkFun_ToF_Range_FinderVL6180; DestDir: "{userdocs}\Arduino\libraries\SparkFun_ToF_Range_Finder-VL6180_Arduino_Library-master"; Flags: recursesubdirs createallsubdirs ignoreversion
 
-Source: "{#Sourse}\target\roboscratch-tool.jar"; Components: programm; DestDir: "{app}\tools\{#Name}\tool"; Flags: ignoreversion
+Source: "{#Sourse}\target\OmegaBot_IDE-tool.jar"; Components: programm; DestDir: "{app}\tools\{#Name}\tool"; Flags: ignoreversion
 
 

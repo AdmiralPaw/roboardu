@@ -80,7 +80,7 @@ public class Settings extends JFrame {
             }
         });
 
-        userPrefs = Preferences.userRoot().node("roboscratch");
+        userPrefs = Preferences.userRoot().node("OmegaBot_IDE");
         if (this.isFirstLaunch()) {
             userPrefs.putBoolean("is_first_launch", false);
             userPrefs.putBoolean("ardublock.ui.autostart", false);

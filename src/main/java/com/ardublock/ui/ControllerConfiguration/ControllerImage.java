@@ -26,9 +26,18 @@ public class ControllerImage extends JPanel {
         this.setLayout(null);
         this.setBackground(Color.WHITE);
         this.controllerConf = controller;
-        
-        background = getImage("com/ardublock/Images/PlataBackground1.png",
+        this.type_of_plate = type_of_plate;
+        switch(this.type_of_plate){
+            case 0:
+                background = getImage("com/ardublock/Images/PlataBackground0.png",
                 300/*this.getWidth()*/, 300/*this.getHeight()*/);
+                break;
+            case 1:
+                background = getImage("com/ardublock/Images/PlataBackground1.png",
+                300/*this.getWidth()*/, 300/*this.getHeight()*/);
+                break;
+        }
+        
         this.initArrays(type_of_plate);
     }
 

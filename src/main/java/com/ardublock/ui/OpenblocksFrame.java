@@ -149,7 +149,7 @@ public class OpenblocksFrame extends JFrame {
         initOpenBlocks();
 
         user = System.getProperty("user.name");
-        autosavePath = "C:\\Users\\" + user + "\\Documents\\RoboScratch\\";
+        autosavePath = "C:\\Users\\" + user + "\\Documents\\OmegaBot_IDE\\";
 
         File directory = new File(autosavePath);
         if (!directory.exists()) {
@@ -393,7 +393,7 @@ public class OpenblocksFrame extends JFrame {
         ImageIcon mLogo = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(
                 "com/ardublock/block/mainLogo2.png")
         );
-        Image image = mLogo.getImage().getScaledInstance(137, standartNorthPanelSize,
+        Image image = mLogo.getImage().getScaledInstance(81, standartNorthPanelSize,
                 java.awt.Image.SCALE_SMOOTH);
         mLogo = new ImageIcon(image);
         mainLogo.setIcon(mLogo);

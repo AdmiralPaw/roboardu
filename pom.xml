@@ -5,10 +5,10 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 	<groupId>org.ardublock</groupId>
-	<artifactId>roboscratch</artifactId>
+	<artifactId>OmegaBot_IDE</artifactId>
 	<packaging>jar</packaging>
 	<version>0.1.0</version>
-	<name>RoboscratchEtu</name>
+	<name>OmegaBot_IDEEtu</name>
 	<description>A Block Programming Language for Arduino</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

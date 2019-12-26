@@ -35,7 +35,7 @@ public class Context {
     private OsType osType;
     private String defaultFileName = "untitled";
 
-    final public static String APP_NAME = "Roboscratch";
+    final public static String APP_NAME = "OmegaBot_IDE";
 
     private Editor editor;
 
