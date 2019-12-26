@@ -38,11 +38,13 @@ public class buttonD12 extends TranslatorBlock
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {
+        TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
+        String pin = translatorBlock.toCode();
         translator.addDefinitionCommand(BUTTON_FUNC_DEFINE);
         translator.addDefinitionCommand(LIFT_FUNC_DEFINE);
-        translator.addSetupCommand("Lift_pin(12);");
+        translator.addSetupCommand("Lift_pin(" + pin + ",true);");
 
-        String ret = "!GetButton(12)";
+        String ret = "!GetButton(" + pin + ")";
         return codePrefix + ret + codeSuffix;
     }
 }

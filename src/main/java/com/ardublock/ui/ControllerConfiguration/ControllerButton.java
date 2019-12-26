@@ -24,6 +24,7 @@ public class ControllerButton extends JToggleButton {
     private ControllerButton button;
     private boolean mouseIsOnThis;
     private boolean mouseIsPressedThis;
+    private int type_of_plate;
     //private boolean canBePressed;
 
     /**
@@ -32,7 +33,7 @@ public class ControllerButton extends JToggleButton {
      * @param Id
      * @param mode
      */
-    public ControllerButton(СontrollerСonfiguration root, ControllerImage rootImage, String Id, String mode) {
+    public ControllerButton(СontrollerСonfiguration root, ControllerImage rootImage, String Id, String mode, int type_of_plate) {
         moduleSuitableBlocks.add("");
 
         this.button = this;
@@ -40,6 +41,7 @@ public class ControllerButton extends JToggleButton {
         this.buttonId = Id;
         this.controllerImage = rootImage;
         this.mode = mode;
+        this.type_of_plate = type_of_plate;
         setMargin(new Insets(0, 0, 0, 0));
         setIconTextGap(0);
         setBorderPainted(false);
@@ -51,13 +53,13 @@ public class ControllerButton extends JToggleButton {
             case "connector":
             case "Connector":
                 this.isItConnector = true;
-                this.setStartPositionAsConnector(Id);
+                this.setStartPositionAsConnector(Id,this.type_of_plate);
                 this.setIconAsConnector(Id);
                 break;
             case "module":
             case "Module":
                 this.isItConnector = false;
-                this.setStartPositionAsModule(Id);
+                this.setStartPositionAsModule(Id,this.type_of_plate);
                 this.setStartIconAsModule();
                 break;
             default:
@@ -238,93 +240,210 @@ public class ControllerButton extends JToggleButton {
         }
     }
 
-    private void setStartPositionAsConnector(String Id) {
-        switch (Id) {
-            case "dir04pwm05":
-                this.setBounds(this.controller.getX() + 54, this.controller.getY() + 88, 16, 27);
-                break;
-            case "dir07pwm06":
-                this.setBounds(this.controller.getX() + 54, this.controller.getY() + 185, 16, 27);
-                break;
-            case "d2":
-                this.setBounds(this.controller.getX() + 54, this.controller.getY() + 120, 25, 16);
-                break;
-            case "d3":
-                this.setBounds(this.controller.getX() + 54, this.controller.getY() + 165, 25, 16);
-                break;
-            case "d8":
-                this.setBounds(this.controller.getX() + 86, this.controller.getY() + 65, 16, 25);
-                break;
-            case "d10":
-                this.setBounds(this.controller.getX() + 106, this.controller.getY() + 65, 16, 25);
-                break;
-            case "d9":
-                this.setBounds(this.controller.getX() + 126, this.controller.getY() + 65, 16, 25);
-                break;
-            case "d11":
-                this.setBounds(this.controller.getX() + 146, this.controller.getY() + 65, 16, 25);
-                break;
-            case "a3":
-                this.setBounds(this.controller.getX() + 86, this.controller.getY() + 210, 16, 25);
-                break;
-            case "a2":
-                this.setBounds(this.controller.getX() + 106, this.controller.getY() + 210, 16, 25);
-                break;
-            case "a1":
-                this.setBounds(this.controller.getX() + 126, this.controller.getY() + 210, 16, 25);
-                break;
-            case "a0":
-                this.setBounds(this.controller.getX() + 146, this.controller.getY() + 210, 16, 25);
-                break;
-            case "i2c":
-                this.setBounds(this.controller.getX() + 228, this.controller.getY() + 90, 16, 30);
-                break;
+    private void setStartPositionAsConnector(String Id, int type_of_plate) {
+        switch (type_of_plate) {
+            case 0:
+                switch (Id) {
+                    case "dir04pwm05":
+                        this.setBounds(this.controller.getX() + 54, this.controller.getY() + 88, 16, 27);
+                        break;
+                    case "dir07pwm06":
+                        this.setBounds(this.controller.getX() + 54, this.controller.getY() + 185, 16, 27);
+                        break;
+                    case "d2":
+                        this.setBounds(this.controller.getX() + 54, this.controller.getY() + 120, 25, 16);
+                        break;
+                    case "d3":
+                        this.setBounds(this.controller.getX() + 54, this.controller.getY() + 165, 25, 16);
+                        break;
+                    case "d8":
+                        this.setBounds(this.controller.getX() + 86, this.controller.getY() + 65, 16, 25);
+                        break;
+                    case "d10":
+                        this.setBounds(this.controller.getX() + 106, this.controller.getY() + 65, 16, 25);
+                        break;
+                    case "d9":
+                        this.setBounds(this.controller.getX() + 126, this.controller.getY() + 65, 16, 25);
+                        break;
+                    case "d11":
+                        this.setBounds(this.controller.getX() + 146, this.controller.getY() + 65, 16, 25);
+                        break;
+                    case "a3":
+                        this.setBounds(this.controller.getX() + 86, this.controller.getY() + 210, 16, 25);
+                        break;
+                    case "a2":
+                        this.setBounds(this.controller.getX() + 106, this.controller.getY() + 210, 16, 25);
+                        break;
+                    case "a1":
+                        this.setBounds(this.controller.getX() + 126, this.controller.getY() + 210, 16, 25);
+                        break;
+                    case "a0":
+                        this.setBounds(this.controller.getX() + 146, this.controller.getY() + 210, 16, 25);
+                        break;
+                    case "i2c":
+                        this.setBounds(this.controller.getX() + 228, this.controller.getY() + 90, 16, 30);
+                        break;
 
+                }
+                break;
+            case 1:
+                switch (Id) {
+                    case "dir04pwm05":
+                        this.setBounds(this.controller.getX() + 54, this.controller.getY() + 88, 16, 27);
+                        break;
+                    case "dir07pwm06":
+                        this.setBounds(this.controller.getX() + 54, this.controller.getY() + 185, 16, 27);
+                        break;
+                    case "d2":
+                        this.setBounds(this.controller.getX() + 54, this.controller.getY() + 120, 25, 16);
+                        break;
+                    case "d3":
+                        this.setBounds(this.controller.getX() + 54, this.controller.getY() + 165, 25, 16);
+                        break;
+                    case "d8":
+                        this.setBounds(this.controller.getX() + 86, this.controller.getY() + 65, 16, 25);
+                        break;
+                    case "d10":
+                        this.setBounds(this.controller.getX() + 106, this.controller.getY() + 65, 16, 25);
+                        break;
+                    case "d9":
+                        this.setBounds(this.controller.getX() + 126, this.controller.getY() + 65, 16, 25);
+                        break;
+                    case "d11":
+                        this.setBounds(this.controller.getX() + 146, this.controller.getY() + 65, 16, 25);
+                        break;
+                    case "a3":
+                        this.setBounds(this.controller.getX() + 86, this.controller.getY() + 210, 16, 25);
+                        break;
+                    case "a2":
+                        this.setBounds(this.controller.getX() + 106, this.controller.getY() + 210, 16, 25);
+                        break;
+                    case "a1":
+                        this.setBounds(this.controller.getX() + 126, this.controller.getY() + 210, 16, 25);
+                        break;
+                    case "a0":
+                        this.setBounds(this.controller.getX() + 146, this.controller.getY() + 210, 16, 25);
+                        break;
+                    case "i2c":
+                        this.setBounds(this.controller.getX() + 228, this.controller.getY() + 90, 16, 30);
+                        break;
+
+                }
+                break;
         }
     }
 
-    private void setStartPositionAsModule(String Id) {
-        switch (Id) {
-            case "dir04pwm05":
-                this.setBounds(this.controller.getX() + 5, this.controller.getY() + 60, 35, 35);
-                break;
-            case "dir07pwm06":
-                this.setBounds(this.controller.getX() + 5, this.controller.getY() + 210, 35, 35);
-                break;
-            case "d2":
-                this.setBounds(this.controller.getX() + 5, this.controller.getY() + 110, 35, 35);
-                break;
-            case "d3":
-                this.setBounds(this.controller.getX() + 5, this.controller.getY() + 160, 35, 35);
-                break;
-            case "d8":
-                this.setBounds(this.controller.getX() + 40, this.controller.getY() + 10, 35, 35);
-                break;
-            case "d10":
-                this.setBounds(this.controller.getX() + 90, this.controller.getY() + 10, 35, 35);
-                break;
-            case "d9":
-                this.setBounds(this.controller.getX() + 140, this.controller.getY() + 10, 35, 35);
-                break;
-            case "d11":
-                this.setBounds(this.controller.getX() + 190, this.controller.getY() + 10, 35, 35);
-                break;
-            case "a3":
-                this.setBounds(this.controller.getX() + 40, this.controller.getY() + 255, 35, 35);
-                break;
-            case "a2":
-                this.setBounds(this.controller.getX() + 90, this.controller.getY() + 255, 35, 35);
-                break;
-            case "a1":
-                this.setBounds(this.controller.getX() + 140, this.controller.getY() + 255, 35, 35);
-                break;
-            case "a0":
-                this.setBounds(this.controller.getX() + 190, this.controller.getY() + 255, 35, 35);
-                break;
-            case "i2c":
-                this.setBounds(this.controller.getX() + 260, this.controller.getY() + 100, 35, 35);
-                break;
+    private void setStartPositionAsModule(String Id, int type_of_plate) {
+        switch (type_of_plate) {
+            case 0:
+                switch (Id) {
+                    case "dir04pwm05":
+                        this.setBounds(this.controller.getX() + 5, this.controller.getY() + 60, 35, 35);
+                        break;
+                    case "dir07pwm06":
+                        this.setBounds(this.controller.getX() + 5, this.controller.getY() + 210, 35, 35);
+                        break;
+                    case "d2":
+                        this.setBounds(this.controller.getX() + 5, this.controller.getY() + 110, 35, 35);
+                        break;
+                    case "d3":
+                        this.setBounds(this.controller.getX() + 5, this.controller.getY() + 160, 35, 35);
+                        break;
+                    case "d8":
+                        this.setBounds(this.controller.getX() + 40, this.controller.getY() + 10, 35, 35);
+                        break;
+                    case "d10":
+                        this.setBounds(this.controller.getX() + 90, this.controller.getY() + 10, 35, 35);
+                        break;
+                    case "d9":
+                        this.setBounds(this.controller.getX() + 140, this.controller.getY() + 10, 35, 35);
+                        break;
+                    case "d11":
+                        this.setBounds(this.controller.getX() + 190, this.controller.getY() + 10, 35, 35);
+                        break;
+                    case "a3":
+                        this.setBounds(this.controller.getX() + 40, this.controller.getY() + 255, 35, 35);
+                        break;
+                    case "a2":
+                        this.setBounds(this.controller.getX() + 90, this.controller.getY() + 255, 35, 35);
+                        break;
+                    case "a1":
+                        this.setBounds(this.controller.getX() + 140, this.controller.getY() + 255, 35, 35);
+                        break;
+                    case "a0":
+                        this.setBounds(this.controller.getX() + 190, this.controller.getY() + 255, 35, 35);
+                        break;
+                    case "i2c":
+                        this.setBounds(this.controller.getX() + 260, this.controller.getY() + 100, 35, 35);
+                        break;
 
+                }
+                break;
+            case 1:
+                switch (Id) {
+                    case "dir04pwm05":
+                        this.setBounds(this.controller.getX() + 54, this.controller.getY() + 88, 16, 27);
+                        break;
+                    case "dir07pwm06":
+                        this.setBounds(this.controller.getX() + 54, this.controller.getY() + 185, 16, 27);
+                        break;
+                    case "d2":
+                        this.setBounds(this.controller.getX() + 54, this.controller.getY() + 120, 25, 16);
+                        break;
+                    case "d3":
+                        this.setBounds(this.controller.getX() + 54, this.controller.getY() + 165, 25, 16);
+                        break;
+                    case "d8":
+                        this.setBounds(this.controller.getX() + 86, this.controller.getY() + 65, 16, 25);
+                        break;
+                    case "d10":
+                        this.setBounds(this.controller.getX() + 106, this.controller.getY() + 65, 16, 25);
+                        break;
+                    case "d9":
+                        this.setBounds(this.controller.getX() + 126, this.controller.getY() + 65, 16, 25);
+                        break;
+                    case "d11":
+                        this.setBounds(this.controller.getX() + 146, this.controller.getY() + 65, 16, 25);
+                        break;
+                    case "a3":
+                        this.setBounds(this.controller.getX() + 86, this.controller.getY() + 210, 16, 25);
+                        break;
+                    case "a2":
+                        this.setBounds(this.controller.getX() + 106, this.controller.getY() + 210, 16, 25);
+                        break;
+                    case "a1":
+                        this.setBounds(this.controller.getX() + 126, this.controller.getY() + 210, 16, 25);
+                        break;
+                    case "a0":
+                        this.setBounds(this.controller.getX() + 146, this.controller.getY() + 210, 16, 25);
+                        break;
+                    case "i2c":
+                        this.setBounds(this.controller.getX() + 228, this.controller.getY() + 90, 16, 30);
+                        break;
+
+                }
+                break;
+        }
+    }
+    
+    public void refresh_plate(int type_of_plate){
+        switch (mode) {
+            case "connector":
+            case "Connector":
+                this.isItConnector = true;
+                this.setStartPositionAsConnector(this.buttonId,this.type_of_plate);
+                this.setIconAsConnector(this.buttonId);
+                break;
+            case "module":
+            case "Module":
+                this.isItConnector = false;
+                this.setStartPositionAsModule(this.buttonId,this.type_of_plate);
+                this.setStartIconAsModule();
+                break;
+            default:
+                this.path = null;
+                //this.pathSet = null;
+                break;
         }
     }
 
