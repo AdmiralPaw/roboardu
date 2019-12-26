@@ -11636,6 +11636,21 @@ initlabel="bg.tft-msg" editable-label="yes">
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
+        
+        <BlockGenus name="IK_sensor" kind="data" color="242 123 99" initlabel="bg.IK_sensor" editable-label="no">
+            <description>
+                <text>IK distance sensor</text>
+            </description>
+            <BlockConnectors>
+                <BlockConnector connector-type="number"
+                                                connector-kind="plug">
+                </BlockConnector>
+                <BlockConnector connector-type="number"
+                                                connector-kind="socket" label="bc.pin_number">
+                    <DefaultArg genus-name="pinListAnalog_A0" label="A0" />
+                </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
 
         <BlockGenus name="buttonD12" kind="data" color="242 123 99" initlabel="bg.buttonD12" editable-label="no">
             <description>
@@ -11790,10 +11805,10 @@ initlabel="bg.tft-msg" editable-label="yes">
             <FamilyMember>pinListDigital_D1</FamilyMember>
 -->            <FamilyMember>pinListDigital_D2</FamilyMember>
             <FamilyMember>pinListDigital_D3</FamilyMember>
-            <FamilyMember>pinListDigital_D4</FamilyMember>
+<!--            <FamilyMember>pinListDigital_D4</FamilyMember>
             <FamilyMember>pinListDigital_D5</FamilyMember>
             <FamilyMember>pinListDigital_D6</FamilyMember>
-            <FamilyMember>pinListDigital_D7</FamilyMember>
+            <FamilyMember>pinListDigital_D7</FamilyMember>-->
             <FamilyMember>pinListDigital_D8</FamilyMember>
             <FamilyMember>pinListDigital_D9</FamilyMember>
             <FamilyMember>pinListDigital_D10</FamilyMember>
@@ -12423,6 +12438,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <BlockGenusMember>LineFinder</BlockGenusMember>
                 <BlockGenusMember>Potentiometer</BlockGenusMember>
                 <BlockGenusMember>ultrasonicRange</BlockGenusMember>
+                <BlockGenusMember>IK_sensor</BlockGenusMember>
             </BlockDrawer>
 			
             <!-- servo -->
@@ -12565,6 +12581,8 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
                 <Component name="modules.encoder.name" info="modules.encoder.info">encoder</Component> 
+                <Component name="modules.trailer.name" info="modules.trailer.info">trailer</Component> 
+                <Component name="modules.servo.name" info="modules.servo.info">servo</Component> 
                 <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="d3">
@@ -12574,6 +12592,8 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
                 <Component name="modules.encoder.name" info="modules.encoder.info">encoder</Component> 
+                <Component name="modules.trailer.name" info="modules.trailer.info">trailer</Component> 
+                <Component name="modules.servo.name" info="modules.servo.info">servo</Component> 
                 <Component name="modules.start.name" info="modules.start.info" >start</Component>
             </ControllerComponents>
             <ControllerComponents pin="d8">
@@ -12582,6 +12602,8 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.trailer.name" info="modules.trailer.info">trailer</Component> 
+                <Component name="modules.servo.name" info="modules.servo.info">servo</Component> 
                 <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="d10">
@@ -12590,6 +12612,8 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.trailer.name" info="modules.trailer.info">trailer</Component> 
+                <Component name="modules.servo.name" info="modules.servo.info">servo</Component> 
                 <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="d9">
@@ -12598,6 +12622,8 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.trailer.name" info="modules.trailer.info">trailer</Component> 
+                <Component name="modules.servo.name" info="modules.servo.info">servo</Component> 
                 <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="d11">
@@ -12606,6 +12632,8 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.trailer.name" info="modules.trailer.info">trailer</Component> 
+                <Component name="modules.servo.name" info="modules.servo.info">servo</Component> 
                 <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="a3">
@@ -12619,6 +12647,8 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.trailer.name" info="modules.trailer.info">trailer</Component> 
+                <Component name="modules.servo.name" info="modules.servo.info">servo</Component> 
                 <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="a2">
@@ -12632,6 +12662,8 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.trailer.name" info="modules.trailer.info">trailer</Component> 
+                <Component name="modules.servo.name" info="modules.servo.info">servo</Component> 
                 <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="a1">
@@ -12645,6 +12677,8 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.trailer.name" info="modules.trailer.info">trailer</Component> 
+                <Component name="modules.servo.name" info="modules.servo.info">servo</Component> 
                 <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="a0">
@@ -12658,11 +12692,14 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
                 <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.trailer.name" info="modules.trailer.info">trailer</Component> 
+                <Component name="modules.servo.name" info="modules.servo.info">servo</Component> 
                 <Component name="modules.start.name" info="modules.start.info">start</Component> 
             </ControllerComponents>
             <ControllerComponents pin="i2c">
                 <!--<Component name="modules.range.name" info="modules.range.info">range</Component> -->
                 <Component name="modules.combined.name" info="modules.combined.info">combined</Component>
+                <Component name="modules.eyes.name" info="modules.eyes.info">eyes</Component> 
                 <Component name="modules.start.name" info="modules.start.info">start</Component> 
                 <!--<Component>ANGLE</Component> 
                 <Component>BUTTON</Component> 

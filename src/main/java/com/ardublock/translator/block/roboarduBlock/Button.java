@@ -7,7 +7,10 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
 public class Button extends TranslatorBlock
 {
-    public static final String ARDUBLOCK_ANALOG_READ_DEFINE =
+    public static final String PINMODE_INPUT = "void pinmode_input(int pin){\n"
+            + "  pinMode(pin, INPUT);\n"
+            + "}";
+    public static final String BUTTON_DEFINE =
             /* If the pin was previously OUTPUT and is **quickly** analog read, the charge on the pin
              *  and the lack of "settling time" does affect the likely result of analogRead.
              * Always introducing a delay to settle the pin is not done here as it is overwhelmingly
@@ -35,10 +38,14 @@ public class Button extends TranslatorBlock
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
-        translator.addDefinitionCommand(ARDUBLOCK_ANALOG_READ_DEFINE);
+        String pin = translatorBlock.toCode();
+        translator.addDefinitionCommand(BUTTON_DEFINE);
+        translator.addDefinitionCommand(PINMODE_INPUT);
+        
+        translator.addSetupCommand("pinmode_input(" + pin + ");");
 
         String ret = "GetButton(";
-        ret = ret + translatorBlock.toCode();
+        ret = ret + pin;
         ret = ret + ")";
         return codePrefix + ret + codeSuffix;
     }
