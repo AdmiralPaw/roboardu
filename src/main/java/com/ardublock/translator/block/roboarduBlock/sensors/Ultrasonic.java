@@ -19,7 +19,7 @@ public class Ultrasonic extends TranslatorBlock {
         translator.addHeaderFile("NewPing.h");
         translator.addDefinitionCommand("#define TRIGGER_PIN  A4\n"
                 + "#define ECHO_PIN     A5\n"
-                + "#define MAX_DISTANCE 200\n"
+                + "#define MAX_DISTANCE 80\n"
                 + "NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);\n\n");
 
         return codePrefix + "sonar.ping_cm()" + codeSuffix;

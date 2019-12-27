@@ -72,9 +72,9 @@ public class TutorialPane extends JPanel {
         URL iconURL = TutorialPane.class.getClassLoader().getResource("com/ardublock/Images/tutorClose.png");
         ImageIcon image = new ImageIcon(iconURL);
         Image imageRaw = image.getImage().getScaledInstance(
-                140, 20, java.awt.Image.SCALE_SMOOTH);
+                rightTopPanel.getWidth()-150, rightTopPanel.getHeight()-10, java.awt.Image.SCALE_SMOOTH);
         JButton exitButton = new JButton();
-        exitButton.setSize(new Dimension(140, 20));
+        exitButton.setSize(new Dimension(rightTopPanel.getWidth()-150, rightTopPanel.getHeight()-10));
         exitButton.setIcon(new ImageIcon(imageRaw));
         exitButton.setLocation(0/*this.openblocksFrame.rightPanel.getX()*/, 0/*this.openblocksFrame.rightPanel.getY()-this.openblocksFrame.rightPanel.getHeight()*/);
 //        exitButton.set
@@ -87,7 +87,7 @@ public class TutorialPane extends JPanel {
                 openblocksFrame.repaint();
             }
         });
-        exitButton.setLocation(rightTopPanel.getWidth() - 140, 0);
+        exitButton.setLocation(150, 0);
 
         JSplitPane workLayer = openblocksFrame.getContext().getWorkspace().workLayer;
         workLayer.addPropertyChangeListener(new PropertyChangeListener() {
