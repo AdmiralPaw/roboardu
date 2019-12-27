@@ -69,12 +69,12 @@ public class ControllerMenuButton extends CButton {
             else {
                 g2.setColor(new Color(19, 144, 148));
             }
-            Font font = g2.getFont().deriveFont((float) (((float) buttonHeight) * 0.4));
+            Font font = g2.getFont().deriveFont((float) (((float) buttonHeight) * 0.6));
             g2.setFont(font);
             FontMetrics metrics = g2.getFontMetrics();
             Rectangle2D textBounds = metrics.getStringBounds(this.getText(), g2);
             float x = 60;
-            float y = (float) ((1.0 * this.getHeight() - 2.75 * metrics.getDescent()));
+            float y = (float) ((1.0 * this.getHeight() - 1.75 * metrics.getDescent())); //2.75
             g2.drawString(this.getText(), x, y);
         }
     }

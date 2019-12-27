@@ -76,14 +76,14 @@ public class ControllerMenu extends CButton {
             } else {
                 g2.setColor(this.standartColor);
             }
-            Font font = g2.getFont().deriveFont((float) (((float) buttonHeight) * 0.4));
+            Font font = g2.getFont().deriveFont((float) (((float) buttonHeight) * 0.6));
             g2.setFont(font);
             FontMetrics metrics = g2.getFontMetrics();
             Rectangle2D textBounds = metrics.getStringBounds(this.getText(), g2);
             float x = 60;
-            float y = (float) ((1.0 * this.getHeight() - 2.75 * metrics.getDescent()));
+            float y = (float) ((1.0 * this.getHeight() - 1.75 * metrics.getDescent()));
             g2.drawString("Порт " + this.Id.toUpperCase() + " :", x, y);
-            x = 112;
+            x = 128; //112
             g2.setColor(Color.GRAY);
             g2.drawString(this.deviceNameTranslated, x, y);
         }
