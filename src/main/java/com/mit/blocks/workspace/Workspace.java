@@ -531,8 +531,8 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         action_buttons.setLayout(new FlowLayout(FlowLayout.LEFT,0,1));
         //action_buttons.setLayout(new BoxLayout(action_buttons, BoxLayout.Y_AXIS));
 
-        action_buttons.add(undoAct);
-        action_buttons.add(redoAct);
+//        action_buttons.add(undoAct);
+//        action_buttons.add(redoAct);
         action_buttons.add(zoomPlus);
         action_buttons.add(zoomMinus);
         action_buttons.add(zoomNormal);
