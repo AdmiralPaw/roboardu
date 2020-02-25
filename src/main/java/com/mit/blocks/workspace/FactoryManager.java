@@ -204,10 +204,10 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         this.factorySwicther.repaint();
     }
 
-    public void setBasket(boolean status)
-    {
+    public void setBasket(boolean status) {
         this.navigator.setBasket(status);
     }
+
     /**
      * prints an error message in red without ending the run process. For
      * debuggin purposes
@@ -794,11 +794,14 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     public void blockDragged(RenderableBlock block) {
     }
 
-    public void startDragged(RenderableBlock b){}
+    public void startDragged(RenderableBlock b) {
+    }
 
-    public void stopDragged(RenderableBlock b){}
+    public void stopDragged(RenderableBlock b) {
+    }
 
-    public void blockRenamed(RenderableBlock block){}
+    public void blockRenamed(RenderableBlock block) {
+    }
 
     public void removeBlock(RenderableBlock block) {
     }
@@ -825,11 +828,10 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
             parent.repaint();
             block.setParentWidget(null);
         }
-        
+
         //fire to workspace that block was removed
         //DO FIRE AN EVENT IF BLOCK IS REMOVED BY USER!!!!
         //NOTE however that we do not throw na event for adding internally
-        
         workspace.notifyListeners(new WorkspaceEvent(workspace, this, block.getBlockID(), WorkspaceEvent.BLOCK_REMOVED));
         //block = null;
     }
@@ -885,12 +887,11 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
                         //rb.getParent() should not be null
                         rb.getParent().remove(rb);
                         rb.setParentWidget(null);
-                        //NEW 
-                        rb = null;
                     }
                 }
             }
             this.relayoutBlocks();
+            this.workspace.getEnv().removeBlockByID(event.getSourceBlockID());
         } else if (event.getEventType() == WorkspaceEvent.BLOCK_MOVED) {
             Block block = workspace.getEnv().getBlock(event.getSourceBlockID());
             if (block != null && block.hasStubs()) {

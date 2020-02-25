@@ -40,6 +40,20 @@ public class WorkspaceEnvironment {
 
     public void addRenderableBlock(RenderableBlock block) {
     	this.allRenderableBlocks.put(block.getBlockID(), block);
+        System.out.println("Рендер блоков: " + allRenderableBlocks.size());
+    }
+    
+    public void removeBlockByID(long id) {
+        this.allRenderableBlocks.remove(id);
+        this.allBlocks.remove(id);
+        System.out.println("Блоков после удаления: " + allRenderableBlocks.size() + "    " + allBlocks.size());
+    }
+    
+    public void removeBlock(RenderableBlock block) {
+        this.allRenderableBlocks.remove(block.getBlockID(), block);
+        Block tempBlock = block.getBlock();
+        this.allBlocks.remove(tempBlock.getBlockID(), tempBlock);
+        System.out.println("Блоков после удаления: " + allRenderableBlocks.size() + "    " + allBlocks.size());
     }
 
 
@@ -63,6 +77,7 @@ public class WorkspaceEnvironment {
         }
 
     	this.allBlocks.put(id, block);
+        System.out.println("Блоков: " + allBlocks.size());
     }
 
     public long getNextBlockID() {
