@@ -220,8 +220,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         currentpage = this;
 
         
-        blocksKeeper = new BlocksKeeper(this);
-        blocksKeeper = null;
+        blocksKeeper = new BlocksKeeper(this, this.workspace);
         
         InputMap im = this.pageJComponent.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = this.pageJComponent.getActionMap();
@@ -248,12 +247,12 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
     public void setUndoScreen()
     {
-        //NEW setScreen(blocksKeeper.undoAct());
+        setScreen(blocksKeeper.undoAct());
     }
 
     public void setRedoScreen()
     {
-        //NEW setScreen(blocksKeeper.redoAct());
+        setScreen(blocksKeeper.redoAct());
     }
 
     public void setScreen(Collection<RenderableBlock> screen) {
@@ -282,8 +281,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
     public void newKeeper() {
         
-        blocksKeeper = new BlocksKeeper(this);
-        blocksKeeper = null;
+        blocksKeeper = new BlocksKeeper(this, this.workspace);
     }
 
     public void disableMinimize() {
@@ -718,7 +716,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     }
 
     public void saveScreen() {
-        //NEW blocksKeeper.addAct(getBlocks());
+        blocksKeeper.addAct(getBlocks());
     }
 
     /**
