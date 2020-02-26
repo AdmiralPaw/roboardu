@@ -1875,8 +1875,6 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         if (parent != null) {
             parent.addBlock(newRb);
         }
-
-
         newRb.linkedDefArgsBefore = true;
 
         return newRb;
@@ -2924,5 +2922,21 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             x += getCollapseLabelWidth();
         }
         return x;
+    }
+    
+    
+    public void removeBlock()
+    {
+        removeBlocks(this);
+    }
+    
+    private void removeBlocks(RenderableBlock rb) {
+        for (BlockConnector socket : BlockLinkChecker
+                .getSocketEquivalents(rb.getBlock())) {
+            if (socket.hasBlock()) {
+                removeBlocks(this.workspace.getEnv().getRenderableBlock(socket.getBlockID()));
+            }
+        }
+        this.workspace.getEnv().removeBlockByID(rb.getBlockID());
     }
 }

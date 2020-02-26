@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.mit.blocks.codeblocks.Block;
+import com.mit.blocks.codeblocks.BlockConnector;
 import com.mit.blocks.codeblocks.BlockGenus;
+import com.mit.blocks.codeblocks.BlockLinkChecker;
 import com.mit.blocks.renderable.RenderableBlock;
 
 /**
@@ -55,7 +57,6 @@ public class WorkspaceEnvironment {
         this.allBlocks.remove(tempBlock.getBlockID(), tempBlock);
         System.out.println("Блоков после удаления: " + allRenderableBlocks.size() + "    " + allBlocks.size());
     }
-
 
     // Block
 
@@ -125,6 +126,7 @@ public class WorkspaceEnvironment {
     }
 
     public void putBlockStubs(String parentName, ArrayList<Long> blockStubs) {
+                System.out.println("parentNameToBlockStubs size: " + parentNameToParentBlock.size());
     	this.parentNameToBlockStubs.put(parentName, blockStubs);
     }
 

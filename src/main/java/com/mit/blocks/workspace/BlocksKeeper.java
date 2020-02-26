@@ -31,7 +31,7 @@ public class BlocksKeeper {
             ArrayList<RenderableBlock> currentScreen = getScreen(parent.getBlocks());
             if (undoList.size() > 1 && equalsCollection(screen, currentScreen)) {
                 screen = undoList.get(undoList.size() - 2);
-                currentScreen = undoList.get(undoList.size() - 1);
+                currentScreen = undoList.get(undoList.size() - 1);             
                 undoList.remove(undoList.size() - 2);
             }
             undoList.remove(undoList.size() - 1);
@@ -61,10 +61,20 @@ public class BlocksKeeper {
         if (undoList.size() != 0) {
             if (!equalsCollection(undoList.get(undoList.size() - 1), screen)) {
                 undoList.add(screen);
+                redoList.forEach(listOfRB ->{
+                    for (RenderableBlock rb : listOfRB) {
+                        rb.removeBlock();
+                    }
+                });
                 redoList.clear();
             }
         } else {
             undoList.add(screen);
+            redoList.forEach(listOfRB ->{
+                    for (RenderableBlock rb : listOfRB) {
+                        rb.removeBlock();
+                    }
+                });
             redoList.clear();
         }
         normalizeListSize();
@@ -104,21 +114,11 @@ public class BlocksKeeper {
     public void normalizeListSize() {
         if (undoList.size() > maxSize) {
             for (RenderableBlock rb : undoList.get(0)) {
-                removeBlocks(rb);
+                rb.removeBlock();
             }
             undoList.remove(0);
             normalizeListSize();
         }
-    }
-
-    private void removeBlocks(RenderableBlock rb) {
-        for (BlockConnector socket : BlockLinkChecker
-                .getSocketEquivalents(rb.getBlock())) {
-            if (socket.hasBlock()) {
-                removeBlocks(this.workspace.getEnv().getRenderableBlock(socket.getBlockID()));
-            }
-        }
-        this.workspace.getEnv().removeBlockByID(rb.getBlockID());
     }
 
     public static void setSize(int s) {

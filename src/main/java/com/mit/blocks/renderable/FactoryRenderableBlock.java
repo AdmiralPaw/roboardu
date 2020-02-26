@@ -138,4 +138,5 @@ public class FactoryRenderableBlock extends RenderableBlock implements Cloneable
     {
         super.setZoomLevel(newZoom);
     }
+    
 }

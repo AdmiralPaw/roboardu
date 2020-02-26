@@ -881,7 +881,7 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
             Block block = workspace.getEnv().getBlock(event.getSourceBlockID());
             if (block.hasStubs()) {
                 for (Long stub : BlockStub.getStubsOfParent(event.getWorkspace(), block)) {
-                    RenderableBlock rb = workspace.getEnv().getRenderableBlock(stub);
+                    RenderableBlock rb = workspace.getEnv().getRenderableBlock(stub);                   
                     if (rb != null && !rb.getBlockID().equals(Block.NULL)
                             && rb.getParentWidget() != null && rb.getParentWidget().equals(this)) {
                         //rb.getParent() should not be null
