@@ -32,6 +32,8 @@ public class SearchBar {
     private static final int SEARCH_UPDATER_DELAY = 5000;
     private Timer searchThrottle;
     private static final int SEARCH_THROTTLE_DELAY = 250;
+    
+    private ArrayList<Long> LastSearch = new ArrayList<>(); 
 
     private Map<String, JComponent> dict = new HashMap<String, JComponent>();
 
@@ -119,12 +121,16 @@ public class SearchBar {
             }
 
             private void searchBlocks() {
+                
+                
+                
                 List<FactoryRenderableBlock> searchedBlocks = getBlocks(searchBar.getText().toUpperCase());
                 FactoryCanvas fcanvas = new FactoryCanvas("searched canvas", Color.WHITE);
                 fcanvas.setBackground(new Color(236, 236, 236));
 
                 for (FactoryRenderableBlock block : searchedBlocks) {
                     FactoryRenderableBlock newBlock = block.deepClone();
+                    LastSearch.add(newBlock.getBlockID());
                     newBlock.OneSetZoomLevel(1);
                     fcanvas.addBlock(newBlock);
 
@@ -143,8 +149,7 @@ public class SearchBar {
                     }
                 }
 //                    dir.validate();
-//                    dir.repaint();
-
+//                    dir.repaint();                
             }
 
             //get blocks which partly matches with text in searchbar
@@ -302,6 +307,12 @@ public class SearchBar {
             searchBar.setFont(new Font(font.getName(), Font.ITALIC, font.getSize()));
             searchBar.setForeground(Color.GRAY);
             searchBar.setText(defaultText);
+            if(LastSearch.size()!=0){
+                    LastSearch.forEach(rb ->{
+                        workspace.getEnv().getRenderableBlock(rb).removeBlock();
+                    });
+                    LastSearch.clear();
+                }
         }
     }
 

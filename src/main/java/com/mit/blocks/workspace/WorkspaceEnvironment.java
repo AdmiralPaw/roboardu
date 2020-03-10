@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.mit.blocks.codeblocks.Block;
+import com.mit.blocks.codeblocks.BlockConnector;
 import com.mit.blocks.codeblocks.BlockGenus;
+import com.mit.blocks.codeblocks.BlockLinkChecker;
 import com.mit.blocks.renderable.RenderableBlock;
 
 /**
@@ -40,8 +42,21 @@ public class WorkspaceEnvironment {
 
     public void addRenderableBlock(RenderableBlock block) {
     	this.allRenderableBlocks.put(block.getBlockID(), block);
+        //Debug System.out.println("Рендер блоков: " + allRenderableBlocks.size());
     }
-
+    
+    public void removeBlockByID(long id) {
+        this.allRenderableBlocks.remove(id);
+        this.allBlocks.remove(id);
+        //Debug System.out.println("Блоков после удаления: " + allRenderableBlocks.size() + "    " + allBlocks.size());
+    }
+    
+    public void removeBlock(RenderableBlock block) {
+        this.allRenderableBlocks.remove(block.getBlockID(), block);
+        Block tempBlock = block.getBlock();
+        this.allBlocks.remove(tempBlock.getBlockID(), tempBlock);
+        //Debug System.out.println("Блоков после удаления: " + allRenderableBlocks.size() + "    " + allBlocks.size());
+    }
 
     // Block
 
@@ -55,7 +70,7 @@ public class WorkspaceEnvironment {
     public void addBlock(Block block) {
 
     	long id = block.getBlockID();
-
+        
         if (this.allBlocks.containsKey(id)) {
             Block dup = this.allBlocks.get(id);
             //System.out.println("pre-existing block is: " + dup + " with genus " + dup.getGenusName() + " and label " + dup.getBlockLabel());
@@ -63,6 +78,7 @@ public class WorkspaceEnvironment {
         }
 
     	this.allBlocks.put(id, block);
+        //Debug System.out.println("Блоков: " + allBlocks.size());
     }
 
     public long getNextBlockID() {
@@ -110,6 +126,7 @@ public class WorkspaceEnvironment {
     }
 
     public void putBlockStubs(String parentName, ArrayList<Long> blockStubs) {
+                System.out.println("parentNameToBlockStubs size: " + parentNameToParentBlock.size());
     	this.parentNameToBlockStubs.put(parentName, blockStubs);
     }
 
