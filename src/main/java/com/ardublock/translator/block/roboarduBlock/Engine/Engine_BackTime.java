@@ -2,6 +2,7 @@ package com.ardublock.translator.block.roboarduBlock.Engine;
 
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
+import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
@@ -106,8 +107,18 @@ public class Engine_BackTime extends TranslatorBlock
             translator.addDefinitionCommand(MOTORS_BACK_TIME_DEFINE);
             translator.addSetupCommand("InitMotors();");
             TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
+            String val = translatorBlock.toCode();
+            if(Double.parseDouble(val) > 100 || Double.parseDouble(val) < -100){
+                throw new BlockException(translatorBlock.getBlockID(),"ARGUMENT_ERROR");
+            };
             String ret = "MotorsBackTime(" + translatorBlock.toCode() + ", ";
             translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
+            val = translatorBlock.toCode();
+            try {
+                Integer.parseInt(val);
+            } catch(NumberFormatException e){
+                throw new BlockException(translatorBlock.getBlockID(),"ARGUMENT_MUST_BE_INTEGER");
+            }
             ret = ret + translatorBlock.toCode() + " );";
             return codePrefix + ret + codeSuffix;
         }

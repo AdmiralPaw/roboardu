@@ -5,6 +5,7 @@ import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
+import com.ardublock.translator.block.exception.BlockException;
 
 
 public class Engine_Basic extends TranslatorBlock
@@ -80,15 +81,23 @@ public class Engine_Basic extends TranslatorBlock
                 "}\n";
         
 	@Override
-	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
+	public String toCode() throws SocketNullException, SubroutineNotDeclaredException,BlockException
 	{
             translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
             translator.addHeaderDefinition(MOTORS_DEFINE_VAR);
             translator.addDefinitionCommand(MOTORS_DEFINE);
             translator.addSetupCommand("InitMotors();");
             TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
+            String val = translatorBlock.toCode();
+            if(Double.parseDouble(val) > 100 || Double.parseDouble(val) < -100){
+                throw new BlockException(translatorBlock.getBlockID(),"ARGUMENT_ERROR");
+            }
             String ret = "Motors(" + translatorBlock.toCode() + ", ";
             translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
+            val = translatorBlock.toCode();
+            if(Double.parseDouble(val) > 100 || Double.parseDouble(val) < -100){
+                throw new BlockException(translatorBlock.getBlockID(),"ARGUMENT_ERROR");
+            };
             ret = ret + translatorBlock.toCode() + ");";
             return codePrefix + ret + codeSuffix;
         }

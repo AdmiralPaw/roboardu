@@ -2,6 +2,7 @@ package com.ardublock.translator.block.roboarduBlock.Engine;
 
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
+import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
@@ -147,8 +148,16 @@ public class Engine_RightTurnDegrees extends TranslatorBlock
             translator.addSetupCommand("InitMotors();");
             translator.addSetupCommand("InitEnc(ON);");
             TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
+            String val = translatorBlock.toCode();
+            if(Double.parseDouble(val) > 100 || Double.parseDouble(val) < -100){
+                throw new BlockException(translatorBlock.getBlockID(),"ARGUMENT_ERROR");
+            };
             String ret = "MotorsRightDegrees(" + translatorBlock.toCode() + ", ";
             translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
+//            val = translatorBlock.toCode();
+//            if(Double.parseDouble(val) > 180 || Double.parseDouble(val) < -100){
+//                throw new BlockException(translatorBlock.getBlockID(),"ARGUMENT_ERROR");
+//            }; DONT KNOW
             ret = ret + translatorBlock.toCode() + ");";
             return codePrefix + ret + codeSuffix;
         }

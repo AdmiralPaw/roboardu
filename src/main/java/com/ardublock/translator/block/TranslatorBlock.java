@@ -101,7 +101,9 @@ abstract public class TranslatorBlock
 	{
 		return this.comment;
 	}
-	
+	public Long getBlockID(){
+            return this.blockId;
+        }
 	public void onTranslateBodyFinished() throws SocketNullException, SubroutineNotDeclaredException{}
 	
 }

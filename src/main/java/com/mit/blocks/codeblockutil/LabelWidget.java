@@ -293,10 +293,9 @@ public abstract class LabelWidget extends JComponent {
 
         //resize to new text
         updateDimensions();
-
+//        System.out.println(text); HER
         //the blockLabel needs to update the data in Block
         this.fireTextChanged(text);
-
         //show text label and additional ComboPopup if one exists
         this.removeAll();
         this.add(textLabel, BorderLayout.CENTER);

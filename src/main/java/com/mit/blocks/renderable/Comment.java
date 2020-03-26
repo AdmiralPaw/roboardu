@@ -390,6 +390,7 @@ public class Comment extends JPanel {
             commentChild = commentChildren.item(j);
             if (commentChild.getNodeName().equals("Text")) {
                 text = commentChild.getTextContent();
+                System.out.println(text);
             } else if (commentChild.getNodeName().equals("Location")) {
                 RenderableBlock.extractLocationInfo(commentChild, commentLoc);
             } else if (commentChild.getNodeName().equals("BoxSize")) {

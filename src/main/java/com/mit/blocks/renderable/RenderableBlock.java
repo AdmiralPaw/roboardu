@@ -646,7 +646,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                         if (argumentToolTip != null) {
                             label.setToolTipText(getBlock()
                                     .getArgumentDescription(i).trim());
-                        }
+                        }                      
                         tag.setLabel(label);
                         label.setText(socket.getLabel());
                         this.add(label.getJComponent());
@@ -1804,6 +1804,27 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         newRb.linkedDefArgsBefore = true;
         return newRb;
     }
+    
+    public RenderableBlock cloneOnlyMe() {
+        return cloneOnlyMe(this, (int) (NEARBY_RADIUS));
+    }
+    
+    private RenderableBlock cloneOnlyMe(RenderableBlock rb, int offset) {
+        Block oriBlock = rb.getBlock();
+        oriBlock.getSockets();
+
+        Point oriLocation = rb.getLocation();
+
+        Block newBlock = new Block(workspace, rb.getGenus(), rb.blockLabel.getText());
+        RenderableBlock newRb = new RenderableBlock(workspace, parent, newBlock.getBlockID(), false, this.zoom);
+
+        newRb.setLocation(oriLocation.x + offset, oriLocation.y + offset);
+        newRb.moveConnectedBlocks();
+        parent.addBlock(newRb);
+        newRb.linkedDefArgsBefore = true;
+        return newRb;
+    }
+    
 
     public RenderableBlock cloneThisForKeeper(RenderableBlock rb, WorkspaceWidget parent) {
         Block oriBlock = rb.getBlock();

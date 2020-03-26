@@ -32,6 +32,8 @@ public class ContextMenu extends PopupMenu implements ActionListener {
     private final static String CLONE_BLOCK = "CLONE";	//heqichen
     private static MenuItem cloneItem1 = null;	//heqichen
     private static MenuItem cloneItem2 = null;	//heqichen
+    private final static String CLONE_THIS_BLOCK = "CLONETHIS";
+    private static MenuItem cloneThisItem = null;
     //context menu for canvas plus
     //menu items for canvas context menu
     private static ContextMenu canvasMenu = new ContextMenu();
@@ -61,6 +63,11 @@ public class ContextMenu extends PopupMenu implements ActionListener {
     	cloneItem1.addActionListener(rndBlockMenu);
         addCommentMenu.add(cloneItem1);
         
+        cloneThisItem = new MenuItem(uiMessageBundle.getString("ardublock.ui.clone_this"));
+    	cloneThisItem.setActionCommand(CLONE_THIS_BLOCK);
+    	cloneThisItem.addActionListener(rndBlockMenu);
+        addCommentMenu.add(cloneThisItem);
+        
         addCommentMenuInit = true;
         
     }
@@ -68,7 +75,7 @@ public class ContextMenu extends PopupMenu implements ActionListener {
     /**
      * Initializes the context menu for deleting Comments.
      */
-    private static void initRemoveCommentMenu() {
+    private static void initRemoveCommentMenu() { //CLONE_THIS
     	ResourceBundle uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
     	
         removeCommentItem = new MenuItem(uiMessageBundle.getString("ardublock.ui.delete_comment"));
@@ -156,6 +163,10 @@ public class ContextMenu extends PopupMenu implements ActionListener {
             if (activeComponent != null && activeComponent instanceof RenderableBlock) {
                 ((RenderableBlock) activeComponent).cloneMe();
 //                System.out.println("cloned");
+            }
+        } else if(a.getActionCommand()==CLONE_THIS_BLOCK){
+            if (activeComponent != null && activeComponent instanceof RenderableBlock) {
+               ((RenderableBlock) activeComponent).cloneOnlyMe();
             }
         }
     }
