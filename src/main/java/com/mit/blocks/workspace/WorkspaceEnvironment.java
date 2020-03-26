@@ -42,20 +42,20 @@ public class WorkspaceEnvironment {
 
     public void addRenderableBlock(RenderableBlock block) {
     	this.allRenderableBlocks.put(block.getBlockID(), block);
-        System.out.println("Рендер блоков: " + allRenderableBlocks.size());
+        //Debug System.out.println("Рендер блоков: " + allRenderableBlocks.size());
     }
     
     public void removeBlockByID(long id) {
         this.allRenderableBlocks.remove(id);
         this.allBlocks.remove(id);
-        System.out.println("Блоков после удаления: " + allRenderableBlocks.size() + "    " + allBlocks.size());
+        //Debug System.out.println("Блоков после удаления: " + allRenderableBlocks.size() + "    " + allBlocks.size());
     }
     
     public void removeBlock(RenderableBlock block) {
         this.allRenderableBlocks.remove(block.getBlockID(), block);
         Block tempBlock = block.getBlock();
         this.allBlocks.remove(tempBlock.getBlockID(), tempBlock);
-        System.out.println("Блоков после удаления: " + allRenderableBlocks.size() + "    " + allBlocks.size());
+        //Debug System.out.println("Блоков после удаления: " + allRenderableBlocks.size() + "    " + allBlocks.size());
     }
 
     // Block
@@ -70,7 +70,7 @@ public class WorkspaceEnvironment {
     public void addBlock(Block block) {
 
     	long id = block.getBlockID();
-
+        
         if (this.allBlocks.containsKey(id)) {
             Block dup = this.allBlocks.get(id);
             //System.out.println("pre-existing block is: " + dup + " with genus " + dup.getGenusName() + " and label " + dup.getBlockLabel());
@@ -78,7 +78,7 @@ public class WorkspaceEnvironment {
         }
 
     	this.allBlocks.put(id, block);
-        System.out.println("Блоков: " + allBlocks.size());
+        //Debug System.out.println("Блоков: " + allBlocks.size());
     }
 
     public long getNextBlockID() {
