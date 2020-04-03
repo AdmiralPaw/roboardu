@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<root>
+
+<translator>
+    <block name="Engine_Back" >
+        <headers>
+            <header name="MOTORS_DEFINE_PIN"/>
+            <header name="MOTORS_DEFINE_VAR" />
+        </headers>
+        <commands>
+            <command name="Motors(int Speed1Left, int Speed2Right)"/>
+            <command name="InitMotors" />
+            <command name="Motor1(int Speed)" />
+            <command name="Motor2Right(int Speed)" />
+            <command name="MotorsBack(int Speed)" />
+        </commands>        
+    </block>  
+</translator>
+
+
+<translatorCode>
+    <headers>
+        <header name="MOTORS_DEFINE_PIN">
+#define M_DIR_PIN_2               4  
+#define M_DIR_PIN_1               7  
+#define M_SPEED_PIN_2             5  
+#define M_SPEED_PIN_1             6
+        </header>
+        <header name="MOTORS_DEFINE_VAR">
+             int SpeedMotorLeft, SpeedMotorRight;
+        </header>
+    </headers>
+    <commands>
+        <command name="Motors(int Speed1Left, int Speed2Right)">
+             void Motors(int Speed1Left, int Speed2Right)  
+             {  
+               Motor1(Speed1Left);  
+               Motor2Right(Speed2Right);  
+             }  
+        </command>
+        <command name="InitMotors">
+             void InitMotors()  
+             {  
+               pinMode(M_DIR_PIN_1, OUTPUT);  
+               pinMode(M_DIR_PIN_2, OUTPUT);  
+               pinMode(M_SPEED_PIN_1, OUTPUT);  
+               pinMode(M_SPEED_PIN_2, OUTPUT);  
+               
+               SpeedMotorLeft = 0;  
+               SpeedMotorRight = 0;  
+             }  
+        </command>
+        <command name="Motor1(int Speed)">
+              
+             void Motor1(int Speed)  
+             {  
+               int Dir = 0;  
+               
+               if(Speed &gt; 100)  Speed = 100;  
+               if(Speed &lt; -100)  Speed = -100;  
+               
+               Speed = map(Speed,-100,100,-255,255);  
+               if(Speed &lt; 0)  
+               {  
+                 Dir = 1;  
+                 Speed *= -1;  
+               }  
+               
+               digitalWrite(M_DIR_PIN_1, Dir);  
+               analogWrite(M_SPEED_PIN_1, Speed);  
+               
+               SpeedMotorLeft = Speed;  
+             }  
+        </command>
+        <command name="Motor2Right(int Speed)">
+             void Motor2Right(int Speed)  
+             {  
+               int Dir = 0;  
+               
+               if(Speed &gt; 100)  Speed = 100;  
+               if(Speed &lt; -100)  Speed = -100;  
+               
+               Speed = map(Speed,-100,100,-255,255);  
+               if(Speed &lt; 0)  
+               {  
+                 Dir = 1;  
+                 Speed *= -1;  
+               }  
+               
+               digitalWrite(M_DIR_PIN_2, Dir);  
+               analogWrite(M_SPEED_PIN_2, Speed);  
+               
+               SpeedMotorRight = Speed;  
+             }  
+        </command>
+        <command name="MotorsBack(int Speed)">
+             void MotorsBack(int Speed)  
+             {  
+               Motors(-Speed, -Speed);  
+            }  
+        </command>
+    </commands>
+    
+</translatorCode>
+</root>
