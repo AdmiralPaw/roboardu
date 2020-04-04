@@ -67,11 +67,11 @@ public class Engine_Back extends TranslatorBlock {
 
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
-        translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
-        translator.addDefinitionCommand(MOTORS_DEFINE_INIT);
-        translator.addDefinitionCommand(MOTORS_DEFINE_MOTORS);
-        translator.addDefinitionCommand(MOTORS_DEFINE_BACK);
-        
+        translator.CheckClassName(this);
+//        translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
+//        translator.addHeaderDefinition(MOTORS_DEFINE_VAR);
+//        translator.addDefinitionCommand(MOTORS_DEFINE);
+//        translator.addDefinitionCommand(MOTORS_BACK_DEFINE);
         translator.addSetupCommand("InitMotors();");
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
         String val = translatorBlock.toCode();

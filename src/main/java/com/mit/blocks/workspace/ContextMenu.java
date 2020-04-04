@@ -34,6 +34,7 @@ public class ContextMenu extends PopupMenu implements ActionListener {
     private static MenuItem cloneItem2 = null;	//heqichen
     private final static String CLONE_THIS_BLOCK = "CLONETHIS";
     private static MenuItem cloneThisItem = null;
+    private static MenuItem cloneThisItem2 = null;
     //context menu for canvas plus
     //menu items for canvas context menu
     private static ContextMenu canvasMenu = new ContextMenu();
@@ -81,15 +82,18 @@ public class ContextMenu extends PopupMenu implements ActionListener {
         removeCommentItem = new MenuItem(uiMessageBundle.getString("ardublock.ui.delete_comment"));
         removeCommentItem.setActionCommand(REMOVE_COMMENT_BLOCK);
         removeCommentItem.addActionListener(rndBlockMenu);
-
         removeCommentMenu.add(removeCommentItem);
         //rndBlockMenu.add(runBlockItem);
-        
     	
     	cloneItem2 = new MenuItem(uiMessageBundle.getString("ardublock.ui.clone"));
     	cloneItem2.setActionCommand(CLONE_BLOCK);
     	cloneItem2.addActionListener(rndBlockMenu);
         removeCommentMenu.add(cloneItem2);
+        
+        cloneThisItem2 = new MenuItem(uiMessageBundle.getString("ardublock.ui.clone_this"));
+    	cloneThisItem2.setActionCommand(CLONE_THIS_BLOCK);
+    	cloneThisItem2.addActionListener(rndBlockMenu);
+        removeCommentMenu.add(cloneThisItem2);
         
         removeCommentMenuInit = true;
     }
