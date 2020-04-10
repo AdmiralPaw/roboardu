@@ -66,12 +66,15 @@ public class Engine_Stop extends TranslatorBlock {
 
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
-        translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
-        translator.addDefinitionCommand(MOTORS_DEFINE_INIT);
-        translator.addDefinitionCommand(MOTORS_DEFINE_MOTORS);
-        translator.addDefinitionCommand(MOTORS_DEFINE_STOP);
+        translator.CheckClassName(this);
+//        translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
+//        translator.addDefinitionCommand(MOTORS_DEFINE_INIT);
+//        translator.addDefinitionCommand(MOTORS_DEFINE_MOTORS);
+//        translator.addDefinitionCommand(MOTORS_DEFINE_STOP);
+
         translator.addSetupCommand("InitMotors();");
-        String ret = "MotorsStop();";
+        
+        String ret = "Stop();";
         return codePrefix + ret + codeSuffix;
     }
 }

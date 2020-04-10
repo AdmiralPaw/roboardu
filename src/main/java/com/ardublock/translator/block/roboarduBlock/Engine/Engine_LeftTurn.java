@@ -67,18 +67,20 @@ public class Engine_LeftTurn extends TranslatorBlock {
 
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
-        translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
-        translator.addDefinitionCommand(MOTORS_DEFINE_INIT);
-        translator.addDefinitionCommand(MOTORS_DEFINE_MOTORS);
-        translator.addDefinitionCommand(MOTORS_DEFINE_LEFT);
-        
+        translator.CheckClassName(this);
+//        translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
+//        translator.addDefinitionCommand(MOTORS_DEFINE_INIT);
+//        translator.addDefinitionCommand(MOTORS_DEFINE_MOTORS);
+//        translator.addDefinitionCommand(MOTORS_DEFINE_LEFT);
+
         translator.addSetupCommand("InitMotors();");
+        
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
         String val = translatorBlock.toCode();
         if (Double.parseDouble(val) > 100 || Double.parseDouble(val) < -100) {
             throw new BlockException(translatorBlock.getBlockID(), "ARGUMENT_ERROR");
         };
-        String ret = "MotorsLeft(" + translatorBlock.toCode() + ");";
+        String ret = "MoveLeft(" + translatorBlock.toCode() + ");";
         return codePrefix + ret + codeSuffix;
     }
 }

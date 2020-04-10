@@ -145,22 +145,23 @@ public class Engine_ForwardDistance extends TranslatorBlock {
 
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
-        translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
-        translator.addHeaderDefinition(ENCODER_DEFINE_CONST);
-        translator.addHeaderDefinition(ENCODER_DEFINE_VARS);
+        translator.CheckClassName(this);
+//        translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
+//        translator.addHeaderDefinition(ENCODER_DEFINE_CONST);
+//        translator.addHeaderDefinition(ENCODER_DEFINE_VARS);
+//
+//        translator.addDefinitionCommand(ENCODER_DEFINE_INIT);
+//        translator.addDefinitionCommand(ENCODER_DEFINE_INC);
+//        translator.addDefinitionCommand(ENCODER_DEFINE_RESET);
+//        translator.addDefinitionCommand(ENCODER_DEFINE_GET_DISTANCE);
+//        translator.addDefinitionCommand(MOTORS_DEFINE_INIT);
+//        translator.addDefinitionCommand(MOTORS_DEFINE_MOTORS);
+//        translator.addDefinitionCommand(MOTORS_DEFINE_FORWARD);
+//        translator.addDefinitionCommand(MOTORS_DEFINE_STOP);
+//        translator.addDefinitionCommand(MOTORS_DEFINE_FORWARD_DISTANCE);
 
-        translator.addDefinitionCommand(ENCODER_DEFINE_INIT);
-        translator.addDefinitionCommand(ENCODER_DEFINE_INC);
-        translator.addDefinitionCommand(ENCODER_DEFINE_RESET);
-        translator.addDefinitionCommand(ENCODER_DEFINE_GET_DISTANCE);
-        translator.addDefinitionCommand(MOTORS_DEFINE_INIT);
-        translator.addDefinitionCommand(MOTORS_DEFINE_MOTORS);
-        translator.addDefinitionCommand(MOTORS_DEFINE_FORWARD);
-        translator.addDefinitionCommand(MOTORS_DEFINE_STOP);
-        translator.addDefinitionCommand(MOTORS_DEFINE_FORWARD_DISTANCE);
-
-        translator.addSetupCommand("InitMotors();");
         translator.addSetupCommand("InitEnc();");
+        translator.addSetupCommand("InitMotors();");
 
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
         String val = translatorBlock.toCode();

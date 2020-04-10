@@ -157,13 +157,13 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
     public final static Integer WIDGET_LAYER = new Integer(3);
     public final static Integer DRAGGED_BLOCK_HIGHLIGHT_LAYER = new Integer(4);
     public final static Integer DRAGGED_BLOCK_LAYER = new Integer(5);
-
+    
+    
     public Workspace() {
         super();
-        setLayout(null);
+        
         setBackground(Color.WHITE);
-
-
+        
         InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
         ActionMap am = getActionMap();
 

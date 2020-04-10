@@ -342,7 +342,7 @@ public class Translator {
 
             DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = builderFactory.newDocumentBuilder();
-            Document xmlDocument = builder.parse(new File(Translator.class.getClassLoader().getResource("com/ardublock/block/translator.xml").getPath()));
+            Document xmlDocument = builder.parse(this.getClass().getResourceAsStream("/com/ardublock/block/translator.xml"));
             XPath xPath = XPathFactory.newInstance().newXPath();
             String expression = "/root/translator/block[@name=" + "'" + className + "'" + "]";
             Node block = (Node) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODE);

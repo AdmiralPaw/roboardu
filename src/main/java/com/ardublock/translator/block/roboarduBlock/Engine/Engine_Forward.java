@@ -68,10 +68,11 @@ public class Engine_Forward extends TranslatorBlock {
 
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
-        translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
-        translator.addDefinitionCommand(MOTORS_DEFINE_INIT);
-        translator.addDefinitionCommand(MOTORS_DEFINE_MOTORS);
-        translator.addDefinitionCommand(MOTORS_DEFINE_FORWARD);
+        translator.CheckClassName(this);
+//        translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
+//        translator.addDefinitionCommand(MOTORS_DEFINE_INIT);
+//        translator.addDefinitionCommand(MOTORS_DEFINE_MOTORS);
+//        translator.addDefinitionCommand(MOTORS_DEFINE_FORWARD);
         
         translator.addSetupCommand("InitMotors();");
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
@@ -79,7 +80,7 @@ public class Engine_Forward extends TranslatorBlock {
         if (Double.parseDouble(val) > 100 || Double.parseDouble(val) < -100) {
             throw new BlockException(translatorBlock.getBlockID(), "ARGUMENT_ERROR");
         };
-        String ret = "MotorsForward(" + translatorBlock.toCode() + ");";
+        String ret = "MoveForward(" + translatorBlock.toCode() + ");";
         return codePrefix + ret + codeSuffix;
     }
 }
