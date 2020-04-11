@@ -20,8 +20,9 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.Workspace;
-import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Vector;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -62,6 +63,8 @@ public class Translator {
     private int variableCnt;
     private boolean isScoopProgram;
     private boolean isGuinoProgram;
+    
+    private String ValueMark = "VALUE_";//add after _ number of value
 
     public Translator(Workspace ws) {
         workspace = ws;
@@ -199,7 +202,7 @@ public class Translator {
     }
 
     public void CheckClassName(TranslatorBlock block) {
-        LoadTranslators(block.getClass().getSimpleName());
+        LoadTranslators(block.getClass().getSimpleName(),null);
     }
 
     public void addSetupCommandForced(String command) {
@@ -336,8 +339,12 @@ public class Translator {
     public void addInternalData(String name, Object value) {
         internalData.put(name, value);
     }
-
-    private void LoadTranslators(String className) {
+    
+    public void LoadTranslators(String className) {
+        LoadTranslators(className,null);
+    }
+    
+    public void LoadTranslators(String className,HashMap<String,ArrayList<String>> valuesToChange) {
         try {
 
             DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
@@ -347,36 +354,75 @@ public class Translator {
             String expression = "/root/translator/block[@name=" + "'" + className + "'" + "]";
             Node block = (Node) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODE);
             
-            Expression expr = (string)->this.addHeaderDefinition(string);
-            ParseXml(xPath,xmlDocument,block,"headers/header",expr);
-            expr = (string)->this.addDefinitionCommand(string);
-            ParseXml(xPath,xmlDocument,block,"commands/command",expr);
-
-        } catch (ParserConfigurationException ex) {
-            ex.printStackTrace(System.out);
-        } catch (SAXException ex) {
-            ex.printStackTrace(System.out);
-        } catch (IOException ex) {
-            ex.printStackTrace(System.out);
-        } catch (XPathExpressionException ex) {
+            HashMap<String,String> CommandNameAndCode = new HashMap<String,String>();
+            
+            Expression TranslatorFunction = (string)->this.addHeaderDefinition(string);
+            CommandNameAndCode = ParseXml(xPath,xmlDocument,block,"headers/header");
+            AddValuesToCode(CommandNameAndCode,valuesToChange);
+            RefactorCode(CommandNameAndCode);
+            addHeaderDefinition(String.join("",CommandNameAndCode.values()));
+            CommandNameAndCode.clear();
+            
+            TranslatorFunction = (string)->this.addDefinitionCommand(string);
+            CommandNameAndCode = ParseXml(xPath,xmlDocument,block,"commands/command");
+            AddValuesToCode(CommandNameAndCode,valuesToChange);
+            RefactorCode(CommandNameAndCode);
+            AddToTranslator(CommandNameAndCode,TranslatorFunction);
+            CommandNameAndCode.clear();
+        } catch (ParserConfigurationException | SAXException | IOException | XPathExpressionException ex) {
             ex.printStackTrace(System.out);
         }
     }
     
     
-    private void ParseXml(XPath xPath,Document xmlDocument,Node foundBlock,String path, Expression func)throws XPathExpressionException {
+    private HashMap<String,String> ParseXml(XPath xPath,Document xmlDocument,Node foundBlock,String path)throws XPathExpressionException {
             NodeList headers = (NodeList) xPath.compile(path).evaluate(foundBlock, XPathConstants.NODESET);
             String headersCodeExpression = "/root/translatorCode/"+path;
             Node SomeType = null;
             Node headersCode;
+            HashMap<String,String> CommandNameAndCode = new HashMap<String,String>();
             String nameOfHeader = "";
             for (int i = 0; i < headers.getLength(); i++) {
                 SomeType = headers.item(i);
                 nameOfHeader = SomeType.getAttributes().getNamedItem("name").getNodeValue();
                 headersCode = (Node) xPath.compile(headersCodeExpression + "[@name=" + "'" + nameOfHeader + "'" + "]").evaluate(xmlDocument, XPathConstants.NODE);
-                func.addSomeCommands(headersCode.getTextContent());
+                CommandNameAndCode.put(nameOfHeader, headersCode.getTextContent());
             }
+            return CommandNameAndCode;
     };
+    
+    private void AddToTranslator(HashMap<String,String> collection, Expression func){
+        if(!collection.isEmpty()){
+        for(Map.Entry<String, String> item : collection.entrySet()){
+            func.addSomeCommands(item.getValue());
+        }
+        }
+    };
+    private void AddValuesToCode(HashMap<String,String> collection, HashMap<String,ArrayList<String>> values){
+        if(values!=null&&!collection.isEmpty()){
+        
+        String lineForChange;
+        int countOfValues;
+        for(Map.Entry<String, String> item : collection.entrySet()){
+            if(values.containsKey(item.getKey())){
+                lineForChange = item.getValue();
+                countOfValues = Character.getNumericValue(lineForChange.charAt(lineForChange.lastIndexOf(ValueMark)+ValueMark.length()))+1;
+                if(values.get(item.getKey()).size()==countOfValues){
+                   for(int i=0;i<countOfValues;i++){
+                       lineForChange = lineForChange.replace(ValueMark+i, values.get(item.getKey()).get(i));                      
+                }
+                item.setValue(lineForChange); 
+                }                
+            }
+        }
+        }
+    };
+    
+    private void RefactorCode(HashMap<String,String> collection){
+        for(Map.Entry<String, String> item : collection.entrySet()){
+            item.setValue(item.getValue().replaceAll("^\n|\n$", ""));
+        }
+    }
     interface Expression{
         void addSomeCommands(String code);
     }
