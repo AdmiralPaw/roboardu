@@ -286,9 +286,9 @@ void InitMotors()
             <command name="void Motors(int Speed1, int Speed2)">
 void Motors(int Speed1, int Speed2)
 {
-  if(Speed1 &gt; 255)  Speed1 = VALUE_0;
+  if(Speed1 &gt; 255)  Speed1 = 255;
   if(Speed1 &lt; -255) Speed1 = -255;
-  if(Speed2 &gt; 255)  Speed2 = VALUE_1;
+  if(Speed2 &gt; 255)  Speed2 = 255;
   if(Speed2 &lt; -255) Speed2 = -255;
 
   if(Speed1 &gt; 0)

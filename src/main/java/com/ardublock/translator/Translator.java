@@ -393,9 +393,9 @@ public class Translator {
     
     private void AddToTranslator(HashMap<String,String> collection, Expression func){
         if(!collection.isEmpty()){
-        for(Map.Entry<String, String> item : collection.entrySet()){
-            func.addSomeCommands(item.getValue());
-        }
+            collection.entrySet().forEach((item) -> {
+                func.addSomeCommands(item.getValue());
+            });
         }
     };
     private void AddValuesToCode(HashMap<String,String> collection, HashMap<String,ArrayList<String>> values){
