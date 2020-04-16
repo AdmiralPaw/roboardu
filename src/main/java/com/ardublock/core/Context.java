@@ -15,12 +15,35 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ *
+ * @author User
+ */
 public class Context {
 
+    /**
+     *
+     */
     public final static String LANG_DTD_PATH = "/com/ardublock/block/lang_def.dtd";
+
+    /**
+     *
+     */
     public final static String ARDUBLOCK_LANG_PATH = "/com/ardublock/block/ardublock.xml";
+
+    /**
+     *
+     */
     public final static String DEFAULT_ARDUBLOCK_PROGRAM_PATH = "/com/ardublock/default.abp";
+
+    /**
+     *
+     */
     public final static String ARDUINO_VERSION_UNKNOWN = "unknown";
+
+    /**
+     *
+     */
     public final boolean isNeedAutoFormat = true;
 
     private static Context singletonContext;
@@ -35,20 +58,46 @@ public class Context {
     private OsType osType;
     private String defaultFileName = "untitled";
 
+    /**
+     *
+     */
     final public static String APP_NAME = "OmegaBot_IDE";
 
     private Editor editor;
 
+    /**
+     *
+     */
     public enum OsType {
+
+        /**
+         *
+         */
         LINUX,
+
+        /**
+         *
+         */
         MAC,
+
+        /**
+         *
+         */
         WINDOWS,
+
+        /**
+         *
+         */
         UNKNOWN,
     };
 
     private String saveFilePath;
     private String saveFileName;
 
+    /**
+     *
+     * @return
+     */
     public static Context getContext() {
         if (singletonContext == null) {
             synchronized (Context.class) {
@@ -77,6 +126,9 @@ public class Context {
         osType = determineOsType();
     }
 
+    /**
+     *
+     */
     public void resetWorksapce() {
 
         List<String[]> list = new ArrayList<String[]>();
@@ -100,11 +152,19 @@ public class Context {
         workspaceEmpty = true;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setDefaultFileName(String name)
     {
         defaultFileName = name;
         saveFileName = name;
     }
+
+    /**
+     *
+     */
     public void loadFreshWorkSpace() {
         //workspaceController.loadFreshWorkspace();
         loadDefaultArdublockProgram();
@@ -149,6 +209,11 @@ public class Context {
         return Context.OsType.UNKNOWN;
     }
 
+    /**
+     *
+     * @param name
+     * @return
+     */
     public File getArduinoFile(String name) {
         String path = System.getProperty("user.dir");
         if (osType.equals(OsType.MAC)) {
@@ -161,32 +226,59 @@ public class Context {
         return new File(workingDir, name);
     }
 
+    /**
+     *
+     * @return
+     */
     public WorkspaceController getWorkspaceController() {
         return workspaceController;
     }
 
+    /**
+     *
+     * @return
+     */
     public Workspace getWorkspace() {
         return workspace;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isWorkspaceChanged() {
         return workspaceChanged;
     }
 
+    /**
+     *
+     * @param workspaceChanged
+     */
     public void setWorkspaceChanged(boolean workspaceChanged) {
         this.workspaceChanged = workspaceChanged;
     }
 
+    /**
+     *
+     * @param block
+     */
     public void highlightBlock(RenderableBlock block) {
         block.updateInSearchResults(true);
         highlightBlockSet.add(block);
     }
 
+    /**
+     *
+     * @param block
+     */
     public void cancelHighlightBlock(RenderableBlock block) {
         block.updateInSearchResults(false);
         highlightBlockSet.remove(block);
     }
 
+    /**
+     *
+     */
     public void resetHightlightBlock() {
         for (RenderableBlock rb : highlightBlockSet) {
             rb.updateInSearchResults(false);
@@ -194,6 +286,12 @@ public class Context {
         highlightBlockSet.clear();
     }
 
+    /**
+     *
+     * @param saveFile
+     * @param saveString
+     * @throws IOException
+     */
     public void saveArduBlockFile(File saveFile, String saveString) throws IOException {
         if (!saveFile.exists()) {
             saveFile.createNewFile();
@@ -205,6 +303,11 @@ public class Context {
         didSave();
     }
 
+    /**
+     *
+     * @param savedFile
+     * @throws IOException
+     */
     public void loadArduBlockFile(File savedFile) throws IOException {
         if (savedFile != null) {
             saveFilePath = savedFile.getAbsolutePath();
@@ -215,82 +318,152 @@ public class Context {
         }
     }
 
+    /**
+     *
+     * @param e
+     */
     public void setEditor(Editor e) {
         editor = e;
     }
 
+    /**
+     *
+     * @return
+     */
     public Editor getEditor() {
         return editor;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isInArduino() {
         return isInArduino;
     }
 
+    /**
+     *
+     * @param isInArduino
+     */
     public void setInArduino(boolean isInArduino) {
         this.isInArduino = isInArduino;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getArduinoVersionString() {
         return arduinoVersionString;
     }
 
+    /**
+     *
+     * @param arduinoVersionString
+     */
     public void setArduinoVersionString(String arduinoVersionString) {
         this.arduinoVersionString = arduinoVersionString;
     }
 
+    /**
+     *
+     * @return
+     */
     public OsType getOsType() {
         return osType;
     }
 
+    /**
+     *
+     * @param ofl
+     */
     public void registerOpenblocksFrameListener(OpenblocksFrameListener ofl) {
         ofls.add(ofl);
     }
 
+    /**
+     *
+     */
     public void didSave() {
         for (OpenblocksFrameListener ofl : ofls) {
             ofl.didSave();
         }
     }
 
+    /**
+     *
+     */
     public void didLoad() {
         for (OpenblocksFrameListener ofl : ofls) {
             ofl.didLoad();
         }
     }
 
+    /**
+     *
+     * @param sourcecode
+     */
     public void didGenerate(String sourcecode) {
         for (OpenblocksFrameListener ofl : ofls) {
             ofl.didGenerate(sourcecode);
         }
     }
 
+    /**
+     *
+     * @param sourcecode
+     */
     public void didVerify(String sourcecode) {
         for (OpenblocksFrameListener ofl : ofls) {
             ofl.didVerify(sourcecode);
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSaveFileName() {
         return saveFileName;
     }
 
+    /**
+     *
+     * @param saveFileName
+     */
     public void setSaveFileName(String saveFileName) {
         this.saveFileName = saveFileName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSaveFilePath() {
         return saveFilePath;
     }
 
+    /**
+     *
+     * @param saveFilePath
+     */
     public void setSaveFilePath(String saveFilePath) {
         this.saveFilePath = saveFilePath;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isWorkspaceEmpty() {
         return workspaceEmpty;
     }
 
+    /**
+     *
+     * @param workspaceEmpty
+     */
     public void setWorkspaceEmpty(boolean workspaceEmpty) {
         this.workspaceEmpty = workspaceEmpty;
     }

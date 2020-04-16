@@ -93,8 +93,8 @@ public class GlassExplorer extends JPanel implements Explorer, FocusListener {
     }
 
     /**
-     * Returns true if a drawer is currently opened at its final width.
-     * For GlassExplorer, this represents a drawer being "selected".
+     * Returns true if a drawer is currently opened at its final width.For GlassExplorer, this represents a drawer being "selected".
+     * @return
      */
     public boolean anyCanvasSelected() {
         return (this.canvasPane.getWidth() == canvasPane.getFinalWidth());
@@ -182,6 +182,7 @@ public class GlassExplorer extends JPanel implements Explorer, FocusListener {
 
     /**
      * Rolls the canvasPane back underneath when focus is lost
+     * @param e
      */
     public void focusLost(FocusEvent e) {
         timer.shrink();

@@ -29,6 +29,7 @@ public class ZoomSlider extends JComponent implements PropertyChangeListener {
 
     /**
      * Constructs a new ZoomSlider
+     * @param workspace
      */
     public ZoomSlider(Workspace workspace) {
         super();
@@ -53,6 +54,9 @@ public class ZoomSlider extends JComponent implements PropertyChangeListener {
         PageChangeEventManager.notifyListeners();
     }
 
+    /**
+     *
+     */
     public void reset() {
         slider.setValue(100);
     }

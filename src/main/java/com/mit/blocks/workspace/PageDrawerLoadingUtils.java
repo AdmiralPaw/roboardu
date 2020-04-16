@@ -49,6 +49,12 @@ public class PageDrawerLoadingUtils {
         return null;
     }
 
+    /**
+     *
+     * @param node
+     * @param nodeKey
+     * @return
+     */
     public static boolean getBooleanValue(final Node node, final String nodeKey) {
         final String bool = getNodeValue(node, nodeKey);
         return bool == null || !"no".equals(bool);
@@ -62,6 +68,12 @@ public class PageDrawerLoadingUtils {
         return 0;
     }
 
+    /**
+     *
+     * @param workspace
+     * @param root
+     * @param manager
+     */
     public static void loadPagesAndDrawers(Workspace workspace, Element root, FactoryManager manager) {
         List<Page> pageList = new ArrayList<Page>();
         //pagesToAdd is needed so that we can add pages all at once
@@ -181,6 +193,13 @@ public class PageDrawerLoadingUtils {
         }
     }
 
+    /**
+     *
+     * @param workspace
+     * @param root
+     * @param manager
+     * @param controller
+     */
     public static void loadBlockDrawerSets(Workspace workspace, Element root, FactoryManager manager, СontrollerСonfiguration controller) {
         Pattern attrExtractor = Pattern.compile("\"(.*)\"");
         Matcher nameMatcher;
@@ -244,6 +263,12 @@ public class PageDrawerLoadingUtils {
         }
     }
 
+    /**
+     *
+     * @param workspace
+     * @param root
+     * @param controller
+     */
     public static void loadComponentsSets(Workspace workspace, Element root, СontrollerСonfiguration controller) {
         Pattern attrExtractor = Pattern.compile("\"(.*)\"");
         List<String> tempComponentsName = new ArrayList<String>();

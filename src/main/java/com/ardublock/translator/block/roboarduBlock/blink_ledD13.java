@@ -10,9 +10,15 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
-
+/**
+ *
+ * @author User
+ */
 public class blink_ledD13 extends TranslatorBlock {
 
+    /**
+     *
+     */
     public static final String BLINK_LED= "void LedBlink(int LED_PIN, int glow_time, int dark_time)\n" +
             "{\n" +
             "  pinMode(LED_PIN, OUTPUT);\n" +
@@ -22,11 +28,25 @@ public class blink_ledD13 extends TranslatorBlock {
             "  delay(dark_time);\n" +
             "}\n";
 
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public blink_ledD13(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {

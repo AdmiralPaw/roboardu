@@ -110,6 +110,10 @@ public class BlockLink {
         return socketBlockID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Long getLastBlockID() {
         return lastPlugBlockID;
     }
@@ -166,6 +170,9 @@ public class BlockLink {
         }
     }
 
+    /**
+     *
+     */
     public void disconnect() {
         plug.setConnectorBlockID(Block.NULL);
         socket.setConnectorBlockID(Block.NULL);

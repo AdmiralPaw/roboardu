@@ -31,7 +31,26 @@ public class CIconButton extends CButton {
 
     /** Icon choices */
     public static enum Icon {
-        PLAY, PAUSE, STEP, STOP
+
+        /**
+         *
+         */
+        PLAY,
+
+        /**
+         *
+         */
+        PAUSE,
+
+        /**
+         *
+         */
+        STEP,
+
+        /**
+         *
+         */
+        STOP
     };
 
     /** icon inset of this button */
@@ -41,6 +60,7 @@ public class CIconButton extends CButton {
     private Icon icon;
 
     /**
+     * @param icon
      * @effects constructs this with particular icon, a black background,
      * 			and a blue selected coloring.
      */
@@ -142,7 +162,8 @@ public class CIconButton extends CButton {
         return null;
     }
 
-    /** Paints this */
+    /** Paints this
+     * @param g */
     @Override
     public void paint(Graphics g) {
         //selected color

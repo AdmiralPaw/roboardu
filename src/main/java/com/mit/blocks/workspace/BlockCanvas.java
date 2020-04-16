@@ -56,6 +56,7 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
     /**
      * Constructs BlockCanvas and subscribes
      * this BlockCanvas to PageChange events
+     * @param wrkspc
      */
     public BlockCanvas(Workspace workspace) {
         this.workspace = workspace;
@@ -138,6 +139,11 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
         return "BlockCanvas " + pages.size() + " pages.";
     }
 
+    /**
+     *
+     * @param left
+     * @return
+     */
     public List<Page> getLeftmostPages(int left) {
         List<Page> leftmostPages = new ArrayList<Page>();
         int scrollPosition = this.scrollPane.getHorizontalModel().getValue();
@@ -197,6 +203,10 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
         //not yet implemented
     }
 
+    /**
+     *
+     * @param c
+     */
     public void scrollToComponent(JComponent c) {
         //not yet implemented
     }
@@ -299,6 +309,7 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
 
     /**
      * @param page - the page to be removed
+     * @return 
      *
      * @requires page != null
      * @modifies this.pages
@@ -430,6 +441,7 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
     /**
      * Returns an XML node describing all the blocks and pages within
      * the BlockCanvas
+     * @param document
      * @return Node or {@code null} if there are no pages
      */
     public Node getSaveNode(Document document) {
@@ -491,7 +503,8 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
     //////////////////////////////
     //REDO/UNOD					//
     //////////////////////////////
-    /** @overrides ISupportMomento.getState */
+    /**
+     * @return  *  @overrides ISupportMomento.getState */
     public Object getState() {
         Map<String, Object> pageStates = new HashMap<String, Object>();
         for (Page page : pages) {
@@ -500,7 +513,8 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
         return pageStates;
     }
 
-    /** @overrides ISupportMomento.loadState() */
+    /**
+     * @param memento *  @overrides ISupportMomento.loadState() */
     @SuppressWarnings("unchecked")
     public void loadState(Object memento) {
         assert (memento instanceof HashMap) : "ISupportMemento contract violated in BlockCanvas";
@@ -555,6 +569,9 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
         private Cursor defaultCursor = null;
         private Cursor closedHandCursor = null;
 
+        /**
+         *
+         */
         public Canvas() {
             super();
             this.p = null;

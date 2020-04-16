@@ -5,13 +5,32 @@ import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 import com.ardublock.translator.block.TranslatorBlock;
 
+/**
+ *
+ * @author User
+ */
 public class MidiCommandBlock extends TranslatorBlock
 {
+
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public MidiCommandBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     public String toCode()
         throws SocketNullException, SubroutineNotDeclaredException
     {

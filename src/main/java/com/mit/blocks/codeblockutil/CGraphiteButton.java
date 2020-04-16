@@ -20,12 +20,17 @@ public class CGraphiteButton extends CButton {
 
     private static final long serialVersionUID = 328149080221L;
 
+    /**
+     *
+     * @param text
+     */
     public CGraphiteButton(String text) {
         super(Color.black, CGraphite.blue, text);
     }
 
     /**
      * re paints this
+     * @param g
      */
     @Override
     public void paint(Graphics g) {

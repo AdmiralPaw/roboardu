@@ -5,8 +5,15 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class BlinkRgbLed extends TranslatorBlock {
 
+    /**
+     *
+     */
     public static final String RGB_BLINK_CONTROL= "void rgbBlinkControl(int red_pin, int green_pin, int blue_pin, int r, int g, int b, int glow_time, int dark_time)\n" +
             "{\n" +
             "  pinMode(red_pin, OUTPUT);\n" +
@@ -28,11 +35,25 @@ public class BlinkRgbLed extends TranslatorBlock {
             "  delay(dark_time);\n" +
             "}\n";
 
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public BlinkRgbLed (Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {

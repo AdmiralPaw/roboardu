@@ -10,16 +10,27 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
 
+/**
+ *
+ * @author User
+ */
 public class RQueryField extends JPanel implements MouseListener, MouseMotionListener {
     private static final long serialVersionUID = 328149080259L;
     private JTextField field;
     private boolean pressed;
     private boolean mouseover;
 
+    /**
+     *
+     */
     public RQueryField() {
         this((String)null);
     }
 
+    /**
+     *
+     * @param text
+     */
     public RQueryField(String text) {
         super(new BorderLayout());
         this.pressed = false;
@@ -65,6 +76,10 @@ public class RQueryField extends JPanel implements MouseListener, MouseMotionLis
         return shape;
     }
 
+    /**
+     *
+     * @return
+     */
     public JTextField getQueryField() {
         return this.field;
     }
@@ -93,10 +108,18 @@ public class RQueryField extends JPanel implements MouseListener, MouseMotionLis
         super.paint(g);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getText() {
         return this.field.getText();
     }
 
+    /**
+     *
+     * @param text
+     */
     public void setText(String text) {
         this.field.setText(text);
     }

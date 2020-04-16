@@ -7,11 +7,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ *
+ * @author User
+ * @param <K>
+ * @param <V>
+ */
 public class SafeHashMap<K, V>  extends HashMap<K,V> implements Map<K,V>, Cloneable, Serializable
 {
 	private static final long serialVersionUID = -731362984994602016L;
 
-	public SafeHashMap()
+    /**
+     *
+     */
+    public SafeHashMap()
 	{
 		super();
 	}

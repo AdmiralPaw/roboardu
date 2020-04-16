@@ -16,6 +16,11 @@ public class CommentLabel extends BlockControlLabel {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     *
+     * @param workspace
+     * @param blockID
+     */
     public CommentLabel(Workspace workspace, long blockID) {
         super(workspace, blockID);
         this.workspace = workspace;
@@ -77,6 +82,7 @@ public class CommentLabel extends BlockControlLabel {
     /**
      * Implement MouseListener interface
      * toggle collapse state of block if button pressed
+     * @param e
      */
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -94,6 +100,7 @@ public class CommentLabel extends BlockControlLabel {
     /**
      * Implement MouseListener interface
      * highlight button state
+     * @param e
      */
     @Override
     public void mouseEntered(MouseEvent e) {
@@ -107,6 +114,7 @@ public class CommentLabel extends BlockControlLabel {
     /**
      * Implement MouseListener interface
      * de-highlight button state
+     * @param e
      */
     @Override
     public void mouseExited(MouseEvent e) {

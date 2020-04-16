@@ -10,10 +10,18 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 
+/**
+ *
+ * @author User
+ */
 public class CGraphiteSquareButton extends CButton {
 
     private static final long serialVersionUID = 328149080220L;
 
+    /**
+     *
+     * @param text
+     */
     public CGraphiteSquareButton(String text) {
         super(Color.black, CGraphite.blue, text);
     }

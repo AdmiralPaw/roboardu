@@ -3,6 +3,10 @@ package com.mit.blocks.renderable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author User
+ */
 public class BlockNode {
 
     private List<BlockNode> children = new ArrayList<BlockNode>();

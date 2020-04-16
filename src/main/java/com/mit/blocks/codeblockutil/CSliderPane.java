@@ -308,22 +308,26 @@ public class CSliderPane extends JPanel implements ComponentListener {
         this.revalidate();
     }
 
-    /** Do nothing when this widget is hidden */
+    /** Do nothing when this widget is hidden
+     * @param e */
     @Override
     public void componentHidden(ComponentEvent e) {
     }
 
-    /** Do nothing when this widget is moved */
+    /** Do nothing when this widget is moved
+     * @param e */
     @Override
     public void componentMoved(ComponentEvent e) {
     }
 
-    /** Do nothing when this widget is shown */
+    /** Do nothing when this widget is shown
+     * @param e */
     @Override
     public void componentShown(ComponentEvent e) {
     }
 
-    /** Reposition text fields and slider when this widget is resized */
+    /** Reposition text fields and slider when this widget is resized
+     * @param e */
     @Override
     public void componentResized(ComponentEvent e) {
         repositionComponent();

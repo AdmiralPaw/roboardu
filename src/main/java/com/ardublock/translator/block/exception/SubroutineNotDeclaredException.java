@@ -2,6 +2,10 @@ package com.ardublock.translator.block.exception;
 
 import com.ardublock.core.exception.ArdublockException;
 
+/**
+ *
+ * @author User
+ */
 public class SubroutineNotDeclaredException extends ArdublockException
 {
 
@@ -9,12 +13,20 @@ public class SubroutineNotDeclaredException extends ArdublockException
 	
 	private Long blockId;
 	
-	public SubroutineNotDeclaredException(Long blockId)
+    /**
+     *
+     * @param blockId
+     */
+    public SubroutineNotDeclaredException(Long blockId)
 	{
 		this.blockId = blockId;
 	}
 	
-	public Long getBlockId()
+    /**
+     *
+     * @return
+     */
+    public Long getBlockId()
 	{
 		return this.blockId;
 	}

@@ -4,12 +4,18 @@ import java.util.*;
 
 /**
  * This class implements a Least Recently Used cache that stores arbitrary key/value pairs.
+ * @param <K>
+ * @param <V>
  */
 public class LRUCache<K, V> {
 
     private final int capacity;
     private final LinkedHashMap<K, V> map;
 
+    /**
+     *
+     * @param _capacity
+     */
     public LRUCache(int _capacity) {
         this.capacity = _capacity;
         map = new LinkedHashMap<K, V>(capacity, 0.75f, true) {
@@ -25,6 +31,7 @@ public class LRUCache<K, V> {
     }
 
     /**
+     * @param key
      * @return the value associated with key, if it is in the cache (or null otherwise)
      */
     public V get(K key) {
@@ -33,6 +40,8 @@ public class LRUCache<K, V> {
 
     /**
      * Adds an entry to the cache.
+     * @param key
+     * @param value
      */
     public void put(K key, V value) {
         map.put(key, value);

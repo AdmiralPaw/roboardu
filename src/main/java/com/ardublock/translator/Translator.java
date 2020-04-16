@@ -35,6 +35,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+/**
+ *
+ * @author User
+ */
 public class Translator {
 
     private static final String variablePrefix = "_";
@@ -66,11 +70,19 @@ public class Translator {
     
     private String ValueMark = "VALUE_";//add after _ number of value
 
+    /**
+     *
+     * @param ws
+     */
     public Translator(Workspace ws) {
         workspace = ws;
         reset();
     }
 
+    /**
+     *
+     * @return
+     */
     public String genreateHeaderCommand() {
         StringBuilder headerCommand = new StringBuilder();
 
@@ -102,6 +114,10 @@ public class Translator {
                 + generateGuinoFunction();
     }
 
+    /**
+     *
+     * @return
+     */
     public String generateSetupFunction() {
         StringBuilder setupFunction = new StringBuilder();
         setupFunction.append("void setup()\n{\n");
@@ -129,6 +145,10 @@ public class Translator {
         return setupFunction.toString();
     }
 
+    /**
+     *
+     * @return
+     */
     public String generateGuinoFunction() {
         StringBuilder guinoFunction = new StringBuilder();
 
@@ -143,6 +163,14 @@ public class Translator {
         return guinoFunction.toString();
     }
 
+    /**
+     *
+     * @param blockId
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     * @throws BlockException
+     */
     public String translate(Long blockId) throws SocketNullException, SubroutineNotDeclaredException, BlockException {
         TranslatorBlockFactory translatorBlockFactory = new TranslatorBlockFactory();
         Block block = workspace.getEnv().getBlock(blockId);
@@ -150,10 +178,17 @@ public class Translator {
         return rootTranslatorBlock.toCode();
     }
 
+    /**
+     *
+     * @return
+     */
     public BlockAdaptor getBlockAdaptor() {
         return blockAdaptor;
     }
 
+    /**
+     *
+     */
     public void reset() {
         headerFileSet = new LinkedHashSet<String>();
         headerDefinitionSet = new LinkedHashSet<String>();
@@ -183,66 +218,128 @@ public class Translator {
         return new OpenBlocksAdaptor();
     }
 
+    /**
+     *
+     * @param headerFile
+     */
     public void addHeaderFile(String headerFile) {
         if (!headerFileSet.contains(headerFile)) {
             headerFileSet.add(headerFile);
         }
     }
 
+    /**
+     *
+     * @param headerDefinition
+     */
     public void addHeaderDefinition(String headerDefinition) {
         if (!headerDefinitionSet.contains(headerDefinition)) {
             headerDefinitionSet.add(headerDefinition);
         }
     }
 
+    /**
+     *
+     * @param command
+     */
     public void addSetupCommand(String command) {
         if (!setupCommand.contains(command)) {
             setupCommand.add(command);
         }
     }
 
+    /**
+     *
+     * @param block
+     */
     public void CheckClassName(TranslatorBlock block) {
         LoadTranslators(block.getClass().getSimpleName(),null);
     }
 
+    /**
+     *
+     * @param command
+     */
     public void addSetupCommandForced(String command) {
         setupCommand.add(command);
     }
 
+    /**
+     *
+     * @param command
+     */
     public void addGuinoCommand(String command) {
 
         guinoCommand.add(command);
 
     }
 
+    /**
+     *
+     * @param command
+     */
     public void addDefinitionCommand(String command) {
         definitionSet.add(command);
     }
 
+    /**
+     *
+     * @param pinNumber
+     */
     public void addInputPin(String pinNumber) {
         inputPinSet.add(pinNumber);
     }
 
+    /**
+     *
+     * @param pinNumber
+     */
     public void addOutputPin(String pinNumber) {
         outputPinSet.add(pinNumber);
     }
 
+    /**
+     *
+     * @param userVarName
+     * @return
+     */
     public String getNumberVariable(String userVarName) {
         return numberVariableSet.get(userVarName);
     }
 
+    /**
+     *
+     * @param userVarName
+     * @return
+     */
     public String getBooleanVariable(String userVarName) {
         return booleanVariableSet.get(userVarName);
     }
 
+    /**
+     *
+     * @param userVarName
+     * @param internalName
+     */
     public void addNumberVariable(String userVarName, String internalName) {
         numberVariableSet.put(userVarName, internalName);
     }
 
+    /**
+     *
+     * @param userVarName
+     * @param internalName
+     */
     public void addBooleanVariable(String userVarName, String internalName) {
         booleanVariableSet.put(userVarName, internalName);
     }
 
+    /**
+     *
+     * @param blockId
+     * @param functionName
+     * @throws SubroutineNameDuplicatedException
+     */
     public void addFunctionName(Long blockId, String functionName) throws SubroutineNameDuplicatedException {
         if (functionName.equals("loop") || functionName.equals("setup") || functionNameSet.contains(functionName)) {
             throw new SubroutineNameDuplicatedException(blockId);
@@ -251,14 +348,28 @@ public class Translator {
         functionNameSet.add(functionName);
     }
 
+    /**
+     *
+     * @param name
+     * @return
+     */
     public boolean containFunctionName(String name) {
         return functionNameSet.contains(name.trim());
     }
 
+    /**
+     *
+     * @return
+     */
     public String buildVariableName() {
         return buildVariableName("");
     }
 
+    /**
+     *
+     * @param reference
+     * @return
+     */
     public String buildVariableName(String reference) {
         variableCnt = variableCnt + 1;
         String varName = variablePrefix + variableCnt + "_";
@@ -272,48 +383,98 @@ public class Translator {
         return varName;
     }
 
+    /**
+     *
+     * @return
+     */
     public Workspace getWorkspace() {
         return workspace;
     }
 
+    /**
+     *
+     * @param blockId
+     * @return
+     */
     public Block getBlock(Long blockId) {
         return workspace.getEnv().getBlock(blockId);
     }
 
+    /**
+     *
+     * @param translatorBlock
+     */
     public void registerBodyTranslateFinishCallback(TranslatorBlock translatorBlock) {
         bodyTranslatreFinishCallbackSet.add(translatorBlock);
     }
 
+    /**
+     *
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     public void beforeGenerateHeader() throws SocketNullException, SubroutineNotDeclaredException {
         for (TranslatorBlock translatorBlock : bodyTranslatreFinishCallbackSet) {
             translatorBlock.onTranslateBodyFinished();
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getRootBlockName() {
         return rootBlockName;
     }
 
+    /**
+     *
+     * @param rootBlockName
+     */
     public void setRootBlockName(String rootBlockName) {
         this.rootBlockName = rootBlockName;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isScoopProgram() {
         return isScoopProgram;
     }
 
+    /**
+     *
+     * @param isScoopProgram
+     */
     public void setScoopProgram(boolean isScoopProgram) {
         this.isScoopProgram = isScoopProgram;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isGuinoProgram() {
         return isGuinoProgram;
     }
 
+    /**
+     *
+     * @param isGuinoProgram
+     */
     public void setGuinoProgram(boolean isGuinoProgram) {
         this.isGuinoProgram = isGuinoProgram;
     }
 
+    /**
+     *
+     * @param loopBlocks
+     * @param subroutineBlocks
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     public String translate(Set<RenderableBlock> loopBlocks, Set<RenderableBlock> subroutineBlocks) throws SocketNullException, SubroutineNotDeclaredException {
         StringBuilder code = new StringBuilder();
 
@@ -332,18 +493,37 @@ public class Translator {
         return code.toString();
     }
 
+    /**
+     *
+     * @param name
+     * @return
+     */
     public Object getInternalData(String name) {
         return internalData.get(name);
     }
 
+    /**
+     *
+     * @param name
+     * @param value
+     */
     public void addInternalData(String name, Object value) {
         internalData.put(name, value);
     }
     
+    /**
+     *
+     * @param className
+     */
     public void LoadTranslators(String className) {
         LoadTranslators(className,null);
     }
     
+    /**
+     *
+     * @param className
+     * @param valuesToChange
+     */
     public void LoadTranslators(String className,HashMap<String,ArrayList<String>> valuesToChange) {
         try {
 

@@ -28,6 +28,10 @@ import java.util.regex.Pattern;
 public class Block implements ISupportMemento {
 
     //Defines a NULL id for a Block
+
+    /**
+     *
+     */
     public static final Long NULL = Long.valueOf(-1);
 
     //block identifying information
@@ -67,6 +71,9 @@ public class Block implements ISupportMemento {
     //argument descriptions
     private ArrayList<String> argumentDescriptions;
 
+    /**
+     *
+     */
     protected final Workspace workspace;
 
     // shortcut field (workspace.getEnv() call provides the same)
@@ -197,6 +204,7 @@ public class Block implements ISupportMemento {
     ///////////////////
     /**
      * Returns the workspace that this block is living in
+     * @return 
      */
     public Workspace getWorkspace() {
         return workspace;
@@ -469,6 +477,8 @@ public class Block implements ISupportMemento {
     /**
      * Informs this Block that a block with id connectedBlockID has connected to the specified
      * connectedSocket
+     * @param connectedSocket
+     * @param connectedBlockID
      */
     public void blockConnected(BlockConnector connectedSocket, Long connectedBlockID) {
         if (connectedSocket.isExpandable()) {
@@ -524,6 +534,10 @@ public class Block implements ISupportMemento {
         return Collections.unmodifiableList(new ArrayList<BlockConnector>(sockets));
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<BlockConnector> getScoketsList()
     {
         return new ArrayList<BlockConnector>(sockets);
@@ -550,7 +564,12 @@ public class Block implements ISupportMemento {
     /**
      * Replaces the socket at the specified index with the new specified parameters
      * @param index of the BlockConnector to replace
+     * @param kind
 	 * @param isLabelEditable is true iff this BlockConnector can have its labels edited.
+     * @param pos
+     * @param label
+     * @param blockID
+     * @param isExpandable
      * @return true if socket successfully replaced
      */
     public boolean setSocketAt(int index, String kind, PositionType pos, String label, boolean isLabelEditable, boolean isExpandable, Long blockID) {
@@ -589,8 +608,7 @@ public class Block implements ISupportMemento {
     }
 
     /**
-     * Adds another socket to this.  Socket is inserted at the specified index of socket list, where 0 is the first socket.
-     * if index is equal numOfSockets(), then socket is added to the end of the socket list.  If index > numOfSockets(), an
+     * Adds another socket to this.Socket is inserted at the specified index of socket list, where 0 is the first socket.  if index is equal numOfSockets(), then socket is added to the end of the socket list.  If index > numOfSockets(), an
      * exception is thrown.
      * @param index the index to insert new socket to
      * @param kind the socket kind of new socket
@@ -599,6 +617,7 @@ public class Block implements ISupportMemento {
 	 * @param isLabelEditable is true iff this BlockConnector can have its labels edited.
      * @param isExpandable true iff this connector can expand to another connector
      * @param blockID the block id of the block attached to new socket
+     * @return 
      */
     public BlockConnector addSocket(int index, String kind, PositionType positionType, String label, boolean isLabelEditable, boolean isExpandable, Long blockID) {
         BlockConnector newSocket = new BlockConnector(workspace, kind, positionType, label, isLabelEditable, isExpandable, blockID);
@@ -762,6 +781,7 @@ public class Block implements ISupportMemento {
     ////////////////
     /**
      * Returns true iff this block is "bad."  Bad means that this block has an associated compile error.
+     * @return 
      */
     public boolean isBad() {
         return isBad;
@@ -777,6 +797,7 @@ public class Block implements ISupportMemento {
 
     /**
      * Returns the "bad" message of this block.
+     * @return 
      */
     public String getBadMsg() {
         return badMsg;
@@ -796,8 +817,8 @@ public class Block implements ISupportMemento {
     ////////////////
 
     /**
-     * Returns true iff this block has focus.  Focus means it is currently selected in the workspace.
-     * Multiple blocks can have focus simultaniously.
+     * Returns true iff this block has focus.Focus means it is currently selected in the workspace.  Multiple blocks can have focus simultaniously.
+     * @return
      */
     public boolean hasFocus() {
         return hasFocus;
@@ -998,8 +1019,8 @@ public class Block implements ISupportMemento {
     }
 
     /**
-     * Returns true if this block is a procedure parameter block; false otherwise.
-     * FORWARDED FROM BLOCK GENUS
+     * Returns true if this block is a procedure parameter block; false otherwise.FORWARDED FROM BLOCK GENUS
+     * @return
      */
     public boolean isProcedureParamBlock() {
         return getGenus().isProcedureParamBlock();
@@ -1156,9 +1177,9 @@ public class Block implements ISupportMemento {
     }
 
     /**
-     * Returns the the argument description at index i.
-     * If the index is out of bounds or if no argument
-     * description exists for arguemnt at index i , return null.
+     * Returns the the argument description at index i.If the index is out of bounds or if no argument
+ description exists for arguemnt at index i , return null.
+     * @param index
      * @return the String argument descriptions of this or NULL.
      */
     public String getArgumentDescription(int index) {
@@ -1230,6 +1251,7 @@ public class Block implements ISupportMemento {
     /**
      * Returns true iff the other Object is an instance of Block and has the same
      * blockID as this; false otherwise
+     * @param other
      * @return true iff the other Object is an instance of Block and has the same
      * blockID as this; false otherwise
      */
@@ -1256,11 +1278,13 @@ public class Block implements ISupportMemento {
     ////////////////////////
     /**
      * Returns the node of this using additional location information
-     * specified in x and y and comment text .
-     * NOTE: in the future will not send these coordinates and instead will have renderable
-     * block insert them.
+     * specified in x and y and comment text .NOTE: in the future will not send these coordinates and instead will have renderable
+ block insert them.
+     * @param document
      * @param x
      * @param y
+     * @param commentNode
+     * @param isCollapsed
      * @return the node of this
      */
     public Node getSaveNode(Document document, int x, int y, Node commentNode, boolean isCollapsed) {
@@ -1365,6 +1389,7 @@ public class Block implements ISupportMemento {
      * instance with the loaded information
      * @param workspace The workspace in use
      * @param node Node cantaining desired information
+     * @param idMapping
      * @return Block instance containing loaded information
      */
     public static Block loadBlockFrom(Workspace workspace, Node node, HashMap<Long, Long> idMapping){
@@ -1553,6 +1578,13 @@ public class Block implements ISupportMemento {
         return null;
     }
 
+    /**
+     *
+     * @param workspace
+     * @param input
+     * @param mapping
+     * @return
+     */
     public static Long translateLong(Workspace workspace, Long input, HashMap<Long, Long> mapping) {
         if (mapping == null) {
             return input;
@@ -1588,7 +1620,10 @@ public class Block implements ISupportMemento {
         public Object after;
     }
 
-
+    /**
+     *
+     * @return
+     */
     public Object getState() {
         BlockState state = new BlockState();
 
@@ -1639,6 +1674,10 @@ public class Block implements ISupportMemento {
         return state;
     }
 
+    /**
+     *
+     * @param memento
+     */
     public void loadState(Object memento) {
         if (memento instanceof BlockState) {
             BlockState state = (BlockState) memento;

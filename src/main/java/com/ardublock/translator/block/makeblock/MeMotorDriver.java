@@ -6,13 +6,31 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class MeMotorDriver extends TranslatorBlock {
 
-	public MeMotorDriver(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public MeMotorDriver(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
 		translator.addHeaderFile("Makeblock.h");
 		translator.addHeaderFile("SoftwareSerial.h");

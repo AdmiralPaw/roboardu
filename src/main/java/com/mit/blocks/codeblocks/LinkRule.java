@@ -15,5 +15,9 @@ public interface LinkRule {
      */
     public boolean canLink(Block block1, Block block2, BlockConnector socket1, BlockConnector socket2);
 
+    /**
+     *
+     * @return
+     */
     public boolean isMandatory();
 }

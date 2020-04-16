@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
+/**
+ *
+ * @author User
+ */
 public class BlocksKeeper {
 
     private ArrayList<ArrayList<RenderableBlock>> undoList;
@@ -17,6 +21,11 @@ public class BlocksKeeper {
     private Page parent;
     private Workspace workspace;
 
+    /**
+     *
+     * @param p
+     * @param workspace
+     */
     public BlocksKeeper(Page p, Workspace workspace) {
         undoList = new ArrayList<ArrayList<RenderableBlock>>();
         redoList = new ArrayList<ArrayList<RenderableBlock>>();
@@ -25,6 +34,10 @@ public class BlocksKeeper {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public Collection<RenderableBlock> undoAct() {
         if (undoList.size() > 0) {
             ArrayList<RenderableBlock> screen = undoList.get(undoList.size() - 1);
@@ -44,6 +57,10 @@ public class BlocksKeeper {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public Collection<RenderableBlock> redoAct() {
         if (redoList.size() > 0) {
             Collection<RenderableBlock> screen = redoList.get(redoList.size() - 1);
@@ -56,6 +73,10 @@ public class BlocksKeeper {
         return null;
     }
 
+    /**
+     *
+     * @param blocks
+     */
     public void addAct(Collection<RenderableBlock> blocks) {
         ArrayList<RenderableBlock> screen = getScreen(blocks);
         if (undoList.size() != 0) {
@@ -81,6 +102,11 @@ public class BlocksKeeper {
         //System.out.println("Act saved: " + undoList.size());
     }
 
+    /**
+     *
+     * @param blocks
+     * @return
+     */
     public ArrayList<RenderableBlock> getScreen(Collection<RenderableBlock> blocks) {
         HashMap<Long, Long> alreadyAdd = new HashMap<Long, Long>();
         ArrayList<RenderableBlock> screen = new ArrayList<RenderableBlock>();
@@ -97,6 +123,12 @@ public class BlocksKeeper {
         return screen;
     }
 
+    /**
+     *
+     * @param a
+     * @param b
+     * @return
+     */
     public boolean equalsCollection(ArrayList<RenderableBlock> a, ArrayList<RenderableBlock> b) {
         if (a.size() != b.size()) {
             return false;
@@ -111,6 +143,9 @@ public class BlocksKeeper {
         return true;
     }
 
+    /**
+     *
+     */
     public void normalizeListSize() {
         if (undoList.size() > maxSize) {
             for (RenderableBlock rb : undoList.get(0)) {
@@ -121,6 +156,10 @@ public class BlocksKeeper {
         }
     }
 
+    /**
+     *
+     * @param s
+     */
     public static void setSize(int s) {
         maxSize = s;
     }

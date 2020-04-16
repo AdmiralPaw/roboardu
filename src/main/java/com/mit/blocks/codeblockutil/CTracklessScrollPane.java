@@ -85,10 +85,13 @@ public class CTracklessScrollPane extends CScrollPane implements KeyListener {
      * Constructs a custom CScrollPane with the view port set to "view",
      * with both scroll bar policies set to "ALWAYS" (see
      * javax.swing.JScrollPane for a description on the use of
-     * scroll bar policies).  Thumb will have  girth of equal to
-     * thumbWidth and an interior color equal to thumbColor.
+     * scroll bar policies).Thumb will have  girth of equal to
+ thumbWidth and an interior color equal to thumbColor.
      *
      * @param view
+     * @param thumbWidth
+     * @param thumbColor
+     * @param trackColor
      *
      * @requires view != null
      * @effects Constructs a CScrollPane as described in method overview.
@@ -233,6 +236,10 @@ public class CTracklessScrollPane extends CScrollPane implements KeyListener {
         return scrollviewport.getHorizontalScrollBar().getModel();
     }
 
+    /**
+     *
+     * @param thumbWidth
+     */
     public void setThumbWidth(int thumbWidth) {
         this.verticalbar.setPreferredSize(new Dimension(thumbWidth, 0));
         this.horizontalbar.setPreferredSize(new Dimension(0, thumbWidth));
@@ -249,6 +256,7 @@ public class CTracklessScrollPane extends CScrollPane implements KeyListener {
 
     /**
      * Set the amount by which the mouse wheel scrolls
+     * @param x
      * @requires INTEGER_MIN<x<INTEGER_MAX
      * @modifies this.SCROLLINGUNIT
      * @effects set this.scrollingunit to x
@@ -260,6 +268,7 @@ public class CTracklessScrollPane extends CScrollPane implements KeyListener {
     }
 
     /**
+     * @param e
      * @overrides CScrollPane.mouseWheelMoved
      * TODO: This is duplicate code (In Hover, Glass, and Tackless ScollPanes)
      * For MACs only: Horizontal scroll events are delivered
@@ -287,6 +296,7 @@ public class CTracklessScrollPane extends CScrollPane implements KeyListener {
     /**
      * KeyListeners: Should repaint the scrollbar
      * everytime the user presses a key
+     * @param e
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -297,6 +307,7 @@ public class CTracklessScrollPane extends CScrollPane implements KeyListener {
     /**
      * KeyListeners: Should repaint the scrollbar
      * everytime the user presses a key
+     * @param e
      */
     @Override
     public void keyReleased(KeyEvent e) {
@@ -307,6 +318,7 @@ public class CTracklessScrollPane extends CScrollPane implements KeyListener {
     /**
      * KeyListeners: Should repaint the scrollbar
      * everytime the user presses a key
+     * @param e
      */
     @Override
     public void keyTyped(KeyEvent e) {

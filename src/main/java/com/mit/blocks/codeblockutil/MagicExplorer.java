@@ -149,6 +149,7 @@ public class MagicExplorer extends JLayeredPane implements Explorer, ComponentLi
 
     /**
      * Rolls the canvasPane back underneath when focus is lost
+     * @param e
      */
     public void focusLost(FocusEvent e) {
         timer.shrink();

@@ -26,6 +26,10 @@ public class TPanel extends JPanel {
     private int width = 300;
     private int height = 300;
 
+    /**
+     *
+     * @param tutorialPane
+     */
     public TPanel(TutorialPane tutorialPane) {
         this.setLayout(null);
         this.setOpaque(false);
@@ -115,15 +119,27 @@ public class TPanel extends JPanel {
         });
     }
 
+    /**
+     *
+     * @param newText
+     */
     public void setText(String newText) {
         this.tutorialText.setText(newText);
     }
 
+    /**
+     *
+     * @param p
+     */
     public void changeLocation(Point p) {
         this.setLocation(p.x, p.y);
         this.repaint();
     }
 
+    /**
+     *
+     * @param d
+     */
     public void changeDimension(Dimension d) {
         this.width = d.width;
         this.height = d.height;
@@ -148,6 +164,10 @@ public class TPanel extends JPanel {
         this.updateUI();
     }
 
+    /**
+     *
+     * @param newColor
+     */
     public void setTextColor(Color newColor) {
         this.tutorialText.setForeground(newColor);
     }

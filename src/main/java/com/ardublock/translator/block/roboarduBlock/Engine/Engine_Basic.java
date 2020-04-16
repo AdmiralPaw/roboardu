@@ -7,8 +7,20 @@ import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 import com.ardublock.translator.block.exception.BlockException;
 
+/**
+ *
+ * @author User
+ */
 public class Engine_Basic extends TranslatorBlock {
 
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public Engine_Basic(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
@@ -60,6 +72,13 @@ public class Engine_Basic extends TranslatorBlock {
             + "  }\n"
             + "}\n";
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     * @throws BlockException
+     */
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException, BlockException {
         translator.CheckClassName(this);

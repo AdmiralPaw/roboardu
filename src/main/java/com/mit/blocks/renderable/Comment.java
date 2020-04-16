@@ -325,6 +325,7 @@ public class Comment extends JPanel {
     /**
      * Returns the node for this comment.
      *
+     * @param document
      * @return
      */
     public Node getSaveNode(Document document) {
@@ -545,6 +546,7 @@ public class Comment extends JPanel {
 
     /**
      * Over rides the standard setVisible to make sure the arrow's visibility is also set.
+     * @param b
      */
     public void setVisible(boolean b) {
         super.setVisible(b);

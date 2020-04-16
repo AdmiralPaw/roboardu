@@ -9,6 +9,10 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.JLabel;
 
+/**
+ *
+ * @author User
+ */
 public class CLabel extends JLabel {
 
     private static final long serialVersionUID = 328149080212L;
@@ -26,6 +30,10 @@ public class CLabel extends JLabel {
     private final float[] shadowColorArray = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0, 0};
     private double offsetSize = 1;
 
+    /**
+     *
+     * @param text
+     */
     public CLabel(String text) {
         super(text);
     }

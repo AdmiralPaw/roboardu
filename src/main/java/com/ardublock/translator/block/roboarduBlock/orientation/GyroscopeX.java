@@ -5,17 +5,38 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class GyroscopeX extends TranslatorBlock {
 
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public GyroscopeX(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    /**
+     *
+     */
     public static final String GYRO_FUNC = "float callGyroX(MPU9250 &Accel){\n"
             + "  Accel.readSensor();\n"
             + "  return Accel.getGyroX_rads();\n"
             + "}";
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
         String Accel = "Accel";

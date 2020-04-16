@@ -4,6 +4,10 @@ import java.io.File;
 
 import javax.swing.filechooser.FileFilter;
 
+/**
+ *
+ * @author User
+ */
 public class CSVFilter extends FileFilter {
 
     public boolean accept(File file) {

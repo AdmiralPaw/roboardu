@@ -4,9 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
+/**
+ *
+ * @author User
+ */
 public class RButton extends JButton {
 
     private Font currentFont;
+
+    /**
+     *
+     * @param text
+     */
     public RButton(String text)
     {
         super(text);

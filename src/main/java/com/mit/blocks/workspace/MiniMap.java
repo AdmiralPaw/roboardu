@@ -27,8 +27,6 @@ import java.util.Collection;
  * as the user mouses over or moves the mouse out of focus.
  *
  * blockCanvas : BlockCanvas 		//the block canvas that this MiniMap renders
- * blocks : Set<RenderableBlocks> 	//the set of blocks that this renders
- * comments : Set<Comment> 			//the set of comments that this renders
  * mapwidth : Integer				//this MiniMap's maximum width
  * mapheight: Integer				//this MiniMap's maximum height
  * ratio : Double					//the aspect ratio that this should maintain
@@ -79,6 +77,7 @@ public class MiniMap extends JPanel implements MouseListener, MouseMotionListene
     private final Workspace workspace;
 
     /**
+     * @param workspace
      * @effects  constructs a MiniMap, M, such that
      * 			M.blockCanvas = The current blockcanvas in Workspace &&
      * 			M.blocks = M.blockCanvas.getBlocks &&
@@ -130,6 +129,9 @@ public class MiniMap extends JPanel implements MouseListener, MouseMotionListene
         this.repaint();
     }
 
+    /**
+     *
+     */
     public void repositionMiniMap() {
         if (this.getParent() != null) {
             this.setBounds(this.getParent().getWidth() - MAPWIDTH - 26, 0,
@@ -299,6 +301,7 @@ public class MiniMap extends JPanel implements MouseListener, MouseMotionListene
 
     /**
      * When dragging along miniMap, zoom to new point
+     * @param e
      */
     public void mouseDragged(MouseEvent e) {
         scrollToPoint(e.getPoint());
@@ -306,12 +309,14 @@ public class MiniMap extends JPanel implements MouseListener, MouseMotionListene
 
     /**
      * When releasing a mouse in a MiniMap, scroll to point
+     * @param e
      */
     public void mouseReleased(MouseEvent e) {
         scrollToPoint(e.getPoint());
     }
 
-    /**MouseEvent methods not interested by this WorkspceWidget**/
+    /**MouseEvent methods not interested by this WorkspceWidge
+     * @param e*/
     public void mouseMoved(MouseEvent e) {
     }
 
@@ -371,10 +376,22 @@ public class MiniMap extends JPanel implements MouseListener, MouseMotionListene
         this.repaint();
     }
 
+    /**
+     *
+     * @param b
+     */
     public void startDragged(RenderableBlock b){}
 
+    /**
+     *
+     * @param b
+     */
     public void stopDragged(RenderableBlock b){}
 
+    /**
+     *
+     * @param block
+     */
     public void blockRenamed(RenderableBlock block){}
 
     /**

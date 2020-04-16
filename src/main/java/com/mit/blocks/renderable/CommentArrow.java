@@ -29,6 +29,8 @@ public class CommentArrow {
 
     /**
      * Set new location for arrow
+     * @param x
+     * @param y
      */
     public void setLocation(int x, int y) {
         arrow.setLocation(x, y);
@@ -95,6 +97,7 @@ public class CommentArrow {
     /**
      * Sets the visibility of the arrow component
      *
+     * @param b
      */
     public void setVisible(boolean b) {
         arrow.setVisible(b);

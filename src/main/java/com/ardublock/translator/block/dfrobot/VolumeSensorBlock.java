@@ -6,9 +6,22 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class VolumeSensorBlock extends AnalogInputBlock 
 {
-	public VolumeSensorBlock(Long blockId, Translator translator,
+
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public VolumeSensorBlock(Long blockId, Translator translator,
 			String codePrefix, String codeSuffix, String label) {
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
@@ -30,7 +43,13 @@ public class VolumeSensorBlock extends AnalogInputBlock
 			"  return maxVol;\n" + 
 			"}\n\n";
 	
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		translator.addDefinitionCommand(AB_SOUND_FUN_DEFINE);

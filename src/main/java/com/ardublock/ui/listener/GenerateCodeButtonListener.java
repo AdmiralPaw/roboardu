@@ -24,6 +24,11 @@ import java.util.Set;
 //=======
 //>>>>>>> lerofaCtrlZ
 
+/**
+ *
+ * @author User
+ */
+
 public class GenerateCodeButtonListener implements ActionListener {
 
     private JFrame parentFrame;
@@ -31,6 +36,11 @@ public class GenerateCodeButtonListener implements ActionListener {
     private Workspace workspace;
     private ResourceBundle uiMessageBundle;
 
+    /**
+     *
+     * @param frame
+     * @param context
+     */
     public GenerateCodeButtonListener(JFrame frame, Context context) {
         this.parentFrame = frame;
         this.context = context;

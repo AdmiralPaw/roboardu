@@ -10,20 +10,40 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
-
+/**
+ *
+ * @author User
+ */
 public class ledD13 extends TranslatorBlock {
 
+    /**
+     *
+     */
     public static final String LED_GLOW= "void LedGlow(int LED_PIN, bool GLOW)\n" +
             "{\n" +
             "  pinMode(LED_PIN, OUTPUT);\n" +
             "  digitalWrite(LED_PIN, !GLOW);\n" +
             "}\n";
 
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public ledD13(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {

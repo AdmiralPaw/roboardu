@@ -9,8 +9,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ *
+ * @author User
+ */
 public class Engine_Back extends TranslatorBlock {
 
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public Engine_Back(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
@@ -68,6 +80,12 @@ public class Engine_Back extends TranslatorBlock {
             + "  Motors(-Speed, -Speed);\n"
             + "}\n";
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
         HashMap<String,ArrayList<String>> CommandNameAndCode = new HashMap<String,ArrayList<String>>();

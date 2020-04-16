@@ -79,6 +79,7 @@ public interface Explorer {
 
     /**
      * Returns whether any Canvas is currently selected
+     * @return 
      */
     public boolean anyCanvasSelected();
 

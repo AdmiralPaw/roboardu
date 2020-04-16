@@ -71,6 +71,9 @@ import java.util.*;
  */
 public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemento {
 
+    /**
+     *
+     */
     public static JComponent blocksContainer;
 
     /**
@@ -149,10 +152,17 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     private boolean hideMinimize = false;
 //<<<<<<< HEAD
 //
+
+    /**
+     *
+     */
     public static Page thisPage;
 //=======
     private Page currentPage;
 
+    /**
+     *
+     */
     public static Page currentpage;
 
     private BlocksKeeper blocksKeeper;
@@ -184,6 +194,17 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         this(workspace, name, pageWidth, pageHeight, pageDrawer, true, null, true);
     }
 
+    /**
+     *
+     * @param workspace
+     * @param name
+     * @param pageWidth
+     * @param pageHeight
+     * @param pageDrawer
+     * @param inFullview
+     * @param defaultColor
+     * @param isCollapsible
+     */
     public Page(Workspace workspace, String name, int pageWidth, int pageHeight, String pageDrawer, boolean inFullview, Color defaultColor, boolean isCollapsible) {
         super();
         thisPage = this;
@@ -245,16 +266,26 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
 
     }
 
+    /**
+     *
+     */
     public void setUndoScreen()
     {
         setScreen(blocksKeeper.undoAct());
     }
 
+    /**
+     *
+     */
     public void setRedoScreen()
     {
         setScreen(blocksKeeper.redoAct());
     }
 
+    /**
+     *
+     * @param screen
+     */
     public void setScreen(Collection<RenderableBlock> screen) {
         if (screen != null) {
             clearPage();
@@ -280,21 +311,34 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         }
     }
 
+    /**
+     *
+     */
     public void newKeeper() {
         
         blocksKeeper = new BlocksKeeper(this, this.workspace);
     }
 
+    /**
+     *
+     */
     public void disableMinimize() {
         this.hideMinimize = true;
         this.collapse.repaint();
     }
 
+    /**
+     *
+     */
     public void enableMinimize() {
         this.hideMinimize = false;
         this.collapse.repaint();
     }
 
+    /**
+     *
+     * @param hide
+     */
     public void setHide(boolean hide) {
         this.hideMinimize = hide;
         this.collapse.repaint();
@@ -323,6 +367,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
      * Constructs a new Page
      *
      * @param workspace The workspace in use
+     * @return 
      * @requires none
      * @effects constructs a new Page such that:
      * 1) The name of this page equals the argument "".
@@ -365,8 +410,9 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     }
 
     /**
-     * Sets the page id. Consider the page id "final" but settable - once
-     * set, it cannot be modified or unset.
+     * Sets the page id.Consider the page id "final" but settable - once
+ set, it cannot be modified or unset.
+     * @param id
      */
     public void setPageId(String id) {
         if (pageId == null) {
@@ -414,7 +460,8 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     }
 
     /**
-     * Returns this page's id. Can be null, if id is not yet set.
+     * Returns this page's id.Can be null, if id is not yet set.
+     * @return 
      */
     public String getPageId() {
         return pageId;
@@ -470,6 +517,10 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         return this.pageJComponent.getImage();
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isInFullview() {
         return fullview;
     }
@@ -538,6 +589,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     }
 
     /**
+     * @param pixelWidth
      * @requires Integer.MIN_VAL <= pixelWidth <= Integer.MAX_VAL
      * @modifies this.width
      * @effects sets abstract width to pixelWidth taking into account the zoom level.
@@ -680,6 +732,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     }
 
     /**
+     * @return 
      * @overrides Zoomable.getZoomLevel()
      */
     public static double getZoomLevel() {
@@ -704,19 +757,34 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         this.pageJComponent.revalidate();
     }
 
+    /**
+     *
+     * @param block
+     */
     public void startDragged(RenderableBlock block) {
         workspace.deactiveCPopupMenu();
         saveScreen();
         //System.out.println(block.toString());
     }
 
+    /**
+     *
+     * @param b
+     */
     public void stopDragged(RenderableBlock b) {
     }
 
+    /**
+     *
+     * @param block
+     */
     public void blockRenamed(RenderableBlock block) {
         saveScreen();
     }
 
+    /**
+     *
+     */
     public void saveScreen() {
         blocksKeeper.addAct(getBlocks());
     }
@@ -837,6 +905,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     }
 
     /**
+     * @return 
      * @overrides WorkspaceWidget.contains()
      */
     @Override
@@ -845,6 +914,8 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     }
 
     /**
+     * @param p
+     * @return 
      * @overrides WorkspaceWidget.contains()
      */
     public boolean contains(Point p) {
@@ -882,6 +953,13 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     //////////////////////////
     //SAVING AND LOADING	//
     //////////////////////////
+
+    /**
+     *
+     * @param pageNode
+     * @param importingPage
+     * @return
+     */
     public ArrayList<RenderableBlock> loadPageFrom(Node pageNode, boolean importingPage) {
         //note: this code is duplicated in BlockCanvas.loadSaveString().
         NodeList pageChildren = pageNode.getChildNodes();
@@ -908,6 +986,11 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         return loadedBlocks;
     }
 
+    /**
+     *
+     * @param loadedBlocks
+     * @param importingPage
+     */
     public void addLoadedBlocks(Collection<RenderableBlock> loadedBlocks, boolean importingPage) {
         for (RenderableBlock rb : loadedBlocks) {
             if (rb != null) {
@@ -942,6 +1025,11 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
         this.pageJComponent.repaint();
     }
 
+    /**
+     *
+     * @param document
+     * @return
+     */
     public Node getSaveNode(Document document) {
         Element pageElement = document.createElement("Page");
 
@@ -992,6 +1080,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     }
 
     /**
+     * @return 
      * @overrides ISupportMomento.getState
      */
     @Override
@@ -1010,6 +1099,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
     }
 
     /**
+     * @param memento
      * @overrides ISupportMomento.loadState()
      */
     @Override

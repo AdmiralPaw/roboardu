@@ -3,11 +3,28 @@ package com.ardublock.translator.block.roboarduBlock.sensors;
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
 
+/**
+ *
+ * @author User
+ */
 public class rangefinderCombined extends TranslatorBlock {
+
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public rangefinderCombined(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toCode() {
         String sensor = "sensorCombined";

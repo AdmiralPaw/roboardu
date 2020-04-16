@@ -11,21 +11,43 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class Tone extends TranslatorBlock
 {
-	public Tone(Long blockId, Translator translator, String codePrefix,	String codeSuffix, String label)
+
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public Tone(Long blockId, Translator translator, String codePrefix,	String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
         
-        public static final String TONE_FUNC = "void Tone(int port, int frequency)\n" +
+    /**
+     *
+     */
+    public static final String TONE_FUNC = "void Tone(int port, int frequency)\n" +
             "{\n" +
             "  if(frequency > 20000) frequency = 20000;\n" +
             "  if(frequency < 100) frequency = 100;\n" +
             "  tone(port, frequency);\n" +
             "}";
 
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		TranslatorBlock pinBlock = this.getRequiredTranslatorBlockAtSocket(0);

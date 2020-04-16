@@ -5,14 +5,33 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class RTC_Year  extends TranslatorBlock {
 
-	public RTC_Year (Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public RTC_Year (Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 	
 	//@Override
+
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
 		public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 		{
 				

@@ -7,10 +7,21 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.GeneralPath;
 
-
-
+/**
+ *
+ * @author User
+ */
 public class ShapeBevel {
     
+    /**
+     *
+     * @param g2
+     * @param theShape
+     * @param flatness
+     * @param numBands
+     * @param bevelSize
+     * @param light
+     */
     public static void createShapeBevel(Graphics2D g2,Shape theShape,double flatness,int numBands,float bevelSize,float light[]) {
         // draw bands from inside of shape to outside (important)
         for(int i=numBands-1;i>=0;i--) {
@@ -55,6 +66,11 @@ public class ShapeBevel {
         }
     }
     
+    /**
+     *
+     * @param light
+     * @return
+     */
     public static Color getFrontFaceOverlay(float light[]) {
         float frontNorm[] = {0,0,1};
         float frontGrayAlpha[] = {0,0}; // receives gray,alpha
@@ -62,7 +78,13 @@ public class ShapeBevel {
         return new Color(frontGrayAlpha[0],frontGrayAlpha[0],frontGrayAlpha[0],frontGrayAlpha[1]);
     }
         
-    
+    /**
+     *
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
     public static float[] getLightVector(float x,float y,float z) {
         // normalized light vector
         float light[] = {x,y,z};

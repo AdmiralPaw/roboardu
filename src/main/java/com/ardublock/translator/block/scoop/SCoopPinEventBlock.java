@@ -6,10 +6,17 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class SCoopPinEventBlock extends SCoopTaskBlock
 {
 
-	public static final String FUNCTION_IS_EVENT_TRIGGERED = 
+    /**
+     *
+     */
+    public static final String FUNCTION_IS_EVENT_TRIGGERED = 
 			"bool isABEventTriggered(int trigFlag, int lastStatus, int currentStatus)\n" + 
 			"{\n" + 
 			"  switch (trigFlag)\n" + 
@@ -41,12 +48,26 @@ public class SCoopPinEventBlock extends SCoopTaskBlock
 			"  }\n" + 
 			"}\n\n";
 	
-	public SCoopPinEventBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public SCoopPinEventBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		//initialize

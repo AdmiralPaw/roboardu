@@ -96,6 +96,7 @@ public class PageDivider extends JComponent implements MouseListener, MouseMotio
     }
 
     /**
+     * @param e
      * @modifies this.leftPage
      * @effects reforms the minimum width of this.leftPage
      */
@@ -105,6 +106,7 @@ public class PageDivider extends JComponent implements MouseListener, MouseMotio
     }
 
     /**
+     * @param e
      * @effects all WorkspaceListeners
      * @modifies fires and notifies all WorkspaceListener of a Page_Resize event
      */
@@ -116,6 +118,7 @@ public class PageDivider extends JComponent implements MouseListener, MouseMotio
     }
 
     /**
+     * @param e
      * @modifies mouseIn flag
      * @effects sets mouseIn boolean flag to true
      */
@@ -125,6 +128,7 @@ public class PageDivider extends JComponent implements MouseListener, MouseMotio
     }
 
     /**
+     * @param e
      * @modifies mouseIn flag
      * @effects sets mouseIn boolean flag to false
      */
@@ -134,6 +138,7 @@ public class PageDivider extends JComponent implements MouseListener, MouseMotio
     }
 
     /**
+     * @param e
      * @modifies this.leftPage and all PageChangeListeners
      * @effects adds the delta x change to the elft page's abstract width
      * 			and informs all PageChangeListeners of this change
