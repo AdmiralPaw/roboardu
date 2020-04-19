@@ -536,8 +536,15 @@ public class Translator {
             
             HashMap<String,String> CommandNameAndCode = new HashMap<String,String>();
             
-            Expression TranslatorFunction = (string)->this.addHeaderDefinition(string);
+            Expression TranslatorFunction = (string)->this.addHeaderFile(string);
             CommandNameAndCode = ParseXml(xPath,xmlDocument,block,"headers/header");
+            AddValuesToCode(CommandNameAndCode,valuesToChange);
+            RefactorCode(CommandNameAndCode);
+            addHeaderFile(String.join("",CommandNameAndCode.values()));
+            CommandNameAndCode.clear();
+            
+            TranslatorFunction = (string)->this.addHeaderDefinition(string);
+            CommandNameAndCode = ParseXml(xPath,xmlDocument,block,"headersDefinitions/headerDefinition");
             AddValuesToCode(CommandNameAndCode,valuesToChange);
             RefactorCode(CommandNameAndCode);
             addHeaderDefinition(String.join("",CommandNameAndCode.values()));

@@ -11581,7 +11581,18 @@ initlabel="bg.tft-msg" editable-label="yes">
             </BlockConnectors>
         </BlockGenus>
         
-        <BlockGenus name="ultrasonicRange" kind="data" color="242 123 99" initlabel="bg.ultrasonicRange" editable-label="no">
+        <BlockGenus name="UltrasonicI2C" kind="data" color="242 123 99" initlabel="bg.UltrasonicI2C" editable-label="no">
+            <description>
+                <text>Gives distance to object</text>
+            </description>
+            <BlockConnectors>
+                <BlockConnector connector-type="number"
+                                                connector-kind="plug">
+                </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
+        
+        <BlockGenus name="ultrasonicHCSR04" kind="data" color="242 123 99" initlabel="bg.ultrasonicHCSR04" editable-label="no">
             <description>
                 <text>Gives distance to object</text>
             </description>
@@ -12440,7 +12451,8 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <!--<BlockGenusMember>lightCombined</BlockGenusMember>-->
                 <BlockGenusMember>LineFinder</BlockGenusMember>
                 <BlockGenusMember>Potentiometer</BlockGenusMember>
-                <BlockGenusMember>ultrasonicRange</BlockGenusMember>
+                <BlockGenusMember>UltrasonicI2C</BlockGenusMember>
+                <BlockGenusMember>ultrasonicHCSR04</BlockGenusMember>
                 <BlockGenusMember>IK_sensor</BlockGenusMember>
             </BlockDrawer>
 			

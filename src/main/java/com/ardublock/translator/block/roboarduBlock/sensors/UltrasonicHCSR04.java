@@ -9,7 +9,7 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
  *
  * @author User
  */
-public class Ultrasonic extends TranslatorBlock {
+public class UltrasonicHCSR04 extends TranslatorBlock {
 
     /**
      *
@@ -19,7 +19,7 @@ public class Ultrasonic extends TranslatorBlock {
      * @param codeSuffix
      * @param label
      */
-    public Ultrasonic(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
+    public UltrasonicHCSR04(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 

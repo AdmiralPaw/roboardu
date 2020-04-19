@@ -1,4 +1,4 @@
-package com.ardublock.translator.block.roboarduBlock.Engine;
+package com.ardublock.translator.block.roboarduBlock.sensors;
 
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
@@ -9,7 +9,7 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
  *
  * @author User
  */
-public class Engine_Stop extends TranslatorBlock {
+public class UltrasonicI2C extends TranslatorBlock {
 
     /**
      *
@@ -19,7 +19,7 @@ public class Engine_Stop extends TranslatorBlock {
      * @param codeSuffix
      * @param label
      */
-    public Engine_Stop(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
+    public UltrasonicI2C(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
@@ -32,10 +32,10 @@ public class Engine_Stop extends TranslatorBlock {
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
         translator.CheckClassName(this);
-
-        translator.addSetupCommand("InitMotors();");
         
-        String ret = "Stop();";
+        translator.addSetupCommand("void InitUltrasonic();");
+
+        String ret = "UltrasonikRead();";
         return codePrefix + ret + codeSuffix;
     }
 }

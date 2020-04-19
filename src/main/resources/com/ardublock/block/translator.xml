@@ -10,11 +10,13 @@ and open the template in the editor.
     <translator>
         <block name="Engine_Back" >
             <headers>
-                <header name="#define M1_DIR          4"/>
-                <header name="#define M1_PWM          5"/>
-                <header name="#define M2_DIR          7"/>
-                <header name="#define M2_PWM          6"/>
-            </headers>
+            </headers>    
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
             <commands>
                 <command name="void InitMotors()"/>
                 <command name="void Motors(int Speed1, int Speed2)"/>
@@ -23,13 +25,15 @@ and open the template in the editor.
         </block>
         <block name="Engine_BackDistance" >
             <headers>
-                <header name="#define M1_DIR          4"/>
-                <header name="#define M1_PWM          5"/>
-                <header name="#define M2_DIR          7"/>
-                <header name="#define M2_PWM          6"/>
-                <header name="#define ENCODER_K_DIST  1"/>
-                <header name="unsigned long EncoderCount1, EncoderCount2;"/>
             </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+                <headerDefinition name="#define ENCODER_K_DIST  1"/>
+                <headerDefinition name="unsigned long EncoderCount1, EncoderCount2;"/>
+            </headersDefinitions>
             <commands>
                 <command name="void InitEnc()"/>
                 <command name="void nEncoder1()"/>
@@ -50,11 +54,13 @@ and open the template in the editor.
         </block>
         <block name="Engine_BackTime" >
             <headers>
-                <header name="#define M1_DIR          4"/>
-                <header name="#define M1_PWM          5"/>
-                <header name="#define M2_DIR          7"/>
-                <header name="#define M2_PWM          6"/>
             </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
             <commands>
                 <command name="void InitMotors()"/>
                 <command name="void Motors(int Speed1, int Speed2)"/>
@@ -66,11 +72,13 @@ and open the template in the editor.
         </block> 
         <block name="Engine_Basic" >
             <headers>
-                <header name="#define M1_DIR          4"/>
-                <header name="#define M1_PWM          5"/>
-                <header name="#define M2_DIR          7"/>
-                <header name="#define M2_PWM          6"/>
             </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
             <commands>
                 <command name="void InitMotors()"/>
                 <command name="void Motors(int Speed1, int Speed2)"/>
@@ -78,11 +86,13 @@ and open the template in the editor.
         </block> 
         <block name="Engine_Forward" >
             <headers>
-                <header name="#define M1_DIR          4"/>
-                <header name="#define M1_PWM          5"/>
-                <header name="#define M2_DIR          7"/>
-                <header name="#define M2_PWM          6"/>
             </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
             <commands>
                 <command name="void InitMotors()"/>
                 <command name="void Motors(int Speed1, int Speed2)"/>
@@ -91,13 +101,15 @@ and open the template in the editor.
         </block> 
         <block name="Engine_ForwardDistance" >
             <headers>
-                <header name="#define M1_DIR          4"/>
-                <header name="#define M1_PWM          5"/>
-                <header name="#define M2_DIR          7"/>
-                <header name="#define M2_PWM          6"/>
-                <header name="#define ENCODER_K_DIST  1"/>
-                <header name="unsigned long EncoderCount1, EncoderCount2;"/>
             </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+                <headerDefinition name="#define ENCODER_K_DIST  1"/>
+                <headerDefinition name="unsigned long EncoderCount1, EncoderCount2;"/>
+            </headersDefinitions>
             <commands>
                 <command name="void InitEnc()"/>
                 <command name="void nEncoder1()"/>
@@ -118,11 +130,13 @@ and open the template in the editor.
         </block> 
         <block name="Engine_ForwardTime" >
             <headers>
-                <header name="#define M1_DIR          4"/>
-                <header name="#define M1_PWM          5"/>
-                <header name="#define M2_DIR          7"/>
-                <header name="#define M2_PWM          6"/>
             </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
             <commands>
                 <command name="void InitMotors()"/>
                 <command name="void Motors(int Speed1, int Speed2)"/>
@@ -134,11 +148,13 @@ and open the template in the editor.
         </block> 
         <block name="Engine_LeftTurn" >
             <headers>
-                <header name="#define M1_DIR          4"/>
-                <header name="#define M1_PWM          5"/>
-                <header name="#define M2_DIR          7"/>
-                <header name="#define M2_PWM          6"/>
             </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
             <commands>
                 <command name="void InitMotors()"/>
                 <command name="void Motors(int Speed1, int Speed2)"/>
@@ -147,14 +163,16 @@ and open the template in the editor.
         </block> 
         <block name="Engine_LeftTurnDegrees" >
             <headers>
-                <header name="#define M1_DIR          4"/>
-                <header name="#define M1_PWM          5"/>
-                <header name="#define M2_DIR          7"/>
-                <header name="#define M2_PWM          6"/>
-                <header name="#define ENCODER_K_DIST  1"/>
-                <header name="#define ENCODER_K_ANGLE     2.37"/>
-                <header name="unsigned long EncoderCount1, EncoderCount2;"/>
             </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+                <headerDefinition name="#define ENCODER_K_DIST  1"/>
+                <headerDefinition name="#define ENCODER_K_ANGLE     2.37"/>
+                <headerDefinition name="unsigned long EncoderCount1, EncoderCount2;"/>
+            </headersDefinitions>
             <commands>
                 <command name="void InitEnc()"/>
                 <command name="void nEncoder1()"/>
@@ -175,11 +193,13 @@ and open the template in the editor.
         </block> 
         <block name="Engine_RightTurn" >
             <headers>
-                <header name="#define M1_DIR          4"/>
-                <header name="#define M1_PWM          5"/>
-                <header name="#define M2_DIR          7"/>
-                <header name="#define M2_PWM          6"/>
             </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
             <commands>
                 <command name="void InitMotors()"/>
                 <command name="void Motors(int Speed1, int Speed2)"/>
@@ -188,14 +208,16 @@ and open the template in the editor.
         </block> 
         <block name="Engine_RightTurnDegrees" >
             <headers>
-                <header name="#define M1_DIR          4"/>
-                <header name="#define M1_PWM          5"/>
-                <header name="#define M2_DIR          7"/>
-                <header name="#define M2_PWM          6"/>
-                <header name="#define ENCODER_K_DIST  1"/>
-                <header name="#define ENCODER_K_ANGLE     2.37"/>
-                <header name="unsigned long EncoderCount1, EncoderCount2;"/>
             </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+                <headerDefinition name="#define ENCODER_K_DIST  1"/>
+                <headerDefinition name="#define ENCODER_K_ANGLE     2.37"/>
+                <headerDefinition name="unsigned long EncoderCount1, EncoderCount2;"/>
+            </headersDefinitions>
             <commands>
                 <command name="void InitEnc()"/>
                 <command name="void nEncoder1()"/>
@@ -216,11 +238,13 @@ and open the template in the editor.
         </block> 
         <block name="Engine_Stop" >
             <headers>
-                <header name="#define M1_DIR          4"/>
-                <header name="#define M1_PWM          5"/>
-                <header name="#define M2_DIR          7"/>
-                <header name="#define M2_PWM          6"/>
-            </headers>
+            </headers>  
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
             <commands>
                 <command name="void InitMotors()"/>
                 <command name="void Motors(int Speed1, int Speed2)"/>
@@ -228,50 +252,107 @@ and open the template in the editor.
             </commands>       
         </block> 
         
-        <block name="dummy" >
+        <!--SENSORS(ДАТЧИКИ)-->
+        <block name="UltrasonicI2C" >
             <headers>
-
+                <header name="Wire.h"/>
             </headers>
+            <headersDefinitions>
+                <headerDefinition name=""/>
+            </headersDefinitions>
             <commands>
-
+                <command name="void InitUltrasonic()"/>
+                <command name="int UltrasonikRead()"/>
             </commands>        
         </block>  
-        <block name="dummy" >
+        <block name="UltrasonicHCSR04" >
             <headers>
-
             </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define TRIG_PIN            	A4"/>
+                <headerDefinition name="#define ECHO_PIN            	A5"/>
+            </headersDefinitions>
             <commands>
-
+                <command name="void InitUltrasonicHCSR04()"/>
+                <command name="int UltrasonikHCSR04Read()"/>
             </commands>        
-        </block>  
-          
+        </block>    
+<!--        <block name="" >
+            <headers>
+                <header name=""/>
+            </headers>  
+            <headersDefinitions>
+                <headerDefinition name=""/>
+                <headerDefinition name=""/>
+            </headersDefinitions>
+            <commands>
+                <command name=""/>
+                <command name=""/>
+            </commands>        
+        </block>  -->
+   
+        
     </translator>
     
     <translatorCode>
         <headers>
-            <header name="#define M1_DIR          4">
-#define M1_DIR          4
+            <header name="Wire.h"> 
+Wire.h
             </header>
-            <header name="#define M1_PWM          5">
-#define M1_PWM          5              
-            </header>
-            <header name="#define M2_DIR          7">
-#define M2_DIR          7                
-            </header>
-            <header name="#define M2_PWM          6">
-#define M2_PWM          6              
-            </header>
-            <!--ENCODERS(ЭНКОДЕРЫ)-->
-            <header name="#define ENCODER_K_DIST  1">
-#define ENCODER_K_DIST  1                               
-            </header>
-            <header name="#define ENCODER_K_ANGLE     2.37">
-#define ENCODER_K_ANGLE     2.37                               
-            </header>  
-            <header name="unsigned long EncoderCount1, EncoderCount2;">
-unsigned long EncoderCount1, EncoderCount2;                               
-            </header> 
         </headers>
+        
+        
+        <headersDefinitions>
+            <headerDefinition name="#define M1_DIR          4">
+#define M1_DIR          4
+            </headerDefinition> 
+            <headerDefinition name="#define M1_PWM          5">
+#define M1_PWM          5              
+            </headerDefinition> 
+            <headerDefinition name="#define M2_DIR          7">
+#define M2_DIR          7                
+            </headerDefinition> 
+            <headerDefinition name="#define M2_PWM          6">
+#define M2_PWM          6              
+            </headerDefinition> 
+            <!--ENCODERS(ЭНКОДЕРЫ)-->
+            <headerDefinition name="#define ENCODER_K_DIST  1">
+#define ENCODER_K_DIST  1                               
+            </headerDefinition> 
+            <headerDefinition name="#define ENCODER_K_ANGLE     2.37">
+#define ENCODER_K_ANGLE     2.37                               
+            </headerDefinition>   
+            <headerDefinition name="unsigned long EncoderCount1, EncoderCount2;">
+unsigned long EncoderCount1, EncoderCount2;                               
+            </headerDefinition>  
+            <!--SENSORS(ДАТЧИКИ)--> 
+            <headerDefinition name="#define TRIG_PIN            	A4"> 
+#define TRIG_PIN            	A4
+            </headerDefinition> 
+            <headerDefinition name="#define ECHO_PIN            	A5"> 
+#define ECHO_PIN            	A5
+            </headerDefinition> 
+            <headerDefinition name="#define LED_PIN             	13"> 
+#define LED_PIN             	13
+            </headerDefinition> 
+            <headerDefinition name="#define BUTTON_PIN          	12"> 
+#define BUTTON_PIN          	12
+             </headerDefinition> 
+<!--            <headerDefinition name=""> 
+            </headerDefinition> 
+            <headerDefinition name=""> 
+            </headerDefinition> 
+            <headerDefinition name=""> 
+            </headerDefinition> 
+            <headerDefinition name=""> 
+            </headerDefinition> 
+            <headerDefinition name=""> 
+            </headerDefinition> 
+            <headerDefinition name=""> 
+            -->
+            
+
+        </headersDefinitions>
         
         <commands>
             <command name="void InitMotors()">
@@ -519,6 +600,154 @@ void EncodersToNull()
   EncoderCount2 = 0;
 }                
             </command>
+            <!--SENSORS(ДАТЧИКИ)-->
+            <command name="">
+void InitUltrasonic()
+{ 
+     // Открываем соединение с датчиком по I2C
+    Wire.begin();
+    Wire.setClock(8000);
+}
+            </command>
+            <command name="int UltrasonikRead()">
+int UltrasonikRead()
+{
+    // Запрашиваем данные с датчика
+    Wire.requestFrom(56, 1);
+    // Ждем ответа с датчика
+    while(Wire.available() == 0);
+    // Получаем дальность с датчика расстояния в сантиметрах
+    int S = Wire.read();
+    delay(50);
+
+    return (S);  
+}
+            </command>
+            <command name="int UltrasonikHCSR04Read()">
+int UltrasonikHCSR04Read()
+{
+  digitalWrite(TRIG_PIN, 1);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, 0);
+
+  int Data = pulseIn(ECHO_PIN, 1) / 55;
+
+  return Data;
+}
+            </command>
+            <command name="void InitUltrasonicHCSR04()">
+void InitUltrasonicHCSR04()
+{
+  pinMode(TRIG_PIN, OUTPUT);    
+}
+            </command>
+            <command name="int IKSensorRead(int SensorPin)">
+int IKSensorRead(int SensorPin)
+{
+  if(SensorPin &lt; A0 || SensorPin &gt; A3)
+    return -1;
+
+  int Data = analogRead(SensorPin);
+  return Data;
+}
+            </command>
+            <command name="int LineSensorRead(int SensorPin)">
+int LineSensorRead(int SensorPin)
+{
+  if(SensorPin &lt; A0 || SensorPin &gt; A3)
+    return -1;
+
+  int Data = analogRead(SensorPin);
+  return Data;
+}
+            </command>
+            <command name="int LineSensorRead(int SensorPin)">
+int LineSensorRead(int SensorPin)
+{
+  if(SensorPin &lt; A0 || SensorPin &gt; A3)
+    return -1;
+
+  int Data = analogRead(SensorPin);
+  return Data;
+}
+            </command>
+            <command name="int ButtonRead(int ButtonPin)">
+int ButtonRead(int ButtonPin)
+{
+  int Data = digitalRead(ButtonPin);
+  if(ButtonPin == 12) Data = !Data;
+  return Data;
+}
+            </command>
+            <command name="int ObjectSensorRead(int SensorPin)">
+int ObjectSensorRead(int SensorPin)
+{
+  int Data = digitalRead(SensorPin);
+  return !Data;
+}
+            </command>
+            <command name="int GerconSensorRead(int SensorPin)">
+int GerconSensorRead(int SensorPin)
+{
+  int Data = digitalRead(SensorPin);
+  return Data;
+}
+            </command>
+            <command name="int TempSensorRead(int SensorPin)">
+int TempSensorRead(int SensorPin)
+{
+  OneWire TempSensorWire(SensorPin);
+  DallasTemperature TempSensor(&amp;TempSensorWire);
+
+  TempSensor.begin();
+  
+  float TempC;
+  TempSensor.requestTemperatures();
+  TempC = TempSensor.getTempCByIndex(0);
+  
+  if(TempC != DEVICE_DISCONNECTED_C) 
+  {
+    return TempC;
+  }
+  else
+  {
+    return -1000;
+  }
+}
+            </command>
+            <command name="int TouchSensorRead(int SensorPin)">
+int TouchSensorRead(int SensorPin)
+{
+  int Data = digitalRead(SensorPin);
+  return Data;
+}
+            </command>
+            <command name="int HallRead(int SensorPin)">
+int HallRead(int SensorPin)
+{
+  if(SensorPin &lt; A0 || SensorPin &gt; A3)
+    return -1;
+
+  int Data = analogRead(SensorPin);
+  return Data;
+}
+            </command>
+            <command name="int PotenciometrRead(int SensorPin)">
+int PotenciometrRead(int SensorPin)
+{
+  if(SensorPin &lt; A0 || SensorPin &gt; A3)
+    return -1;
+
+  int Data = analogRead(SensorPin);
+  return Data;
+}
+            </command>
+<!--            <command name="">
+            </command>
+            <command name="">
+            </command>-->
+            
+            
         </commands>
         
     </translatorCode>
