@@ -22,7 +22,8 @@ import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.Workspace;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.LinkedHashMap;
+import java.util.function.Consumer;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -94,7 +95,7 @@ public class Translator {
 
         if (!headerDefinitionSet.isEmpty()) {
             for (String command : headerDefinitionSet) {
-                headerCommand.append(command + "\n");
+                headerCommand.append(command + "");
             }
         }
 
@@ -533,41 +534,32 @@ public class Translator {
             XPath xPath = XPathFactory.newInstance().newXPath();
             String expression = "/root/translator/block[@name=" + "'" + className + "'" + "]";
             Node block = (Node) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODE);
-            
-            HashMap<String,String> CommandNameAndCode = new HashMap<String,String>();
-            
-            Expression TranslatorFunction = (string)->this.addHeaderFile(string);
-            CommandNameAndCode = ParseXml(xPath,xmlDocument,block,"headers/header");
-            AddValuesToCode(CommandNameAndCode,valuesToChange);
-            RefactorCode(CommandNameAndCode);
-            addHeaderFile(String.join("",CommandNameAndCode.values()));
-            CommandNameAndCode.clear();
-            
-            TranslatorFunction = (string)->this.addHeaderDefinition(string);
-            CommandNameAndCode = ParseXml(xPath,xmlDocument,block,"headersDefinitions/headerDefinition");
-            AddValuesToCode(CommandNameAndCode,valuesToChange);
-            RefactorCode(CommandNameAndCode);
-            addHeaderDefinition(String.join("",CommandNameAndCode.values()));
-            CommandNameAndCode.clear();
-            
-            TranslatorFunction = (string)->this.addDefinitionCommand(string);
-            CommandNameAndCode = ParseXml(xPath,xmlDocument,block,"commands/command");
-            AddValuesToCode(CommandNameAndCode,valuesToChange);
-            RefactorCode(CommandNameAndCode);
-            AddToTranslator(CommandNameAndCode,TranslatorFunction);
-            CommandNameAndCode.clear();
+                     
+            Translate(xmlDocument,block,"headers/header",this::addHeaderDefinition,valuesToChange);
+            Translate(xmlDocument,block,"hedersFiles/hedersFile",this::addHeaderDefinition,valuesToChange);  
+            Translate(xmlDocument,block,"commands/command",this::addDefinitionCommand,valuesToChange);
+
         } catch (ParserConfigurationException | SAXException | IOException | XPathExpressionException ex) {
             ex.printStackTrace(System.out);
         }
     }
     
+    private void Translate(Document xmlDocument,Node foundBlock,String path,Consumer<String> func,HashMap<String,ArrayList<String>> valuesToChange)throws XPathExpressionException {
+            LinkedHashMap<String,String> CommandNameAndCode = new LinkedHashMap<String,String>();
+            CommandNameAndCode = ParseXml(xmlDocument,foundBlock,path);
+            AddValuesToCode(CommandNameAndCode,valuesToChange);
+            RefactorCode(CommandNameAndCode);
+            AddToTranslator(CommandNameAndCode,func);
+    }
     
-    private HashMap<String,String> ParseXml(XPath xPath,Document xmlDocument,Node foundBlock,String path)throws XPathExpressionException {
+    
+    private LinkedHashMap<String,String> ParseXml(Document xmlDocument,Node foundBlock,String path)throws XPathExpressionException {
+            XPath xPath = XPathFactory.newInstance().newXPath();
             NodeList headers = (NodeList) xPath.compile(path).evaluate(foundBlock, XPathConstants.NODESET);
             String headersCodeExpression = "/root/translatorCode/"+path;
             Node SomeType = null;
             Node headersCode;
-            HashMap<String,String> CommandNameAndCode = new HashMap<String,String>();
+            LinkedHashMap<String,String> CommandNameAndCode = new LinkedHashMap<String,String>();
             String nameOfHeader = "";
             for (int i = 0; i < headers.getLength(); i++) {
                 SomeType = headers.item(i);
@@ -578,14 +570,14 @@ public class Translator {
             return CommandNameAndCode;
     };
     
-    private void AddToTranslator(HashMap<String,String> collection, Expression func){
+    private void AddToTranslator(LinkedHashMap<String,String> collection, Consumer<String> func){
         if(!collection.isEmpty()){
             collection.entrySet().forEach((item) -> {
-                func.addSomeCommands(item.getValue());
+                func.accept(item.getValue());
             });
         }
     };
-    private void AddValuesToCode(HashMap<String,String> collection, HashMap<String,ArrayList<String>> values){
+    private void AddValuesToCode(LinkedHashMap<String,String> collection, HashMap<String,ArrayList<String>> values){
         if(values!=null&&!collection.isEmpty()){
         
         String lineForChange;
@@ -605,12 +597,9 @@ public class Translator {
         }
     };
     
-    private void RefactorCode(HashMap<String,String> collection){
+    private void RefactorCode(LinkedHashMap<String,String> collection){
         for(Map.Entry<String, String> item : collection.entrySet()){
             item.setValue(item.getValue().replaceAll("^\n|\n$", ""));
         }
-    }
-    interface Expression{
-        void addSomeCommands(String code);
     }
 }
