@@ -5,11 +5,23 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class sensor_trailer extends TranslatorBlock
 {
+
+    /**
+     *
+     */
     public static final String PINMODE_INPUT = "void pinmode_input(int pin){\n"
             + "  pinMode(pin, INPUT);\n"
             + "}";
+
+    /**
+     *
+     */
     public static final String TRAILER_FUNC_DEFINE =
             /* If the pin was previously OUTPUT and is **quickly** analog read, the charge on the pin
              *  and the lack of "settling time" does affect the likely result of analogRead.
@@ -29,11 +41,25 @@ public class sensor_trailer extends TranslatorBlock
                     "  return 0;\n" +
                     "}";
 
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public sensor_trailer(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {

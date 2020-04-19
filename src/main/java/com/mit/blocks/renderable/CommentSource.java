@@ -38,5 +38,9 @@ public interface CommentSource {
      */
     public Component add(Component commentLabel);
 
+    /**
+     *
+     * @return
+     */
     public Long getBlockID();
 }

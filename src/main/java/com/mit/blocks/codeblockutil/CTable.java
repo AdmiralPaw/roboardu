@@ -35,6 +35,9 @@ public class CTable extends JPanel {
     private String[] columns;
     private JLabel[] columnLabels;
 
+    /**
+     *
+     */
     public CTable() {
         this(9);
     }
@@ -66,6 +69,7 @@ public class CTable extends JPanel {
     /**
      * rests this table with the new column identities
      *
+     * @param columns
      */
     public void setColumns(String[] columns) {
         data.clear();
@@ -142,6 +146,10 @@ public class CTable extends JPanel {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCSV() {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < columns.length; i++) {

@@ -37,6 +37,10 @@ public class ParamRule implements LinkRule{
             return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isMandatory() {
         return true;
     }

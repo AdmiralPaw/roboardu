@@ -75,14 +75,33 @@ import com.mit.blocks.workspace.Workspace;
  */
 public class WorkspaceController {
 
+    /**
+     *
+     */
     public static Map<String,String[]> suitableBlocks;
 
     private Element langDefRoot;
     private boolean isWorkspacePanelInitialized = false;
+
+    /**
+     *
+     */
     protected JPanel workspacePanel;
+
+    /**
+     *
+     */
     protected final Workspace workspace;
+
+    /**
+     *
+     */
     protected SearchBar searchBar;
 
+    /**
+     *
+     * @return
+     */
     public Workspace getWorkspace() {
         return this.workspace;
     }
@@ -118,14 +137,26 @@ public class WorkspaceController {
         pom = new ProcedureOutputManager(workspace);	//*****
     }
     
+    /**
+     *
+     * @param is
+     */
     public void setLangDefDtd(InputStream is) {
     	langDefDtd = is;
     }
     
+    /**
+     *
+     * @param bundle
+     */
     public void setLangResourceBundle(ResourceBundle bundle) {
     	langResourceBundle = bundle;
     }
     
+    /**
+     *
+     * @param list
+     */
     public void setStyleList(List<String[]> list) {
     	styleList = list;
     }
@@ -133,6 +164,7 @@ public class WorkspaceController {
     /**
      * Sets the file path for the language definition file, if the
      * language definition file is located in
+     * @param filePath
      */
     public void setLangDefFilePath(final String filePath) {
         InputStream in = null;
@@ -476,10 +508,10 @@ public class WorkspaceController {
     }
 
     /**
-     * Loads the programming project from the specified file path.
-     * This method assumes that a Language Definition File has already
-     * been specified for this programming project.
+     * Loads the programming project from the specified file path.This method assumes that a Language Definition File has already
+ been specified for this programming project.
      * @param path String file path of the programming project to load
+     * @throws java.io.IOException
      */
     public void loadProjectFromPath(final String path) throws IOException
     {
@@ -508,11 +540,11 @@ public class WorkspaceController {
     }
 
     /**
-     * Loads the programming project from the specified element. This method
-     * assumes that a Language Definition File has already been specified for
-     * this programming project.
+     * Loads the programming project from the specified element.This method
+ assumes that a Language Definition File has already been specified for
+ this programming project.
      *
-     * @param element element of the programming project to load
+     * @param elementToLoad
      */
     public void loadProjectFromElement(Element elementToLoad) {
         workspace.loadWorkspaceFrom(elementToLoad, langDefRoot);
@@ -704,6 +736,10 @@ public class WorkspaceController {
         }
     }
 
+    /**
+     *
+     * @param selectedFile
+     */
     public void setSelectedFile(File selectedFile) {
         this.selectedFile = selectedFile;
         frame.setTitle("WorkspaceDemo - "+selectedFile.getPath());
@@ -729,6 +765,7 @@ public class WorkspaceController {
     /**
      * Returns a SearchBar instance capable of searching for blocks
      * within the BlockCanvas and block drawers
+     * @return 
      */
     public JComponent getSearchBar() {
         final SearchBar sb = new SearchBar(
@@ -769,6 +806,10 @@ public class WorkspaceController {
         frame.setVisible(true);
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(final String[] args) {
 //        if (args.length < 1) {
 //            System.err.println("usage: WorkspaceController lang_def.xml");

@@ -36,12 +36,20 @@ import java.util.prefs.Preferences;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+/**
+ *
+ * @author User
+ */
 public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
 
     static Editor editor;
     static ArduBlockToolFrame openblocksFrame;
     private Preferences userPrefs;
 
+    /**
+     *
+     * @param editor
+     */
     public void init(Editor editor) {
         try {
             UIManager.setLookAndFeel(
@@ -102,26 +110,46 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getMenuTitle() {
         return Context.APP_NAME;
     }
 
+    /**
+     *
+     */
     public void didSave() {
 
     }
 
+    /**
+     *
+     */
     public void didLoad() {
 
     }
 
+    /**
+     *
+     */
     public void didSaveAs() {
 
     }
 
+    /**
+     *
+     */
     public void didNew() {
 
     }
 
+    /**
+     *
+     * @param source
+     */
     public void didGenerate(String source) {
         java.lang.reflect.Method method;
         try {
@@ -143,6 +171,10 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
         OmegaBot_IDE.editor.handleExport(false);
     }
 
+    /**
+     *
+     * @param source
+     */
     public void didVerify(String source) {
         java.lang.reflect.Method method;
         try {

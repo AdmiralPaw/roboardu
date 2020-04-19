@@ -9,16 +9,25 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 
+/**
+ *
+ * @author User
+ */
 public class CBorderlessButton extends CButton {
 
     private static final long serialVersionUID = 328149080229L;
 
+    /**
+     *
+     * @param text
+     */
     public CBorderlessButton(String text) {
         super(Color.black, CGraphite.blue, text);
     }
 
     /**
      * re paints this
+     * @param g
      */
     @Override
     public void paint(Graphics g) {

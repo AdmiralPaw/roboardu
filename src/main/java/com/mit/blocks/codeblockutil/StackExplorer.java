@@ -94,6 +94,8 @@ public class StackExplorer extends JLayeredPane implements Explorer, ActionListe
     /**
      * Slides all canvases under the selected canvas down
      * and all canvases above up.
+     * @param selectedDrawer
+     * @param directedToDestination
      */
     public void notifySelection(StackCard selectedDrawer, boolean directedToDestination) {
         if (!drawers.contains(selectedDrawer)) {
@@ -141,6 +143,7 @@ public class StackExplorer extends JLayeredPane implements Explorer, ActionListe
 
     /**
      * Slides all the drawers
+     * @param e
      */
     public void actionPerformed(ActionEvent e) {
         if (count < 0) {

@@ -10,24 +10,109 @@ import javax.swing.JLabel;
 import javax.swing.JSplitPane;
 import org.jfree.ui.tabbedui.VerticalLayout;
 
+/**
+ *
+ * @author User
+ */
 public class СontrollerСonfiguration extends JPanel {
 
     //верхняя панель контроллера
+
+    /**
+     *
+     */
     public ControllerImage controllerImage;
 
     //лист всевозможных компонентов на подключение
     private List<Device> components;
     //нижняя панель
+
+    /**
+     *
+     */
     public JPanel componentsPane;
     private ModuleInfoPane moduleInfoPane;
     private ResourceBundle uiMessageBundle;
 
+    /**
+     *
+     */
     public enum Pin {
 
-        dir04pwm05, dir07pwm06, d2, d3, d8, d10, d9, d11, a3, a2, a1, a0, i2c
+        /**
+         *
+         */
+        dir04pwm05,
+
+        /**
+         *
+         */
+        dir07pwm06,
+
+        /**
+         *
+         */
+        d2,
+
+        /**
+         *
+         */
+        d3,
+
+        /**
+         *
+         */
+        d8,
+
+        /**
+         *
+         */
+        d10,
+
+        /**
+         *
+         */
+        d9,
+
+        /**
+         *
+         */
+        d11,
+
+        /**
+         *
+         */
+        a3,
+
+        /**
+         *
+         */
+        a2,
+
+        /**
+         *
+         */
+        a1,
+
+        /**
+         *
+         */
+        a0,
+
+        /**
+         *
+         */
+        i2c
     };
+
+    /**
+     *
+     */
     public Pin controllerPin;
 
+    /**
+     *
+     */
     public СontrollerСonfiguration() {
         super();
         this.setLayout(new BorderLayout());
@@ -59,6 +144,14 @@ public class СontrollerСonfiguration extends JPanel {
 //        allButtons.add(testVisibleButton);
 //        return allButtons;
 //    }
+
+    /**
+     *
+     * @param pin
+     * @param name
+     * @param pathToTranslate
+     * @param info
+     */
     public void addComponent(String pin, String name, String pathToTranslate, String info) {
         this.components.add(new Device(
                 pin,
@@ -67,6 +160,10 @@ public class СontrollerСonfiguration extends JPanel {
                 uiMessageBundle.getString(info)));
     }
 
+    /**
+     *
+     * @param buttonPin
+     */
     public void changeConnectorComponentsPane(String buttonPin) {
         componentsPane.removeAll();
         if (buttonPin == null) {
@@ -85,6 +182,10 @@ public class СontrollerСonfiguration extends JPanel {
         componentsPane.repaint();
     }
 
+    /**
+     *
+     * @param moduleName
+     */
     public void changeModuleComponentsPane(String moduleName) {
         componentsPane.removeAll();
         //if (!moduleName.equals("start")) {
@@ -105,6 +206,9 @@ public class СontrollerСonfiguration extends JPanel {
         componentsPane.repaint();
     }
 
+    /**
+     *
+     */
     public void resetPane() {
         componentsPane.removeAll();
         for (ControllerButton module : this.controllerImage.moduleButtons) {

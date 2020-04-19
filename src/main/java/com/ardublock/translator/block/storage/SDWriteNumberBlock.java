@@ -6,14 +6,33 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class SDWriteNumberBlock extends TranslatorBlock
 {
-	public SDWriteNumberBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public SDWriteNumberBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		setupSDEnvironment(translator);
@@ -56,7 +75,11 @@ public class SDWriteNumberBlock extends TranslatorBlock
 	private static final String SD_INT_DEFINITION = "void __ardublockWriteNumberIntSD (String file_name,int number)\n{\nchar Filename[12];\nfile_name.toCharArray(Filename, 12);\nFile dataFile = SD.open(Filename, FILE_WRITE);\n\nif (dataFile)\n{\ndataFile.print(number);\ndataFile.close();\n}\n\n}\n\nvoid __ardublockWriteNumberIntSDln (String file_name,int number)\n{\nchar Filename[12];\nfile_name.toCharArray(Filename, 12);\nFile dataFile = SD.open(Filename, FILE_WRITE);\n\nif (dataFile)\n{\ndataFile.println(number);\ndataFile.close();\n}\n\n}\n\n";
 	private static final String SD_SETUP_DEFINITION = "const int chipSelect = 10;\nSD.begin(chipSelect);\n";	
 	
-	public static void setupSDEnvironment(Translator t)
+    /**
+     *
+     * @param t
+     */
+    public static void setupSDEnvironment(Translator t)
 	{
 		t.addHeaderFile("SD.h");
 		t.addDefinitionCommand(SD_DEFINITION);

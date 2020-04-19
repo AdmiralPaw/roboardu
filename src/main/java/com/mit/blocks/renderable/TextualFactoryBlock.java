@@ -44,6 +44,11 @@ public class TextualFactoryBlock {
         return false;
     }
 
+    /**
+     *
+     * @param b2
+     * @return
+     */
     public int compareTo(TextualFactoryBlock b2) {
         return this.ID.toLowerCase().compareTo(b2.ID.toLowerCase());
     }

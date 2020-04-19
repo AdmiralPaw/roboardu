@@ -1,5 +1,9 @@
 package com.ardublock.translator.block.exception;
 
+/**
+ *
+ * @author User
+ */
 public class BlockException extends RuntimeException
 {
 
@@ -11,23 +15,42 @@ public class BlockException extends RuntimeException
 	private Long blockId;
 	private String message;
 	
-	public BlockException(Long blockId, String message)
+    /**
+     *
+     * @param blockId
+     * @param message
+     */
+    public BlockException(Long blockId, String message)
 	{
 		this.blockId = blockId;
 		this.message = message;
 	}
 	
-	public Long getBlockId() {
+    /**
+     *
+     * @return
+     */
+    public Long getBlockId() {
 		return blockId;
 	}
-	public void setBlockId(Long blockId) {
+
+    /**
+     *
+     * @param blockId
+     */
+    public void setBlockId(Long blockId) {
 		this.blockId = blockId;
 	}
 	@Override
 	public String getMessage() {
 		return message;
 	}
-	public void setMessage(String message) {
+
+    /**
+     *
+     * @param message
+     */
+    public void setMessage(String message) {
 		this.message = message;
 	}
 	

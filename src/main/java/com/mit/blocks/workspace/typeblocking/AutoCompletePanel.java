@@ -61,7 +61,8 @@ public class AutoCompletePanel extends JPanel implements MouseListener, MouseMot
     /** The workspace in use */
     private final Workspace workspace;
 
-    /**Constructs AutoCompletePanel*/
+    /**Constructs AutoCompletePane
+     * @param workspacel*/
     @SuppressWarnings("serial")
     public AutoCompletePanel(Workspace workspace) {
         super(new BorderLayout());

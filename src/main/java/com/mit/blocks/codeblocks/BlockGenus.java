@@ -218,13 +218,15 @@ public class BlockGenus {
 
     /**
      * Returns true if this block is a procedure parameter block; false otherwise
+     * @return 
      */
     public boolean isProcedureParamBlock() {
         return kind.equals("param");
     }
 
     /**
-     * Returns true if this genus is a declaration block.  Declaration blocks define variables and procedures.
+     * Returns true if this genus is a declaration block.Declaration blocks define variables and procedures.
+     * @return 
      */
     public boolean isDeclaration() {
         return this.isVariableDeclBlock() || this.isProcedureDeclBlock();
@@ -298,6 +300,7 @@ public class BlockGenus {
 
     /**
      * Returns true iff this genus's sockets are expandable
+     * @return 
      */
     public boolean areSocketsExpandable() {
         return areSocketsExpandable;
@@ -426,7 +429,8 @@ public class BlockGenus {
     }
 
     /**
-     * Returns the expand groups of this. Not modifiable.
+     * Returns the expand groups of this.Not modifiable.
+     * @return 
      */
     public List<List<BlockConnector>> getExpandGroups() {
         return Collections.unmodifiableList(expandGroups);

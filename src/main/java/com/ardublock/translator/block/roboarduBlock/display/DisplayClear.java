@@ -5,7 +5,20 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class DisplayClear extends TranslatorBlock {
+
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public DisplayClear (Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
@@ -15,6 +28,10 @@ public class DisplayClear extends TranslatorBlock {
             "#define SCREEN_HEIGHT 64 // OLED display height, in pixels\n"+
             "#define OLED_RESET     4 // Reset pin # (or -1 if sharing Arduino reset pin)\n";
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toCode()
     {

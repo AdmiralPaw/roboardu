@@ -13,8 +13,15 @@ import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 
+/**
+ *
+ * @author User
+ */
 public abstract class LabelWidget extends JComponent {
 
+    /**
+     *
+     */
     public static final int DROP_DOWN_MENU_WIDTH = 7;
     private static final long serialVersionUID = 837647234895L;
     /**
@@ -68,8 +75,14 @@ public abstract class LabelWidget extends JComponent {
     private Color tooltipBackground = new Color(255, 255, 225);
     private double zoom = 1.5;
 
+    /**
+     *
+     */
     protected Workspace workspace;
 
+    /**
+     *
+     */
     protected long blockID;
     /**
      * BlockLabel Constructor that takes in BlockID as well. Unfortunately
@@ -99,22 +112,51 @@ public abstract class LabelWidget extends JComponent {
         textField.setMargin(textFieldBorder.getBorderInsets(textField));
     }
 
+    /**
+     *
+     * @param value
+     */
     protected abstract void fireTextChanged(String value);
 
+    /**
+     *
+     * @param value
+     */
     protected abstract void fireGenusChanged(String value);
 
+    /**
+     *
+     * @param value
+     */
     protected abstract void fireDimensionsChanged(Dimension value);
 
+    /**
+     *
+     * @param text
+     * @return
+     */
     protected abstract boolean isTextValid(String text);
 
+    /**
+     *
+     * @param l
+     */
     public void addKeyListenerToTextField(KeyListener l) {
         textField.addKeyListener(l);
     }
 
+    /**
+     *
+     * @param l
+     */
     public void addMouseListenerToLabel(MouseListener l) {
         textLabel.addMouseListener(l);
     }
 
+    /**
+     *
+     * @param l
+     */
     public void addMouseMotionListenerToLabel(MouseMotionListener l) {
         textLabel.addMouseMotionListener(l);
     }
@@ -122,6 +164,11 @@ public abstract class LabelWidget extends JComponent {
     //////////////////////////////
     //// LABEL CONFIGURATION /////
     /////////////////////////////
+
+    /**
+     *
+     * @param show
+     */
     public void showMenuIcon(boolean show) {
         if (this.hasSiblings) {
             isFocused = show;
@@ -132,8 +179,8 @@ public abstract class LabelWidget extends JComponent {
     }
 
     /**
-     * setEditingState sets the current editing state of the BlockLabel.
-     * Repaints BlockLabel to reflect the change.
+     * setEditingState sets the current editing state of the BlockLabel.Repaints BlockLabel to reflect the change.
+     * @param editing
      */
     public void setEditingState(boolean editing) {
         if (editing) {
@@ -188,6 +235,10 @@ public abstract class LabelWidget extends JComponent {
         return isEditable;
     }
 
+    /**
+     *
+     * @param isNumber
+     */
     public void setNumeric(boolean isNumber) {
         this.isNumber = isNumber;
     }
@@ -201,11 +252,20 @@ public abstract class LabelWidget extends JComponent {
         return isNumber;
     }
 
+    /**
+     *
+     * @param hasSiblings
+     * @param siblings
+     */
     public void setSiblings(boolean hasSiblings, String[][] siblings) {
         this.hasSiblings = hasSiblings;
         this.menu.setSiblings(siblings);
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean hasSiblings() {
         return this.hasSiblings;
     }
@@ -224,6 +284,7 @@ public abstract class LabelWidget extends JComponent {
 
     /**
      * sets the tool tip of the label
+     * @param text
      */
     public void assignToolTipToLabel(String text) {
         this.textLabel.setToolTipText(text);
@@ -353,6 +414,10 @@ public abstract class LabelWidget extends JComponent {
         }
     }
 
+    /**
+     *
+     * @param newZoom
+     */
     public void setZoomLevel(double newZoom) {
         this.zoom = newZoom;
         Font renderingFont;// = new Font(font.getFontName(), font.getStyle(), (int)(font.getSize()*newZoom));
@@ -370,6 +435,7 @@ public abstract class LabelWidget extends JComponent {
 
     /**
      * returns true if this block should can accept a negative sign
+     * @return 
      */
     public boolean canProcessNegativeSign() {
         if (this.getText() != null && this.getText().contains("-")) {

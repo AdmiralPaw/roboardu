@@ -7,6 +7,10 @@ import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ *
+ * @author User
+ */
 public class ErrWindow extends JPanel {
 
     private final JPanel mainPanel;
@@ -14,6 +18,9 @@ public class ErrWindow extends JPanel {
     private final JLabel errLabel;
     private final JPanel errDevider;
 
+    /**
+     *
+     */
     public ErrWindow() {
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBackground(Color.black);
@@ -34,26 +41,46 @@ public class ErrWindow extends JPanel {
         mainPanel.add(errWindow, BorderLayout.CENTER);
     }
 
+    /**
+     *
+     * @return
+     */
     public JPanel getErrPanel() {
         return this.mainPanel;
     }
 
+    /**
+     *
+     * @param text
+     */
     public void setErrText(String text) {
         this.errInfo.setText(text);
         this.mainPanel.repaint();
     }
 
+    /**
+     *
+     * @param text
+     */
     public void setErrTitle(String text) {
         this.errLabel.setText(text);
         this.mainPanel.repaint();
     }
 
+    /**
+     *
+     * @param title
+     * @param text
+     */
     public void setErr(String title, String text) {
         setErrTitle(title);
         setErrText(text);
         errDevider.setBackground(new Color(227, 76, 0));
     }
 
+    /**
+     *
+     */
     public void reset() {
         errDevider.setBackground(
                 new Color(0, 151, 157));

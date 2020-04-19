@@ -76,6 +76,7 @@ public class BlockLinkChecker {
      * @param block2 Block instance to compare
      * @param con1 the BlockConnector at block1 to compare against con2
      * @param con2 the BlockConnector at block2 to compare against con1
+     * @return 
      */
     public static BlockLink canLink(Workspace workspace, Block block1, Block block2, BlockConnector con1, BlockConnector con2) {
         if (checkRules(block1, block2, con1, con2)) {
@@ -255,6 +256,11 @@ public class BlockLinkChecker {
         return new Point2D.Double(relativePoint.getX() + blockPosition.getX(), relativePoint.getY() + blockPosition.getY());
     }
 
+    /**
+     *
+     * @param b
+     * @return
+     */
     public static boolean hasPlugEquivalent(Block b) {
         if (b == null) {
             return false;
@@ -266,6 +272,11 @@ public class BlockLinkChecker {
         return hasPlug | hasBefore;
     }
 
+    /**
+     *
+     * @param b
+     * @return
+     */
     public static BlockConnector getPlugEquivalent(Block b) {
         if (!hasPlugEquivalent(b)) {
             return null;
@@ -276,6 +287,11 @@ public class BlockLinkChecker {
         return b.getBeforeConnector();
     }
 
+    /**
+     *
+     * @param b
+     * @return
+     */
     public static Iterable<BlockConnector> getSocketEquivalents(Block b) {
         if (b == null) {
             return new ArrayList<BlockConnector>();

@@ -32,6 +32,9 @@ public class CSignLabel extends JPanel {
     private String[] charSet;
     private int FONT_SIZE = 12;
 
+    /**
+     *
+     */
     public CSignLabel() {
         super();
         this.charSet = new String[0];
@@ -39,6 +42,10 @@ public class CSignLabel extends JPanel {
         this.setFont(new Font("Ariel", Font.BOLD, FONT_SIZE));
     }
 
+    /**
+     *
+     * @param text
+     */
     public void setText(String text) {
         if (text != null) {
             text = text.toUpperCase();

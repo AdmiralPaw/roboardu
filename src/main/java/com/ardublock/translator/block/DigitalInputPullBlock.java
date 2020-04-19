@@ -4,9 +4,17 @@ import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class DigitalInputPullBlock extends TranslatorBlock
 {
-	public static final String ARDUBLOCK_DIGITAL_READ_PULLUP_DEFINE =
+
+    /**
+     *
+     */
+    public static final String ARDUBLOCK_DIGITAL_READ_PULLUP_DEFINE =
 			/* The charge left on the pin if it was previously OUTPUT does not affect
 			 *  the likely result of digitalRead with PULLUP resistors.
 			 * If this changes then implement https://github.com/arduino/Arduino/issues/4606
@@ -17,12 +25,26 @@ public class DigitalInputPullBlock extends TranslatorBlock
 			"return digitalRead(pinNumber);\n" + 
 			"}\n\n";
 	
-	public DigitalInputPullBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public DigitalInputPullBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);

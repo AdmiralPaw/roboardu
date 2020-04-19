@@ -10,11 +10,22 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
-
+/**
+ *
+ * @author User
+ */
 public class lightSensor extends TranslatorBlock
 {
 
-	public lightSensor(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public lightSensor(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{   
             super(blockId, translator, codePrefix, codeSuffix, label);
 	}
@@ -30,7 +41,13 @@ public class lightSensor extends TranslatorBlock
             + "  return map((arr[0] + arr[1] + arr[2] + arr[3] + arr[4]) / 5, 0, 1023, 100, 0);\n"
             + "}";
 
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
             translator.addDefinitionCommand(lightSensor);

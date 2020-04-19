@@ -25,8 +25,56 @@ public class BlockImageIcon extends JLabel {
      */
     public enum ImageLocation {
 
-        CENTER, EAST, WEST, NORTH, SOUTH, SOUTHEAST, SOUTHWEST, NORTHEAST, NORTHWEST;
+        /**
+         *
+         */
+        CENTER,
 
+        /**
+         *
+         */
+        EAST,
+
+        /**
+         *
+         */
+        WEST,
+
+        /**
+         *
+         */
+        NORTH,
+
+        /**
+         *
+         */
+        SOUTH,
+
+        /**
+         *
+         */
+        SOUTHEAST,
+
+        /**
+         *
+         */
+        SOUTHWEST,
+
+        /**
+         *
+         */
+        NORTHEAST,
+
+        /**
+         *
+         */
+        NORTHWEST;
+
+        /**
+         *
+         * @param s
+         * @return
+         */
         public static ImageLocation getImageLocation(String s) {
             for (ImageLocation loc : values()) {
                 if (loc.toString().equalsIgnoreCase(s)) {
@@ -62,23 +110,43 @@ public class BlockImageIcon extends JLabel {
         this.wrapText = wrapText;
     }
 
+    /**
+     *
+     * @return
+     */
     public ImageIcon getImageIcon() {
         return blockImageIcon;
     }
 
+    /**
+     *
+     * @param icon
+     */
     public void setImageIcon(ImageIcon icon) {
         blockImageIcon = icon;
         super.setIcon(icon);
     }
 
+    /**
+     *
+     * @return
+     */
     public ImageLocation getImageLocation() {
         return location;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isEditable() {
         return isEditable;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean wrapText() {
         return wrapText;
     }

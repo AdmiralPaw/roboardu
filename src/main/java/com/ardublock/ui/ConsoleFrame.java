@@ -5,6 +5,10 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+/**
+ *
+ * @author User
+ */
 public class ConsoleFrame extends JFrame
 {
 	/**
@@ -12,7 +16,10 @@ public class ConsoleFrame extends JFrame
 	 */
 	private static final long serialVersionUID = -4057010070646255290L;
 
-	public ConsoleFrame()
+    /**
+     *
+     */
+    public ConsoleFrame()
 	{	
 		this.setLayout(new FlowLayout());
 		

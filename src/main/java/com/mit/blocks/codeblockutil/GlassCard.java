@@ -82,6 +82,7 @@ public class GlassCard implements ActionListener, PropertyChangeListener {
     /**
      * When the user presses the button, the explorer selects the
      * corresponding canvas
+     * @param e
      */
     public void actionPerformed(ActionEvent e) {
         explorer.selectCanvas(index);

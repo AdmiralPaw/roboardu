@@ -34,12 +34,40 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
      * relative to the (0,0) corner of the JComponent.
      */
     public int mPressedX; //at mouse pressed
+
+    /**
+     *
+     */
     public int mPressedY; //at mouse pressed
+
+    /**
+     *
+     */
     public int mCurrentX; //where the mouse is currently
+
+    /**
+     *
+     */
     public int mCurrentY; //where the mouse is currently
+
+    /**
+     *
+     */
     public int dragDX; // amount of last drag in X direction
+
+    /**
+     *
+     */
     public int dragDY; // amount of last drag in Y direction
+
+    /**
+     *
+     */
     public int oldLocX; //where the component was before dragging
+
+    /**
+     *
+     */
     public int oldLocY;
     private static Cursor openHandCursor = null;
     private static Cursor closedHandCursor = null;
@@ -74,6 +102,12 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
         closedHandCursor = createHandCursor("/com/ardublock/closed_hand.png", "closedHandCursor");
     }
 
+    /**
+     *
+     * @param location
+     * @param cursorName
+     * @return
+     */
     public static Cursor createHandCursor(String location, String cursorName) {
         if (GraphicsEnvironment.isHeadless()) {
             // return default hand cursor if headless
@@ -124,9 +158,9 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
     //MOUSE EVENTS
     ///////////////////
     /**
-     * Called when the mouse is pressed over the JComponent.
-     * Saves the point (which is measured relative to the JComponent's corner)
-     * over which the mouse was pressed.
+     * Called when the mouse is pressed over the JComponent.Saves the point (which is measured relative to the JComponent's corner)
+ over which the mouse was pressed.
+     * @param e
      */
     public void mousePressed(MouseEvent e) {
         myComponent.setCursor(closedHandCursor);
@@ -137,10 +171,11 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
     }
 
     /**
-     * This method is called when the mouse is dragged over the JComponent.
-     * Moves the JComponent by the amount of the drag such that the point
-     * under which the mouse the pressed remains under the mouse cursor.  In
-     * other words, "drags" the JComponent.
+     * This method is called when the mouse is dragged over the JComponent.Moves the JComponent by the amount of the drag such that the point
+ under which the mouse the pressed remains under the mouse cursor.
+     * In
+ other words, "drags" the JComponent.
+     * @param e
      */
     public void mouseDragged(MouseEvent e) {
         //System.out.println("mouse dragged: "+this.getLocation());
@@ -177,6 +212,7 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
 
     /**
      * update the current location of the mouse
+     * @param e
      */
     public void mouseMoved(MouseEvent e) {
         mCurrentX = e.getX();

@@ -20,25 +20,38 @@ import com.mit.blocks.workspace.Workspace;
 import com.mit.blocks.workspace.WorkspaceEvent;
 import com.mit.blocks.workspace.WorkspaceWidget;
 
+/**
+ *
+ * @author User
+ */
 public class BlockUtilities {
 
     private static final Map<String, Integer> instanceCounter = new HashMap<String, Integer>();
     private static double zoom = 1.0;
 
+    /**
+     *
+     */
     public static void reset() {
         zoom = 1.0;
         instanceCounter.clear();
     }
 
+    /**
+     *
+     * @param newZoom
+     */
     public static void setZoomLevel(double newZoom) {
         zoom = newZoom;
     }
 
     /**
      * Returns true if the specified label is valid according to the specifications
-     * of this block's genus. For example, if this block's label must be unique
-     * (as specified from its genus), this method verifies that its label is
-     * unique relative to the other instances present.
+     * of this block's genus.For example, if this block's label must be unique
+ (as specified from its genus), this method verifies that its label is
+ unique relative to the other instances present.
+     * @param workspace
+     * @param blockID
      * @param label the String block label to test
      * @return true if the specified label is valid according to the specifications
      * of this block's genus.
@@ -47,6 +60,12 @@ public class BlockUtilities {
         return isLabelValid(workspace.getEnv().getBlock(blockID), label);
     }
 
+    /**
+     *
+     * @param block
+     * @param label
+     * @return
+     */
     public static boolean isLabelValid(Block block, String label) {
         if (block == null || label == null) {
             return false;
@@ -64,6 +83,10 @@ public class BlockUtilities {
         return true;
     }
 
+    /**
+     *
+     * @param block
+     */
     public static void deleteBlock(RenderableBlock block) {
         block.setLocation(0, 0);
 
@@ -84,6 +107,11 @@ public class BlockUtilities {
 
     }
 
+    /**
+     *
+     * @param myblock
+     * @return
+     */
     public static RenderableBlock cloneBlock(Block myblock) {
         String mygenusname = myblock.getGenusName();
         String label = myblock.getBlockLabel();
@@ -267,6 +295,7 @@ public class BlockUtilities {
 
     /**
      *
+     * @param workspace
      * @param plus
      *
      * @requires plus != null
@@ -453,6 +482,12 @@ public class BlockUtilities {
         }
     }
 
+    /**
+     *
+     * @param workspace
+     * @param blockID
+     * @return
+     */
     public static BlockNode makeNodeWithChildren(Workspace workspace, Long blockID) {
         if (isNullBlockInstance(workspace, blockID)) {
             return null;
@@ -475,6 +510,12 @@ public class BlockUtilities {
         return node;
     }
 
+    /**
+     *
+     * @param workspace
+     * @param blockID
+     * @return
+     */
     public static BlockNode makeNodeWithStack(Workspace workspace, Long blockID) {
         if (isNullBlockInstance(workspace, blockID)) {
             return null;
@@ -502,6 +543,8 @@ public class BlockUtilities {
 
     /**
      * Checks to see if the block still exists
+     * @param workspace
+     * @param node
      * @return True if renderable block is still there, False otherwise
      */
     public static boolean blockExists(Workspace workspace, BlockNode node) {
@@ -514,6 +557,13 @@ public class BlockUtilities {
         }
     }
 
+    /**
+     *
+     * @param workspace
+     * @param node
+     * @param widget
+     * @return
+     */
     public static RenderableBlock makeRenderable(Workspace workspace, BlockNode node, WorkspaceWidget widget) {
         String genusName = node.getGenusName(); //genusName may not be null
         RenderableBlock renderable = BlockUtilities.getBlock(workspace, genusName, node.getLabel());

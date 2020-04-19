@@ -34,6 +34,10 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
 
     private static final long serialVersionUID = 328149080427L;
     //highlight stroke and width specifications
+
+    /**
+     *
+     */
     public static final int HIGHLIGHT_STROKE_WIDTH = 12;
     private static final float HIGHLIGHT_ALPHA = .75f;
     private Color hColor = null;
@@ -42,6 +46,10 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
     private RenderableBlock rb;
     private BufferedImage hImage;
 
+    /**
+     *
+     * @param rb
+     */
     public RBHighlightHandler(RenderableBlock rb) {
         super();
         this.rb = rb;
@@ -54,18 +62,29 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
         rb.addComponentListener(this);
     }
 
+    /**
+     *
+     * @param c
+     */
     public void setHighlightColor(Color c) {
         hColor = c;
         updateImage();
         repaint();
     }
 
+    /**
+     *
+     * @param isResult
+     */
     public void setIsSearchResult(boolean isResult) {
         isSearchResult = isResult;
         updateImage();
         repaint();
     }
 
+    /**
+     *
+     */
     public void resetHighlight() {
         hColor = null;
         updateImage();
@@ -103,6 +122,10 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
         }
     }
 
+    /**
+     *
+     * @param newParent
+     */
     public void setParent(RBParent newParent) {
         removeFromParent();
         newParent.addToHighlightLayer(this);
@@ -110,12 +133,18 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
         ((Container) newParent).validate();
     }
 
+    /**
+     *
+     */
     public void removeFromParent() {
         if (this.getParent() != null) {
             this.getParent().remove(this);
         }
     }
 
+    /**
+     *
+     */
     public void updateImage() {
         if (GraphicsEnvironment.isHeadless()) {
             return;
@@ -171,6 +200,7 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
 
     /************************************************************
      * ComponentListener methods for when the RB moves or resizes
+     * @param arg0
      ************************************************************/
     @Override
     public void componentResized(ComponentEvent arg0) {
@@ -196,6 +226,7 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
     /*************************************************************
      * HierarchyListener method for the RB is added to or removed
      * from a parent component
+     * @param he
      *************************************************************/
     @Override
     public void hierarchyChanged(HierarchyEvent he) {

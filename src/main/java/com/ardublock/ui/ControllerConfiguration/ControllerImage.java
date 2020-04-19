@@ -7,12 +7,24 @@ import java.util.ArrayList;
 import java.awt.Image;
 import java.net.URL;
 
+/**
+ *
+ * @author User
+ */
 public class ControllerImage extends JPanel {
 
     private int type_of_plate;
     private СontrollerСonfiguration controllerConf;
     private Image background;
+
+    /**
+     *
+     */
     public ArrayList<ControllerButton> moduleButtons;
+
+    /**
+     *
+     */
     public ArrayList<ControllerButton> connectorButtons;
     private static final String[] names = {
 //        "dir04pwm05",
@@ -22,6 +34,11 @@ public class ControllerImage extends JPanel {
         "a3", "a2", "a1", "a0", 
         "i2c"};
 
+    /**
+     *
+     * @param controller
+     * @param type_of_plate
+     */
     public ControllerImage(СontrollerСonfiguration controller, int type_of_plate) {
         this.setLayout(null);
         this.setBackground(Color.WHITE);
@@ -50,20 +67,42 @@ public class ControllerImage extends JPanel {
         }
     }
     
+    /**
+     *
+     * @param plate_in
+     */
     public void setPlate(int plate_in){
         this.type_of_plate = plate_in;
     }
 
     //-------------------------------------ДЛЯ УСТАНОВКИ ИЗОБРАЖЕНИЯ В МОДУЛЬ----------------------------------------------
+
+    /**
+     *
+     * @param Id
+     * @param Path
+     */
     public void setModule(String Id, String Path) {
         this.callModuleButton(Id).setNewIconAsModule(Path);
     }
 
+    /**
+     *
+     * @param Id
+     * @param iconURL
+     */
     public void setModule(String Id, URL iconURL) {
         this.callModuleButton(Id).setNewIconAsModule(iconURL);
     }
     //---------------------------------------------------------------------------------------------------------------------
 
+    /**
+     *
+     * @param Path
+     * @param Width
+     * @param Height
+     * @return
+     */
     public Image getImage(String Path, int Width, int Height) {
         URL iconURL = ControllerImage.class.getClassLoader().getResource(Path);
         return new ImageIcon(iconURL).getImage().getScaledInstance(
@@ -71,6 +110,11 @@ public class ControllerImage extends JPanel {
     }
 //
 
+    /**
+     *
+     * @param Id
+     * @return
+     */
     public ControllerButton callModuleButton(String Id) {
         for (ControllerButton i : moduleButtons) {
             if (i.getId() == Id) {
@@ -80,6 +124,11 @@ public class ControllerImage extends JPanel {
         return null;
     }
 
+    /**
+     *
+     * @param Id
+     * @return
+     */
     public ControllerButton callConnectorButton(String Id) {
         for (ControllerButton i : connectorButtons) {
             if (i.getId() == Id) {
@@ -89,6 +138,9 @@ public class ControllerImage extends JPanel {
         return null;
     }
 
+    /**
+     *
+     */
     public void unpressAll() {
         for (Component butt : this.getComponents()) {
             if (butt instanceof ControllerButton) {
@@ -97,6 +149,11 @@ public class ControllerImage extends JPanel {
         }
     }
 
+    /**
+     *
+     * @param Id
+     * @param isConnector
+     */
     public void unpressElse(String Id, boolean isConnector) {
         if (isConnector) {
             for (Component i : this.getComponents()) {
@@ -121,6 +178,11 @@ public class ControllerImage extends JPanel {
         }
     }
 
+    /**
+     *
+     * @param Id
+     * @param isConnector
+     */
     public void setSelectedId(String Id, boolean isConnector) {
         if (isConnector) {
             for (Component i : this.getComponents()) {
@@ -143,6 +205,11 @@ public class ControllerImage extends JPanel {
         }
     }
     
+    /**
+     *
+     * @param Id
+     * @param isConnector
+     */
     public void resetSelectedId(String Id, boolean isConnector) {
         if (isConnector) {
             for (Component i : this.getComponents()) {

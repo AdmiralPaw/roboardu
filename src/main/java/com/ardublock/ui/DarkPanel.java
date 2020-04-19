@@ -25,7 +25,15 @@ public class DarkPanel extends JPanel {
     private double frames = time * fps;
     private double iteratorOfFrames = frames;
     boolean animationIsFinished = true;
+
+    /**
+     *
+     */
     public Timer animationTimerStart = null;
+
+    /**
+     *
+     */
     public Timer animationTimerBack = null;
 
     private Color myColor = new Color(0, 0, 0, 128);
@@ -33,6 +41,13 @@ public class DarkPanel extends JPanel {
     private final OpenblocksFrame openblocksFrame;
     private final TutorialPane tutorialPane;
 
+    /**
+     *
+     * @param openblocksFrame
+     * @param tutorialPane
+     * @param size
+     * @param point
+     */
     public DarkPanel(OpenblocksFrame openblocksFrame, TutorialPane tutorialPane,
             Dimension size, Point point) {
         this.openblocksFrame = openblocksFrame;
@@ -59,15 +74,25 @@ public class DarkPanel extends JPanel {
         this.repaint();
     }
 
+    /**
+     *
+     * @param i
+     */
     public void setColorAlpha(int i) {
         this.myColor = new Color(0, 0, 0, i);
         this.updateUI();
     }
 
+    /**
+     *
+     */
     public void startAnimation() {
         animationTimerStart.start();
     }
 
+    /**
+     *
+     */
     public void backAnimation() {
         animationTimerBack.start();
     }
@@ -98,6 +123,11 @@ public class DarkPanel extends JPanel {
         this.updateUI();
     }
 
+    /**
+     *
+     * @param size
+     * @param location
+     */
     public void repaintPanel(Dimension size, Point location) {
         this.setSize(size);
         this.setPreferredSize(size);

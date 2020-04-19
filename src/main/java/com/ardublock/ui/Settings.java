@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
+/**
+ *
+ * @author User
+ */
 public class Settings extends JFrame {
 
     private ResourceBundle uiMessageBundle;
@@ -30,6 +34,10 @@ public class Settings extends JFrame {
     int windowHeight = 300;
     private ArrayList<Integer> keyBuf;
 
+    /**
+     *
+     * @param openblocksFrame
+     */
     public Settings(OpenblocksFrame openblocksFrame) {
         thisFrame = this;
         this.setTitle("settings");
@@ -265,6 +273,10 @@ public class Settings extends JFrame {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isFirstLaunch() {
         return userPrefs.getBoolean("is_first_launch", true);
     }

@@ -4,10 +4,18 @@ import com.mit.blocks.workspace.Workspace;
 import com.mit.blocks.workspace.WorkspaceEvent;
 import com.mit.blocks.workspace.WorkspaceListener;
 
+/**
+ *
+ * @author User
+ */
 public class CommandRule implements LinkRule, WorkspaceListener {
     
     private final Workspace workspace;
 
+    /**
+     *
+     * @param workspace
+     */
     public CommandRule(Workspace workspace) {
         this.workspace = workspace;
     }
@@ -25,6 +33,10 @@ public class CommandRule implements LinkRule, WorkspaceListener {
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isMandatory() {
         return false;
     }

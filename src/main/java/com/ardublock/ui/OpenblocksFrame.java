@@ -28,6 +28,10 @@ import java.util.*;
 
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
 
+/**
+ *
+ * @author User
+ */
 public class OpenblocksFrame extends JFrame {
 
     private static final long serialVersionUID = 2841155965906223806L;
@@ -35,6 +39,10 @@ public class OpenblocksFrame extends JFrame {
     JMenu recentMenu;
     private OpenblocksFrame thisFrame;
     //время для функции вызова автосохранения
+
+    /**
+     *
+     */
     public int timeDelay = 5;
     private File fileToSave;
 
@@ -42,21 +50,52 @@ public class OpenblocksFrame extends JFrame {
     private JFileChooser fileChooser;
     private FileFilter ffilter;
     private ErrWindow errWindow;
+
+    /**
+     *
+     */
     public Settings settings;
+
+    /**
+     *
+     */
     public JLayeredPane GlobalLayaredPane;
     private Timer timer = null;
 
+    /**
+     *
+     */
     public JPanel northPanelCenter = null;
+
+    /**
+     *
+     */
     public JPanel logo;
+
+    /**
+     *
+     */
     public JPanel rightPanel;
     //Just for Tutorial Pane (не бейте, не знал как по-другому)
+
+    /**
+     *
+     */
     public ImageButton generateButton;
+
+    /**
+     *
+     */
     public ImageButton verifyButton;
 
     private ResourceBundle uiMessageBundle;
     private String autosavePath = "";
     private boolean controllerIsShown = true;
 
+    /**
+     *
+     * @param ofl
+     */
     public void addListener(OpenblocksFrameListener ofl) {
         context.registerOpenblocksFrameListener(ofl);
     }
@@ -65,6 +104,10 @@ public class OpenblocksFrame extends JFrame {
 //<<<<<<< HEAD
 //    public static void deleteAllBlocks() {
 //=======
+
+    /**
+     *
+     */
     public static void deleteAllBlocks(){
         Page.currentpage.saveScreen();
 //>>>>>>> lerofaCtrlZ
@@ -73,7 +116,10 @@ public class OpenblocksFrame extends JFrame {
         Page.blocksContainer.repaint();
     }
 
-
+    /**
+     *
+     * @return
+     */
     public String makeFrameTitle() {
         String title;
         if (!context.getSaveFileName().endsWith(".abp")) {
@@ -92,9 +138,16 @@ public class OpenblocksFrame extends JFrame {
 
     //TODO: доделать список последних файлов
     String user;
+
+    /**
+     *
+     */
     public static String recentFile;
     List<String> recentFiles = new ArrayList<>();
 
+    /**
+     *
+     */
     public OpenblocksFrame() {
         thisFrame = this;
         ClassLoader classLoader = getClass().getClassLoader();
@@ -217,6 +270,10 @@ public class OpenblocksFrame extends JFrame {
 
     }
 
+    /**
+     *
+     * @param interval
+     */
     public void setAutosaveInterval(int interval) {
         timeDelay = interval;
         if (timer != null) {
@@ -697,6 +754,10 @@ public class OpenblocksFrame extends JFrame {
 
 
     // <editor-fold defaultstate="collapsed" desc="Buttons listners">
+
+    /**
+     *
+     */
     public void doOpenArduBlockFile() {
         if (context.isWorkspaceChanged()) {
             int optionValue = JOptionPane.showOptionDialog(this, uiMessageBundle.getString("message.content.open_unsaved"), uiMessageBundle.getString("message.title.question"), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, JOptionPane.YES_OPTION);
@@ -741,6 +802,10 @@ public class OpenblocksFrame extends JFrame {
         errWindow.reset();
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean doSaveArduBlockFile() {
         if (!context.isWorkspaceChanged()) {
             return true;
@@ -758,6 +823,9 @@ public class OpenblocksFrame extends JFrame {
         }
     }
 
+    /**
+     *
+     */
     public void doSaveAsArduBlockFile() {
         if (context.isWorkspaceEmpty()) {
             return;
@@ -769,6 +837,10 @@ public class OpenblocksFrame extends JFrame {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public ResourceBundle getResource() {
         return uiMessageBundle;
     }
@@ -955,6 +1027,9 @@ public class OpenblocksFrame extends JFrame {
         context.setSaveFilePath(saveFile.getAbsolutePath());
     }
 
+    /**
+     *
+     */
     public void doNewArduBlockFile() {
         if (context.isWorkspaceChanged()) {
             int optionValue = JOptionPane.showOptionDialog(this, uiMessageBundle.getString("message.question.newfile_on_workspace_changed"), uiMessageBundle.getString("message.title.question"), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, JOptionPane.YES_OPTION);
@@ -988,6 +1063,9 @@ public class OpenblocksFrame extends JFrame {
 
     }
 
+    /**
+     *
+     */
     public void doCloseArduBlockFile() {
         if (context.isWorkspaceChanged()) {
             int optionValue = JOptionPane.showOptionDialog(this,
@@ -1033,6 +1111,11 @@ public class OpenblocksFrame extends JFrame {
 
 
     // </editor-fold>
+
+    /**
+     *
+     * @return
+     */
 
     public Context getContext() {
         return this.context;

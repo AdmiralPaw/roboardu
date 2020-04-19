@@ -6,10 +6,21 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ *
+ * @author User
+ */
 public class RCheckBox extends JPanel
 {
 
+    /**
+     *
+     */
     public JCheckBox box;
+
+    /**
+     *
+     */
     public RCheckBox ()
     {
         super();
@@ -29,16 +40,28 @@ public class RCheckBox extends JPanel
         });
     }
 
+    /**
+     *
+     * @param e
+     */
     public void setSelected(boolean e)
     {
         box.setSelected(e);
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isSelected()
     {
         return box.isSelected();
     }
 
+    /**
+     *
+     * @param e
+     */
     public void addItemListener(ItemListener e)
     {
         box.addItemListener(e);

@@ -7,6 +7,10 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public abstract class AbstractTinkerReadDigitalBlock extends TranslatorBlock
 {
 
@@ -16,7 +20,13 @@ public abstract class AbstractTinkerReadDigitalBlock extends TranslatorBlock
 		translator.addHeaderFile("TinkerKit.h");
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);

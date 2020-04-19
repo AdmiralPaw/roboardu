@@ -7,16 +7,32 @@ import com.ardublock.translator.block.TranslatorBlockFactory;
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.codeblocks.BlockConnector;
 
+/**
+ *
+ * @author User
+ */
 public class OpenBlocksAdaptor implements BlockAdaptor
 {
 	TranslatorBlockFactory translatorBlockFactory;
-	public OpenBlocksAdaptor()
+
+    /**
+     *
+     */
+    public OpenBlocksAdaptor()
 	{
 		super();
 		translatorBlockFactory = new TranslatorBlockFactory();
 	}
 	
-	public TranslatorBlock nextTranslatorBlock(Translator translator, Long blockId, String codePrefix, String codeSuffix)
+    /**
+     *
+     * @param translator
+     * @param blockId
+     * @param codePrefix
+     * @param codeSuffix
+     * @return
+     */
+    public TranslatorBlock nextTranslatorBlock(Translator translator, Long blockId, String codePrefix, String codeSuffix)
 	{
 		Block block = translator.getBlock(blockId);
 		blockId = block.getAfterBlockID();
@@ -32,7 +48,16 @@ public class OpenBlocksAdaptor implements BlockAdaptor
 		}
 	}
 	
-	public TranslatorBlock getTranslatorBlockAtSocket(Translator translator, Long blockId, int i, String codePrefix, String codeSuffix)
+    /**
+     *
+     * @param translator
+     * @param blockId
+     * @param i
+     * @param codePrefix
+     * @param codeSuffix
+     * @return
+     */
+    public TranslatorBlock getTranslatorBlockAtSocket(Translator translator, Long blockId, int i, String codePrefix, String codeSuffix)
 	{
 		Block block = translator.getBlock(blockId);
 		if (block == null)

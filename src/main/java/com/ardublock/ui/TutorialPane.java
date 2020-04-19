@@ -31,27 +31,80 @@ public class TutorialPane extends JPanel {
     private DarkPanel controllerPanel;
     private DarkPanel logoPanel;
     private DarkPanel rightTopPanel;
+
+    /**
+     *
+     */
     public TutorialPane tutorialPane;
+
+    /**
+     *
+     */
     public IllumPanel dummy;
 
+    /**
+     *
+     */
     public List<List<DarkPanel>> activeAnimPanels = new ArrayList<>();
+
+    /**
+     *
+     */
     public List<DarkPanel> inactiveTutorPanels = new ArrayList<>();
+
+    /**
+     *
+     */
     public List<Point> tutorLocations = new ArrayList<>();
+
+    /**
+     *
+     */
     public List<Dimension> tutorDimensions = new ArrayList<>();
+
+    /**
+     *
+     */
     public List<String> tutorTexts = new ArrayList<>();
+
+    /**
+     *
+     */
     public List<Color> tutorColors = new ArrayList<>();
+
+    /**
+     *
+     */
     public List<Color> tutorTextColors = new ArrayList<>();
+
+    /**
+     *
+     */
     public List<List<IllumPanel>> tutorIllumPanels = new ArrayList<>();
 
+    /**
+     *
+     */
     public TPanel tutorTextPanel;
 
     private final int menuHeight = 22;
     private final int kostilEbani = 1;
 
+    /**
+     *
+     */
     public int iter = 0;
+
+    /**
+     *
+     */
     public int lastIter = 1;
     private boolean tutorIsActive = true;
 
+    /**
+     *
+     * @param openblocksFrame
+     */
     public TutorialPane(OpenblocksFrame openblocksFrame) {
         openblocksFrame.validate();
         this.tutorialPane = this;
@@ -110,6 +163,9 @@ public class TutorialPane extends JPanel {
         this.nextTutor();
     }
 
+    /**
+     *
+     */
     public void nextTutor() {
         this.repaintPanels();
         if ((iter == 0) || (iter == this.inactiveTutorPanels.size() - 1)) {

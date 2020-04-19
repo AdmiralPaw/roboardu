@@ -40,7 +40,31 @@ public class BlockConnector implements ISupportMemento {
     //Mirror is creates a connectors with locations mirrored on both left and right side of a block.
     //Bottom is a double sided enclosure within the bottom side of a block, or the next command.
     //Top is the previous command.
-    public enum PositionType { SINGLE, MIRROR, BOTTOM, TOP };
+
+    /**
+     *
+     */
+    public enum PositionType { 
+
+        /**
+         *
+         */
+        SINGLE, 
+
+        /**
+         *
+         */
+        MIRROR, 
+
+        /**
+         *
+         */
+        BOTTOM, 
+
+        /**
+         *
+         */
+        TOP };
     
     /**
      * Constructs a new <code>BlockConnector</code>
@@ -176,6 +200,7 @@ public class BlockConnector implements ISupportMemento {
     /**
      * Returns the expand group of this connector, or an empty string ("") if
      * the connector is not part of a group.
+     * @return 
      */
     public String getExpandGroup() {
         return expandGroup;
@@ -300,6 +325,7 @@ public class BlockConnector implements ISupportMemento {
      * of BlockConnector with the loaded information
      * @param workspace The workspace in use
      * @param node the Node containing the desired information
+     * @param idMapping
      * @return BlockConnector instance with the loaded information
      */
     public static BlockConnector loadBlockConnector(Workspace workspace, Node node, HashMap<Long, Long> idMapping) {
@@ -392,8 +418,9 @@ public class BlockConnector implements ISupportMemento {
     }
     
     /**
-     * Returns the node of this.  Node only includes 
-     * information that was modifiable and modified 
+     * Returns the node of this.Node only includes 
+ information that was modifiable and modified 
+     * @param document
      * @param conKind String containing if this is a socket or plug
      * @return the node of this
      */
@@ -450,6 +477,10 @@ public class BlockConnector implements ISupportMemento {
         public boolean isLabelEditable;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Object getState() {
         BlockConnectorState state = new BlockConnectorState();
@@ -476,6 +507,10 @@ public class BlockConnector implements ISupportMemento {
         return state;
     }
 
+    /**
+     *
+     * @param memento
+     */
     @Override
     public void loadState(Object memento) {
         if (memento instanceof BlockConnectorState) {

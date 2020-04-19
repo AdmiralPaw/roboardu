@@ -8,10 +8,17 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
 import java.util.ResourceBundle;
 
+/**
+ *
+ * @author User
+ */
 public class ServoDegreesToDegrees extends TranslatorBlock {
 
     private static ResourceBundle uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
 
+    /**
+     *
+     */
     public static final String SERVO_DEGREES_TO_DEGREES = "void SetServoPos(Servo ServoMotor, int Pos, int Speed)\n" +
             "{\n" +
             "  int PosOld = ServoMotor.read();\n" +
@@ -37,11 +44,25 @@ public class ServoDegreesToDegrees extends TranslatorBlock {
             "  }\n" +
             "}";
 
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public ServoDegreesToDegrees(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {

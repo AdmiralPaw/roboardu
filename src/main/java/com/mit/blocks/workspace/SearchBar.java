@@ -22,7 +22,14 @@ public class SearchBar {
 
     private static JComponent fcdir;
 
+    /**
+     *
+     */
     public static Workspace workspace;
+
+    /**
+     *
+     */
     public final RQueryField searchPanel;
     private final JTextField searchBar;
     private final String defaultText;

@@ -17,6 +17,7 @@ public class LinkFinderUtil {
      * @param workspace The workspace in use
      * @param child
      * @param parent
+     * @return 
      */
     protected static BlockLink connectBlocks(Workspace workspace, Block child, Block parent) {
         //child must exist for there to be a link (no links to null instances allowed)

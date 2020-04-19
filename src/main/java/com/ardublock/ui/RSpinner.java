@@ -9,8 +9,16 @@ import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+/**
+ *
+ * @author User
+ */
 public class RSpinner extends JSpinner {
 
+    /**
+     *
+     * @param model
+     */
     public RSpinner(SpinnerNumberModel model)
     {
         super(model);
@@ -29,7 +37,10 @@ public class RSpinner extends JSpinner {
 
     }
 
-
+    /**
+     *
+     * @return
+     */
     public int getIntValue()
     {
         return Integer.parseInt(getValue().toString());

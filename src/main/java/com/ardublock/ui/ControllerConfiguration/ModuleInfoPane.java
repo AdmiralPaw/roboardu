@@ -27,10 +27,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ * @author User
+ */
 public class ModuleInfoPane extends JPanel {
 
     private URL imageURL;
+
+    /**
+     *
+     */
     public String moduleName;
+
+    /**
+     *
+     */
     public String transModuleName;
     private String moduleInfo;
     private СontrollerСonfiguration controller;
@@ -41,8 +53,10 @@ public class ModuleInfoPane extends JPanel {
     private JButton closeButton = new JButton();
     private JTextArea moduleInfoLabel = new JTextArea();
 
-
-
+    /**
+     *
+     * @param controller
+     */
     public ModuleInfoPane(СontrollerСonfiguration controller) {
         super();
         this.controller = controller;
@@ -244,6 +258,10 @@ public class ModuleInfoPane extends JPanel {
         });*/
     }
     
+    /**
+     *
+     * @param modules
+     */
     public void setButtonAction(String modules){//просто как пример
         this.blocksButton.addMouseListener(new MouseListener(){
             public void mouseClicked(MouseEvent e) {
@@ -266,6 +284,10 @@ public class ModuleInfoPane extends JPanel {
         });
     }
 
+    /**
+     *
+     * @param deviceName
+     */
     public void setModuleImage(String deviceName) {
         setImageURL(deviceName+"Info");
         ImageIcon image = new ImageIcon(this.imageURL);
@@ -274,10 +296,18 @@ public class ModuleInfoPane extends JPanel {
         this.moduleIcon.setIcon(new ImageIcon(imageRaw));
     }
 
+    /**
+     *
+     * @param deviceName
+     */
     public void setModuleName(String deviceName) {
         this.moduleNameLabel.setText(deviceName);
     }
 
+    /**
+     *
+     * @param info
+     */
     public void setModuleInfo(String info) {
         this.moduleInfo = info;
         this.moduleInfoLabel.setText(this.moduleInfo);

@@ -5,9 +5,15 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
-
+/**
+ *
+ * @author User
+ */
 public class pwmLed extends TranslatorBlock {
 
+    /**
+     *
+     */
     public static final String PWM_LED= "void LedPWM(int LED_PIN, int GLOW)\n" +
             "{\n" +
             "  if(GLOW > 100) GLOW = 100;\n"+
@@ -16,11 +22,25 @@ public class pwmLed extends TranslatorBlock {
             "  analogWrite(LED_PIN, map(GLOW,0,100,255,0));\n" +
             "}\n";
 
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public pwmLed(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {

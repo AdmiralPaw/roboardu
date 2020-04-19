@@ -7,6 +7,10 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
+/**
+ *
+ * @author User
+ */
 public class ControllerMenuButton extends CButton {
 
     private static final long serialVersionUID = 328149080229L;
@@ -18,10 +22,25 @@ public class ControllerMenuButton extends CButton {
     ControllerButton moduleButton;
     СontrollerСonfiguration controller;
 
+    /**
+     *
+     * @param controller
+     * @param text
+     * @param tr
+     * @param Id
+     */
     public ControllerMenuButton(СontrollerСonfiguration controller, String text, String tr, String Id) {
         this(controller, text, tr, Id, Color.black);
     }
 
+    /**
+     *
+     * @param controller
+     * @param deviceName
+     * @param tr
+     * @param Id
+     * @param cat_col
+     */
     public ControllerMenuButton(СontrollerСonfiguration controller, String deviceName, String tr, String Id, Color cat_col) {
         super(Color.black, CGraphite.blue, tr);
         this.cat_color = cat_col;
@@ -36,6 +55,7 @@ public class ControllerMenuButton extends CButton {
 
     /**
      * re paints this
+     * @param g
      */
     @Override
     public void paint(Graphics g) {

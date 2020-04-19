@@ -35,7 +35,35 @@ public class TypeBlockManager {
     /**Directional Pad values*/
     protected static enum Direction {
 
-        UP, DOWN, LEFT, RIGHT, ESCAPE, ENTER
+        /**
+         *
+         */
+        UP,
+
+        /**
+         *
+         */
+        DOWN,
+
+        /**
+         *
+         */
+        LEFT,
+
+        /**
+         *
+         */
+        RIGHT,
+
+        /**
+         *
+         */
+        ESCAPE,
+
+        /**
+         *
+         */
+        ENTER
     };
     /**TypeBlockmanager graphical view*/
     private final AutoCompletePanel autoCompletePanel;
@@ -137,6 +165,7 @@ public class TypeBlockManager {
     //Automation Handlers//
     ///////////////////////
     /**
+     * @param workspace
      * @requires the current block with focus must exist with non-null
      * 			 ID in a non-null widget with a non-null parent
      * @modifies the current block with focus
@@ -411,14 +440,26 @@ public class TypeBlockManager {
      */
     private BlockNode bufferedBlock = null;
 
+    /**
+     *
+     * @param workspace
+     */
     public static void copyBlock(Workspace workspace) {
         TypeBlockManager.automateCopyBlock(workspace);
     }
 
+    /**
+     *
+     * @param workspace
+     */
     public static void pasteBlock(Workspace workspace) {
         TypeBlockManager.automatePasteBlock(workspace);
     }
 
+    /**
+     *
+     * @param workspace
+     */
     protected static void automateCopyBlock(Workspace workspace) {
         TypeBlockManager typeBlockManager = workspace.getTypeBlockManager();
         if (!typeBlockManager.isEnabled()) {
@@ -429,6 +470,10 @@ public class TypeBlockManager {
                 BlockUtilities.makeNodeWithChildren(workspace, typeBlockManager.focusManager.getFocusBlockID());
     }
 
+    /**
+     *
+     * @param workspace
+     */
     protected static void automateCopyAll(Workspace workspace) {
         TypeBlockManager typeBlockManager = workspace.getTypeBlockManager();
         if (!typeBlockManager.isEnabled()) {
@@ -601,6 +646,7 @@ public class TypeBlockManager {
 
     /**
      * assumes number and differen genus exist and number genus has ediitabel lable
+     * @param workspace
      */
     protected void automateNegationInsertion(Workspace workspace) {
         TypeBlockManager typeBlockManager = workspace.getTypeBlockManager();
@@ -631,6 +677,11 @@ public class TypeBlockManager {
         }
     }
 
+    /**
+     *
+     * @param workspace
+     * @param character
+     */
     protected void automateMultiplication(Workspace workspace, char character) {
         TypeBlockManager typeBlockManager = workspace.getTypeBlockManager();
         if (!typeBlockManager.isEnabled()) {
@@ -648,6 +699,11 @@ public class TypeBlockManager {
         return;
     }
 
+    /**
+     *
+     * @param workspace
+     * @param character
+     */
     protected void automateAddition(Workspace workspace, char character) {
         TypeBlockManager typeBlockManager = workspace.getTypeBlockManager();
         if (!typeBlockManager.isEnabled()) {
@@ -720,6 +776,8 @@ public class TypeBlockManager {
     }
 
     /**
+     * @param workspace
+     * @param block
      * @requires none
      * @modifies 	focusManager.focusblock &&
      * 				focusManager.focuspoint &&
@@ -741,6 +799,9 @@ public class TypeBlockManager {
     }
 
     /**
+     * @param workspace
+     * @param block
+     * @param label
      * @requires none
      * @modifies 	focusManager.focusblock &&
      * 				focusManager.focuspoint &&

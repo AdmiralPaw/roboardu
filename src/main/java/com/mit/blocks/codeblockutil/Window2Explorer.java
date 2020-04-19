@@ -30,11 +30,26 @@ public class Window2Explorer extends JPanel implements Explorer {
 
     //TODO: добавить поиск - удаление не соответсвующих элементов в тек директории(компоненте)
     //и добавление в него компонентов из переменной dictionary соответствующих блоков
+
+    /**
+     *
+     */
     public static JComponent cdir;
 
-
+    /**
+     *
+     */
     public static Map<String, JComponent> dictionary = new HashMap<String, JComponent>();
-    public static JComponent currentDir, canvasPanel;
+
+    /**
+     *
+     */
+    public static JComponent currentDir,
+
+    /**
+     *
+     */
+    canvasPanel;
     //public static JComponent currentCanvas;
 
     private static final long serialVersionUID = 328149080308L;
@@ -51,9 +66,25 @@ public class Window2Explorer extends JPanel implements Explorer {
      * The tab portion
      */
     public JPanel butpan;
+
+    /**
+     *
+     */
     public JPanel buttonPane;
+
+    /**
+     *
+     */
     public JPanel basketPane;
+
+    /**
+     *
+     */
     public JLayeredPane currentCanvasWithBasket;
+
+    /**
+     *
+     */
     public int oldIndex;
 
     /**
@@ -215,6 +246,9 @@ public class Window2Explorer extends JPanel implements Explorer {
     public void reformView() {
     }
 
+    /**
+     *
+     */
     public void activeBasket() {
         
         currentCanvasWithBasket.getComponentsInLayer(0)[0].setVisible(false);
@@ -222,11 +256,18 @@ public class Window2Explorer extends JPanel implements Explorer {
 
     }
 
+    /**
+     *
+     */
     public void deactiveBasket() {
         currentCanvasWithBasket.getComponentsInLayer(0)[0].setVisible(true);
         currentCanvasWithBasket.getComponentsInLayer(1)[0].setVisible(false);
     }
 
+    /**
+     *
+     * @param panel
+     */
     public void setSearchResult(JComponent panel) {
         currentCanvasWithBasket.remove(currentCanvasWithBasket.getComponentsInLayer(0)[0]);
         currentCanvasWithBasket.add(panel, new Integer(0));
@@ -235,6 +276,9 @@ public class Window2Explorer extends JPanel implements Explorer {
         
     }
     
+    /**
+     *
+     */
     public void setNormalMode()
     {
         selectCanvas(oldIndex);

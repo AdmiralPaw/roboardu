@@ -18,16 +18,27 @@ import java.text.Format;
 import javax.swing.JFormattedTextField;
 import javax.swing.event.DocumentListener;
 
+/**
+ *
+ * @author User
+ */
 public class CTextField extends JFormattedTextField implements MouseListener, MouseMotionListener {
 
     private static final long serialVersionUID = 328149080250L;
     private boolean pressed = false;
     private boolean mouseover = false;
 
+    /**
+     *
+     */
     public CTextField() {
         this("");
     }
 
+    /**
+     *
+     * @param format
+     */
     public CTextField(Format format) {
         super(format);
         this.setBorder(null);
@@ -40,6 +51,10 @@ public class CTextField extends JFormattedTextField implements MouseListener, Mo
         this.repaint();
     }
 
+    /**
+     *
+     * @param text
+     */
     public CTextField(String text) {
         super(text);
         this.setBorder(null);
@@ -103,6 +118,10 @@ public class CTextField extends JFormattedTextField implements MouseListener, Mo
         super.paint(g);
     }
 
+    /**
+     *
+     * @param l
+     */
     public void addDocumentListener(DocumentListener l) {
         this.getDocument().addDocumentListener(l);
     }

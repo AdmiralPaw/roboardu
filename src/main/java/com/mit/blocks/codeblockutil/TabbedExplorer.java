@@ -183,6 +183,10 @@ public class TabbedExplorer extends JPanel implements Explorer, MouseListener, A
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSelectedIndex() {
         return this.selectedIndex;
     }
@@ -224,6 +228,7 @@ public class TabbedExplorer extends JPanel implements Explorer, MouseListener, A
 
     /**
      * Start the timer when the user presses the mouse.
+     * @param e
      */
     public void mousePressed(MouseEvent e) {
         if (e.getSource().equals(left)) {
@@ -241,6 +246,7 @@ public class TabbedExplorer extends JPanel implements Explorer, MouseListener, A
 
     /**
      * Stop the timer when the releases the mouse
+     * @param e
      */
     public void mouseReleased(MouseEvent e) {
         timer.stop();
@@ -249,6 +255,7 @@ public class TabbedExplorer extends JPanel implements Explorer, MouseListener, A
     /**
      * Continue to scroll to the left or right
      * for every time step
+     * @param e
      */
     public void actionPerformed(ActionEvent e) {
         if (directedToLeft) {

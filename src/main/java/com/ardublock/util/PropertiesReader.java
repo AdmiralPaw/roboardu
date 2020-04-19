@@ -5,10 +5,22 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ *
+ * @author User
+ */
 public class PropertiesReader
 {
-	public static Map<String, PropertiesReader> propertiesReaderMap = new SafeHashMap<String, PropertiesReader>();
-	public static final String DEFAULT_PROPERTIES_FILE = "heqichen.properties";
+
+    /**
+     *
+     */
+    public static Map<String, PropertiesReader> propertiesReaderMap = new SafeHashMap<String, PropertiesReader>();
+
+    /**
+     *
+     */
+    public static final String DEFAULT_PROPERTIES_FILE = "heqichen.properties";
 	
 	private String filename;
 	private Properties p;
@@ -33,12 +45,23 @@ public class PropertiesReader
 		}
 	}
 	
-	public static String getValue(String key)
+    /**
+     *
+     * @param key
+     * @return
+     */
+    public static String getValue(String key)
 	{
 		return getValue(key, DEFAULT_PROPERTIES_FILE);
 	}
 	
-	public static String getValue(String key, String file)
+    /**
+     *
+     * @param key
+     * @param file
+     * @return
+     */
+    public static String getValue(String key, String file)
 	{
 		PropertiesReader propertiesReader = PropertiesReader.getPropertiesReader(file);
 		return propertiesReader.readValue(key);

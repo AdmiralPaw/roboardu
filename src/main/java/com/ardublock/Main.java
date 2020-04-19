@@ -14,10 +14,18 @@ import javax.swing.JLayeredPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+/**
+ *
+ * @author User
+ */
 public class Main {
 
     private OpenblocksFrame openblocksFrame;
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(
@@ -35,6 +43,9 @@ public class Main {
         me.startArdublock();
     }
 
+    /**
+     *
+     */
     public void startArdublock() {
         startOpenblocksFrame();
     }
@@ -67,6 +78,9 @@ public class Main {
 //        }
     }
 
+    /**
+     *
+     */
     public void shutdown() {
         openblocksFrame.dispatchEvent(new WindowEvent(openblocksFrame, WindowEvent.WINDOW_CLOSING));
     }

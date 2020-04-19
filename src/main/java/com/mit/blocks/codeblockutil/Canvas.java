@@ -28,6 +28,9 @@ import javax.swing.JComponent;
  */
 public interface Canvas {
 
+    /**
+     *
+     */
     public String LABEL_CHANGE = "label_change_property";
 
     /**

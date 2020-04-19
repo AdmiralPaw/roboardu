@@ -7,14 +7,30 @@ import javax.swing.*;
 import java.net.URL;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author User
+ */
 public class ControllerButton extends JToggleButton {
 
     private final ControllerImage controllerImage;
     private final СontrollerСonfiguration controller;
     private final String buttonId;
     private String path;
+
+    /**
+     *
+     */
     public String moduleName = "start";
+
+    /**
+     *
+     */
     public String moduleTranslatedName = "modules.start.info";
+
+    /**
+     *
+     */
     public ArrayList<String> moduleSuitableBlocks = new ArrayList<String>();
     private String mode;
     //private String pathSet;
@@ -144,10 +160,18 @@ public class ControllerButton extends JToggleButton {
 
     }
 
+    /**
+     *
+     * @param paths
+     */
     public void setSuitableBlocks(ArrayList<String> paths){
 
     }
     
+    /**
+     *
+     * @param isItBig
+     */
     public void setModuleBig(boolean isItBig) { //можно лучше, но мозг в такой жаре не работает
         if (isItConnector) {
             if(isItBig) setBounds(getX() - 10, getY() - 10, getWidth() + 20, getHeight() + 20);
@@ -508,6 +532,10 @@ public class ControllerButton extends JToggleButton {
         }
     }
     
+    /**
+     *
+     * @param type_of_plate
+     */
     public void refresh_plate(int type_of_plate){
         switch (mode) {
             case "connector":
@@ -533,10 +561,18 @@ public class ControllerButton extends JToggleButton {
         path = "com/ardublock/Images/module/start.png";
     }
 
+    /**
+     *
+     * @param iconURL
+     */
     public void setNewIconAsModule(URL iconURL) {
         path = iconURL.getPath();
     }
 
+    /**
+     *
+     * @param Path
+     */
     public void setNewIconAsModule(String Path) {
         path = Path;
         this.setImages();
@@ -548,18 +584,33 @@ public class ControllerButton extends JToggleButton {
         return beforePoint + adding + afterPoint;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getId() {
         return this.buttonId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPath() {
         return this.path;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isConnector() {
         return this.isItConnector;
     }
 
+    /**
+     *
+     */
     public void rePaint() {
         Image imageRaw = image.getImage().getScaledInstance(
                 this.getWidth(), this.getHeight(), java.awt.Image.SCALE_SMOOTH);
@@ -585,10 +636,18 @@ public class ControllerButton extends JToggleButton {
         this.setSelectedIcon(getScaled(imageSet));
     }
     
+    /**
+     *
+     * @param moduleName
+     */
     public void setModuleName(String moduleName){
         this.moduleName = moduleName;
     }
     
+    /**
+     *
+     * @param moduleTrName
+     */
     public void setTranslatedName(String moduleTrName){
         this.moduleTranslatedName = moduleTrName;
     }

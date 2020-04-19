@@ -53,6 +53,10 @@ public class FactoryRenderableBlock extends RenderableBlock implements Cloneable
         return (FactoryRenderableBlock) super.clone();
     }
     
+    /**
+     *
+     * @return
+     */
     public FactoryRenderableBlock deepClone(){
         Block newBlock = new Block(workspace, this.getGenus(), false);
         FactoryRenderableBlock block = new FactoryRenderableBlock(workspace, this.wWidget, newBlock.getBlockID());
@@ -124,16 +128,29 @@ public class FactoryRenderableBlock extends RenderableBlock implements Cloneable
     public void mouseClicked(MouseEvent e) {
     }
 
+    /**
+     *
+     * @param e
+     */
     public void startDragging(MouseEvent e) {
 
     }
 
+    /**
+     *
+     * @param e
+     * @param w
+     */
     public void stopDragging(MouseEvent e, WorkspaceWidget w) {
     }
 
     public void setZoomLevel(double newZoom){
     }
 
+    /**
+     *
+     * @param newZoom
+     */
     public void OneSetZoomLevel(double newZoom)
     {
         super.setZoomLevel(newZoom);
