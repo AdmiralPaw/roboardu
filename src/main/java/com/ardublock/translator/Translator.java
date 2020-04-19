@@ -22,6 +22,8 @@ import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.Workspace;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.TreeMap;
 import java.util.Vector;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -82,7 +84,7 @@ public class Translator {
 
         if (!headerDefinitionSet.isEmpty()) {
             for (String command : headerDefinitionSet) {
-                headerCommand.append(command + "\n");
+                headerCommand.append(command + "");
             }
         }
 
@@ -354,13 +356,13 @@ public class Translator {
             String expression = "/root/translator/block[@name=" + "'" + className + "'" + "]";
             Node block = (Node) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODE);
             
-            HashMap<String,String> CommandNameAndCode = new HashMap<String,String>();
+            LinkedHashMap<String,String> CommandNameAndCode = new LinkedHashMap<String,String>();
             
             Expression TranslatorFunction = (string)->this.addHeaderDefinition(string);
             CommandNameAndCode = ParseXml(xPath,xmlDocument,block,"headers/header");
             AddValuesToCode(CommandNameAndCode,valuesToChange);
             RefactorCode(CommandNameAndCode);
-            addHeaderDefinition(String.join("",CommandNameAndCode.values()));
+            AddToTranslator(CommandNameAndCode,TranslatorFunction);
             CommandNameAndCode.clear();
             
             TranslatorFunction = (string)->this.addDefinitionCommand(string);
@@ -375,12 +377,12 @@ public class Translator {
     }
     
     
-    private HashMap<String,String> ParseXml(XPath xPath,Document xmlDocument,Node foundBlock,String path)throws XPathExpressionException {
+    private LinkedHashMap<String,String> ParseXml(XPath xPath,Document xmlDocument,Node foundBlock,String path)throws XPathExpressionException {
             NodeList headers = (NodeList) xPath.compile(path).evaluate(foundBlock, XPathConstants.NODESET);
             String headersCodeExpression = "/root/translatorCode/"+path;
             Node SomeType = null;
             Node headersCode;
-            HashMap<String,String> CommandNameAndCode = new HashMap<String,String>();
+            LinkedHashMap<String,String> CommandNameAndCode = new LinkedHashMap<String,String>();
             String nameOfHeader = "";
             for (int i = 0; i < headers.getLength(); i++) {
                 SomeType = headers.item(i);
@@ -391,14 +393,14 @@ public class Translator {
             return CommandNameAndCode;
     };
     
-    private void AddToTranslator(HashMap<String,String> collection, Expression func){
+    private void AddToTranslator(LinkedHashMap<String,String> collection, Expression func){
         if(!collection.isEmpty()){
             collection.entrySet().forEach((item) -> {
                 func.addSomeCommands(item.getValue());
             });
         }
     };
-    private void AddValuesToCode(HashMap<String,String> collection, HashMap<String,ArrayList<String>> values){
+    private void AddValuesToCode(LinkedHashMap<String,String> collection, HashMap<String,ArrayList<String>> values){
         if(values!=null&&!collection.isEmpty()){
         
         String lineForChange;
@@ -418,7 +420,7 @@ public class Translator {
         }
     };
     
-    private void RefactorCode(HashMap<String,String> collection){
+    private void RefactorCode(LinkedHashMap<String,String> collection){
         for(Map.Entry<String, String> item : collection.entrySet()){
             item.setValue(item.getValue().replaceAll("^\n|\n$", ""));
         }
