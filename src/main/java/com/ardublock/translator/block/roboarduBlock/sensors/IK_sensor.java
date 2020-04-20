@@ -19,22 +19,6 @@ public class IK_sensor extends TranslatorBlock
 
     /**
      *
-     */
-    public static final String PINMODE_INPUT = "void pinmode_input(int pin){\n"
-            + "  pinMode(pin, INPUT);\n"
-            + "}";
-
-    /**
-     *
-     */
-    public static final String GET_IJ_DISTANCE_FUNC_DEFINE
-            = "double get_IK_distance(int pin){\n"
-            + "  double temp = 65*pow((analogRead(pin)*0.0048828125),-1.10);\n"
-            + "  return temp;\n"
-            + "}";
-
-    /**
-     *
      * @param blockId
      * @param translator
      * @param codePrefix
@@ -55,15 +39,11 @@ public class IK_sensor extends TranslatorBlock
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {
-        TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
-        String pin = translatorBlock.toCode();
-        translator.addDefinitionCommand(GET_IJ_DISTANCE_FUNC_DEFINE);
-        translator.addDefinitionCommand(PINMODE_INPUT);
+        translator.LoadTranslators(this.getClass().getSimpleName());
         
-        translator.addSetupCommand("pinmode_input(" + pin + ");");
-
-        String ret = "get_IK_distance(";
-        ret = ret + pin + ")";
+        TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
+        
+        String ret = "IKSensorRead(" + translatorBlock.toCode() + ")";
         return codePrefix + ret + codeSuffix;
     }
 }

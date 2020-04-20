@@ -258,7 +258,6 @@ and open the template in the editor.
                 <header name="Wire.h"/>
             </headers>
             <headersDefinitions>
-                <headerDefinition name=""/>
             </headersDefinitions>
             <commands>
                 <command name="void InitUltrasonic()"/>
@@ -277,7 +276,16 @@ and open the template in the editor.
                 <command name="int UltrasonikHCSR04Read()"/>
             </commands>        
         </block>    
-<!--        <block name="" >
+        <block name="IK_sensor" >
+            <headers>
+            </headers>  
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int IKSensorRead(int SensorPin)"/>
+            </commands>        
+        </block>  
+                <block name="" >
             <headers>
                 <header name=""/>
             </headers>  
@@ -289,16 +297,40 @@ and open the template in the editor.
                 <command name=""/>
                 <command name=""/>
             </commands>        
-        </block>  -->
+        </block>  
+                <block name="" >
+            <headers>
+                <header name=""/>
+            </headers>  
+            <headersDefinitions>
+                <headerDefinition name=""/>
+                <headerDefinition name=""/>
+            </headersDefinitions>
+            <commands>
+                <command name=""/>
+                <command name=""/>
+            </commands>        
+        </block>  
+                <block name="" >
+            <headers>
+                <header name=""/>
+            </headers>  
+            <headersDefinitions>
+                <headerDefinition name=""/>
+                <headerDefinition name=""/>
+            </headersDefinitions>
+            <commands>
+                <command name=""/>
+                <command name=""/>
+            </commands>        
+        </block>  
    
         
     </translator>
     
     <translatorCode>
         <headers>
-            <header name="Wire.h"> 
-Wire.h
-            </header>
+            <header name="Wire.h">Wire.h</header>
         </headers>
         
         
@@ -326,16 +358,16 @@ Wire.h
 unsigned long EncoderCount1, EncoderCount2;                               
             </headerDefinition>  
             <!--SENSORS(ДАТЧИКИ)--> 
-            <headerDefinition name="#define TRIG_PIN            	A4"> 
+            <headerDefinition name="#define TRIG_PIN            	A4">
 #define TRIG_PIN            	A4
             </headerDefinition> 
-            <headerDefinition name="#define ECHO_PIN            	A5"> 
+            <headerDefinition name="#define ECHO_PIN            	A5">
 #define ECHO_PIN            	A5
             </headerDefinition> 
-            <headerDefinition name="#define LED_PIN             	13"> 
+            <headerDefinition name="#define LED_PIN             	13">
 #define LED_PIN             	13
             </headerDefinition> 
-            <headerDefinition name="#define BUTTON_PIN          	12"> 
+            <headerDefinition name="#define BUTTON_PIN          	12">
 #define BUTTON_PIN          	12
              </headerDefinition> 
 <!--            <headerDefinition name=""> 
@@ -601,7 +633,7 @@ void EncodersToNull()
 }                
             </command>
             <!--SENSORS(ДАТЧИКИ)-->
-            <command name="">
+            <command name="void InitUltrasonic()">
 void InitUltrasonic()
 { 
      // Открываем соединение с датчиком по I2C

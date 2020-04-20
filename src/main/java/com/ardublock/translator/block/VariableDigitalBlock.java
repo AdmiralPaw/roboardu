@@ -33,7 +33,7 @@ public class VariableDigitalBlock extends TranslatorBlock
             if (internalVariableName == null) {
                 internalVariableName = translator.buildVariableName(label);
                 translator.addBooleanVariable(label, internalVariableName);
-                translator.addDefinitionCommand("bool " + internalVariableName + "= false ;");
+                translator.addHeaderDefinition("bool " + internalVariableName + "= false ;");
             }
             String ret = internalVariableName;
             return codePrefix + ret + codeSuffix;

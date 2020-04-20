@@ -534,9 +534,9 @@ public class Translator {
             XPath xPath = XPathFactory.newInstance().newXPath();
             String expression = "/root/translator/block[@name=" + "'" + className + "'" + "]";
             Node block = (Node) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODE);
-                     
-            Translate(xmlDocument,block,"headers/header",this::addHeaderDefinition,valuesToChange);
-            Translate(xmlDocument,block,"hedersFiles/hedersFile",this::addHeaderDefinition,valuesToChange);  
+
+            Translate(xmlDocument,block,"headers/header",this::addHeaderFile,valuesToChange);
+            Translate(xmlDocument,block,"headersDefinitions/headerDefinition",this::addHeaderDefinition,valuesToChange);  
             Translate(xmlDocument,block,"commands/command",this::addDefinitionCommand,valuesToChange);
 
         } catch (ParserConfigurationException | SAXException | IOException | XPathExpressionException ex) {

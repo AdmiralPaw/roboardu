@@ -31,15 +31,11 @@ public class UltrasonicHCSR04 extends TranslatorBlock {
      */
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
+        translator.LoadTranslators(this.getClass().getSimpleName());
+        
+        translator.addSetupCommand("void InitUltrasonicHCSR04();");
 
-        String sensor = "Ultrasonic";
-
-        translator.addHeaderFile("NewPing.h");
-        translator.addDefinitionCommand("#define TRIGGER_PIN  A4\n"
-                + "#define ECHO_PIN     A5\n"
-                + "#define MAX_DISTANCE 80\n"
-                + "NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);\n\n");
-
-        return codePrefix + "sonar.ping_cm()" + codeSuffix;
+        String ret = "UltrasonikHCSR04Read()";
+        return codePrefix + ret + codeSuffix;
     }
 }
