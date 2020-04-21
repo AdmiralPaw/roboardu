@@ -9494,16 +9494,13 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
-        <BlockGenus name="servo_degrees_to_degrees" kind="command" color="205 133 62" initlabel="bg.servo_degrees_to_degrees">
+        <BlockGenus name="ServoMoveSlow" kind="command" color="205 133 62" initlabel="bg.ServoMoveSlow">
             <description>
-                <text>Servo Degrees_to_degrees</text>
+                <text>Servo MoveSlow</text>
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListDigital_D8" label="D8"/>
-                </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="bc.angle">
-                    <DefaultArg genus-name="number" label="0" />
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.angle">
                     <DefaultArg genus-name="number" label="90" />
@@ -12459,7 +12456,7 @@ initlabel="bg.tft-msg" editable-label="yes">
             <!-- servo -->
             <BlockDrawer button-color="205 133 62" name="bd.servo">
                 <BlockGenusMember>servo_default</BlockGenusMember>
-                <BlockGenusMember>servo_degrees_to_degrees</BlockGenusMember>
+                <BlockGenusMember>ServoMoveSlow</BlockGenusMember>
             </BlockDrawer>
 			
             <!-- diode -->

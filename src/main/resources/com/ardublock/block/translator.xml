@@ -285,33 +285,24 @@ and open the template in the editor.
                 <command name="int IKSensorRead(int SensorPin)"/>
             </commands>        
         </block>  
-                <block name="" >
+        <block name="ServoDefaultBlock" >
             <headers>
-                <header name=""/>
+                <header name="Servo.h"/>
             </headers>  
-            <headersDefinitions>
-                <headerDefinition name=""/>
-                <headerDefinition name=""/>
-            </headersDefinitions>
             <commands>
-                <command name=""/>
-                <command name=""/>
+                <command name="void ServoMove(Servo S1, int Angle)"/>
             </commands>        
         </block>  
-                <block name="" >
+        <block name="ServoMoveSlow" >
             <headers>
-                <header name=""/>
+                <header name="Servo.h"/>
             </headers>  
-            <headersDefinitions>
-                <headerDefinition name=""/>
-                <headerDefinition name=""/>
-            </headersDefinitions>
             <commands>
-                <command name=""/>
-                <command name=""/>
+                <command name="void ServoMove(Servo S1, int Angle)"/>
+                <command name="void ServoMoveSlow(Servo S1, int Angle, int Time)"/>
             </commands>        
         </block>  
-                <block name="" >
+        <block name="" >
             <headers>
                 <header name=""/>
             </headers>  
@@ -331,6 +322,7 @@ and open the template in the editor.
     <translatorCode>
         <headers>
             <header name="Wire.h">Wire.h</header>
+            <header name="Servo.h">Servo.h</header>
         </headers>
         
         
@@ -774,6 +766,42 @@ int PotenciometrRead(int SensorPin)
   return Data;
 }
             </command>
+            <command name="void ServoMove(Servo S1, int Angle)">
+void ServoMove(Servo S1, int Angle)
+{
+  if(Angle &gt; 180) Angle = 180;
+  if(Angle &lt; 0) Angle = 0;
+
+  S1.write(Angle);
+}
+            </command>
+            <command name="void ServoMoveSlow(Servo S1, int Angle, int Time)">
+void ServoMoveSlow(Servo S1, int Angle, int Time)
+{
+  int Pos, Delta;
+  Pos = S1.read();
+
+  Delta = Angle - Pos;
+  if(Delta &gt; 0)
+  {
+    for(int i = Pos; i &lt; Angle; i++)
+    {
+      ServoMove(S1, i);
+      delay(Time);
+    }
+  }
+  else if(Delta &lt; 0)
+  {
+    for(int i = Pos; i &gt; Angle; i--)
+    {
+      ServoMove(S1, i);
+      delay(Time);
+    }    
+  }
+  else return;
+}                
+            </command>
+            
 <!--            <command name="">
             </command>
             <command name="">
