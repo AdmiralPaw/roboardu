@@ -9,7 +9,7 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
  *
  * @author User
  */
-public class LightSensor extends TranslatorBlock
+public class Button extends TranslatorBlock
 {
 
     /**
@@ -20,10 +20,10 @@ public class LightSensor extends TranslatorBlock
      * @param codeSuffix
      * @param label
      */
-    public LightSensor(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
-	{   
-            super(blockId, translator, codePrefix, codeSuffix, label);
-	}
+    public Button(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    {
+        super(blockId, translator, codePrefix, codeSuffix, label);
+    }
 
     /**
      *
@@ -32,13 +32,13 @@ public class LightSensor extends TranslatorBlock
      * @throws SubroutineNotDeclaredException
      */
     @Override
-	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
-	{
+    public String toCode() throws SocketNullException, SubroutineNotDeclaredException
+    {
         translator.CheckClassName(this);
 
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
-        String ret = "LightSensorRead(" + translatorBlock.toCode() + ")";
+        String ret = "ButtonRead(" + translatorBlock.toCode() + ")";
 
         return codePrefix + ret + codeSuffix;
-	}
+    }
 }

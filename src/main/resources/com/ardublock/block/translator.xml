@@ -263,7 +263,8 @@ and open the template in the editor.
                 <command name="void InitUltrasonic()"/>
                 <command name="int UltrasonikRead()"/>
             </commands>        
-        </block>  
+        </block>
+
         <block name="UltrasonicHCSR04" >
             <headers>
             </headers>
@@ -275,7 +276,8 @@ and open the template in the editor.
                 <command name="void InitUltrasonicHCSR04()"/>
                 <command name="int UltrasonikHCSR04Read()"/>
             </commands>        
-        </block>    
+        </block>
+
         <block name="IK_sensor" >
             <headers>
             </headers>  
@@ -284,7 +286,120 @@ and open the template in the editor.
             <commands>
                 <command name="int IKSensorRead(int SensorPin)"/>
             </commands>        
-        </block>  
+        </block>
+
+        <block name="LineSensor" >
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int LineSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+        <block name="LightSensor" >
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int LightSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+        <block name="Button" >
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define BUTTON_PIN          	12"/>
+                <headerDefinition name="#define LED_PIN             	13"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitBoard()"/>
+                <command name="int ButtonRead(int ButtonPin)"/>
+            </commands>
+        </block>
+
+        <block name="" >
+            <headers>
+                <header name=""/>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name=""/>
+                <headerDefinition name=""/>
+            </headersDefinitions>
+            <commands>
+                <command name=""/>
+                <command name=""/>
+            </commands>
+        </block>
+        <block name="" >
+            <headers>
+                <header name=""/>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name=""/>
+                <headerDefinition name=""/>
+            </headersDefinitions>
+            <commands>
+                <command name=""/>
+                <command name=""/>
+            </commands>
+        </block>
+        <block name="" >
+            <headers>
+                <header name=""/>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name=""/>
+                <headerDefinition name=""/>
+            </headersDefinitions>
+            <commands>
+                <command name=""/>
+                <command name=""/>
+            </commands>
+        </block>
+        <block name="" >
+            <headers>
+                <header name=""/>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name=""/>
+                <headerDefinition name=""/>
+            </headersDefinitions>
+            <commands>
+                <command name=""/>
+                <command name=""/>
+            </commands>
+        </block>
+        <block name="" >
+            <headers>
+                <header name=""/>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name=""/>
+                <headerDefinition name=""/>
+            </headersDefinitions>
+            <commands>
+                <command name=""/>
+                <command name=""/>
+            </commands>
+        </block>
+        <block name="" >
+            <headers>
+                <header name=""/>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name=""/>
+                <headerDefinition name=""/>
+            </headersDefinitions>
+            <commands>
+                <command name=""/>
+                <command name=""/>
+            </commands>
+        </block>
+        <!--Servo(СЕРВО)-->
         <block name="ServoDefaultBlock" >
             <headers>
                 <header name="Servo.h"/>
@@ -685,14 +800,21 @@ int LineSensorRead(int SensorPin)
   return Data;
 }
             </command>
-            <command name="int LineSensorRead(int SensorPin)">
-int LineSensorRead(int SensorPin)
+            <command name="int LightSensorRead(int SensorPin)">
+int LightSensorRead(int SensorPin)
 {
   if(SensorPin &lt; A0 || SensorPin &gt; A3)
     return -1;
 
   int Data = analogRead(SensorPin);
   return Data;
+}
+            </command>
+            <command name="void InitBoard()">
+void InitBoard()
+{
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
 }
             </command>
             <command name="int ButtonRead(int ButtonPin)">

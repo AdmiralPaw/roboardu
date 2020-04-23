@@ -25,10 +25,10 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <Block value="bg.magnetic_sensor"/>
         </KeyBlock>
         <KeyBlock key="modules.light.name">
-            <Block value="bg.little_bits_lightsensor"/>
+            <Block value="bg.LightSensor"/>
         </KeyBlock>
         <KeyBlock key="modules.line.name">
-            <Block value="bg.LineFinder"/>
+            <Block value="bg.LineSensor"/>
         </KeyBlock>
         <KeyBlock key="modules.touch.name">
             <Block value="bg.seeed_touch_sensor"/>
@@ -64,7 +64,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <Block value="bg.Potentiometer"/>
         </KeyBlock>
         <KeyBlock key="modules.light.name">
-            <Block value="bg.little_bits_lightsensor"/>
+            <Block value="bg.LightSensor"/>
         </KeyBlock>
         <KeyBlock key="modules.angle.name">
             <Block value="bg.Potentiometer"/>
@@ -4751,22 +4751,22 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </Images>
         </BlockGenus>
 		
-        <BlockGenus name="seeed_push_button" kind="data" color="242 123 99" initlabel="bg.seeed_push_button">
-            <description>
-                <text>Read digital from the pin</text>
-            </description>
-            <BlockConnectors>
-                <BlockConnector connector-type="boolean" connector-kind="plug" />
-                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="DuinoEDU_D2" label="D2" />
-                </BlockConnector>
-            </BlockConnectors>
-            <Images>
-                <Image>
-                    <FileLocation>com/ardublock/block/seeedstudio/push_button.jpg</FileLocation>
-                </Image>
-            </Images>
-        </BlockGenus>
+<!--        <BlockGenus name="seeed_push_button" kind="data" color="242 123 99" initlabel="bg.seeed_push_button">-->
+<!--            <description>-->
+<!--                <text>Read digital from the pin</text>-->
+<!--            </description>-->
+<!--            <BlockConnectors>-->
+<!--                <BlockConnector connector-type="boolean" connector-kind="plug" />-->
+<!--                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">-->
+<!--                    <DefaultArg genus-name="DuinoEDU_D2" label="D2" />-->
+<!--                </BlockConnector>-->
+<!--            </BlockConnectors>-->
+<!--            <Images>-->
+<!--                <Image>-->
+<!--                    <FileLocation>com/ardublock/block/seeedstudio/push_button.jpg</FileLocation>-->
+<!--                </Image>-->
+<!--            </Images>-->
+<!--        </BlockGenus>-->
 		
         <BlockGenus name="seeed_water_sensor" kind="data" color="242 123 99" initlabel="bg.seeed_water_sensor">
             <description>
@@ -5421,27 +5421,27 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 				
 		
-        <BlockGenus name="DuinoEDU_Keypad_12_Button" kind="command" color="242 123 99" initlabel="bg.DuinoEDU_Keypad_12_Button">
-            <description>
-                <text>Keypad 12 or 16 Buttons</text>
-            </description>			
-            <BlockConnectors>
-                <BlockConnector connector-type="number" connector-kind="socket" label="StartPin #">
-                    <DefaultArg genus-name="DuinoEDU_D2" label="D2" />
-                </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="EndPin #">
-                    <DefaultArg genus-name="DuinoEDU_D8" label="D8" />
-                </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="bc.DuinoEDU_serial_display">
-                    <DefaultArg genus-name="DuinoEDU_setSerialInfosOn" label="activer" />
-                </BlockConnector>
-            </BlockConnectors>
-            <Images>
-                <Image>
-                    <FileLocation>com/ardublock/block/keypad_12_button.png</FileLocation>
-                </Image>
-            </Images>
-        </BlockGenus>
+<!--        <BlockGenus name="DuinoEDU_Keypad_12_Button" kind="command" color="242 123 99" initlabel="bg.DuinoEDU_Keypad_12_Button">-->
+<!--            <description>-->
+<!--                <text>Keypad 12 or 16 Buttons</text>-->
+<!--            </description>			-->
+<!--            <BlockConnectors>-->
+<!--                <BlockConnector connector-type="number" connector-kind="socket" label="StartPin #">-->
+<!--                    <DefaultArg genus-name="DuinoEDU_D2" label="D2" />-->
+<!--                </BlockConnector>-->
+<!--                <BlockConnector connector-type="number" connector-kind="socket" label="EndPin #">-->
+<!--                    <DefaultArg genus-name="DuinoEDU_D8" label="D8" />-->
+<!--                </BlockConnector>-->
+<!--                <BlockConnector connector-type="number" connector-kind="socket" label="bc.DuinoEDU_serial_display">-->
+<!--                    <DefaultArg genus-name="DuinoEDU_setSerialInfosOn" label="activer" />-->
+<!--                </BlockConnector>-->
+<!--            </BlockConnectors>-->
+<!--            <Images>-->
+<!--                <Image>-->
+<!--                    <FileLocation>com/ardublock/block/keypad_12_button.png</FileLocation>-->
+<!--                </Image>-->
+<!--            </Images>-->
+<!--        </BlockGenus>-->
 		
         <BlockGenus name="DuinoEDU_Keypad_Post" kind="data" color="242 123 99" initlabel="bg.DuinoEDU_Keypad_Post">
             <description>
@@ -7534,19 +7534,19 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 </Image>
             </Images>
         </BlockGenus>
-        <BlockGenus name="Esplora_LightSensor" kind="data" color="242 123 99" initlabel="bg.Esplora_LightSensor">
-            <description>
-                <text>Esplora Light Sensor</text>
-            </description>
-            <BlockConnectors>
-                <BlockConnector connector-type="number" connector-kind="plug" />
-            </BlockConnectors>		
-            <Images>
-                <Image>
-                    <FileLocation>com/ardublock/block/esplora/Esplora.png</FileLocation>
-                </Image>
-            </Images>
-        </BlockGenus>
+<!--        <BlockGenus name="Esplora_LightSensor" kind="data" color="242 123 99" initlabel="bg.Esplora_LightSensor">-->
+<!--            <description>-->
+<!--                <text>Esplora Light Sensor</text>-->
+<!--            </description>-->
+<!--            <BlockConnectors>-->
+<!--                <BlockConnector connector-type="number" connector-kind="plug" />-->
+<!--            </BlockConnectors>		-->
+<!--            <Images>-->
+<!--                <Image>-->
+<!--                    <FileLocation>com/ardublock/block/esplora/Esplora.png</FileLocation>-->
+<!--                </Image>-->
+<!--            </Images>-->
+<!--        </BlockGenus>-->
         <BlockGenus name="Esplora_tone" kind="command" color="242 123 99" initlabel="bg.Esplora_tone">
             <description>
                 <text>Generates a square wave of the specified frequency (and 50%
@@ -8280,22 +8280,22 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </Images>
         </BlockGenus>
 
-        <BlockGenus name="ls_ButtonModule" kind="data" color="135 206 235" initlabel="bg.ls_ButtonModule">
-            <description>
-                <text>Button Module</text>
-            </description>
-            <BlockConnectors>
-                <BlockConnector connector-type="boolean" connector-kind="plug" />
-                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="number" label="1" />
-                </BlockConnector>
-            </BlockConnectors>
-            <Images>
-                <Image>
-                    <FileLocation>com/ardublock/block/linksprite/ButtonModule.jpg</FileLocation>
-                </Image>
-            </Images>
-        </BlockGenus>
+<!--        <BlockGenus name="ls_ButtonModule" kind="data" color="135 206 235" initlabel="bg.ls_ButtonModule">-->
+<!--            <description>-->
+<!--                <text>Button Module</text>-->
+<!--            </description>-->
+<!--            <BlockConnectors>-->
+<!--                <BlockConnector connector-type="boolean" connector-kind="plug" />-->
+<!--                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">-->
+<!--                    <DefaultArg genus-name="number" label="1" />-->
+<!--                </BlockConnector>-->
+<!--            </BlockConnectors>-->
+<!--            <Images>-->
+<!--                <Image>-->
+<!--                    <FileLocation>com/ardublock/block/linksprite/ButtonModule.jpg</FileLocation>-->
+<!--                </Image>-->
+<!--            </Images>-->
+<!--        </BlockGenus>-->
 
         <BlockGenus name="ls_BuzzerModule" kind="command" color="135 206 235" initlabel="bg.ls_BuzzerModule">
             <description>
@@ -8854,23 +8854,23 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 </Image>
             </Images>
         </BlockGenus>
-        <BlockGenus name="me_linefinder" kind="data" color="0 177 236" initlabel="bg.me_linefinder">
-            <description>
-                <text>Makeblock LineFinder</text>
-            </description>
-            <BlockConnectors>
-                <BlockConnector connector-type="number" connector-kind="socket" label="bc.port_number">
-                    <DefaultArg genus-name="me_port_4" label="Port 4" />
-					
-                </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="plug" />
-            </BlockConnectors>
-            <Images>
-                <Image>
-                    <FileLocation>com/ardublock/block/makeblock/me_linefinder.png</FileLocation>
-                </Image>
-            </Images>
-        </BlockGenus>
+<!--        <BlockGenus name="me_linefinder" kind="data" color="0 177 236" initlabel="bg.me_linefinder">-->
+<!--            <description>-->
+<!--                <text>Makeblock LineSensor</text>-->
+<!--            </description>-->
+<!--            <BlockConnectors>-->
+<!--                <BlockConnector connector-type="number" connector-kind="socket" label="bc.port_number">-->
+<!--                    <DefaultArg genus-name="me_port_4" label="Port 4" />-->
+<!--					-->
+<!--                </BlockConnector>-->
+<!--                <BlockConnector connector-type="number" connector-kind="plug" />-->
+<!--            </BlockConnectors>-->
+<!--            <Images>-->
+<!--                <Image>-->
+<!--                    <FileLocation>com/ardublock/block/makeblock/me_linefinder.png</FileLocation>-->
+<!--                </Image>-->
+<!--            </Images>-->
+<!--        </BlockGenus>-->
         <BlockGenus name="me_limitswitch" kind="data" color="0 177 236" initlabel="bg.me_limitswitch">
             <description>
                 <text>Makeblock LimitSwitch</text>
@@ -9431,24 +9431,25 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </Images>
         </BlockGenus>
         <!-- sensors -->
-        <BlockGenus name="little_bits_button" kind="data" color="242 123 99" initlabel="bg.little_bits_button">
-            <description>
-                <text>Button</text>
-            </description>
-            <BlockConnectors>
-                <BlockConnector connector-type="number" connector-kind="socket" label="#">
-                    <DefaultArg genus-name="number" label="1" />
-                </BlockConnector>
-                <BlockConnector connector-type="boolean" connector-kind="plug" />
-            </BlockConnectors>
-            <Images>
-                <Image>
-                    <FileLocation>com/ardublock/block/littlebits/input/Button.jpg</FileLocation>
-                </Image>
-            </Images>
-        </BlockGenus>
+<!--        <BlockGenus name="little_bits_button" kind="data" color="242 123 99" initlabel="bg.little_bits_button">-->
+<!--            <description>-->
+<!--                <text>Button</text>-->
+<!--            </description>-->
+<!--            <BlockConnectors>-->
+<!--                <BlockConnector connector-type="number" connector-kind="socket" label="#">-->
+<!--                    <DefaultArg genus-name="number" label="1" />-->
+<!--                </BlockConnector>-->
+<!--                <BlockConnector connector-type="boolean" connector-kind="plug" />-->
+<!--            </BlockConnectors>-->
+<!--            <Images>-->
+<!--                <Image>-->
+<!--                    <FileLocation>com/ardublock/block/littlebits/input/Button.jpg</FileLocation>-->
+<!--                </Image>-->
+<!--            </Images>-->
+<!--        </BlockGenus>-->
+
         <BlockGenus name="sensor_button" kind="data" color="242 123 99" initlabel="bg.sensor_button">
-    <description>
+            <description>
                 <text>Button</text>
             </description>
             <BlockConnectors>
@@ -9458,6 +9459,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockConnector connector-type="boolean" connector-kind="plug" />
             </BlockConnectors>
         </BlockGenus>
+
         <BlockGenus name="obstacle_sensor" kind="data" color="242 123 99" initlabel="bg.obstacle_sensor">
             <description>
                 <text>Obstacle sensor</text>
@@ -9690,7 +9692,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </Images>
         </BlockGenus>
 		
-        <BlockGenus name="little_bits_lightsensor" kind="data" color="242 123 99" initlabel="bg.little_bits_lightsensor">
+        <BlockGenus name="LightSensor" kind="data" color="242 123 99" initlabel="LightSensor">
             <description>
                 <text>Lightsensor</text>
             </description>
@@ -10362,16 +10364,16 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>		
 			
-        <BlockGenus name="ke-button-getbutton" kind="data" color="20 150 30"
-                            initlabel="bg.ke-button-getbutton">
-            <description>
-                <text>get button&#x000A;&#x000D;Keenlon Robot&#x000A;&#x000D;上海擎朗智能</text>
-            </description>
-            <BlockConnectors>
-                <BlockConnector connector-type="boolean"
-                                                connector-kind="plug" />
-            </BlockConnectors>				
-        </BlockGenus>	
+<!--        <BlockGenus name="ke-button-getbutton" kind="data" color="20 150 30"-->
+<!--                            initlabel="bg.ke-button-getbutton">-->
+<!--            <description>-->
+<!--                <text>get button&#x000A;&#x000D;Keenlon Robot&#x000A;&#x000D;上海擎朗智能</text>-->
+<!--            </description>-->
+<!--            <BlockConnectors>-->
+<!--                <BlockConnector connector-type="boolean"-->
+<!--                                                connector-kind="plug" />-->
+<!--            </BlockConnectors>				-->
+<!--        </BlockGenus>	-->
 
         <BlockGenus name="ke-encoder-clear" kind="command" color="20 150 30"
                             initlabel="bg.ke-encoder-clear">
@@ -11615,7 +11617,7 @@ initlabel="bg.tft-msg" editable-label="yes">
             </BlockConnectors>
         </BlockGenus>
 
-        <BlockGenus name="LineFinder" kind="data" color="242 123 99" initlabel="bg.LineFinder" editable-label="no">
+        <BlockGenus name="LineSensor" kind="data" color="242 123 99" initlabel="bg.LineSensor" editable-label="no">
             <description>
                 <text>This is  line finder</text>
             </description>
@@ -11660,9 +11662,9 @@ initlabel="bg.tft-msg" editable-label="yes">
             </BlockConnectors>
         </BlockGenus>
 
-        <BlockGenus name="buttonD12" kind="data" color="242 123 99" initlabel="bg.buttonD12" editable-label="no">
+        <BlockGenus name="Button" kind="data" color="242 123 99" initlabel="bg.Button" editable-label="no">
             <description>
-                <text>buttonD12</text>
+                <text>Button</text>
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="boolean"
@@ -12429,8 +12431,8 @@ initlabel="bg.tft-msg" editable-label="yes">
             <BlockDrawer button-color="242 123 99" name="bd.sensors">
                 <BlockGenusMember>sensor_button</BlockGenusMember>
                 <BlockGenusMember>sensor_trailer</BlockGenusMember>
-                <BlockGenusMember>buttonD12</BlockGenusMember>
-                <BlockGenusMember>little_bits_lightsensor</BlockGenusMember>
+                <BlockGenusMember>Button</BlockGenusMember>
+                <BlockGenusMember>LightSensor</BlockGenusMember>
                 <!--<BlockGenusMember>little_bits_microphone</BlockGenusMember>-->
                 <!--<BlockGenusMember>little_bits_pulse</BlockGenusMember>-->
                 <!--<BlockGenusMember>df_digital_viberation_sensor</BlockGenusMember>-->
@@ -12446,7 +12448,7 @@ initlabel="bg.tft-msg" editable-label="yes">
                 <BlockGenusMember>magnetic_sensor</BlockGenusMember>
                 <!--<BlockGenusMember>rangefinderCombined</BlockGenusMember>-->
                 <!--<BlockGenusMember>lightCombined</BlockGenusMember>-->
-                <BlockGenusMember>LineFinder</BlockGenusMember>
+                <BlockGenusMember>LineSensor</BlockGenusMember>
                 <BlockGenusMember>Potentiometer</BlockGenusMember>
                 <BlockGenusMember>UltrasonicI2C</BlockGenusMember>
                 <BlockGenusMember>UltrasonicHCSR04</BlockGenusMember>

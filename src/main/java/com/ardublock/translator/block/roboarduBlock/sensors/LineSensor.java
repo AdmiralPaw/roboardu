@@ -9,7 +9,7 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
  *
  * @author User
  */
-public class LineFinder extends TranslatorBlock {
+public class LineSensor extends TranslatorBlock {
 
     /**
      *
@@ -19,7 +19,7 @@ public class LineFinder extends TranslatorBlock {
      * @param codeSuffix
      * @param label
      */
-    public LineFinder(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
+    public LineSensor(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
@@ -31,17 +31,11 @@ public class LineFinder extends TranslatorBlock {
      */
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
+        translator.CheckClassName(this);
 
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
-        String pin = translatorBlock.toCode();
-        translator.addDefinitionCommand("int LineFinder(int Pin){\n" +
-                "  int value = analogRead(Pin);\n" +
-                "  value = map(value,0,1023,0,100);\n" +
-                "  return value;\n" +
-                "}");
+        String ret = "LineSensorRead(" + translatorBlock.toCode() + ")";
 
-
-
-        return codePrefix + "LineFinder(" + pin + ")" + codeSuffix;
+        return codePrefix + ret + codeSuffix;
     }
 }
