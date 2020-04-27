@@ -180,6 +180,24 @@ and open the template in the editor.
             </commands>
         </block>
 
+        <block name="Engine_RightTurnTime">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+                <command name="void Stop()"/>
+                <command name="void MoveRight(int Speed)"/>
+                <command name="void MoveRightByDelay(int Speed, int Time)"/>
+            </commands>
+        </block>
+
         <block name="Engine_LeftTurnDegrees">
             <headers>
             </headers>

@@ -34,6 +34,7 @@ public class TouchSensor extends TranslatorBlock
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {
+        
         translator.CheckClassName(this);
 
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
