@@ -2497,7 +2497,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListAnalogWrite_D9" label="D9"/>
+                    <DefaultArg genus-name="pinListAnalog_A0" label="A0"/>
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.level">
                     <DefaultArg genus-name="number" label="255"/>

@@ -480,6 +480,15 @@ and open the template in the editor.
                 <command name="void LedBlinks(int LedPin, int Count, int TimeON, int TimeOFF)"/>
             </commands>
         </block>
+        <block name="pwmLed">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="void LedBrightness(int LedPin, int Bright)"/>
+            </commands>
+        </block>
 
 
     </translator>

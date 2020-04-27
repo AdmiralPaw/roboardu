@@ -49,7 +49,7 @@ public class blink_ledD13 extends TranslatorBlock {
         tb = this.getRequiredTranslatorBlockAtSocket(1);
         String TimeBlink = tb.toCode();
         if((Integer.parseInt(TimeBlink)<1) || (Integer.parseInt(TimeBlink)>10000)){
-        throw new BlockException(tb.getBlockID(), "ARGUMENT_ERROR");
+            throw new BlockException(tb.getBlockID(), "ARGUMENT_ERROR");
         }
  
         translator.LoadTranslators(this.getClass().getSimpleName());
