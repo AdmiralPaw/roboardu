@@ -3049,6 +3049,10 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockConnector connector-type="number"
                                 connector-kind="plug">
                 </BlockConnector>
+                <BlockConnector connector-type="number"
+                                connector-kind="socket" label="bc.pin_number">
+                    <DefaultArg genus-name="pinListAnalog_A0" label="A0"/>
+                </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
 
@@ -3060,6 +3064,10 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <BlockConnectors>
                 <BlockConnector connector-type="number"
                                 connector-kind="plug">
+                </BlockConnector>
+                <BlockConnector connector-type="number"
+                                connector-kind="socket" label="bc.pin_number">
+                    <DefaultArg genus-name="pinListAnalog_A0" label="A0"/>
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -3171,24 +3179,6 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 
-
-        <BlockGenus name="sensor_trailer" kind="data" color="242 123 99" initlabel="bg.sensor_trailer"
-        >
-            <description>
-                <text>Trailer sensor</text>
-            </description>
-            <BlockConnectors>
-                <BlockConnector connector-type="boolean"
-                                connector-kind="plug">
-                </BlockConnector>
-                <BlockConnector connector-type="number"
-                                connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D8" label="D8"/>
-                </BlockConnector>
-            </BlockConnectors>
-        </BlockGenus>
-
-
         <BlockGenus name="LightSensor" kind="data" color="242 123 99" initlabel="bg.LightSensor">
             <description>
                 <text>Read digital from the pin</text>
@@ -3231,8 +3221,8 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockConnector connector-type="number"
                                 connector-kind="socket"
                                 label="bc.pin_number">
-                    <DefaultArg genus-name="pinListAnalog_D12"
-                                label="D12"/>
+                    <DefaultArg genus-name="pinListDigital_D8"
+                                label="D8"/>
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -3395,7 +3385,6 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <!-- sensors -->
             <!--242 123 99-->
             <BlockDrawer button-color="242 123 99" name="bd.sensors">
-                <BlockGenusMember>sensor_trailer</BlockGenusMember>
                 <BlockGenusMember>Button</BlockGenusMember>
                 <BlockGenusMember>LightSensor</BlockGenusMember>
                 <BlockGenusMember>ObjectSensor</BlockGenusMember>
