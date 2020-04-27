@@ -308,6 +308,19 @@ and open the template in the editor.
             </commands>
         </block>
 
+        <block name="Button">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define LED_PIN             	13"/>
+                <headerDefinition name="#define BUTTON_PIN          	12"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void Init Board()"/>
+                <command name="int ButtonRead(int ButtonPin)"/>
+            </commands>
+        </block>
+
 <!--        SERVO(СЕРВО)-->
         <block name="ServoDefaultBlock" >
             <headers>
@@ -747,6 +760,14 @@ and open the template in the editor.
 
                 int Data = analogRead(SensorPin);
                 return Data;
+                }
+            </command>
+            <command name="void Init Board()">
+                //Инициализация ножек светодиода и кнопки на плате расширения
+                void InitBoard()
+                {
+                pinMode(LED_PIN, OUTPUT);
+                pinMode(BUTTON_PIN, INPUT_PULLUP);
                 }
             </command>
             <command name="int ButtonRead(int ButtonPin)">
