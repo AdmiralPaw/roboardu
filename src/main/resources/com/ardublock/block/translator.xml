@@ -341,6 +341,18 @@ and open the template in the editor.
             </commands>
         </block>
 
+        <block name="TempSensor">
+            <headers>
+                <header name="OneWire.h"/>
+                <header name="DallasTemperature.h"/>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int TempSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
 <!--        SERVO(СЕРВО)-->
         <block name="ServoDefaultBlock" >
             <headers>
@@ -410,6 +422,8 @@ and open the template in the editor.
         <headers>
             <header name="Wire.h">Wire.h</header>
             <header name="Servo.h">Servo.h</header>
+            <header name="OneWire.h">OneWire.h</header>
+            <header name="DallasTemperature.h">DallasTemperature.h</header>
         </headers>
 
 
