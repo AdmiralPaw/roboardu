@@ -10,7 +10,7 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
  *
  * @author User
  */
-public class Engine_LeftTurnDegrees extends TranslatorBlock {
+public class Engine_LeftTurnTime extends TranslatorBlock {
 
     /**
      *
@@ -20,7 +20,7 @@ public class Engine_LeftTurnDegrees extends TranslatorBlock {
      * @param codeSuffix
      * @param label
      */
-    public Engine_LeftTurnDegrees(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
+    public Engine_LeftTurnTime(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
@@ -34,18 +34,18 @@ public class Engine_LeftTurnDegrees extends TranslatorBlock {
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
         translator.CheckClassName(this);
 
-        translator.addSetupCommand("InitEnc();");
         translator.addSetupCommand("InitMotors();");
-        
+
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
         String val = translatorBlock.toCode();
         if (Double.parseDouble(val) > 100 || Double.parseDouble(val) < -100) {
             throw new BlockException(translatorBlock.getBlockID(), "ARGUMENT_ERROR");
         };
-        String ret = "MoveLeftByEncoder(" + translatorBlock.toCode() + ", ";
-        translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
+        String ret = "MoveLeftByDelay(" + translatorBlock.toCode() + ", ";
 
+        translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
         ret = ret + translatorBlock.toCode() + ");";
+
         return codePrefix + ret + codeSuffix;
     }
 }

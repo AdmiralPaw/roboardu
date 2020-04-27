@@ -2677,6 +2677,24 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
+
+        <BlockGenus name="Engine_LeftTurnTime" kind="command" color="226 108 160"
+                    initlabel="bg.Engine_LeftTurnTime">
+            <description>
+                <text>Engine_LeftTurn</text>
+            </description>
+            <BlockConnectors>
+                <BlockConnector connector-type="number"
+                                connector-kind="socket" label="bc.speed_number">
+                    <DefaultArg genus-name="number" label="100"/>
+                </BlockConnector>
+                <BlockConnector connector-type="number"
+                                connector-kind="socket" label="bc.time">
+                    <DefaultArg genus-name="number" label="5"/>
+                </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
+
         <BlockGenus name="Engine_LeftTurnDegrees" kind="command" color="226 108 160"
                     initlabel="bg.Engine_LeftTurnDegrees">
             <description>
@@ -2693,6 +2711,9 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
+
+
+
         <BlockGenus name="Engine_Forward" kind="command" color="226 108 160"
                     initlabel="bg.Engine_Forward">
             <description>
@@ -2705,6 +2726,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
+
         <BlockGenus name="Engine_ForwardDistance" kind="command" color="226 108 160"
                     initlabel="bg.Engine_ForwardDistance">
             <description>
@@ -3463,6 +3485,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockGenusMember>Engine_RightTurnDegrees</BlockGenusMember>
                 <BlockGenusMember>Engine_LeftTurn</BlockGenusMember>
                 <BlockGenusMember>Engine_LeftTurnDegrees</BlockGenusMember>
+                <BlockGenusMember>Engine_LeftTurnTime</BlockGenusMember>
             </BlockDrawer>
 
             <!-- encoder -->
