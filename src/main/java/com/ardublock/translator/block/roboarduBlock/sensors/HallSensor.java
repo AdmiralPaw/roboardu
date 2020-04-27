@@ -9,7 +9,7 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
  *
  * @author User
  */
-public class TouchSensor extends TranslatorBlock
+public class HallSensor extends TranslatorBlock
 {
 
     /**
@@ -20,7 +20,7 @@ public class TouchSensor extends TranslatorBlock
      * @param codeSuffix
      * @param label
      */
-    public TouchSensor(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    public HallSensor(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
@@ -37,7 +37,7 @@ public class TouchSensor extends TranslatorBlock
         translator.CheckClassName(this);
 
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
-        String ret = "TouchSensorRead(" + translatorBlock.toCode() + ")";
+        String ret = "HallRead(" + translatorBlock.toCode() + ")";
 
         return codePrefix + ret + codeSuffix;
     }

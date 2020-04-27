@@ -9,7 +9,8 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
  *
  * @author User
  */
-public class Potentiometer extends TranslatorBlock {
+public class Potentiometer extends TranslatorBlock
+{
 
     /**
      *
@@ -19,7 +20,8 @@ public class Potentiometer extends TranslatorBlock {
      * @param codeSuffix
      * @param label
      */
-    public Potentiometer(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
+    public Potentiometer(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
@@ -30,18 +32,16 @@ public class Potentiometer extends TranslatorBlock {
      * @throws SubroutineNotDeclaredException
      */
     @Override
-    public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
+    public String toCode() throws SocketNullException, SubroutineNotDeclaredException
+    {
+        translator.CheckClassName(this);
 
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
-        String pin = translatorBlock.toCode();
-        translator.addDefinitionCommand("int Potentiometer(int Pin){\n" +
-                "  int value = analogRead(Pin);\n" +
-                "  value = map(value,0,1023,0,100);\n" +
-                "  return value;\n" +
-                "}");
+        String ret = "PotentiometerRead(" + translatorBlock.toCode() + ")";
 
-
-
-        return codePrefix + "Potentiometer(" + pin + ")" + codeSuffix;
+        return codePrefix + ret + codeSuffix;
     }
 }
+
+
+

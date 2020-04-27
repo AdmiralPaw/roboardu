@@ -353,6 +353,36 @@ and open the template in the editor.
             </commands>
         </block>
 
+        <block name="TouchSensor">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int TouchSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+        <block name="HallSensor">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int HallRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+        <block name="Potentiometer">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int PotentiometerRead(int SensorPin)"/>
+            </commands>
+        </block>
+
 <!--        SERVO(СЕРВО)-->
         <block name="ServoDefaultBlock" >
             <headers>
@@ -865,8 +895,8 @@ and open the template in the editor.
                 return Data;
                 }
             </command>
-            <command name="int PotenciometrRead(int SensorPin)">
-                int PotenciometrRead(int SensorPin)
+            <command name="int PotentiometerRead(int SensorPin)">
+                int PotentiometerRead(int SensorPin)
                 {
                 if(SensorPin &lt; A0 || SensorPin &gt; A3)
                 return -1;
@@ -875,6 +905,7 @@ and open the template in the editor.
                 return Data;
                 }
             </command>
+            <!--SERVO(СЕРВАКИ)-->
             <command name="void ServoMove(Servo S1, int Angle)">
                 void ServoMove(Servo S1, int Angle)
                 {

@@ -29,10 +29,10 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <Block value="bg.LineSensor"/>
         </KeyBlock>
         <KeyBlock key="modules.touch.name">
-            <!--            <Block value="bg.seeed_touch_sensor"/>-->
+            <Block value="bg.TouchSensor"/>
         </KeyBlock>
         <KeyBlock key="modules.range.name">
-            <!--            <Block value="bg.seeed_touch_sensor"/>-->
+            <Block value="bg.TouchSensor"/>
         </KeyBlock>
         <KeyBlock key="modules.angle.name">
             <Block value="bg.Potentiometer"/>
@@ -3221,40 +3221,21 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 
-        <!--        TODO: Сделать TouchSensor-->
-        <!--        <BlockGenus name="HallSensor" kind="data" color="242 123 99" initlabel="bg.HallSensor">-->
-        <!--            <description>-->
-        <!--                <text>Read digital from the pin</text>-->
-        <!--            </description>-->
-        <!--            <BlockConnectors>-->
-        <!--                <BlockConnector connector-type="number"-->
-        <!--                                connector-kind="plug"/>-->
-        <!--                <BlockConnector connector-type="number"-->
-        <!--                                connector-kind="socket"-->
-        <!--                                label="bc.pin_number">-->
-        <!--                    <DefaultArg genus-name="pinListAnalog_A0"-->
-        <!--                                label="A0"/>-->
-        <!--                </BlockConnector>-->
-        <!--            </BlockConnectors>-->
-        <!--        </BlockGenus>-->
-
-        <!--        TODO: Сделать Potentiometer-->
-        <!--        <BlockGenus name="HallSensor" kind="data" color="242 123 99" initlabel="bg.HallSensor">-->
-        <!--            <description>-->
-        <!--                <text>Read digital from the pin</text>-->
-        <!--            </description>-->
-        <!--            <BlockConnectors>-->
-        <!--                <BlockConnector connector-type="number"-->
-        <!--                                connector-kind="plug"/>-->
-        <!--                <BlockConnector connector-type="number"-->
-        <!--                                connector-kind="socket"-->
-        <!--                                label="bc.pin_number">-->
-        <!--                    <DefaultArg genus-name="pinListAnalog_A0"-->
-        <!--                                label="A0"/>-->
-        <!--                </BlockConnector>-->
-        <!--            </BlockConnectors>-->
-        <!--        </BlockGenus>-->
-
+        <BlockGenus name="TouchSensor" kind="data" color="242 123 99" initlabel="bg.TouchSensor">
+            <description>
+                <text>Read digital from the pin</text>
+            </description>
+            <BlockConnectors>
+                <BlockConnector connector-type="number"
+                                connector-kind="plug"/>
+                <BlockConnector connector-type="number"
+                                connector-kind="socket"
+                                label="bc.pin_number">
+                    <DefaultArg genus-name="pinListAnalog_D12"
+                                label="D12"/>
+                </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
 
     </BlockGenuses>
 
@@ -3420,7 +3401,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockGenusMember>ObjectSensor</BlockGenusMember>
                 <BlockGenusMember>TempSensor</BlockGenusMember>
                 <BlockGenusMember>HallSensor</BlockGenusMember>
-                <!--                <BlockGenusMember>seeed_touch_sensor</BlockGenusMember>-->
+                <BlockGenusMember>TouchSensor</BlockGenusMember>
                 <BlockGenusMember>Gercon</BlockGenusMember>
                 <BlockGenusMember>LineSensor</BlockGenusMember>
                 <BlockGenusMember>Potentiometer</BlockGenusMember>
