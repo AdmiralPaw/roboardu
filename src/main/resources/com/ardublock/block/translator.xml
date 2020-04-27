@@ -941,6 +941,44 @@ and open the template in the editor.
                 else return;
                 }
             </command>
+            <command name="void LedControl(int LedPin, int State)">
+                void LedControl(int LedPin, int State)
+                {
+                if(LedPin != 13)  State = !State;
+                digitalWrite(LedPin, State);
+                }
+            </command>
+            <command name = "void LedOneBlink(int LedPin, int TimeBlink)">
+            void LedOneBlink(int LedPin, int TimeBlink)
+            {
+            LedControl(LedPin, 1);
+            delay(TimeBlink);
+            LedControl(LedPin, 0);
+            delay(TimeBlink);
+            }
+            </command>
+            <command name="void LedBlinks(int LedPin, int Count, int TimeON, int TimeOFF)">
+            void LedBlinks(int LedPin, int Count, int TimeON, int TimeOFF)
+            {
+            for(int i = 0; i < Count; i++)
+            {
+            LedControl(LedPin, 1);
+            delay(TimeON);
+            LedControl(LedPin, 0);
+            delay(TimeOFF);
+            }
+            }
+            </command>
+            <command name="void LedBrightness(int LedPin, int Bright)">
+            void LedBrightness(int LedPin, int Bright)
+            {
+            if(LedPin > 255) LedPin = 255;
+            if(LedPin < 0) LedPin = 0;
+
+            analogWrite(LedPin, 255 - Bright);
+            }
+            </command>
+            
             <!--            <command name="">
                         </command>
                         <command name="">
