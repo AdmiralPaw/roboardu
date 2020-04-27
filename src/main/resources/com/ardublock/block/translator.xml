@@ -424,17 +424,15 @@ and open the template in the editor.
                 <command name="void ServoMoveSlow(Servo S1, int Angle, int Time)"/>
             </commands>
         </block>
-        <block name="">
+        <block name="justLed">
             <headers>
-                <header name=""/>
             </headers>
             <headersDefinitions>
-                <headerDefinition name=""/>
-                <headerDefinition name=""/>
+                <headerDefinition name="#define LED_PIN             	13"/>
+                <headerDefinition name="#define BUTTON_PIN          	12"/>
             </headersDefinitions>
             <commands>
-                <command name=""/>
-                <command name=""/>
+                <command name="void LedControl(int LedPin, int State)"/>
             </commands>
         </block>
         <block name="">
@@ -996,7 +994,7 @@ and open the template in the editor.
             <command name="void LedBlinks(int LedPin, int Count, int TimeON, int TimeOFF)">
             void LedBlinks(int LedPin, int Count, int TimeON, int TimeOFF)
             {
-            for(int i = 0; i < Count; i++)
+            for(int i = 0; i &lt; Count; i++)
             {
             LedControl(LedPin, 1);
             delay(TimeON);
@@ -1008,8 +1006,8 @@ and open the template in the editor.
             <command name="void LedBrightness(int LedPin, int Bright)">
             void LedBrightness(int LedPin, int Bright)
             {
-            if(LedPin > 255) LedPin = 255;
-            if(LedPin < 0) LedPin = 0;
+            if(LedPin &gt; 255) LedPin = 255;
+            if(LedPin &lt; 0) LedPin = 0;
 
             analogWrite(LedPin, 255 - Bright);
             }

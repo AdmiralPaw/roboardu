@@ -564,8 +564,10 @@ public class Translator {
             for (int i = 0; i < headers.getLength(); i++) {
                 SomeType = headers.item(i);
                 nameOfHeader = SomeType.getAttributes().getNamedItem("name").getNodeValue();
-                headersCode = (Node) xPath.compile(headersCodeExpression + "[@name=" + "'" + nameOfHeader + "'" + "]").evaluate(xmlDocument, XPathConstants.NODE);
-                CommandNameAndCode.put(nameOfHeader, headersCode.getTextContent());
+                if(nameOfHeader!=null){
+                    headersCode = (Node) xPath.compile(headersCodeExpression + "[@name=" + "'" + nameOfHeader + "'" + "]").evaluate(xmlDocument, XPathConstants.NODE);
+                    CommandNameAndCode.put(nameOfHeader, headersCode.getTextContent());
+                }              
             }
             return CommandNameAndCode;
     };

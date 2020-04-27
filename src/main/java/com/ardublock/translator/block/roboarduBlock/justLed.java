@@ -2,24 +2,18 @@ package com.ardublock.translator.block.roboarduBlock;
 
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
+import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
+import java.util.ResourceBundle;
 
 /**
  *
  * @author User
  */
 public class justLed extends TranslatorBlock {
-
-    /**
-     *
-     */
-    public static final String LED_GLOW= "void LedGlow(int LED_PIN, bool GLOW)\n" +
-            "{\n" +
-            "  pinMode(LED_PIN, OUTPUT);\n" +
-            "  digitalWrite(LED_PIN, !GLOW);\n" +
-            "}\n";
-
+    
+    private static ResourceBundle uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
     /**
      *
      * @param blockId
@@ -42,14 +36,16 @@ public class justLed extends TranslatorBlock {
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {
+        translator.LoadTranslators(this.getClass().getSimpleName());
         TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(0);
         String pinNumber = tb.toCode();
+        if(!("A0 A1 A2 A3/").contains(pinNumber.trim())) {
+            throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.Digital_pin_slot"));
+        }
         tb = this.getRequiredTranslatorBlockAtSocket(1);
-        String glow_time = tb.toCode();
-
-        translator.addDefinitionCommand(LED_GLOW);
-
-        String ret ="LedGlow(" + pinNumber +", " + glow_time + ");\n";
+        String led_state = tb.toCode();
+        //TODO add check for D13 pin in setup
+        String ret ="LedControl(" + pinNumber +", " + led_state + ");\n";
 
         return codePrefix + ret + codeSuffix;
     }
