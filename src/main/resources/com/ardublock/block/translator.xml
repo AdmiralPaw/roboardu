@@ -353,6 +353,16 @@ and open the template in the editor.
             </commands>
         </block>
 
+        <block name="TouchSensor">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int TouchSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
 <!--        SERVO(СЕРВО)-->
         <block name="ServoDefaultBlock" >
             <headers>
