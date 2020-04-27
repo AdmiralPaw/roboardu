@@ -297,7 +297,17 @@ and open the template in the editor.
                 <command name="int LineSensorRead(int SensorPin)"/>
             </commands>
         </block>
-        
+
+        <block name="LightSensor">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int LightSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
 <!--        SERVO(СЕРВО)-->
         <block name="ServoDefaultBlock" >
             <headers>
@@ -721,6 +731,16 @@ and open the template in the editor.
             </command>
             <command name="int LineSensorRead(int SensorPin)">
                 int LineSensorRead(int SensorPin)
+                {
+                if(SensorPin &lt; A0 || SensorPin &gt; A3)
+                return -1;
+
+                int Data = analogRead(SensorPin);
+                return Data;
+                }
+            </command>
+            <command name="int LightSensorRead(int SensorPin)">
+                int LightSensorRead(int SensorPin)
                 {
                 if(SensorPin &lt; A0 || SensorPin &gt; A3)
                 return -1;
