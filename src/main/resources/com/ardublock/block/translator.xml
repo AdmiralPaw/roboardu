@@ -264,6 +264,7 @@ and open the template in the editor.
                 <command name="int UltrasonikRead()"/>
             </commands>
         </block>
+
         <block name="UltrasonicHCSR04">
             <headers>
             </headers>
@@ -276,6 +277,7 @@ and open the template in the editor.
                 <command name="int UltrasonikHCSR04Read()"/>
             </commands>
         </block>
+
         <block name="IK_sensor">
             <headers>
             </headers>
@@ -285,6 +287,17 @@ and open the template in the editor.
                 <command name="int IKSensorRead(int SensorPin)"/>
             </commands>
         </block>
+
+        <block name="LineSensor">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int LineSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+        
 <!--        SERVO(СЕРВО)-->
         <block name="ServoDefaultBlock" >
             <headers>
@@ -698,16 +711,6 @@ and open the template in the editor.
             </command>
             <command name="int IKSensorRead(int SensorPin)">
                 int IKSensorRead(int SensorPin)
-                {
-                if(SensorPin &lt; A0 || SensorPin &gt; A3)
-                return -1;
-
-                int Data = analogRead(SensorPin);
-                return Data;
-                }
-            </command>
-            <command name="int LineSensorRead(int SensorPin)">
-                int LineSensorRead(int SensorPin)
                 {
                 if(SensorPin &lt; A0 || SensorPin &gt; A3)
                 return -1;
