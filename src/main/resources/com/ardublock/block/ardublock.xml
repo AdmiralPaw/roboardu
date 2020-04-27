@@ -56,7 +56,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <Block value="bg.melody"/>
         </KeyBlock>
         <KeyBlock key="modules.hall.name">
-            <Block value="bg.Gercon"/>
+<!--            <Block value="bg.Gercon"/>-->
         </KeyBlock>
         <KeyBlock key="modules.angle.name">
             <Block value="bg.Potentiometer"/>
@@ -2440,7 +2440,8 @@ file before genus A is specified./ We impose this requirement so that sanity che
                     <DefaultArg genus-name="pinListAnalog_A0"
                                 label="A0"/>
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="plug"/>
+                <BlockConnector connector-type="number"
+                                connector-kind="plug"/>
             </BlockConnectors>
         </BlockGenus>
 

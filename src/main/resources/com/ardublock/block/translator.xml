@@ -331,6 +331,16 @@ and open the template in the editor.
             </commands>
         </block>
 
+        <block name="Gercon">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int GerconSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
 <!--        SERVO(СЕРВО)-->
         <block name="ServoDefaultBlock" >
             <headers>
