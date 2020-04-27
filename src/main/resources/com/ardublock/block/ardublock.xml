@@ -23,7 +23,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <Block value="bg.HallSensor"/>
         </KeyBlock>
         <KeyBlock key="modules.light.name">
-            <!--            <Block value="bg.LightSensor"/>-->
+            <Block value="bg.LightSensor"/>
         </KeyBlock>
         <KeyBlock key="modules.line.name">
             <Block value="bg.LineSensor"/>
@@ -56,13 +56,13 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <Block value="bg.melody"/>
         </KeyBlock>
         <KeyBlock key="modules.hall.name">
-            <Block value="bg.Gercon"/>
+<!--            <Block value="bg.Gercon"/>-->
         </KeyBlock>
         <KeyBlock key="modules.angle.name">
             <Block value="bg.Potentiometer"/>
         </KeyBlock>
         <KeyBlock key="modules.light.name">
-            <!--            <Block value="bg.LightSensor"/>-->
+            <Block value="bg.LightSensor"/>
         </KeyBlock>
         <KeyBlock key="modules.angle.name">
             <Block value="bg.Potentiometer"/>
@@ -2440,7 +2440,8 @@ file before genus A is specified./ We impose this requirement so that sanity che
                     <DefaultArg genus-name="pinListAnalog_A0"
                                 label="A0"/>
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="plug"/>
+                <BlockConnector connector-type="number"
+                                connector-kind="plug"/>
             </BlockConnectors>
         </BlockGenus>
 
@@ -3095,22 +3096,6 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 
-        <BlockGenus name="sensorTemperature" kind="data" color="242 123 99" initlabel="bg.sensorTemperature"
-        >
-            <description>
-                <text>Temperature sensor</text>
-            </description>
-            <BlockConnectors>
-                <BlockConnector connector-type="number"
-                                connector-kind="plug">
-                </BlockConnector>
-                <BlockConnector connector-type="number"
-                                connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListDigital_D8" label="D8"/>
-                </BlockConnector>
-            </BlockConnectors>
-        </BlockGenus>
-
         <BlockGenus name="IK_sensor" kind="data" color="242 123 99" initlabel="bg.IK_sensor">
             <description>
                 <text>IK distance sensor</text>
@@ -3203,39 +3188,38 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 
-        <!--        TODO: Сделать LightSensor-->
-        <!--        <BlockGenus name="HallSensor" kind="data" color="242 123 99" initlabel="bg.HallSensor">-->
-        <!--            <description>-->
-        <!--                <text>Read digital from the pin</text>-->
-        <!--            </description>-->
-        <!--            <BlockConnectors>-->
-        <!--                <BlockConnector connector-type="number"-->
-        <!--                                connector-kind="plug"/>-->
-        <!--                <BlockConnector connector-type="number"-->
-        <!--                                connector-kind="socket"-->
-        <!--                                label="bc.pin_number">-->
-        <!--                    <DefaultArg genus-name="pinListAnalog_A0"-->
-        <!--                                label="A0"/>-->
-        <!--                </BlockConnector>-->
-        <!--            </BlockConnectors>-->
-        <!--        </BlockGenus>-->
 
-        <!--        TODO: Сделать TempSensor-->
-        <!--        <BlockGenus name="HallSensor" kind="data" color="242 123 99" initlabel="bg.HallSensor">-->
-        <!--            <description>-->
-        <!--                <text>Read digital from the pin</text>-->
-        <!--            </description>-->
-        <!--            <BlockConnectors>-->
-        <!--                <BlockConnector connector-type="number"-->
-        <!--                                connector-kind="plug"/>-->
-        <!--                <BlockConnector connector-type="number"-->
-        <!--                                connector-kind="socket"-->
-        <!--                                label="bc.pin_number">-->
-        <!--                    <DefaultArg genus-name="pinListAnalog_A0"-->
-        <!--                                label="A0"/>-->
-        <!--                </BlockConnector>-->
-        <!--            </BlockConnectors>-->
-        <!--        </BlockGenus>-->
+        <BlockGenus name="LightSensor" kind="data" color="242 123 99" initlabel="bg.LightSensor">
+            <description>
+                <text>Read digital from the pin</text>
+            </description>
+            <BlockConnectors>
+                <BlockConnector connector-type="number"
+                                connector-kind="plug"/>
+                <BlockConnector connector-type="number"
+                                connector-kind="socket"
+                                label="bc.pin_number">
+                    <DefaultArg genus-name="pinListAnalog_A0"
+                                label="A0"/>
+                </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
+
+        <BlockGenus name="TempSensor" kind="data" color="242 123 99" initlabel="bg.TempSensor">
+            <description>
+                <text>Read digital from the pin</text>
+            </description>
+            <BlockConnectors>
+                <BlockConnector connector-type="number"
+                                connector-kind="plug"/>
+                <BlockConnector connector-type="number"
+                                connector-kind="socket"
+                                label="bc.pin_number">
+                    <DefaultArg genus-name="pinListAnalog_A0"
+                                label="A0"/>
+                </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
 
         <!--        TODO: Сделать TouchSensor-->
         <!--        <BlockGenus name="HallSensor" kind="data" color="242 123 99" initlabel="bg.HallSensor">-->
@@ -3432,9 +3416,9 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <BlockDrawer button-color="242 123 99" name="bd.sensors">
                 <BlockGenusMember>sensor_trailer</BlockGenusMember>
                 <BlockGenusMember>Button</BlockGenusMember>
-                <!--                <BlockGenusMember>LightSensor</BlockGenusMember>-->
+                <BlockGenusMember>LightSensor</BlockGenusMember>
                 <BlockGenusMember>ObjectSensor</BlockGenusMember>
-                <BlockGenusMember>sensorTemperature</BlockGenusMember>
+                <BlockGenusMember>TempSensor</BlockGenusMember>
                 <BlockGenusMember>HallSensor</BlockGenusMember>
                 <!--                <BlockGenusMember>seeed_touch_sensor</BlockGenusMember>-->
                 <BlockGenusMember>Gercon</BlockGenusMember>

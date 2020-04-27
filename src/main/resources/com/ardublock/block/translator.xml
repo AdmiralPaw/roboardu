@@ -264,6 +264,7 @@ and open the template in the editor.
                 <command name="int UltrasonikRead()"/>
             </commands>
         </block>
+
         <block name="UltrasonicHCSR04">
             <headers>
             </headers>
@@ -276,6 +277,7 @@ and open the template in the editor.
                 <command name="int UltrasonikHCSR04Read()"/>
             </commands>
         </block>
+
         <block name="IK_sensor">
             <headers>
             </headers>
@@ -285,6 +287,72 @@ and open the template in the editor.
                 <command name="int IKSensorRead(int SensorPin)"/>
             </commands>
         </block>
+
+        <block name="LineSensor">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int LineSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+        <block name="LightSensor">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int LightSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+        <block name="Button">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define LED_PIN             	13"/>
+                <headerDefinition name="#define BUTTON_PIN          	12"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void Init Board()"/>
+                <command name="int ButtonRead(int ButtonPin)"/>
+            </commands>
+        </block>
+
+        <block name="ObjectSensor">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int ObjectSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+        <block name="Gercon">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int GerconSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+        <block name="TempSensor">
+            <headers>
+                <header name="OneWire.h"/>
+                <header name="DallasTemperature.h"/>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int TempSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
 <!--        SERVO(СЕРВО)-->
         <block name="ServoDefaultBlock" >
             <headers>
@@ -354,6 +422,8 @@ and open the template in the editor.
         <headers>
             <header name="Wire.h">Wire.h</header>
             <header name="Servo.h">Servo.h</header>
+            <header name="OneWire.h">OneWire.h</header>
+            <header name="DallasTemperature.h">DallasTemperature.h</header>
         </headers>
 
 
@@ -716,14 +786,22 @@ and open the template in the editor.
                 return Data;
                 }
             </command>
-            <command name="int LineSensorRead(int SensorPin)">
-                int LineSensorRead(int SensorPin)
+            <command name="int LightSensorRead(int SensorPin)">
+                int LightSensorRead(int SensorPin)
                 {
                 if(SensorPin &lt; A0 || SensorPin &gt; A3)
                 return -1;
 
                 int Data = analogRead(SensorPin);
                 return Data;
+                }
+            </command>
+            <command name="void Init Board()">
+                //Инициализация ножек светодиода и кнопки на плате расширения
+                void InitBoard()
+                {
+                pinMode(LED_PIN, OUTPUT);
+                pinMode(BUTTON_PIN, INPUT_PULLUP);
                 }
             </command>
             <command name="int ButtonRead(int ButtonPin)">
