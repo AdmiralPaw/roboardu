@@ -3209,8 +3209,8 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>blink_ledD13</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="number" connector-kind="socket" label="bc.led_blinkD13_time1">
-                    <DefaultArg genus-name="number" label="1000"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+                    <DefaultArg genus-name="pinListAnalog_A3" label="A3"/>
                 </BlockConnector>
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.led_blinkD13_time2">
                     <DefaultArg genus-name="number" label="1000"/>

@@ -450,20 +450,21 @@ and open the template in the editor.
                 <headerDefinition name="#define BUTTON_PIN          	12"/>
             </headersDefinitions>
             <commands>
+                <command name="void Init Board()"/>
                 <command name="void LedControl(int LedPin, int State)"/>
             </commands>
         </block>
-        <block name="">
+        <block name="blink_ledD13">
             <headers>
-                <header name=""/>
             </headers>
             <headersDefinitions>
-                <headerDefinition name=""/>
-                <headerDefinition name=""/>
+                <headerDefinition name="#define LED_PIN             	13"/>
+                <headerDefinition name="#define BUTTON_PIN          	12"/>
             </headersDefinitions>
             <commands>
-                <command name=""/>
-                <command name=""/>
+                <command name="void Init Board()"/>
+                <command name="void LedControl(int LedPin, int State)"/>
+                <command name="void LedOneBlink(int LedPin, int TimeBlink)"/>
             </commands>
         </block>
         <block name="">

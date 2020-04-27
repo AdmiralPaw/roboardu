@@ -47,7 +47,7 @@ public class LedControl extends TranslatorBlock {
         if(Integer.parseInt(led_state)!=0 && Integer.parseInt(led_state)!=1){
             throw new BlockException(tb.getBlockID(), "ARGUMENT_ERROR");
         }
-        
+        translator.addSetupCommand("InitBoard();");
         //TODO add check for D13 pin in setup
         String ret ="LedControl(" + pinNumber +", " + led_state + ");\n";
 
