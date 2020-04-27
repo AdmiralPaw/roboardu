@@ -442,7 +442,7 @@ and open the template in the editor.
                 <command name="void ServoMoveSlow(Servo S1, int Angle, int Time)"/>
             </commands>
         </block>
-        <block name="justLed">
+        <block name="LedControl">
             <headers>
             </headers>
             <headersDefinitions>

@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
  *
  * @author User
  */
-public class justLed extends TranslatorBlock {
+public class LedControl extends TranslatorBlock {
     
     private static ResourceBundle uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
     /**
@@ -22,7 +22,7 @@ public class justLed extends TranslatorBlock {
      * @param codeSuffix
      * @param label
      */
-    public justLed(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    public LedControl(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
@@ -44,6 +44,10 @@ public class justLed extends TranslatorBlock {
         }
         tb = this.getRequiredTranslatorBlockAtSocket(1);
         String led_state = tb.toCode();
+        if(Integer.parseInt(led_state)!=0 && Integer.parseInt(led_state)!=1){
+            throw new BlockException(tb.getBlockID(), "ARGUMENT_ERROR");
+        }
+        
         //TODO add check for D13 pin in setup
         String ret ="LedControl(" + pinNumber +", " + led_state + ");\n";
 

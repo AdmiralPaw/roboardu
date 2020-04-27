@@ -38,7 +38,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <Block value="bg.Potentiometer"/>
         </KeyBlock>
         <KeyBlock key="modules.diod.name">
-            <Block value="bg.justled"/>
+            <Block value="bg.LedControl"/>
             <Block value="bg.pwmled"/>
             <Block value="bg.led_blink"/>
             <Block value="bg.rgb_led"/>
@@ -2477,7 +2477,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </BlockGenus>
 
         <!-- diode -->
-        <BlockGenus name="justled" kind="command" color="190 30 180" initlabel="bg.justled">
+        <BlockGenus name="LedControl" kind="command" color="190 30 180" initlabel="bg.LedControl">
             <description>
                 <text>DFRobot LED Module</text>
             </description>
@@ -2485,8 +2485,8 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListAnalog_A0" label="A0"/>
                 </BlockConnector>
-                <BlockConnector connector-type="boolean" connector-kind="socket" label="bc.status">
-                    <DefaultArg genus-name="digital-high" label="HIGH"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.level">
+                    <DefaultArg genus-name="number" label="255"/>
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -3447,7 +3447,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <!-- diode -->
             <!--190 30 180-->
             <BlockDrawer button-color="190 30 180" name="bd.diode">
-                <BlockGenusMember>justled</BlockGenusMember>
+                <BlockGenusMember>LedControl</BlockGenusMember>
                 <BlockGenusMember>led_blink</BlockGenusMember>
                 <BlockGenusMember>ledD13</BlockGenusMember>
                 <BlockGenusMember>blink_ledD13</BlockGenusMember>
