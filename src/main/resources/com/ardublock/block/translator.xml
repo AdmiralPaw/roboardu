@@ -161,6 +161,43 @@ and open the template in the editor.
                 <command name="void MoveLeft(int Speed)"/>
             </commands>
         </block>
+
+        <block name="Engine_LeftTurnTime">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+                <command name="void Stop()"/>
+                <command name="void MoveLeft(int Speed)"/>
+                <command name="void MoveLeftByDelay(int Speed, int Time)"/>
+            </commands>
+        </block>
+
+        <block name="Engine_RightTurnTime">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+                <command name="void Stop()"/>
+                <command name="void MoveRight(int Speed)"/>
+                <command name="void MoveRightByDelay(int Speed, int Time)"/>
+            </commands>
+        </block>
+
         <block name="Engine_LeftTurnDegrees">
             <headers>
             </headers>
@@ -405,43 +442,51 @@ and open the template in the editor.
                 <command name="void ServoMoveSlow(Servo S1, int Angle, int Time)"/>
             </commands>
         </block>
-        <block name="">
+        <block name="LedControl">
             <headers>
-                <header name=""/>
             </headers>
             <headersDefinitions>
-                <headerDefinition name=""/>
-                <headerDefinition name=""/>
+                <headerDefinition name="#define LED_PIN             	13"/>
+                <headerDefinition name="#define BUTTON_PIN          	12"/>
             </headersDefinitions>
             <commands>
-                <command name=""/>
-                <command name=""/>
+                <command name="void Init Board()"/>
+                <command name="void LedControl(int LedPin, int State)"/>
             </commands>
         </block>
-        <block name="">
+        <block name="blink_ledD13">
             <headers>
-                <header name=""/>
             </headers>
             <headersDefinitions>
-                <headerDefinition name=""/>
-                <headerDefinition name=""/>
+                <headerDefinition name="#define LED_PIN             	13"/>
+                <headerDefinition name="#define BUTTON_PIN          	12"/>
             </headersDefinitions>
             <commands>
-                <command name=""/>
-                <command name=""/>
+                <command name="void Init Board()"/>
+                <command name="void LedControl(int LedPin, int State)"/>
+                <command name="void LedOneBlink(int LedPin, int TimeBlink)"/>
             </commands>
         </block>
-        <block name="">
+        <block name="BlinkLed">
             <headers>
-                <header name=""/>
             </headers>
             <headersDefinitions>
-                <headerDefinition name=""/>
-                <headerDefinition name=""/>
+                <headerDefinition name="#define LED_PIN             	13"/>
+                <headerDefinition name="#define BUTTON_PIN          	12"/>
             </headersDefinitions>
             <commands>
-                <command name=""/>
-                <command name=""/>
+                <command name="void Init Board()"/>
+                <command name="void LedControl(int LedPin, int State)"/>
+                <command name="void LedBlinks(int LedPin, int Count, int TimeON, int TimeOFF)"/>
+            </commands>
+        </block>
+        <block name="pwmLed">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="void LedBrightness(int LedPin, int Bright)"/>
             </commands>
         </block>
 
@@ -689,6 +734,23 @@ and open the template in the editor.
                 Stop();
                 }
             </command>
+            <command name="void MoveLeftByDelay(int Speed, int Time)">
+                void MoveLeftByDelay(int Speed, int Time)
+                {
+                MoveLeft(Speed);
+                delay(Time);
+                Stop();
+                }
+            </command>
+            <command name="void MoveRightByDelay(int Speed, int Time)">
+                void MoveRightByDelay(int Speed, int Time)
+                {
+                MoveRight(Speed);
+                delay(Time);
+                Stop();
+                }
+            </command>
+
 
             <command name="void InitEnc()">
                 void InitEnc()
@@ -941,6 +1003,44 @@ and open the template in the editor.
                 else return;
                 }
             </command>
+            <command name="void LedControl(int LedPin, int State)">
+                void LedControl(int LedPin, int State)
+                {
+                if(LedPin != 13)  State = !State;
+                digitalWrite(LedPin, State);
+                }
+            </command>
+            <command name = "void LedOneBlink(int LedPin, int TimeBlink)">
+            void LedOneBlink(int LedPin, int TimeBlink)
+            {
+            LedControl(LedPin, 1);
+            delay(TimeBlink);
+            LedControl(LedPin, 0);
+            delay(TimeBlink);
+            }
+            </command>
+            <command name="void LedBlinks(int LedPin, int Count, int TimeON, int TimeOFF)">
+            void LedBlinks(int LedPin, int Count, int TimeON, int TimeOFF)
+            {
+            for(int i = 0; i &lt; Count; i++)
+            {
+            LedControl(LedPin, 1);
+            delay(TimeON);
+            LedControl(LedPin, 0);
+            delay(TimeOFF);
+            }
+            }
+            </command>
+            <command name="void LedBrightness(int LedPin, int Bright)">
+            void LedBrightness(int LedPin, int Bright)
+            {
+            if(LedPin &gt; 255) LedPin = 255;
+            if(LedPin &lt; 0) LedPin = 0;
+
+            analogWrite(LedPin, 255 - Bright);
+            }
+            </command>
+            
             <!--            <command name="">
                         </command>
                         <command name="">

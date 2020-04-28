@@ -2,8 +2,10 @@ package com.ardublock.translator.block.roboarduBlock;
 
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
+import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -11,16 +13,7 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
  */
 public class pwmLed extends TranslatorBlock {
 
-    /**
-     *
-     */
-    public static final String PWM_LED= "void LedPWM(int LED_PIN, int GLOW)\n" +
-            "{\n" +
-            "  if(GLOW > 100) GLOW = 100;\n"+
-            "  if(GLOW < 0) GLOW = 0;\n"+
-            "  pinMode(LED_PIN, OUTPUT);\n" +
-            "  analogWrite(LED_PIN, map(GLOW,0,100,255,0));\n" +
-            "}\n";
+    private static ResourceBundle uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
 
     /**
      *
@@ -45,13 +38,18 @@ public class pwmLed extends TranslatorBlock {
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {
         TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(0);
-        String pinNumber = tb.toCode();
+        String LedPin = tb.toCode();
+        if(!("A0 A1 A2 A3/").contains(LedPin.trim())) {
+            throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.Digital_pin_slot"));
+        }
         tb = this.getRequiredTranslatorBlockAtSocket(1);
-        String glow_time = tb.toCode();
+        String Bright = tb.toCode();
+        if((Integer.parseInt(Bright)<0) || (Integer.parseInt(Bright)>255)){
+            throw new BlockException(tb.getBlockID(), "ARGUMENT_ERROR");
+        }
+        translator.LoadTranslators(this.getClass().getSimpleName());
 
-        translator.addDefinitionCommand(PWM_LED);
-
-        String ret ="LedPWM(" + pinNumber +", " + glow_time + ");\n";
+        String ret ="LedBrightness(" + LedPin +", " + Bright + ");\n";
 
         return codePrefix + ret + codeSuffix;
     }

@@ -44,10 +44,7 @@ public class Engine_LeftTurnDegrees extends TranslatorBlock {
         };
         String ret = "MoveLeftByEncoder(" + translatorBlock.toCode() + ", ";
         translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
-        val = translatorBlock.toCode();
-//            if(Double.parseDouble(val) > 180 || Double.parseDouble(val) < -100){
-//                throw new BlockException(translatorBlock.getBlockID(),"ARGUMENT_ERROR");
-//            }; DONT KNOW
+
         ret = ret + translatorBlock.toCode() + ");";
         return codePrefix + ret + codeSuffix;
     }

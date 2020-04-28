@@ -72,14 +72,15 @@ Name: "custom"; 															 Description: "Выборочная установка"; Flags: iscu
 [Components]
 Name: "programm"; 														 Description: "Установить {#Name}"; Types: full custom ;Flags: fixed
 
-Name: "libs"; 																 Description: "Установить библиотеки"; Types: full 
-Name: "libs\Adafruit_SSD1306"; 								 Description: "Adafruit_SSD1306"; Types: full
-Name: "libs\AdafruitGFX"; 										 Description: "Adafruit-GFX"; Types: full
-Name: "libs\I2Cdev"; 													 Description: "I2Cdev"; Types: full
-Name: "libs\MPU9250";													 Description: "MPU9250"; Types: full
-Name: "libs\SparkFun_ToF_Range_FinderVL6180";  Description: "SparkFun_ToF_Range_Finder-VL6180"; Types: full
-Name: "libs\NewPing";                          Description: "NewPing"; Types: full
-Name: "libs\OneWire";                          Description: "OneWire-2.3.5"; Types: full
+Name: "libs"; 																             Description: "Установить библиотеки"; Types: full 
+Name: "libs\Adafruit_SSD1306"; 								             Description: "Adafruit_SSD1306"; Types: full
+Name: "libs\AdafruitGFX"; 										             Description: "Adafruit-GFX"; Types: full
+Name: "libs\I2Cdev"; 													             Description: "I2Cdev"; Types: full
+Name: "libs\MPU9250";													             Description: "MPU9250"; Types: full
+Name: "libs\SparkFun_ToF_Range_FinderVL6180";              Description: "SparkFun_ToF_Range_Finder-VL6180"; Types: full
+Name: "libs\NewPing";                                      Description: "NewPing"; Types: full
+Name: "libs\OneWire";                                      Description: "OneWire-2.3.5"; Types: full
+Name: "libs\Arduino_Temperature_Control_Library";          Description: "Arduino-Temperature-Control-Library-master"; Types: full
 
 ;------------------------------------------------------------------------------
 ;   Файлы, которые надо включить в пакет установщика
@@ -94,6 +95,7 @@ Source: "{#Sourse}\ArduinoLibraries\MPU9250-master\*"; Components: libs\MPU9250;
 Source: "{#Sourse}\ArduinoLibraries\SparkFun_ToF_Range_Finder-VL6180_Arduino_Library-master\*"; Components: libs\SparkFun_ToF_Range_FinderVL6180; DestDir: "{app}\libraries\SparkFun_ToF_Range_Finder-VL6180_Arduino_Library-master"; Flags: recursesubdirs createallsubdirs ignoreversion
 Source: "{#Sourse}\ArduinoLibraries\NewPing\*"; Components: libs\NewPing; DestDir: "{app}\libraries\NewPing"; Flags: recursesubdirs createallsubdirs ignoreversion
 Source: "{#Sourse}\ArduinoLibraries\OneWire-2.3.5\*"; Components: libs\OneWire; DestDir: "{app}\libraries\OneWire-2.3.5"; Flags: recursesubdirs createallsubdirs ignoreversion
+Source: "{#Sourse}\ArduinoLibraries\Arduino-Temperature-Control-Library-master\*"; Components: libs\Arduino_Temperature_Control_Library; DestDir: "{app}\libraries\Arduino-Temperature-Control-Library-master"; Flags: recursesubdirs createallsubdirs ignoreversion
 
 
 Source: "{#Sourse}\target\{#ExeName}.jar"; Components: programm; DestDir: "{app}\tools\{#Name}\tool"; Flags: ignoreversion
