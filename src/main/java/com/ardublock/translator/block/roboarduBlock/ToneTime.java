@@ -8,8 +8,10 @@ package com.ardublock.translator.block.roboarduBlock;
 
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
+import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -17,6 +19,7 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
  */
 public class ToneTime extends TranslatorBlock
 {
+    private static ResourceBundle uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
 
     /**
      *
@@ -34,12 +37,6 @@ public class ToneTime extends TranslatorBlock
     /**
      *
      */
-    public static final String TONETIME_FUNC = "void Tone(int port, int frequency, int length)\n" +
-            "{\n" +
-            "  if(frequency > 20000) frequency = 20000;\n" +
-            "  if(frequency < 100) frequency = 100;\n" +
-            "  tone(port, frequency, length);\n" +
-            "}";
 
     /**
      *
@@ -51,11 +48,20 @@ public class ToneTime extends TranslatorBlock
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		TranslatorBlock pinBlock = this.getRequiredTranslatorBlockAtSocket(0);
+                 if(!("A0 A1 A2 A3 8 9 10 11 12").contains(pinBlock.toCode().trim())) {
+                    throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.Digital_pin_slot"));
+                }
 		TranslatorBlock freqBlock = this.getRequiredTranslatorBlockAtSocket(1);
+                if((Integer.parseInt(freqBlock.toCode())<100) || (Integer.parseInt(freqBlock.toCode())>3000)){
+                    throw new BlockException(freqBlock.getBlockID(), "ARGUMENT_ERROR");
+                }
 		TranslatorBlock timeBlock = this.getRequiredTranslatorBlockAtSocket(2);
-                translator.addDefinitionCommand(TONETIME_FUNC);
+                if((Integer.parseInt(timeBlock.toCode())<1) || (Integer.parseInt(timeBlock.toCode())>10)){
+                    throw new BlockException(timeBlock.getBlockID(), "ARGUMENT_ERROR");
+                }
+                translator.LoadTranslators(this.getClass().getSimpleName());
 		
-		String ret = "Tone(" + pinBlock.toCode() + ", " + freqBlock.toCode() + ", " + timeBlock.toCode() + ");\n";
+		String ret = "PiezoTone(" + pinBlock.toCode() + ", " + freqBlock.toCode() + ", " + timeBlock.toCode() + ");\n";
 		return ret;
 	}
 }

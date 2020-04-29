@@ -8,8 +8,10 @@ package com.ardublock.translator.block.roboarduBlock;
 
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
+import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -17,6 +19,7 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
  */
 public class NoTone extends TranslatorBlock
 {
+    private static ResourceBundle uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
 
     /**
      *
@@ -41,7 +44,11 @@ public class NoTone extends TranslatorBlock
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		TranslatorBlock pinBlock = this.getRequiredTranslatorBlockAtSocket(0);
-		String ret = "\tnoTone(" + pinBlock.toCode() + ");\n";
+                if(!("A0 A1 A2 A3 8 9 10 11 12").contains(pinBlock.toCode().trim())) {
+                    throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.Digital_pin_slot"));
+                }
+                translator.LoadTranslators(this.getClass().getSimpleName());
+		String ret = "PiezoOFF(" + pinBlock.toCode() + ");\n";
 		return ret;
 	}
 }

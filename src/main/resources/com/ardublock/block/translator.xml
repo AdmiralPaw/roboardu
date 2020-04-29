@@ -489,8 +489,51 @@ and open the template in the editor.
                 <command name="void LedBrightness(int LedPin, int Bright)"/>
             </commands>
         </block>
-
-
+        <block name="Tone">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="void PiezoON(int PiezoPin, int Tone)"/>
+            </commands>
+        </block>
+        <block name="NoTone">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="void PiezoOFF(int PiezoPin)"/>
+            </commands>
+        </block>
+        <block name="ToneImpulse">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="void PiezoBeep(int PiezoPin, int Tone, int TimeON, int TimeOFF, int Count)"/>
+            </commands>
+        </block>
+        <block name="ToneTime">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="void PiezoTone(int PiezoPin, int Tone, int Duration)"/>
+            </commands>
+        </block>Melody
+        <block name="Melody">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="void PiezoAlarm(int PiezoPin)"/>
+            </commands>
+        </block>
     </translator>
 
     <translatorCode>
@@ -1038,6 +1081,55 @@ and open the template in the editor.
             if(LedPin &lt; 0) LedPin = 0;
 
             analogWrite(LedPin, 255 - Bright);
+            }
+            </command>
+            <command name="void PiezoON(int PiezoPin, int Tone)">
+            void PiezoON(int PiezoPin, int Tone)
+            {
+                tone(PiezoPin, Tone);
+            }
+            </command>
+            <command name="void PiezoOFF(int PiezoPin)">
+            void PiezoOFF(int PiezoPin)
+            {
+                noTone(PiezoPin);
+            }
+            </command>
+            <command name="void PiezoBeep(int PiezoPin, int Tone, int TimeON, int TimeOFF, int Count)">
+            void PiezoBeep(int PiezoPin, int Tone, int TimeON, int TimeOFF, int Count)
+            {
+                for(int i = 0; i &lt; Count; i++)
+                {
+                    tone(PiezoPin, Tone);
+                    delay(TimeON);
+                    noTone(PiezoPin);
+                    delay(TimeOFF);
+                }
+            }
+            </command>
+            <command name="void PiezoTone(int PiezoPin, int Tone, int Duration)">
+            void PiezoTone(int PiezoPin, int Tone, int Duration)
+            {
+                int noteDuration = 1000 / Duration;
+                tone(PiezoPin, Tone, noteDuration);
+                delay(noteDuration * 1.3);
+                noTone(PiezoPin);
+            }
+            </command>
+            <command name="void PiezoAlarm(int PiezoPin)">
+            void PiezoAlarm(int PiezoPin)
+            {
+                for(int i = 400; i &lt; 1000; i++)
+                {
+                    tone(PiezoPin, i);
+                    delay(2);
+                }
+                for(int i = 1000; i &gt; 400; i--)
+                {
+                    tone(PiezoPin, i);
+                    delay(2);
+                }
+                noTone(PiezoPin);
             }
             </command>
             

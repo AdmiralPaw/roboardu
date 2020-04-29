@@ -39,8 +39,11 @@ public class pwmLed extends TranslatorBlock {
     {
         TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(0);
         String LedPin = tb.toCode();
-        if(!("A0 A1 A2 A3/").contains(LedPin.trim())) {
+        if(!("A0 A1 A2 A3 13").contains(LedPin.trim())) {
             throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.Digital_pin_slot"));
+        }
+        if(LedPin.equals("13")){
+            translator.addSetupCommand("pinMode("+LedPin+", OUTPUT);");
         }
         tb = this.getRequiredTranslatorBlockAtSocket(1);
         String Bright = tb.toCode();

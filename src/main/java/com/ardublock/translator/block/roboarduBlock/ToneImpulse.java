@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.ardublock.translator.block.roboarduBlock;
-
 
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
@@ -13,11 +7,12 @@ import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 import java.util.ResourceBundle;
 
-/**
- *
- * @author User
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-public class Tone extends TranslatorBlock
+public class ToneImpulse extends TranslatorBlock
 {
     private static ResourceBundle uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
 
@@ -29,7 +24,7 @@ public class Tone extends TranslatorBlock
      * @param codeSuffix
      * @param label
      */
-    public Tone(Long blockId, Translator translator, String codePrefix,	String codeSuffix, String label)
+    public ToneImpulse (Long blockId, Translator translator, String codePrefix,	String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
@@ -55,9 +50,24 @@ public class Tone extends TranslatorBlock
                 if((Integer.parseInt(freqBlock.toCode())<100) || (Integer.parseInt(freqBlock.toCode())>3000)){
                     throw new BlockException(freqBlock.getBlockID(), "ARGUMENT_ERROR");
                 }
+                TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(2);
+                String TimeON = tb.toCode();
+                if((Integer.parseInt(TimeON)<10) || (Integer.parseInt(TimeON)>10000)){
+                    throw new BlockException(tb.getBlockID(), "ARGUMENT_ERROR");
+                }
+                tb = this.getRequiredTranslatorBlockAtSocket(3);
+                String TimeOFF = tb.toCode();
+                if((Integer.parseInt(TimeOFF)<10) || (Integer.parseInt(TimeOFF)>10000)){
+                    throw new BlockException(tb.getBlockID(), "ARGUMENT_ERROR");
+                }
+                tb = this.getRequiredTranslatorBlockAtSocket(4);
+                String Count = tb.toCode();
+                if((Integer.parseInt(Count)<1) || (Integer.parseInt(Count)>100)){
+                    throw new BlockException(tb.getBlockID(), "ARGUMENT_ERROR");
+                }
                 translator.LoadTranslators(this.getClass().getSimpleName());
 		
-		String ret = "PiezoON(" + pinBlock.toCode() + ", " + freqBlock.toCode() + ");\n";
+		String ret = "PiezoBeep(" + pinBlock.toCode() + ", " + freqBlock.toCode() +", "+TimeON+", "+TimeOFF+", "+Count+ ");\n";
 		return ret;
 	}
 }

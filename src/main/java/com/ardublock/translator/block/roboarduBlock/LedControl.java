@@ -39,12 +39,15 @@ public class LedControl extends TranslatorBlock {
         translator.LoadTranslators(this.getClass().getSimpleName());
         TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(0);
         String pinNumber = tb.toCode();
-        if(!("A0 A1 A2 A3/").contains(pinNumber.trim())) {
+        if(!("A0 A1 A2 A3 13").contains(pinNumber.trim())) {
             throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.Digital_pin_slot"));
+        }
+        if(pinNumber.equals("13")){
+            translator.addSetupCommand("pinMode("+pinNumber+", OUTPUT);");
         }
         tb = this.getRequiredTranslatorBlockAtSocket(1);
         String led_state = tb.toCode();
-        if(Integer.parseInt(led_state)!=0 && Integer.parseInt(led_state)!=1){
+        if(!led_state.equals("HIGH") && !led_state.equals("LOW")){
             throw new BlockException(tb.getBlockID(), "ARGUMENT_ERROR");
         }
         translator.addSetupCommand("InitBoard();");

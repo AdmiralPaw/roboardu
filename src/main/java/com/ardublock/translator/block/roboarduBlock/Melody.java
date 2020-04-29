@@ -2,8 +2,10 @@ package com.ardublock.translator.block.roboarduBlock;
 
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
+import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -11,95 +13,7 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
  */
 public class Melody extends TranslatorBlock {
 
-    /**
-     *
-     */
-    public static final String MELODY= "void melody(int pin)\n" +
-            "{\n" +
-            "tone(pin, 392, 350);\n" +
-            "delay(350);\n" +
-            "tone(pin, 392, 350);\n" +
-            "delay(350);\n" +
-            "tone(pin, 392, 350);\n" +
-            "delay(350);\n" +
-            "tone(pin, 311, 250);\n" +
-            "delay(250);\n" +
-            "tone(pin, 466, 100);\n" +
-            "delay(100);\n" +
-            "tone(pin, 392, 350);\n" +
-            "delay(350);\n" +
-            "tone(pin, 311, 250);\n" +
-            "delay(250);\n" +
-            "tone(pin, 466, 100);\n" +
-            "delay(100);\n" +
-            "tone(pin, 392, 700);\n" +
-            "delay(700);\n" +
-            "\n" +
-            "tone(pin, 587, 350);\n" +
-            "delay(350);\n" +
-            "tone(pin, 587, 350);\n" +
-            "delay(350);\n" +
-            "tone(pin, 587, 350);\n" +
-            "delay(350);\n" +
-            "tone(pin, 622, 250);\n" +
-            "delay(250);\n" +
-            "tone(pin, 466, 100);\n" +
-            "delay(100);\n" +
-            "tone(pin, 369, 350);\n" +
-            "delay(350);\n" +
-            "tone(pin, 311, 250);\n" +
-            "delay(250);\n" +
-            "tone(pin, 466, 100);\n" +
-            "delay(100);\n" +
-            "tone(pin, 392, 700);\n" +
-            "delay(700);\n" +
-            "\n" +
-            "tone(pin, 784, 350);\n" +
-            "delay(350);\n" +
-            "tone(pin, 392, 250);\n" +
-            "delay(250);\n" +
-            "tone(pin, 392, 100);\n" +
-            "delay(100);\n" +
-            "tone(pin, 784, 350);\n" +
-            "delay(350);\n" +
-            "tone(pin, 739, 250);\n" +
-            "delay(250);\n" +
-            "tone(pin, 698, 100);\n" +
-            "delay(100);\n" +
-            "tone(pin, 659, 100);\n" +
-            "delay(100);\n" +
-            "tone(pin, 622, 100);\n" +
-            "delay(100);\n" +
-            "tone(pin, 659, 450);\n" +
-            "delay(450);\n" +
-            "\n" +
-            "tone(pin, 415, 150);\n" +
-            "delay(150);\n" +
-            "tone(pin, 554, 350);\n" +
-            "delay(350);\n" +
-            "tone(pin, 523, 250);\n" +
-            "delay(250);\n" +
-            "tone(pin, 493, 100);\n" +
-            "delay(100);\n" +
-            "tone(pin, 466, 100);\n" +
-            "delay(100);\n" +
-            "tone(pin, 440, 100);\n" +
-            "delay(100);\n" +
-            "tone(pin, 466, 450);\n" +
-            "delay(450);\n" +
-            "\n" +
-            "tone(pin, 311, 150);\n" +
-            "delay(150);\n" +
-            "tone(pin, 369, 350);\n" +
-            "delay(350);\n" +
-            "tone(pin, 311, 250);\n" +
-            "delay(250);\n" +
-            "tone(pin, 466, 100);\n" +
-            "delay(100);\n" +
-            "tone(pin, 392, 750);\n" +
-            "delay(750);\n" +
-            "delay(5000);\n" +
-            "}\n";
+    private static ResourceBundle uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
 
     /**
      *
@@ -126,10 +40,12 @@ public class Melody extends TranslatorBlock {
 
         TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(0);
         String pin = tb.toCode();
+        if(!("A0 A1 A2 A3 8 9 10 11 12").contains(pin.trim())) {
+            throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.Digital_pin_slot"));
+        }
 
-
-        translator.addDefinitionCommand(MELODY);
-        String ret = "melody(" + pin + ");\n";
+        translator.LoadTranslators(this.getClass().getSimpleName());
+        String ret = "PiezoAlarm(" + pin + ");\n";
 
         return codePrefix + ret + codeSuffix;
     }
