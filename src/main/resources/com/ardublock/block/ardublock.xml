@@ -53,6 +53,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <Block value="bg.tone"/>
             <Block value="bg.tone_time"/>
             <Block value="bg.no_tone"/>
+            <Block value="bg.tone_impulse"/>
             <Block value="bg.melody"/>
         </KeyBlock>
         <KeyBlock key="modules.hall.name">
@@ -373,7 +374,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListDigital_D8" label="D8"/>
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="bc.frequency">
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.tone">
                     <DefaultArg genus-name="number" label="440"/>
                 </BlockConnector>
 
@@ -390,11 +391,11 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListDigital_D8" label="D8"/>
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="bc.frequency">
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.tone">
                     <DefaultArg genus-name="number" label="440"/>
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="bc.milliseconds">
-                    <DefaultArg genus-name="number" label="1000"/>
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.seconds">
+                    <DefaultArg genus-name="number" label="1"/>
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -412,7 +413,31 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 
+        <BlockGenus name="tone_impulse" kind="command" color="95 95 195" initlabel="bg.tone_impulse">
+            <description>
+                <text>Generates a square wave of the specified frequency (and 50%
+                    duty cycle) on a pin.
+                </text>
+            </description>
+            <BlockConnectors>
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
+                    <DefaultArg genus-name="pinListDigital_D8" label="D8"/>
+                </BlockConnector>
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.tone">
+                    <DefaultArg genus-name="number" label="440"/>
+                </BlockConnector>
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.timeOn">
+                    <DefaultArg genus-name="number" label="1000"/>
+                </BlockConnector>
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.timeOff">
+                    <DefaultArg genus-name="number" label="1000"/>
+                </BlockConnector>
+                <BlockConnector connector-type="number" connector-kind="socket" label="bc.count">
+                    <DefaultArg genus-name="number" label="3"/>
+                </BlockConnector>
 
+            </BlockConnectors>
+        </BlockGenus>
         <!--****************** Pin Drop Down List Members *************** -->
 
         <!--****************** Analog DAC pins on all Arduino Boards *************** -->
@@ -2485,8 +2510,8 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockConnector connector-type="number" connector-kind="socket" label="bc.pin_number">
                     <DefaultArg genus-name="pinListAnalog_A0" label="A0"/>
                 </BlockConnector>
-                <BlockConnector connector-type="number" connector-kind="socket" label="bc.level">
-                    <DefaultArg genus-name="number" label="255"/>
+                <BlockConnector connector-type="boolean" connector-kind="socket" label="bc.status">
+                    <DefaultArg genus-name="digital-high" label="HIGH"/>
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -3463,6 +3488,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockGenusMember>tone</BlockGenusMember>
                 <BlockGenusMember>tone_time</BlockGenusMember>
                 <BlockGenusMember>no_tone</BlockGenusMember>
+                <BlockGenusMember>tone_impulse</BlockGenusMember>
                 <BlockGenusMember>melody</BlockGenusMember>
             </BlockDrawer>
 
