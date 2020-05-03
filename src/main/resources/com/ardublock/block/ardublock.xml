@@ -3128,10 +3128,6 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockConnector connector-type="number"
                                 connector-kind="plug">
                 </BlockConnector>
-                <BlockConnector connector-type="number"
-                                connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListAnalog_A0" label="A0"/>
-                </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
 
