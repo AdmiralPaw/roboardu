@@ -3116,10 +3116,6 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockConnector connector-type="number"
                                 connector-kind="plug">
                 </BlockConnector>
-                <BlockConnector connector-type="number"
-                                connector-kind="socket" label="bc.pin_number">
-                    <DefaultArg genus-name="pinListAnalog_A0" label="A0"/>
-                </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
 
@@ -3283,7 +3279,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>Read digital from the pin</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="boolean"
+                <BlockConnector connector-type="booleanа"
                                 connector-kind="plug"/>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket"
