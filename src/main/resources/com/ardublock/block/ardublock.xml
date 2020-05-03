@@ -3208,7 +3208,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>ObjectSensor</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="number"
+                <BlockConnector connector-type="boolean"
                                 connector-kind="plug">
                 </BlockConnector>
                 <BlockConnector connector-type="number"
