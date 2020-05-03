@@ -3283,7 +3283,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <text>Read digital from the pin</text>
             </description>
             <BlockConnectors>
-                <BlockConnector connector-type="number"
+                <BlockConnector connector-type="boolean"
                                 connector-kind="plug"/>
                 <BlockConnector connector-type="number"
                                 connector-kind="socket"
