@@ -2465,7 +2465,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                     <DefaultArg genus-name="pinListAnalog_A0"
                                 label="A0"/>
                 </BlockConnector>
-                <BlockConnector connector-type="number"
+                <BlockConnector connector-type="boolean"
                                 connector-kind="plug"/>
             </BlockConnectors>
         </BlockGenus>
