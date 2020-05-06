@@ -74,7 +74,11 @@ public class AutoFormat
 
 	String line_feed;
 
-	public void comment() throws IOException
+    /**
+     *
+     * @throws IOException
+     */
+    public void comment() throws IOException
 	{
 		int save_s_flg;
 		save_s_flg = s_flg;
@@ -112,7 +116,12 @@ public class AutoFormat
 		return;
 	}
 
-	public char get_string() throws IOException
+    /**
+     *
+     * @return
+     * @throws IOException
+     */
+    public char get_string() throws IOException
 	{
 		char ch;
 		ch = '*';
@@ -152,7 +161,10 @@ public class AutoFormat
 		}
 	}
 
-	public void indent_puts()
+    /**
+     *
+     */
+    public void indent_puts()
 	{
 		string[j] = '\0';
 		if (j > 0)
@@ -188,12 +200,21 @@ public class AutoFormat
 		}
 	}
 
-	public void fprintf(String out_string)
+    /**
+     *
+     * @param out_string
+     */
+    public void fprintf(String out_string)
 	{
 		strOut.append(out_string);
 	}
 
 	/* special edition of put string for comment processing */
+
+    /**
+     *
+     */
+
 	public void putcoms()
 	{
 		int i = 0;
@@ -235,7 +256,11 @@ public class AutoFormat
 		}
 	}
 
-	public void cpp_comment() throws IOException
+    /**
+     *
+     * @throws IOException
+     */
+    public void cpp_comment() throws IOException
 	{
 		c = getchr();
 		while (c != '\n' && c != '\r' && EOF == 0)
@@ -249,6 +274,11 @@ public class AutoFormat
 	}
 
 	/* expand indentValue into tabs and spaces */
+
+    /**
+     *
+     */
+
 	public void p_tabs()
 	{
 		int i, k;
@@ -266,7 +296,12 @@ public class AutoFormat
 		}
 	}
 
-	public char getchr() throws IOException
+    /**
+     *
+     * @return
+     * @throws IOException
+     */
+    public char getchr() throws IOException
 	{
 		if ((peek < 0) && (last_char != ' ') && (last_char != '\t'))
 		{
@@ -321,6 +356,11 @@ public class AutoFormat
 	}
 
 	/* else processing */
+
+    /**
+     *
+     */
+
 	public void gotelse()
 	{
 		tabs = s_tabs[c_level][if_lev];
@@ -330,6 +370,13 @@ public class AutoFormat
 	}
 
 	/* read to new_line */
+
+    /**
+     *
+     * @return
+     * @throws IOException
+     */
+
 	public int getnl() throws IOException
 	{
 		int save_s_flg;
@@ -391,7 +438,12 @@ public class AutoFormat
 		return 0;
 	}
 
-	public int lookup(String keyword)
+    /**
+     *
+     * @param keyword
+     * @return
+     */
+    public int lookup(String keyword)
 	{
 		char r;
 		int l, kk; // ,k,i;
@@ -420,7 +472,12 @@ public class AutoFormat
 		return (1);
 	}
 
-	public int lookup_com(String keyword)
+    /**
+     *
+     * @param keyword
+     * @return
+     */
+    public int lookup_com(String keyword)
 	{
 		// char r;
 		int l, kk; // ,k,i;
@@ -440,7 +497,12 @@ public class AutoFormat
 		return (1);
 	}
 
-	public String format(String originalText)
+    /**
+     *
+     * @param originalText
+     * @return
+     */
+    public String format(String originalText)
 	{
 		StringBuffer onechar;
 
@@ -906,12 +968,23 @@ public class AutoFormat
 		}
 	}
 
-	static public int[] expand(int list[])
+    /**
+     *
+     * @param list
+     * @return
+     */
+    static public int[] expand(int list[])
 	{
 		return expand(list, list.length << 1);
 	}
 
-	static public int[] expand(int list[], int newSize)
+    /**
+     *
+     * @param list
+     * @param newSize
+     * @return
+     */
+    static public int[] expand(int list[], int newSize)
 	{
 		int temp[] = new int[newSize];
 		System.arraycopy(list, 0, temp, 0, Math.min(newSize, list.length));

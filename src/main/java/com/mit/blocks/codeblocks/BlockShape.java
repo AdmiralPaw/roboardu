@@ -1,15 +1,13 @@
 package com.mit.blocks.codeblocks;
 
-import java.awt.Dimension;
-import java.awt.Rectangle;
+import com.mit.blocks.codeblocks.rendering.BlockShapeUtil;
+import com.mit.blocks.renderable.RenderableBlock;
+
+import java.awt.*;
 import java.awt.geom.Area;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-
-import com.mit.blocks.renderable.RenderableBlock;
-
-import com.mit.blocks.codeblocks.rendering.BlockShapeUtil;
 
 /**
  * This class separates block shape from the RenderableBlock class. BlockShape
@@ -101,14 +99,34 @@ public class BlockShape {
      * Body of the block
      */
     protected Rectangle blockBody;
+
+    /**
+     *
+     */
     protected Point2D topLeftCorner;
+
+    /**
+     *
+     */
     protected Point2D topRightCorner;
+
+    /**
+     *
+     */
     protected Point2D botLeftCorner;
+
+    /**
+     *
+     */
     protected Point2D botRightCorner;
     /**
      * block properties determining shape
      */
     protected boolean hasCurvedCorners;
+
+    /**
+     *
+     */
     protected float blockCornerRadius;
 
     /**
@@ -199,6 +217,7 @@ public class BlockShape {
      * Determines the width of the block by checking for numerous block
      * characteristics TODO: this contains a lot of starlogo specific checks -
      * should be refactored into slcodeblocks?
+     * @return 
      */
     protected int determineBlockWidth() {
 
@@ -301,6 +320,7 @@ public class BlockShape {
      * Determines the height of a block by summing it's socket heights OR plug
      * height if no sockets TODO: this contains a lot of starlogo specific
      * checks - should be refactored into slcodeblocks?
+     * @return 
      */
     protected int determineBlockHeight() {
         int heightSum = 0;
@@ -344,6 +364,10 @@ public class BlockShape {
     //---------------------
     // drawn clockwise
     // top-left corner, top edge, and top-right corner
+
+    /**
+     *
+     */
     protected void makeTopSide() {
 
         //starting point of the block
@@ -377,6 +401,10 @@ public class BlockShape {
     //DRAW RIGHT SIDE OF BLOCK
     //------------------------
     // drawn clockwise
+
+    /**
+     *
+     */
     protected void makeRightSide() {
 
         //move to the end of the TopSide
@@ -443,6 +471,10 @@ public class BlockShape {
     //DRAW LEFT SIDE OF THE BLOCK
     //---------------------------
     //drawn counter-clockwise
+
+    /**
+     *
+     */
     protected void makeLeftSide() {
 
         //starting point of the block
@@ -472,6 +504,10 @@ public class BlockShape {
     //------------------------
     // drawn counter-clockwise
     // bottom-left conrner, bottom edge, and bottom-right corner
+
+    /**
+     *
+     */
     protected void makeBottomSide() {
         //start bottom-right
         setEndPoint(gpBottom, botLeftCorner, topLeftCorner, true);
@@ -497,9 +533,13 @@ public class BlockShape {
     }
 
     /**
-     * Sets the end point for a particular side of a block. firstPointOnSide ==
-     * true : Used to "moveTo" first point of a side, firstPointOnSide == false
-     * : "lineTo" the last point of a side.
+     * Sets the end point for a particular side of a block.firstPointOnSide ==
+ true : Used to "moveTo" first point of a side, firstPointOnSide == false
+ : "lineTo" the last point of a side.
+     * @param gp
+     * @param currentCorner
+     * @param otherCorner
+     * @param firstPointOnSide
      */
     protected void setEndPoint(GeneralPath gp, Point2D currentCorner, Point2D otherCorner, boolean firstPointOnSide) {
         //save calculation time if cornerRadius is zero
@@ -563,6 +603,9 @@ public class BlockShape {
     /**
      * Returns the height of the spacer associated with a socket if it exists,
      * else it returns the given default height.
+     * @param socket
+     * @param defaultHeight
+     * @return 
      */
     protected int getSocketSpacerHeight(BlockConnector socket, float defaultHeight) {
         //spacer for block connected to socket
@@ -673,6 +716,7 @@ public class BlockShape {
     /////////////////////////////////
     /**
      * Add a new set of custom shapes
+     * @param cbs
      */
     public static void addCustomShapes(CustomBlockShapeSet cbs) {
         customBlockShapeSets.add(cbs);

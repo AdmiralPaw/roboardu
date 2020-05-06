@@ -5,16 +5,27 @@ import java.awt.event.WindowEvent;
 import com.ardublock.core.Context;
 import com.ardublock.ui.ConsoleFrame;
 import com.ardublock.ui.OpenblocksFrame;
+import com.ardublock.ui.Settings;
+import com.ardublock.ui.TutorialPane;
 import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLayeredPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+/**
+ *
+ * @author User
+ */
 public class Main {
 
     private OpenblocksFrame openblocksFrame;
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(
@@ -32,6 +43,9 @@ public class Main {
         me.startArdublock();
     }
 
+    /**
+     *
+     */
     public void startArdublock() {
         startOpenblocksFrame();
     }
@@ -47,13 +61,26 @@ public class Main {
                 openblocksFrame.doCloseArduBlockFile();
             }
         });
-
+        
         Context context = Context.getContext();
         context.setInArduino(false);
         openblocksFrame.setMinimumSize(new Dimension(1140, 460));
         openblocksFrame.setVisible(true);
+        openblocksFrame.repaint();
+        
+//        Settings settings = openblocksFrame.settings;
+//        if (settings.isFirstLaunch()) {
+//            TutorialPane pan = new TutorialPane(openblocksFrame);
+//            openblocksFrame.setGlassPane(pan);
+//            pan.setOpaque(false);
+//            pan.setVisible(true);
+//            openblocksFrame.getGlassPane().setVisible(true);
+//        }
     }
 
+    /**
+     *
+     */
     public void shutdown() {
         openblocksFrame.dispatchEvent(new WindowEvent(openblocksFrame, WindowEvent.WINDOW_CLOSING));
     }

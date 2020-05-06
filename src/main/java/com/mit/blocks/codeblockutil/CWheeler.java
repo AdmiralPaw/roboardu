@@ -24,14 +24,28 @@ public class CWheeler extends JPanel {
     CScrollPane scroll;
     JComponent view;
 
+    /**
+     *
+     * @param includeScrollbar
+     */
     public CWheeler(boolean includeScrollbar) {
         this(new ArrayList<JComponent>(), includeScrollbar, background);
     }
 
+    /**
+     *
+     * @param items
+     */
     public CWheeler(Collection<JComponent> items) {
         this(items, true, background);
     }
 
+    /**
+     *
+     * @param items
+     * @param includeScrollbar
+     * @param backgroundColor
+     */
     public CWheeler(Collection<JComponent> items, boolean includeScrollbar, Color backgroundColor) {
         super(new BorderLayout());
         this.setBackground(backgroundColor);
@@ -85,6 +99,9 @@ public class CWheeler extends JPanel {
         reformItems();
     }
 
+    /**
+     *
+     */
     public void scrollLeft() {
         int v = scroll.getHorizontalModel().getValue();
         int accumulatedWidth = 0;
@@ -100,6 +117,9 @@ public class CWheeler extends JPanel {
         scroll.repaint();
     }
 
+    /**
+     *
+     */
     public void scrollRight() {
         int v = scroll.getHorizontalModel().getValue();
         int accumulatedWidth = 0;
@@ -129,6 +149,10 @@ public class CWheeler extends JPanel {
         this.repaint();
     }
 
+    /**
+     *
+     * @param items
+     */
     public void setElements(Collection<? extends JComponent> items) {
         this.elements = items;
         view.removeAll();
@@ -138,6 +162,10 @@ public class CWheeler extends JPanel {
         reformItems();
     }
 
+    /**
+     *
+     * @param item
+     */
     public void scrollToWheelItem(JComponent item) {
         scroll.validate();
         scroll.getHorizontalModel().setValue(item.getX());

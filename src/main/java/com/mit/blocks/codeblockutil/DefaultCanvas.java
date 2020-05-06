@@ -45,6 +45,7 @@ public class DefaultCanvas extends JPanel implements Canvas {
      * constructs a new Canvas which supports all JComponent functions,
      * and with a default color of blue, and a no highlight values.
      *
+     * @param m
      */
     public DefaultCanvas(LayoutManager m) {
         super(m);

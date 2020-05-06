@@ -5,94 +5,37 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
+public class Engine_Stop extends TranslatorBlock {
 
-public class Engine_Stop extends TranslatorBlock
-{
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public Engine_Stop(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
+        super(blockId, translator, codePrefix, codeSuffix, label);
+    }
 
-	public Engine_Stop(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
-	{   
-            super(blockId, translator, codePrefix, codeSuffix, label);
-	}
-	
-        private static final String MOTORS_DEFINE_PIN = "" +
-                "#define M_DIR_PIN_1               4\n" +
-                "#define M_DIR_PIN_2               7\n" +
-                "#define M_SPEED_PIN_1             5\n" +
-                "#define M_SPEED_PIN_2             6\n";
-        private static final String MOTORS_DEFINE_VAR = "" + 
-                "int SpeedMotor1, SpeedMotor2;\n";
-        private static final String MOTORS_DEFINE = "" +
-                "void InitMotors()\n" +
-                "{\n" +
-                "  pinMode(M_DIR_PIN_1, OUTPUT);\n" +
-                "  pinMode(M_DIR_PIN_2, OUTPUT);\n" +
-                "  pinMode(M_SPEED_PIN_1, OUTPUT);\n" +
-                "  pinMode(M_SPEED_PIN_2, OUTPUT);\n" +
-                "\n" +
-                "  SpeedMotor1 = 0;\n" +
-                "  SpeedMotor2 = 0;\n" +
-                "}\n" +
-                "\n" +
-                "void Motor1(int Speed)\n" +
-                "{\n" +
-                "  int Dir = 0;\n" +
-                "\n" +
-                "  if(Speed > 100)  Speed = 100;\n" +
-                "  if(Speed < -100)  Speed = -100;\n" +
-                "\n" +
-                "  map(Speed,-100,100,-255,255);\n" +
-                "  if(Speed < 0)\n" +
-                "  {\n" +
-                "    Dir = 1;\n" +
-                "    Speed *= -1;\n" +
-                "  }\n" +
-                "\n" +
-                "  digitalWrite(M_DIR_PIN_1, Dir);\n" +
-                "  analogWrite(M_SPEED_PIN_1, Speed);\n" +
-                "\n" +
-                "  SpeedMotor1 = Speed;\n" +
-                "}\n" +
-                "\n" +
-                "void Motor2(int Speed)\n" +
-                "{\n" +
-                "  int Dir = 0;\n" +
-                "\n" +
-                "  if(Speed > 100)  Speed = 100;\n" +
-                "  if(Speed < -100)  Speed = -100;\n" +
-                "\n" +
-                "  map(Speed,-100,100,-255,255);\n" +
-                "  if(Speed < 0)\n" +
-                "  {\n" +
-                "    Dir = 1;\n" +
-                "    Speed *= -1;\n" +
-                "  }\n" +
-                "\n" +
-                "  digitalWrite(M_DIR_PIN_2, Dir);\n" +
-                "  analogWrite(M_SPEED_PIN_2, Speed);\n" +
-                "\n" +
-                "  SpeedMotor2 = Speed;\n" +
-                "}\n" +
-                "\n" +
-                "void Motors(int Speed1, int Speed2)\n" +
-                "{\n" +
-                "  Motor1(Speed1);\n" +
-                "  Motor2(Speed2);\n" +
-                "}\n";
-        private static final String MOTORS_STOP_DEFINE = "" +
-                "void MotorsStop()\n" +
-                "{\n" +
-                "  Motors(0, 0);\n" +
-                "}\n";
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
+    public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
+        translator.CheckClassName(this);
+
+        translator.addSetupCommand("InitMotors();");
         
-	@Override
-	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
-	{
-            translator.addHeaderDefinition(MOTORS_DEFINE_PIN);
-            translator.addHeaderDefinition(MOTORS_DEFINE_VAR);
-            translator.addDefinitionCommand(MOTORS_DEFINE);
-            translator.addDefinitionCommand(MOTORS_STOP_DEFINE);
-            translator.addSetupCommand("InitMotors();");
-            String ret = "MotorsStop();";
-            return codePrefix + ret + codeSuffix;
-        }
+        String ret = "Stop();";
+        return codePrefix + ret + codeSuffix;
+    }
 }

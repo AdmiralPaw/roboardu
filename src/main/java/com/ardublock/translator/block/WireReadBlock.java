@@ -5,14 +5,33 @@ import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class WireReadBlock extends TranslatorBlock
 {
-	public WireReadBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public WireReadBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		setupWireEnvironment(translator);
@@ -37,7 +56,11 @@ public class WireReadBlock extends TranslatorBlock
 	private static final String IIC_DEFINITION_10 = "boolean __ardublockIsI2cReadOk;\n\nvoid __ardublockI2cWriteData(int devAddr, int regAddr, int value)\n{\nWire.beginTransmission(devAddr);\nWire.write(regAddr);\nWire.write(value);\nWire.endTransmission();\n}\n\nvoid __ardublockI2cWriteDataOne(int devAddr, int regAddr)\n{\nWire.beginTransmission(devAddr);\nWire.write(regAddr);\nWire.endTransmission();\n}\n\nint __ardublockI2cReadData(int devAddr, int regAddr)\n{\nint data = 0;\nchar b;\nWire.beginTransmission(devAddr);\nWire.write(regAddr);\nWire.endTransmission();\nWire.requestFrom(devAddr, 1);\nif (Wire.available() > 0)\n{\n__ardublockIsI2cReadOk = true;\nb = Wire.read();\ndata = b;\n}\nelse\n{\n__ardublockIsI2cReadOk = false;\n}\nreturn data;\n}\n";
 	private static final String IIC_DEFINITION_00 = "boolean __ardublockIsI2cReadOk;\n\nvoid __ardublockI2cWriteData(int devAddr, int regAddr, int value)\n{\nWire.beginTransmission(devAddr);\nWire.send(regAddr);\nWire.send(value);\nWire.endTransmission();\n}\n\nvoid __ardublockI2cWriteDataOne(int devAddr, int regAddr)\n{\nWire.beginTransmission(devAddr);\nWire.send(regAddr);\nWire.endTransmission();\n}\n\nint __ardublockI2cReadData(int devAddr, int regAddr)\n{\nint data = 0;\nchar b;\nWire.beginTransmission(devAddr);\nWire.send(regAddr);\nWire.endTransmission();\nWire.requestFrom(devAddr, 1);\nif (Wire.available() > 0)\n{\n__ardublockIsI2cReadOk = true;\nb = Wire.receive();\ndata = b;\n}\nelse\n{\n__ardublockIsI2cReadOk = false;\n}\nreturn data;\n}\n";
 	
-	public static void setupWireEnvironment(Translator t)
+    /**
+     *
+     * @param t
+     */
+    public static void setupWireEnvironment(Translator t)
 	{
 		t.addHeaderFile("Wire.h");
 		

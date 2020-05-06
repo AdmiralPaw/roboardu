@@ -3,33 +3,116 @@ package com.mit.blocks.workspace;
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.codeblocks.BlockLink;
 
+/**
+ *
+ * @author User
+ */
 public class WorkspaceEvent {
 
     //workspace-wide events
     //affects layout and content of workspace and at least two or more blocks
+
+    /**
+     *
+     */
     public final static int PAGE_ADDED = 1;
+
+    /**
+     *
+     */
     public final static int PAGE_REMOVED = 2;
+
+    /**
+     *
+     */
     public final static int BLOCK_ADDED = 3;
+
+    /**
+     *
+     */
     public final static int BLOCK_REMOVED = 4;
+
+    /**
+     *
+     */
     public final static int BLOCKS_CONNECTED = 5;
+
+    /**
+     *
+     */
     public final static int BLOCKS_DISCONNECTED = 6;
+
+    /**
+     *
+     */
     public final static int BLOCK_STACK_COMPILED = 7;
     //page specific events
+
+    /**
+     *
+     */
     public final static int PAGE_RENAMED = 8;
+
+    /**
+     *
+     */
     public final static int PAGE_RESIZED = 9;
     //block specific events
+
+    /**
+     *
+     */
     public final static int BLOCK_RENAMED = 10;
+
+    /**
+     *
+     */
     public final static int BLOCK_MOVED = 11;
+
+    /**
+     *
+     */
     public final static int BLOCK_GENUS_CHANGED = 12;
+
+    /**
+     *
+     */
     public final static int BLOCK_COMMENT_ADDED = 13;
+
+    /**
+     *
+     */
     public final static int BLOCK_COMMENT_REMOVED = 14;
+
+    /**
+     *
+     */
     public final static int BLOCK_COMMENT_MOVED = 15;
+
+    /**
+     *
+     */
     public final static int BLOCK_COMMENT_RESIZED = 16;
+
+    /**
+     *
+     */
     public final static int BLOCK_COMMENT_VISBILITY_CHANGE = 17;
+
+    /**
+     *
+     */
     public final static int BLOCK_COMMENT_CHANGED = 18;
     //workspace specific event
+
+    /**
+     *
+     */
     public final static int WORKSPACE_FINISHED_LOADING = 100;
     
+    /**
+     *
+     */
     public final static int BLOCK_CLONED = 51;
     
     private final Workspace workspace;
@@ -56,6 +139,13 @@ public class WorkspaceEvent {
         this.blockID = Block.NULL;
     }
 
+    /**
+     *
+     * @param workspace
+     * @param page
+     * @param eventType
+     * @param userSpawned
+     */
     public WorkspaceEvent(Workspace workspace, WorkspaceWidget page, int eventType, boolean userSpawned) {
         this.workspace = workspace;
         this.widget = page;
@@ -80,6 +170,14 @@ public class WorkspaceEvent {
         this.oldWidgetName = oldName;
     }
 
+    /**
+     *
+     * @param workspace
+     * @param page
+     * @param oldName
+     * @param eventType
+     * @param userSpawned
+     */
     public WorkspaceEvent(Workspace workspace, WorkspaceWidget page, String oldName, int eventType, boolean userSpawned) {
         this.workspace = workspace;
         this.widget = page;
@@ -103,6 +201,14 @@ public class WorkspaceEvent {
         this.blockID = blockID;
     }
 
+    /**
+     *
+     * @param workspace
+     * @param widget
+     * @param blockID
+     * @param eventType
+     * @param userSpawned
+     */
     public WorkspaceEvent(Workspace workspace, WorkspaceWidget widget, Long blockID, int eventType, boolean userSpawned) {
         this.workspace = workspace;
         this.widget = widget;
@@ -127,6 +233,14 @@ public class WorkspaceEvent {
         this.blockID = Block.NULL;
     }
 
+    /**
+     *
+     * @param workspace
+     * @param widget
+     * @param link
+     * @param eventType
+     * @param userSpawned
+     */
     public WorkspaceEvent(Workspace workspace, WorkspaceWidget widget, BlockLink link, int eventType, boolean userSpawned) {
         this.workspace = workspace;
         this.widget = widget;
@@ -160,9 +274,10 @@ public class WorkspaceEvent {
     }
 
     /**
-     * Returns the Long ID of the Block where this event occured.  For 
-     * block connection events, this id is Block.NULL since the event occurred
-     * from two blocks.
+     * Returns the Long ID of the Block where this event occured.For 
+ block connection events, this id is Block.NULL since the event occurred
+ from two blocks.
+     * @return 
      */
     public Long getSourceBlockID() {
         return blockID;

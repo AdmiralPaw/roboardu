@@ -1,12 +1,11 @@
 package com.mit.blocks.renderable;
 
-import java.awt.Color;
-import java.awt.event.MouseEvent;
-
-import javax.swing.BorderFactory;
-
 import com.mit.blocks.workspace.Workspace;
 import com.mit.blocks.workspace.WorkspaceEvent;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 
 /**
  * The CommentLabel class controls the visibility of a Comment on a RenderableBlock
@@ -17,6 +16,11 @@ public class CommentLabel extends BlockControlLabel {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     *
+     * @param workspace
+     * @param blockID
+     */
     public CommentLabel(Workspace workspace, long blockID) {
         super(workspace, blockID);
         this.workspace = workspace;
@@ -78,11 +82,13 @@ public class CommentLabel extends BlockControlLabel {
     /**
      * Implement MouseListener interface
      * toggle collapse state of block if button pressed
+     * @param e
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        toggle();
         RenderableBlock rb = workspace.getEnv().getRenderableBlock(getBlockID());
+        rb.blockRenamed();
+        toggle();
         rb.getComment().setVisible(isActive());
         workspace.notifyListeners(new WorkspaceEvent(workspace, rb.getComment().getCommentSource().getParentWidget(), WorkspaceEvent.BLOCK_COMMENT_VISBILITY_CHANGE));
         update();
@@ -94,6 +100,7 @@ public class CommentLabel extends BlockControlLabel {
     /**
      * Implement MouseListener interface
      * highlight button state
+     * @param e
      */
     @Override
     public void mouseEntered(MouseEvent e) {
@@ -107,6 +114,7 @@ public class CommentLabel extends BlockControlLabel {
     /**
      * Implement MouseListener interface
      * de-highlight button state
+     * @param e
      */
     @Override
     public void mouseExited(MouseEvent e) {

@@ -24,6 +24,10 @@ public class InfixBlockShape extends BlockShape {
      */
     private float maxX = 0; //Stores the maximum X-coordinate visited by the infix block
 
+    /**
+     *
+     * @param rb
+     */
     public InfixBlockShape(RenderableBlock rb) {
         super(rb);
     }
@@ -221,10 +225,10 @@ public class InfixBlockShape extends BlockShape {
     }
 
     /**
-     * Overrided from BlockShape.
-     * Determines the width of the sum of the bottom sockets and uses it if it is
-     * greater than the width determined by the determineBlockWidth in BlockShape.
+     * Overrided from BlockShape.Determines the width of the sum of the bottom sockets and uses it if it is
+ greater than the width determined by the determineBlockWidth in BlockShape.
      * Else, it returns the sum of these two values.
+     * @return 
      */
     @Override
     protected int determineBlockWidth() {

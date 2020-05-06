@@ -8,15 +8,28 @@ import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
+/**
+ *
+ * @author User
+ */
 public class ImageManager {
 
     private Component comp;
 
+    /**
+     *
+     * @param comp
+     */
     public ImageManager(Component comp) {
         assert (comp != null);
         this.comp = comp;
     }
 
+    /**
+     *
+     * @param file
+     * @return
+     */
     public BufferedImage createImage(String file) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         URL u = ImageManager.class.getResource(file);
@@ -73,6 +86,13 @@ public class ImageManager {
         return bimg;
     }
 
+    /**
+     *
+     * @param img
+     * @param x
+     * @param y
+     * @return
+     */
     public static boolean hitTest(BufferedImage img, int x, int y) {
         return ((img.getRGB(x, y) >> 24) & 0xFF) >= 0xFF / 2;
     }

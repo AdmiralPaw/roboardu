@@ -6,11 +6,19 @@ import java.awt.event.ActionListener;
 import com.ardublock.core.Context;
 import com.ardublock.ui.OpenblocksFrame;
 
+/**
+ *
+ * @author User
+ */
 public class NewButtonListener implements ActionListener
 {
 	private OpenblocksFrame parentFrame;
 	
-	public NewButtonListener(OpenblocksFrame frame)
+    /**
+     *
+     * @param frame
+     */
+    public NewButtonListener(OpenblocksFrame frame)
 	{
 		Context.getContext();
 		

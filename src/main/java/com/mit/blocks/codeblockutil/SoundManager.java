@@ -16,6 +16,11 @@ public class SoundManager {
 
     private static boolean enableSound = true;
 
+    /**
+     *
+     * @param soundFileName
+     * @return
+     */
     public static Sound loadSound(String soundFileName) {
         final URL url = SoundManager.class.getResource(soundFileName);
         if (url == null) {

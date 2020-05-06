@@ -1,28 +1,13 @@
 package com.mit.blocks.workspace;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import com.mit.blocks.codeblocks.BlockConnector;
+import com.mit.blocks.renderable.RenderableBlock;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.Timer;
-
-import com.mit.blocks.codeblocks.BlockConnector;
-import com.mit.blocks.renderable.Comment;
-import com.mit.blocks.renderable.RenderableBlock;
 
 /**
  * A MiniMap is a miniturized representation of the
@@ -42,14 +27,12 @@ import com.mit.blocks.renderable.RenderableBlock;
  * as the user mouses over or moves the mouse out of focus.
  *
  * blockCanvas : BlockCanvas 		//the block canvas that this MiniMap renders
- * blocks : Set<RenderableBlocks> 	//the set of blocks that this renders
- * comments : Set<Comment> 			//the set of comments that this renders
  * mapwidth : Integer				//this MiniMap's maximum width
  * mapheight: Integer				//this MiniMap's maximum height
  * ratio : Double					//the aspect ratio that this should maintain
  * 									//		when rendering this.blocks and this.comments
  */
-public class MiniMap extends JPanel implements WorkspaceWidget, MouseListener, MouseMotionListener, SearchableContainer, PageChangeListener {
+public class MiniMap extends JPanel implements MouseListener, MouseMotionListener, SearchableContainer, PageChangeListener, WorkspaceWidget {
     /*
      * Implementation Notes:
      * -should be initialized BEFORE blockCanvas (that is, should initialize miniMap
@@ -94,6 +77,7 @@ public class MiniMap extends JPanel implements WorkspaceWidget, MouseListener, M
     private final Workspace workspace;
 
     /**
+     * @param workspace
      * @effects  constructs a MiniMap, M, such that
      * 			M.blockCanvas = The current blockcanvas in Workspace &&
      * 			M.blocks = M.blockCanvas.getBlocks &&
@@ -145,6 +129,9 @@ public class MiniMap extends JPanel implements WorkspaceWidget, MouseListener, M
         this.repaint();
     }
 
+    /**
+     *
+     */
     public void repositionMiniMap() {
         if (this.getParent() != null) {
             this.setBounds(this.getParent().getWidth() - MAPWIDTH - 26, 0,
@@ -314,6 +301,7 @@ public class MiniMap extends JPanel implements WorkspaceWidget, MouseListener, M
 
     /**
      * When dragging along miniMap, zoom to new point
+     * @param e
      */
     public void mouseDragged(MouseEvent e) {
         scrollToPoint(e.getPoint());
@@ -321,12 +309,14 @@ public class MiniMap extends JPanel implements WorkspaceWidget, MouseListener, M
 
     /**
      * When releasing a mouse in a MiniMap, scroll to point
+     * @param e
      */
     public void mouseReleased(MouseEvent e) {
         scrollToPoint(e.getPoint());
     }
 
-    /**MouseEvent methods not interested by this WorkspceWidget**/
+    /**MouseEvent methods not interested by this WorkspceWidge
+     * @param e*/
     public void mouseMoved(MouseEvent e) {
     }
 
@@ -385,6 +375,24 @@ public class MiniMap extends JPanel implements WorkspaceWidget, MouseListener, M
         block.moveConnectedBlocks();
         this.repaint();
     }
+
+    /**
+     *
+     * @param b
+     */
+    public void startDragged(RenderableBlock b){}
+
+    /**
+     *
+     * @param b
+     */
+    public void stopDragged(RenderableBlock b){}
+
+    /**
+     *
+     * @param block
+     */
+    public void blockRenamed(RenderableBlock block){}
 
     /**
      * @param block

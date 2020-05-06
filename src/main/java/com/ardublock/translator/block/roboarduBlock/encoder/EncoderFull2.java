@@ -6,7 +6,20 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class EncoderFull2 extends TranslatorBlock {
+
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public EncoderFull2 (Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
@@ -25,13 +38,13 @@ public class EncoderFull2 extends TranslatorBlock {
             "{\n" +
             "  if(fEn == ON)\n" +
             "  {\n" +
-            "    attachInterrupt(ENCODER_PIN_1, Encoder1, CHANGE);\n" +
-            "    attachInterrupt(ENCODER_PIN_2, Encoder2, CHANGE);\n" +
+            "    attachInterrupt(digitalPinToInterrupt(ENCODER_PIN_1), Encoder1, CHANGE);\n" +
+            "    attachInterrupt(digitalPinToInterrupt(ENCODER_PIN_2), Encoder2, CHANGE);\n" +
             "  }\n" +
             "  if(fEn == OFF)\n" +
             "  {\n" +
-            "    detachInterrupt(ENCODER_PIN_1);\n" +
-            "    detachInterrupt(ENCODER_PIN_2);\n" +
+            "    detachInterrupt(digitalPinToInterrupt(ENCODER_PIN_1));\n" +
+            "    detachInterrupt(digitalPinToInterrupt(ENCODER_PIN_2));\n" +
             "  }\n" +
             "}\n" +
             "\n" +
@@ -45,6 +58,12 @@ public class EncoderFull2 extends TranslatorBlock {
             "  nEncoder2++;\n" +
             "}\n";
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {

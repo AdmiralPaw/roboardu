@@ -1,15 +1,10 @@
 package com.mit.blocks.codeblocks;
 
-import java.util.ArrayList;
-
-import com.mit.blocks.codeblocks.Block;
-import com.mit.blocks.codeblocks.BlockConnector;
-import com.mit.blocks.codeblocks.BlockLink;
-import com.mit.blocks.codeblocks.BlockStub;
-import com.mit.blocks.codeblocks.LinkRule;
 import com.mit.blocks.workspace.Workspace;
 import com.mit.blocks.workspace.WorkspaceEvent;
 import com.mit.blocks.workspace.WorkspaceListener;
+
+import java.util.ArrayList;
 
 /*** About poly rule *****************************************************************************************************
  * 
@@ -54,6 +49,10 @@ public class PolyRule implements LinkRule, WorkspaceListener {
 	
     private final Workspace workspace;		//*****
 
+    /**
+     *
+     * @param workspace
+     */
     public PolyRule(Workspace workspace) {
         this.workspace = workspace;
     }
@@ -161,7 +160,11 @@ public class PolyRule implements LinkRule, WorkspaceListener {
 				(!isList2 && isPoly2 && !inListBlock2));
 	}
 
-	public boolean isMandatory() {
+    /**
+     *
+     * @return
+     */
+    public boolean isMandatory() {
 		return false;
 	}
 	
@@ -189,11 +192,12 @@ public class PolyRule implements LinkRule, WorkspaceListener {
  */
 	
 	/**
-	 * Handles setting/reverting POLY connectors when a BLOCKS_CONNECTED/BLOCKS_DISCONNECTED event occurs.
-	 * Connecting: checks which connector is the POLY CONN and which is the SETTER CONN, calls connectPoly
-	 * 		with the SETTER CONN. (See "Setting type specifics" for details on how to determine this and why.)
-	 * Disconnecting: calls revertPoly on both connectors. (See "Reverting type specifics" for details on why.)
-	 * Finally, calls Procedure Output Manager to handle changes in output block types (which are also POLY).
+	 * Handles setting/reverting POLY connectors when a BLOCKS_CONNECTED/BLOCKS_DISCONNECTED event occurs.Connecting: checks which connector is the POLY CONN and which is the SETTER CONN, calls connectPoly
+ 		with the SETTER CONN.
+	 * (See "Setting type specifics" for details on how to determine this and why.)
+ Disconnecting: calls revertPoly on both connectors. (See "Reverting type specifics" for details on why.)
+ Finally, calls Procedure Output Manager to handle changes in output block types (which are also POLY).
+     * @param e
 	 */
 	public void workspaceEventOccurred(WorkspaceEvent e) {
 		BlockLink link = e.getSourceLink();
@@ -225,9 +229,7 @@ public class PolyRule implements LinkRule, WorkspaceListener {
 			revertPoly(workspace.getEnv().getBlock(link.getSocketBlockID()), link.getSocket());
 		}
 		// Calls POM to deal with changes in output block types.
-		if (link != null){
-		//System.out.println(link.toString());
-		}
+
 		ProcedureOutputManager.procedureUpdateInfo(e);
 	}
 	

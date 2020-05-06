@@ -1,13 +1,13 @@
 package com.mit.blocks.renderable;
 
-import java.awt.Container;
-import java.awt.event.MouseEvent;
-
-import javax.swing.SwingUtilities;
-
+import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.codeblocks.JComponentDragHandler;
 import com.mit.blocks.workspace.Workspace;
 import com.mit.blocks.workspace.WorkspaceWidget;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 
 /**
  * FactoryRenderableBlock extends RenderableBlock and is used within FactoryBlockDrawers.
@@ -19,7 +19,7 @@ import com.mit.blocks.workspace.WorkspaceWidget;
  * created on top of it to receive further mouse events and a new Block instance is created
  * in the background.  
  */
-public class FactoryRenderableBlock extends RenderableBlock {
+public class FactoryRenderableBlock extends RenderableBlock implements Cloneable {
 
     private static final long serialVersionUID = 1L;
     //the RenderableBlock to produce
@@ -29,6 +29,10 @@ public class FactoryRenderableBlock extends RenderableBlock {
     //mouseexited methods to change the cursor appropriately, so that we can make it 
     //"seem" that this block is draggable
     private JComponentDragHandler dragHandler;
+    
+    private WorkspaceWidget wWidget;
+    
+    
 
     /**
      * Constructs a new FactoryRenderableBlock instance.
@@ -39,7 +43,24 @@ public class FactoryRenderableBlock extends RenderableBlock {
     public FactoryRenderableBlock(Workspace workspace, WorkspaceWidget widget, Long blockID) {
         super(workspace, widget, blockID);
         this.setBlockLabelUneditable();
+        this.wWidget=widget;
+        
         dragHandler = new JComponentDragHandler(workspace, this);
+
+    }
+    
+    public FactoryRenderableBlock clone() throws CloneNotSupportedException{
+        return (FactoryRenderableBlock) super.clone();
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public FactoryRenderableBlock deepClone(){
+        Block newBlock = new Block(workspace, this.getGenus(), false);
+        FactoryRenderableBlock block = new FactoryRenderableBlock(workspace, this.wWidget, newBlock.getBlockID());
+        return block;
     }
 
     /**
@@ -68,6 +89,7 @@ public class FactoryRenderableBlock extends RenderableBlock {
         MouseEvent newE = SwingUtilities.convertMouseEvent(this, e, createdRB);
         createdRB.mousePressed(newE);
         mouseDragged(e); // immediately make the RB appear under the mouse cursor
+        workspace.getPageNamed("Main").saveScreen();
     }
 
     public void mouseDragged(MouseEvent e) {
@@ -106,12 +128,32 @@ public class FactoryRenderableBlock extends RenderableBlock {
     public void mouseClicked(MouseEvent e) {
     }
 
+    /**
+     *
+     * @param e
+     */
     public void startDragging(MouseEvent e) {
+
     }
 
+    /**
+     *
+     * @param e
+     * @param w
+     */
     public void stopDragging(MouseEvent e, WorkspaceWidget w) {
     }
 
-    public void setZoomLevel(double newZoom) {
+    public void setZoomLevel(double newZoom){
     }
+
+    /**
+     *
+     * @param newZoom
+     */
+    public void OneSetZoomLevel(double newZoom)
+    {
+        super.setZoomLevel(newZoom);
+    }
+    
 }

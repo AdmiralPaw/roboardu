@@ -1,11 +1,10 @@
 package com.mit.blocks.workspace;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
+import com.mit.blocks.renderable.BlockUtilities;
+import com.mit.blocks.renderable.RenderableBlock;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
@@ -13,11 +12,10 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.swing.JComponent;
-
-import com.mit.blocks.renderable.BlockUtilities;
-import com.mit.blocks.renderable.RenderableBlock;
-
+/**
+ *
+ * @author User
+ */
 public class TrashCan extends JComponent implements MouseListener, WorkspaceWidget, ComponentListener {
 
     private static final long serialVersionUID = 328149080275L;
@@ -27,6 +25,12 @@ public class TrashCan extends JComponent implements MouseListener, WorkspaceWidg
     private Color currentColor = Color.BLACK;
     private final Workspace workspace;
 
+    /**
+     *
+     * @param workspace
+     * @param trashCanImage
+     * @param openedTrashCanImage
+     */
     public TrashCan(Workspace workspace, Image trashCanImage, Image openedTrashCanImage) {
         this.workspace = workspace;
         this.tcImage = trashCanImage;
@@ -83,6 +87,24 @@ public class TrashCan extends JComponent implements MouseListener, WorkspaceWidg
         this.repaint();
     }
 
+    /**
+     *
+     * @param b
+     */
+    public void startDragged(RenderableBlock b){}
+
+    /**
+     *
+     * @param b
+     */
+    public void stopDragged(RenderableBlock b){}
+
+    /**
+     *
+     * @param block
+     */
+    public void blockRenamed(RenderableBlock block){}
+
     public void addBlock(RenderableBlock block) {
     }
     public void addBlocks(Collection<RenderableBlock> block) {
@@ -124,7 +146,8 @@ public class TrashCan extends JComponent implements MouseListener, WorkspaceWidg
         return new ArrayList<RenderableBlock>();
     }
 
-    /**Component Listeners**/
+    /**Component Listener
+     * @param es**/
     public void componentHidden(ComponentEvent e) {
     }
 
@@ -148,12 +171,20 @@ public class TrashCan extends JComponent implements MouseListener, WorkspaceWidg
     public void mouseClicked(MouseEvent e) {
     }
 
+    /**
+     *
+     * @param e
+     */
     public void mouseDragged(MouseEvent e) {
     }
 
     public void mouseReleased(MouseEvent e) {
     }
 
+    /**
+     *
+     * @param e
+     */
     public void mouseMoved(MouseEvent e) {
     }
 

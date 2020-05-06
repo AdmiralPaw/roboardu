@@ -49,6 +49,12 @@ public class PageDrawerLoadingUtils {
         return null;
     }
 
+    /**
+     *
+     * @param node
+     * @param nodeKey
+     * @return
+     */
     public static boolean getBooleanValue(final Node node, final String nodeKey) {
         final String bool = getNodeValue(node, nodeKey);
         return bool == null || !"no".equals(bool);
@@ -62,6 +68,12 @@ public class PageDrawerLoadingUtils {
         return 0;
     }
 
+    /**
+     *
+     * @param workspace
+     * @param root
+     * @param manager
+     */
     public static void loadPagesAndDrawers(Workspace workspace, Element root, FactoryManager manager) {
         List<Page> pageList = new ArrayList<Page>();
         //pagesToAdd is needed so that we can add pages all at once
@@ -181,6 +193,13 @@ public class PageDrawerLoadingUtils {
         }
     }
 
+    /**
+     *
+     * @param workspace
+     * @param root
+     * @param manager
+     * @param controller
+     */
     public static void loadBlockDrawerSets(Workspace workspace, Element root, FactoryManager manager, СontrollerСonfiguration controller) {
         Pattern attrExtractor = Pattern.compile("\"(.*)\"");
         Matcher nameMatcher;
@@ -232,7 +251,9 @@ public class PageDrawerLoadingUtils {
                                 //don't link factory blocks to their stubs because they will
                                 //forever remain inside the drawer and never be active
                                 newBlock = new Block(workspace, genusName, false);
-                                drawerRBs.add(new FactoryRenderableBlock(workspace, manager, newBlock.getBlockID()));
+                                FactoryRenderableBlock frb = new FactoryRenderableBlock(workspace, manager, newBlock.getBlockID());
+                                frb.OneSetZoomLevel(1);
+                                drawerRBs.add(frb);
                             }
                         }
                         manager.addStaticBlocks(drawerRBs, drawerName);
@@ -242,12 +263,20 @@ public class PageDrawerLoadingUtils {
         }
     }
 
+    /**
+     *
+     * @param workspace
+     * @param root
+     * @param controller
+     */
     public static void loadComponentsSets(Workspace workspace, Element root, СontrollerСonfiguration controller) {
         Pattern attrExtractor = Pattern.compile("\"(.*)\"");
         List<String> tempComponentsName = new ArrayList<String>();
         Matcher nameMatcher;
         NodeList componentsSetNodes = root.getElementsByTagName("ControllerComponentsSet");
         Node componentSetNode;
+        String componentName = null;
+        String componentInfo = null;
         for (int i = 0; i < componentsSetNodes.getLength(); i++) {
             componentSetNode = componentsSetNodes.item(i);
             if (componentSetNode.getNodeName().equals("ControllerComponentsSet")) {
@@ -262,12 +291,23 @@ public class PageDrawerLoadingUtils {
                         if (nameMatcher.find()) {//will be true
                             pinName = nameMatcher.group(1);
                         }
+
                         NodeList component = componentNode.getChildNodes();
                         for (int k = 0; k < component.getLength(); k++) {
                             componentNode = component.item(k);
                             if (componentNode.getNodeName().equals("Component")) {
-                                String componentName = componentNode.getTextContent();
-                                controller.addComponent(pinName, componentName);
+                                nameMatcher = attrExtractor.matcher(componentNode.getAttributes().getNamedItem("name").toString());
+                                if (nameMatcher.find()) {
+                                    componentName = nameMatcher.group(1);
+                                }
+                                nameMatcher = attrExtractor.matcher(componentNode.getAttributes().getNamedItem("info").toString());
+                                if (nameMatcher.find()) {
+                                    componentInfo = nameMatcher.group(1);
+                                }
+                                controller.addComponent(
+                                        pinName,
+                                        componentNode.getTextContent(),
+                                        componentName, componentInfo);
                             }
                         }
                     }

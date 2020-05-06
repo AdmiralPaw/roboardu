@@ -7,16 +7,34 @@ import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class SetterVariableVectorBlock extends TranslatorBlock
 {
 	private static ResourceBundle uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
 	
-	public SetterVariableVectorBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public SetterVariableVectorBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		TranslatorBlock name = this.getRequiredTranslatorBlockAtSocket(0);
@@ -25,7 +43,7 @@ public class SetterVariableVectorBlock extends TranslatorBlock
 		    }
 		TranslatorBlock position = this.getRequiredTranslatorBlockAtSocket(1);
 		TranslatorBlock value = this.getRequiredTranslatorBlockAtSocket(2);
-		String ret = name.toCode()+"["+position.toCode()+" - 1]";
+		String ret = name.toCode()+"["+position.toCode()+"]";
 		ret = ret + " = " + value.toCode() + " ;\n";
 		return ret;
 	}

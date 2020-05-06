@@ -20,13 +20,39 @@ import javax.swing.JLayeredPane;
  */
 public abstract class CScrollPane extends JLayeredPane implements MouseWheelListener, KeyListener {
 
+    /**
+     *
+     */
     public enum ScrollPolicy {
 
+        /**
+         *
+         */
         HORIZONTAL_BAR_ALWAYS,
+
+        /**
+         *
+         */
         HORIZONTAL_BAR_NEVER,
+
+        /**
+         *
+         */
         HORIZONTAL_BAR_AS_NEEDED,
+
+        /**
+         *
+         */
         VERTICAL_BAR_ALWAYS,
+
+        /**
+         *
+         */
         VERTICAL_BAR_NEVER,
+
+        /**
+         *
+         */
         VERTICAL_BAR_AS_NEEDED
     };
 
@@ -63,6 +89,7 @@ public abstract class CScrollPane extends JLayeredPane implements MouseWheelList
 
     /**
      * Set the amount by which the mouse wheel scrolls
+     * @param x
      * @requires INTEGER_MIN<x<INTEGER_MAX
      * @modifies this.SCROLLINGUNIT
      * @effects set this.scrollingunit to x
@@ -71,6 +98,7 @@ public abstract class CScrollPane extends JLayeredPane implements MouseWheelList
 
     /**
      * MouseWheelListener: Should move the viewport by same amount of wheel scroll
+     * @param e
      */
     abstract public void mouseWheelMoved(MouseWheelEvent e);
 }

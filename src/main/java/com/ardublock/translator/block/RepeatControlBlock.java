@@ -7,17 +7,35 @@ import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class RepeatControlBlock extends TranslatorBlock
 {
 
 	private static ResourceBundle uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
 	
-	public RepeatControlBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public RepeatControlBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator);
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 
@@ -39,9 +57,7 @@ public class RepeatControlBlock extends TranslatorBlock
 
 		String ret = "";
 
-		ret = ret + "for(" + varName + " = " + startVal + "; \n" + 
-				    startVal + "<=" + stopVal + "?" + varName + " <= " + stopVal + ":" + varName + " >= " + stopVal + "; \n" + 
-				    startVal + "<=" + stopVal + "?" + varName + " = "  + varName + " + " + incVal + ":" +  varName + " = " + varName + " - " + incVal + ")\n{"; 
+		ret = ret + "for(" + varName + " = " + startVal + "; " + varName + " < " + stopVal + "; " + varName + " += " + incVal + ")\n{"; 
 
 		TranslatorBlock translatorBlock = getTranslatorBlockAtSocket(4);
 		while (translatorBlock != null)

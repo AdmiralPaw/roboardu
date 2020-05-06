@@ -1,43 +1,27 @@
 package com.mit.blocks.codeblockutil;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.RenderingHints;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.GeneralPath;
+import com.mit.blocks.workspace.Workspace;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JToolTip;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.GeneralPath;
 
+/**
+ *
+ * @author User
+ */
 public abstract class LabelWidget extends JComponent {
 
+    /**
+     *
+     */
     public static final int DROP_DOWN_MENU_WIDTH = 7;
     private static final long serialVersionUID = 837647234895L;
     /**
@@ -92,18 +76,31 @@ public abstract class LabelWidget extends JComponent {
     private double zoom = 1.5;
 
     /**
+     *
+     */
+    protected Workspace workspace;
+
+    /**
+     *
+     */
+    protected long blockID;
+    /**
      * BlockLabel Constructor that takes in BlockID as well. Unfortunately
      * BlockID is needed, so the label can redirect mouse actions.
      *
      */
-    public LabelWidget(String initLabelText, Color fieldColor, Color tooltipBackground) {
+    public LabelWidget(String initLabelText, Color fieldColor, Color tooltipBackground, Workspace work, long id) {
         if (initLabelText == null) {
             initLabelText = "";
         }
+
+        blockID = id;
         this.setFocusTraversalKeysEnabled(false);//MOVE DEFAULT FOCUS TRAVERSAL KEYS SUCH AS TABS
         this.setLayout(new BorderLayout());
         this.tooltipBackground = tooltipBackground;
         this.labelBeforeEdit = initLabelText;
+
+        workspace = work;
 
         //set up textfield colors
         textField.setForeground(Color.WHITE);//white text
@@ -115,22 +112,51 @@ public abstract class LabelWidget extends JComponent {
         textField.setMargin(textFieldBorder.getBorderInsets(textField));
     }
 
+    /**
+     *
+     * @param value
+     */
     protected abstract void fireTextChanged(String value);
 
+    /**
+     *
+     * @param value
+     */
     protected abstract void fireGenusChanged(String value);
 
+    /**
+     *
+     * @param value
+     */
     protected abstract void fireDimensionsChanged(Dimension value);
 
+    /**
+     *
+     * @param text
+     * @return
+     */
     protected abstract boolean isTextValid(String text);
 
+    /**
+     *
+     * @param l
+     */
     public void addKeyListenerToTextField(KeyListener l) {
         textField.addKeyListener(l);
     }
 
+    /**
+     *
+     * @param l
+     */
     public void addMouseListenerToLabel(MouseListener l) {
         textLabel.addMouseListener(l);
     }
 
+    /**
+     *
+     * @param l
+     */
     public void addMouseMotionListenerToLabel(MouseMotionListener l) {
         textLabel.addMouseMotionListener(l);
     }
@@ -138,6 +164,11 @@ public abstract class LabelWidget extends JComponent {
     //////////////////////////////
     //// LABEL CONFIGURATION /////
     /////////////////////////////
+
+    /**
+     *
+     * @param show
+     */
     public void showMenuIcon(boolean show) {
         if (this.hasSiblings) {
             isFocused = show;
@@ -148,11 +179,13 @@ public abstract class LabelWidget extends JComponent {
     }
 
     /**
-     * setEditingState sets the current editing state of the BlockLabel.
-     * Repaints BlockLabel to reflect the change.
+     * setEditingState sets the current editing state of the BlockLabel.Repaints BlockLabel to reflect the change.
+     * @param editing
      */
     public void setEditingState(boolean editing) {
         if (editing) {
+            workspace.setActiveWidget(this);
+            workspace.getEnv().getRenderableBlock(blockID).blockRenamed();
             editingText = true;
             textField.setText(textLabel.getText().trim());
             labelBeforeEdit = textLabel.getText();
@@ -202,6 +235,10 @@ public abstract class LabelWidget extends JComponent {
         return isEditable;
     }
 
+    /**
+     *
+     * @param isNumber
+     */
     public void setNumeric(boolean isNumber) {
         this.isNumber = isNumber;
     }
@@ -215,11 +252,20 @@ public abstract class LabelWidget extends JComponent {
         return isNumber;
     }
 
+    /**
+     *
+     * @param hasSiblings
+     * @param siblings
+     */
     public void setSiblings(boolean hasSiblings, String[][] siblings) {
         this.hasSiblings = hasSiblings;
         this.menu.setSiblings(siblings);
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean hasSiblings() {
         return this.hasSiblings;
     }
@@ -238,6 +284,7 @@ public abstract class LabelWidget extends JComponent {
 
     /**
      * sets the tool tip of the label
+     * @param text
      */
     public void assignToolTipToLabel(String text) {
         this.textLabel.setToolTipText(text);
@@ -307,10 +354,9 @@ public abstract class LabelWidget extends JComponent {
 
         //resize to new text
         updateDimensions();
-
+//        System.out.println(text); HER
         //the blockLabel needs to update the data in Block
         this.fireTextChanged(text);
-
         //show text label and additional ComboPopup if one exists
         this.removeAll();
         this.add(textLabel, BorderLayout.CENTER);
@@ -337,6 +383,7 @@ public abstract class LabelWidget extends JComponent {
         textLabel.setSize(updatedDimension);
         this.setSize(updatedDimension);
         this.fireDimensionsChanged(this.getSize());
+
     }
 
     /**
@@ -367,6 +414,10 @@ public abstract class LabelWidget extends JComponent {
         }
     }
 
+    /**
+     *
+     * @param newZoom
+     */
     public void setZoomLevel(double newZoom) {
         this.zoom = newZoom;
         Font renderingFont;// = new Font(font.getFontName(), font.getStyle(), (int)(font.getSize()*newZoom));
@@ -384,6 +435,7 @@ public abstract class LabelWidget extends JComponent {
 
     /**
      * returns true if this block should can accept a negative sign
+     * @return 
      */
     public boolean canProcessNegativeSign() {
         if (this.getText() != null && this.getText().contains("-")) {
@@ -549,7 +601,7 @@ public abstract class LabelWidget extends JComponent {
             this.addMouseListener(this);
             this.addMouseMotionListener(this);
             this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-            this.popupmenu = new CPopupMenu();
+            this.popupmenu = new CPopupMenu(workspace);
         }
 
         /**
@@ -557,7 +609,7 @@ public abstract class LabelWidget extends JComponent {
          * label}, {genus, label}, {genus, label} ....}
          */
         private void setSiblings(String[][] siblings) {
-            popupmenu = new CPopupMenu();
+            popupmenu = new CPopupMenu(workspace);
             //if connected to a block, add self and add siblings
             for (int i = 0; i < siblings.length; i++) {
                 final String selfGenus = siblings[i][0];
@@ -565,8 +617,10 @@ public abstract class LabelWidget extends JComponent {
                 selfItem.addActionListener(new ActionListener() {
 
                     public void actionPerformed(ActionEvent e) {
+                        workspace.getEnv().getRenderableBlock(blockID).blockRenamed();
                         fireGenusChanged(selfGenus);
                         showMenuIcon(false);
+
                     }
                 });
                 popupmenu.add(selfItem);
@@ -588,16 +642,26 @@ public abstract class LabelWidget extends JComponent {
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
                 triangle = new GeneralPath();
-                triangle.moveTo(0, this.getHeight() / 4);
-                triangle.lineTo(this.getWidth() - 1, this.getHeight() / 4);
-                triangle.lineTo(this.getWidth() / 2 - 1, this.getHeight() / 4 + LabelWidget.DROP_DOWN_MENU_WIDTH);
-                triangle.lineTo(0, this.getHeight() / 4);
-                triangle.closePath();
+                GeneralPath rect = new GeneralPath();
+                rect.moveTo(0, this.getHeight() / 4);
+                rect.lineTo(this.getWidth() - 1, this.getHeight() / 4);
+                rect.lineTo(this.getWidth() / 2 - 1, this.getHeight() / 4 + LabelWidget.DROP_DOWN_MENU_WIDTH);
+                rect.lineTo(0, this.getHeight() / 4);
+                rect.closePath();
+                
+                
+                triangle.moveTo(0, this.getHeight() / 5);
+                triangle.lineTo(this.getWidth(), this.getHeight() / 5);
+                triangle.lineTo(this.getWidth(), this.getHeight() / 2 + LabelWidget.DROP_DOWN_MENU_WIDTH);
+                triangle.lineTo(0, this.getHeight() / 2 + LabelWidget.DROP_DOWN_MENU_WIDTH);
+                triangle.lineTo(0, this.getHeight() / 5);
 
-                g2.setColor(new Color(255, 255, 255, 100));
+                g2.setColor(new Color(255,0,0,0));
                 g2.fill(triangle);
+                g2.setColor(new Color(255, 255, 255,100));
+                g2.fill(rect);
                 g2.setColor(Color.BLACK);
-                g2.draw(triangle);
+                g2.draw(rect);
             }
 
         }

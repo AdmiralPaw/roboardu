@@ -1,5 +1,9 @@
 package com.mit.blocks.workspace;
 
+/**
+ *
+ * @author User
+ */
 public interface SearchableElement {
 
     /**

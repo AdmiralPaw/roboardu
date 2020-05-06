@@ -1,17 +1,17 @@
 package com.mit.blocks.codeblocks.rendering;
 
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.PathIterator;
-import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-
 import com.mit.blocks.codeblockutil.GraphicsManager;
 import com.mit.blocks.codeblockutil.LRUCache;
 
+import java.awt.*;
+import java.awt.geom.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author User
+ */
 public class BlockShapeUtil {
 	
     /**
@@ -23,12 +23,18 @@ public class BlockShapeUtil {
     }
     
     /**
-     * Draws a curve segment relative to the current point of the GeneralPath.
-     * 
-     * Adds a curved segment, defined by three new points, to the path by
-     * drawing a Bézier curve that intersects both the current coordinates and
-     * the coordinates (x3, y3), using the specified points (x1, y1) and (x2,
-     * y2) as Bézier control points.
+     * Draws a curve segment relative to the current point of the GeneralPath.Adds a curved segment, defined by three new points, to the path by
+ drawing a Bézier curve that intersects both the current coordinates and
+ the coordinates (x3, y3), using the specified points (x1, y1) and (x2,
+ y2) as Bézier control points.
+     *
+     * @param gp
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @param x3
+     * @param y3
      */
     public static void curveTo(GeneralPath gp, float x1, float y1, float x2, float y2, float x3, float y3) {
         Point2D currentPoint = gp.getCurrentPoint();
@@ -99,7 +105,14 @@ public class BlockShapeUtil {
                 (float) endCurvePoint.getX(), (float) endCurvePoint.getY());
     }
 	
-    /** Assumes we are at (x1,y1), the corner point is (x2,y2), and we end at (x3, y3) */
+    /** Assumes we are at (x1,y1), the corner point is (x2,y2), and we end at (x3, y3)
+     * @param gp
+     * @param y1
+     * @param x1
+     * @param y2
+     * @param x2
+     * @param y3
+     * @param x3 */
     public static void cornerShape(GeneralPath gp, float x1, float y1, float x2, float y2, float x3, float y3) {
         gp.curveTo((x1 + x2) / 2, (y1 + y2) / 2, (x2 + x3) / 2, (y2 + y3) / 2, x3, y3);
     }
@@ -158,6 +171,10 @@ public class BlockShapeUtil {
 	
     /**
      * Static method to return bufferedImage of a Beveled outline of a block
+     * @param width
+     * @param height
+     * @param s
+     * @return 
      */
     public static Image getBevelImage(int width, int height, Area s) {
         BevelCacheKey key = new BevelCacheKey(width, height, s);
@@ -185,9 +202,10 @@ public class BlockShapeUtil {
     }
 
     /**
-     * Appends path gp2 to gp1.
-     * Taken from pre-redesign code.
+     * Appends path gp2 to gp1.Taken from pre-redesign code.
+     * @param gp1
      * @param reversed is true if the segments are added in reverse order
+     * @param gp2
      */
     public static void appendPath(GeneralPath gp1, GeneralPath gp2, boolean reversed) {
         // Each element is an array consisting of one Integer and six Floats
@@ -305,7 +323,8 @@ public class BlockShapeUtil {
         }
     }
 
-    /** Prints out a GeneralPath.  Used for debugging only */
+    /** *  Prints out a GeneralPath.Used for debugging only
+     * @param gp */
     public static void printPath(GeneralPath gp) {
         if (gp == null) {
             System.out.println("(null path)");
@@ -317,13 +336,13 @@ public class BlockShapeUtil {
         while (!i.isDone()) {
             type = i.currentSegment(segment);
             if (type == PathIterator.SEG_MOVETO) {
-                System.out.println("m: (" + segment[0] + ", " + segment[1] + ")");
+//                System.out.println("m: (" + segment[0] + ", " + segment[1] + ")");
             } else if (type == PathIterator.SEG_LINETO) {
-                System.out.println("l: (" + segment[0] + ", " + segment[1] + ")");
+//                System.out.println("l: (" + segment[0] + ", " + segment[1] + ")");
             } else if (type == PathIterator.SEG_QUADTO) {
-                System.out.println("q: (" + segment[0] + ", " + segment[1] + "), (" + segment[2] + ", " + segment[3] + ")");
+//                System.out.println("q: (" + segment[0] + ", " + segment[1] + "), (" + segment[2] + ", " + segment[3] + ")");
             } else if (type == PathIterator.SEG_CUBICTO) {
-                System.out.println("c: (" + segment[0] + ", " + segment[1] + "), (" + segment[2] + ", " + segment[3] + "), (" + segment[4] + ", " + segment[5] + ")");
+//                System.out.println("c: (" + segment[0] + ", " + segment[1] + "), (" + segment[2] + ", " + segment[3] + "), (" + segment[4] + ", " + segment[5] + ")");
             }
             i.next();
         }

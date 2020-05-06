@@ -13,6 +13,8 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.List;
 
@@ -73,12 +75,33 @@ import com.mit.blocks.workspace.Workspace;
  */
 public class WorkspaceController {
 
+    /**
+     *
+     */
+    public static Map<String,String[]> suitableBlocks;
+
     private Element langDefRoot;
     private boolean isWorkspacePanelInitialized = false;
+
+    /**
+     *
+     */
     protected JPanel workspacePanel;
+
+    /**
+     *
+     */
     protected final Workspace workspace;
+
+    /**
+     *
+     */
     protected SearchBar searchBar;
 
+    /**
+     *
+     * @return
+     */
     public Workspace getWorkspace() {
         return this.workspace;
     }
@@ -114,14 +137,26 @@ public class WorkspaceController {
         pom = new ProcedureOutputManager(workspace);	//*****
     }
     
+    /**
+     *
+     * @param is
+     */
     public void setLangDefDtd(InputStream is) {
     	langDefDtd = is;
     }
     
+    /**
+     *
+     * @param bundle
+     */
     public void setLangResourceBundle(ResourceBundle bundle) {
     	langResourceBundle = bundle;
     }
     
+    /**
+     *
+     * @param list
+     */
     public void setStyleList(List<String[]> list) {
     	styleList = list;
     }
@@ -129,6 +164,7 @@ public class WorkspaceController {
     /**
      * Sets the file path for the language definition file, if the
      * language definition file is located in
+     * @param filePath
      */
     public void setLangDefFilePath(final String filePath) {
         InputStream in = null;
@@ -171,7 +207,7 @@ public class WorkspaceController {
             // TODO modify the L10N text and style here
             ardublockLocalize(doc);
             ardublockStyling(doc);
-            
+            getAllSuitableBlocks(doc);
             langDefRoot = doc.getDocumentElement();
             langDefDirty = true;
         } catch (ParserConfigurationException e) {
@@ -182,6 +218,61 @@ public class WorkspaceController {
             throw new RuntimeException(e);
         }
     }
+
+
+    private void getAllSuitableBlocks(Document doc){
+
+        Map<String,String[]> allsuitableBlocks = new HashMap<String,String[]>(){};
+        Map<String,String[]> parsedSuitableBlocks = new HashMap<String,String[]>(){};
+
+        ResourceBundle resourses = ResourceBundle.getBundle("com/ardublock/block/ardublock");
+
+        NodeList elements = doc.getElementsByTagName("SuitableBlocks");
+        Element el = (Element) elements.item(0);
+
+        NodeList keyElements = el.getElementsByTagName("KeyBlock");
+        //System.out.println("keys from xml ***************8");
+        for(int i=0;i<keyElements.getLength();i++){
+            String key = ((Element)keyElements.item(i)).getAttribute("key");
+
+            try {
+                key = resourses.getString(key);
+                //System.out.println(key);
+            }catch (Exception e){
+                key = "not found";
+            }
+
+
+            NodeList blocks = ((Element)keyElements.item(i)).getElementsByTagName("Block");
+            String[] values = new String[blocks.getLength()];
+            String[] parsedValues = new String[blocks.getLength()];
+
+            for(int q=0;q<blocks.getLength();q++){
+                values[q] = ((Element)blocks.item(q)).getAttribute("value");
+                parsedValues[q] = resourses.getString(values[q]);
+
+            }
+            parsedSuitableBlocks.put(key,parsedValues);
+            allsuitableBlocks.put(key.toUpperCase(), values);
+        }
+
+        this.suitableBlocks=parsedSuitableBlocks;
+
+        //разкомментить чтоб посмотреть что дает нам xml
+//        for(String key:suitableBlocks.keySet()){
+//            System.out.println(key);
+//
+//            String[] s = suitableBlocks.get(key);
+//            for(String val:s){
+//                System.out.println(val);
+//            }
+//
+//        }
+
+
+    }
+
+
     
     /**
      * Styling the color of the BlockGenus and other elements with color
@@ -244,7 +335,7 @@ public class WorkspaceController {
 				for (int j = 0 ; j < arg_descs.getLength(); j++) {
 					Element arg_desc = (Element)arg_descs.item(j);
 					String arg_name = arg_desc.getAttribute("name");
-					// System.out.println("bg." + name + ".arg_desc." + arg_name);
+//					 System.out.println("bg." + name + ".arg_desc." + arg_name);
 				}
 			}
         	nodes = doc.getElementsByTagName("BlockDrawer");
@@ -417,10 +508,10 @@ public class WorkspaceController {
     }
 
     /**
-     * Loads the programming project from the specified file path.
-     * This method assumes that a Language Definition File has already
-     * been specified for this programming project.
+     * Loads the programming project from the specified file path.This method assumes that a Language Definition File has already
+ been specified for this programming project.
      * @param path String file path of the programming project to load
+     * @throws java.io.IOException
      */
     public void loadProjectFromPath(final String path) throws IOException
     {
@@ -449,11 +540,11 @@ public class WorkspaceController {
     }
 
     /**
-     * Loads the programming project from the specified element. This method
-     * assumes that a Language Definition File has already been specified for
-     * this programming project.
+     * Loads the programming project from the specified element.This method
+ assumes that a Language Definition File has already been specified for
+ this programming project.
      *
-     * @param element element of the programming project to load
+     * @param elementToLoad
      */
     public void loadProjectFromElement(Element elementToLoad) {
         workspace.loadWorkspaceFrom(elementToLoad, langDefRoot);
@@ -645,6 +736,10 @@ public class WorkspaceController {
         }
     }
 
+    /**
+     *
+     * @param selectedFile
+     */
     public void setSelectedFile(File selectedFile) {
         this.selectedFile = selectedFile;
         frame.setTitle("WorkspaceDemo - "+selectedFile.getPath());
@@ -670,6 +765,7 @@ public class WorkspaceController {
     /**
      * Returns a SearchBar instance capable of searching for blocks
      * within the BlockCanvas and block drawers
+     * @return 
      */
     public JComponent getSearchBar() {
         final SearchBar sb = new SearchBar(
@@ -696,7 +792,7 @@ public class WorkspaceController {
         frame = new JFrame("WorkspaceDemo");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setBounds(100, 100, 800, 600);
-        final SearchBar sb = new SearchBar("Search blocks",
+        final SearchBar sb = new SearchBar("Поиск блоков",
                 "Search for blocks in the drawers and workspace", workspace);
         for (final SearchableContainer con : getAllSearchableContainers()) {
             sb.addSearchableContainer(con);
@@ -710,6 +806,10 @@ public class WorkspaceController {
         frame.setVisible(true);
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(final String[] args) {
 //        if (args.length < 1) {
 //            System.err.println("usage: WorkspaceController lang_def.xml");

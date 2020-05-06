@@ -2,58 +2,28 @@ package com.mit.blocks.workspace;
 
 import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
 import com.ardublock.ui.OpenblocksFrame;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import javax.xml.xpath.XPathFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathConstants;
-
-import com.mit.blocks.codeblockutil.RSplitPane;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import com.mit.blocks.workspace.ZoomSlider;
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.codeblocks.ProcedureOutputManager;
-import com.mit.blocks.codeblockutil.Explorer;
-import com.mit.blocks.codeblockutil.ExplorerEvent;
-import com.mit.blocks.codeblockutil.ExplorerListener;
+import com.mit.blocks.codeblockutil.*;
 import com.mit.blocks.renderable.BlockUtilities;
 import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.typeblocking.FocusTraversalManager;
 import com.mit.blocks.workspace.typeblocking.TypeBlockManager;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import org.w3c.dom.*;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.xml.xpath.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.URL;
-
-import org.jfree.ui.tabbedui.VerticalLayout;
+import java.util.List;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * The Workspace is the main block area, where blocks are manipulated and
@@ -64,9 +34,20 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
 
     private static final long serialVersionUID = 328149080422L;
 
+    /**
+     *
+     */
+    public static JComponent blocksContainer;
+
     // the environment wrapps all the components of a workspace (Blocks, RenderableBlocks, BlockStubs, BlockGenus)
     private final WorkspaceEnvironment env = new WorkspaceEnvironment();
+    private CPopupMenu activeMenu = null;
+    private LabelWidget activeWidget = null;
 
+    /**
+     *
+     * @return
+     */
     public WorkspaceEnvironment getEnv() {
         return this.env;
     }
@@ -108,6 +89,9 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         }
     });
 
+    /**
+     *
+     */
     public static boolean everyPageHasDrawer = true;
 
     /**
@@ -126,33 +110,124 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      * toggle the visibility of.
      */
     public JSplitPane workLayer;
+
+    /**
+     *
+     */
     public JPanel blockCanvasLayer; //Layer with controller
+
+    /**
+     *
+     */
+    public JSplitPane centerPane;
     private boolean isActiveBasket;
+
+    /**
+     *
+     */
+    public JButton zoomPlus;
+
+    /**
+     *
+     */
+    public JButton zoomMinus;
+
+    /**
+     *
+     */
+    public JButton zoomNormal;
+
+    /**
+     *
+     */
+    public JButton undoAct;
+
+    /**
+     *
+     */
+    public JButton redoAct;
+
+    /**
+     *
+     */
+    public JPanel action_buttons;
+
+    /**
+     *
+     */
+    public JPanel level_two;
 
     /**
      * MiniMap associated with the blockCanvas
      */
     private ErrWindow errWindow = new ErrWindow();
     private MiniMap miniMap;
+
+    /**
+     *
+     */
     public FactoryManager factory;
+
+    /**
+     *
+     */
     public СontrollerСonfiguration controller;
     private final FocusTraversalManager focusManager;
 
     private final TypeBlockManager typeBlockManager;
 
     /// RENDERING LAYERS ///
+    /**
+     *
+     */
     public final static Integer PAGE_LAYER = new Integer(0);
+
+    /**
+     *
+     */
     public final static Integer BLOCK_HIGHLIGHT_LAYER = new Integer(1);
+
+    /**
+     *
+     */
     public final static Integer BLOCK_LAYER = new Integer(2);
+
+    /**
+     *
+     */
     public final static Integer WIDGET_LAYER = new Integer(3);
+
+    /**
+     *
+     */
     public final static Integer DRAGGED_BLOCK_HIGHLIGHT_LAYER = new Integer(4);
+
+    /**
+     *
+     */
     public final static Integer DRAGGED_BLOCK_LAYER = new Integer(5);
 
+    /**
+     *
+     */
     public Workspace() {
-        super();
-        setLayout(null);
-        setBackground(Color.WHITE);
-        setPreferredSize(new Dimension(800, 600));
+        
+        //super();
+        
+//        setBackground(Color.WHITE);
+
+        InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+        ActionMap am = getActionMap();
+
+        KeyStroke keyV = KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.CTRL_DOWN_MASK);
+        im.put(keyV, "deleteAllBlocks");
+
+        am.put("deleteAllBlocks", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OpenblocksFrame.deleteAllBlocks();
+            }
+        });
 
         this.controller = new СontrollerСonfiguration();
         controller.setMinimumSize(new Dimension(100, 100));
@@ -177,11 +252,11 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 workLayer.validate();
             }
         });
-        
+
         isActiveBasket = false;
 
         JPanel errPanel = errWindow.getErrPanel();
-        
+
         final JLayeredPane blockCanvasWithDepth = new JLayeredPane();
         blockCanvasWithDepth.setPreferredSize(new Dimension(300, 500));
         final JPanel level_one = new JPanel();
@@ -197,7 +272,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
             public void componentResized(ComponentEvent e) {
                 super.componentResized(e);
                 blockCanvasWithDepth.getComponents()[1].setBounds(0, 0, blockCanvasWithDepth.getWidth() - 1, blockCanvasWithDepth.getHeight() - 1);
-                blockCanvasWithDepth.getComponents()[0].setBounds(blockCanvasWithDepth.getWidth() - 75, blockCanvasWithDepth.getHeight() - 150, 75, 150);
+                blockCanvasWithDepth.getComponents()[0].setBounds(blockCanvasWithDepth.getWidth() - 60, blockCanvasWithDepth.getHeight() - 241, 60, 241);
                 blockCanvasWithDepth.getComponents()[1].revalidate();
                 blockCanvasWithDepth.getComponents()[1].repaint();
 
@@ -206,7 +281,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
 
         //blockCanvas.getJComponent().setMinimumSize(new Dimension(0, 100));
         //blockCanvas.getJComponent().setPreferredSize(new Dimension(0, 600));
-        final JSplitPane centerPane = new RSplitPane(JSplitPane.VERTICAL_SPLIT, true,
+        centerPane = new RSplitPane(JSplitPane.VERTICAL_SPLIT, true,
                 blockCanvasWithDepth, errPanel);
         centerPane.setOneTouchExpandable(true);
         centerPane.setDividerSize(6);
@@ -219,7 +294,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 blockCanvasLayer.updateUI();
             }
         });
-       
+
         workLayer = new RSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
                 factory.getJComponent(), centerPane);
         workLayer.setOneTouchExpandable(true);
@@ -241,19 +316,20 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         add(blockCanvasLayer, BLOCK_LAYER);
 
         int size = 45;
-        final double coef = 0.25;
+        final double coef = 0.2f;
         final double max_zoom = 2.5;
         final double min_zoom = 0.5;
         URL iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/block/buttons/zoom+.png");
         ImageIcon button_icon = new ImageIcon(
                 new ImageIcon(iconURL).getImage()
                         .getScaledInstance(size, size, java.awt.Image.SCALE_SMOOTH));
-        JButton zoomPlus = new JButton(button_icon);
+        zoomPlus = new JButton(button_icon);
         zoomPlus.setBorder(BorderFactory.createEmptyBorder());
         zoomPlus.setContentAreaFilled(false);
         zoomPlus.setFocusable(false);
         zoomPlus.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                zoomPlus.repaint();
                 double zoom = Page.zoom + coef;
                 if (zoom > max_zoom) {
                     zoom = max_zoom;
@@ -263,24 +339,43 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
             }
         });
         zoomPlus.addMouseListener(new MouseListener() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 repaint();
             }
 
+            @Override
             public void mousePressed(MouseEvent e) {
                 repaint();
             }
 
+            @Override
             public void mouseReleased(MouseEvent e) {
                 repaint();
             }
 
+            @Override
             public void mouseEntered(MouseEvent e) {
                 repaint();
             }
 
+            @Override
             public void mouseExited(MouseEvent e) {
                 repaint();
+            }
+        });
+        InputMap imap = this.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke zoomPlusStr = KeyStroke.getKeyStroke(KeyEvent.VK_ADD, InputEvent.CTRL_DOWN_MASK);
+        imap.put(zoomPlusStr, "workspacePlus");
+        this.getActionMap().put("workspacePlus", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double zoom = Page.zoom + coef;
+                if (zoom > max_zoom) {
+                    zoom = max_zoom;
+                }
+                setWorkspaceZoom(zoom);
+                PageChangeEventManager.notifyListeners();
             }
         });
 
@@ -288,11 +383,26 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         button_icon = new ImageIcon(
                 new ImageIcon(iconURL).getImage()
                         .getScaledInstance(size, size, java.awt.Image.SCALE_SMOOTH));
-        JButton zoomMinus = new JButton(button_icon);
+        zoomMinus = new JButton(button_icon);
         zoomMinus.setBorder(BorderFactory.createEmptyBorder());
         zoomMinus.setContentAreaFilled(false);
         zoomMinus.setFocusable(false);
         zoomMinus.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                zoomMinus.repaint();
+                double zoom = Page.zoom - coef;
+                if (zoom < min_zoom) {
+                    zoom = min_zoom;
+                }
+                setWorkspaceZoom(zoom);
+                PageChangeEventManager.notifyListeners();
+            }
+        });
+        imap = this.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke zoomMinusStr = KeyStroke.getKeyStroke(KeyEvent.VK_SUBTRACT, InputEvent.CTRL_DOWN_MASK);
+        imap.put(zoomMinusStr, "workspaceMinus");
+        this.getActionMap().put("workspaceMinus", new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 double zoom = Page.zoom - coef;
                 if (zoom < min_zoom) {
@@ -303,22 +413,27 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
             }
         });
         zoomMinus.addMouseListener(new MouseListener() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 repaint();
             }
 
+            @Override
             public void mousePressed(MouseEvent e) {
                 repaint();
             }
 
+            @Override
             public void mouseReleased(MouseEvent e) {
                 repaint();
             }
 
+            @Override
             public void mouseEntered(MouseEvent e) {
                 repaint();
             }
 
+            @Override
             public void mouseExited(MouseEvent e) {
                 repaint();
             }
@@ -328,7 +443,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         button_icon = new ImageIcon(
                 new ImageIcon(iconURL).getImage()
                         .getScaledInstance(size, size, java.awt.Image.SCALE_SMOOTH));
-        JButton zoomNormal = new JButton(button_icon);
+        zoomNormal = new JButton(button_icon);
         zoomNormal.setBorder(BorderFactory.createEmptyBorder());
         zoomNormal.setContentAreaFilled(false);
         zoomNormal.setFocusable(false);
@@ -339,44 +454,147 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
             }
         });
         zoomNormal.addMouseListener(new MouseListener() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 repaint();
             }
 
+            @Override
             public void mousePressed(MouseEvent e) {
                 repaint();
             }
 
+            @Override
             public void mouseReleased(MouseEvent e) {
                 repaint();
             }
 
+            @Override
             public void mouseEntered(MouseEvent e) {
                 repaint();
             }
 
+            @Override
             public void mouseExited(MouseEvent e) {
                 repaint();
             }
         });
 
-        JPanel level_two = new JPanel();
+        imap = this.getInputMap(JButton.WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke zoomNormalStr = KeyStroke.getKeyStroke(KeyEvent.VK_EQUALS, InputEvent.CTRL_DOWN_MASK);
+        imap.put(zoomNormalStr, "workspaceNormal");
+        this.getActionMap().put("workspaceNormal", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setWorkspaceZoom(1);
+                PageChangeEventManager.notifyListeners();
+            }
+        });
+
+        iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/block/buttons/undoButton.png");
+        button_icon = new ImageIcon(
+                new ImageIcon(iconURL).getImage()
+                        .getScaledInstance(size, size, java.awt.Image.SCALE_SMOOTH));
+        undoAct = new JButton(button_icon);
+        undoAct.setBorder(BorderFactory.createEmptyBorder());
+        undoAct.setContentAreaFilled(false);
+        undoAct.setFocusable(false);
+        undoAct.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Workspace.this.getPageNamed("Main").setUndoScreen();
+            }
+        });
+        undoAct.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                repaint();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                repaint();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                repaint();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                repaint();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                repaint();
+            }
+        });
+
+        iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/block/buttons/redoButton.png");
+        button_icon = new ImageIcon(
+                new ImageIcon(iconURL).getImage()
+                        .getScaledInstance(size, size, java.awt.Image.SCALE_SMOOTH));
+        redoAct = new JButton(button_icon);
+        redoAct.setBorder(BorderFactory.createEmptyBorder());
+        redoAct.setContentAreaFilled(false);
+        redoAct.setFocusable(false);
+        redoAct.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Workspace.this.getPageNamed("Main").setRedoScreen();
+            }
+        });
+        redoAct.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                repaint();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                repaint();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                repaint();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                repaint();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                repaint();
+            }
+        });
+
+        level_two = new JPanel();
         level_two.setLayout(new BorderLayout());
         level_two.setBackground(new Color(0, 0, 0, 0));
-        JPanel zoom_buttons = new JPanel();
-        zoom_buttons.setLayout(new BoxLayout(zoom_buttons, BoxLayout.Y_AXIS));
-        zoom_buttons.add(zoomPlus);
-        zoom_buttons.add(zoomMinus);
-        zoom_buttons.add(zoomNormal);
+        action_buttons = new JPanel();
+        action_buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 1));
+        //action_buttons.setLayout(new BoxLayout(action_buttons, BoxLayout.Y_AXIS));
+
+//        action_buttons.add(undoAct);
+//        action_buttons.add(redoAct);
+        action_buttons.add(zoomPlus);
+        action_buttons.add(zoomMinus);
+        action_buttons.add(zoomNormal);
 
         int zoom_panel_x = 500;
         int zoom_panel_y = 500;
         level_two.setBounds(1, 1,
                 299, 649);
 
-        zoom_buttons.setBackground(new Color(255, 255, 255, 0));
+        action_buttons.setBackground(new Color(255, 255, 255, 0));
 
-        level_two.add(zoom_buttons, BorderLayout.CENTER);
+        level_two.add(action_buttons, BorderLayout.CENTER);
+
         blockCanvasWithDepth.add(level_two, new Integer(3));
 
         validate();
@@ -387,6 +605,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         this.focusManager = new FocusTraversalManager(this);
 
         this.typeBlockManager = new TypeBlockManager(this, blockCanvas);
+
     }
 
     /*
@@ -395,16 +614,45 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      * If event is of type "2" then shows the Minimize page button
      * Event type details can be found in the GlassExplorerEvent class
      */
-
-    public void setBasket(boolean status)
-    {
-        if (isActiveBasket!=status)
-        {
+    /**
+     *
+     * @param status
+     */
+    public void setBasket(boolean status) {
+        if (isActiveBasket != status) {
             this.factory.setBasket(status);
             isActiveBasket = status;
         }
     }
 
+    /**
+     *
+     */
+    public void fullRandomBlocksRepaint() {
+        Random rnd = new Random();
+        for (RenderableBlock bl : getFactoryManager().getBlocks()) {
+            int r = rnd.nextInt(255);
+            int g = rnd.nextInt(255);
+            int b = rnd.nextInt(255);
+            bl.randomColor = new Color(r, g, b);
+            bl.updateBuffImg();
+            bl.repaint();
+        }
+        for (RenderableBlock bl : getPageNamed("Main").getBlocks()) {
+            int r = rnd.nextInt(255);
+            int g = rnd.nextInt(255);
+            int b = rnd.nextInt(255);
+            bl.randomColor = new Color(r, g, b);
+            bl.updateBuffImg();
+            bl.repaint();
+        }
+
+    }
+
+    /**
+     *
+     * @param event
+     */
     @Override
     public void explorerEventOccurred(ExplorerEvent event) {
         final Explorer exp = event.getSource();
@@ -419,23 +667,44 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Dimension getFactorySize() {
         return factory.getNavigator().getJComponent().getSize();
     }
 
+    /**
+     *
+     * @return
+     */
     public Dimension getCanvasSize() {
         return blockCanvas.getCanvas().getSize();
     }
 
+    /**
+     *
+     * @return
+     */
     public Dimension getCanvasOffset() {
         return new Dimension(blockCanvas.getHorizontalModel().getValue() - blockCanvas.getJComponent().getX(),
                 blockCanvas.getVerticalModel().getValue() - blockCanvas.getJComponent().getY());
     }
 
+    /**
+     *
+     * @param pageName
+     * @return
+     */
     public Page getPageNamed(String pageName) {
         return blockCanvas.getPageNamed(pageName);
     }
 
+    /**
+     *
+     * @return
+     */
     public BlockCanvas getBlockCanvas() {
         return blockCanvas;
     }
@@ -446,11 +715,15 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
     public MiniMap getMiniMap() {
         return this.miniMap;
     }
-    
+
+    /**
+     *
+     * @return
+     */
     public ErrWindow getErrWindow() {
         return this.errWindow;
     }
-    
+
     /**
      * Returns the FocusTraversalManager instance
      *
@@ -462,11 +735,11 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
 
     /**
      * Disables the MiniMap from canvas
-     *
      */
     public void disableMiniMap() {
         miniMap.hideMiniMap();
     }
+
     ////////////////
     // WIDGETS
     ////////////////
@@ -709,6 +982,8 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
     //////////////////////////
     /**
      * Adds the specified WorkspaceListener
+     *
+     * @param listener
      */
     public void addWorkspaceListener(WorkspaceListener listener) {
         if (listener != null) {
@@ -745,6 +1020,8 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
     ////////////////////
     /**
      * Enables TypeBLocking if and only if enabled == true
+     *
+     * @param enabled
      */
     public void enableTypeBlocking(boolean enabled) {
         typeBlockManager.setEnabled(enabled);
@@ -786,9 +1063,9 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         for (Page p : getBlockCanvas().getPages()) {
             for (RenderableBlock block : p.getTopLevelBlocks()) {
 
-                // checks if the x and y position has not been set yet, this happens when
-                // a previously saved project is just opened and the blocks have not been
-                // moved yet. otherwise, the unzoomed X and Y are calculated in RenderableBlock
+//                 checks if the x and y position has not been set yet, this happens when
+//                 a previously saved project is just opened and the blocks have not been
+//                 moved yet. otherwise, the unzoomed X and Y are calculated in RenderableBlock
                 if (block.getUnzoomedX() == 0.0 && block.getUnzoomedY() == 0.0) {
                     if (newZoom == 1.0) {
                         block.setUnzoomedX(block.getX());
@@ -800,19 +1077,14 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 } else {
                 }
 
-                if (block.hasComment()) {
-                    //determine the new relative position of the comment based on the current relative position
-                    cDX = (int) ((block.getComment().getX() - block.getX()) / oldZoom * newZoom);
-                    cDY = (int) ((block.getComment().getY() - block.getY()) / oldZoom * newZoom);
-                }
                 // calculates the new position based on the initial position when zoom is at 1.0
-                block.setLocation((int) (block.getUnzoomedX() * this.zoom), (int) (block.getUnzoomedY() * this.zoom));
-                if (block.hasComment()) {
-                    //Set the comment location to the new relative position
-                    block.getComment().setLocation(block.getX() + cDX, block.getY() + cDY);
-                }
+                double coef = oldZoom / newZoom;
+                block.setLocation((int) ((double) block.getX() / coef), (int) ((double) block.getY() / coef));
+//
+
                 block.redrawFromTop();
                 block.repaint();
+
             }
         }
         Page.setZoomLevel(newZoom);
@@ -829,12 +1101,15 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
 
     /**
      * Resets the workspace zoom to the default level
-     *
      */
     public void setWorkspaceZoomToDefault() {
         this.setWorkspaceZoom(1.0);
     }
 
+    /**
+     *
+     * @param c
+     */
     public void scrollToComponent(JComponent c) {
         blockCanvas.scrollToComponent(c);
     }
@@ -874,6 +1149,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      * canvas
      *
      * @param page the desired page to add
+     * @param position
      */
     public void addPage(Page page, int position) {
         //this method assumes that this addPage was a user or file loading
@@ -968,6 +1244,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      * Find the page that lies underneath this block CAN RETURN NULL
      *
      * @param block
+     * @return
      */
     public Page getCurrentPage(RenderableBlock block) {
         for (Page page : getBlockCanvas().getPages()) {
@@ -989,6 +1266,10 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         blockCanvas.switchViewToPage(page);
     }
 
+    /**
+     *
+     * @return
+     */
     public FactoryManager getFactoryManager() {
         return factory;
     }
@@ -996,6 +1277,8 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
     /**
      * Returns an unmodifiable Iterable of all the SearchableContainers within
      * this workspace.
+     *
+     * @return
      */
     public Iterable<SearchableContainer> getAllSearchableContainers() {
         ArrayList<SearchableContainer> containers = new ArrayList<SearchableContainer>(factory.getSearchableContainers());
@@ -1030,8 +1313,9 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
     // SAVING AND LOADING //
     ////////////////////////
     /**
-     * Returns the node of this. Currently returns the BlockCanvas node only.
+     * Returns the node of this.Currently returns the BlockCanvas node only.
      *
+     * @param document
      * @return the node of this.
      */
     public Node getSaveNode(Document document) {
@@ -1095,15 +1379,15 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         ProcedureOutputManager.finishLoad();
 
         if (newRoot != null) {
-            PageDrawerLoadingUtils.loadBlockDrawerSets(this, originalLangRoot, factory, controller); //
-            PageDrawerLoadingUtils.loadComponentsSets(this, originalLangRoot, controller);
+            //PageDrawerLoadingUtils.loadBlockDrawerSets(this, originalLangRoot, factory, controller); //
+            //PageDrawerLoadingUtils.loadComponentsSets(this, originalLangRoot, controller);
             //load pages, page drawers, and their blocks from save file
             blockCanvas.loadSaveString(newRoot);
             //load the block drawers specified in the file (may contain
             //custom drawers) and/or the lang def file if the contents specify
 //            PageDrawerLoadingUtils.loadBlockDrawerSets(this, originalLangRoot, factory);
             PageDrawerLoadingUtils.loadBlockDrawerSets(this, newRoot, factory, controller);
-            PageDrawerLoadingUtils.loadComponentsSets(this, newRoot, controller);
+            //PageDrawerLoadingUtils.loadComponentsSets(this, newRoot, controller);
             loadWorkspaceSettings(newRoot);
         } else {
             //load from original language/workspace root specification
@@ -1161,7 +1445,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      * references and their associated buttons - clears all RenderableBlock
      * instances (which clears their associated Block instances.) Note: we want
      * to get rid of all RendereableBlocks and their references.
-     *
+     * <p>
      * Want to get the Workspace ready to load another workspace
      */
     public void reset() {
@@ -1210,19 +1494,58 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
 
     /**
      * *********************************
-     * State Saving Stuff for Undo/Redo *
-     **********************************
+     * State Saving Stuff for Undo/Redo * *********************************
+     * @param menu
      */
+    public void setActiveCPopupMenu(CPopupMenu menu) {
+        activeMenu = menu;
+    }
+
+    /**
+     *
+     */
+    public void deactiveCPopupMenu() {
+        if (activeMenu != null) {
+            activeMenu.superSetVisible(false);
+            activeMenu = null;
+        }
+    }
+
+    /**
+     *
+     * @param wid
+     */
+    public void setActiveWidget(LabelWidget wid) {
+        activeWidget = wid;
+    }
+
+    /**
+     *
+     */
+    public void deactiveLabelWidget() {
+        if (activeWidget != null) {
+            activeWidget.setEditingState(false);
+        }
+    }
+
     private class WorkspaceState {
 
         public Map<Long, Object> blockStates;
         public Object blockCanvasState;
     }
 
+    /**
+     *
+     * @return
+     */
     public Object getState() {
         return null;
     }
 
+    /**
+     *
+     * @param memento
+     */
     public void loadState(Object memento) {
         assert memento instanceof WorkspaceState : "";
         if (memento instanceof WorkspaceState) {
@@ -1237,16 +1560,21 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         }
     }
 
+    /**
+     *
+     */
     public void undo() {
     }
 
+    /**
+     *
+     */
     public void redo() {
     }
 
     /**
      * ****************************************
-     * RBParent implemented methods
-     *****************************************
+     * RBParent implemented methods ****************************************
      */
     public void addToBlockLayer(Component c) {
         this.add(c, DRAGGED_BLOCK_LAYER);

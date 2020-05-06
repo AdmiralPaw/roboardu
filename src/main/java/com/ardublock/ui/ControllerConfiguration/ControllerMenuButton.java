@@ -7,24 +7,47 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
+/**
+ *
+ * @author User
+ */
 public class ControllerMenuButton extends CButton {
 
     private static final long serialVersionUID = 328149080229L;
 
     Color cat_color;
     String deviceName;
+    String deviceNameTranslated;
     String Id;
     ControllerButton moduleButton;
+    СontrollerСonfiguration controller;
 
-    public ControllerMenuButton(СontrollerСonfiguration controller, String text, String Id) {
-        this(controller, text, Id, Color.black);
+    /**
+     *
+     * @param controller
+     * @param text
+     * @param tr
+     * @param Id
+     */
+    public ControllerMenuButton(СontrollerСonfiguration controller, String text, String tr, String Id) {
+        this(controller, text, tr, Id, Color.black);
     }
 
-    public ControllerMenuButton(СontrollerСonfiguration controller, String text, String Id, Color cat_col) {
-        super(Color.black, CGraphite.blue, text);
+    /**
+     *
+     * @param controller
+     * @param deviceName
+     * @param tr
+     * @param Id
+     * @param cat_col
+     */
+    public ControllerMenuButton(СontrollerСonfiguration controller, String deviceName, String tr, String Id, Color cat_col) {
+        super(Color.black, CGraphite.blue, tr);
         this.cat_color = cat_col;
-        this.deviceName = text;
+        this.deviceName = deviceName;
+        this.deviceNameTranslated = tr;
         this.Id = Id;
+        this.controller=controller;
         this.moduleButton = controller.controllerImage.callModuleButton(Id);
         this.setFont(new Font("TimesRoman", Font.PLAIN, 16));
         this.setPreferredSize(new Dimension(80, 25));
@@ -32,6 +55,7 @@ public class ControllerMenuButton extends CButton {
 
     /**
      * re paints this
+     * @param g
      */
     @Override
     public void paint(Graphics g) {
@@ -59,22 +83,44 @@ public class ControllerMenuButton extends CButton {
 
         // Draw the text (if any)
         if (this.getText() != null) {
-            g2.setColor(new Color(19, 144, 148));
-            Font font = g2.getFont().deriveFont((float) (((float) buttonHeight) * 0.4));
+            if (this.deviceName.equals(this.moduleButton.moduleName)) {
+                g2.setColor(new Color(235, 158, 91));
+            } 
+            else {
+                g2.setColor(new Color(19, 144, 148));
+            }
+            Font font = g2.getFont().deriveFont((float) (((float) buttonHeight) * 0.6));
             g2.setFont(font);
             FontMetrics metrics = g2.getFontMetrics();
             Rectangle2D textBounds = metrics.getStringBounds(this.getText(), g2);
             float x = 60;
-            float y = (float) ((1.0 * this.getHeight() - 2.75 * metrics.getDescent()));
+            float y = (float) ((1.0 * this.getHeight() - 1.75 * metrics.getDescent())); //2.75
             g2.drawString(this.getText(), x, y);
         }
     }
 
     public void mouseReleased(MouseEvent e) {
+        //System.out.println("mouseReleased");
+        //this.moduleButton.setModuleBig(false);
         this.pressed = false;
         repaint();
         this.moduleButton.setNewIconAsModule(
-                "com/ardublock/Images/module/" + deviceName.toLowerCase() + ".png");
+                "com/ardublock/Images/module/" + deviceName + ".png");
+        this.moduleButton.setModuleName(deviceName);
+        this.moduleButton.setTranslatedName(deviceNameTranslated);
+        this.controller.controllerImage.resetSelectedId(Id, true);
+        this.controller.changeConnectorComponentsPane(null);
     }
-
+    
+    public void mouseEntered(MouseEvent e){
+        //this.moduleButton.setModuleBig(true);
+        this.moduleButton.setNewIconAsModule(
+                "com/ardublock/Images/module/" + deviceName + ".png");
+        this.moduleButton.setModuleName(deviceName);
+        this.moduleButton.setTranslatedName(deviceNameTranslated);
+    }
+    
+    public void mouseExited(MouseEvent e){
+        //this.moduleButton.setModuleBig(false);
+    }
 }

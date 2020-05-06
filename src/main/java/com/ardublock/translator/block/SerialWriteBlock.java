@@ -4,14 +4,33 @@ import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class SerialWriteBlock extends TranslatorBlock
 {
-	public SerialWriteBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public SerialWriteBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		translator.addSetupCommand("Serial.begin(9600);");
@@ -22,7 +41,7 @@ public class SerialWriteBlock extends TranslatorBlock
 		
 		
 		
-		    ret="Serial.print("+ret+");\n";
+		    ret="Serial.println("+ret+");\n";
 		return ret;
 	}
 }

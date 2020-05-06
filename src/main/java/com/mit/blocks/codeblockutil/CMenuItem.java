@@ -11,23 +11,51 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.JButton;
 
+/**
+ *
+ * @author User
+ */
 public class CMenuItem extends JButton implements MouseListener {
 
     private static final long serialVersionUID = 328149080429L;
 
+    /**
+     *
+     */
     public enum Position {
 
-        CENTER, LEFT
+        /**
+         *
+         */
+        CENTER,
+
+        /**
+         *
+         */
+        LEFT
     };
-    private Color background = CGraphite.blue;
-    private Color highlight = CGraphite.white;
-    private boolean focus = false;
+    private Color background = new Color(255, 133, 8);//new Color(193,193,193);
+    private Color highlight = new Color(236, 236, 236);
+
+    /**
+     *
+     */
+    public boolean focus = false;
     Position textPosition;
 
+    /**
+     *
+     * @param text
+     */
     public CMenuItem(String text) {
         this(text, Position.LEFT);
     }
 
+    /**
+     *
+     * @param text
+     * @param position
+     */
     public CMenuItem(String text, Position position) {
         super();
         super.setText(text);
@@ -84,4 +112,5 @@ public class CMenuItem extends JButton implements MouseListener {
 
     public void mouseClicked(MouseEvent e) {
     }
+    
 }

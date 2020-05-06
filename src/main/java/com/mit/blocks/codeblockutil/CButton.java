@@ -111,12 +111,18 @@ public class CButton extends JButton implements MouseListener {
         this.selectedColor = selectedColor;
     }
 
+    /**
+     *
+     * @param foregroundColor
+     * @param hoveredColor
+     */
     public void setTextLighting(Color foregroundColor, Color hoveredColor) {
         this.foregroundColor = foregroundColor;
         this.hoveredColor = hoveredColor;
     }
 
     /**
+     * @param selected
      * @modifies this.selected
      * @effects toggles selcted flag to valeu of selected
      */

@@ -5,31 +5,119 @@ import com.mit.blocks.codeblockutil.RMenuButton;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.swing.JLabel;
 import javax.swing.JSplitPane;
 import org.jfree.ui.tabbedui.VerticalLayout;
 
+/**
+ *
+ * @author User
+ */
 public class СontrollerСonfiguration extends JPanel {
 
     //верхняя панель контроллера
+
+    /**
+     *
+     */
     public ControllerImage controllerImage;
 
     //лист всевозможных компонентов на подключение
     private List<Device> components;
     //нижняя панель
-    private JPanel componentsPane;
 
+    /**
+     *
+     */
+    public JPanel componentsPane;
+    private ModuleInfoPane moduleInfoPane;
+    private ResourceBundle uiMessageBundle;
+
+    /**
+     *
+     */
     public enum Pin {
 
-        dir04pwm05, dir07pwm06, d2, d3, d8, d10, d9, d11, a3, a2, a1, a0, i2c
+        /**
+         *
+         */
+        dir04pwm05,
+
+        /**
+         *
+         */
+        dir07pwm06,
+
+        /**
+         *
+         */
+        d2,
+
+        /**
+         *
+         */
+        d3,
+
+        /**
+         *
+         */
+        d8,
+
+        /**
+         *
+         */
+        d10,
+
+        /**
+         *
+         */
+        d9,
+
+        /**
+         *
+         */
+        d11,
+
+        /**
+         *
+         */
+        a3,
+
+        /**
+         *
+         */
+        a2,
+
+        /**
+         *
+         */
+        a1,
+
+        /**
+         *
+         */
+        a0,
+
+        /**
+         *
+         */
+        i2c
     };
+
+    /**
+     *
+     */
     public Pin controllerPin;
 
+    /**
+     *
+     */
     public СontrollerСonfiguration() {
         super();
         this.setLayout(new BorderLayout());
         this.components = new ArrayList<>();
-        this.controllerImage = new ControllerImage(this);
+        this.controllerImage = new ControllerImage(this,0);
         this.componentsPane = new JPanel(new VerticalLayout());
         componentsPane.setBackground(Color.white);
         //buttonPane.setBorder(BorderFactory.createMatteBorder(3, 0, 0, 0, new Color(55, 150, 240)));
@@ -37,6 +125,9 @@ public class СontrollerСonfiguration extends JPanel {
                 controllerImage, componentsPane);
         splitPane.setDividerLocation(300/*750 / 2*/);
         this.add(splitPane);
+        moduleInfoPane = new ModuleInfoPane(this);
+        uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
+        this.resetPane();
         //this.controllerImage.add(justButt);
 //        this.addButtons();
     }
@@ -54,36 +145,81 @@ public class СontrollerСonfiguration extends JPanel {
 //        return allButtons;
 //    }
 
-    public void addComponent(String pin, String name) {
-        this.components.add(new Device(pin, name));
+    /**
+     *
+     * @param pin
+     * @param name
+     * @param pathToTranslate
+     * @param info
+     */
+    public void addComponent(String pin, String name, String pathToTranslate, String info) {
+        this.components.add(new Device(
+                pin,
+                name,
+                uiMessageBundle.getString(pathToTranslate),
+                uiMessageBundle.getString(info)));
     }
 
+    /**
+     *
+     * @param buttonPin
+     */
     public void changeConnectorComponentsPane(String buttonPin) {
         componentsPane.removeAll();
+        if (buttonPin == null) {
+            this.resetPane();
+        }
         for (int i = 0; i < components.size(); i++) {
             if (components.get(i).pin.equals(buttonPin)) {
                 componentsPane.add(new ControllerMenuButton(
-                        this, components.get(i).deviceName, buttonPin));
+                        this,
+                        components.get(i).deviceName,
+                        components.get(i).deviceNameTranslated,
+                        buttonPin));
             }
         }
         componentsPane.validate();
         componentsPane.repaint();
     }
-    
-    public void changeModuleComponentsPane(String buttonPin) {
+
+    /**
+     *
+     * @param moduleName
+     */
+    public void changeModuleComponentsPane(String moduleName) {
         componentsPane.removeAll();
-        JLabel info = new JLabel();
-        for (int i = 0; i < components.size(); i++) {
-            if (components.get(i).pin.equals(buttonPin)) {
-                info.setText(components.get(i).deviceInfo);
-                info.setBackground(Color.black);
-                componentsPane.add(new ControllerMenuButton(
-                        this, components.get(i).deviceName, buttonPin));
-                componentsPane.add(info);
+        //if (!moduleName.equals("start")) {
+            for (Device device : components) {
+                if (device.deviceName.equals(moduleName)) {
+                    this.moduleInfoPane.setModuleImage(device.deviceName);
+                    this.moduleInfoPane.setModuleName(device.deviceNameTranslated);
+                    this.moduleInfoPane.setModuleInfo(device.deviceInfo);
+                    this.moduleInfoPane.moduleName = device.deviceName;
+                    this.moduleInfoPane.transModuleName = device.deviceNameTranslated;
+                    componentsPane.add(this.moduleInfoPane);
+                }
             }
-        }
+        /*} else {
+            this.resetPane();
+        }*/
         componentsPane.validate();
         componentsPane.repaint();
+    }
+
+    /**
+     *
+     */
+    public void resetPane() {
+        componentsPane.removeAll();
+        for (ControllerButton module : this.controllerImage.moduleButtons) {
+            if (!module.moduleName.equals("start")) {
+                componentsPane.add(new ControllerMenu(
+                        this,
+                        module.moduleName,
+                        module.moduleTranslatedName,
+                        module.getId()));
+            }
+        }
     }
 
     /**
@@ -92,12 +228,18 @@ public class СontrollerСonfiguration extends JPanel {
     private static class Device {
 
         final String pin;
-        final String deviceName;
-        final String deviceInfo = "info";
+        final public String deviceName;
+        final String deviceNameTranslated;
+        final String deviceInfo;
 
-        public Device(String pin, String deviceName) {
+        public Device(String pin, String deviceName, String deviceNameTranslated, String deviceInfo) {
             this.pin = pin;
             this.deviceName = deviceName;
+            this.deviceInfo = deviceInfo;
+            this.deviceNameTranslated = deviceNameTranslated;
+
+            //System.out.println("!!!!!!!!!!!!!!!  "+pin+" pin "+deviceName+"  "+deviceNameTranslated);
+
         }
     }
 }

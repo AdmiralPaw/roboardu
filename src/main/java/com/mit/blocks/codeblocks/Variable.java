@@ -3,23 +3,78 @@ package com.mit.blocks.codeblocks;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author User
+ */
 public class Variable implements Comparable<Variable> {
-	public enum VariableType {NUMBER, BOOLEAN, STRING, LIST}
-	public enum VariableScope {GLOBAL, LOCAL}
+
+    /**
+     *
+     */
+    public enum VariableType {
+
+            /**
+             *
+             */
+            NUMBER, 
+
+        /**
+         *
+         */
+        BOOLEAN, 
+
+            /**
+             *
+             */
+            STRING, 
+
+            /**
+             *
+             */
+            LIST}
+
+    /**
+     *
+     */
+    public enum VariableScope { 
+
+        /**
+         *
+         */
+        GLOBAL, 
+
+            /**
+             *
+             */
+            LOCAL}
 	
 	private String name;
 	private VariableType type;
 	private VariableScope scope;
 	private boolean isList;
 	
-	public Variable(String name, VariableType type, VariableScope scope, boolean isList) {
+    /**
+     *
+     * @param name
+     * @param type
+     * @param scope
+     * @param isList
+     */
+    public Variable(String name, VariableType type, VariableScope scope, boolean isList) {
 		this.name = name;
 		this.type = type;
 		this.scope = scope;
 		this.isList = isList;
 	}
 	
-	public Variable(String name, String type, String scope) {
+    /**
+     *
+     * @param name
+     * @param type
+     * @param scope
+     */
+    public Variable(String name, String type, String scope) {
 		this.name = name;
 		
 		if (type.startsWith("number"))
@@ -39,19 +94,35 @@ public class Variable implements Comparable<Variable> {
 		else assert false;
 	}
 	
-	public String getName() {
+    /**
+     *
+     * @return
+     */
+    public String getName() {
 		return name;
 	}
 	
-	public VariableType getType() {
+    /**
+     *
+     * @return
+     */
+    public VariableType getType() {
 		return type;
 	}
 	
-	public VariableScope getScope() {
+    /**
+     *
+     * @return
+     */
+    public VariableScope getScope() {
 		return scope;
 	}
 	
-	public boolean isList() {
+    /**
+     *
+     * @return
+     */
+    public boolean isList() {
 		return isList;
 	}
 	
@@ -73,7 +144,11 @@ public class Variable implements Comparable<Variable> {
 	           (isList ? 52933 : 99102);
 	}
 	
-	public String getScopeString() {
+    /**
+     *
+     * @return
+     */
+    public String getScopeString() {
 		switch(scope) {
 		case GLOBAL:
 		    return "global";
@@ -84,7 +159,11 @@ public class Variable implements Comparable<Variable> {
 		}
 	}
 	
-	public String getTypeString() {
+    /**
+     *
+     * @return
+     */
+    public String getTypeString() {
 		String typeName = null;
 		switch(type) {
 		case NUMBER:
@@ -111,7 +190,11 @@ public class Variable implements Comparable<Variable> {
 		return scopeName + "-" + typeName + (isList ? "-" : "-var-") + name;
 	}
 	
-	public List<String> toList() {
+    /**
+     *
+     * @return
+     */
+    public List<String> toList() {
 		ArrayList<String> strs = new ArrayList<String>();
 		strs.add(name);
 		strs.add(getTypeString());
@@ -119,7 +202,12 @@ public class Variable implements Comparable<Variable> {
 		return strs;
 	}
 	
-	public static Variable fromList(List<?> l) {
+    /**
+     *
+     * @param l
+     * @return
+     */
+    public static Variable fromList(List<?> l) {
 		if (l.size() != 3)
 			return null;
 		String n = getString(l, 0);

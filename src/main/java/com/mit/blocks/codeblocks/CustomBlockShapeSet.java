@@ -3,6 +3,10 @@ package com.mit.blocks.codeblocks;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author User
+ */
 public abstract class CustomBlockShapeSet {
 
     /**
@@ -23,17 +27,39 @@ public abstract class CustomBlockShapeSet {
      */
     public class CustomBlockShape {
 
+        /**
+         *
+         */
         protected String genusName;
+
+        /**
+         *
+         */
         protected Point2D topLeftCorner;
+
+        /**
+         *
+         */
         protected Point2D topRightCorner;
+
+        /**
+         *
+         */
         protected Point2D botLeftCorner;
+
+        /**
+         *
+         */
         protected Point2D botRightCorner;
     }
 
     /**
-     * Checks if the given block is a "special shape" that has custom dimensions.
-     * CornerPoints is an array with array order Point2D topLeftCorner, Point2D topRightCorner,
-     * 											Point2D botLeftCorner, Point2D botRightCorner.
+     * Checks if the given block is a "special shape" that has custom dimensions.CornerPoints is an array with array order Point2D topLeftCorner, Point2D topRightCorner,
+ 											Point2D botLeftCorner, Point2D botRightCorner.
+     * @param b
+     * @param cornerPoints
+     * @param labelsWidth
+     * @param totalSocketHeight
      * @return if a matching customBlockShape was found that corresponds to the given block.
      * @modifies the array of cornerPoints if method returns true
      */

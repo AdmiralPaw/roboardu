@@ -1,5 +1,11 @@
 package com.mit.blocks.codeblockutil;
 
+import com.mit.blocks.codeblockutil.CScrollPane.ScrollPolicy;
+import com.mit.blocks.renderable.FactoryRenderableBlock;
+import com.mit.blocks.workspace.Workspace;
+import org.jfree.ui.tabbedui.VerticalLayout;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,16 +13,9 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import javax.swing.*;
-
-import com.ardublock.ui.OpenblocksFrame;
-import com.mit.blocks.codeblockutil.CScrollPane.ScrollPolicy;
-import com.mit.blocks.workspace.SearchBar;
-import com.mit.blocks.workspace.SearchableContainer;
-import com.mit.blocks.workspace.Workspace;
-import org.jfree.ui.tabbedui.VerticalLayout;
+import java.util.Map;
 
 /**
  * A WindowExplorer is an Explorer that explores its set of canvases by
@@ -29,21 +28,63 @@ import org.jfree.ui.tabbedui.VerticalLayout;
  */
 public class Window2Explorer extends JPanel implements Explorer {
 
+    //TODO: добавить поиск - удаление не соответсвующих элементов в тек директории(компоненте)
+    //и добавление в него компонентов из переменной dictionary соответствующих блоков
+
+    /**
+     *
+     */
+    public static JComponent cdir;
+
+    /**
+     *
+     */
+    public static Map<String, JComponent> dictionary = new HashMap<String, JComponent>();
+
+    /**
+     *
+     */
+    public static JComponent currentDir,
+
+    /**
+     *
+     */
+    canvasPanel;
+    //public static JComponent currentCanvas;
+
     private static final long serialVersionUID = 328149080308L;
     private static final int buttonHeight = 13;
     /**
      * The set of drawers that wraps each canvas
      */
-    private List<JLayeredPane> canvases;
+    public static List<JComponent> canvases;
     /**
      * Teh canvas portion
      */
-    private JPanel canvasPane;
+    public JPanel canvasPane;
     /**
      * The tab portion
      */
+    public JPanel butpan;
+
+    /**
+     *
+     */
     public JPanel buttonPane;
+
+    /**
+     *
+     */
     public JPanel basketPane;
+
+    /**
+     *
+     */
+    public JLayeredPane currentCanvasWithBasket;
+
+    /**
+     *
+     */
     public int oldIndex;
 
     /**
@@ -52,14 +93,41 @@ public class Window2Explorer extends JPanel implements Explorer {
     public Window2Explorer() {
         super();
         this.setLayout(new BorderLayout());
-        this.canvases = new ArrayList<JLayeredPane>();
+        this.canvases = new ArrayList<JComponent>();
         this.canvasPane = new JPanel(new BorderLayout());
         this.buttonPane = new JPanel();
-        //buttonPane.setBorder(BorderFactory.createMatteBorder(3, 0, 0, 0, new Color(55, 150, 240)));
         buttonPane.setBackground(Color.black);
         this.add(canvasPane, BorderLayout.CENTER);
         buttonPane.setLayout(new BorderLayout());//VerticalLayout());//GridLayout(0, 2));
         this.add(buttonPane, BorderLayout.NORTH);
+
+        this.currentDir = this.canvasPane;
+        this.cdir = this;
+
+        this.canvasPanel = this.canvasPane;
+        currentCanvasWithBasket = new JLayeredPane();
+
+        URL iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/trashcan.png");
+        Image imageRaw = new ImageIcon(iconURL).getImage().getScaledInstance(
+                84, 84, java.awt.Image.SCALE_SMOOTH);
+        ImageIcon button_icon = new ImageIcon(imageRaw);
+        //ImageIcon button_icon = new ImageIcon(iconURL).getImage().getScaledInstance(128,128, java.awt.Image.SCALE_SMOOTH);
+        final JLabel mainLogo = new JLabel(button_icon);
+        basketPane = new JPanel(new BorderLayout());
+        basketPane.add(mainLogo, BorderLayout.CENTER);
+        basketPane.setVisible(false);
+        
+        currentCanvasWithBasket.add(basketPane, new Integer(1));
+        currentCanvasWithBasket.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                super.componentResized(e);
+                for (int i = 0; i < currentCanvasWithBasket.getComponentCount(); i++) {
+                    currentCanvasWithBasket.getComponents()[i].setBounds(0, 0, currentCanvasWithBasket.getWidth() - 1, currentCanvasWithBasket.getHeight() - 1);
+                }
+            }
+        });
+        canvasPane.add(currentCanvasWithBasket);
 
     }
 
@@ -85,56 +153,33 @@ public class Window2Explorer extends JPanel implements Explorer {
      *
      * @requires items != null && for each element in item, element!= null
      */
+    int iterationCount = 0;
     public void setDrawersCard(List<? extends Canvas> items) {
+        iterationCount++;
         canvases.clear();
         buttonPane.removeAll();
-        int size = items.size();
-        if (size % 2 == 1) {
-            size++;
-        }
-        size = buttonHeight * 24;
+        int size = buttonHeight * 24;
         buttonPane.setPreferredSize(new Dimension(60, size));
-        JPanel butpan = new JPanel(new VerticalLayout());
+        butpan = new JPanel(new VerticalLayout());
         butpan.setBackground(Color.white);
         for (int i = 0; i < items.size(); i++) {
             final int index = i;
             Canvas item = items.get(i);
-            //final CButton button = new CButton(item.getColor(), item.getColor().brighter().brighter().brighter(),item.getName());
             item.getJComponent().setBackground(new Color(236, 236, 236));
             CButton button = new RMenuButton(item.getName(), item.getColor());
             button.setPreferredSize(new Dimension(30, 35));
-            JComponent scrollFLVL = new RHoverScrollPane(
+            JComponent scroll = new RHoverScrollPane(
                     item.getJComponent(),
                     ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
                     ScrollPolicy.HORIZONTAL_BAR_AS_NEEDED,
                     15, item.getColor(), Color.darkGray);
-            final JLayeredPane blockCanvasWithDepth = new JLayeredPane();
-            blockCanvasWithDepth.setPreferredSize(new Dimension(300, 500));
-            blockCanvasWithDepth.add(scrollFLVL, 0);
-            URL iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/trashcan.png");
-            Image imageRaw = new ImageIcon(iconURL).getImage().getScaledInstance(
-                    84, 84, java.awt.Image.SCALE_SMOOTH);
-            ImageIcon button_icon = new ImageIcon(imageRaw);
-            //ImageIcon button_icon = new ImageIcon(iconURL).getImage().getScaledInstance(128,128, java.awt.Image.SCALE_SMOOTH);
-            final JLabel mainLogo = new JLabel(button_icon);
-            basketPane = new JPanel(new BorderLayout());
-            basketPane.add(mainLogo, BorderLayout.CENTER);
-            blockCanvasWithDepth.add(basketPane, 1);
-            blockCanvasWithDepth.addComponentListener(new ComponentAdapter() {
-                @Override
-                public void componentResized(ComponentEvent e) {
-                    super.componentResized(e);
-                    blockCanvasWithDepth.getComponents()[0].setBounds(0, 0, blockCanvasWithDepth.getWidth() - 1, blockCanvasWithDepth.getHeight() - 1);
-                    blockCanvasWithDepth.getComponents()[1].setBounds(0, 0, blockCanvasWithDepth.getWidth() - 1, blockCanvasWithDepth.getHeight() - 1);
 
-                }
-            });
-            blockCanvasWithDepth.getComponents()[1].setVisible(false);
-            canvases.add(blockCanvasWithDepth);
+            canvases.add(scroll);
             button.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e) {
                     selectCanvas(index);
+                    deactiveBasket();
                 }
             });
             butpan.add(button);
@@ -144,25 +189,53 @@ public class Window2Explorer extends JPanel implements Explorer {
                 butpan,
                 ScrollPolicy.VERTICAL_BAR_AS_NEEDED,
                 ScrollPolicy.HORIZONTAL_BAR_NEVER,
-                15, new Color(255, 133, 8), Color.darkGray);//new JScrollPane(butpan);
-        //buttonScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                15, new Color(255, 133, 8), Color.darkGray);
         buttonPane.add(buttonScroll, BorderLayout.CENTER);
         if (!canvases.isEmpty()) {
-            canvasPane.add(canvases.get(0));
+            selectCanvas(0);
+
+        }
+        if(iterationCount==18) {
+            long time1 = System.currentTimeMillis();
+            for (Canvas unit : items) {
+                for (Component comp : unit.getJComponent().getComponents()) {
+                    if (comp instanceof FactoryRenderableBlock) {
+
+                        FactoryRenderableBlock bl = ((FactoryRenderableBlock) comp).deepClone();
+
+                        boolean contains = bl.getKeyword().contains("(");
+                        if (contains) {
+                            int index = bl.getKeyword().indexOf("(");
+                            //System.out.println(bl.getKeyword().toUpperCase().substring(0,index));
+                            dictionary.put(bl.getKeyword().toUpperCase().substring(0, index), bl);
+                        } else {
+                            //System.out.println(bl.getKeyword().toUpperCase());
+                            dictionary.put(bl.getKeyword().toUpperCase(), bl);
+                        }
+                    }
+                }
+            }
+            iterationCount = 0;
         }
         this.revalidate();
-
     }
+
 
     public void selectCanvas(int index) {
         oldIndex = index;
         if (index >= 0 && index < canvases.size()) {
+            
             JComponent scroll = canvases.get(index);
-            canvasPane.removeAll();
-            canvasPane.add(scroll);
-            canvasPane.revalidate();
-            canvasPane.repaint();
+            try {
+                currentCanvasWithBasket.remove(currentCanvasWithBasket.getComponentsInLayer(0)[0]);
+            } catch (Exception e) {
+            }
+
+            currentCanvasWithBasket.add(scroll, new Integer(0));
+            currentCanvasWithBasket.setBounds(new Rectangle(0, 0, 300, 300));
         }
+        this.revalidate();
+        this.repaint();
     }
 
     /**
@@ -173,25 +246,42 @@ public class Window2Explorer extends JPanel implements Explorer {
     public void reformView() {
     }
 
+    /**
+     *
+     */
     public void activeBasket() {
-        JLayeredPane scroll = canvases.get(oldIndex);
-        scroll.getComponents()[0].setVisible(false);
-        scroll.getComponents()[1].setVisible(true);
-        canvasPane.removeAll();
-        canvasPane.add(scroll);
-        canvasPane.revalidate();
-        canvasPane.repaint();
+        
+        currentCanvasWithBasket.getComponentsInLayer(0)[0].setVisible(false);
+        currentCanvasWithBasket.getComponentsInLayer(1)[0].setVisible(true);
 
     }
 
+    /**
+     *
+     */
     public void deactiveBasket() {
-        JLayeredPane scroll = canvases.get(oldIndex);
-        scroll.getComponents()[0].setVisible(true);
-        scroll.getComponents()[1].setVisible(false);
-        canvasPane.removeAll();
-        canvasPane.add(scroll);
-        canvasPane.revalidate();
-        canvasPane.repaint();
+        currentCanvasWithBasket.getComponentsInLayer(0)[0].setVisible(true);
+        currentCanvasWithBasket.getComponentsInLayer(1)[0].setVisible(false);
+    }
+
+    /**
+     *
+     * @param panel
+     */
+    public void setSearchResult(JComponent panel) {
+        currentCanvasWithBasket.remove(currentCanvasWithBasket.getComponentsInLayer(0)[0]);
+        currentCanvasWithBasket.add(panel, new Integer(0));
+        currentCanvasWithBasket.setBounds(new Rectangle(0, 0, 300, 300));
+        currentCanvasWithBasket.getComponentsInLayer(0)[0].setVisible(true);
+        
+    }
+    
+    /**
+     *
+     */
+    public void setNormalMode()
+    {
+        selectCanvas(oldIndex);
     }
 
     /**

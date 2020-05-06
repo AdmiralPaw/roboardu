@@ -4,10 +4,19 @@ import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 
+/**
+ *
+ * @author User
+ */
 public class PandaOutputPortBlock extends TranslatorBlock
 {
 
 	/* pinTable represent the port mapping to read pins, first be the functional pin number and second being the LED pin */
+
+    /**
+     *
+     */
+
 	public int pinTable[][] = {
 			{0, 0},
 			{0, 1},
@@ -18,12 +27,25 @@ public class PandaOutputPortBlock extends TranslatorBlock
 			{7, 13}
 	};
 			
-	public PandaOutputPortBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public PandaOutputPortBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     */
+    @Override
 	public String toCode() throws SocketNullException
 	{
 		String g_name = this.getTranslator().getBlock(blockId).getGenusName();

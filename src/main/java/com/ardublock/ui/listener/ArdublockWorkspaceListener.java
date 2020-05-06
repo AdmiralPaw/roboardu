@@ -6,11 +6,20 @@ import com.ardublock.ui.OpenblocksFrame;
 import com.mit.blocks.workspace.WorkspaceEvent;
 import com.mit.blocks.workspace.WorkspaceListener;
 
+/**
+ *
+ * @author User
+ */
 public class ArdublockWorkspaceListener implements WorkspaceListener
 {
 	private Context context;
 	private OpenblocksFrame frame;
-	public ArdublockWorkspaceListener(OpenblocksFrame frame)
+
+    /**
+     *
+     * @param frame
+     */
+    public ArdublockWorkspaceListener(OpenblocksFrame frame)
 	{
 		context = Context.getContext();
 		this.frame = frame;

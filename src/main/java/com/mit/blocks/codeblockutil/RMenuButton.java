@@ -3,16 +3,29 @@ package com.mit.blocks.codeblockutil;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
+/**
+ *
+ * @author User
+ */
 public class RMenuButton extends CButton {
 
     private static final long serialVersionUID = 328149080229L;
 
     Color cat_color = new Color(0,0,0);
 
+    /**
+     *
+     * @param text
+     */
     public RMenuButton(String text) {
         super(Color.black, CGraphite.blue, text);
     }
 
+    /**
+     *
+     * @param text
+     * @param cat_col
+     */
     public RMenuButton(String text, Color cat_col)
     {
         super(Color.black, CGraphite.blue, text);
@@ -22,6 +35,7 @@ public class RMenuButton extends CButton {
 
     /**
      * re paints this
+     * @param g
      */
     @Override
     public void paint(Graphics g) {

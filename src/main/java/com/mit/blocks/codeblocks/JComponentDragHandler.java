@@ -1,23 +1,14 @@
 package com.mit.blocks.codeblocks;
 
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.Transparency;
+import com.mit.blocks.codeblockutil.GraphicsManager;
+import com.mit.blocks.workspace.Workspace;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.SwingUtilities;
-
-import com.mit.blocks.workspace.Workspace;
-import com.mit.blocks.codeblockutil.GraphicsManager;
 
 /**
  * This class can be used to add dragging capability to any JComponents.
@@ -43,12 +34,40 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
      * relative to the (0,0) corner of the JComponent.
      */
     public int mPressedX; //at mouse pressed
+
+    /**
+     *
+     */
     public int mPressedY; //at mouse pressed
+
+    /**
+     *
+     */
     public int mCurrentX; //where the mouse is currently
+
+    /**
+     *
+     */
     public int mCurrentY; //where the mouse is currently
+
+    /**
+     *
+     */
     public int dragDX; // amount of last drag in X direction
+
+    /**
+     *
+     */
     public int dragDY; // amount of last drag in Y direction
+
+    /**
+     *
+     */
     public int oldLocX; //where the component was before dragging
+
+    /**
+     *
+     */
     public int oldLocY;
     private static Cursor openHandCursor = null;
     private static Cursor closedHandCursor = null;
@@ -83,7 +102,13 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
         closedHandCursor = createHandCursor("/com/ardublock/closed_hand.png", "closedHandCursor");
     }
 
-    private static Cursor createHandCursor(String location, String cursorName) {
+    /**
+     *
+     * @param location
+     * @param cursorName
+     * @return
+     */
+    public static Cursor createHandCursor(String location, String cursorName) {
         if (GraphicsEnvironment.isHeadless()) {
             // return default hand cursor if headless
             return Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
@@ -133,9 +158,9 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
     //MOUSE EVENTS
     ///////////////////
     /**
-     * Called when the mouse is pressed over the JComponent.
-     * Saves the point (which is measured relative to the JComponent's corner)
-     * over which the mouse was pressed.
+     * Called when the mouse is pressed over the JComponent.Saves the point (which is measured relative to the JComponent's corner)
+ over which the mouse was pressed.
+     * @param e
      */
     public void mousePressed(MouseEvent e) {
         myComponent.setCursor(closedHandCursor);
@@ -143,19 +168,18 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
         mPressedY = e.getY();
         oldLocX = myComponent.getX();
         oldLocY = myComponent.getY();
-        workspace.setBasket(true);
     }
 
     /**
-     * This method is called when the mouse is dragged over the JComponent.
-     * Moves the JComponent by the amount of the drag such that the point
-     * under which the mouse the pressed remains under the mouse cursor.  In
-     * other words, "drags" the JComponent.
+     * This method is called when the mouse is dragged over the JComponent.Moves the JComponent by the amount of the drag such that the point
+ under which the mouse the pressed remains under the mouse cursor.
+     * In
+ other words, "drags" the JComponent.
+     * @param e
      */
     public void mouseDragged(MouseEvent e) {
         //System.out.println("mouse dragged: "+this.getLocation());
         myComponent.setCursor(closedHandCursor);
-        workspace.setBasket(true);
         mCurrentX = e.getX();
         mCurrentY = e.getY();
         int dx = mCurrentX - mPressedX;
@@ -188,6 +212,7 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
 
     /**
      * update the current location of the mouse
+     * @param e
      */
     public void mouseMoved(MouseEvent e) {
         mCurrentX = e.getX();
@@ -201,12 +226,10 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
      */
     public void mouseReleased(MouseEvent e) {
         myComponent.setCursor(openHandCursor);
-        workspace.setBasket(false);
     }
 
     public void mouseClicked(MouseEvent arg0) {
         myComponent.setCursor(openHandCursor);
-        workspace.setBasket(false);
     }
 
     public void mouseEntered(MouseEvent arg0) {
@@ -216,7 +239,6 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
 
     public void mouseExited(MouseEvent arg0) {
         myComponent.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-        workspace.setBasket(false);
     }
 
 }

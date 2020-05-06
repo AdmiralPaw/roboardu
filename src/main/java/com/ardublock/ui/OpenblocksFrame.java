@@ -1,63 +1,125 @@
 package com.ardublock.ui;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import com.ardublock.core.Context;
+import com.ardublock.ui.listener.*;
+import com.mit.blocks.controller.WorkspaceController;
+import com.mit.blocks.workspace.ErrWindow;
+import com.mit.blocks.workspace.Page;
+import com.mit.blocks.workspace.Workspace;
 
 import javax.imageio.ImageIO;
+import javax.swing.Timer;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.Dimension;
-
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import com.ardublock.core.Context;
-import com.ardublock.ui.listener.ArdublockWorkspaceListener;
-import com.ardublock.ui.listener.GenerateCodeButtonListener;
-import com.ardublock.ui.listener.NewButtonListener;
-import com.ardublock.ui.listener.OpenButtonListener;
-import com.ardublock.ui.listener.OpenblocksFrameListener;
-import com.ardublock.ui.listener.SaveAsButtonListener;
-import com.ardublock.ui.listener.SaveButtonListener;
-import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
-
-import com.mit.blocks.controller.WorkspaceController;
-import com.mit.blocks.workspace.ErrWindow;
-import com.mit.blocks.workspace.SearchBar;
-import com.mit.blocks.workspace.ZoomSlider;
-import com.mit.blocks.workspace.SearchableContainer;
-import com.mit.blocks.workspace.Workspace;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.*;
 
+import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
+
+/**
+ *
+ * @author User
+ */
 public class OpenblocksFrame extends JFrame {
 
     private static final long serialVersionUID = 2841155965906223806L;
+
+    JMenu recentMenu;
+    private OpenblocksFrame thisFrame;
+    //время для функции вызова автосохранения
+
+    /**
+     *
+     */
+    public int timeDelay = 5;
+    private File fileToSave;
 
     private Context context;
     private JFileChooser fileChooser;
     private FileFilter ffilter;
     private ErrWindow errWindow;
-    private Settings settings;
+
+    /**
+     *
+     */
+    public Settings settings;
+
+    /**
+     *
+     */
+    public JLayeredPane GlobalLayaredPane;
+    private Timer timer = null;
+
+    /**
+     *
+     */
+    public JPanel northPanelCenter = null;
+
+    /**
+     *
+     */
+    public JPanel logo;
+
+    /**
+     *
+     */
+    public JPanel rightPanel;
+    //Just for Tutorial Pane (не бейте, не знал как по-другому)
+
+    /**
+     *
+     */
+    public ImageButton generateButton;
+
+    /**
+     *
+     */
+    public ImageButton verifyButton;
 
     private ResourceBundle uiMessageBundle;
-
+    private String autosavePath = "";
     private boolean controllerIsShown = true;
 
+    /**
+     *
+     * @param ofl
+     */
     public void addListener(OpenblocksFrameListener ofl) {
         context.registerOpenblocksFrameListener(ofl);
     }
 
+
+//<<<<<<< HEAD
+//    public static void deleteAllBlocks() {
+//=======
+
+    /**
+     *
+     */
+    public static void deleteAllBlocks(){
+        Page.currentpage.saveScreen();
+//>>>>>>> lerofaCtrlZ
+        Page.blocksContainer.removeAll();
+        Page.blocksContainer.revalidate();
+        Page.blocksContainer.repaint();
+    }
+
+    /**
+     *
+     * @return
+     */
     public String makeFrameTitle() {
         String title;
         if (!context.getSaveFileName().endsWith(".abp")) {
@@ -73,16 +135,59 @@ public class OpenblocksFrame extends JFrame {
 
     }
 
+
+    //TODO: доделать список последних файлов
+    String user;
+
+    /**
+     *
+     */
+    public static String recentFile;
+    List<String> recentFiles = new ArrayList<>();
+
+    /**
+     *
+     */
     public OpenblocksFrame() {
+        thisFrame = this;
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("recentFiles.txt");
+        Scanner scanner = new Scanner(inputStream);
+
+        try {
+            if (scanner.hasNextLine()) {
+                String recentFileName = scanner.nextLine();
+                recentFiles.add(recentFileName);
+                recentFile = recentFileName;
+            }
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            try {
+                inputStream.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
         context = Context.getContext();
-        settings = new Settings();
+        uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
+        context.setDefaultFileName(uiMessageBundle.getString("ardublock.ui.untitled"));
+
+        settings = new Settings(this);
         this.setTitle(makeFrameTitle());
         this.setSize(new Dimension(1024, 760));
+        // Определяем разрешение экрана монитора
+        Dimension sSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Задаем размер
+        this.setSize(sSize);
         this.setExtendedState(MAXIMIZED_BOTH);
+        //this.setResizable(false);
+        //this.setUndecorated(true);
         this.setLayout(new BorderLayout());
         //put the frame to the center of screen
         this.setLocationRelativeTo(null);
-        uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
+
         //25.03.2019
         Image icon = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(
                 "com/ardublock/block/mainIcon.png")).getImage();
@@ -95,9 +200,91 @@ public class OpenblocksFrame extends JFrame {
         fileChooser.addChoosableFileFilter(ffilter);
 
         initOpenBlocks();
+
+        user = System.getProperty("user.name");
+        autosavePath = "C:\\Users\\" + user + "\\Documents\\OmegaBot_IDE\\";
+
+        File directory = new File(autosavePath);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        //System.out.println(user);
+
+        try {
+            File file = new File(autosavePath + "saver.abp");
+
+            if (file.exists()) {
+
+            } else {
+                Formatter fileCreator = new Formatter(autosavePath + "saver.abp");
+                fileCreator.close();
+                Formatter fileCreator2 = new Formatter(autosavePath + "beforeDelete.abp");
+                fileCreator2.close();
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        //TODO: ok all, funcs i need to save and load in this class , see in docs TimerTask is asynchronous or not?
+        //make public static var to set time to timer
+        //see screenshots on my phone
+//        Thread timeToSave = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Timer timer = new Timer();
+//                timer.scheduleAtFixedRate(new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        String text = getContext().getSaveFileName();
+//                        writeFileAndUpdateFrame(getArduBlockString(), new File(text + "_autosave.abp"));
+//                        System.out.println(text);
+//                        setTitle(makeFrameTitle());
+//                        System.out.println("delayed and worked successfully");
+//                    }
+//                },1000*60*4,1000*60*timeDelay);
+//            }
+//        });
+
+        timer = new Timer(1000 * 60 * timeDelay, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //System.gc();
+                String text = getContext().getSaveFileName();
+                String newText = text.replace(".abp", "");
+                String oldPath = context.getSaveFilePath();
+                boolean isWorkspaceChanged = context.isWorkspaceChanged();
+                writeFileAndUpdateFrame(getArduBlockString(), new File(autosavePath + newText + "_autosave.abp"));
+                context.setSaveFileName(newText);
+                context.setWorkspaceChanged(isWorkspaceChanged);
+                context.setSaveFilePath(oldPath);
+                setTitle(makeFrameTitle());
+                Date dateNow = new Date();
+                SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss");
+                errWindow.setErrText("[" + formatForDateNow.format(dateNow) + "] " +
+                        uiMessageBundle.getString("ardublock.ui.compledAutosave") + autosavePath + newText + "_autosave.abp");
+            }
+        });
+        timer.start();
+
     }
 
+    /**
+     *
+     * @param interval
+     */
+    public void setAutosaveInterval(int interval) {
+        timeDelay = interval;
+        if (timer != null) {
+            timer.setDelay(1000 * 60 * timeDelay);
+            timer.restart();
+        }
+    }
+
+
     private void initOpenBlocks() {
+
         final Context context = Context.getContext();
         final Workspace workspace = context.getWorkspace();
         errWindow = workspace.getErrWindow();
@@ -114,34 +301,85 @@ public class OpenblocksFrame extends JFrame {
         JMenuItem settingsItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.settings"));
         JMenuItem exitItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.exit"));
         JMenu toolsMenu = new JMenu(uiMessageBundle.getString("ardublock.ui.tools"));
+        JMenuItem verifyItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.verify"));
         JMenuItem uploadItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.upload"));
         JMenuItem serialMonitorItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.serialMonitor"));
         JMenuItem saveImageItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.saveImage"));
+        JMenuItem tutorialItem = new JMenuItem(uiMessageBundle.getString("ardublock.ui.tutorial"));
+        JMenu recentItems = new JMenu(uiMessageBundle.getString("ardublock.ui.recent"));
+
+        //JMenuItem recentFiles = new JMenuItem("open recent");
+        this.recentMenu = recentItems;
+
+        try {
+            File recentFiles = new File("C:\\Users\\Public\\recentFiles.txt");
+            List<String> files = new ArrayList<>();
+            Scanner scanner = new Scanner(recentFiles);
+            while (scanner.hasNextLine()) {
+                files.add(scanner.nextLine());
+            }
+
+            remakeRecentItems(files);
+
+        } catch (Exception e) {
+
+        }
+
 
         newItem.addActionListener(new NewButtonListener(this));
+        KeyStroke newButStr = KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK);
+        newItem.setAccelerator(newButStr);
+
         openItem.addActionListener(new OpenButtonListener(this));
+        KeyStroke openButStr = KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK);
+        openItem.setAccelerator(openButStr);
+
         saveItem.addActionListener(new SaveButtonListener(this));
+        KeyStroke saveButStr = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK);
+        saveItem.setAccelerator(saveButStr);
+
         saveAsItem.addActionListener(new SaveAsButtonListener(this));
+        KeyStroke saveAsButStr = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK);
+        saveAsItem.setAccelerator(saveAsButStr);
+
         settingsItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 settings.setVisible(true);
             }
         });
+        KeyStroke settingStr = KeyStroke.getKeyStroke(KeyEvent.VK_WINDOWS, InputEvent.CTRL_DOWN_MASK);
+        settingsItem.setAccelerator(settingStr);
+
         exitItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+//                System.exit(0);
             }
         });
+        KeyStroke exitStr = KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_DOWN_MASK);
+        exitItem.setAccelerator(exitStr);
+
+        verifyItem.addActionListener(new GenerateCodeButtonListener(this, context));
+        verifyItem.setActionCommand("VERIFY_CODE");
+        KeyStroke verifyButStr = KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK);
+        verifyItem.setAccelerator(verifyButStr);
+
         uploadItem.addActionListener(new GenerateCodeButtonListener(this, context));
+        uploadItem.setActionCommand("UPLOAD_CODE");
+        KeyStroke generateButStr = KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_DOWN_MASK);
+        uploadItem.setAccelerator(generateButStr);
+
         serialMonitorItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 context.getEditor().handleSerial();
             }
         });
+        KeyStroke serialMonitorButStr = KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK);
+        serialMonitorItem.setAccelerator(serialMonitorButStr);
+
         saveImageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Dimension size = workspace.getCanvasSize();
-                System.out.println("size: " + size);
+                //System.out.println("size: " + size);
                 BufferedImage bi = new BufferedImage(2560, 2560, BufferedImage.TYPE_INT_RGB);
                 Graphics2D g = (Graphics2D) bi.createGraphics();
                 double theScaleFactor = (300d / 72d);
@@ -164,30 +402,46 @@ public class OpenblocksFrame extends JFrame {
             }
         });
 
+        tutorialItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TutorialPane pan = new TutorialPane(thisFrame);
+                setGlassPane(pan);
+                getGlassPane().setVisible(true);
+                repaint();
+                settings.setVisible(false);
+            }
+        });
+
         fileMenu.add(newItem);
         fileMenu.add(openItem);
         fileMenu.add(saveItem);
         fileMenu.add(saveAsItem);
+        fileMenu.add(recentItems);
         fileMenu.addSeparator();
         fileMenu.add(settingsItem);
         fileMenu.addSeparator();
         fileMenu.add(exitItem);
+
+
+        toolsMenu.add(verifyItem);
         toolsMenu.add(uploadItem);
         toolsMenu.add(serialMonitorItem);
+        toolsMenu.add(tutorialItem);
 
         menuBar.add(fileMenu);
         menuBar.add(toolsMenu);
-        // </editor-fold>
 
+        // </editor-fold>
         //Panels------------------------------------------------------//
         final int standartNorthPanelSize = 24;  //TODO: make like constant
 
         final JPanel northPanel = new JPanel();
-        final JPanel logo = new JPanel();
-        final JPanel northPanelCenter = new JPanel();
+        logo = new JPanel();
+        northPanelCenter = new JPanel();
         final JPanel buttons = new JPanel();
         final JPanel panelWithConfigButton = new JPanel();
-        final JPanel rightPanel = new JPanel();
+        rightPanel = new JPanel();
         final JLabel dividerFirst = new JLabel();
         final JLabel dividerSecond = new JLabel();
 
@@ -196,12 +450,13 @@ public class OpenblocksFrame extends JFrame {
         ImageIcon mLogo = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(
                 "com/ardublock/block/mainLogo2.png")
         );
-        Image image = mLogo.getImage().getScaledInstance(180, standartNorthPanelSize,
+        Image image = mLogo.getImage().getScaledInstance(81, standartNorthPanelSize,
                 java.awt.Image.SCALE_SMOOTH);
         mLogo = new ImageIcon(image);
         mainLogo.setIcon(mLogo);
         logo.add(mainLogo);
         logo.setBackground(new Color(0, 151, 157));
+        Dimension size = workspace.getFactorySize();
         logo.setPreferredSize(workspace.getFactorySize());
         logo.setBounds(38, 0, workspace.getFactorySize().width, workspace.getFactorySize().height);
 
@@ -231,12 +486,50 @@ public class OpenblocksFrame extends JFrame {
         northPanel.add(rightPanel, BorderLayout.EAST);
 
         JLabel infoLabel = new JLabel(); //displays text
-        infoLabel.setPreferredSize(new Dimension(150, 20));
+        //TODO может сделать авто размер лейбла от текста в нем?
+        //+ нужно изменить минимальные размеры проги, а то кнопки друг на друга залезут
+        //либо как идея: сделать "прячущиеся" кнопки
+        infoLabel.setPreferredSize(new Dimension(230, 20));
         infoLabel.setForeground(Color.white);
 
         //<editor-fold defaultstate="collapsed" desc="Buttons images and listners">
+        ImageButton reloadDeleted = new ImageButton(
+                "reloadDeleted",
+                "com/ardublock/block/buttons/newA.jpg",
+                "com/ardublock/block/buttons/newB.jpg",
+                infoLabel
+        );
+
+        reloadDeleted.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    context.loadArduBlockFile(new File("C:\\Users\\" + user + "\\Documents\\beforeDelete.abp"));
+                    context.setWorkspaceChanged(false);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+
+//        ImageButton deleteAll = new ImageButton(
+//                "deleteAllBlocks",
+//                "com/ardublock/block/buttons/newA.jpg",
+//                "com/ardublock/block/buttons/newB.jpg",
+//                infoLabel
+//        );
+
+//        deleteAll.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                writeFileAndUpdateFrame(getArduBlockString(), new File("C:\\Users\\" + user + "\\Documents\\beforeDelete.abp"));
+//                deleteAllBlocks();
+//            }
+//        });
         ImageButton newButton = new ImageButton(
-                "new",
+                uiMessageBundle.getString("ardublock.ui.new"),
                 "com/ardublock/block/buttons/newA.jpg",
                 "com/ardublock/block/buttons/newB.jpg",
                 infoLabel
@@ -244,7 +537,7 @@ public class OpenblocksFrame extends JFrame {
         newButton.addActionListener(new NewButtonListener(this));
 
         ImageButton saveButton = new ImageButton(
-                "save",
+                uiMessageBundle.getString("ardublock.ui.save"),
                 "com/ardublock/block/buttons/saveA.jpg",
                 "com/ardublock/block/buttons/saveB.jpg",
                 infoLabel
@@ -252,7 +545,7 @@ public class OpenblocksFrame extends JFrame {
         saveButton.addActionListener(new SaveButtonListener(this));
 
         ImageButton saveAsButton = new ImageButton(
-                "saveAs",
+                uiMessageBundle.getString("ardublock.ui.saveAs"),
                 "com/ardublock/block/buttons/saveAsA.jpg",
                 "com/ardublock/block/buttons/saveAsB.jpg",
                 infoLabel
@@ -260,23 +553,33 @@ public class OpenblocksFrame extends JFrame {
         saveAsButton.addActionListener(new SaveAsButtonListener(this));
 
         ImageButton openButton = new ImageButton(
-                "open",
+                uiMessageBundle.getString("ardublock.ui.open"),
                 "com/ardublock/block/buttons/openA.jpg",
                 "com/ardublock/block/buttons/openB.jpg",
                 infoLabel
         );
         openButton.addActionListener(new OpenButtonListener(this));
 
-        ImageButton generateButton = new ImageButton(
-                "upload to Arduino",
+        verifyButton = new ImageButton(
+                uiMessageBundle.getString("ardublock.ui.verify"),
+                "com/ardublock/block/buttons/verifyA.jpg",
+                "com/ardublock/block/buttons/verifyB.jpg",
+                infoLabel
+        );
+        verifyButton.setActionCommand("VERIFY_CODE");
+        verifyButton.addActionListener(new GenerateCodeButtonListener(this, context));
+
+        generateButton = new ImageButton(
+                uiMessageBundle.getString("ardublock.ui.upload"),
                 "com/ardublock/block/buttons/uploadA.jpg",
                 "com/ardublock/block/buttons/uploadB.jpg",
                 infoLabel
         );
+        generateButton.setActionCommand("UPLOAD_CODE");
         generateButton.addActionListener(new GenerateCodeButtonListener(this, context));
 
         ImageButton serialMonitorButton = new ImageButton(
-                "serialMonitor",
+                uiMessageBundle.getString("ardublock.ui.serialMonitor"),
                 "com/ardublock/block/buttons/monitorA.jpg",
                 "com/ardublock/block/buttons/monitorB.jpg",
                 infoLabel
@@ -286,9 +589,8 @@ public class OpenblocksFrame extends JFrame {
                 context.getEditor().handleSerial();
             }
         });
-
         ImageButton saveImageButton = new ImageButton(
-                "save image",
+                uiMessageBundle.getString("ardublock.ui.saveImage"),
                 "com/ardublock/block/buttons/saveAsImageA.jpg",
                 "com/ardublock/block/buttons/saveAsImageB.jpg",
                 infoLabel
@@ -296,7 +598,7 @@ public class OpenblocksFrame extends JFrame {
         saveImageButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Dimension size = workspace.getCanvasSize();
-                System.out.println("size: " + size);
+                //System.out.println("size: " + size);
                 BufferedImage bi = new BufferedImage(2560, 2560, BufferedImage.TYPE_INT_RGB);
                 Graphics2D g = (Graphics2D) bi.createGraphics();
                 double theScaleFactor = (300d / 72d);
@@ -331,7 +633,7 @@ public class OpenblocksFrame extends JFrame {
                 URL url;
                 if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
                     try {
-                        url = new URL("http://ardublock.com");
+                        url = new URL("https://omegabot.ru/");
                         desktop.browse(url.toURI());
                     } catch (Exception e1) {
                         e1.printStackTrace();
@@ -339,14 +641,16 @@ public class OpenblocksFrame extends JFrame {
                 }
             }
         });
+
         ImageButton configButton = new ImageButton(
                 "controller",
                 "com/ardublock/block/buttons/showPanelsA.jpg",
                 "com/ardublock/block/buttons/showPanelsB.jpg",
                 null
         );
-        configButton.addMouseListener(new MouseListener() {
-            public void mouseClicked(MouseEvent e) {
+        configButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 if (controllerIsShown) {
                     workspace.blockCanvasLayer.remove(workspace.controller);
                     northPanel.remove(rightPanel);
@@ -360,34 +664,12 @@ public class OpenblocksFrame extends JFrame {
                 workspace.controller.updateUI();
                 northPanel.updateUI();
             }
-
-            public void mousePressed(MouseEvent e) {
-                workspace.updateUI();
-                workspace.controller.updateUI();
-                northPanel.updateUI();
-            }
-
-            public void mouseReleased(MouseEvent e) {
-                workspace.updateUI();
-                workspace.blockCanvasLayer.updateUI();
-                workspace.controller.updateUI();
-                northPanel.updateUI();
-            }
-
-            public void mouseEntered(MouseEvent e) {
-                workspace.updateUI();
-                workspace.blockCanvasLayer.updateUI();
-                workspace.controller.updateUI();
-                northPanel.updateUI();
-            }
-
-            public void mouseExited(MouseEvent e) {
-                workspace.updateUI();
-                workspace.blockCanvasLayer.updateUI();
-                workspace.controller.updateUI();
-                northPanel.updateUI();
-            }
         });
+
+        InputMap imap = configButton.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke configStr = KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_DOWN_MASK);
+        imap.put(configStr, "showPanel");
+        configButton.getActionMap().put("showPanel", new ClickAction(configButton));
         // </editor-fold>
 
         buttons.add(newButton);
@@ -395,23 +677,20 @@ public class OpenblocksFrame extends JFrame {
         buttons.add(saveAsButton);
         buttons.add(openButton);
         buttons.add(dividerFirst);
+        buttons.add(verifyButton);
         buttons.add(generateButton);
         buttons.add(serialMonitorButton);
         buttons.add(dividerSecond);
         buttons.add(saveImageButton);
         buttons.add(websiteButton);
         buttons.add(infoLabel);
+
         panelWithConfigButton.add(configButton);
 
         workspace.workLayer.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent e) {
                 Dimension s = workspace.getFactorySize();
-                Dimension q = workspace.getCanvasSize();
                 logo.setPreferredSize(new Dimension(s.width, standartNorthPanelSize));
-//                        if (workspace.workLayer.getDividerLocation() > 380)
-//                            workspace.workLayer.setDividerLocation(380);
-//                        else if (workspace.workLayer.getDividerLocation() < 120)
-//                            workspace.workLayer.setDividerLocation(120);
                 northPanel.updateUI();
                 workspace.updateUI();
                 workspace.validate();
@@ -420,12 +699,65 @@ public class OpenblocksFrame extends JFrame {
 
         northPanel.updateUI();
         workspace.updateUI();
+
+        JPanel GlobalPanel = new JPanel(new BorderLayout());
+        //GlobalLayaredPane = new JLayeredPane();
+        //GlobalLayaredPane.addComponentListener(new ComponentAdapter() {
+//            @Override
+//            public void componentResized(ComponentEvent e) {
+//                GlobalPanel.setSize(e.getComponent().getSize());
+//                //pan.setSize(e.getComponent().getSize());
+//            }
+//        });
+        //this.add(GlobalLayaredPane, BorderLayout.CENTER);
         this.setJMenuBar(menuBar);
+        //GlobalPanel.add(northPanel, BorderLayout.NORTH);
+        //GlobalPanel.add(workspace, BorderLayout.CENTER);
         this.add(northPanel, BorderLayout.NORTH);
         this.add(workspace, BorderLayout.CENTER);
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowActivated(WindowEvent e) {
+                super.windowActivated(e);
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                super.windowDeactivated(e);
+                workspace.deactiveCPopupMenu();
+            }
+        });
+
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+                workspace.deactiveCPopupMenu();
+            }
+        });
     }
 
+
     // <editor-fold defaultstate="collapsed" desc="Buttons listners">
+
+    /**
+     *
+     */
     public void doOpenArduBlockFile() {
         if (context.isWorkspaceChanged()) {
             int optionValue = JOptionPane.showOptionDialog(this, uiMessageBundle.getString("message.content.open_unsaved"), uiMessageBundle.getString("message.title.question"), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, JOptionPane.YES_OPTION);
@@ -470,6 +802,10 @@ public class OpenblocksFrame extends JFrame {
         errWindow.reset();
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean doSaveArduBlockFile() {
         if (!context.isWorkspaceChanged()) {
             return true;
@@ -481,11 +817,15 @@ public class OpenblocksFrame extends JFrame {
             return chooseFileAndSave(saveString);
         } else {
             File saveFile = new File(context.getSaveFilePath());
+            fileToSave = saveFile;
             writeFileAndUpdateFrame(saveString, saveFile);
             return true;
         }
     }
 
+    /**
+     *
+     */
     public void doSaveAsArduBlockFile() {
         if (context.isWorkspaceEmpty()) {
             return;
@@ -497,9 +837,141 @@ public class OpenblocksFrame extends JFrame {
 
     }
 
+    /**
+     *
+     * @return
+     */
+    public ResourceBundle getResource() {
+        return uiMessageBundle;
+    }
+
+    private void remakeRecentItems(List<String> recentFiles) {
+        File recentfiles = new File("C:\\Users\\Public\\recentFiles.txt");
+        List<String> files = new ArrayList<>();
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(recentfiles);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            //System.out.println("eeerrrroooorrr");
+            return;
+        }
+        while (scanner.hasNextLine()) {
+            files.add(scanner.nextLine());
+        }
+
+
+        for (String s : files) {
+            JMenuItem item = new JMenuItem(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    try {
+                        context.loadArduBlockFile(new File(s));
+                        remakeRecentFiles(s);
+                        //посоветоваться и узнать изменять ли сразу или только при загрузке
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            });
+
+            String name = s.substring(s.lastIndexOf("\\"), s.length() - 1);
+            String name2 = "";
+            char[] chars = name.toCharArray();
+            for (int i = 1; i < name.length(); i++) {
+                name2 += chars[i];
+            }
+
+            item.setText(name2);
+            recentMenu.add(item);
+            //System.out.println(s);
+        }
+        recentMenu.revalidate();
+        recentMenu.repaint();
+    }
+
+    private void remakeRecentFiles(String path) {
+
+        //файл для хранения всех недавних файлов
+        File recentFilesData = new File("C:\\Users\\Public\\recentFiles.txt");
+        if (recentFilesData.exists()) {
+            try {
+                Scanner scanner = new Scanner(recentFilesData);
+                recentFiles = new ArrayList<>();
+                while (scanner.hasNextLine()) {
+                    recentFiles.add(scanner.nextLine());
+                }
+
+                if (!recentFiles.contains(path)) {
+
+                    if (recentFiles.size() >= 5) {
+                        List<String> files = new ArrayList<>();
+                        files.add(path);
+                        for (int i = 0; i < 4; i++) {
+                            files.add(recentFiles.get(i));
+                        }
+                        Formatter writer = new Formatter("C:\\Users\\Public\\recentFiles.txt");
+                        for (String s : files) {
+                            writer.format("%s", s + "\r\n");
+                        }
+                        writer.close();
+                    } else {
+                        List<String> files = new ArrayList<>();
+                        files.add(path);
+                        for (int i = 0; i < recentFiles.size(); i++) {
+                            files.add(recentFiles.get(i));
+                        }
+                        Formatter writer = new Formatter("C:\\Users\\Public\\recentFiles.txt");
+                        for (String s : files) {
+                            writer.format("%s", s + "\r\n");
+                        }
+                        writer.close();
+                    }
+
+                    recentMenu.removeAll();
+                    remakeRecentItems(recentFiles);
+                } else {
+                    int index = recentFiles.indexOf(path);
+                    List<String> rlist = new ArrayList<>();
+                    rlist.add(path);
+                    for (int i = 0; i < recentFiles.size(); i++) {
+                        if (i != index) {
+                            rlist.add(recentFiles.get(i));
+                        }
+                    }
+
+                    Formatter writer = new Formatter("C:\\Users\\Public\\recentFiles.txt");
+                    for (String s : rlist) {
+                        writer.format("%s", s + "\r\n");
+                    }
+                    writer.close();
+                    recentFiles = rlist;
+                    recentMenu.removeAll();
+                    remakeRecentItems(rlist);
+
+                }
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            try {
+                Formatter writer = new Formatter("C:\\Users\\Public\\recentFiles.txt");
+                writer.format("%s", path + "\r\n");
+                writer.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
     private boolean chooseFileAndSave(String ardublockString) {
         File saveFile = letUserChooseSaveFile();
-        saveFile = checkFileSuffix(saveFile);
+        fileToSave = saveFile;
         if (saveFile == null) {
             return false;
         }
@@ -507,6 +979,13 @@ public class OpenblocksFrame extends JFrame {
         if (saveFile.exists() && !askUserOverwriteExistedFile()) {
             return false;
         }
+        //System.out.println(saveFile.getAbsolutePath());
+        //файл для хранения всех недавних файлов
+        saveFile = checkFileSuffix(saveFile);
+        remakeRecentFiles(saveFile.getAbsolutePath());
+
+
+        //System.out.println(ardublockString+saveFile.getPath().toString());
 
         writeFileAndUpdateFrame(ardublockString, saveFile);
         return true;
@@ -548,6 +1027,9 @@ public class OpenblocksFrame extends JFrame {
         context.setSaveFilePath(saveFile.getAbsolutePath());
     }
 
+    /**
+     *
+     */
     public void doNewArduBlockFile() {
         if (context.isWorkspaceChanged()) {
             int optionValue = JOptionPane.showOptionDialog(this, uiMessageBundle.getString("message.question.newfile_on_workspace_changed"), uiMessageBundle.getString("message.title.question"), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, JOptionPane.YES_OPTION);
@@ -555,10 +1037,12 @@ public class OpenblocksFrame extends JFrame {
             switch (optionValue) {
                 case JOptionPane.YES_OPTION:
                     doSaveArduBlockFile();
-                //break;
+                    //break;
                 case JOptionPane.NO_OPTION:
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    context.resetWorksapce();
+                    //context.resetWorksapce();
+                    deleteAllBlocks();
+                    context.loadFreshWorkSpace();
                     context.setWorkspaceChanged(false);
                     this.setTitle(this.makeFrameTitle());
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -569,7 +1053,9 @@ public class OpenblocksFrame extends JFrame {
         } else {
             // If workspace unchanged just start a new Ardublock
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            context.resetWorksapce();
+            //context.resetWorksapce();
+            deleteAllBlocks();
+            context.loadFreshWorkSpace();
             context.setWorkspaceChanged(false);
             this.setTitle(this.makeFrameTitle());
             this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -577,6 +1063,9 @@ public class OpenblocksFrame extends JFrame {
 
     }
 
+    /**
+     *
+     */
     public void doCloseArduBlockFile() {
         if (context.isWorkspaceChanged()) {
             int optionValue = JOptionPane.showOptionDialog(this,
@@ -588,19 +1077,24 @@ public class OpenblocksFrame extends JFrame {
                 case JOptionPane.YES_OPTION:
                     if (doSaveArduBlockFile()) {
                         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//                        System.exit(0);
                     } else {
                         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                     }
                     break;
                 case JOptionPane.NO_OPTION:
                     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//                    System.exit(0);
                     break;
                 case JOptionPane.CANCEL_OPTION:
                     setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                     break;
             }
         } else {
+
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//            System.exit(0);
+
         }
         settings.dispose();
 
@@ -614,7 +1108,18 @@ public class OpenblocksFrame extends JFrame {
             return new File(filePath + ".abp");
         }
     }
+
+
     // </editor-fold>
+
+    /**
+     *
+     * @return
+     */
+
+    public Context getContext() {
+        return this.context;
+    }
 
     class ImageButton extends JButton {
 
@@ -646,6 +1151,13 @@ public class OpenblocksFrame extends JFrame {
             setSize(image.getWidth(null) - 1, image.getHeight(null) - 1);
             MouseListener mouseListener = new CustomMouseListener();
             addMouseListener(mouseListener);
+            addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ImageButton.this.grabFocus();
+                }
+            });
+
         }
 
         public class CustomMouseListener implements MouseListener {
@@ -677,4 +1189,28 @@ public class OpenblocksFrame extends JFrame {
             }
         }
     }
+
+    class ClickAction extends AbstractAction {
+
+        private JButton button;
+
+        public ClickAction(JButton but) {
+            button = but;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            button.doClick();
+        }
+    }
+
+    Thread timerSave = new Thread(new Runnable() {
+        @Override
+        public void run() {
+
+
+            chooseFileAndSave("backupSave.abp");
+        }
+    });
+
+
 }

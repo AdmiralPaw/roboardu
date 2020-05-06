@@ -1,30 +1,21 @@
 package com.mit.blocks.codeblocks;
 
-import java.awt.Color;
-import java.awt.Image;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.ResourceBundle;
-import java.util.MissingResourceException;
-
-import javax.swing.ImageIcon;
-
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import com.mit.blocks.renderable.BlockImageIcon;
 import com.mit.blocks.renderable.BlockImageIcon.ImageLocation;
 import com.mit.blocks.workspace.Workspace;
 import com.mit.blocks.workspace.WorkspaceEnvironment;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import javax.swing.*;
+import java.awt.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A genus describes the properties that define a block.  For example, fd is a block genus
@@ -227,13 +218,15 @@ public class BlockGenus {
 
     /**
      * Returns true if this block is a procedure parameter block; false otherwise
+     * @return 
      */
     public boolean isProcedureParamBlock() {
         return kind.equals("param");
     }
 
     /**
-     * Returns true if this genus is a declaration block.  Declaration blocks define variables and procedures.
+     * Returns true if this genus is a declaration block.Declaration blocks define variables and procedures.
+     * @return 
      */
     public boolean isDeclaration() {
         return this.isVariableDeclBlock() || this.isProcedureDeclBlock();
@@ -307,6 +300,7 @@ public class BlockGenus {
 
     /**
      * Returns true iff this genus's sockets are expandable
+     * @return 
      */
     public boolean areSocketsExpandable() {
         return areSocketsExpandable;
@@ -435,7 +429,8 @@ public class BlockGenus {
     }
 
     /**
-     * Returns the expand groups of this. Not modifiable.
+     * Returns the expand groups of this.Not modifiable.
+     * @return 
      */
     public List<List<BlockConnector>> getExpandGroups() {
         return Collections.unmodifiableList(expandGroups);

@@ -1,14 +1,5 @@
 package com.ardublock.ui.listener;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.HashSet;
-import java.util.ResourceBundle;
-import java.util.Set;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import com.ardublock.core.Context;
 import com.ardublock.translator.AutoFormat;
 import com.ardublock.translator.Translator;
@@ -16,10 +7,27 @@ import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNameDuplicatedException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
-
+import com.ardublock.ui.OpenblocksFrame;
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.Workspace;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashSet;
+import java.util.ResourceBundle;
+import java.util.Set;
+
+//<<<<<<< HEAD
+//import com.ardublock.ui.OpenblocksFrame;
+//=======
+//>>>>>>> lerofaCtrlZ
+
+/**
+ *
+ * @author User
+ */
 
 public class GenerateCodeButtonListener implements ActionListener {
 
@@ -28,6 +36,11 @@ public class GenerateCodeButtonListener implements ActionListener {
     private Workspace workspace;
     private ResourceBundle uiMessageBundle;
 
+    /**
+     *
+     * @param frame
+     * @param context
+     */
     public GenerateCodeButtonListener(JFrame frame, Context context) {
         this.parentFrame = frame;
         this.context = context;
@@ -48,6 +61,10 @@ public class GenerateCodeButtonListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        if (parentFrame instanceof OpenblocksFrame)
+        {
+            ((OpenblocksFrame) parentFrame).getContext().getWorkspace().deactiveLabelWidget();
+        }
         boolean success;
         success = true;
         Translator translator = new Translator(workspace);
@@ -193,7 +210,15 @@ public class GenerateCodeButtonListener implements ActionListener {
             if (!context.isInArduino()) {
                 System.out.println(codeOut);
             }
-            context.didGenerate(codeOut);
+
+            if (e.getActionCommand() == "UPLOAD_CODE")
+            {
+                context.didGenerate(codeOut);
+            }
+            else if (e.getActionCommand() == "VERIFY_CODE")
+            {
+                context.didVerify(codeOut);
+            }
         }
     }
 }

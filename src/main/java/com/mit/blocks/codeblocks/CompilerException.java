@@ -2,12 +2,22 @@ package com.mit.blocks.codeblocks;
 
 import com.mit.blocks.workspace.Workspace;
 
+/**
+ *
+ * @author User
+ */
 public class CompilerException extends Exception {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     *
+     */
     public enum Error {
 
+        /**
+         *
+         */
         UNSUPPORTED_VALUE
     }
     /** USE_DEBUGGING_MESSAGES is whether the messages are friendly to developers, as opposed to friendly to users. */
@@ -16,6 +26,12 @@ public class CompilerException extends Exception {
     private Long illegalBlockID;
     private String label;
 
+    /**
+     *
+     * @param error
+     * @param workspace
+     * @param illegalBlockID
+     */
     public CompilerException(Error error, Workspace workspace, Long illegalBlockID) {
         this.error = error;
         this.illegalBlockID = illegalBlockID;
