@@ -66,6 +66,9 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
         
         if (OmegaBot_IDE.editor == null) {
             OmegaBot_IDE.editor = editor;
+
+            //OmegaBot_IDE.editor.setVisible(false);
+
             OmegaBot_IDE.openblocksFrame = new ArduBlockToolFrame();
             OmegaBot_IDE.openblocksFrame.addListener(this);
             Context context = Context.getContext();
@@ -73,6 +76,7 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
             context.setInArduino(true);
             context.setArduinoVersionString(arduinoVersion);
             context.setEditor(editor);
+            //editor.setVisible(false);
             System.out.println("Arduino Version: " + arduinoVersion);
             userPrefs = Preferences.userRoot().node("OmegaBot_IDE");
             // Don't just "close" Ardublock, see if there's something to save first.
@@ -95,19 +99,37 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
             });
             if (userPrefs.getBoolean("ardublock.ui.autostart", false)) {
                 OmegaBot_IDE.openblocksFrame.setVisible(true);
+//                Runnable task = () -> {
+//                    while (!editor.isVisible());
+//                    editor.setVisible(false);
+//                };
+//                task.run();
             }
         }
     }
 
     public void run() {
         try {
-            OmegaBot_IDE.editor.toFront();
+            //OmegaBot_IDE.editor.toFront();
             OmegaBot_IDE.openblocksFrame.setVisible(true);
             OmegaBot_IDE.openblocksFrame.toFront();
             OmegaBot_IDE.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            OmegaBot_IDE.editor.setVisible(false);
         } catch (Exception e) {
 
         }
+        //this.hideEditor();
+        java.lang.reflect.Method method;
+        try {
+            Class ed = OmegaBot_IDE.editor.getClass();
+            Class[] cArg = new Class[1];
+            cArg[0] = String.class;
+            method = ed.getMethod("setVisible", boolean.class);
+            method.invoke(OmegaBot_IDE.editor, false);
+        } catch (NoSuchMethodException | IllegalAccessException | SecurityException | InvocationTargetException e) {
+            OmegaBot_IDE.editor.getCurrentTab().setText("");
+        }
+        OmegaBot_IDE.editor.handleExport(false);
     }
 
     /**

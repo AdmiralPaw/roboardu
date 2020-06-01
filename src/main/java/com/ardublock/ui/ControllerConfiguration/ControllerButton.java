@@ -629,7 +629,12 @@ public class ControllerButton extends JToggleButton {
     private void setImages(){
         //pathSet = getPathAddedName(path, "Set");
         URL iconURL = ControllerButton.class.getClassLoader().getResource(path);
-        image = new ImageIcon(iconURL);
+        try {
+            image = new ImageIcon(iconURL);
+        }
+        catch (java.lang.NullPointerException e) {
+            //System.out.println(iconURL);
+        }
         iconURL = ControllerButton.class.getClassLoader().getResource(getPathAddedName(path, "Set"));
         imageSet = new ImageIcon(iconURL);
         this.setIcon(getScaled(image));
