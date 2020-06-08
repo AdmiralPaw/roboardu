@@ -149,9 +149,10 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
         if (GraphicsEnvironment.isHeadless()) {
             return;
         }
-
+        if (rb.getBlock() == null)
+            System.out.println("[Error] Блок не имеет блока");
         // cache the focus so it'll know when it needs to redraw later.
-        hasFocus = rb.getBlock().hasFocus();
+        else hasFocus = rb.getBlock().hasFocus();
 
         Color color = null;
         if (hColor != null) {
