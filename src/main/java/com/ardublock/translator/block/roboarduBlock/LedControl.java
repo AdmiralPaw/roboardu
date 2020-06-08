@@ -39,6 +39,7 @@ public class LedControl extends TranslatorBlock {
         translator.LoadTranslators(this.getClass().getSimpleName());
         TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(0);
         String pinNumber = tb.toCode();
+        //TODO цифровые порты тоже нужны
         if(!("A0 A1 A2 A3 13").contains(pinNumber.trim())) {
             throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.Digital_pin_slot"));
         }
