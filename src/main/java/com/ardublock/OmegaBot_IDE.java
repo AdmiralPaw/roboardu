@@ -115,22 +115,9 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
             OmegaBot_IDE.openblocksFrame.toFront();
             OmegaBot_IDE.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             OmegaBot_IDE.editor.setVisible(false);
-        } catch (Exception e) {
-
-        }
-        //this.hideEditor();
-        java.lang.reflect.Method method;
-        try {
-            Class ed = OmegaBot_IDE.editor.getClass();
-            Class[] cArg = new Class[1];
-            cArg[0] = String.class;
-            method = ed.getMethod("setVisible", boolean.class);
-            method.invoke(OmegaBot_IDE.editor, false);
-        } catch (NoSuchMethodException | IllegalAccessException | SecurityException | InvocationTargetException e) {
-            OmegaBot_IDE.editor.getCurrentTab().setText("");
-        }
-        OmegaBot_IDE.editor.handleExport(false);
+        } catch (Exception e) {}
     }
+
 
     /**
      *
