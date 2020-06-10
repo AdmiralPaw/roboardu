@@ -58,7 +58,7 @@ public class ToneTime extends TranslatorBlock {
         leftLimit = 1;
         rightLimit = 10;
         if ((Integer.parseInt(timeBlock.toCode()) < 1) || (Integer.parseInt(timeBlock.toCode()) > 10)) {
-            throw new BlockException(timeBlock.getBlockID(), "[Ошибка в значении] Значение секунд может быть только от "
+            throw new BlockException(timeBlock.getBlockID(), "[Ошибка в значении] Значение может быть только от "
                     + leftLimit + " до " + rightLimit);
         }
         translator.LoadTranslators(this.getClass().getSimpleName());
