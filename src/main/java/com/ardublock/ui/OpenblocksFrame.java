@@ -260,10 +260,7 @@ public class OpenblocksFrame extends JFrame {
                 context.setWorkspaceChanged(isWorkspaceChanged);
                 context.setSaveFilePath(oldPath);
                 setTitle(makeFrameTitle());
-                Date dateNow = new Date();
-                SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss");
-                errWindow.setErrText("[" + formatForDateNow.format(dateNow) + "] " +
-                        uiMessageBundle.getString("ardublock.ui.compledAutosave") + autosavePath + newText + "_autosave.abp");
+                
             }
         });
         timer.start();
@@ -281,7 +278,10 @@ public class OpenblocksFrame extends JFrame {
             timer.restart();
         }
     }
-
+    
+    public void setAutosavePath(String path){
+        autosavePath = path;
+    }
 
     private void initOpenBlocks() {
 

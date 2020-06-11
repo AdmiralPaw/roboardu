@@ -8,6 +8,8 @@ import com.mit.blocks.workspace.BlocksKeeper;
 import com.mit.blocks.workspace.Workspace;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
@@ -33,6 +35,10 @@ public class Settings extends JFrame {
     int windowWidth = 400;
     int windowHeight = 300;
     private ArrayList<Integer> keyBuf;
+    
+    
+    JFileChooser fileChooser;
+    private String autosavePath = "";
 
     /**
      *
@@ -94,6 +100,9 @@ public class Settings extends JFrame {
             userPrefs.putBoolean("ardublock.ui.autostart", false);
             userPrefs.putInt("ardublock.ui.autosaveInterval", 10);
             userPrefs.putInt("ardublock.ui.ctrlzLength", 10);
+            String user = System.getProperty("user.name");
+            String autosavePath = "C:\\Users\\" + user + "\\Documents\\OmegaBot_IDE\\";
+            userPrefs.put("ardublock.ui.path_autosave", autosavePath);
         }
 
         //uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
@@ -223,6 +232,30 @@ public class Settings extends JFrame {
         BlocksKeeper.setSize(queueSize.getIntValue());
 
         position += offset;
+        
+        text = new JLabel(uiMessageBundle.getString("ardublock.ui.path_autosave"));
+        text.setVerticalAlignment(SwingConstants.CENTER);
+        windowBodyPanel.add(text);
+        text.setBounds(leftOffset, position, 300, 40);
+        text.setFont(new Font(mainFont, Font.PLAIN, 15));
+        
+        JButton button = new JButton(uiMessageBundle.getString("ardublock.ui.button_name_path_autosave"));
+        windowBodyPanel.add(button);
+        button.setBounds(getWidth() - 80 - rigthOffset, position + offset / 2 - spinnerHeigth / 2, 80, spinnerHeigth);
+        button.setBounds(getWidth()-80-rigthOffset, position + offset/2 - spinnerHeigth/2, 80,spinnerHeigth);  
+        fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        button.addActionListener(new ActionListener() {
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            fileChooser.showOpenDialog(null);
+            autosavePath = fileChooser.getSelectedFile().getAbsolutePath();
+        }
+});
+        position += offset;
+        
         eggText = new JLabel(uiMessageBundle.getString("ardublock.ui.randomColor"));
         eggText.setVerticalAlignment(SwingConstants.CENTER);
         windowBodyPanel.add(eggText);
@@ -260,6 +293,7 @@ public class Settings extends JFrame {
                 userPrefs.putInt("ardublock.ui.autosaveInterval", autosaveInterval.getIntValue());
                 userPrefs.putInt("ardublock.ui.ctrlzLength", queueSize.getIntValue());
                 openblocksFrame.setAutosaveInterval(autosaveInterval.getIntValue());
+                openblocksFrame.setAutosavePath(autosavePath);
                 BlocksKeeper.setSize(queueSize.getIntValue());
             }
         });
