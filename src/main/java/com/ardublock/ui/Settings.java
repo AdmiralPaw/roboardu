@@ -38,7 +38,6 @@ public class Settings extends JFrame {
     
     
     JFileChooser fileChooser;
-    private String autosavePath = "";
 
     /**
      *
@@ -100,9 +99,6 @@ public class Settings extends JFrame {
             userPrefs.putBoolean("ardublock.ui.autostart", false);
             userPrefs.putInt("ardublock.ui.autosaveInterval", 10);
             userPrefs.putInt("ardublock.ui.ctrlzLength", 10);
-            String user = System.getProperty("user.name");
-            String autosavePath = "C:\\Users\\" + user + "\\Documents\\OmegaBot_IDE\\";
-            userPrefs.put("ardublock.ui.path_autosave", autosavePath);
         }
 
         //uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
@@ -245,13 +241,25 @@ public class Settings extends JFrame {
         button.setBounds(getWidth()-80-rigthOffset, position + offset/2 - spinnerHeigth/2, 80,spinnerHeigth);  
         fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
+        
+        position += offset;
+        
+        JTextField textField = new JTextField(uiMessageBundle.getString("ardublock.ui.path_autosave"),128);
+        windowBodyPanel.add(textField);
+        textField.setBounds(leftOffset, position, getWidth()-leftOffset-rigthOffset, 30);
+        textField.setFont(new Font(mainFont, Font.PLAIN, 15));
+        
+        String user = System.getProperty("user.name");
+        String autosavePath = "C:\\Users\\" + user + "\\Documents\\OmegaBot_IDE\\";
+        
+        textField.setText(autosavePath);
         button.addActionListener(new ActionListener() {
         
+           
         @Override
         public void actionPerformed(ActionEvent e) {
             fileChooser.showOpenDialog(null);
-            autosavePath = fileChooser.getSelectedFile().getAbsolutePath();
+            textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
         }
 });
         position += offset;
@@ -293,7 +301,7 @@ public class Settings extends JFrame {
                 userPrefs.putInt("ardublock.ui.autosaveInterval", autosaveInterval.getIntValue());
                 userPrefs.putInt("ardublock.ui.ctrlzLength", queueSize.getIntValue());
                 openblocksFrame.setAutosaveInterval(autosaveInterval.getIntValue());
-                openblocksFrame.setAutosavePath(autosavePath);
+                openblocksFrame.setAutosavePath(textField.getText());
                 BlocksKeeper.setSize(queueSize.getIntValue());
             }
         });

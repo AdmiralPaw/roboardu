@@ -282,6 +282,9 @@ public class OpenblocksFrame extends JFrame {
     public void setAutosavePath(String path){
         autosavePath = path;
     }
+    public String getAutosavePath(){
+        return autosavePath;
+    }
 
     private void initOpenBlocks() {
 
