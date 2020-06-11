@@ -3325,13 +3325,14 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <FamilyMember>pinListDigital_D11</FamilyMember>
             <FamilyMember>pinListDigital_D12</FamilyMember>
             <FamilyMember>pinListDigital_D13</FamilyMember>
-
+        </BlockFamily>
+        <BlockFamily>
             <FamilyMember>pinListAnalog_A0</FamilyMember>
             <FamilyMember>pinListAnalog_A1</FamilyMember>
             <FamilyMember>pinListAnalog_A2</FamilyMember>
             <FamilyMember>pinListAnalog_A3</FamilyMember>
         </BlockFamily>
-
+        
         <BlockFamily>
             <FamilyMember>pinListAnalogWrite_D3</FamilyMember>
             <FamilyMember>pinListAnalogWrite_D9</FamilyMember>
@@ -3375,7 +3376,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockGenusMember>pin-write-analog</BlockGenusMember>
                 <BlockGenusMember>pinListDigital_D8</BlockGenusMember>
                 <BlockGenusMember>pinListAnalog_A0</BlockGenusMember>
-                <BlockGenusMember>pinListAnalogWrite_D9</BlockGenusMember>
+<!--                <BlockGenusMember>pinListAnalogWrite_D9</BlockGenusMember>-->
             </BlockDrawer>
             <!--90 160 85-->
             <BlockDrawer button-color="90 160 85" name="bd.logic" type="factory">

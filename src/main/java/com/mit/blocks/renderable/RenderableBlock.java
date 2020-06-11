@@ -644,7 +644,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 } else {
                     SocketLabel label = new SocketLabel(workspace, socket,
                             socket.getLabel(), BlockLabel.Type.PORT_LABEL,
-                            socket.isLabelEditable(), blockID);
+                            socket.isLabelEditable(), blockID);                   
                     String argumentToolTip = getBlock().getArgumentDescription(
                             i);
                     if (argumentToolTip != null) {
@@ -683,7 +683,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                     label.setZoomLevel(this.getZoom());
                 }
             }
-            newSocketTags.add(tag);
+            newSocketTags.add(tag); 
         }
         this.socketTags.clear();
         this.socketTags = newSocketTags;
