@@ -1,43 +1,26 @@
 package com.ardublock;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import javax.swing.JFrame;
-
-import processing.app.Editor;
-import processing.app.Editor;
-import processing.app.EditorStatus;
-import processing.app.EditorTab;
-import processing.app.SketchFile;
-import processing.app.tools.Tool;
-
 import com.ardublock.core.Context;
 import com.ardublock.ui.ArduBlockToolFrame;
 import com.ardublock.ui.Settings;
 import com.ardublock.ui.TutorialPane;
 import com.ardublock.ui.listener.OpenblocksFrameListener;
+import processing.app.Editor;
+import processing.app.EditorConsole;
+import processing.app.tools.Tool;
 
+import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
- *
  * @author User
  */
 public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
@@ -45,9 +28,9 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
     static Editor editor;
     static ArduBlockToolFrame openblocksFrame;
     private Preferences userPrefs;
+    private Context context;
 
     /**
-     *
      * @param editor
      */
     public void init(Editor editor) {
@@ -63,7 +46,7 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         if (OmegaBot_IDE.editor == null) {
             OmegaBot_IDE.editor = editor;
 
@@ -76,6 +59,7 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
             context.setInArduino(true);
             context.setArduinoVersionString(arduinoVersion);
             context.setEditor(editor);
+            this.context = context;
             //editor.setVisible(false);
             System.out.println("Arduino Version: " + arduinoVersion);
             userPrefs = Preferences.userRoot().node("OmegaBot_IDE");
@@ -105,22 +89,31 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
 //                };
 //                task.run();
             }
+//            Runnable task = () -> {
+//                while (true) {
+//                    System.out.println(editor.getWarningString());
+//                    if (editor.getWarningString() != "") {
+//                        try {
+//                            this.context.getWorkspace().getErrWindow().setErr("err", editor.getWarningString());
+//                        } catch (NullPointerException ignored) { }
+//                    }
+//                }
+//            };
+//            task.run();
         }
     }
 
     public void run() {
         try {
-            //OmegaBot_IDE.editor.toFront();
             OmegaBot_IDE.openblocksFrame.setVisible(true);
             OmegaBot_IDE.openblocksFrame.toFront();
             OmegaBot_IDE.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-            OmegaBot_IDE.editor.setVisible(false);
-        } catch (Exception e) {}
+            //OmegaBot_IDE.editor.setVisible(false);
+        } catch (Exception ignored) { }
     }
 
 
     /**
-     *
      * @return
      */
     public String getMenuTitle() {
@@ -156,7 +149,6 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
     }
 
     /**
-     *
      * @param source
      */
     public void didGenerate(String source) {
@@ -181,7 +173,6 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
     }
 
     /**
-     *
      * @param source
      */
     public void didVerify(String source) {
@@ -243,9 +234,7 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
                 }
                 return line;
 
-            } catch (FileNotFoundException e) {
-                return Context.ARDUINO_VERSION_UNKNOWN;
-            } catch (UnsupportedEncodingException e) {
+            } catch (FileNotFoundException | UnsupportedEncodingException e) {
                 return Context.ARDUINO_VERSION_UNKNOWN;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -255,5 +244,16 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
             return Context.ARDUINO_VERSION_UNKNOWN;
         }
 
+    }
+
+    public void getInfoText() {
+        try {
+            Field f = Editor.class.getDeclaredField("console");
+            f.setAccessible(true);
+            EditorConsole console = (EditorConsole) f.get(OmegaBot_IDE.editor);
+            this.context.getWorkspace().getErrWindow().setErr("err", console.getText());
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            System.out.println(e.toString());
+        }
     }
 }

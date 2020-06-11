@@ -420,6 +420,12 @@ public class Context {
         }
     }
 
+    public void getInfoText(){
+        for (OpenblocksFrameListener ofl : ofls) {
+            ofl.getInfoText();
+        }
+    }
+
     /**
      *
      * @return
