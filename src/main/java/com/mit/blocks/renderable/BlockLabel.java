@@ -170,8 +170,9 @@ public class BlockLabel implements MouseListener, MouseMotionListener, KeyListen
             List<String> siblingsNames = workspace.getEnv().getBlock(blockID).getSiblingsList();
             String[][] siblings = new String[siblingsNames.size() + 1][2];
             siblings[0] = new String[]{workspace.getEnv().getBlock(blockID).getGenusName(), workspace.getEnv().getBlock(blockID).getInitialLabel()};
-            for (int i = 0; i < siblingsNames.size(); i++) {
+            for (int i = 0; i < siblingsNames.size(); i++) {            
                 siblings[i + 1] = new String[]{siblingsNames.get(i), workspace.getEnv().getGenusWithName(siblingsNames.get(i)).getInitialLabel()};
+                System.out.println(siblingsNames.get(i));
             }
             widget.setSiblings(hasComboPopup && workspace.getEnv().getBlock(blockID).hasSiblings(), siblings);
         }

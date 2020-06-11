@@ -5,12 +5,15 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
+import java.util.ResourceBundle;
 
 /**
  *
  * @author User
  */
 public class Engine_ForwardTime extends TranslatorBlock {
+
+    private static ResourceBundle uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
 
     /**
      *
@@ -38,8 +41,8 @@ public class Engine_ForwardTime extends TranslatorBlock {
         
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
         String val = translatorBlock.toCode();
-        if (Double.parseDouble(val) > 100 || Double.parseDouble(val) < -100) {
-            throw new BlockException(translatorBlock.getBlockID(), "ARGUMENT_ERROR");
+        if (Double.parseDouble(val) > 255 || Double.parseDouble(val) < -255) {
+            throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range").replace("?", 255 +", "+-255));
         };
         String ret = "MoveForwardByDelay(" + translatorBlock.toCode() + ", ";
         translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
@@ -47,7 +50,7 @@ public class Engine_ForwardTime extends TranslatorBlock {
         try {
             Integer.parseInt(val);
         } catch (NumberFormatException e) {
-            throw new BlockException(translatorBlock.getBlockID(), "ARGUMENT_MUST_BE_INTEGER");
+            throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.must_be_int"));
         }
         ret = ret + translatorBlock.toCode() + " );";
         return codePrefix + ret + codeSuffix;
