@@ -22,7 +22,7 @@ public class ErrWindow extends JPanel {
     private Color foregroundColour = new Color(255,255,255);
 
     private Font actualFont = new Font("TimesRoman", Font.PLAIN, 12);
-
+    public int mode;
     /**
      *
      */
@@ -61,6 +61,7 @@ public class ErrWindow extends JPanel {
 
         add(editorStatus, BorderLayout.NORTH);
         add(this.editorConsole, BorderLayout.CENTER);
+        mode = 0;
     }
 
     /**
@@ -68,7 +69,8 @@ public class ErrWindow extends JPanel {
      * @param text
      */
     public void setErrText(String text) {
-        this.consoleTextPane.setText(text);
+        if (!this.consoleTextPane.getText().equals(text))
+            this.consoleTextPane.setText(text);
     }
 
     /**
@@ -76,7 +78,8 @@ public class ErrWindow extends JPanel {
      * @param text
      */
     public void setErrTitle(String text) {
-        this.status.setText(text);
+        if (!this.status.getText().equals(text))
+            this.status.setText(text);
     }
 
     /**
@@ -88,6 +91,7 @@ public class ErrWindow extends JPanel {
         setErrTitle(title);
         setErrText(text);
         this.editorStatus.setBackground(backgroundColourError);
+        mode = 1;
     }
 
     public void setErr(String title, String text, Color bgcolor) {
@@ -103,5 +107,6 @@ public class ErrWindow extends JPanel {
         setErrTitle("");
         setErrText("");
         this.editorStatus.setBackground(backgroundColourStatus);
+        mode = 0;
     }
 }

@@ -11,7 +11,10 @@ import processing.app.EditorStatus;
 import processing.app.tools.Tool;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.*;
@@ -91,17 +94,8 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
 //                };
 //                task.run();
             }
-//            Runnable task = () -> {
-//                while (true) {
-//                    System.out.println(editor.getWarningString());
-//                    if (editor.getWarningString() != "") {
-//                        try {
-//                            this.context.getWorkspace().getErrWindow().setErr("err", editor.getWarningString());
-//                        } catch (NullPointerException ignored) { }
-//                    }
-//                }
-//            };
-//            task.run();
+            Timer timer = new Timer(300, (ActionListener) e -> getInfoText());
+            timer.start();
         }
     }
 
@@ -249,34 +243,27 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
     }
 
     public void getInfoText() {
+        if (this.context.getWorkspace().getErrWindow().mode == 0){
         try {
-            Field f6 = Editor.class.getDeclaredField("avoidMultipleOperations");
-            f6.setAccessible(true);
-            boolean avoidMultipleOperations = (boolean) f6.get(OmegaBot_IDE.editor);
-            System.out.println("[DEBUG] Начало цикла");
-            while(avoidMultipleOperations) {
-                Field f1 = Editor.class.getDeclaredField("console");
-                f1.setAccessible(true);
-                EditorConsole console = (EditorConsole) f1.get(OmegaBot_IDE.editor);
-                Field f2 = Editor.class.getDeclaredField("status");
-                f2.setAccessible(true);
-                EditorStatus status = (EditorStatus) f2.get(OmegaBot_IDE.editor);
-                Field f3 = EditorStatus.class.getDeclaredField("message");
-                f3.setAccessible(true);
-                String message = (String) f3.get(status);
-                Field f4 = EditorStatus.class.getDeclaredField("mode");
-                f4.setAccessible(true);
-                int mode = (int) f4.get(status);
-                Field f5 = EditorStatus.class.getDeclaredField("BGCOLOR");
-                f5.setAccessible(true);
-                Color[] BGCOLOR = (Color[]) f5.get(status);
-                this.context.getWorkspace().getErrWindow().setErr(message, console.getText(), BGCOLOR[mode]);
-                avoidMultipleOperations = (boolean) f6.get(OmegaBot_IDE.editor);
-                System.out.println("[DEBUG] avoidMultipleOperations: " + avoidMultipleOperations);
-            }
-            System.out.println("[DEBUG] Конец цикла");
+            Field f1 = Editor.class.getDeclaredField("console");
+            f1.setAccessible(true);
+            EditorConsole console = (EditorConsole) f1.get(OmegaBot_IDE.editor);
+            Field f2 = Editor.class.getDeclaredField("status");
+            f2.setAccessible(true);
+            EditorStatus status = (EditorStatus) f2.get(OmegaBot_IDE.editor);
+            Field f3 = EditorStatus.class.getDeclaredField("message");
+            f3.setAccessible(true);
+            String message = (String) f3.get(status);
+            Field f4 = EditorStatus.class.getDeclaredField("mode");
+            f4.setAccessible(true);
+            int mode = (int) f4.get(status);
+            Field f5 = EditorStatus.class.getDeclaredField("BGCOLOR");
+            f5.setAccessible(true);
+            Color[] BGCOLOR = (Color[]) f5.get(status);
+            this.context.getWorkspace().getErrWindow().setErr(message, console.getText(), BGCOLOR[mode]);
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            System.out.println(e.toString());
+            //System.out.println(e.toString());
+        }
         }
     }
 }

@@ -219,8 +219,6 @@ public class GenerateCodeButtonListener implements ActionListener {
             {
                 context.didVerify(codeOut);
             }
-            //TODO
-//            context.getInfoText();
         }
     }
 }

@@ -632,16 +632,14 @@ public class OpenblocksFrame extends JFrame {
         );
         websiteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                    context.getInfoText();
-//                //
 //                //TODO: код ниже позволяет скрывать окно Arduino IDE, необходимо автоматически закрывать его, если
-//                //  включен параметр @autostart@
-//                if (context.getEditor() != null) {
-//                    context.getEditor().setVisible(!context.getEditor().isVisible());
-//                }
-//                else {
-//                    System.out.println("[DEBUG] editor == null");
-//                }
+                //  включен параметр @autostart@
+                if (context.getEditor() != null) {
+                    context.getEditor().setVisible(!context.getEditor().isVisible());
+                }
+                else {
+                    System.out.println("[DEBUG] editor == null");
+                }
 //                Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
 //                URL url;
 //                if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
