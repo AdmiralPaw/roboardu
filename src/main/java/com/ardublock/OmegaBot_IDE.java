@@ -7,9 +7,11 @@ import com.ardublock.ui.TutorialPane;
 import com.ardublock.ui.listener.OpenblocksFrameListener;
 import processing.app.Editor;
 import processing.app.EditorConsole;
+import processing.app.EditorStatus;
 import processing.app.tools.Tool;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.*;
@@ -248,10 +250,31 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
 
     public void getInfoText() {
         try {
-            Field f = Editor.class.getDeclaredField("console");
-            f.setAccessible(true);
-            EditorConsole console = (EditorConsole) f.get(OmegaBot_IDE.editor);
-            this.context.getWorkspace().getErrWindow().setErr("err", console.getText());
+            Field f6 = Editor.class.getDeclaredField("avoidMultipleOperations");
+            f6.setAccessible(true);
+            boolean avoidMultipleOperations = (boolean) f6.get(OmegaBot_IDE.editor);
+            System.out.println("[DEBUG] Начало цикла");
+            while(avoidMultipleOperations) {
+                Field f1 = Editor.class.getDeclaredField("console");
+                f1.setAccessible(true);
+                EditorConsole console = (EditorConsole) f1.get(OmegaBot_IDE.editor);
+                Field f2 = Editor.class.getDeclaredField("status");
+                f2.setAccessible(true);
+                EditorStatus status = (EditorStatus) f2.get(OmegaBot_IDE.editor);
+                Field f3 = EditorStatus.class.getDeclaredField("message");
+                f3.setAccessible(true);
+                String message = (String) f3.get(status);
+                Field f4 = EditorStatus.class.getDeclaredField("mode");
+                f4.setAccessible(true);
+                int mode = (int) f4.get(status);
+                Field f5 = EditorStatus.class.getDeclaredField("BGCOLOR");
+                f5.setAccessible(true);
+                Color[] BGCOLOR = (Color[]) f5.get(status);
+                this.context.getWorkspace().getErrWindow().setErr(message, console.getText(), BGCOLOR[mode]);
+                avoidMultipleOperations = (boolean) f6.get(OmegaBot_IDE.editor);
+                System.out.println("[DEBUG] avoidMultipleOperations: " + avoidMultipleOperations);
+            }
+            System.out.println("[DEBUG] Конец цикла");
         } catch (NoSuchFieldException | IllegalAccessException e) {
             System.out.println(e.toString());
         }

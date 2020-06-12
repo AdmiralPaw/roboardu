@@ -1,11 +1,9 @@
 package com.mit.blocks.workspace;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import processing.app.PreferencesData;
+
+import java.awt.*;
+import javax.swing.*;
 
 /**
  *
@@ -13,40 +11,56 @@ import javax.swing.JPanel;
  */
 public class ErrWindow extends JPanel {
 
-    private final JPanel mainPanel;
-    private final JLabel errInfo;
-    private final JLabel errLabel;
-    private final JPanel errDevider;
+    private JScrollPane editorConsole;
+    private JTextPane consoleTextPane;
+    private JPanel editorStatus;
+    private JLabel status;
+
+    private Color backgroundColour = new Color(0, 0, 0);
+    private Color backgroundColourStatus = new Color(0, 151, 157);
+    private Color backgroundColourError = new Color(227, 76, 0);
+    private Color foregroundColour = new Color(255,255,255);
+
+    private Font actualFont = new Font("TimesRoman", Font.PLAIN, 12);
 
     /**
      *
      */
     public ErrWindow() {
-        mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBackground(Color.black);
-        errDevider = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 5));
-        errLabel = new JLabel();
-        errLabel.setForeground(Color.white);
-        errDevider.setBackground(
-                new Color(0, 151, 157));
-        errDevider.add(errLabel);
-        errDevider.setPreferredSize(
-                new Dimension(0, 24));
-        mainPanel.add(errDevider, BorderLayout.NORTH);
-        JPanel errWindow = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 3));
-        errInfo = new JLabel();
-        errInfo.setForeground(Color.white);
-        errWindow.add(errInfo);
-        errWindow.setBackground(Color.black);
-        mainPanel.add(errWindow, BorderLayout.CENTER);
-    }
+        setLayout(new BorderLayout());
 
-    /**
-     *
-     * @return
-     */
-    public JPanel getErrPanel() {
-        return this.mainPanel;
+        this.editorConsole = new JScrollPane();
+        this.editorConsole.setBackground(backgroundColour);
+        this.consoleTextPane = new JTextPane();
+        this.consoleTextPane.setEditable(false);
+        this.consoleTextPane.setFocusTraversalKeysEnabled(false);
+        this.consoleTextPane.setBackground(backgroundColour);
+        this.consoleTextPane.setForeground(foregroundColour);
+        this.consoleTextPane.setFont(actualFont);
+        JPanel noWrapPanel = new JPanel(new BorderLayout());
+        noWrapPanel.add(this.consoleTextPane);
+        this.editorConsole.setViewportView(noWrapPanel);
+        this.editorConsole.getVerticalScrollBar().setUnitIncrement(7);
+        FontMetrics metrics = this.getFontMetrics(actualFont);
+        this.editorConsole.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
+
+        int height = metrics.getAscent() + metrics.getDescent();
+        int lines = 3;
+        this.editorConsole.setPreferredSize(new Dimension(100, height * lines));
+        this.editorConsole.setMinimumSize(new Dimension(100, height * lines));
+
+        this.editorStatus = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 5));
+        this.editorStatus.setBackground(backgroundColourStatus);
+        this.status = new JLabel();
+        this.status.setBackground(backgroundColourStatus);
+        this.status.setForeground(foregroundColour);
+        this.status.setFont(actualFont);
+        this.editorStatus.add(this.status);
+        this.editorStatus.setPreferredSize(new Dimension(100, height * 2));
+        this.editorStatus.setMinimumSize(new Dimension(100, height * 2));
+
+        add(editorStatus, BorderLayout.NORTH);
+        add(this.editorConsole, BorderLayout.CENTER);
     }
 
     /**
@@ -54,8 +68,7 @@ public class ErrWindow extends JPanel {
      * @param text
      */
     public void setErrText(String text) {
-        this.errInfo.setText(text);
-        this.mainPanel.repaint();
+        this.consoleTextPane.setText(text);
     }
 
     /**
@@ -63,8 +76,7 @@ public class ErrWindow extends JPanel {
      * @param text
      */
     public void setErrTitle(String text) {
-        this.errLabel.setText(text);
-        this.mainPanel.repaint();
+        this.status.setText(text);
     }
 
     /**
@@ -75,17 +87,21 @@ public class ErrWindow extends JPanel {
     public void setErr(String title, String text) {
         setErrTitle(title);
         setErrText(text);
-        errDevider.setBackground(new Color(227, 76, 0));
+        this.editorStatus.setBackground(backgroundColourError);
+    }
+
+    public void setErr(String title, String text, Color bgcolor) {
+        setErrTitle(title);
+        setErrText(text);
+        this.editorStatus.setBackground(bgcolor);
     }
 
     /**
      *
      */
     public void reset() {
-        errDevider.setBackground(
-                new Color(0, 151, 157));
-        errLabel.setText("");
-        errInfo.setText("");
-        this.mainPanel.repaint();
+        setErrTitle("");
+        setErrText("");
+        this.editorStatus.setBackground(backgroundColourStatus);
     }
 }
