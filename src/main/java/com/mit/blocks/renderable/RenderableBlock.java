@@ -2209,7 +2209,8 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     public static void stopDragging(RenderableBlock renderable,
             WorkspaceWidget widget) {
         if (!renderable.dragging) {
-            throw new RuntimeException("dropping without prior dragging?");
+            //TODO понять почему эта ошибка вызывается
+            //throw new RuntimeException("dropping without prior dragging?");
         }
         // notify children
         for (BlockConnector socket : BlockLinkChecker
