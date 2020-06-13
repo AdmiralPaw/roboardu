@@ -155,7 +155,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      */
     private final NameLabel blockLabel;
     private final PageLabel pageLabel;
-    private final ConnectorTag plugTag;
+    public final ConnectorTag plugTag;
     private final ConnectorTag afterTag;
     private final ConnectorTag beforeTag;
     private List<ConnectorTag> socketTags = new ArrayList<ConnectorTag>();
@@ -2926,7 +2926,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      */
     public boolean dellAction = false;
 
-    private ConnectorTag getConnectorTag(BlockConnector socket) {
+    public ConnectorTag getConnectorTag(BlockConnector socket) {
 
         if (socket == null) {
             throw new RuntimeException("Socket may not be null");
