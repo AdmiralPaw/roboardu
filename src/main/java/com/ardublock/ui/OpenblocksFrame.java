@@ -570,7 +570,6 @@ public class OpenblocksFrame extends JFrame {
             /**
              * Метод, загружающий файл
              * @param e - Событие совершённого действия
-             * @exception IOException ex - Исключение, из-за невозможности загрузки файла
              */
             @Override
             public void actionPerformed(ActionEvent e) {
