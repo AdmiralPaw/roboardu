@@ -120,7 +120,7 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
 
     /**
      * Constucts new Factorymanager
-     * @param wrkspc
+     * @param workspace 12
      */
     public FactoryManager(Workspace workspace) {
         this.workspace = workspace;
@@ -925,6 +925,16 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         //THIS ENTIRE METHOD IS A HACK!
         //PLEASE CHANGE WITH CAUTION
         //IT DOES SOME PREETY STRANGE THINGS
+        if (event.getEventType() == WorkspaceEvent.BLOCKS_CONNECTED) {
+            RenderableBlock rb1 = workspace.getEnv().getRenderableBlock(event.getSourceLink().getSocket().getBlockID());
+            RenderableBlock rb2 = workspace.getEnv().getRenderableBlock(event.getSourceLink().getPlug().getBlockID());
+            System.out.println("BLOCKS_CONNECTED" + workspace.getEnv().getBlock(event.getSourceBlockID()));
+        }
+        if (event.getEventType() == WorkspaceEvent.BLOCK_GENUS_CHANGED) {
+            RenderableBlock rb1 = workspace.getEnv().getRenderableBlock(event.getSourceBlockID());
+            RenderableBlock rb2 = workspace.getEnv().getRenderableBlock(rb1.plugTag.getSocket().getBlockID());
+            System.out.println("BLOCKS_CONNECTED" + workspace.getEnv().getBlock(event.getSourceBlockID()));
+        }
         if (event.getEventType() == WorkspaceEvent.BLOCK_ADDED) {
             if (event.getSourceWidget() instanceof Page) {
                 Page page = (Page) event.getSourceWidget();

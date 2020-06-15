@@ -190,7 +190,7 @@ public class GenerateCodeButtonListener implements ActionListener {
             translator.beforeGenerateHeader();
             code.insert(0, translator.genreateHeaderCommand());
         } catch (SocketNullException e1) {
-            e1.printStackTrace();
+            //e1.printStackTrace();
             success = false;
             Long blockId = e1.getBlockId();
             afterException(blockId);
@@ -199,14 +199,14 @@ public class GenerateCodeButtonListener implements ActionListener {
                                     "Error",
                                     uiMessageBundle.getString("ardublock.translator.exception.socketNull"));
         } catch (BlockException e2) {
-            e2.printStackTrace();
+            //e2.printStackTrace();
             success = false;
             Long blockId = e2.getBlockId();
             afterException(blockId);
             //JOptionPane.showMessageDialog(parentFrame, e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             workspace.getErrWindow().setErr("Error",e2.getMessage());
         } catch (SubroutineNotDeclaredException e3) {
-            e3.printStackTrace();
+            //e3.printStackTrace();
             success = false;
             Long blockId = e3.getBlockId();
             afterException(blockId);

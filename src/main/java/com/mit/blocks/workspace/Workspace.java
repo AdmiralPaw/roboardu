@@ -161,7 +161,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
     /**
      * MiniMap associated with the blockCanvas
      */
-    private ErrWindow errWindow = new ErrWindow();
+    private ErrWindow errWindow;
     private MiniMap miniMap;
 
     /**
@@ -256,7 +256,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
 
         isActiveBasket = false;
 
-        JPanel errPanel = errWindow.getErrPanel();
+        this.errWindow = new ErrWindow();
 
         final JLayeredPane blockCanvasWithDepth = new JLayeredPane();
         blockCanvasWithDepth.setPreferredSize(new Dimension(300, 500));
@@ -267,7 +267,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         level_one.add(blockCanvas.getJComponent());
         blockCanvasWithDepth.setBackground(Color.black);
         blockCanvasWithDepth.add(level_one, 2);
-        blockCanvasWithDepth.add(errPanel, 4);
+        blockCanvasWithDepth.add(errWindow, 4);
         blockCanvasWithDepth.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -283,7 +283,7 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
         //blockCanvas.getJComponent().setMinimumSize(new Dimension(0, 100));
         //blockCanvas.getJComponent().setPreferredSize(new Dimension(0, 600));
         centerPane = new RSplitPane(JSplitPane.VERTICAL_SPLIT, true,
-                blockCanvasWithDepth, errPanel);
+                blockCanvasWithDepth, errWindow);
         centerPane.setOneTouchExpandable(true);
         centerPane.setDividerSize(6);
 //        centerPane.setDividerLocation(centerPane.getMaximumDividerLocation() - 100);

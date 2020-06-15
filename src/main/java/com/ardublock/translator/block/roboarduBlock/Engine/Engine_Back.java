@@ -8,6 +8,7 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -15,6 +16,7 @@ import java.util.HashMap;
  */
 public class Engine_Back extends TranslatorBlock {
 
+    private static ResourceBundle uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
     /**
      *
      * @param blockId
@@ -39,8 +41,8 @@ public class Engine_Back extends TranslatorBlock {
         translator.addSetupCommand("InitMotors();");
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
         String val = translatorBlock.toCode();
-        if (Double.parseDouble(val) > 100 || Double.parseDouble(val) < -100) {
-            throw new BlockException(translatorBlock.getBlockID(), "ARGUMENT_ERROR");
+        if (Double.parseDouble(val) > 255 || Double.parseDouble(val) < -255) {
+            throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range").replace("?", 255 +", "+-255));
         };
         String ret = "MoveBack(" + translatorBlock.toCode() + ");";
         return codePrefix + ret + codeSuffix;

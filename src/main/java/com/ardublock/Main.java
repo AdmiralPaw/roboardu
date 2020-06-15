@@ -78,7 +78,6 @@ public class Main {
         openblocksFrame.setMinimumSize(new Dimension(1140, 460));
         openblocksFrame.setVisible(true);
         openblocksFrame.repaint();
-        
 //        Settings settings = openblocksFrame.settings;
 //        if (settings.isFirstLaunch()) {
 //            TutorialPane pan = new TutorialPane(openblocksFrame);

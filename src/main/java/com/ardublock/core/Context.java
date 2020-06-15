@@ -449,6 +449,12 @@ public class Context {
         }
     }
 
+    public void getInfoText(){
+        for (OpenblocksFrameListener ofl : ofls) {
+            ofl.getInfoText();
+        }
+    }
+
     /**
      * Метод для загрузки имени сохраняемого файла
      * @return saveFileName

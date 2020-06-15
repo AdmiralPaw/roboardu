@@ -155,7 +155,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      */
     private final NameLabel blockLabel;
     private final PageLabel pageLabel;
-    private final ConnectorTag plugTag;
+    public final ConnectorTag plugTag;
     private final ConnectorTag afterTag;
     private final ConnectorTag beforeTag;
     private List<ConnectorTag> socketTags = new ArrayList<ConnectorTag>();
@@ -644,7 +644,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 } else {
                     SocketLabel label = new SocketLabel(workspace, socket,
                             socket.getLabel(), BlockLabel.Type.PORT_LABEL,
-                            socket.isLabelEditable(), blockID);
+                            socket.isLabelEditable(), blockID);                   
                     String argumentToolTip = getBlock().getArgumentDescription(
                             i);
                     if (argumentToolTip != null) {
@@ -683,7 +683,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                     label.setZoomLevel(this.getZoom());
                 }
             }
-            newSocketTags.add(tag);
+            newSocketTags.add(tag); 
         }
         this.socketTags.clear();
         this.socketTags = newSocketTags;
@@ -2209,7 +2209,8 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     public static void stopDragging(RenderableBlock renderable,
             WorkspaceWidget widget) {
         if (!renderable.dragging) {
-            throw new RuntimeException("dropping without prior dragging?");
+            //TODO понять почему эта ошибка вызывается
+            //throw new RuntimeException("dropping without prior dragging?");
         }
         // notify children
         for (BlockConnector socket : BlockLinkChecker
@@ -2925,7 +2926,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      */
     public boolean dellAction = false;
 
-    private ConnectorTag getConnectorTag(BlockConnector socket) {
+    public ConnectorTag getConnectorTag(BlockConnector socket) {
 
         if (socket == null) {
             throw new RuntimeException("Socket may not be null");
