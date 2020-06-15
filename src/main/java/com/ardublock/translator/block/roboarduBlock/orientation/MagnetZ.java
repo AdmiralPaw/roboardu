@@ -10,17 +10,38 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class MagnetZ extends TranslatorBlock {
 
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public MagnetZ(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    /**
+     *
+     */
     public static final String MAGNET_FUNC = "float callMagnetZ(MPU9250 &Accel){\n"
             + "  Accel.readSensor();\n"
             + "  return Accel.getMagZ_uT();\n"
             + "}";
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
         String Accel = "Accel";

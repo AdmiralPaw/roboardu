@@ -4,18 +4,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * The PageChangeEventmanager is in charged of
- * handling all page-changed events triggered by
- * Pages and notifying page-change listeners when
- * such an event is triggered.
- * 
- * A page-change event is thrown by invoking the
- * manager through the static method
- * PageChangeEventManager.notifyListeners().
- * 
- * An object can subscribe to page-change events
- * by delegating itself through the static method
- * PageChangeEventManager.addPageChangeListener(). 
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс PageChangeEventmanager отвечает за обработку всех событий изменения страницы,
+ * инициируемых Pages, и уведомляет слушателей изменения страницы, когда такое событие инициируется.
+ * Cобытие изменение страницы генерируется путем вызова диспетчера через статический
+ * метод PageChangeEventManager.notifyListeners(). Объект может подписаться на события изменения страницы,
+ * делегируя себя через статический метод PageChangeEventManager.addPageChangeListener().
  */
 public class PageChangeEventManager {
 

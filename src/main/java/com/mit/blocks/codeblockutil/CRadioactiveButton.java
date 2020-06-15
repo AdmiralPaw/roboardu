@@ -16,6 +16,10 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
 
+/**
+ *
+ * @author User
+ */
 public class CRadioactiveButton extends CButton {
 
     private static final long serialVersionUID = 328149080258L;
@@ -33,6 +37,12 @@ public class CRadioactiveButton extends CButton {
     private final float[] shadowColorArray = {0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0, 0};
     private double offsetSize = 1;
 
+    /**
+     *
+     * @param buttonColor
+     * @param selectedColor
+     * @param text
+     */
     public CRadioactiveButton(Color buttonColor, Color selectedColor, String text) {
         super(buttonColor, selectedColor, text);
     }

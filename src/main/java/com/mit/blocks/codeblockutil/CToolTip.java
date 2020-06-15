@@ -12,6 +12,10 @@ import javax.swing.JTextArea;
 import javax.swing.JToolTip;
 import javax.swing.plaf.basic.BasicToolTipUI;
 
+/**
+ *
+ * @author User
+ */
 public class CToolTip extends JToolTip {
 
     private static final long serialVersionUID = 328149080249L;
@@ -21,6 +25,10 @@ public class CToolTip extends JToolTip {
         this(new Color(255, 255, 225));
     }
 
+    /**
+     *
+     * @param background
+     */
     public CToolTip(Color background) {
         this.background = background;
         updateUI();

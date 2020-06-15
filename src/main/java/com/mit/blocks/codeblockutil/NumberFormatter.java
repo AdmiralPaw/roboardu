@@ -12,16 +12,19 @@ public class NumberFormatter {
         /**
          * Returns the number of significant digits
          * to display given the precision of a
-         * particular number.  Given a non-zero
-         * number x,
-         * significantDigits(Math.log10(Math.abs(x)))
-         * digits should be displayed.
+         * particular number.Given a non-zero
+ number x,
+ significantDigits(Math.log10(Math.abs(x)))
+ digits should be displayed.
+         * @param precision
+         * @return 
          */
         public int significantDigits(int precision);
 
         /**
          * Returns the precision below which
          * to display a number with e notation.
+         * @return 
          */
         public int showAsDecimalThreshold();
     }
@@ -68,9 +71,25 @@ public class NumberFormatter {
             return lowPrecisionThreshold;
         }
     }
+
+    /**
+     *
+     */
     public static final StandardPrecisionSpecifier LOW_PRECISION = new StandardPrecisionSpecifier(-2, 4, 3);
+
+    /**
+     *
+     */
     public static final StandardPrecisionSpecifier MEDIUM_PRECISION = new StandardPrecisionSpecifier(-5, 7, 4);
+
+    /**
+     *
+     */
     public static final StandardPrecisionSpecifier HIGH_PRECISION = new StandardPrecisionSpecifier(-5, 7, 6);
+
+    /**
+     *
+     */
     public static final StandardPrecisionSpecifier VERY_LOW_PRECISION = new StandardPrecisionSpecifier(-6, 8, 8);
     private PrecisionSpecifier ps;
     private String eCharacter = "e";
@@ -78,23 +97,38 @@ public class NumberFormatter {
     private boolean showPlusInExponent = true;
     private boolean showExtraZeros = false;
 
+    /**
+     *
+     */
     public NumberFormatter() {
         ps = MEDIUM_PRECISION;
     }
 
+    /**
+     *
+     * @param ps
+     */
     public NumberFormatter(PrecisionSpecifier ps) {
         this.ps = ps;
     }
 
     /**
+     * @param ps
+     * @param eCharacter
+     * @param showZeroBeforeDecimal
      * @param showPlusInExponent Whether to show the '+' character when displaying a number with e notation (e.g. 1.5e+12)
+     * @param showExtraZeros
      */
     public NumberFormatter(PrecisionSpecifier ps, char eCharacter, boolean showZeroBeforeDecimal, boolean showPlusInExponent, boolean showExtraZeros) {
         this(ps, "" + eCharacter, showZeroBeforeDecimal, showPlusInExponent, showExtraZeros);
     }
 
     /**
+     * @param ps
+     * @param eCharacter
      * @param showPlusInExponent Whether to show the '+' character when displaying a number with e notation (e.g. 1.5e+12)
+     * @param showZeroBeforeDecimal
+     * @param showExtraZeros
      */
     public NumberFormatter(PrecisionSpecifier ps, String eCharacter, boolean showZeroBeforeDecimal, boolean showPlusInExponent, boolean showExtraZeros) {
         this.ps = ps;
@@ -104,6 +138,11 @@ public class NumberFormatter {
         this.showExtraZeros = showExtraZeros;
     }
 
+    /**
+     *
+     * @param x
+     * @return
+     */
     public String format(double x) {
         if (x == 0.0) {
             return "0";

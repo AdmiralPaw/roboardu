@@ -58,7 +58,40 @@ final public class Navigator {
      */
     public enum Type {
 
-        GLASS, MAGIC, POPUP, STACK, TABBED, WINDOW, WINDOW2
+        /**
+         *
+         */
+        GLASS,
+
+        /**
+         *
+         */
+        MAGIC,
+
+        /**
+         *
+         */
+        POPUP,
+
+        /**
+         *
+         */
+        STACK,
+
+        /**
+         *
+         */
+        TABBED,
+
+        /**
+         *
+         */
+        WINDOW,
+
+        /**
+         *
+         */
+        WINDOW2
     };
     /**
      * UI Type
@@ -101,6 +134,9 @@ final public class Navigator {
      */
     private final Workspace workspace;
     
+    /**
+     *
+     */
     public SearchBar sb;
     
     /**
@@ -110,6 +146,11 @@ final public class Navigator {
         this(workspace, Type.WINDOW2); //WINDOW2
     }
 
+    /**
+     *
+     * @param workspace
+     * @param UIModel
+     */
     public Navigator(Workspace workspace, Type UIModel) {
         this.workspace = workspace;
         explorerModel = UIModel;
@@ -217,6 +258,10 @@ final public class Navigator {
         this.reformView();
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Explorer> getExplorers() {
         return this.explorers;
     }
@@ -342,6 +387,10 @@ final public class Navigator {
         }
     }
 
+    /**
+     *
+     * @param status
+     */
     public void setBasket(boolean status) {
         for (int i = 0; i < explorers.size(); i++) {
             Explorer ex = explorers.get(i);
@@ -369,14 +418,26 @@ final public class Navigator {
         return this.switcher;
     }
     
+    /**
+     *
+     * @return
+     */
     public JComponent getCanvasPane() {
         return ((Window2Explorer) this.explorers.get(0)).canvasPane;
     }
     
+    /**
+     *
+     * @return
+     */
     public JComponent getButtonsPane() {
         return ((Window2Explorer) this.explorers.get(0)).buttonPane;
     }
     
+    /**
+     *
+     * @return
+     */
     public JComponent getSearchBar(){
         return this.sb.searchPanel;
     }

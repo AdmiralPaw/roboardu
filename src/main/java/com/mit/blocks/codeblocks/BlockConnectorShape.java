@@ -15,17 +15,11 @@ import java.util.regex.Pattern;
 
 
 /**
- * BlockConnectionShape defines and draws the connectors between the blocks.
- * This includes the different (command/data) (sockets/plugs).
- * The standard sockets/plugs have varying styles.
- * 
- * BlockConnectionShape doesn't care about the layout of the connectors on 
- * the blocks, that is the job of BlockShape.
- * 
- * BlockConnectionShape is extendable to allow for 3rd party (command/data)
- * (sockets/plugs) shapes.
- * 
- * @author bwarne
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Форма соединения блоков определяет и рисует соединители между блоками.
+ * Включает в себя различные (команды/данные) (входы/выходы). Стандартные выходы / выходы
+ * имеют различные стили. Форма соединения блоков не заботится о расположении разъемов на блоках,
+ * это работа формы блоков.
  */
 public class BlockConnectorShape {
 
@@ -72,28 +66,80 @@ public class BlockConnectorShape {
      */
     
     public static final int TRIANGLE_1 = 1;
+
+    /**
+     *
+     */
     public static final int TRIANGLE_2 = 2;
+
+    /**
+     *
+     */
     public static final int TRIANGLE_3 = 3;
     
+    /**
+     *
+     */
     public static final int CIRCLE_1 = 4;
+
+    /**
+     *
+     */
     public static final int CIRCLE_2 = 5;
+
+    /**
+     *
+     */
     public static final int CIRCLE_3 = 6;
     
+    /**
+     *
+     */
     public static final int SQUARE_1 = 7;
+
+    /**
+     *
+     */
     public static final int SQUARE_2 = 8;
+
+    /**
+     *
+     */
     public static final int SQUARE_3 = 9;
     
+    /**
+     *
+     */
     public static final int POLYMORPHIC_1 = 10;
+
+    /**
+     *
+     */
     public static final int POLYMORPHIC_2 = 11;
+
+    /**
+     *
+     */
     public static final int POLYMORPHIC_3 = 12;
     
+    /**
+     *
+     */
     public static final int PROC_PARAM = 13;
     
+    /**
+     *
+     */
     public static final int COMMAND = 14;
     
+    /**
+     *
+     */
     public static final boolean DEBUG_MODE = false;
     
-    
+    /**
+     *
+     */
     public BlockConnectorShape() {
         if (DEBUG_MODE) {
             addDebugConnectionShapeMappings();
@@ -142,6 +188,8 @@ public class BlockConnectorShape {
     
     /**
      * Get a shape identifying integer mapped to an application specific string of a connection shape
+     * @param shapeName
+     * @return 
      */
     public static int getConnenctionShapeMapping(String shapeName) {
         if (SHAPE_MAPPINGS.get(shapeName) == null) {
@@ -153,7 +201,9 @@ public class BlockConnectorShape {
     }
     
     /**
-     * Gets the dimension of a given BlockConnector.  Mapping for the connector to a shape must already exist.
+     * Gets the dimension of a given BlockConnector.Mapping for the connector to a shape must already exist.
+     * @param blockConnector
+     * @return 
      */
     public static Dimension getConnectorDimensions(BlockConnector blockConnector) {
         int mappedValue = getConnenctionShapeMapping(blockConnector.getKind());
@@ -172,11 +222,24 @@ public class BlockConnectorShape {
     ////////////////////////////////////
     ///// CONTROL PLUG AND SOCKETS /////
     ////////////////////////////////////
+
+    /**
+     *
+     * @param blockPath
+     * @param appendRight
+     * @return
+     */
     public Point2D addControlConnectorShape(GeneralPath blockPath, boolean appendRight) {
         return addControlConnectorShape(blockPath, CONTROL_PLUG_WIDTH / 2, appendRight);
     }
     
-
+    /**
+     *
+     * @param blockPath
+     * @param distanceToCenter
+     * @param appendRight
+     * @return
+     */
     public Point2D addControlConnectorShape(GeneralPath blockPath, float distanceToCenter, boolean appendRight) {
         //get the initial point info and set the currentConnectorPath to use the _lineTo _curveTo methods
         startPoint = blockPath.getCurrentPoint();
@@ -215,6 +278,13 @@ public class BlockConnectorShape {
     ///////////////////////////////////////////////////
     /////   COMMAND SOCKET (OVERHANG AND  AREA)   /////
     ///////////////////////////////////////////////////
+
+    /**
+     *
+     * @param blockPath
+     * @param commandSocketHeight
+     * @return
+     */
 
     public Point2D addCommandSocket(GeneralPath blockPath, int commandSocketHeight) {
 
@@ -260,11 +330,12 @@ public class BlockConnectorShape {
     //////////////////////////////////
 
     /**
-     * Appends a dataPlug to the blockPath given.  Starts drawing from the top.
+     * Appends a dataPlug to the blockPath given.Starts drawing from the top.
      *
      * @param blockPath the current GeneralPath of the block being drawn
      * @param connectionShape specifies the socket shape to be added
      * @param onRightSide (note this method assumes startingFromTop)
+     * @return 
      */
     public Point2D addDataSocket(GeneralPath blockPath, String connectionShape, boolean onRightSide) {
         //if onRightSide, socket is convex-left
@@ -272,17 +343,26 @@ public class BlockConnectorShape {
     }
 
     //assosiated method to draw starting from the bottom of the socket
+
+    /**
+     *
+     * @param blockPath
+     * @param connectionShape
+     * @param onRightSide
+     * @return
+     */
     public Point2D addDataSocketUp(GeneralPath blockPath, String connectionShape, boolean onRightSide) {
         //if onRightSide, socket is convex-left
         return addDataConnection(blockPath, connectionShape, false, !onRightSide);
     }
     
     /**
-     * Appends a dataSocket to the blockPath given.  Starts drawing from the top.
+     * Appends a dataSocket to the blockPath given.Starts drawing from the top.
      * 
      * @param blockPath the current GeneralPath of the block being drawn
      * @param connectionShape specifies the socket shape to be added
      * @param onRightSide (note this method assumes startingFromTop)
+     * @return 
      */
     public Point2D addDataPlug(GeneralPath blockPath, String connectionShape, boolean onRightSide) {
         //if onRightSide, plug is convex-right
@@ -290,6 +370,14 @@ public class BlockConnectorShape {
     }
 
     //  associated method to draw starting from the bottom of the socket
+
+    /**
+     *
+     * @param blockPath
+     * @param connectionShape
+     * @param onRightSide
+     * @return
+     */
     public Point2D addDataPlugUp(GeneralPath blockPath, String connectionShape, boolean onRightSide) {
         //if onRightSide, plug is convex-right
         return addDataConnection(blockPath, connectionShape, false, onRightSide);
@@ -607,10 +695,20 @@ public class BlockConnectorShape {
     ///////////////////////////
     // STATIC HELPER METHODS //
     ///////////////////////////
+
+    /**
+     *
+     * @param connector
+     * @return
+     */
     static public boolean isCommandConnector(BlockConnector connector) {
         return (BlockConnectorShape.getConnenctionShapeMapping(connector.getKind()) == BlockConnectorShape.COMMAND);
     }
 
+    /**
+     *
+     * @return
+     */
     static public String getCommandShapeName() {
         return BlockConnectorShape.COMMAND_SHAPE_NAME;
     }

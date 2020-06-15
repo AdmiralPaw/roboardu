@@ -24,6 +24,10 @@ import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneConstants;
 
+/**
+ *
+ * @author User
+ */
 public class CGlassScrollPane extends CScrollPane implements KeyListener {
 
     private static final long serialVersionUID = 328149080222L;
@@ -206,6 +210,9 @@ public class CGlassScrollPane extends CScrollPane implements KeyListener {
         this.revalidate();
     }
 
+    /**
+     *
+     */
     public void repositionComponents() {
         scrollviewport.setBounds(0, 0, this.getWidth(), this.getHeight());
         if (this.vpolicy.equals(ScrollPolicy.VERTICAL_BAR_ALWAYS) || this.vpolicy.equals(ScrollPolicy.VERTICAL_BAR_AS_NEEDED)) {
@@ -255,6 +262,7 @@ public class CGlassScrollPane extends CScrollPane implements KeyListener {
     }
 
     /**
+     * @param x
      * @overrides CScrollPane.setScrollingUnit
      */
     @Override
@@ -264,6 +272,7 @@ public class CGlassScrollPane extends CScrollPane implements KeyListener {
     }
 
     /**
+     * @param e
      * @overrides CScrollPane.mouseWheelMoved
      * TODO: This is duplicate code (In Hover, Glass, and Tackless ScollPanes)
      * For MACs only: Horizontal scroll events are delivered
@@ -291,6 +300,7 @@ public class CGlassScrollPane extends CScrollPane implements KeyListener {
     /**
      * KeyListeners: Should repaint the scrollbar
      * everytime the user presses a key
+     * @param e
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -301,6 +311,7 @@ public class CGlassScrollPane extends CScrollPane implements KeyListener {
     /**
      * KeyListeners: Should repaint the scrollbar
      * everytime the user presses a key
+     * @param e
      */
     @Override
     public void keyReleased(KeyEvent e) {
@@ -311,6 +322,7 @@ public class CGlassScrollPane extends CScrollPane implements KeyListener {
     /**
      * KeyListeners: Should repaint the scrollbar
      * everytime the user presses a key
+     * @param e
      */
     @Override
     public void keyTyped(KeyEvent e) {

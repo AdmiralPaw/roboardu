@@ -120,6 +120,7 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
 
     /**
      * Constucts new Factorymanager
+     * @param workspace 12
      */
     public FactoryManager(Workspace workspace) {
         this.workspace = workspace;
@@ -204,10 +205,14 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         this.factorySwicther.repaint();
     }
 
-    public void setBasket(boolean status)
-    {
+    /**
+     *
+     * @param status
+     */
+    public void setBasket(boolean status) {
         this.navigator.setBasket(status);
     }
+
     /**
      * prints an error message in red without ending the run process. For
      * debuggin purposes
@@ -254,6 +259,10 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Navigator getNavigator() {
         return this.navigator;
     }
@@ -309,6 +318,10 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         return drawers;
     }
 
+    /**
+     *
+     * @return
+     */
     public Collection<String> getDynamicDrawers() {
         Collection<String> drawers = new HashSet<String>();
         for (Canvas canvas : this.dynamicCanvases) {
@@ -339,6 +352,9 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         this.navigator.setView(DYNAMIC_NAME);
     }
 
+    /**
+     *
+     */
     public void viewSubsetsDrawers() {
         this.navigator.setView(SUBSETS_NAME);
     }
@@ -417,7 +433,7 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
             this.staticCanvases.add(position, canvas);
             this.navigator.setCanvas(staticCanvases, STATIC_NAME);
         } else {
-            this.printError("Invalid Drawer: trying to add a drawer that already exists: " + name);
+            this.printError("Invalid Static Drawer: trying to add a drawer that already exists: " + name);
         }
     }
 
@@ -476,7 +492,7 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
             this.dynamicCanvases.add(position, canvas);
             this.navigator.setCanvas(dynamicCanvases, DYNAMIC_NAME);
         } else {
-            this.printError("Invalid Drawer: trying to add a drawer that already exists: " + name);
+            this.printError("Invalid Dynamic Drawer: trying to add a drawer that already exists: " + name);
         }
     }
 
@@ -515,6 +531,11 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         return;
     }
 
+    /**
+     *
+     * @param oldName
+     * @param newName
+     */
     public void renameDynamicDrawer(String oldName, String newName) {
         //check rep
         if (oldName == null || newName == null) {
@@ -562,6 +583,10 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         return;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void removeDynamicDrawer(String name) {
         FactoryCanvas canvas = null;
         for (FactoryCanvas c : this.dynamicCanvases) {
@@ -582,6 +607,7 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     //Block Methods//
     /////////////////
     /**
+     * @param name
      * @return set of blocks found in drawer with the specified name. If no
      * blocks are found in the drawer, return an empty set. If no Drawers are
      * found with specified name, return empty set.
@@ -598,6 +624,11 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         return blocks;
     }
 
+    /**
+     *
+     * @param name
+     * @return
+     */
     public Collection<RenderableBlock> getDynamicBlocks(String name) {
         ArrayList<RenderableBlock> blocks = new ArrayList<RenderableBlock>();
         for (FactoryCanvas canvas : this.dynamicCanvases) {
@@ -650,6 +681,11 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         return;
     }
 
+    /**
+     *
+     * @param block
+     * @param drawer
+     */
     public void addDynamicBlock(RenderableBlock block, String drawer) {
         for (FactoryCanvas canvas : this.dynamicCanvases) {
             if (canvas.getName().equals(drawer)) {
@@ -695,6 +731,11 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         return;
     }
 
+    /**
+     *
+     * @param blocks
+     * @param drawer
+     */
     public void addDynamicBlocks(Collection<RenderableBlock> blocks, String drawer) {
         //find canvas
         for (FactoryCanvas canvas : this.dynamicCanvases) {
@@ -766,6 +807,11 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         return;
     }
 
+    /**
+     *
+     * @param block
+     * @param drawer
+     */
     public void removeDynamicBlock(RenderableBlock block, String drawer) {
         //find canvas
         for (FactoryCanvas canvas : this.dynamicCanvases) {
@@ -794,11 +840,26 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
     public void blockDragged(RenderableBlock block) {
     }
 
-    public void startDragged(RenderableBlock b){}
+    /**
+     *
+     * @param b
+     */
+    public void startDragged(RenderableBlock b) {
+    }
 
-    public void stopDragged(RenderableBlock b){}
+    /**
+     *
+     * @param b
+     */
+    public void stopDragged(RenderableBlock b) {
+    }
 
-    public void blockRenamed(RenderableBlock block){}
+    /**
+     *
+     * @param block
+     */
+    public void blockRenamed(RenderableBlock block) {
+    }
 
     public void removeBlock(RenderableBlock block) {
     }
@@ -825,11 +886,10 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
             parent.repaint();
             block.setParentWidget(null);
         }
-        
+
         //fire to workspace that block was removed
         //DO FIRE AN EVENT IF BLOCK IS REMOVED BY USER!!!!
         //NOTE however that we do not throw na event for adding internally
-        
         workspace.notifyListeners(new WorkspaceEvent(workspace, this, block.getBlockID(), WorkspaceEvent.BLOCK_REMOVED));
         //block = null;
     }
@@ -838,6 +898,10 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         return this.navigator.getJComponent();
     }
 
+    /**
+     *
+     * @return
+     */
     public JComponent getFactorySwitcher() {
         return this.factorySwicther;
     }
@@ -861,6 +925,14 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
         //THIS ENTIRE METHOD IS A HACK!
         //PLEASE CHANGE WITH CAUTION
         //IT DOES SOME PREETY STRANGE THINGS
+        if (event.getEventType() == WorkspaceEvent.BLOCKS_CONNECTED) {
+            RenderableBlock rb1 = workspace.getEnv().getRenderableBlock(event.getSourceLink().getSocket().getBlockID());
+            RenderableBlock rb2 = workspace.getEnv().getRenderableBlock(event.getSourceLink().getPlug().getBlockID());
+        }
+        if (event.getEventType() == WorkspaceEvent.BLOCK_GENUS_CHANGED) {
+            RenderableBlock rb1 = workspace.getEnv().getRenderableBlock(event.getSourceBlockID());
+            RenderableBlock rb2 = workspace.getEnv().getRenderableBlock(rb1.plugTag.getSocket().getBlockID());
+        }
         if (event.getEventType() == WorkspaceEvent.BLOCK_ADDED) {
             if (event.getSourceWidget() instanceof Page) {
                 Page page = (Page) event.getSourceWidget();
@@ -879,18 +951,17 @@ public class FactoryManager implements WorkspaceWidget, ComponentListener, Works
             Block block = workspace.getEnv().getBlock(event.getSourceBlockID());
             if (block.hasStubs()) {
                 for (Long stub : BlockStub.getStubsOfParent(event.getWorkspace(), block)) {
-                    RenderableBlock rb = workspace.getEnv().getRenderableBlock(stub);
+                    RenderableBlock rb = workspace.getEnv().getRenderableBlock(stub);                   
                     if (rb != null && !rb.getBlockID().equals(Block.NULL)
                             && rb.getParentWidget() != null && rb.getParentWidget().equals(this)) {
                         //rb.getParent() should not be null
                         rb.getParent().remove(rb);
                         rb.setParentWidget(null);
-                        //NEW 
-                        rb = null;
                     }
                 }
             }
             this.relayoutBlocks();
+            this.workspace.getEnv().removeBlockByID(event.getSourceBlockID());
         } else if (event.getEventType() == WorkspaceEvent.BLOCK_MOVED) {
             Block block = workspace.getEnv().getBlock(event.getSourceBlockID());
             if (block != null && block.hasStubs()) {

@@ -11,6 +11,10 @@ import javax.swing.JPopupMenu;
 import com.mit.blocks.codeblockutil.CScrollPane.ScrollPolicy;
 import com.mit.blocks.workspace.Workspace;
 
+/**
+ *
+ * @author User
+ */
 public class CPopupMenu extends JPopupMenu implements ActionListener {
 
     private static final long serialVersionUID = 328149080311L;
@@ -68,6 +72,10 @@ public class CPopupMenu extends JPopupMenu implements ActionListener {
         return new Insets(5, 5, 5, 5);
     }
 
+    /**
+     *
+     * @param item
+     */
     public void add(CMenuItem item) {
         items++;
         item.addActionListener(this);
@@ -85,6 +93,10 @@ public class CPopupMenu extends JPopupMenu implements ActionListener {
         });
     }
 
+    /**
+     *
+     * @param zoom
+     */
     public void setZoomLevel(double zoom) {
         this.zoom = zoom;
         // change the size of the panel and the text
@@ -124,11 +136,18 @@ public class CPopupMenu extends JPopupMenu implements ActionListener {
         }
     }
 
+    /**
+     *
+     * @param e
+     */
     public void superSetVisible(boolean e)
     {
         super.setVisible(e);
     }
 
+    /**
+     *
+     */
     public void deactiveAllItems()
     {
         for (Component item:view.getComponents())

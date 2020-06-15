@@ -13,11 +13,26 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
  */
 public class IrGetCodeBlock extends TranslatorBlock
 {
-	public static final String IR_BLOCK_COUNT = "irBlockCnt";
-	public static final String IR_BLOCK_CALLBACK_COUNT = "irBlockCallbackCnt";
-	public static final String IR_SETUP = "irSetup";
+
+    /**
+     *
+     */
+    public static final String IR_BLOCK_COUNT = "irBlockCnt";
+
+    /**
+     *
+     */
+    public static final String IR_BLOCK_CALLBACK_COUNT = "irBlockCallbackCnt";
+
+    /**
+     *
+     */
+    public static final String IR_SETUP = "irSetup";
 	
-	public static final String IR_DEFINITION = 
+    /**
+     *
+     */
+    public static final String IR_DEFINITION = 
 			"void __ab_setupIrReceiver()\n" + 
 			"{\n" + 
 			"  __ab_irrecv.enableIRIn();\n" + 
@@ -47,13 +62,27 @@ public class IrGetCodeBlock extends TranslatorBlock
 			"  }\n" + 
 			"}";
 	
-	
-	public IrGetCodeBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public IrGetCodeBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     * @throws BlockException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException, BlockException
 	{
 		addIrBlockCount(translator);
@@ -75,17 +104,30 @@ public class IrGetCodeBlock extends TranslatorBlock
 		return codePrefix + "__ab_getIrCommand(" + tb.toCode() + ");\n" + codeSuffix;
 	}
 	
-	public static void addIrBlockCount(Translator translator)
+    /**
+     *
+     * @param translator
+     */
+    public static void addIrBlockCount(Translator translator)
 	{
 		IrGetCodeBlock.increaseInternalData(translator, IrGetCodeBlock.IR_BLOCK_COUNT);
 	}
 	
-	public static void addIrBlockCallbackCount(Translator translator)
+    /**
+     *
+     * @param translator
+     */
+    public static void addIrBlockCallbackCount(Translator translator)
 	{
 		IrGetCodeBlock.increaseInternalData(translator, IrGetCodeBlock.IR_BLOCK_CALLBACK_COUNT);
 	}
 	
-	public static void increaseInternalData(Translator translator, String name)
+    /**
+     *
+     * @param translator
+     * @param name
+     */
+    public static void increaseInternalData(Translator translator, String name)
 	{
 		Object o = translator.getInternalData(name);
 		if (o == null)
@@ -101,7 +143,12 @@ public class IrGetCodeBlock extends TranslatorBlock
 		}
 	}
 	
-	public static boolean isLastIrBlock(Translator translator)
+    /**
+     *
+     * @param translator
+     * @return
+     */
+    public static boolean isLastIrBlock(Translator translator)
 	{
 		Integer registeredBlockCount = (Integer)translator.getInternalData(IrGetCodeBlock.IR_BLOCK_COUNT);
 		Integer currentBlockCount = (Integer)translator.getInternalData(IrGetCodeBlock.IR_BLOCK_CALLBACK_COUNT);
@@ -115,7 +162,11 @@ public class IrGetCodeBlock extends TranslatorBlock
 		}
 	}
 	
-	public static void irBlockCallback(Translator translator)
+    /**
+     *
+     * @param translator
+     */
+    public static void irBlockCallback(Translator translator)
 	{
 		IrGetCodeBlock.addIrBlockCallbackCount(translator);
 		if (isLastIrBlock(translator) && translator.getInternalData(IrGetCodeBlock.IR_SETUP)==null)
@@ -124,7 +175,11 @@ public class IrGetCodeBlock extends TranslatorBlock
 			translator.addDefinitionCommand(def);
 		}
 	}
-	public void onTranslateBodyFinished()
+
+    /**
+     *
+     */
+    public void onTranslateBodyFinished()
 	{
 		IrGetCodeBlock.irBlockCallback(translator);
 	}

@@ -6,6 +6,10 @@ import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
 import java.awt.*;
 
+/**
+ *
+ * @author User
+ */
 public class RSplitPane extends JSplitPane
 {
     /**
@@ -22,10 +26,17 @@ public class RSplitPane extends JSplitPane
      */
     private int dividerDragOffset = 4;
 
+    /**
+     *
+     */
     public RSplitPane() {
         this( HORIZONTAL_SPLIT );
     }
 
+    /**
+     *
+     * @param orientation
+     */
     public RSplitPane( int orientation ) {
         super( orientation );
         setContinuousLayout( true );
@@ -33,6 +44,11 @@ public class RSplitPane extends JSplitPane
         setBorder(null);
     }
 
+    /**
+     *
+     * @param newOrientation
+     * @param newContinuousLayout
+     */
     public RSplitPane(int newOrientation, boolean newContinuousLayout)
     {
         super(newOrientation, newContinuousLayout);
@@ -41,6 +57,12 @@ public class RSplitPane extends JSplitPane
         setBorder(null);
     }
 
+    /**
+     *
+     * @param newOrientation
+     * @param newLeftComponent
+     * @param newRightComponent
+     */
     public RSplitPane(int newOrientation, Component newLeftComponent, Component newRightComponent)
     {
         super(newOrientation, newLeftComponent, newRightComponent);
@@ -49,6 +71,13 @@ public class RSplitPane extends JSplitPane
         setBorder(null);
     }
 
+    /**
+     *
+     * @param newOrientation
+     * @param newContinuousLayout
+     * @param newLeftComponent
+     * @param newRightComponent
+     */
     public RSplitPane(int newOrientation, boolean newContinuousLayout, Component newLeftComponent, Component newRightComponent)
     {
         super(newOrientation, newContinuousLayout, newLeftComponent, newRightComponent);
@@ -57,24 +86,43 @@ public class RSplitPane extends JSplitPane
         setBorder(null);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDividerDragSize() {
         return dividerDragSize;
     }
 
+    /**
+     *
+     * @param dividerDragSize
+     */
     public void setDividerDragSize( int dividerDragSize ) {
         this.dividerDragSize = dividerDragSize;
         revalidate();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDividerDragOffset() {
         return dividerDragOffset;
     }
 
+    /**
+     *
+     * @param dividerDragOffset
+     */
     public void setDividerDragOffset( int dividerDragOffset ) {
         this.dividerDragOffset = dividerDragOffset;
         revalidate();
     }
 
+    /**
+     *
+     */
     @Override
     @SuppressWarnings("deprecation")
     public void layout() {

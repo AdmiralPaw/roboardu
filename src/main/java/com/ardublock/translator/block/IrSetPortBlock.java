@@ -13,12 +13,26 @@ import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 public class IrSetPortBlock extends TranslatorBlock
 {
 	
-	public IrSetPortBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public IrSetPortBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		translator.registerBodyTranslateFinishCallback(this);
@@ -40,7 +54,12 @@ public class IrSetPortBlock extends TranslatorBlock
 		return getDefinitionCode(translatorBlock.toCode());
 	}
 	
-	public static StringBuilder getDefinitionCode(String port)
+    /**
+     *
+     * @param port
+     * @return
+     */
+    public static StringBuilder getDefinitionCode(String port)
 	{
 
 		StringBuilder ret = new StringBuilder();
@@ -50,7 +69,12 @@ public class IrSetPortBlock extends TranslatorBlock
 		return ret;
 	}
 	
-	public void onTranslateBodyFinished() throws SocketNullException, SubroutineNotDeclaredException
+    /**
+     *
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    public void onTranslateBodyFinished() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		IrGetCodeBlock.irBlockCallback(translator);
 	}

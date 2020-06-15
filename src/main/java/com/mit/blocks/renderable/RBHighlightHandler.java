@@ -24,16 +24,19 @@ import com.mit.blocks.workspace.RBParent;
 import com.mit.blocks.codeblockutil.GraphicsManager;
 
 /**
- * The RBHighlightHandler class is responsible for maintaining the
- * highlight state of a RenderableBlock and rendering the highlight
- * properly.  It works by adding itself to a layer behind its RenderableBlock
- * and drawing the highlight there so as not to cover the block.
- * @author Daniel
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс RBHighlightHandler отвечает за поддержание состояния выделения RenderableBlock и
+ * правильную визуализацию выделения. Он работает, добавляя себя к слою позади своего
+ * RenderableBlock и рисуя подсветку там, чтобы не закрывать блок.
  */
 public class RBHighlightHandler extends JComponent implements ComponentListener, HierarchyListener {
 
     private static final long serialVersionUID = 328149080427L;
     //highlight stroke and width specifications
+
+    /**
+     *
+     */
     public static final int HIGHLIGHT_STROKE_WIDTH = 12;
     private static final float HIGHLIGHT_ALPHA = .75f;
     private Color hColor = null;
@@ -42,6 +45,10 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
     private RenderableBlock rb;
     private BufferedImage hImage;
 
+    /**
+     *
+     * @param rb
+     */
     public RBHighlightHandler(RenderableBlock rb) {
         super();
         this.rb = rb;
@@ -54,18 +61,29 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
         rb.addComponentListener(this);
     }
 
+    /**
+     *
+     * @param c
+     */
     public void setHighlightColor(Color c) {
         hColor = c;
         updateImage();
         repaint();
     }
 
+    /**
+     *
+     * @param isResult
+     */
     public void setIsSearchResult(boolean isResult) {
         isSearchResult = isResult;
         updateImage();
         repaint();
     }
 
+    /**
+     *
+     */
     public void resetHighlight() {
         hColor = null;
         updateImage();
@@ -103,6 +121,10 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
         }
     }
 
+    /**
+     *
+     * @param newParent
+     */
     public void setParent(RBParent newParent) {
         removeFromParent();
         newParent.addToHighlightLayer(this);
@@ -110,19 +132,26 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
         ((Container) newParent).validate();
     }
 
+    /**
+     *
+     */
     public void removeFromParent() {
         if (this.getParent() != null) {
             this.getParent().remove(this);
         }
     }
 
+    /**
+     *
+     */
     public void updateImage() {
         if (GraphicsEnvironment.isHeadless()) {
             return;
         }
-
+        if (rb.getBlock() == null)
+            System.out.println("[Error] Блок не имеет блока");
         // cache the focus so it'll know when it needs to redraw later.
-        hasFocus = rb.getBlock().hasFocus();
+        else hasFocus = rb.getBlock().hasFocus();
 
         Color color = null;
         if (hColor != null) {
@@ -171,6 +200,7 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
 
     /************************************************************
      * ComponentListener methods for when the RB moves or resizes
+     * @param arg0
      ************************************************************/
     @Override
     public void componentResized(ComponentEvent arg0) {
@@ -196,6 +226,7 @@ public class RBHighlightHandler extends JComponent implements ComponentListener,
     /*************************************************************
      * HierarchyListener method for the RB is added to or removed
      * from a parent component
+     * @param he
      *************************************************************/
     @Override
     public void hierarchyChanged(HierarchyEvent he) {

@@ -1,5 +1,9 @@
 package com.ardublock.core.exception;
 
+/**
+ *
+ * @author User
+ */
 public class ArdublockException extends Exception //RuntimeException
 {
 

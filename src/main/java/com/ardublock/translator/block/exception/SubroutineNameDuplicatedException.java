@@ -2,6 +2,10 @@ package com.ardublock.translator.block.exception;
 
 import com.ardublock.core.exception.ArdublockException;
 
+/**
+ *
+ * @author User
+ */
 public class SubroutineNameDuplicatedException extends ArdublockException
 {
 
@@ -9,11 +13,19 @@ public class SubroutineNameDuplicatedException extends ArdublockException
 	
 	private Long blockId;
 
-	public Long getBlockId() {
+    /**
+     *
+     * @return
+     */
+    public Long getBlockId() {
 		return blockId;
 	}
 	
-	public SubroutineNameDuplicatedException(Long blockId)
+    /**
+     *
+     * @param blockId
+     */
+    public SubroutineNameDuplicatedException(Long blockId)
 	{
 		this.blockId = blockId;
 	}

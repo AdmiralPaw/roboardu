@@ -25,17 +25,32 @@ public class IllumPanel extends JPanel {
     private double frames = time * fps;
     private double iteratorOfFrames = 0;
     boolean animationIsFinished = true;
+
+    /**
+     *
+     */
     public Timer animationTimerStart = null;
 
     private int pulses = 8;
     private int pulsingCount = pulses * 2;
 
+    /**
+     *
+     */
     public Color myColor = new Color(254, 254, 254, 0);
 
     private OpenblocksFrame openblocksFrame;
     private TutorialPane tutorialPane;
     private Boolean rectangle;
 
+    /**
+     *
+     * @param openblocksFrame
+     * @param tutorialPane
+     * @param size
+     * @param point
+     * @param rectangle
+     */
     public IllumPanel(OpenblocksFrame openblocksFrame, TutorialPane tutorialPane,
             Dimension size, Point point, Boolean rectangle) {
         this.openblocksFrame = openblocksFrame;
@@ -56,11 +71,18 @@ public class IllumPanel extends JPanel {
         this.repaint();
     }
 
+    /**
+     *
+     * @param i
+     */
     public void setColorAlpha(int i) {
         this.myColor = new Color(myColor.getRed(), myColor.getGreen(), myColor.getBlue(), i);
         this.updateUI();
     }
 
+    /**
+     *
+     */
     public void animaStart() {
         if (tutorialPane.activeAnimPanels.get(tutorialPane.iter).get(0).animationIsFinished) {
             if (pulsingCount != 0) {
@@ -78,10 +100,16 @@ public class IllumPanel extends JPanel {
         }
     }
 
+    /**
+     *
+     */
     public void startAnimation() {
         animationTimerStart.start();
     }
 
+    /**
+     *
+     */
     public void stopAnimation() {
         animationTimerStart.stop();
         animationIsFinished = true;
@@ -111,6 +139,11 @@ public class IllumPanel extends JPanel {
         this.updateUI();
     }
 
+    /**
+     *
+     * @param size
+     * @param location
+     */
     public void repaintPanel(Dimension size, Point location) {
         this.setSize(size);
         this.setPreferredSize(size);

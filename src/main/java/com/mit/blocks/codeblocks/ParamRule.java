@@ -5,8 +5,9 @@ import com.mit.blocks.codeblocks.LinkRule;
 import com.mit.blocks.codeblocks.BlockConnector;
 
 /**
- * LinkRule that prevents constants from linking as procedure parameters and prevents parameters
- * from linking as constants in other code.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс LinkRule запрещает связывание констант в качестве параметров процедуры
+ * и запрещает связывание параметров в качестве констант в другом коде.
  */
 public class ParamRule implements LinkRule{
 
@@ -37,6 +38,10 @@ public class ParamRule implements LinkRule{
             return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isMandatory() {
         return true;
     }

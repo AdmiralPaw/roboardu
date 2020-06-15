@@ -4,9 +4,17 @@ import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class AnalogInputBlock extends TranslatorBlock
 {
-	public static final String ARDUBLOCK_ANALOG_READ_DEFINE =
+
+    /**
+     *
+     */
+    public static final String ARDUBLOCK_ANALOG_READ_DEFINE =
 			/* If the pin was previously OUTPUT and is **quickly** analog read, the charge on the pin
 			 *  and the lack of "settling time" does affect the likely result of analogRead.
 			 * Always introducing a delay to settle the pin is not done here as it is overwhelmingly
@@ -20,12 +28,26 @@ public class AnalogInputBlock extends TranslatorBlock
 			"return analogRead(pinNumber);\n" + 
 			"}\n\n";
 	
-	public AnalogInputBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public AnalogInputBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);

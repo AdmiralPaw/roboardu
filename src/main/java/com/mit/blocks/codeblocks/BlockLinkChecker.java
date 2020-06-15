@@ -11,15 +11,13 @@ import com.mit.blocks.workspace.Workspace;
 import com.mit.blocks.workspace.WorkspaceListener;
 
 /**
- * <code>BlockLinkChecker</code> determines if two <code>Block</code> objects can connect.  In particular, 
- * <code>BlockLinkChecker</code> will report which sockets of the two <code>Block</code> objects can connect.
- * Interested <code>Block</code> objects may make a static call to canLink() to determine if it can link to another
- * <code>Block</code> object.
- * 
- * <code>BlockLinkChecker</code> uses a list of <code>LinkRule</code>s to check the <code>Connector</code>s of each
- * <code>Block</code>.  Rules may be added, inserted, and removed from the checker.  
- * 
- * There is only one instance of the <code>BlockLinkChecker</code>.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * BlockLinkChecker определяет, могут ли соединяться два блочных объекта.
+ * В частности, BlockLinkChecker сообщит, какие сокеты двух блочных объектов могут соединяться.
+ * Заинтересованные блочные объекты могут сделать статический вызов canLink, чтобы определить,
+ * может ли он ссылаться на другой блочный объект. BlockLinkChecker использует список правил
+ * ссылок для проверки соединителей каждого блока. Правила могут быть добавлены,
+ * вставлены и удалены из чекера. Существует только один экземпляр средства проверки блочных ссылок.
  */
 public class BlockLinkChecker {
 
@@ -76,6 +74,7 @@ public class BlockLinkChecker {
      * @param block2 Block instance to compare
      * @param con1 the BlockConnector at block1 to compare against con2
      * @param con2 the BlockConnector at block2 to compare against con1
+     * @return 
      */
     public static BlockLink canLink(Workspace workspace, Block block1, Block block2, BlockConnector con1, BlockConnector con2) {
         if (checkRules(block1, block2, con1, con2)) {
@@ -255,6 +254,11 @@ public class BlockLinkChecker {
         return new Point2D.Double(relativePoint.getX() + blockPosition.getX(), relativePoint.getY() + blockPosition.getY());
     }
 
+    /**
+     *
+     * @param b
+     * @return
+     */
     public static boolean hasPlugEquivalent(Block b) {
         if (b == null) {
             return false;
@@ -266,6 +270,11 @@ public class BlockLinkChecker {
         return hasPlug | hasBefore;
     }
 
+    /**
+     *
+     * @param b
+     * @return
+     */
     public static BlockConnector getPlugEquivalent(Block b) {
         if (!hasPlugEquivalent(b)) {
             return null;
@@ -276,6 +285,11 @@ public class BlockLinkChecker {
         return b.getBeforeConnector();
     }
 
+    /**
+     *
+     * @param b
+     * @return
+     */
     public static Iterable<BlockConnector> getSocketEquivalents(Block b) {
         if (b == null) {
             return new ArrayList<BlockConnector>();

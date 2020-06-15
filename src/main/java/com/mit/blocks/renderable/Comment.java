@@ -325,6 +325,7 @@ public class Comment extends JPanel {
     /**
      * Returns the node for this comment.
      *
+     * @param document
      * @return
      */
     public Node getSaveNode(Document document) {
@@ -390,6 +391,7 @@ public class Comment extends JPanel {
             commentChild = commentChildren.item(j);
             if (commentChild.getNodeName().equals("Text")) {
                 text = commentChild.getTextContent();
+                System.out.println(text);
             } else if (commentChild.getNodeName().equals("Location")) {
                 RenderableBlock.extractLocationInfo(commentChild, commentLoc);
             } else if (commentChild.getNodeName().equals("BoxSize")) {
@@ -544,6 +546,7 @@ public class Comment extends JPanel {
 
     /**
      * Over rides the standard setVisible to make sure the arrow's visibility is also set.
+     * @param b
      */
     public void setVisible(boolean b) {
         super.setVisible(b);

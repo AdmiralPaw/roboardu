@@ -14,12 +14,20 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
+/**
+ *
+ * @author User
+ */
 public class CProgressBar extends JFrame implements ActionListener {
 
     private static final long serialVersionUID = 328149080260L;
     JProgressBar bar;
     Timer timer;
 
+    /**
+     *
+     * @param text
+     */
     public CProgressBar(String text) {
         super(text);
         this.setUndecorated(true);

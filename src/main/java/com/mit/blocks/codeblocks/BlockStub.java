@@ -185,7 +185,9 @@ public class BlockStub extends Block {
 
     /**
      * Returns a list of the block ids of the specified parent's stubs
-     * @param blockID
+     * @param workspace
+     * @param block
+     * @return 
      */
     public static Iterable<Long> getStubsOfParent(Workspace workspace, Block block) {
         ArrayList<Long> stubs = workspace.getEnv().getBlockStubs(block.getBlockLabel() + block.getGenusName());
@@ -198,6 +200,7 @@ public class BlockStub extends Block {
 
     /**
      * Saves the parent block information with the specified blockID in the Stub Map
+     * @param workspace
      * @param blockID
      */
     public static void putNewParentInStubMap(Workspace workspace, Long blockID) {
@@ -220,6 +223,7 @@ public class BlockStub extends Block {
 
     /**
      * Updates BlockStub hashmaps and the BlockStubs of the parent of its new name
+     * @param workspace
      * @param oldParentName
      * @param newParentName
      * @param parentID
@@ -259,6 +263,7 @@ public class BlockStub extends Block {
 
     /**
      * Updates the BlockStubs associated with the parent of its new page label
+     * @param workspace
      * @param newPageLabel
      * @param parentID
      */
@@ -277,6 +282,7 @@ public class BlockStub extends Block {
 
     /**
      * Updates the BlocksStubs associated with the parent of its new page label
+     * @param workspace
      * @param parentID
      */
     public static void parentConnectorsChanged(Workspace workspace, Long parentID) {
@@ -297,6 +303,8 @@ public class BlockStub extends Block {
 
     /**
      * Updates the plug on caller stubs associated with the given parent.
+     * @param workspace
+     * @param parentID
      * @param kind the new plug kind that callers should set
      */
     public static void parentPlugChanged(Workspace workspace, Long parentID, String kind) {
@@ -356,6 +364,7 @@ public class BlockStub extends Block {
 
     /**
      *
+     * @return 
      */
     public boolean doesParentExist() {
         //TODO ria: needs to check BlockCanvas if parent is "alive"

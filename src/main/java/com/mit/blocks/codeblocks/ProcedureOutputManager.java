@@ -23,14 +23,13 @@ import com.mit.blocks.workspace.WorkspaceEnvironment;
 //import com.ardublock.translator.Translator;
 
 /**
- * This class manages all procedure to output type mappings. This class
- * makes best-effort attempts to synchronize/update output block sockets.
- * This class also tries to update procedure callers when such things happen.
- * 
- * <p>Note that even with this class, we still need to implement separate 
- * procedure output checking in the compiler, since we make no guarantees 
- * about code branches or even output types (since we don't modify blocks
- * that are already connected to something). 
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Этот класс управляет всеми процедурами вывода отображений типов. Этот класс делает
+ * все возможное для синхронизации / обновления выходных блочных сокетов.
+ * Этот класс также пытается обновить вызывающие процедуры, когда такие вещи происходят.
+ * Обратите внимание, что даже с этим классом нам все равно нужно реализовать отдельную процедуру
+ * проверки вывода в компиляторе, так как мы не даем никаких гарантий относительно ветвей кода
+ * или даже типов вывода (так как мы не изменяем блоки, которые уже подключены к чему-то).
  */
 public class ProcedureOutputManager
 {   
@@ -69,8 +68,14 @@ public class ProcedureOutputManager
     /** Value corresponds to the vm command name its corresponding Block */
     public final static String VM_COMMAND_NAME = "vm-cmd-name";
     
+    /**
+     *
+     */
     public final static String CMD_EVAL_PROCEDURE = "eval-procedure";
 
+    /**
+     *
+     */
     public final static String RUNTIME_TYPE = "runtime-type";
     
     // Event Management =========================
@@ -458,7 +463,9 @@ public class ProcedureOutputManager
             revertType(b2, info, remove);
     }
     
-    /** Returns the block if one exists, or null if not. */
+    /** Returns the block if one exists, or null if not.
+     * @param id
+     * @return  */
     public static Block getBlock(Long id) {
         if (id == null || id.equals(Block.NULL)) 
             return null;
@@ -496,6 +503,8 @@ public class ProcedureOutputManager
     /**
      * Returns true if the given block is a forever-run block 
      * (forever, runforsometime, runonce).
+     * @param blockID
+     * @return 
      */
     public static boolean isForeverRunBlock(Long blockID) {
         if (blockID.equals(Block.NULL)) return false;
@@ -509,7 +518,10 @@ public class ProcedureOutputManager
         return RuntimeType.getRuntime(b.getProperty(RUNTIME_TYPE));
     }
     
-    /** Returns true if "vm-cmd-name" is given cmd */
+    /** Returns true if "vm-cmd-name" is given cmd
+     * @param cmd
+     * @param b
+     * @return  */
     public static boolean isCmd(String cmd, Block b) {
     	//String toto = b.getProperty(VM_COMMAND_NAME);
     	//BlockGenus bg = workspace.getEnv().getGenusWithName(b.getGenusName());
@@ -522,17 +534,47 @@ public class ProcedureOutputManager
      * The possible block runtime types.
      */
     public static enum RuntimeType {
-        FOREVER ("forever"), 
-        RUNONCE ("runonce"), 
-        RUNFORSOMETIME ("runforsometime"),
-        LOOP ("loop"),
-        NULL_RUNTIME ("");  // used as a marker to prevent NPEs
+ 
+            /**
+             *
+             */
+            FOREVER ("forever"), 
+ 
+            /**
+             *
+             */
+            RUNONCE ("runonce"), 
+
+            /**
+             *
+             */
+            RUNFORSOMETIME ("runforsometime"),
+
+            /**
+             *
+             */
+            LOOP ("loop"),
+
+            /**
+             *
+             */
+            NULL_RUNTIME ("");  // used as a marker to prevent NPEs
         
         private final String myString;
         private RuntimeType(String s) { myString = s; }
-        public String getString() { return myString; }
+
+            /**
+             *
+             * @return
+             */
+            public String getString() { return myString; }
         
-        public static RuntimeType getRuntime(String s) {
+            /**
+             *
+             * @param s
+             * @return
+             */
+            public static RuntimeType getRuntime(String s) {
             for (RuntimeType t : values()) {
                 if (t.myString.equals(s)) {
                     return t;

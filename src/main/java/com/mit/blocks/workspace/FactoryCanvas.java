@@ -83,10 +83,18 @@ public class FactoryCanvas extends JPanel implements Canvas, SearchableContainer
         return this.highlight;
     }
 
+    /**
+     *
+     * @return
+     */
     public Color getColor() {
         return color;
     }
 
+    /**
+     *
+     * @param color
+     */
     public void setColor(Color color) {
         if (color == null) {
             this.color = CGraphite.blue;
@@ -95,6 +103,10 @@ public class FactoryCanvas extends JPanel implements Canvas, SearchableContainer
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public JComponent getJComponent() {
         return this;
     }
@@ -125,6 +137,9 @@ public class FactoryCanvas extends JPanel implements Canvas, SearchableContainer
         block.removeComponentListener(this);
     }
 
+    /**
+     *
+     */
     public void layoutBlocks() {
         RenderableBlock rb;
         int maxWidth = 20;

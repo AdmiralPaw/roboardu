@@ -1,0 +1,1145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<root>
+
+    <translator>
+        <block name="Engine_Back">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+                <command name="void MoveBack(int Speed)"/>
+            </commands>
+        </block>
+        <block name="Engine_BackDistance">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+                <headerDefinition name="#define ENCODER_K_DIST  1"/>
+                <headerDefinition name="unsigned long EncoderCount1, EncoderCount2;"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitEnc()"/>
+                <command name="void nEncoder1()"/>
+                <command name="void nEncoder2()"/>
+                <command name="void Encoder1ToNull()"/>
+                <command name="void Encoder2ToNull()"/>
+                <command name="void EncodersToNull()"/>
+                <command name="unsigned  long GetDistanceFromEnc1()"/>
+                <command name="unsigned  long GetDistanceFromEnc2()"/>
+
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+                <command name="void MoveBack(int Speed)"/>
+                <command name="void Stop()"/>
+
+                <command name="void MoveBackByEncoder(int Speed, int Distance)"/>
+            </commands>
+        </block>
+        <block name="Engine_BackTime">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+                <command name="void MoveBack(int Speed)"/>
+                <command name="void Stop()"/>
+
+                <command name="void MoveBackByDelay(int Speed, int Time)"/>
+            </commands>
+        </block>
+        <block name="Engine_Basic">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+            </commands>
+        </block>
+        <block name="Engine_Forward">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+                <command name="void MoveForward(int Speed)"/>
+            </commands>
+        </block>
+        <block name="Engine_ForwardDistance">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+                <headerDefinition name="#define ENCODER_K_DIST  1"/>
+                <headerDefinition name="unsigned long EncoderCount1, EncoderCount2;"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitEnc()"/>
+                <command name="void nEncoder1()"/>
+                <command name="void nEncoder2()"/>
+                <command name="void Encoder1ToNull()"/>
+                <command name="void Encoder2ToNull()"/>
+                <command name="void EncodersToNull()"/>
+                <command name="unsigned  long GetDistanceFromEnc1()"/>
+                <command name="unsigned  long GetDistanceFromEnc2()"/>
+
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+                <command name="void MoveForward(int Speed)"/>
+                <command name="void Stop()"/>
+
+                <command name="void MoveForwardByEncoder(int Speed, unsigned long Distance)"/>
+            </commands>
+        </block>
+        <block name="Engine_ForwardTime">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+                <command name="void MoveForward(int Speed)"/>
+                <command name="void Stop()"/>
+
+                <command name="void MoveForwardByDelay(int Speed, int Time)"/>
+            </commands>
+        </block>
+        <block name="Engine_LeftTurn">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+                <command name="void MoveLeft(int Speed)"/>
+            </commands>
+        </block>
+
+        <block name="Engine_LeftTurnTime">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+                <command name="void Stop()"/>
+                <command name="void MoveLeft(int Speed)"/>
+                <command name="void MoveLeftByDelay(int Speed, int Time)"/>
+            </commands>
+        </block>
+
+        <block name="Engine_RightTurnTime">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+                <command name="void Stop()"/>
+                <command name="void MoveRight(int Speed)"/>
+                <command name="void MoveRightByDelay(int Speed, int Time)"/>
+            </commands>
+        </block>
+
+        <block name="Engine_LeftTurnDegrees">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+                <headerDefinition name="#define ENCODER_K_DIST  1"/>
+                <headerDefinition name="#define ENCODER_K_ANGLE     2.37"/>
+                <headerDefinition name="unsigned long EncoderCount1, EncoderCount2;"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitEnc()"/>
+                <command name="void nEncoder1()"/>
+                <command name="void nEncoder2()"/>
+                <command name="void Encoder1ToNull()"/>
+                <command name="void Encoder2ToNull()"/>
+                <command name="void EncodersToNull()"/>
+                <command name="unsigned  long GetAngleFromEnc1()"/>
+                <command name="unsigned  long GetAngleFromEnc2()"/>
+
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+                <command name="void MoveLeft(int Speed)"/>
+                <command name="void Stop()"/>
+
+                <command name="void MoveLeftByEncoder(int Speed, int Angle)"/>
+            </commands>
+        </block>
+        <block name="Engine_RightTurn">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+                <command name="void MoveRight(int Speed)"/>
+            </commands>
+        </block>
+        <block name="Engine_RightTurnDegrees">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+                <headerDefinition name="#define ENCODER_K_DIST  1"/>
+                <headerDefinition name="#define ENCODER_K_ANGLE     2.37"/>
+                <headerDefinition name="unsigned long EncoderCount1, EncoderCount2;"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitEnc()"/>
+                <command name="void nEncoder1()"/>
+                <command name="void nEncoder2()"/>
+                <command name="void Encoder1ToNull()"/>
+                <command name="void Encoder2ToNull()"/>
+                <command name="void EncodersToNull()"/>
+                <command name="unsigned  long GetAngleFromEnc1()"/>
+                <command name="unsigned  long GetAngleFromEnc2()"/>
+
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+                <command name="void MoveRight(int Speed)"/>
+                <command name="void Stop()"/>
+
+                <command name="void MoveRightByEncoder(int Speed, int Angle)"/>
+            </commands>
+        </block>
+        <block name="Engine_Stop">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define M1_DIR          4"/>
+                <headerDefinition name="#define M1_PWM          5"/>
+                <headerDefinition name="#define M2_DIR          7"/>
+                <headerDefinition name="#define M2_PWM          6"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitMotors()"/>
+                <command name="void Motors(int Speed1, int Speed2)"/>
+                <command name="void Stop()"/>
+            </commands>
+        </block>
+
+        <!--SENSORS(ДАТЧИКИ)-->
+        <block name="UltrasonicI2C">
+            <headers>
+                <header name="Wire.h"/>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitUltrasonic()"/>
+                <command name="int UltrasonikRead()"/>
+            </commands>
+        </block>
+
+        <block name="UltrasonicHCSR04">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define TRIG_PIN            	A4"/>
+                <headerDefinition name="#define ECHO_PIN            	A5"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void InitUltrasonicHCSR04()"/>
+                <command name="int UltrasonikHCSR04Read()"/>
+            </commands>
+        </block>
+
+        <block name="IK_sensor">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int IKSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+        <block name="LineSensor">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int LineSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+        <block name="LightSensor">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int LightSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+        <block name="Button">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define LED_PIN             	13"/>
+                <headerDefinition name="#define BUTTON_PIN          	12"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void Init Board()"/>
+                <command name="int ButtonRead(int ButtonPin)"/>
+            </commands>
+        </block>
+
+        <block name="ObjectSensor">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int ObjectSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+        <block name="Gercon">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int GerconSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+        <block name="TempSensor">
+            <headers>
+                <header name="OneWire.h"/>
+                <header name="DallasTemperature.h"/>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int TempSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+        <block name="TouchSensor">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int TouchSensorRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+        <block name="HallSensor">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int HallRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+        <block name="Potentiometer">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="int PotentiometerRead(int SensorPin)"/>
+            </commands>
+        </block>
+
+<!--        SERVO(СЕРВО)-->
+        <block name="ServoDefaultBlock" >
+            <headers>
+                <header name="Servo.h"/>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="void ServoMove(Servo S1, int Angle)"/>
+            </commands>
+        </block>
+        <block name="ServoMoveSlow" >
+            <headers>
+                <header name="Servo.h"/>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="void ServoMove(Servo S1, int Angle)"/>
+                <command name="void ServoMoveSlow(Servo S1, int Angle, int Time)"/>
+            </commands>
+        </block>
+        <block name="LedControl">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define LED_PIN             	13"/>
+                <headerDefinition name="#define BUTTON_PIN          	12"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void Init Board()"/>
+                <command name="void LedControl(int LedPin, int State)"/>
+            </commands>
+        </block>
+        <block name="blink_ledD13">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define LED_PIN             	13"/>
+                <headerDefinition name="#define BUTTON_PIN          	12"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void Init Board()"/>
+                <command name="void LedControl(int LedPin, int State)"/>
+                <command name="void LedOneBlink(int LedPin, int TimeBlink)"/>
+            </commands>
+        </block>
+        <block name="BlinkLed">
+            <headers>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="#define LED_PIN             	13"/>
+                <headerDefinition name="#define BUTTON_PIN          	12"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void Init Board()"/>
+                <command name="void LedControl(int LedPin, int State)"/>
+                <command name="void LedBlinks(int LedPin, int Count, int TimeON, int TimeOFF)"/>
+            </commands>
+        </block>
+        <block name="pwmLed">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="void LedBrightness(int LedPin, int Bright)"/>
+            </commands>
+        </block>
+        <block name="Tone">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="void PiezoON(int PiezoPin, int Tone)"/>
+            </commands>
+        </block>
+        <block name="NoTone">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="void PiezoOFF(int PiezoPin)"/>
+            </commands>
+        </block>
+        <block name="ToneImpulse">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="void PiezoBeep(int PiezoPin, int Tone, int TimeON, int TimeOFF, int Count)"/>
+            </commands>
+        </block>
+        <block name="ToneTime">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="void PiezoTone(int PiezoPin, int Tone, int Duration)"/>
+            </commands>
+        </block>Melody
+        <block name="Melody">
+            <headers>
+            </headers>
+            <headersDefinitions>
+            </headersDefinitions>
+            <commands>
+                <command name="void PiezoAlarm(int PiezoPin)"/>
+            </commands>
+        </block>
+    </translator>
+
+    <translatorCode>
+        <headers>
+            <header name="Wire.h">Wire.h</header>
+            <header name="Servo.h">Servo.h</header>
+            <header name="OneWire.h">OneWire.h</header>
+            <header name="DallasTemperature.h">DallasTemperature.h</header>
+        </headers>
+
+
+        <headersDefinitions>
+            <headerDefinition name="#define M1_DIR          4">
+                #define M1_DIR 4
+            </headerDefinition>
+            <headerDefinition name="#define M1_PWM          5">
+                #define M1_PWM 5
+            </headerDefinition>
+            <headerDefinition name="#define M2_DIR          7">
+                #define M2_DIR 7
+            </headerDefinition>
+            <headerDefinition name="#define M2_PWM          6">
+                #define M2_PWM 6
+            </headerDefinition>
+            <!--ENCODERS(ЭНКОДЕРЫ)-->
+            <headerDefinition name="#define ENCODER_K_DIST  1">
+                #define ENCODER_K_DIST 1
+            </headerDefinition>
+            <headerDefinition name="#define ENCODER_K_ANGLE     2.37">
+                #define ENCODER_K_ANGLE 2.37
+            </headerDefinition>
+            <headerDefinition name="unsigned long EncoderCount1, EncoderCount2;">
+                unsigned long EncoderCount1, EncoderCount2;
+            </headerDefinition>
+            <!--SENSORS(ДАТЧИКИ)-->
+            <headerDefinition name="#define TRIG_PIN            	A4">
+                #define TRIG_PIN A4
+            </headerDefinition>
+            <headerDefinition name="#define ECHO_PIN            	A5">
+                #define ECHO_PIN A5
+            </headerDefinition>
+            <headerDefinition name="#define LED_PIN             	13">
+                #define LED_PIN 13
+            </headerDefinition>
+            <headerDefinition name="#define BUTTON_PIN          	12">
+                #define BUTTON_PIN 12
+            </headerDefinition>
+            <!--            <headerDefinition name="">
+                        </headerDefinition>
+                        <headerDefinition name="">
+                        </headerDefinition>
+                        <headerDefinition name="">
+                        </headerDefinition>
+                        <headerDefinition name="">
+                        </headerDefinition>
+                        <headerDefinition name="">
+                        </headerDefinition>
+                        <headerDefinition name="">
+                        -->
+
+
+        </headersDefinitions>
+
+        <commands>
+            <command name="void InitMotors()">
+                void InitMotors()
+                {
+                pinMode(M1_DIR, OUTPUT);
+                pinMode(M1_PWM, OUTPUT);
+                pinMode(M2_DIR, OUTPUT);
+                pinMode(M2_PWM, OUTPUT);
+                }
+            </command>
+            <command name="void Motors(int Speed1, int Speed2)">
+                void Motors(int Speed1, int Speed2)
+                {
+                if(Speed1 &gt; 255) Speed1 = 255;
+                if(Speed1 &lt; -255) Speed1 = -255;
+                if(Speed2 &gt; 255) Speed2 = 255;
+                if(Speed2 &lt; -255) Speed2 = -255;
+
+                if(Speed1 &gt; 0)
+                {
+                digitalWrite(M1_DIR, 1);
+                analogWrite(M1_PWM, Speed1);
+                }
+                else
+                {
+                digitalWrite(M1_DIR, 0);
+                analogWrite(M1_PWM, -Speed1);
+                }
+
+                if(Speed2 &gt; 0)
+                {
+                digitalWrite(M2_DIR, 1);
+                analogWrite(M2_PWM, Speed2);
+                }
+                else
+                {
+                digitalWrite(M2_DIR, 0);
+                analogWrite(M2_PWM, -Speed2);
+                }
+                }
+            </command>
+            <command name="void MoveForward(int Speed)">
+                //Ехать вперед
+                void MoveForward(int Speed)
+                {
+                Motors(Speed, Speed);
+                }
+            </command>
+            <command name="void MoveBack(int Speed)">
+                //Ехать назад
+                void MoveBack(int Speed)
+                {
+                Motors(-Speed, -Speed);
+                }
+            </command>
+            <command name="void Stop()">
+                //Стоп
+                void Stop()
+                {
+                Motors(0, 0);
+                }
+            </command>
+            <command name="void MoveRight(int Speed)">
+                //Разворот налево
+                void MoveRight(int Speed)
+                {
+                Motors(Speed, -Speed);
+                }
+            </command>
+            <command name="void MoveLeft(int Speed)">
+                //Разворот направо
+                void MoveLeft(int Speed)
+                {
+                Motors(-Speed, Speed);
+                }
+            </command>
+            <command name="void MoveForwardByDelay(int Speed, int Time)">
+                //Вперед по времени
+                void MoveForwardByDelay(int Speed, int Time)
+                {
+                MoveForward(Speed);
+                delay(Time);
+                Stop();
+                }
+            </command>
+            <command name="void MoveForwardByEncoder(int Speed, unsigned long Distance)">
+                //Вперед по расстоянию
+                void MoveForwardByEncoder(int Speed, unsigned long Distance)
+                {
+                EncodersToNull();
+                MoveForward(Speed);
+
+                while(1)
+                {
+                if(GetDistanceFromEnc1() &gt; Distance) break;
+                if(GetDistanceFromEnc2() &gt; Distance) break;
+                Serial.print("1");
+                }
+
+                Stop();
+                }
+            </command>
+            <command name="void MoveBackByDelay(int Speed, int Time)">
+                //Назад по времени
+                void MoveBackByDelay(int Speed, int Time)
+                {
+                MoveBack(Speed);
+                delay(Time);
+                Stop();
+                }
+            </command>
+            <command name="void MoveBackByEncoder(int Speed, int Distance)">
+                //Назад по расстоянию
+                void MoveBackByEncoder(int Speed, int Distance)
+                {
+                EncodersToNull();
+                MoveBack(Speed);
+
+                while(1)
+                {
+                if(GetDistanceFromEnc1() &gt; Distance) break;
+                if(GetDistanceFromEnc2() &gt; Distance) break;
+                Serial.print("1");
+                }
+
+                Stop();
+                }
+            </command>
+            <command name="void MoveRightByDelay(int Speed, int Time)">
+                //Поворот направо по времени
+                void MoveRightByDelay(int Speed, int Time)
+                {
+                MoveRight(Speed);
+                delay(Time);
+                Stop();
+                }
+            </command>
+            <command name="void MoveRightByEncoder(int Speed, int Angle)">
+                //Поворот направо на градус
+                void MoveRightByEncoder(int Speed, int Angle)
+                {
+                EncodersToNull();
+                MoveRight(Speed);
+
+                while(1)
+                {
+                if(GetAngleFromEnc1() &gt; Angle) break;
+                if(GetAngleFromEnc2() &gt; Angle) break;
+                Serial.print("1");
+                }
+
+                Stop();
+                }
+            </command>
+            <command name="void MoveLeftByDelay(int Speed, int Time)">
+                //Поворот налево по времени
+                void MoveLeftByDelay(int Speed, int Time)
+                {
+                MoveLeft(Speed);
+                delay(Time);
+                Stop();
+                }
+            </command>
+            <command name="void MoveLeftByEncoder(int Speed, int Angle)">
+                //Поворот налево на градус
+                void MoveLeftByEncoder(int Speed, int Angle)
+                {
+                EncodersToNull();
+                MoveLeft(Speed);
+
+                while(1)
+                {
+                if(GetAngleFromEnc1() &gt; Angle) break;
+                if(GetAngleFromEnc2() &gt; Angle) break;
+                Serial.print("1");
+                }
+
+                Stop();
+                }
+            </command>
+            <command name="void MoveLeftByDelay(int Speed, int Time)">
+                void MoveLeftByDelay(int Speed, int Time)
+                {
+                MoveLeft(Speed);
+                delay(Time);
+                Stop();
+                }
+            </command>
+            <command name="void MoveRightByDelay(int Speed, int Time)">
+                void MoveRightByDelay(int Speed, int Time)
+                {
+                MoveRight(Speed);
+                delay(Time);
+                Stop();
+                }
+            </command>
+
+
+            <command name="void InitEnc()">
+                void InitEnc()
+                {
+                pinMode(2, INPUT_PULLUP);
+                pinMode(3, INPUT_PULLUP);
+                attachInterrupt(0, nEncoder1, CHANGE);
+                attachInterrupt(1, nEncoder2, CHANGE);
+                }
+            </command>
+            <command name="void nEncoder1()">
+                void nEncoder1()
+                {
+                EncoderCount1++;
+                }
+            </command>
+            <command name="void nEncoder2()">
+                void nEncoder2()
+                {
+                EncoderCount2++;
+                }
+            </command>
+            <command name="unsigned  long GetDistanceFromEnc1()">
+                unsigned long GetDistanceFromEnc1()
+                {
+                return (double)EncoderCount1 * (double)ENCODER_K_DIST;
+                }
+            </command>
+            <command name="unsigned  long GetDistanceFromEnc2()">
+                unsigned long GetDistanceFromEnc2()
+                {
+                return (double)EncoderCount2 * (double)ENCODER_K_DIST;
+                }
+
+            </command>
+            <command name="unsigned  long GetAngleFromEnc1()">
+                unsigned long GetAngleFromEnc1()
+                {
+                return (double)EncoderCount1 * (double)ENCODER_K_ANGLE;
+                }
+            </command>
+            <command name="unsigned  long GetAngleFromEnc2()">
+                unsigned long GetAngleFromEnc2()
+                {
+                return (double)EncoderCount2 * (double)ENCODER_K_ANGLE;
+                }
+            </command>
+            <command name="void Encoder1ToNull()">
+                void Encoder1ToNull()
+                {
+                EncoderCount1 = 0;
+                }
+            </command>
+            <command name="void Encoder2ToNull()">
+                void Encoder2ToNull()
+                {
+                EncoderCount2 = 0;
+                }
+            </command>
+            <command name="void EncodersToNull()">
+                void EncodersToNull()
+                {
+                EncoderCount1 = 0;
+                EncoderCount2 = 0;
+                }
+            </command>
+            <!--SENSORS(ДАТЧИКИ)-->
+            <command name="void InitUltrasonic()">
+                void InitUltrasonic()
+                {
+                // Открываем соединение с датчиком по I2C
+                Wire.begin();
+                Wire.setClock(8000);
+                }
+            </command>
+            <command name="int UltrasonikRead()">
+                int UltrasonikRead()
+                {
+                // Запрашиваем данные с датчика
+                Wire.requestFrom(56, 1);
+                // Ждем ответа с датчика
+                while(Wire.available() == 0);
+                // Получаем дальность с датчика расстояния в сантиметрах
+                int S = Wire.read();
+                delay(50);
+
+                return (S);
+                }
+            </command>
+            <command name="int UltrasonikHCSR04Read()">
+                int UltrasonikHCSR04Read()
+                {
+                digitalWrite(TRIG_PIN, 1);
+                delayMicroseconds(10);
+                digitalWrite(TRIG_PIN, 0);
+
+                int Data = pulseIn(ECHO_PIN, 1) / 55;
+
+                return Data;
+                }
+            </command>
+            <command name="void InitUltrasonicHCSR04()">
+                void InitUltrasonicHCSR04()
+                {
+                pinMode(TRIG_PIN, OUTPUT);
+                }
+            </command>
+            <command name="int IKSensorRead(int SensorPin)">
+                int IKSensorRead(int SensorPin)
+                {
+                if(SensorPin &lt; A0 || SensorPin &gt; A3)
+                return -1;
+
+                int Data = analogRead(SensorPin);
+                return Data;
+                }
+            </command>
+            <command name="int LineSensorRead(int SensorPin)">
+                int LineSensorRead(int SensorPin)
+                {
+                if(SensorPin &lt; A0 || SensorPin &gt; A3)
+                return -1;
+
+                int Data = analogRead(SensorPin);
+                return Data;
+                }
+            </command>
+            <command name="int LightSensorRead(int SensorPin)">
+                int LightSensorRead(int SensorPin)
+                {
+                if(SensorPin &lt; A0 || SensorPin &gt; A3)
+                return -1;
+
+                int Data = analogRead(SensorPin);
+                return Data;
+                }
+            </command>
+            <command name="void Init Board()">
+                //Инициализация ножек светодиода и кнопки на плате расширения
+                void InitBoard()
+                {
+                pinMode(LED_PIN, OUTPUT);
+                pinMode(BUTTON_PIN, INPUT_PULLUP);
+                }
+            </command>
+            <command name="int ButtonRead(int ButtonPin)">
+                int ButtonRead(int ButtonPin)
+                {
+                int Data = digitalRead(ButtonPin);
+                if(ButtonPin == 12) Data = !Data;
+                return Data;
+                }
+            </command>
+            <command name="int ObjectSensorRead(int SensorPin)">
+                int ObjectSensorRead(int SensorPin)
+                {
+                int Data = digitalRead(SensorPin);
+                return !Data;
+                }
+            </command>
+            <command name="int GerconSensorRead(int SensorPin)">
+                int GerconSensorRead(int SensorPin)
+                {
+                int Data = digitalRead(SensorPin);
+                return Data;
+                }
+            </command>
+            <command name="int TempSensorRead(int SensorPin)">
+                int TempSensorRead(int SensorPin)
+                {
+                OneWire TempSensorWire(SensorPin);
+                DallasTemperature TempSensor(&amp;TempSensorWire);
+
+                TempSensor.begin();
+
+                float TempC;
+                TempSensor.requestTemperatures();
+                TempC = TempSensor.getTempCByIndex(0);
+
+                if(TempC != DEVICE_DISCONNECTED_C)
+                {
+                return TempC;
+                }
+                else
+                {
+                return -1000;
+                }
+                }
+            </command>
+            <command name="int TouchSensorRead(int SensorPin)">
+                int TouchSensorRead(int SensorPin)
+                {
+                int Data = digitalRead(SensorPin);
+                return Data;
+                }
+            </command>
+            <command name="int HallRead(int SensorPin)">
+                int HallRead(int SensorPin)
+                {
+                if(SensorPin &lt; A0 || SensorPin &gt; A3)
+                return -1;
+
+                int Data = analogRead(SensorPin);
+                return Data;
+                }
+            </command>
+            <command name="int PotentiometerRead(int SensorPin)">
+                int PotentiometerRead(int SensorPin)
+                {
+                if(SensorPin &lt; A0 || SensorPin &gt; A3)
+                return -1;
+
+                int Data = analogRead(SensorPin);
+                return Data;
+                }
+            </command>
+            <!--SERVO(СЕРВАКИ)-->
+            <command name="void ServoMove(Servo S1, int Angle)">
+                void ServoMove(Servo S1, int Angle)
+                {
+                if(Angle &gt; 180) Angle = 180;
+                if(Angle &lt; 0) Angle = 0;
+
+                S1.write(Angle);
+                }
+            </command>
+            <command name="void ServoMoveSlow(Servo S1, int Angle, int Time)">
+                void ServoMoveSlow(Servo S1, int Angle, int Time)
+                {
+                int Pos, Delta;
+                Pos = S1.read();
+
+                Delta = Angle - Pos;
+                if(Delta &gt; 0)
+                {
+                for(int i = Pos; i &lt; Angle; i++)
+                {
+                ServoMove(S1, i);
+                delay(Time);
+                }
+                }
+                else if(Delta &lt; 0)
+                {
+                for(int i = Pos; i &gt; Angle; i--)
+                {
+                ServoMove(S1, i);
+                delay(Time);
+                }
+                }
+                else return;
+                }
+            </command>
+            <command name="void LedControl(int LedPin, int State)">
+                void LedControl(int LedPin, int State)
+                {
+                if(LedPin != 13)  State = !State;
+                digitalWrite(LedPin, State);
+                }
+            </command>
+            <command name = "void LedOneBlink(int LedPin, int TimeBlink)">
+            void LedOneBlink(int LedPin, int TimeBlink)
+            {
+            LedControl(LedPin, 1);
+            delay(TimeBlink);
+            LedControl(LedPin, 0);
+            delay(TimeBlink);
+            }
+            </command>
+            <command name="void LedBlinks(int LedPin, int Count, int TimeON, int TimeOFF)">
+            void LedBlinks(int LedPin, int Count, int TimeON, int TimeOFF)
+            {
+            for(int i = 0; i &lt; Count; i++)
+            {
+            LedControl(LedPin, 1);
+            delay(TimeON);
+            LedControl(LedPin, 0);
+            delay(TimeOFF);
+            }
+            }
+            </command>
+            <command name="void LedBrightness(int LedPin, int Bright)">
+            void LedBrightness(int LedPin, int Bright)
+            {
+            if(LedPin &gt; 255) LedPin = 255;
+            if(LedPin &lt; 0) LedPin = 0;
+
+            analogWrite(LedPin, 255 - Bright);
+            }
+            </command>
+            <command name="void PiezoON(int PiezoPin, int Tone)">
+            void PiezoON(int PiezoPin, int Tone)
+            {
+                tone(PiezoPin, Tone);
+            }
+            </command>
+            <command name="void PiezoOFF(int PiezoPin)">
+            void PiezoOFF(int PiezoPin)
+            {
+                noTone(PiezoPin);
+            }
+            </command>
+            <command name="void PiezoBeep(int PiezoPin, int Tone, int TimeON, int TimeOFF, int Count)">
+            void PiezoBeep(int PiezoPin, int Tone, int TimeON, int TimeOFF, int Count)
+            {
+                for(int i = 0; i &lt; Count; i++)
+                {
+                    tone(PiezoPin, Tone);
+                    delay(TimeON);
+                    noTone(PiezoPin);
+                    delay(TimeOFF);
+                }
+            }
+            </command>
+            <command name="void PiezoTone(int PiezoPin, int Tone, int Duration)">
+            void PiezoTone(int PiezoPin, int Tone, int Duration)
+            {
+                int noteDuration = 1000 / Duration;
+                tone(PiezoPin, Tone, noteDuration);
+                delay(noteDuration * 1.3);
+                noTone(PiezoPin);
+            }
+            </command>
+            <command name="void PiezoAlarm(int PiezoPin)">
+            void PiezoAlarm(int PiezoPin)
+            {
+                for(int i = 400; i &lt; 1000; i++)
+                {
+                    tone(PiezoPin, i);
+                    delay(2);
+                }
+                for(int i = 1000; i &gt; 400; i--)
+                {
+                    tone(PiezoPin, i);
+                    delay(2);
+                }
+                noTone(PiezoPin);
+            }
+            </command>
+            
+            <!--            <command name="">
+                        </command>
+                        <command name="">
+                        </command>-->
+
+
+        </commands>
+
+    </translatorCode>
+</root>

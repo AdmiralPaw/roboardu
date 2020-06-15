@@ -9,17 +9,25 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 
-
+/**
+ *
+ * @author User
+ */
 public class CTabButton extends CButton {
 
     private static final long serialVersionUID = 328149080252L;
 
+    /**
+     *
+     * @param text
+     */
     public CTabButton(String text) {
         super(Color.black, CGraphite.blue, text);
     }
 
     /**
      * re paints this
+     * @param g
      */
     public void paint(Graphics g) {
         // Set up graphics and buffer

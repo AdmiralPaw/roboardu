@@ -17,10 +17,22 @@ public interface WorkspaceWidget {
      */
     public void blockDropped(RenderableBlock block);
 
+    /**
+     *
+     * @param block
+     */
     public void startDragged(RenderableBlock block);
 
+    /**
+     *
+     * @param block
+     */
     public void stopDragged(RenderableBlock block);
 
+    /**
+     *
+     * @param block
+     */
     public void blockRenamed(RenderableBlock block);
     /**
      * Called by RenderableBlocks as they are dragged over this Widget.
@@ -73,6 +85,7 @@ public interface WorkspaceWidget {
      * Widgets must be able to report whether a given point is inside them
      * @param x
      * @param y
+     * @return 
      */
     public boolean contains(int x, int y);
 
@@ -83,10 +96,11 @@ public interface WorkspaceWidget {
     public JComponent getJComponent();
 
     /**
-     * Returns the set of blocks that abstract "lives" inside this widget.
-     * Does not return all the blocks that exists in thsi component,
-     * or return all the blocks that are handled by this widget.  Rather,
-     * the set of blocks returned all the blocks that "lives" in this widget.
+     * Returns the set of blocks that abstract "lives" inside this widget.Does not return all the blocks that exists in thsi component,
+ or return all the blocks that are handled by this widget.
+     * Rather,
+ the set of blocks returned all the blocks that "lives" in this widget.
+     * @return 
      */
     public Iterable<RenderableBlock> getBlocks();
 }

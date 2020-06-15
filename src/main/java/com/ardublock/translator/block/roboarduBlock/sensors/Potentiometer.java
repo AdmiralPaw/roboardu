@@ -5,24 +5,43 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
-public class Potentiometer extends TranslatorBlock {
-    public Potentiometer(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
+/**
+ *
+ * @author User
+ */
+public class Potentiometer extends TranslatorBlock
+{
+
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public Potentiometer(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     @Override
-    public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
+    public String toCode() throws SocketNullException, SubroutineNotDeclaredException
+    {
+        translator.CheckClassName(this);
 
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
-        String pin = translatorBlock.toCode();
-        translator.addDefinitionCommand("int Potentiometer(int Pin){\n" +
-                "  int value = analogRead(Pin);\n" +
-                "  value = map(value,0,1023,0,100);\n" +
-                "  return value;\n" +
-                "}");
+        String ret = "PotentiometerRead(" + translatorBlock.toCode() + ")";
 
-
-
-        return codePrefix + "Potentiometer(" + pin + ")" + codeSuffix;
+        return codePrefix + ret + codeSuffix;
     }
 }
+
+
+
