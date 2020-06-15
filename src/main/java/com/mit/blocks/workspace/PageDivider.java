@@ -10,36 +10,34 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JComponent;
 
 /**
- * The PageDivider is a JComponent graphically 
- * marking the boundary between the two pages.  
- * It holds a reference to the left page and invokes 
- * mutations to that page upon user-generated 
- * interactions with the PageDivider. Specifically, 
- * when a user presses the PageDivider, it forces the 
- * left page to recalculate the minimum width by invoking 
- * Page.reformMinimumPixelWidth().  When a user drags a 
- * PageDivider, it resizes the left pages's abstract width 
- * by invoking Page.addPixelWidth().  Note that this only 
- * changes the page's abstract width but does not re-render 
- * the left to reflect the change in the abstract width.  
- * This is done by various page listeners handled when 
- * the PageDivider informs the PageChangedEventListener 
- * to notify various PageChangeListeners.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * PageDivider-это JComponent, графически отмечающий границу между двумя страницами.
+ * Он содержит ссылку на левую страницу и вызывает мутации на этой странице при взаимодействии
+ * пользователя с PageDivider. В частности, когда пользователь нажимает PageDivider,
+ * он заставляет левую страницу пересчитать минимальную ширину, вызывая Page.reformMinimumPixelWidth().
+ * Когда пользователь перетаскивает PageDivider, он изменяет абстрактную ширину левой страницы,
+ * вызывая Page.addPixelWidth(). Обратите внимание, что это только изменяет абстрактную ширину страницы,
+ * но не перерисовывает левую часть, чтобы отразить изменение абстрактной ширины.
+ * Это делается различными прослушивателями страниц, обрабатываемыми, когда PageDivider сообщает
+ * PageChangedEventListener, чтобы уведомить различные PageChangeListeners.
+ *
+ * Мы наблюдаем следующие случаи использования:
+ *      1) пользователь наводит мышь на разделитель страниц
+ *      Разделитель страниц растет в ширину
+ *
+ *      2) пользователь перемещает мышь за пределы разделителя страниц
+ *      Разделитель страниц сжимается по ширине
+ *
+ *      3) пользователь нажимает на разделитель страниц
+ *      Страница.минимальная реформы ширина в пикселях() вызывается
+ *
+ *      4) пользователь перетаскивает разделитель страниц
+ *      Страница.добавить ширину в пикселях() вызывается
+ *      Вызываются прослушиватели изменений страниц
  * 
- * We observe the following use cases:
- * 	1) 	User mouses over PageDivider
- * 		PageDivider grows in width
- * 	2) 	User moves mouse outside of PageDivider
- * 		PageDivider shrinks in width
- * 	3)	User presses on the PageDivider
- * 		Page.reformMinimumPixelWidth() is invoked
- * 	4) 	User drags the PageDivider
- * 		Page.addPixelWidth() is invoked
- * 		PageChangeListeners are invoked
- * 
- * @specfield leftPage : Page //the page on the left side of thsi PageDivider
- * @specfield color : Color //the color of this pageDivider
- * @specfield mouseIn : boolean flag //true if and only if mouse is over this PageDivider
+ * @specfield leftPage : Page //Cтраница в левой части этого PageDivider
+ * @specfield color : Color //Wвет этого PageDivider
+ * @specfield mouseIn : boolean flag //true тогда и только тогда, когда мышь находится над этим PageDivider
  */
 public class PageDivider extends JComponent implements MouseListener, MouseMotionListener {
 

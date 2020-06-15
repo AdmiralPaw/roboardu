@@ -5,8 +5,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- *
  * @author User
+ * Класс, создающий пользовательские CHoverScrollPane с портом представления, устаанавливаемым по желанию пользователя
  */
 public class RHoverScrollPane extends CScrollPane implements KeyListener {
 

@@ -7,16 +7,17 @@ import com.ardublock.core.Context;
 import com.ardublock.ui.OpenblocksFrame;
 
 /**
- *
- * @author User
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс открывающий прослушиватель кнопки
  */
 public class OpenButtonListener implements ActionListener
 {
+	//Поле родительской оконной процедуры
 	private OpenblocksFrame parentFrame;
 	
     /**
-     *
-     * @param frame
+     * Метод, открывающий прослушиватель кнопки
+     * @param frame - Оконная процедура
      */
     public OpenButtonListener(OpenblocksFrame frame)
 	{
@@ -24,7 +25,11 @@ public class OpenButtonListener implements ActionListener
 		
 		this.parentFrame = frame;
 	}
-	
+
+	/**
+	 * Метод, открывающий файл, сгенерированного кода Arduino из блоков
+	 * @param e - Событие совершённого действия
+	 */
 	public void actionPerformed(ActionEvent e)
 	{
 		parentFrame.doOpenArduBlockFile();

@@ -15,17 +15,11 @@ import java.util.regex.Pattern;
 
 
 /**
- * BlockConnectionShape defines and draws the connectors between the blocks.
- * This includes the different (command/data) (sockets/plugs).
- * The standard sockets/plugs have varying styles.
- * 
- * BlockConnectionShape doesn't care about the layout of the connectors on 
- * the blocks, that is the job of BlockShape.
- * 
- * BlockConnectionShape is extendable to allow for 3rd party (command/data)
- * (sockets/plugs) shapes.
- * 
- * @author bwarne
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Форма соединения блоков определяет и рисует соединители между блоками.
+ * Включает в себя различные (команды/данные) (входы/выходы). Стандартные выходы / выходы
+ * имеют различные стили. Форма соединения блоков не заботится о расположении разъемов на блоках,
+ * это работа формы блоков.
  */
 public class BlockConnectorShape {
 

@@ -10,11 +10,10 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 /**
- * This class separates block shape from the RenderableBlock class. BlockShape
- * uses information from RenderableBlock to determine shape and dimensions of
- * the block being drawn.
- *
- * BlockShape does not know where it is in the world -- all coords are local.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Этот класс отделяет форму блока от класса RenderableBlock.
+ * Форма блока использует информацию из RenderableBlock для определения формы и размеров рисуемого блока.
+ * BlockShape не знает, где он находится в мире - все координаты являются локальными.
  */
 public class BlockShape {
 

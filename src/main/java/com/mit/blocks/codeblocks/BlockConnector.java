@@ -12,11 +12,11 @@ import com.mit.blocks.workspace.ISupportMemento;
 import com.mit.blocks.workspace.Workspace;
 
 /**
- * <code>BlockConnector</code> is a light class that describes the socket/plug
- * information for each socket or plug of a particular Block.  Each socket has
- * a kind (i.e. number, String, boolean, etc.), a label, and the block id of
- * the block at that socket (not to be confused with the block that hold the
- * socket information - socket does not have a reference to that parent block).
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс, который описывает информацию о выходе/входе для каждого выхода
+ * или входа конкретного блока. Каждый сокет имеет свой вид (например, число, строку,
+ * логическое значение и т. д.), метка и блочный идентификатор блока в этом сокете
+ * (не путать с блоком, который содержит информацию о сокете - сокет не имеет ссылки на этот родительский блок).
  */
 public class BlockConnector implements ISupportMemento {
     

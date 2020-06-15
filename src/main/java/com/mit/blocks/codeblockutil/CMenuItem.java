@@ -12,8 +12,8 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JButton;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  *
- * @author User
  */
 public class CMenuItem extends JButton implements MouseListener {
 

@@ -24,11 +24,10 @@ import com.mit.blocks.workspace.RBParent;
 import com.mit.blocks.codeblockutil.GraphicsManager;
 
 /**
- * The RBHighlightHandler class is responsible for maintaining the
- * highlight state of a RenderableBlock and rendering the highlight
- * properly.  It works by adding itself to a layer behind its RenderableBlock
- * and drawing the highlight there so as not to cover the block.
- * @author Daniel
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс RBHighlightHandler отвечает за поддержание состояния выделения RenderableBlock и
+ * правильную визуализацию выделения. Он работает, добавляя себя к слою позади своего
+ * RenderableBlock и рисуя подсветку там, чтобы не закрывать блок.
  */
 public class RBHighlightHandler extends JComponent implements ComponentListener, HierarchyListener {
 

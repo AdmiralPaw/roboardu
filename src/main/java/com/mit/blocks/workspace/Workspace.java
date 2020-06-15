@@ -26,9 +26,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * The Workspace is the main block area, where blocks are manipulated and
- * assembled. This class governs the blocks, the world, the view, drawing,
- * dragging, animating.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Рабочее пространство - это основная блочная область, где происходит
+ * манипулирование блоками и их сборка. Этот класс управляет блоками, миром,
+ * видом, рисованием, перетаскиванием, анимацией.
  */
 public class Workspace extends JLayeredPane implements ISupportMemento, RBParent, ChangeListener, ExplorerListener {
 

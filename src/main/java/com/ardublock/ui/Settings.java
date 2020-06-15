@@ -16,26 +16,49 @@ import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
 /**
- *
- * @author User
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс, работающий с настройками, изменяющий их соответственно с предпочтениями пользователя
  */
 public class Settings extends JFrame {
 
+    //Поле, содержащее пакет сообщений пользовательского интерфейса
     private ResourceBundle uiMessageBundle;
+
+    //Поле пользовательских данных конфигурации (Пользовательские предпочтения)
     private final Preferences userPrefs;
+
+    //Поле с настройками оконной процедуры
     private Settings thisFrame;
+
+    //Поле с используемым шрифтом
     private String mainFont = "TimesNewRoman";
+
+    //Поле логической переменной с информацией о перетаскивании (перемещении)
     boolean beginDrag;
+
+    //Поле с координатой по оси Ох нажатии мыши
     int mousePressX;
+
+    //Поле с координатой по оси Оу нажатии мыши
     int mousePressY;
+
+    //
     JLabel eggText;
+
+    //
     RCheckBox egg;
+
+    //Поле ширины окна
     int windowWidth = 400;
+
+    //Поле высоты окна
     int windowHeight = 300;
+
+    //Поле с буффеером нажатий кнопок
     private ArrayList<Integer> keyBuf;
 
     /**
-     *
+     * Метод с предустановками оконной процедуры "Настройки" (Внешний вид, значения, режим окна и т.д.)
      * @param openblocksFrame
      */
     public Settings(OpenblocksFrame openblocksFrame) {
@@ -52,6 +75,10 @@ public class Settings extends JFrame {
 
 
         this.addKeyListener(new KeyAdapter() {
+            /**
+             * Метод, который указывает на то, что была нажата определённая клавиша
+             * @param e - Событие нажатия клавиши
+             */
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() != KeyEvent.VK_ENTER && e.getKeyCode() != KeyEvent.VK_ESCAPE) {
@@ -97,7 +124,9 @@ public class Settings extends JFrame {
         }
 
         //uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
+        //Поле панели со вкладками
         final JTabbedPane tabbedPane = new JTabbedPane();
+        //Поле панели
         final JPanel panel = new JPanel();
         //panel.setLayout(new BorderLayout());
 
@@ -106,6 +135,10 @@ public class Settings extends JFrame {
         JPanel windowCapPanel = new JPanel();
         windowCapPanel.setLayout(null);
         windowCapPanel.addMouseListener(new MouseAdapter() {
+            /**
+             * Метод, который указывает на то, что была нажата кнопка мыши
+             * @param e - Событие нажатия кнопки мыши
+             */
             @Override
             public void mousePressed(MouseEvent e) {
                 beginDrag = true;
@@ -113,25 +146,47 @@ public class Settings extends JFrame {
                 mousePressY = e.getY();
             }
 
+            /**
+             * Метод, который указывает на то, что была отпущена кнопка мыши
+             * @param e - Событие нажатия кнопки мыши
+             */
             @Override
             public void mouseReleased(MouseEvent e) {
                 beginDrag = false;
+
+                //Поле с новым местоположением перетаскиваемого объекта по оси Ох
                 int newX = e.getX() - mousePressX;
+
+                //Поле с новым местоположением перетаскиваемого объекта по оси Оу
                 int newY = e.getY() - mousePressY;
+
                 thisFrame.setBounds(thisFrame.getX() + newX, thisFrame.getY() + newY, windowWidth, windowHeight);
             }
         });
 
         windowCapPanel.addMouseMotionListener(new MouseMotionListener() {
+            /**
+             * Метод, который указывает на то, что мышью начали перетаскивать объект
+             * @param e - Событие нажатия кнопки мыши
+             */
             @Override
             public void mouseDragged(MouseEvent e) {
                 if (beginDrag) {
+
+                    //Поле с новым местоположением перетаскиваемого объекта по оси Ох
                     int newX = e.getX() - mousePressX;
+
+                    //Поле с новым местоположением перетаскиваемого объекта по оси Оу
                     int newY = e.getY() - mousePressY;
+
                     thisFrame.setBounds(thisFrame.getX() + newX, thisFrame.getY() + newY, windowWidth, windowHeight);
                 }
             }
 
+            /**
+             * Метод, который указывает на то, что мышь была перемещена
+             * @param e - Событие нажатия кнопки мыши
+             */
             @Override
             public void mouseMoved(MouseEvent e) {
             }
@@ -143,6 +198,7 @@ public class Settings extends JFrame {
         windowCapPanel.setBorder(BorderFactory.createLineBorder(new Color(215, 215, 215)));
 
 
+        //Поле с размером иконки
         int size = 16;
         URL iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/X.png");
         ImageIcon button_icon = new ImageIcon(
@@ -150,6 +206,10 @@ public class Settings extends JFrame {
                         .getScaledInstance(size, size, java.awt.Image.SCALE_SMOOTH));
         JButton XButton = new JButton(button_icon);
         XButton.addActionListener(new ActionListener() {
+            /**
+             * Метод, меняющий видимость оконной процедуры
+             * @param e - Событие совершённого действия
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 thisFrame.setVisible(false);
@@ -163,7 +223,10 @@ public class Settings extends JFrame {
         XButton.setContentAreaFilled(false);
         XButton.setFocusable(false);
 
+        //Поле смещения вправо
         int rigthOffset = getWidth() - XButton.getX() - size;
+
+        //Поле смещения влево
         int leftOffset = rigthOffset;
 
         JLabel text = new JLabel(uiMessageBundle.getString("ardublock.ui.settings"));
@@ -179,8 +242,11 @@ public class Settings extends JFrame {
         add(windowBodyPanel);
         windowBodyPanel.setBounds(0, windowCapPanel.getHeight() - 1, getWidth(), getHeight() - windowCapPanel.getHeight() + 1);
 
+        //Поле позиции
         int position = 5;
+        //Поле смещения
         int offset = 40;
+        //Поле высоты выпадающего списка
         int spinnerHeigth = 30;
 
         text = new JLabel(uiMessageBundle.getString("ardublock.ui.autostart"));
@@ -236,6 +302,10 @@ public class Settings extends JFrame {
         egg.setBounds(windowWidth - 44 - rigthOffset, position, 44, 40);
         egg.setVisible(false);
         egg.addItemListener(new ItemListener() {
+            /**
+             * Метод, сообщающий, что состояние элемента было изменено
+             * @param e - событие, указывающее, что элемент был выбран или отменен
+             */
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (!egg.isSelected()) {
@@ -253,6 +323,10 @@ public class Settings extends JFrame {
         windowBodyPanel.add(saveBtn);
         saveBtn.setBounds(1, windowBodyPanel.getHeight() - 40, getWidth() - 1, 39);
         saveBtn.addActionListener(new ActionListener() {
+            /**
+             * Метод, который меняет настройки согласно предпочтениям пользователя
+             * @param e - Событие совершённого действия
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 thisFrame.setVisible(false);
@@ -266,6 +340,10 @@ public class Settings extends JFrame {
         this.requestFocus();
     }
 
+    /**
+     * Метод, определяющий видимость
+     * @param e - логическая переменная, которая ответственная за видимость
+     */
     public void setVisible(boolean e) {
         super.setVisible(e);
         if (e) {
@@ -274,8 +352,8 @@ public class Settings extends JFrame {
     }
 
     /**
-     *
-     * @return
+     * Метод, определяющий был ли это первый запуск или нет
+     * @return userPrefs.getBoolean("is_first_launch", true)
      */
     public boolean isFirstLaunch() {
         return userPrefs.getBoolean("is_first_launch", true);

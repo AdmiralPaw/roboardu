@@ -11,20 +11,17 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.GeneralPath;
 
 /**
- * A CArrowButton is a swing-compatible widget that
- * allows clients to display a semi-transpanrent arrow
- * in any of the four traditional directions:
- * NORTH, SOUTH, EAST, WEST.
- * 
- * Clients of the CArrowButton may subscribe mouse triggers
- * to particular actions by doing the following:
- * this.addCButtonListener(new CButtonListener());
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс CArrowButton - это совместимый с swing виджет, который позволяет клиентам отображать
+ * полупрозрачную стрелку в любом из четырех традиционных направлений: север, юг, восток,
+ * запад. Клиенты кнопки со стрелкой могут подписывать триггеры мыши на
+ * определенные действия, делая следующее: this.addCButtonListener(new CButtonListener());
  */
 public abstract class CArrowButton extends CButton implements ActionListener {
 
     private static final long serialVersionUID = 328149080231L;
 
-    /** Directions */
+    //Структура направлений
     public enum Direction {
 
         /**
@@ -47,9 +44,17 @@ public abstract class CArrowButton extends CButton implements ActionListener {
          */
         WEST
     };
+
+
     private static final int m = 3;
+
+    //Поле направления
     private final Direction dir;
+
+    //Цвет подсветки
     private static final Color highlight = CGraphite.blue;
+
+    //Цвет стрелки
     private static final Color arrowColor = CGraphite.blue;
 
     /**
@@ -129,7 +134,7 @@ public abstract class CArrowButton extends CButton implements ActionListener {
 
     /**
      * stop triggering the action os this arrow as the user holds down the arrow
-     * @param e
+     * @param e - Событие, указывающее, что в компоненте произошло действие мыши
      */
     public void mouseReleased(MouseEvent e) {
         this.pressed = false;
@@ -138,15 +143,15 @@ public abstract class CArrowButton extends CButton implements ActionListener {
     }
 
     /**
-     * this method has no use
-     * @param e
+     * Этот метод неиспользуется
+     * @param e - Событие совершённого действия
      */
     public void actionPerformed(ActionEvent e) {
         triggerAction();
     }
 
     /**
-     * The action triggered by mouse clicks and pressing and holding arrows
+     * Действие вызывается щелчками мыши и нажатием и удержанием стрелок
      */
     abstract public void triggerAction();
 }

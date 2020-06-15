@@ -8,8 +8,7 @@ import java.awt.Shape;
 import java.awt.geom.GeneralPath;
 
 /**
- *
- * @author User
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class ShapeBevel {
     

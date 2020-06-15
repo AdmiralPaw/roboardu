@@ -13,16 +13,17 @@ import java.awt.event.*;
 import java.util.List;
 
 /**
- * BlockLabel is a region on a block in which text is displayed and possibly edited.  The
- * location and font of a BlockLabel is specified in BlockShape and the text displayed is specified
- * by a Block, BlockLabel is the gateway for text to be rendered and modified.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс BlockLabel - это область блока, в которой отображается и, возможно, редактируется текст.
+ * Расположение и шрифт метки блока задаются в форме блока, а отображаемый текст задается блоком,
+ * BlockLabel - это шлюз для отображения и изменения текста.
  *
- * The key nature of a BlockLabel is that it is a JLabel when being viewed, and a JTextField
- * when it is being edited.
+ * Ключевая природа метки блока заключается в том, что она является JLabel при просмотре
+ * и JTextField при редактировании.
  *
- * During mouse move, entered and exited events a white border is toggled around the label
- * for particular blocks. This white border helps to suggest editable labels for blocks that
- * have this enabled.
+ * Во время перемещения мыши, ввода и выхода событий белая граница переключается вокруг метки
+ * для определенных блоков. Эта белая граница помогает предложить редактируемые метки
+ * для блоков, у которых эта возможность включена.
  */
 public class BlockLabel implements MouseListener, MouseMotionListener, KeyListener {
 

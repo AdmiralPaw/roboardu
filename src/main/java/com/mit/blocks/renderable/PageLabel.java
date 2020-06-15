@@ -4,6 +4,10 @@ import java.awt.Color;
 
 import com.mit.blocks.workspace.Workspace;
 
+/**
+ * @author AdmiralPaw, Ritevi, Aizek
+ *
+ */
 class PageLabel extends BlockLabel {
 
     PageLabel(Workspace workspace, String initLabelText, BlockLabel.Type labelType, boolean isEditable, long blockID) {

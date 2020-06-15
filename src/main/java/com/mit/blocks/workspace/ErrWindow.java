@@ -8,8 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  *
- * @author User
  */
 public class ErrWindow extends JPanel {
 

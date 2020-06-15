@@ -14,9 +14,10 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 /**
- * GraphicsManager maintains graphics context information that maybe useful for many aspects of
- * graphics rendering.  This means that many of the fields are computer dependent and are
- * placed here so they are only calculated once.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * GraphicsManager поддерживает информацию о графическом контексте, которая может быть полезна для многих аспектов
+ * графического рендеринга. Это означает, что многие поля зависят от компьютера и помещаются здесь, поэтому они
+ * вычисляются только один раз.
  */
 public class GraphicsManager {
 

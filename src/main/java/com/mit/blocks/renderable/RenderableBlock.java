@@ -22,11 +22,11 @@ import java.util.List;
 import java.util.*;
 
 /**
- * RenderableBlock is responsible for all graphical rendering of a code Block.
- * This class is also responsible for consuming all mouse and key events on
- * itself. Each RenderableBlock object is coupled with its associated Block
- * object, and uses information maintained in Block to render the graphical
- * block accordingly.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс RenderableBlock отвечает за весь графический рендеринг блока кода.
+ * Этот класс также отвечает за потребление всех событий мыши и ключа на себя.
+ * Каждый объект RenderableBlock связан со своим связанным объектом Block и использует информацию,
+ * сохраняемую в блоке, для соответствующего отображения графического блока.
  */
 public class RenderableBlock extends JComponent implements SearchableElement,
         MouseListener, MouseMotionListener, ISupportMemento, CommentSource, KeyListener {

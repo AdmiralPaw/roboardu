@@ -25,21 +25,28 @@ import java.util.Set;
 //>>>>>>> lerofaCtrlZ
 
 /**
- *
- * @author User
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс, который генерирует код прослушивателя кнопки
  */
 
 public class GenerateCodeButtonListener implements ActionListener {
 
+    //Поле родительской оконной процедуры
     private JFrame parentFrame;
+
+    //Поле контекста
     private Context context;
+
+    //Поле рабочего пространства
     private Workspace workspace;
+
+    //Поле сообщений пользовательского интерфейса
     private ResourceBundle uiMessageBundle;
 
     /**
-     *
-     * @param frame
-     * @param context
+     * Метод, генерирующий код прослушивателя кнопки
+     * @param frame - Оконная процедура
+     * @param context - Контекст
      */
     public GenerateCodeButtonListener(JFrame frame, Context context) {
         this.parentFrame = frame;
@@ -48,6 +55,10 @@ public class GenerateCodeButtonListener implements ActionListener {
         uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
     }
 
+    /**
+     * Метод, *
+     * @param blockId - Идентификатор блока
+     */
     private void afterException(Long blockId) {
         Iterable<RenderableBlock> blocks = workspace.getRenderableBlocks();
         for (RenderableBlock renderableBlock2 : blocks) {
@@ -60,6 +71,13 @@ public class GenerateCodeButtonListener implements ActionListener {
 
     }
 
+    /**
+     *
+     * @param e - Событие совершённого действия
+     * @exception SocketNullException e1
+     * @exception BlockException e2
+     * @exception SubroutineNotDeclaredException e3
+     */
     public void actionPerformed(ActionEvent e) {
         if (parentFrame instanceof OpenblocksFrame)
         {

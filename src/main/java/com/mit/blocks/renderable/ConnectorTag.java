@@ -7,8 +7,7 @@ import java.awt.geom.Point2D;
 import com.mit.blocks.codeblocks.BlockConnector;
 
 /**
- *
- * @author User
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class ConnectorTag  {
 

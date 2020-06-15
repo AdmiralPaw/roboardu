@@ -10,8 +10,8 @@ import java.util.Collection;
 import java.util.HashMap;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  *
- * @author User
  */
 public class BlocksKeeper {
 
