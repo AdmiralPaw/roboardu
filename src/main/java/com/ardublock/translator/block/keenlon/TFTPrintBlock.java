@@ -5,13 +5,34 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class TFTPrintBlock extends TranslatorBlock
 {
-	public TFTPrintBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public TFTPrintBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
-	  public static String replace(String strSource, String strFrom, String strTo) {    
+    
+    /**
+     *
+     * @param strSource
+     * @param strFrom
+     * @param strTo
+     * @return
+     */
+    public static String replace(String strSource, String strFrom, String strTo) {    
 		    if (strSource == null) {        
 		      return null;    
 		    }  
@@ -34,7 +55,14 @@ public class TFTPrintBlock extends TranslatorBlock
 		    } 
 		    return strSource;
 		  }
-	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
+
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		
 		translator.addHeaderFile("keenlon.h");		

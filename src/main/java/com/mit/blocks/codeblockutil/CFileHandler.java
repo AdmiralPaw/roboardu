@@ -16,8 +16,18 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 
+/**
+ *
+ * @author User
+ */
 public final class CFileHandler {
 
+    /**
+     *
+     * @param parent
+     * @param numLines
+     * @return
+     */
     public static String[] readFromFile(JComponent parent, int numLines) {
         int numberOfLines = numLines;
         JFileChooser filechooser = new JFileChooser("Import Data From");
@@ -55,6 +65,12 @@ public final class CFileHandler {
         return null;
     }
 
+    /**
+     *
+     * @param parent
+     * @param source
+     * @return
+     */
     public static boolean writeToFile(JComponent parent, String source) {
         JFileChooser fc = new JFileChooser("Saving Data");
         int returnVal = fc.showSaveDialog(parent.getTopLevelAncestor());
@@ -87,6 +103,12 @@ public final class CFileHandler {
         return false;
     }
 
+    /**
+     *
+     * @param parent
+     * @param image
+     * @return
+     */
     public static boolean writeToFile(JComponent parent, BufferedImage image) {
         JFileChooser fc = new JFileChooser();
         int returnVal = fc.showSaveDialog(parent.getTopLevelAncestor());

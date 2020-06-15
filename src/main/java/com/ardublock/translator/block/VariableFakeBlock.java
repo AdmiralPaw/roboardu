@@ -2,14 +2,31 @@ package com.ardublock.translator.block;
 
 import com.ardublock.translator.Translator;
 
+/**
+ *
+ * @author User
+ */
 public class VariableFakeBlock extends TranslatorBlock
 {
-	public VariableFakeBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public VariableFakeBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     */
+    @Override
 	public String toCode()
 	{
 		String internalVariableName = translator.getNumberVariable(label);

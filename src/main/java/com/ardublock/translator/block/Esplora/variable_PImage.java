@@ -3,14 +3,31 @@ package com.ardublock.translator.block.Esplora;
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
 
+/**
+ *
+ * @author User
+ */
 public class variable_PImage extends TranslatorBlock
 {
-	public variable_PImage(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public variable_PImage(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     */
+    @Override
 	public String toCode()
 	{
 		translator.addHeaderFile("SD.h");

@@ -19,19 +19,16 @@ import java.util.List;
 import java.util.*;
 
 /**
- * A BlockCanvas is a container of Pages and is a scrollable
- * panel.  When a page is added to a BlockCanvas, that
- * particular new page must be added to both the data
- * structure holding the set of pages and the scrollable
- * panel that renders the page.
- *
- * A BlockCanvas is also a PageChangeListener.  When any
- * pages are changed, the Blockcanvas must update itself
- * appropriately to reflect this change.
- *
- * As of the current implementation, the BlockCanvas must
- * have at least one Page when it becomes visible (that is,
- * when its viewable JComponent becomes visible).
+ * @author AdmiralPaw, Ritevi, Aizek
+ * BlockCanvas - это контейнер страниц и прокручиваемая панель. Когда страница
+ * добавляется в BlockCanvas, эта конкретная новая страница должна быть
+ * добавлена как в структуру данных, содержащую набор страниц, так и в
+ * прокручиваемую панель, которая отображает страницу.
+ * A BlockCanvas также является PageChangeListener. При изменении каких-либо
+ * страниц BlockCanvas должны соответствующим образом обновляться, чтобы
+ * отразить это изменение. Начиная с текущей реализации, BlockCanvas должен
+ * иметь по крайней мере одну страницу, когда он становится видимым (то есть
+ * когда его видимый JComponent становится видимым).
  */
 public class BlockCanvas implements PageChangeListener, ISupportMemento {
 
@@ -56,6 +53,7 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
     /**
      * Constructs BlockCanvas and subscribes
      * this BlockCanvas to PageChange events
+     * @param workspace
      */
     public BlockCanvas(Workspace workspace) {
         this.workspace = workspace;
@@ -138,6 +136,11 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
         return "BlockCanvas " + pages.size() + " pages.";
     }
 
+    /**
+     *
+     * @param left
+     * @return
+     */
     public List<Page> getLeftmostPages(int left) {
         List<Page> leftmostPages = new ArrayList<Page>();
         int scrollPosition = this.scrollPane.getHorizontalModel().getValue();
@@ -197,6 +200,10 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
         //not yet implemented
     }
 
+    /**
+     *
+     * @param c
+     */
     public void scrollToComponent(JComponent c) {
         //not yet implemented
     }
@@ -299,6 +306,7 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
 
     /**
      * @param page - the page to be removed
+     * @return 
      *
      * @requires page != null
      * @modifies this.pages
@@ -430,6 +438,7 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
     /**
      * Returns an XML node describing all the blocks and pages within
      * the BlockCanvas
+     * @param document
      * @return Node or {@code null} if there are no pages
      */
     public Node getSaveNode(Document document) {
@@ -491,7 +500,8 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
     //////////////////////////////
     //REDO/UNOD					//
     //////////////////////////////
-    /** @overrides ISupportMomento.getState */
+    /**
+     * @return  *  @overrides ISupportMomento.getState */
     public Object getState() {
         Map<String, Object> pageStates = new HashMap<String, Object>();
         for (Page page : pages) {
@@ -500,7 +510,8 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
         return pageStates;
     }
 
-    /** @overrides ISupportMomento.loadState() */
+    /**
+     * @param memento *  @overrides ISupportMomento.loadState() */
     @SuppressWarnings("unchecked")
     public void loadState(Object memento) {
         assert (memento instanceof HashMap) : "ISupportMemento contract violated in BlockCanvas";
@@ -555,6 +566,9 @@ public class BlockCanvas implements PageChangeListener, ISupportMemento {
         private Cursor defaultCursor = null;
         private Cursor closedHandCursor = null;
 
+        /**
+         *
+         */
         public Canvas() {
             super();
             this.p = null;

@@ -10,13 +10,25 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
+/**
+ *
+ * @author User
+ */
 public class CColorChooser extends CButton implements MouseListener, MouseMotionListener {
 
     private static final long serialVersionUID = 328149080226L;
+
+    /**
+     *
+     */
     public static final String COLOR_CHANGE = "color_change_property";
     private ColorPicker popup;
     private Color previousColor = null;
 
+    /**
+     *
+     * @param color
+     */
     public CColorChooser(Color color) {
         super(color, Color.gray, "RGB = 0,0,0");
         popup = new ColorPicker(color);

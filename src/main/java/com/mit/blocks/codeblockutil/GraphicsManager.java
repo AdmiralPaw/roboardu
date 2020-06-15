@@ -14,15 +14,20 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 /**
- * GraphicsManager maintains graphics context information that maybe useful for many aspects of
- * graphics rendering.  This means that many of the fields are computer dependent and are
- * placed here so they are only calculated once.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * GraphicsManager поддерживает информацию о графическом контексте, которая может быть полезна для многих аспектов
+ * графического рендеринга. Это означает, что многие поля зависят от компьютера и помещаются здесь, поэтому они
+ * вычисляются только один раз.
  */
 public class GraphicsManager {
 
     /** get GraphicConfiguration for default screen - this should only be done once at startup **/
     private static GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
     private static GraphicsDevice gs = ge.getDefaultScreenDevice();
+
+    /**
+     *
+     */
     public static GraphicsConfiguration gc = gs.getDefaultConfiguration();
     private static final int MAX_RECYCLED_IMAGES = 50;
     private static int numRecycledImages = 0;
@@ -49,8 +54,8 @@ public class GraphicsManager {
     }
 
     /** 
-     * Add an image to the recycled images list (or if img = null, does nothing).
-     * Note: the passed variable should be immediately set to null to avoid aliasing bugs.
+     * Add an image to the recycled images list (or if img = null, does nothing).Note: the passed variable should be immediately set to null to avoid aliasing bugs.
+     * @param img
      */
     public static void recycleGCCompatibleImage(BufferedImage img) {
         if (img == null) {

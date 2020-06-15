@@ -8,6 +8,10 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import javax.swing.SwingUtilities;
 
+/**
+ *
+ * @author User
+ */
 public class ControllerMenu extends CButton {
 
     private static final long serialVersionUID = 328149080229L;
@@ -23,7 +27,7 @@ public class ControllerMenu extends CButton {
     /**
      *
      * @param controller
-     * @param text рабочее имя для блоков
+     * @param deviceName
      * @param tr видимый текст, он же перевод
      * @param Id ID порта
      */
@@ -40,6 +44,7 @@ public class ControllerMenu extends CButton {
 
     /**
      * re paints this
+     * @param g
      */
     @Override
     public void paint(Graphics g) {

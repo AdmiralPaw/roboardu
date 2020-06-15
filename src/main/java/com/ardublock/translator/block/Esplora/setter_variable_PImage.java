@@ -8,16 +8,34 @@ import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class setter_variable_PImage extends TranslatorBlock
 {
 	private static ResourceBundle uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
 	
-	public setter_variable_PImage(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public setter_variable_PImage(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(0);

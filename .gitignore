@@ -10,8 +10,10 @@ openblocks.iml
 bin/
 .settings/
 *~
+*.iml
 src/main/resources/com/ardublock/block/ardublock.zip
 deploy.sh
+.run
 <<<<<<< HEAD
 =======
 test-output

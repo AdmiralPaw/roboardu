@@ -2,11 +2,18 @@ package com.ardublock.translator.block.drawing;
 
 import com.ardublock.translator.Translator;
 
-
-
+/**
+ *
+ * @author User
+ */
 public class Util
 {
-	public static void setupEnv(Translator translator)
+
+    /**
+     *
+     * @param translator
+     */
+    public static void setupEnv(Translator translator)
 	{
 		
 		translator.addHeaderFile("public.h");

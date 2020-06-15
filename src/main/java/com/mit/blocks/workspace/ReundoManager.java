@@ -22,6 +22,10 @@ public class ReundoManager implements WorkspaceListener {
     private boolean lock = false;
     // Member Variables
 
+    /**
+     *
+     * @param managedClass
+     */
     public ReundoManager(ISupportMemento managedClass) {
         this.managedClasses = new ArrayList<ISupportMemento>();
         this.managedClasses.add(managedClass);
@@ -29,6 +33,9 @@ public class ReundoManager implements WorkspaceListener {
         this.reset();
     }
 
+    /**
+     *
+     */
     public void reset() {
         undoMementoStack = new Stack<List<Object>>();
         redoMementoStack = new Stack<List<Object>>();
@@ -39,6 +46,10 @@ public class ReundoManager implements WorkspaceListener {
         //the current state will be valid. (hence the is null test below.
     }
 
+    /**
+     *
+     * @param anotherManagedClass
+     */
     public void addManagedClass(ISupportMemento anotherManagedClass) {
         managedClasses.add(anotherManagedClass);
     }
@@ -58,6 +69,9 @@ public class ReundoManager implements WorkspaceListener {
         }
     }
 
+    /**
+     *
+     */
     public void undo() {
         if (canUndo() && !lock) {
             lock = true;
@@ -80,6 +94,9 @@ public class ReundoManager implements WorkspaceListener {
         }
     }
 
+    /**
+     *
+     */
     public void redo() {
         if (canRedo() && !lock) {
             lock = true;
@@ -97,18 +114,34 @@ public class ReundoManager implements WorkspaceListener {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean canUndo() {
         return (undoMementoStack.size() > 0);
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean canRedo() {
         return (redoMementoStack.size() > 0);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUndoText() {
         return "";
     }
 
+    /**
+     *
+     * @return
+     */
     public String getRedoText() {
         return "";
     }

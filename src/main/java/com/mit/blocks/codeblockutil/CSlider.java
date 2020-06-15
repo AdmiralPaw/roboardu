@@ -17,6 +17,10 @@ import java.awt.geom.GeneralPath;
 
 import javax.swing.JPanel;
 
+/**
+ * @author AdmiralPaw, Ritevi, Aizek
+ *
+ */
 public class CSlider extends JPanel implements MouseListener, MouseMotionListener {
 
     private static final long serialVersionUID = 328149080257L;

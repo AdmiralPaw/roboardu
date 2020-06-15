@@ -10,21 +10,20 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
+
 /**
- * This class can be used to add dragging capability to any JComponents.
- * It contains the methods and data members needed to support automatic dragging,
- * and contains methods to impliment both MouseListener, MouseMotionListener.
- * In general, any existing JComponent can be made to be draggable simple by
- * creating an instance of JComponentDragHandler (passing a reference to itself)
- * and registering the JComponentDragHandler as the listener for all mouse events.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Этот класс можно использовать для добавления возможности перетаскивания в любой JComponent.
+ *  Он содержит методы и элементы данных, необходимые для поддержки автоматического перетаскивания, а также
+ *  содержит методы для имплиментации как MouseListener, MouseMotionListener.
+ *  В общем случае любой существующий JComponent можно сделать легко перетаскиваемым, создав экземпляр
+ *  JComponentDragHandler (передавая ссылку на себя) и зарегистрировав JComponentDragHandler в качестве прослушивателя
+ *  для всех событий мыши.
  *
- * Classes that need similar, but not identical, behavior, or that need to add
- * functionality to the mouse methods here can create an inner class that extends
- * this class.  In this way the inner class can maintain the functionality of
- * JComponentDragHandler while also having access to data members and methods
- * of its enclosing class for the purposes of extension.
- *
- * @author Daniel <djwendel@mit.edu>
+ *  Классы, которые нуждаются в подобном, но не идентичном поведении, или которые должны добавить функциональность к
+ *  методам мыши здесь, могут создать внутренний класс, который расширяет этот класс. Таким образом, внутренний класс
+ *  может поддерживать функциональность Jcommonentdraghandler, а также иметь доступ к элементам данных и методам своего
+ *  заключающего класса для целей расширения.
  *
  */
 public class JComponentDragHandler implements MouseListener, MouseMotionListener {
@@ -34,12 +33,40 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
      * relative to the (0,0) corner of the JComponent.
      */
     public int mPressedX; //at mouse pressed
+
+    /**
+     *
+     */
     public int mPressedY; //at mouse pressed
+
+    /**
+     *
+     */
     public int mCurrentX; //where the mouse is currently
+
+    /**
+     *
+     */
     public int mCurrentY; //where the mouse is currently
+
+    /**
+     *
+     */
     public int dragDX; // amount of last drag in X direction
+
+    /**
+     *
+     */
     public int dragDY; // amount of last drag in Y direction
+
+    /**
+     *
+     */
     public int oldLocX; //where the component was before dragging
+
+    /**
+     *
+     */
     public int oldLocY;
     private static Cursor openHandCursor = null;
     private static Cursor closedHandCursor = null;
@@ -74,6 +101,12 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
         closedHandCursor = createHandCursor("/com/ardublock/closed_hand.png", "closedHandCursor");
     }
 
+    /**
+     *
+     * @param location
+     * @param cursorName
+     * @return
+     */
     public static Cursor createHandCursor(String location, String cursorName) {
         if (GraphicsEnvironment.isHeadless()) {
             // return default hand cursor if headless
@@ -124,9 +157,9 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
     //MOUSE EVENTS
     ///////////////////
     /**
-     * Called when the mouse is pressed over the JComponent.
-     * Saves the point (which is measured relative to the JComponent's corner)
-     * over which the mouse was pressed.
+     * Called when the mouse is pressed over the JComponent.Saves the point (which is measured relative to the JComponent's corner)
+ over which the mouse was pressed.
+     * @param e
      */
     public void mousePressed(MouseEvent e) {
         myComponent.setCursor(closedHandCursor);
@@ -137,10 +170,11 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
     }
 
     /**
-     * This method is called when the mouse is dragged over the JComponent.
-     * Moves the JComponent by the amount of the drag such that the point
-     * under which the mouse the pressed remains under the mouse cursor.  In
-     * other words, "drags" the JComponent.
+     * This method is called when the mouse is dragged over the JComponent.Moves the JComponent by the amount of the drag such that the point
+ under which the mouse the pressed remains under the mouse cursor.
+     * In
+ other words, "drags" the JComponent.
+     * @param e
      */
     public void mouseDragged(MouseEvent e) {
         //System.out.println("mouse dragged: "+this.getLocation());
@@ -177,6 +211,7 @@ public class JComponentDragHandler implements MouseListener, MouseMotionListener
 
     /**
      * update the current location of the mouse
+     * @param e
      */
     public void mouseMoved(MouseEvent e) {
         mCurrentX = e.getX();

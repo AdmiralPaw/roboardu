@@ -13,28 +13,72 @@ import java.awt.event.*;
 import java.util.List;
 
 /**
- * BlockLabel is a region on a block in which text is displayed and possibly edited.  The
- * location and font of a BlockLabel is specified in BlockShape and the text displayed is specified
- * by a Block, BlockLabel is the gateway for text to be rendered and modified.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс BlockLabel - это область блока, в которой отображается и, возможно, редактируется текст.
+ * Расположение и шрифт метки блока задаются в форме блока, а отображаемый текст задается блоком,
+ * BlockLabel - это шлюз для отображения и изменения текста.
  *
- * The key nature of a BlockLabel is that it is a JLabel when being viewed, and a JTextField
- * when it is being edited.
+ * Ключевая природа метки блока заключается в том, что она является JLabel при просмотре
+ * и JTextField при редактировании.
  *
- * During mouse move, entered and exited events a white border is toggled around the label
- * for particular blocks. This white border helps to suggest editable labels for blocks that
- * have this enabled.
+ * Во время перемещения мыши, ввода и выхода событий белая граница переключается вокруг метки
+ * для определенных блоков. Эта белая граница помогает предложить редактируемые метки
+ * для блоков, у которых эта возможность включена.
  */
 public class BlockLabel implements MouseListener, MouseMotionListener, KeyListener {
 
     /**Enum for the differnt types of labels in codeblocks */
     public enum Type {
-        NAME_LABEL, PAGE_LABEL, PORT_LABEL, DATA_LABEL
+
+        /**
+         *
+         */
+        NAME_LABEL,
+
+        /**
+         *
+         */
+        PAGE_LABEL,
+
+        /**
+         *
+         */
+        PORT_LABEL,
+
+        /**
+         *
+         */
+        DATA_LABEL
     }
+
+    /**
+     *
+     */
     public final static Font blockFontSmall_Bold = new Font("lucida sans unicode", Font.PLAIN, 7);
+
+    /**
+     *
+     */
     public final static Font blockFontMedium_Bold = new Font("lucida sans unicode", Font.PLAIN, 10);
+
+    /**
+     *
+     */
     public final static Font blockFontLarge_Bold = new Font("lucida sans unicode", Font.PLAIN, 12);
+
+    /**
+     *
+     */
     public final static Font blockFontSmall_Plain = new Font("lucida sans unicode", Font.PLAIN, 7);
+
+    /**
+     *
+     */
     public final static Font blockFontMedium_Plain = new Font("lucida sans unicode", Font.PLAIN, 10);
+
+    /**
+     *
+     */
     public final static Font blockFontLarge_Plain = new Font("lucida sans unicode"   , Font.PLAIN, 12);
     private LabelWidget widget;
 
@@ -47,18 +91,36 @@ public class BlockLabel implements MouseListener, MouseMotionListener, KeyListen
 
     private double zoom = 1.0;
 
+    /**
+     *
+     */
     protected final Workspace workspace;
 
     /**
      * BlockLabel Constructor
      * NOTE: A true boolean passed into the isEditable parameter does not necessarily make the label
      * editable, but a false boolean will make the label uneditable.
+     * @param workspace
+     * @param initLabelText
+     * @param labelType
+     * @param isEditable
+     * @param tooltipBackground
      */
     public BlockLabel(Workspace workspace, String initLabelText, BlockLabel.Type labelType, boolean isEditable, Color tooltipBackground) {
         //call other constructor
         this(workspace, initLabelText, labelType, isEditable, -1, false, tooltipBackground);
     }
 
+    /**
+     *
+     * @param workspace
+     * @param initLabelText
+     * @param labelType
+     * @param isEditable
+     * @param blockID
+     * @param hasComboPopup
+     * @param tooltipBackground
+     */
     public BlockLabel(Workspace workspace, String initLabelText, BlockLabel.Type labelType, boolean isEditable, long blockID, boolean hasComboPopup, Color tooltipBackground) {
         this.workspace = workspace;
         if (Block.NULL.equals(blockID)) {
@@ -109,7 +171,7 @@ public class BlockLabel implements MouseListener, MouseMotionListener, KeyListen
             List<String> siblingsNames = workspace.getEnv().getBlock(blockID).getSiblingsList();
             String[][] siblings = new String[siblingsNames.size() + 1][2];
             siblings[0] = new String[]{workspace.getEnv().getBlock(blockID).getGenusName(), workspace.getEnv().getBlock(blockID).getInitialLabel()};
-            for (int i = 0; i < siblingsNames.size(); i++) {
+            for (int i = 0; i < siblingsNames.size(); i++) {            
                 siblings[i + 1] = new String[]{siblingsNames.get(i), workspace.getEnv().getGenusWithName(siblingsNames.get(i)).getInitialLabel()};
             }
             widget.setSiblings(hasComboPopup && workspace.getEnv().getBlock(blockID).hasSiblings(), siblings);
@@ -125,11 +187,19 @@ public class BlockLabel implements MouseListener, MouseMotionListener, KeyListen
         widget.setEditingState(false);
     }
 
+    /**
+     *
+     * @param newZoom
+     */
     public void setZoomLevel(double newZoom) {
         this.zoom = newZoom;
         widget.setZoomLevel(newZoom);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getAbstractWidth() {
         if (widget.hasSiblings()) {
             return (int) (widget.getWidth() / zoom) - LabelWidget.DROP_DOWN_MENU_WIDTH;
@@ -138,82 +208,166 @@ public class BlockLabel implements MouseListener, MouseMotionListener, KeyListen
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getAbstractHeight() {
         return (int) (widget.getHeight() / zoom);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPixelWidth() {
         return widget.getWidth();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPixelHeight() {
         return widget.getHeight();
     }
 
+    /**
+     *
+     * @return
+     */
     public Point getPixelLocation() {
         return widget.getLocation();
     }
 
+    /**
+     *
+     * @param isEditable
+     */
     public void setEditable(boolean isEditable) {
         widget.setEditable(isEditable);
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean editingText() {
         return widget.editingText();
     }
 
+    /**
+     *
+     */
     public void highlightText() {
         widget.highlightText();
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public void setPixelLocation(int x, int y) {
         widget.setLocation(x, y);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getText() {
         return widget.getText();
     }
 
+    /**
+     *
+     * @param text
+     */
     public void setText(String text) {
         widget.setText(text);
     }
 
+    /**
+     *
+     * @param text
+     */
     public void setText(boolean text) {
         widget.setText(text);
     }
 
+    /**
+     *
+     * @param text
+     */
     public void setText(double text) {
         widget.setText(text);
     }
 
+    /**
+     *
+     * @param text
+     */
     public void setToolTipText(String text) {
         widget.assignToolTipToLabel(text);
     }
 
+    /**
+     *
+     * @param show
+     */
     public void showMenuIcon(boolean show) {
         widget.showMenuIcon(show);
     }
 
+    /**
+     *
+     * @return
+     */
     public JComponent getJComponent() {
         return widget;
     }
 
+    /**
+     *
+     * @param editing
+     */
     public void setEditingState(boolean editing) {
         widget.setEditingState(editing);
     }
 
+    /**
+     *
+     * @param x
+     * @return
+     */
     protected int rescale(int x) {
         return (int) (x * zoom);
     }
 
+    /**
+     *
+     * @param x
+     * @return
+     */
     protected int rescale(double x) {
         return (int) (x * zoom);
     }
 
+    /**
+     *
+     * @param x
+     * @return
+     */
     protected int descale(int x) {
         return (int) (x / zoom);
     }
 
+    /**
+     *
+     * @param x
+     * @return
+     */
     protected int descale(double x) {
         return (int) (x / zoom);
     }
@@ -223,6 +377,10 @@ public class BlockLabel implements MouseListener, MouseMotionListener, KeyListen
         return blockID;
     }
 
+    /**
+     *
+     * @param text
+     */
     protected void textChanged(String text) {
         if ((this.labelType.equals(BlockLabel.Type.NAME_LABEL) || this.labelType.equals(BlockLabel.Type.PORT_LABEL))
                 && workspace.getEnv().getBlock(blockID).isLabelEditable()) {
@@ -252,6 +410,10 @@ public class BlockLabel implements MouseListener, MouseMotionListener, KeyListen
 
     }
 
+    /**
+     *
+     * @param genus
+     */
     protected void genusChanged(String genus) {
         if (widget.hasSiblings()) {
             Block oldBlock = workspace.getEnv().getBlock(blockID);
@@ -262,12 +424,21 @@ public class BlockLabel implements MouseListener, MouseMotionListener, KeyListen
         }
     }
 
+    /**
+     *
+     * @param value
+     */
     protected void dimensionsChanged(Dimension value) {
         if (workspace.getEnv().getRenderableBlock(blockID) != null) {
         	workspace.getEnv().getRenderableBlock(blockID).repaintBlock();
         }
     }
 
+    /**
+     *
+     * @param text
+     * @return
+     */
     protected boolean textValid(String text) {
         return !text.equals("")
                 && BlockUtilities.isLabelValid(workspace, blockID, text);

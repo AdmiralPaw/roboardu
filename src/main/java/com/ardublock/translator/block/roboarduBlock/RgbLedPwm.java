@@ -5,8 +5,15 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class RgbLedPwm extends TranslatorBlock {
 
+    /**
+     *
+     */
     public static final String RGB_BRIGHTNESS_CONTROL= "void rgbBrightnessControl(int red_pin, int green_pin, int blue_pin, int r, int g, int b)\n" +
             "{\n" +
             "  pinMode(red_pin, OUTPUT);\n" +
@@ -23,11 +30,25 @@ public class RgbLedPwm extends TranslatorBlock {
             "  analogWrite(blue_pin, map(b,0,100,255,0));\n" +
             "}\n";
 
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public RgbLedPwm (Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {

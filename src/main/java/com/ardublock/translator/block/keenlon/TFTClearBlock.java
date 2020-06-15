@@ -5,16 +5,33 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
-
-
+/**
+ *
+ * @author User
+ */
 public class TFTClearBlock  extends TranslatorBlock
 {
-	public TFTClearBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public TFTClearBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 
-	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		
 		translator.addHeaderFile("keenlon.h");		

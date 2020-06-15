@@ -14,15 +14,22 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 /**
- * Contributes a search bar component to the CodeBlocks GUI, which allows the
- * user to find Searchables such as blocks in the drawers and workspace with a
- * query by name.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Данный класс добавляет компонент панели поиска в графический интерфейс CodeBlocks, который позволяет
+ * пользователю находить объекты поиска, такие как блоки в ящиках и рабочей области, с запросом по имени.
  */
 public class SearchBar {
 
     private static JComponent fcdir;
 
+    /**
+     *
+     */
     public static Workspace workspace;
+
+    /**
+     *
+     */
     public final RQueryField searchPanel;
     private final JTextField searchBar;
     private final String defaultText;

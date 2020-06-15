@@ -113,11 +113,11 @@ public class XMLStringWriter {
     }
 
     /**
-     * Adding an element like this or beginning an element tree.  
-     * If hasAttriutes is true, must call endAttributes when you're done 
-     * adding all attributes
-     * In order to add elements, you must call endAttributes().
+     * Adding an element like this or beginning an element tree.If hasAttriutes is true, must call endAttributes when you're done 
+ adding all attributes
+ In order to add elements, you must call endAttributes().
      * @param ele
+     * @param hasAttributes
      */
     public void beginElement(String ele, boolean hasAttributes) {
         appendIndent();

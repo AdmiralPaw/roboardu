@@ -11,6 +11,10 @@ import com.mit.blocks.codeblocks.BlockLink;
 import com.mit.blocks.codeblocks.BlockLinkChecker;
 import com.mit.blocks.codeblocks.LinkRule;
 
+/**
+ *
+ * @author User
+ */
 public class StackRule implements LinkRule, WorkspaceListener {
 
     private final Workspace workspace;
@@ -18,7 +22,11 @@ public class StackRule implements LinkRule, WorkspaceListener {
 	private static HashMap<Long, Long> topBlock;
 	private static HashMap<Long, String> stackType;
 	
-	public StackRule(Workspace workspace) {
+    /**
+     *
+     * @param workspace
+     */
+    public StackRule(Workspace workspace) {
 		this.workspace = workspace;
 		topBlock = new HashMap<Long, Long>();
 		stackType = new HashMap<Long, String>();
@@ -35,7 +43,11 @@ public class StackRule implements LinkRule, WorkspaceListener {
 		return (type1 == null || type2 == null || type1.startsWith(type2) || type2.startsWith(type1));
 	}
 
-	public boolean isMandatory() {
+    /**
+     *
+     * @return
+     */
+    public boolean isMandatory() {
 		return true;
 	}
 
@@ -64,7 +76,12 @@ public class StackRule implements LinkRule, WorkspaceListener {
 		stackType.put(blockID, type);  
 	}
 	
-	public String getStackType(Long blockID) {
+    /**
+     *
+     * @param blockID
+     * @return
+     */
+    public String getStackType(Long blockID) {
 		return findStackType(blockID, blockID, "");
 	}
 

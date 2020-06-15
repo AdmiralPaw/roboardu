@@ -5,8 +5,15 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class RgbLed extends TranslatorBlock {
 
+    /**
+     *
+     */
     public static final String RGB_CONTROL= "void rgbControl(int red_pin, int green_pin, int blue_pin, bool r, bool g, bool b)\n" +
             "{\n" +
             "  pinMode(red_pin, OUTPUT);\n" +
@@ -17,11 +24,25 @@ public class RgbLed extends TranslatorBlock {
             "  digitalWrite(blue_pin, !b);\n" +
             "}\n";
 
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public RgbLed (Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {

@@ -5,20 +5,39 @@ import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 import com.ardublock.translator.block.TranslatorBlock;
 
+/**
+ *
+ * @author User
+ */
 public class MidiCommandBlock extends TranslatorBlock
 {
+
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public MidiCommandBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     public String toCode()
         throws SocketNullException, SubroutineNotDeclaredException
     {
         translator.addSetupCommand("Serial.begin(115200);");
 
         translator.addDefinitionCommand(midiFunctions);
-		translator.addHeaderDefinition("#define MIDI_C 0\n#define MIDI_CS 1\n#define MIDI_D 2\n#define MIDI_DS 3\n#define MIDI_E 4\n#define MIDI_F 5\n#define MIDI_FS 6\n#define MIDI_G 7\n#define MIDI_GS 8\n#define MIDI_A 9\n#define MIDI_AS 10\n#define MIDI_B 11\n#define MIDI_OCTAVE 12");
+	translator.addHeaderDefinition("#define MIDI_C 0\n#define MIDI_CS 1\n#define MIDI_D 2\n#define MIDI_DS 3\n#define MIDI_E 4\n#define MIDI_F 5\n#define MIDI_FS 6\n#define MIDI_G 7\n#define MIDI_GS 8\n#define MIDI_A 9\n#define MIDI_AS 10\n#define MIDI_B 11\n#define MIDI_OCTAVE 12");
 		
 		TranslatorBlock translatorBlock = getRequiredTranslatorBlockAtSocket(0);
         String note = translatorBlock.toCode();

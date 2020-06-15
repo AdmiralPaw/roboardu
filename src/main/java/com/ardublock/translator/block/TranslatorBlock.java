@@ -6,23 +6,60 @@ import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 abstract public class TranslatorBlock
 {
-	abstract public String toCode() throws SocketNullException, SubroutineNotDeclaredException, BlockException;
+
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     * @throws BlockException
+     */
+    abstract public String toCode() throws SocketNullException, SubroutineNotDeclaredException, BlockException;
 	
-	protected Long blockId;
+    /**
+     *
+     */
+    protected Long blockId;
 	
 	private BlockAdaptor blockAdaptor;
 	
-	protected Translator translator;
+    /**
+     *
+     */
+    protected Translator translator;
 	
-	protected String label;
-	protected String comment;
+    /**
+     *
+     */
+    protected String label;
+
+    /**
+     *
+     */
+    protected String comment;
 	
-	protected String codePrefix;
-	protected String codeSuffix;
+    /**
+     *
+     */
+    protected String codePrefix;
+
+    /**
+     *
+     */
+    protected String codeSuffix;
 	
-	protected TranslatorBlock(Long blockId, Translator translator)
+    /**
+     *
+     * @param blockId
+     * @param translator
+     */
+    protected TranslatorBlock(Long blockId, Translator translator)
 	{
 		this.blockId = blockId;
 		this.translator = translator;
@@ -32,7 +69,14 @@ abstract public class TranslatorBlock
 		this.label = "";
 	}
 	
-	protected TranslatorBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix)
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     */
+    protected TranslatorBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix)
 	{
 		this.blockId = blockId;
 		this.translator = translator;
@@ -42,7 +86,15 @@ abstract public class TranslatorBlock
 		this.label = "";
 	}
 	
-	public TranslatorBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public TranslatorBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		this.blockId = blockId;
 		this.translator = translator;
@@ -52,37 +104,77 @@ abstract public class TranslatorBlock
 		this.label = label;
 	}
 	
-	protected Translator getTranslator()
+    /**
+     *
+     * @return
+     */
+    protected Translator getTranslator()
 	{
 		return translator;
 	}
 	
-	public TranslatorBlock nextTranslatorBlock()
+    /**
+     *
+     * @return
+     */
+    public TranslatorBlock nextTranslatorBlock()
 	{
 		return this.nextTranslatorBlock("", "");
 	}
 	
-	protected TranslatorBlock nextTranslatorBlock(String codePrefix, String codeSuffix)
+    /**
+     *
+     * @param codePrefix
+     * @param codeSuffix
+     * @return
+     */
+    protected TranslatorBlock nextTranslatorBlock(String codePrefix, String codeSuffix)
 	{
 		return blockAdaptor.nextTranslatorBlock(this.translator, blockId, codePrefix, codeSuffix);
 	}
 	
-	protected TranslatorBlock getTranslatorBlockAtSocket(int i)
+    /**
+     *
+     * @param i
+     * @return
+     */
+    protected TranslatorBlock getTranslatorBlockAtSocket(int i)
 	{
 		return this.getTranslatorBlockAtSocket(i, "", "");
 	}
 	
-	protected TranslatorBlock getTranslatorBlockAtSocket(int i, String codePrefix, String codeSuffix)
+    /**
+     *
+     * @param i
+     * @param codePrefix
+     * @param codeSuffix
+     * @return
+     */
+    protected TranslatorBlock getTranslatorBlockAtSocket(int i, String codePrefix, String codeSuffix)
 	{
 		return blockAdaptor.getTranslatorBlockAtSocket(this.translator, blockId, i, codePrefix, codeSuffix);
 	}
 	
-	protected TranslatorBlock getRequiredTranslatorBlockAtSocket(int i) throws SocketNullException
+    /**
+     *
+     * @param i
+     * @return
+     * @throws SocketNullException
+     */
+    protected TranslatorBlock getRequiredTranslatorBlockAtSocket(int i) throws SocketNullException
 	{
 		return this.getRequiredTranslatorBlockAtSocket(i, "", "");
 	}
 	
-	protected TranslatorBlock getRequiredTranslatorBlockAtSocket(int i, String codePrefix, String codeSuffix) throws SocketNullException
+    /**
+     *
+     * @param i
+     * @param codePrefix
+     * @param codeSuffix
+     * @return
+     * @throws SocketNullException
+     */
+    protected TranslatorBlock getRequiredTranslatorBlockAtSocket(int i, String codePrefix, String codeSuffix) throws SocketNullException
 	{
 		TranslatorBlock translatorBlock = blockAdaptor.getTranslatorBlockAtSocket(this.translator, blockId, i, codePrefix, codeSuffix);
 		if (translatorBlock == null)
@@ -92,16 +184,37 @@ abstract public class TranslatorBlock
 		return translatorBlock;
 	}
 	
-	protected void setComment(String comment)
+    /**
+     *
+     * @param comment
+     */
+    protected void setComment(String comment)
 	{
 		this.comment = comment;
 	}
 	
-	protected String getComment()
+    /**
+     *
+     * @return
+     */
+    protected String getComment()
 	{
 		return this.comment;
 	}
-	
-	public void onTranslateBodyFinished() throws SocketNullException, SubroutineNotDeclaredException{}
+
+    /**
+     *
+     * @return
+     */
+    public Long getBlockID(){
+            return this.blockId;
+        }
+
+    /**
+     *
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    public void onTranslateBodyFinished() throws SocketNullException, SubroutineNotDeclaredException{}
 	
 }

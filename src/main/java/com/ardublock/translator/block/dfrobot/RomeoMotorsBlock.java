@@ -6,10 +6,17 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class RomeoMotorsBlock extends TranslatorBlock
 {
 
-	public static final String ROMEO_MOTOR_DEFINITION = 
+    /**
+     *
+     */
+    public static final String ROMEO_MOTOR_DEFINITION = 
 			"void setRomeoMotor(int motorId, int speed)\n" + 
 			"{\n" + 
 			"  int speedPin, directionPin;\n" + 
@@ -48,7 +55,11 @@ public class RomeoMotorsBlock extends TranslatorBlock
 			"  }\n" + 
 			"}";
 	
-	public static void setupRomeoMotorPin(Translator translator)
+    /**
+     *
+     * @param translator
+     */
+    public static void setupRomeoMotorPin(Translator translator)
 	{
 		translator.addOutputPin("4");
 		translator.addOutputPin("5");
@@ -63,12 +74,26 @@ public class RomeoMotorsBlock extends TranslatorBlock
 		translator.addDefinitionCommand(ROMEO_MOTOR_DEFINITION);
 	}
 	
-	public RomeoMotorsBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public RomeoMotorsBlock(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
 	{
 		super(blockId, translator, codePrefix, codeSuffix, label);
 	}
 	
-	@Override
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
 	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
 	{
 		setupRomeoMotorPin(translator);

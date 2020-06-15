@@ -33,6 +33,10 @@ public class SocketRule implements LinkRule {
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isMandatory() {
         return false;
     }

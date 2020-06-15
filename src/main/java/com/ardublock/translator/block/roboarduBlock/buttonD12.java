@@ -10,14 +10,25 @@ import com.ardublock.translator.block.TranslatorBlock;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
+/**
+ *
+ * @author User
+ */
 public class buttonD12 extends TranslatorBlock
 {
 
+    /**
+     *
+     */
     public static final String LIFT_FUNC_DEFINE = "void Lift_pin(int pinNumber, boolean status)\n"
             + "{\n"
             + "  pinMode(pinNumber, OUTPUT);\n"
             + "  digitalWrite(pinNumber, status);\n"
             + "}";
+
+    /**
+     *
+     */
     public static final String BUTTON_FUNC_DEFINE =
             "boolean GetButton(int pin)\n" +
                     "{\n" +
@@ -30,11 +41,25 @@ public class buttonD12 extends TranslatorBlock
                     "  return 0;\n" +
                     "}";
 
+    /**
+     *
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
     public buttonD12(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label)
     {
         super(blockId, translator, codePrefix, codeSuffix, label);
     }
 
+    /**
+     *
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException
     {

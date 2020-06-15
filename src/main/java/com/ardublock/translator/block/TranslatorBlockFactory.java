@@ -8,13 +8,20 @@ import java.util.Map;
 import com.ardublock.translator.Translator;
 import com.ardublock.util.PropertiesReader;
 
+/**
+ *
+ * @author User
+ */
 public class TranslatorBlockFactory
 {
 	private static final String BLOCK_MAPPING = "com/ardublock/block/block-mapping.properties";
 	
 	private Map<String, String> shortClassName;
 	
-	public TranslatorBlockFactory()
+    /**
+     *
+     */
+    public TranslatorBlockFactory()
 	{
 		shortClassName = new HashMap<String, String>();
 		shortClassName.put("analogInput", "com.ardublock.translator.block.AnalogInputBlock");
@@ -31,8 +38,17 @@ public class TranslatorBlockFactory
 		shortClassName.put("noTone", "com.ardublock.translator.block.NoToneBlock");
 	}
 	
-	
-	public TranslatorBlock buildTranslatorBlock(Translator translator, Long blockId, String blockName, String codePrefix, String codeSuffix, String label)
+    /**
+     *
+     * @param translator
+     * @param blockId
+     * @param blockName
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     * @return
+     */
+    public TranslatorBlock buildTranslatorBlock(Translator translator, Long blockId, String blockName, String codePrefix, String codeSuffix, String label)
 	{
 
 		String className = PropertiesReader.getValue(blockName, BLOCK_MAPPING);

@@ -83,6 +83,11 @@ public class FocusTraversalManager implements MouseListener, KeyListener, Worksp
     /////////////////
     // Constructor //
     /////////////////
+
+    /**
+     *
+     * @param workspace
+     */
     public FocusTraversalManager(Workspace workspace) {
         this.workspace = workspace;
     }
@@ -214,6 +219,10 @@ public class FocusTraversalManager implements MouseListener, KeyListener, Worksp
         }
     }
 
+    /**
+     *
+     * @param blockID
+     */
     public void setFocus(Long blockID) {
         if (blockID == null || blockID == Block.NULL || blockID == -1 || workspace.getEnv().getBlock(blockID) == null) {
             throw new RuntimeException("Invariant Violated:"

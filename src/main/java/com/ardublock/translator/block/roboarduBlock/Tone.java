@@ -8,31 +8,55 @@ package com.ardublock.translator.block.roboarduBlock;
 
 import com.ardublock.translator.Translator;
 import com.ardublock.translator.block.TranslatorBlock;
+import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
-public class Tone extends TranslatorBlock
-{
-	public Tone(Long blockId, Translator translator, String codePrefix,	String codeSuffix, String label)
-	{
-		super(blockId, translator, codePrefix, codeSuffix, label);
-	}
-        
-        public static final String TONE_FUNC = "void Tone(int port, int frequency)\n" +
-            "{\n" +
-            "  if(frequency > 20000) frequency = 20000;\n" +
-            "  if(frequency < 100) frequency = 100;\n" +
-            "  tone(port, frequency);\n" +
-            "}";
+import java.util.ResourceBundle;
 
-	@Override
-	public String toCode() throws SocketNullException, SubroutineNotDeclaredException
-	{
-		TranslatorBlock pinBlock = this.getRequiredTranslatorBlockAtSocket(0);
-		TranslatorBlock freqBlock = this.getRequiredTranslatorBlockAtSocket(1);
-                translator.addDefinitionCommand(TONE_FUNC);
-		
-		String ret = "Tone(" + pinBlock.toCode() + ", " + freqBlock.toCode() + ");\n";
-		return ret;
-	}
+/**
+ * @author User
+ */
+public class Tone extends TranslatorBlock {
+    private static ResourceBundle uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
+
+    /**
+     * @param blockId
+     * @param translator
+     * @param codePrefix
+     * @param codeSuffix
+     * @param label
+     */
+    public Tone(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
+        super(blockId, translator, codePrefix, codeSuffix, label);
+    }
+
+    /**
+     *
+     */
+
+    /**
+     * @return
+     * @throws SocketNullException
+     * @throws SubroutineNotDeclaredException
+     */
+    @Override
+    public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
+        TranslatorBlock pinBlock = this.getRequiredTranslatorBlockAtSocket(0);
+        if (!("A0 A1 A2 A3 8 9 10 11 12").contains(pinBlock.toCode().trim())) {
+            throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.Digital_pin_slot"));
+        }
+        TranslatorBlock freqBlock = this.getRequiredTranslatorBlockAtSocket(1);
+        //TODO может засунуть строку ошибки в базу данных?
+        int leftLimit = 100;
+        int rightLimit = 4000;
+        if ((Integer.parseInt(freqBlock.toCode()) < leftLimit) || (Integer.parseInt(freqBlock.toCode()) > rightLimit)) {
+            throw new BlockException(freqBlock.getBlockID(), "[Ошибка в значении] Частота может быть только от "
+                    + leftLimit + " до " + rightLimit);
+        }
+        translator.LoadTranslators(this.getClass().getSimpleName());
+
+        String ret = "PiezoON(" + pinBlock.toCode() + ", " + freqBlock.toCode() + ");\n";
+        return ret;
+    }
 }

@@ -73,6 +73,10 @@ public class InfixRule implements LinkRule, WorkspaceListener {
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isMandatory() {
         return false;
     }
