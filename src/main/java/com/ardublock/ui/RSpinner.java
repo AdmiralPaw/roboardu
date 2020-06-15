@@ -10,14 +10,15 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 /**
- *
- * @author User
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс, работающий с однострочным полем ввода, позволяющим пользователю выбрать число или значение
+ * объекта из упорядоченной последовательности
  */
 public class RSpinner extends JSpinner {
 
     /**
-     *
-     * @param model
+     * Метод, работающий с выпадающим списком (однострочным полем ввода), а именно с его внешним видом
+     * @param model - Несёт параметры модели для выпадающего списка
      */
     public RSpinner(SpinnerNumberModel model)
     {
@@ -28,7 +29,10 @@ public class RSpinner extends JSpinner {
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
+
+                //Поле минимума значения (минимального значения)
                 int min = e.getComponent().getHeight();
+
                 getComponent(0).setPreferredSize(new Dimension(min, min/2));
                 getComponent(1).setPreferredSize(new Dimension(min, min/2));
                 getComponent(2).setPreferredSize(new Dimension(e.getComponent().getWidth() - min, e.getComponent().getHeight()/2));
@@ -38,8 +42,8 @@ public class RSpinner extends JSpinner {
     }
 
     /**
-     *
-     * @return
+     * Метод для получения значения
+     * @return Integer.parseInt(getValue().toString())
      */
     public int getIntValue()
     {
@@ -47,15 +51,26 @@ public class RSpinner extends JSpinner {
     }
 }
 
+/**
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс, работающий конкретно с пользовательским интефрейсом для выпадающего списка
+ */
 class RSpinnerUI extends BasicSpinnerUI
 {
+    //Поле с экземпляром выпадающего списка
     public static JSpinner s;
+
+    //Поле с компонентом пользовательского интерфейса для выпадающего списка
     public static ComponentUI createUI(JComponent c)
     {
         return new RSpinnerUI();
 
     }
 
+    /**
+     * Метод, создающий новую кнопку прослушивателя
+     * @return JButton b
+     */
     public Component createNextButton()
     {
         JButton b = new RSpinnerButton(SwingConstants.NORTH);
@@ -64,6 +79,10 @@ class RSpinnerUI extends BasicSpinnerUI
         return b;
     }
 
+    /**
+     * Метод, создающий предыдущую кнопку прослушивателя
+     * @return JButton b
+     */
     public Component createPreviousButton()
     {
         JButton b = new RSpinnerButton(SwingConstants.SOUTH);
@@ -72,14 +91,27 @@ class RSpinnerUI extends BasicSpinnerUI
         return b;
     }
 
+    /**
+     * Метод, создающий редактор выпадающих списков
+     * @return new SpinEditor(super.spinner)
+     */
     public JComponent createEditor()
     {
         return  new SpinEditor(super.spinner);
     }
 
+    /**
+     * @author AdmiralPaw, Ritevi, Aizek
+     * Класс, работающий с редактором выпадающих списков (внешний вид, значения)
+     */
     public class SpinEditor extends JPanel implements ChangeListener
     {
         JTextField editor;
+
+        /**
+         * Метод, описывающий редактируемые свойства выпадающего списка (цвет, фон, шрифт и т.д.)
+         * @param spin - экземпляр выпадающего списка
+         */
         public SpinEditor(JSpinner spin)
         {
             super();
@@ -97,6 +129,10 @@ class RSpinnerUI extends BasicSpinnerUI
             spin.addChangeListener(this);
         }
 
+        /**
+         * Метод изменения состояния
+         * @param e - Уведомление об изменении состояния
+         */
         public void stateChanged(ChangeEvent e)
         {
             JSpinner spinner = (JSpinner)(e.getSource());
@@ -105,15 +141,29 @@ class RSpinnerUI extends BasicSpinnerUI
         }
     }
 
+    /**
+     * @author AdmiralPaw, Ritevi, Aizek
+     * Класс, работающий с кнопкой выпадающего списка (цвет, размеры, направление)
+     */
     public class RSpinnerButton extends JButton
     {
+        //Поле направления
         private int diraction;
+
+        /**
+         * Метод, задающий направление кнопки
+         * @param dir - направление
+         */
         public RSpinnerButton(int dir)
         {
             super();
             diraction = dir;
         }
 
+        /**
+         * Метод, задающий внешний вид кнопки
+         * @param g - Параметр графического контекста
+         */
         public void paint(Graphics g)
         {
             Graphics2D g2 = (Graphics2D)g;
@@ -124,17 +174,29 @@ class RSpinnerUI extends BasicSpinnerUI
             g2.setColor(new Color(198,198,198));
             g2.drawLine(0,0,0,getHeight()-1);
 
+            //Поле центра по оси Ох
             int xcenter = getWidth() / 2;
+            //Поле значения координаты по оси Оу
             int ypos = diraction == SwingConstants.NORTH ? (int)(1f * getHeight() / 5*4) : (int) (1f*getHeight() / 5);
             g2.setColor(new Color(0,152,157));
             fillTriangle(g2, xcenter,  ypos);
         }
 
+        /**
+         * Метод для заливки треугольника
+         * @param g - Параметр графического контекста
+         * @param xpos - Параметр значения по оси Ох
+         * @param ypos - Параметр значения по оси Оу
+         */
         public void fillTriangle(Graphics2D g, int xpos, int ypos)
         {
+            //Поле смещения по оси Ох
             int xoffset = 5;
+            //Поле смещения по оси Оу
             int yoffset = 5;
+            //Поле массива значений с оси Ох (3 значения для треугольника)
             int[] x = new int[3];
+            //Поле массива значений с оси Оу (3 значения для треугольника)
             int[] y = new int[3];
 
             x[0] =  xpos - xoffset ;

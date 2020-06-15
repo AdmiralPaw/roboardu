@@ -5,16 +5,17 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 /**
- *
- * @author User
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс, работающий с конфигурацией кнопок
  */
 public class RButton extends JButton {
 
+    //Поле шрифта
     private Font currentFont;
 
     /**
-     *
-     * @param text
+     * Метод, настраивающий параметры внешнего вида кнопки
+     * @param text - текст кнопки
      */
     public RButton(String text)
     {
@@ -26,6 +27,10 @@ public class RButton extends JButton {
         currentFont = new Font(Font.DIALOG_INPUT, Font.PLAIN, 15);
     }
 
+    /**
+     * Метод, работающий с настройками графики (цвет, размеры и т.д.)
+     * @param g - параметр графического контекста
+     */
     public void paint(Graphics g)
     {
         Graphics2D g2 = (Graphics2D)g;
@@ -43,6 +48,10 @@ public class RButton extends JButton {
         }
     }
 
+    /**
+     * Метоод, устанавливающий шрифт
+     * @param newFont - шрифт
+     */
     public void setFont(Font newFont)
     {
         currentFont = newFont;

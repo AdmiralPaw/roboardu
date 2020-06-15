@@ -18,9 +18,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * A genus describes the properties that define a block.  For example, fd is a block genus
- * that describes all forward block instances in Starlogo.  The BlockGenus class stores all the immutable
- * properties and socket information of a genus.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Род описывает свойства, определяющие блок. Например, FD-это род блоков,
+ * который описывает все прямые экземпляры блоков в Starlogo.
+ * Класс BlockGenus хранит все неизменяемые свойства и информацию о сокете рода.
  */
 public class BlockGenus {
 

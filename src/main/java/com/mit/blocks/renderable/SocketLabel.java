@@ -7,6 +7,9 @@ import com.mit.blocks.codeblocks.BlockConnector;
 import com.mit.blocks.codeblocks.BlockConnectorShape;
 import com.mit.blocks.workspace.Workspace;
 
+/**
+ * @author AdmiralPaw, Ritevi, Aizek
+ */
 class SocketLabel extends BlockLabel {
 
     private BlockConnector socket;

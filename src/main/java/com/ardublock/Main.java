@@ -15,16 +15,20 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
- *
- * @author User
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Главный класс проекта
  */
 public class Main {
 
     private OpenblocksFrame openblocksFrame;
 
     /**
-     *
-     * @param args
+     * Главный метод класса
+     * @param args - Аргументы получаемые главным классом
+     * @exception ClassNotFoundException - Не был найден необходимый класс
+     * @exception InstantiationException - Экземпляр невозможно создать (не был создан)
+     * @exception IllegalAccessException - Возможность несанкционированного доступа
+     * @exception UnsupportedLookAndFeelException - Неподдерживаемый внешний вид и Руководство для системы пользователя
      */
     public static void main(String args[]) {
         try {
@@ -44,12 +48,15 @@ public class Main {
     }
 
     /**
-     *
+     * Метод, вызывающий метод startOpenblocksFrame
      */
     public void startArdublock() {
         startOpenblocksFrame();
     }
 
+    /**
+     * Метод создающий оконную процедуру приложения
+     */
     private void startOpenblocksFrame() {
         openblocksFrame = new OpenblocksFrame();
 
@@ -57,6 +64,10 @@ public class Main {
         // Note to self: This only affects behaviour when we're run directly,
         // not when we're an Arduino Tool - See ArduBlockTool.java for that.
         openblocksFrame.addWindowListener(new WindowAdapter() {
+            /**
+             * Метод закрывающий файл ArduBlock
+             * @param e - Оконное событие
+             */
             public void windowClosing(WindowEvent e) {
                 openblocksFrame.doCloseArduBlockFile();
             }
@@ -67,7 +78,6 @@ public class Main {
         openblocksFrame.setMinimumSize(new Dimension(1140, 460));
         openblocksFrame.setVisible(true);
         openblocksFrame.repaint();
-        
 //        Settings settings = openblocksFrame.settings;
 //        if (settings.isFirstLaunch()) {
 //            TutorialPane pan = new TutorialPane(openblocksFrame);
@@ -79,12 +89,15 @@ public class Main {
     }
 
     /**
-     *
+     * Метод, закрывающий оконную процедуру
      */
     public void shutdown() {
         openblocksFrame.dispatchEvent(new WindowEvent(openblocksFrame, WindowEvent.WINDOW_CLOSING));
     }
 
+    /**
+     * Метод, запускающий консольную процедуру
+     */
     @SuppressWarnings("unused")
     private void startConsoleFrame() {
         ConsoleFrame consoleFrame = new ConsoleFrame();

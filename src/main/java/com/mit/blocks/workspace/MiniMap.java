@@ -10,27 +10,25 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * A MiniMap is a miniturized representation of the
- * current Workspace's block canvas. Each MiniMap may
- * only be associated with only one block canvas.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Миникарта - это миниатюризированное представление текущего холста блока рабочего пространства.
+ * Каждая миникарта может быть связана только с одним блоком холста.
+ * *
+ * Миникарта должна отображать связанный с ней набор RenderableBlocks
+ * и Comments в их текущем положении или отображать их движение в режиме реального времени.
+ * *
+ * Миникарта должна преобразовать соотношение ширины и высоты холста блока таким образом,
+ * чтобы он поместился в пределах области миникарты. Это может исказить блоки,
+ * чтобы они казались тоньше/шире, чем их реальный размер.
+ * *
+ * Миникарта должна расширяться и сжиматься с некоторой задержкой, когда пользователь наводит
+ * курсор мыши или перемещает его из фокуса.
  *
- * A MiniMap should display its associated set of
- * RenderableBlocks and Comments at their current position,
- * or render their motion in real time.
- *
- * The Minimap must tranform the block canvas's width:height ratio
- * such that it would fit within the MiniMap's area.
- * This may warp the blocks to appear thinner/wider
- * than their real size.
- *
- * The MiniMap should expand and shrink with some delay
- * as the user mouses over or moves the mouse out of focus.
- *
- * blockCanvas : BlockCanvas 		//the block canvas that this MiniMap renders
- * mapwidth : Integer				//this MiniMap's maximum width
- * mapheight: Integer				//this MiniMap's maximum height
- * ratio : Double					//the aspect ratio that this should maintain
- * 									//		when rendering this.blocks and this.comments
+ * blockCanvas : BlockCanvas 		//Блочный холст, который рендерит эта миникарта
+ * mapwidth : Integer				//Максимальная ширина этой миникарты
+ * mapheight: Integer				//Минимальная ширина этой миникарты
+ * ratio : Double					//соотношение сторон, которое должно поддерживаться при
+ *                                  //рендеринге this.blocks и this.comments
  */
 public class MiniMap extends JPanel implements MouseListener, MouseMotionListener, SearchableContainer, PageChangeListener, WorkspaceWidget {
     /*

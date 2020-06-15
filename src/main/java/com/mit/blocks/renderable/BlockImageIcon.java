@@ -6,12 +6,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- * BlockImageIcon holds information regarding the ImageIcons drawn within a RenderableBlock.  This information 
- * includes the following: 
- * - ImageIcon instance to draw
- * - ImageLocation that represents the exact location of the ImageIcon on the RenderableBlock.  (There is only one 
- *   BlockImageIcion per ImageLocation.  This is reinforced within the BlockImageMap in the BlockGenus instance.)
- *   
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс BlockImageIcon содержит информацию о значках изображений, нарисованных
+ * в пределах RenderableBlock (Визуализируемого блока. Эта информация включает
+ * в себя следующее:
+ * - Экземпляр ImageIcon для рисования
+ * - Расположение изображения, представляющее точное расположение ImageIcon на блоке
+ * визуализации. (На каждое место изображения приходится только один значок
+ * блочного изображения. Это усиливается внутри карты изображений блоков в
+ * экземпляре рода блоков.)
  */
 public class BlockImageIcon extends JLabel {
 

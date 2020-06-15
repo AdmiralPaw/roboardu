@@ -4,8 +4,8 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  *
- * @author User
  */
 public class RMenuButton extends CButton {
 

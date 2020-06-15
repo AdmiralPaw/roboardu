@@ -19,55 +19,36 @@ import java.util.List;
 import java.util.*;
 
 /**
- * A Page serves as both an abstract container of blocks
- * and also a graphical panel that renders its collection
- * of blocks.  Abstractly, a page has seven abstract fields:
- * a color, a name, a font, a drawer, width, a height,
- * and a set of blocks.  How it renders these abstract fields
- * depends on the state of the page, including: zoom level,
- * and minimumPixelWidth.
- * <p>
- * A Page exists as a WorkspaceWidget, a SearchableContainer,
- * ISupportMemento, an RBParent, a Zoomable object, and a JPanel.
- * As a WorkspaceWidget, it can add, remove, blocks and manage
- * block manipulations within itself.  As a searchableContainer,
- * it can notify users that certain blocks have been queried.
- * As an ISupportMomento, it can undo the current values of
- * abstract fields.  As an RBParent, it can highlight blocks.
- * <p>
- * Since a Page is both a Zoomable object and JPanel, Pages
- * separate its abstract model and view by allowing clients
- * to mutate its abstract fields directly.  But clients must
- * remember to reform the pages in order to synchronize the
- * data between the model and view.
- * <p>
- * A page's abstract color is rendered the same no matter
- * what state the page is in.  A page's abstract name is
- * rendered thrice centered at every fourth of the page.
- * The name is rendered with a size depending on the zoom
- * level of that page (it tries to maintain a constant aspect
- * ratio).  The drawer name is not rendered.  The width and
- * height of the page is rendered differently depending on
- * the zoom level and minimumPixelWidth.  Using the zoom level,
- * it tries to maintain a constant aspect ratio but the
- * absolute sizes varies with a bigger/smaller zoom level.
- * the minimumPixelWidth limits the width from going below
- * a certain size, no matter what the system tries to set
- * the abstract width to be.  Finally the set of blocks are
- * rendered directly onto the page with the same transformation
- * as the ones imposed on the width and height of the page.
- * <p>
- * As an implementation detail, a page tries to maintain a
- * separation between its abstract states and its view.
- * Clients of Pages should use reform*() methods to validate
- * information between the abstract states and view.  Clients
- * of Pages are warned against accessing Page.getJComponent(),
- * as the method provides clients a way to unintentionally mutate
- * an implementation specific detail of Pages.
- * <p>
- * A Page implements ExplorerListener i.e. it listens for possible changes in
- * an explorer that affects the display of the page. When an explorer event
- * happens the page changes its display accordingly
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс Page служит как абстрактным контейнером блоков, так и графической панелью,
+ * отображающей свою коллекцию блоков. Абстрактно, страница имеет семь абстрактных полей:
+ * цвет, имя, шрифт, ящик, ширина, высота и набор блоков. То, как он отображает эти абстрактные поля,
+ * зависит от состояния страницы, включая уровень масштабирования и минимальную ширину пикселя.
+ * Страница существует, как WorkspaceWidget, а SearchableContainer, ISupportMemento, в RBParent,
+ * масштабируемого объекта, и для jpanel. Как WorkspaceWidget, он может добавлять, удалять, блокировать
+ * и управлять манипуляциями с блоками внутри себя. Как searchableContainer, он может уведомлять
+ * пользователей о том, что определенные блоки были запрошены. Как ISupportMomento, он может отменить
+ * текущие значения абстрактных полей. Как RBParent, он может выделять блоки. Поскольку страница
+ * является одновременно масштабируемым объектом и JPanel, страницы разделяют свою абстрактную модель
+ * и представление, позволяя клиентам непосредственно изменять свои абстрактные поля. Но клиенты должны
+ * помнить о необходимости изменения страниц, чтобы синхронизировать данные между моделью и представлением.
+ * Абстрактный цвет страницы отображается одинаково независимо от того, в каком состоянии находится
+ * страница. Абстрактное имя страницы отображается трижды с центром в каждой четвертой части страницы.
+ * Имя отображается с размером, зависящим от уровня масштабирования этой страницы (он пытается
+ * поддерживать постоянное соотношение сторон). Имя ящика не отображается. Ширина и высота
+ * страницы отображаются по-разному в зависимости от уровня масштабирования и minimumPixelWidth.
+ * Используя уровень масштабирования, он пытается поддерживать постоянное соотношение сторон, но абсолютные
+ * размеры меняются с увеличением / уменьшением уровня масштабирования. MinimumPixelWidth ограничивает ширину
+ * от перехода ниже определенного размера, независимо от того, что система пытается установить
+ * абстрактную ширину. Наконец, набор блоков визуализируется непосредственно на странице с тем же
+ * преобразованием, что и те, которые накладываются на ширину и высоту страницы.
+ * В качестве детали реализации страница пытается поддерживать разделение между ее абстрактными состояниями
+ * и ее представлением. Клиенты страниц должны использовать методы reform () для проверки информации
+ * между абстрактными состояниями и представлением. Клиенты страниц предупреждаются о недопустимости
+ * доступа к странице.getJComponent (), поскольку этот метод предоставляет клиентам способ непреднамеренно
+ * изменять конкретную деталь реализации страниц. Страница реализует ExplorerListener, то есть она
+ * прослушивает возможные изменения в проводнике, которые влияют на отображение страницы. Когда
+ * проводник eventhappens страница изменяет свое отображение соответствующим образом.
  */
 public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemento {
 

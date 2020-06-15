@@ -13,12 +13,11 @@ import javax.swing.JLabel;
 import com.mit.blocks.codeblockutil.CSlider;
 
 /**
- * A ZoomSlider manages the zooming of the block canvas
- * and all its children.
- * 
- * It interfaces with the user through a JSlider but upon
- * observing a change, it invokes the block canvas through
- * the Workspace to reset the zoom factor.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс ZoomSlider управляет масштабированием холста блока и всех его дочерних элементов.
+ *
+ * Он взаимодействует с пользователем через JSlider, но, заметив изменение,
+ * он вызывает холст блока через рабочую область, чтобы сбросить коэффициент масштабирования.
  */
 public class ZoomSlider extends JComponent implements PropertyChangeListener {
 

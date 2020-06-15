@@ -11,16 +11,16 @@ import com.mit.blocks.codeblocks.BlockLinkChecker;
 import com.mit.blocks.renderable.RenderableBlock;
 
 /**
- *
- * For a given {@link Workspace}, a {@link WorkspaceEnvironment} stores a reference to all instances of :
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Для данной {@link Workspace},
+ * {@link WorkspaceEnvironment} хранит ссылку на все экземпляры:
  * {@link Block}
  * {@link RenderableBlock}
  * {@link BlockStub}
  * {@link BlockGenus}
- *
- * This enables to separate the components of each workspace, and so to use several at the same time.
- * @author laurentschall
- *
+ * Это позволяет отделить компоненты каждой рабочей области и таким образом
+ * использовать несколько одновременно.
+ * TODO: Cannot resolve symbol 'BlockStub' (No longer valid)
  */
 
 public class WorkspaceEnvironment {

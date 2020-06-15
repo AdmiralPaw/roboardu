@@ -27,4 +27,6 @@ public interface OpenblocksFrameListener {
      * @param source
      */
     void didVerify(String source);
+
+    void getInfoText();
 }

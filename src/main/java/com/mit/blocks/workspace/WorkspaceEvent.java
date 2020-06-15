@@ -4,8 +4,8 @@ import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.codeblocks.BlockLink;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  *
- * @author User
  */
 public class WorkspaceEvent {
 

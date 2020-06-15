@@ -23,14 +23,13 @@ import com.mit.blocks.workspace.WorkspaceEnvironment;
 //import com.ardublock.translator.Translator;
 
 /**
- * This class manages all procedure to output type mappings. This class
- * makes best-effort attempts to synchronize/update output block sockets.
- * This class also tries to update procedure callers when such things happen.
- * 
- * <p>Note that even with this class, we still need to implement separate 
- * procedure output checking in the compiler, since we make no guarantees 
- * about code branches or even output types (since we don't modify blocks
- * that are already connected to something). 
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Этот класс управляет всеми процедурами вывода отображений типов. Этот класс делает
+ * все возможное для синхронизации / обновления выходных блочных сокетов.
+ * Этот класс также пытается обновить вызывающие процедуры, когда такие вещи происходят.
+ * Обратите внимание, что даже с этим классом нам все равно нужно реализовать отдельную процедуру
+ * проверки вывода в компиляторе, так как мы не даем никаких гарантий относительно ветвей кода
+ * или даже типов вывода (так как мы не изменяем блоки, которые уже подключены к чему-то).
  */
 public class ProcedureOutputManager
 {   

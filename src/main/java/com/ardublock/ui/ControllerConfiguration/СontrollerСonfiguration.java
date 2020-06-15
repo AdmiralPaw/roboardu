@@ -11,107 +11,78 @@ import javax.swing.JSplitPane;
 import org.jfree.ui.tabbedui.VerticalLayout;
 
 /**
- *
- * @author User
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс, для определения настроек контроллера
  */
 public class СontrollerСonfiguration extends JPanel {
 
     //верхняя панель контроллера
 
-    /**
-     *
-     */
+    //Поле изображения контроллера
     public ControllerImage controllerImage;
 
     //лист всевозможных компонентов на подключение
     private List<Device> components;
+
     //нижняя панель
 
-    /**
-     *
-     */
+    //Поле панели компонентов
     public JPanel componentsPane;
+
+    //Поле информационной панели модулей
     private ModuleInfoPane moduleInfoPane;
+
+    //Поле сообщений пользовательского интерфейса
     private ResourceBundle uiMessageBundle;
 
-    /**
-     *
-     */
+    //Структура контактов (пинов)
     public enum Pin {
 
-        /**
-         *
-         */
+        //
         dir04pwm05,
 
-        /**
-         *
-         */
+        //
         dir07pwm06,
 
-        /**
-         *
-         */
+        //
         d2,
 
-        /**
-         *
-         */
+        //
         d3,
 
-        /**
-         *
-         */
+        // src\main\resources\com\ardublock\Images\lines\d8.png
         d8,
 
-        /**
-         *
-         */
+        // src\main\resources\com\ardublock\Images\lines\d10.png
         d10,
 
-        /**
-         *
-         */
+        // src\main\resources\com\ardublock\Images\lines\d9.png
         d9,
 
-        /**
-         *
-         */
+        // src\main\resources\com\ardublock\Images\lines\d11.png
         d11,
 
-        /**
-         *
-         */
+        // src\main\resources\com\ardublock\Images\lines\a3.png
         a3,
 
-        /**
-         *
-         */
+        // src\main\resources\com\ardublock\Images\lines\a2.png
         a2,
 
-        /**
-         *
-         */
+        // src\main\resources\com\ardublock\Images\lines\a1.png
         a1,
 
-        /**
-         *
-         */
+        // src\main\resources\com\ardublock\Images\lines\a0.png
         a0,
 
-        /**
-         *
-         */
+        // src\main\resources\com\ardublock\Images\lines\i2c.png
         i2c
     };
 
-    /**
-     *
-     */
+    //Поле контакта контроллера
     public Pin controllerPin;
 
     /**
-     *
+     * Метод, назначающий настройки контроллера (внешний вид, взаимодействие, расположение, тип платы)
      */
     public СontrollerСonfiguration() {
         super();
@@ -146,11 +117,11 @@ public class СontrollerСonfiguration extends JPanel {
 //    }
 
     /**
-     *
-     * @param pin
-     * @param name
-     * @param pathToTranslate
-     * @param info
+     * Метод добавляющий новый компонент
+     * @param pin - Контакт
+     * @param name - Имя
+     * @param pathToTranslate - Путь к переводу
+     * @param info - Информация
      */
     public void addComponent(String pin, String name, String pathToTranslate, String info) {
         this.components.add(new Device(
@@ -161,8 +132,8 @@ public class СontrollerСonfiguration extends JPanel {
     }
 
     /**
-     *
-     * @param buttonPin
+     * Метод, меняющий панель компонентов коннектора
+     * @param buttonPin - Кнопка контакта
      */
     public void changeConnectorComponentsPane(String buttonPin) {
         componentsPane.removeAll();
@@ -183,8 +154,8 @@ public class СontrollerСonfiguration extends JPanel {
     }
 
     /**
-     *
-     * @param moduleName
+     * Метод, меняющий панель компонентов коннектора
+     * @param moduleName - Имя модуля
      */
     public void changeModuleComponentsPane(String moduleName) {
         componentsPane.removeAll();
@@ -207,7 +178,7 @@ public class СontrollerСonfiguration extends JPanel {
     }
 
     /**
-     *
+     * Метод, сбрасывающий панель компонентов
      */
     public void resetPane() {
         componentsPane.removeAll();
@@ -227,11 +198,25 @@ public class СontrollerСonfiguration extends JPanel {
      */
     private static class Device {
 
+        //Поле контакта
         final String pin;
+
+        //Поле имени устройства
         final public String deviceName;
+
+        //Поле переведённого имени устройства
         final String deviceNameTranslated;
+
+        //Поле информации об устройстве
         final String deviceInfo;
 
+        /**
+         * Метод, для конфигурации информации об устройстве
+         * @param pin - Контакт
+         * @param deviceName - Имя устройства
+         * @param deviceNameTranslated - Переведённое имя устройства
+         * @param deviceInfo - Информация об устройстве
+         */
         public Device(String pin, String deviceName, String deviceNameTranslated, String deviceInfo) {
             this.pin = pin;
             this.deviceName = deviceName;

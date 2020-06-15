@@ -34,10 +34,11 @@ import com.mit.blocks.renderable.TextualFactoryBlock;
 import com.mit.blocks.workspace.Workspace;
 
 /**
- * AutCompletePanel is a Panel that displays an editable text field
- * for the user to produce a desired pattern (regex).  It also
- * provides a JList for users to see some pre-defined choices.
- * User may choose to act/react to AutoCompletePanel intuitively.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс AutoCompletePanel - это панель, которая отображает редактируемое текстовое поле
+ * для пользователя, чтобы создать нужный шаблон (регулярное выражение). Он также предоставляет
+ * список для пользователей, чтобы увидеть некоторые заранее определенные варианты выбора.
+ * Пользователь может выбрать, чтобы действовать/реагировать на панель автозаполнения интуитивно.
  */
 public class AutoCompletePanel extends JPanel implements MouseListener, MouseMotionListener {
 

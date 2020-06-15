@@ -19,10 +19,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Block holds the mutable prop (data) of a particular block.  These mutable
- * prop include socket, before, after and blocks, "bad"-ness. In addition,
- * Block maintains information to describe a particular block's relationship
- * with other blocks.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс Block содержит изменяемую опору (данные) конкретного блока.
+ * Кроме того, блок хранит информацию, описывающую отношения конкретного блока с другими блоками.
  *
  */
 public class Block implements ISupportMemento {

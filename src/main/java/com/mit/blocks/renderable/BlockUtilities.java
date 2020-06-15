@@ -21,8 +21,7 @@ import com.mit.blocks.workspace.WorkspaceEvent;
 import com.mit.blocks.workspace.WorkspaceWidget;
 
 /**
- *
- * @author User
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class BlockUtilities {
 

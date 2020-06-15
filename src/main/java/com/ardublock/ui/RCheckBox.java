@@ -7,19 +7,16 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- *
- * @author User
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс, работающий с флагами состояния
  */
 public class RCheckBox extends JPanel
 {
-
-    /**
-     *
-     */
+    //Поле флага
     public JCheckBox box;
 
     /**
-     *
+     * Метод, определяющий флаг состояния (видимость, текст, размеры и т.д.)
      */
     public RCheckBox ()
     {
@@ -41,8 +38,8 @@ public class RCheckBox extends JPanel
     }
 
     /**
-     *
-     * @param e
+     * Метод, показывающий, были ли выбран флаг
+     * @param e - логический параметр, показывающий был ли выбран флаг
      */
     public void setSelected(boolean e)
     {
@@ -50,8 +47,8 @@ public class RCheckBox extends JPanel
     }
 
     /**
-     *
-     * @return
+     * Метод, указывающий, что флаг был выбран
+     * @return box.isSelected()
      */
     public boolean isSelected()
     {
@@ -59,8 +56,8 @@ public class RCheckBox extends JPanel
     }
 
     /**
-     *
-     * @param e
+     * Метод, добавляющий прослушиватель элементов
+     * @param e - Прослушиватель элементов
      */
     public void addItemListener(ItemListener e)
     {
@@ -68,7 +65,10 @@ public class RCheckBox extends JPanel
     }
 
 
-
+    /**
+     * Метод, работающий с настройками графики (цвет, размеры и т.д.)
+     * @param g - Параметр графического контекста
+     */
     public void paint(Graphics g)
     {
         Graphics2D g2 = (Graphics2D)g;

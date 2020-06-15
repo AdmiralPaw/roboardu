@@ -9,8 +9,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
- *
- * @author User
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс, содержащий информацию о возможных формах блоках, их построение и прочее
  */
 public class BlockShapeUtil {
 	

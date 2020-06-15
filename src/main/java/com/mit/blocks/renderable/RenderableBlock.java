@@ -22,11 +22,11 @@ import java.util.List;
 import java.util.*;
 
 /**
- * RenderableBlock is responsible for all graphical rendering of a code Block.
- * This class is also responsible for consuming all mouse and key events on
- * itself. Each RenderableBlock object is coupled with its associated Block
- * object, and uses information maintained in Block to render the graphical
- * block accordingly.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс RenderableBlock отвечает за весь графический рендеринг блока кода.
+ * Этот класс также отвечает за потребление всех событий мыши и ключа на себя.
+ * Каждый объект RenderableBlock связан со своим связанным объектом Block и использует информацию,
+ * сохраняемую в блоке, для соответствующего отображения графического блока.
  */
 public class RenderableBlock extends JComponent implements SearchableElement,
         MouseListener, MouseMotionListener, ISupportMemento, CommentSource, KeyListener {
@@ -155,7 +155,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      */
     private final NameLabel blockLabel;
     private final PageLabel pageLabel;
-    private final ConnectorTag plugTag;
+    public final ConnectorTag plugTag;
     private final ConnectorTag afterTag;
     private final ConnectorTag beforeTag;
     private List<ConnectorTag> socketTags = new ArrayList<ConnectorTag>();
@@ -644,7 +644,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 } else {
                     SocketLabel label = new SocketLabel(workspace, socket,
                             socket.getLabel(), BlockLabel.Type.PORT_LABEL,
-                            socket.isLabelEditable(), blockID);
+                            socket.isLabelEditable(), blockID);                   
                     String argumentToolTip = getBlock().getArgumentDescription(
                             i);
                     if (argumentToolTip != null) {
@@ -683,7 +683,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                     label.setZoomLevel(this.getZoom());
                 }
             }
-            newSocketTags.add(tag);
+            newSocketTags.add(tag); 
         }
         this.socketTags.clear();
         this.socketTags = newSocketTags;
@@ -2209,7 +2209,8 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     public static void stopDragging(RenderableBlock renderable,
             WorkspaceWidget widget) {
         if (!renderable.dragging) {
-            throw new RuntimeException("dropping without prior dragging?");
+            //TODO понять почему эта ошибка вызывается
+            //throw new RuntimeException("dropping without prior dragging?");
         }
         // notify children
         for (BlockConnector socket : BlockLinkChecker
@@ -2925,7 +2926,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      */
     public boolean dellAction = false;
 
-    private ConnectorTag getConnectorTag(BlockConnector socket) {
+    public ConnectorTag getConnectorTag(BlockConnector socket) {
 
         if (socket == null) {
             throw new RuntimeException("Socket may not be null");

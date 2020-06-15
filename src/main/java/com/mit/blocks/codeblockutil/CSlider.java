@@ -18,8 +18,8 @@ import java.awt.geom.GeneralPath;
 import javax.swing.JPanel;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  *
- * @author User
  */
 public class CSlider extends JPanel implements MouseListener, MouseMotionListener {
 

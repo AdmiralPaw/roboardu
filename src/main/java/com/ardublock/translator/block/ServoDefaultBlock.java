@@ -47,7 +47,7 @@ public class ServoDefaultBlock extends TranslatorBlock {
 
         tb = this.getRequiredTranslatorBlockAtSocket(1);
         String val = tb.toCode();
-        if (Integer.parseInt(val) >= 180 || Integer.parseInt(val) <= 0) {
+        if (Integer.parseInt(val) > 180 || Integer.parseInt(val) < 0) {
             throw new BlockException(tb.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.Argument_error"));
         };
         String ret = "ServoMove(" + servoName + "," + tb.toCode() + ");";

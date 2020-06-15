@@ -25,21 +25,28 @@ import java.util.Set;
 //>>>>>>> lerofaCtrlZ
 
 /**
- *
- * @author User
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс, который генерирует код прослушивателя кнопки
  */
 
 public class GenerateCodeButtonListener implements ActionListener {
 
+    //Поле родительской оконной процедуры
     private JFrame parentFrame;
+
+    //Поле контекста
     private Context context;
+
+    //Поле рабочего пространства
     private Workspace workspace;
+
+    //Поле сообщений пользовательского интерфейса
     private ResourceBundle uiMessageBundle;
 
     /**
-     *
-     * @param frame
-     * @param context
+     * Метод, генерирующий код прослушивателя кнопки
+     * @param frame - Оконная процедура
+     * @param context - Контекст
      */
     public GenerateCodeButtonListener(JFrame frame, Context context) {
         this.parentFrame = frame;
@@ -48,6 +55,10 @@ public class GenerateCodeButtonListener implements ActionListener {
         uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
     }
 
+    /**
+     * Метод, *
+     * @param blockId - Идентификатор блока
+     */
     private void afterException(Long blockId) {
         Iterable<RenderableBlock> blocks = workspace.getRenderableBlocks();
         for (RenderableBlock renderableBlock2 : blocks) {
@@ -60,6 +71,13 @@ public class GenerateCodeButtonListener implements ActionListener {
 
     }
 
+    /**
+     *
+     * @param e - Событие совершённого действия
+     * @exception SocketNullException e1
+     * @exception BlockException e2
+     * @exception SubroutineNotDeclaredException e3
+     */
     public void actionPerformed(ActionEvent e) {
         if (parentFrame instanceof OpenblocksFrame)
         {
@@ -172,7 +190,7 @@ public class GenerateCodeButtonListener implements ActionListener {
             translator.beforeGenerateHeader();
             code.insert(0, translator.genreateHeaderCommand());
         } catch (SocketNullException e1) {
-            e1.printStackTrace();
+            //e1.printStackTrace();
             success = false;
             Long blockId = e1.getBlockId();
             afterException(blockId);
@@ -181,14 +199,14 @@ public class GenerateCodeButtonListener implements ActionListener {
                                     "Error",
                                     uiMessageBundle.getString("ardublock.translator.exception.socketNull"));
         } catch (BlockException e2) {
-            e2.printStackTrace();
+            //e2.printStackTrace();
             success = false;
             Long blockId = e2.getBlockId();
             afterException(blockId);
             //JOptionPane.showMessageDialog(parentFrame, e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             workspace.getErrWindow().setErr("Error",e2.getMessage());
         } catch (SubroutineNotDeclaredException e3) {
-            e3.printStackTrace();
+            //e3.printStackTrace();
             success = false;
             Long blockId = e3.getBlockId();
             afterException(blockId);

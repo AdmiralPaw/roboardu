@@ -9,14 +9,11 @@ import javax.swing.BoundedRangeModel;
 import javax.swing.JLayeredPane;
 
 /**
- * The CScrollPane is a swing-compatible widget that
- * allows clients of this CScrollPane to control the
- * width of the thumb, the color of the thumb, and
- * and the color of the track.  Like all swing-compatible
- * scroll panes, the CScrollPane wraps a viewport and must
- * change the viewing space (also known as the visible rectangle)
- * of the scroll pane when users attempts to scroll
- * with the mouse, wheel, or key board.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * CScrollPane-это совместимый со Swing виджет, который позволяет клиентам этого CScrollPane управлять шириной большого
+ * пальца, цветом большого пальца и цветом дорожки. Как и все совместимые со Swing панели прокрутки, CScrollPane
+ * оборачивает видовой экран и должен изменять пространство просмотра (также известное как видимый прямоугольник)
+ * панели прокрутки, когда пользователи пытаются прокрутить его с помощью мыши, колесика или клавиатуры.
  */
 public abstract class CScrollPane extends JLayeredPane implements MouseWheelListener, KeyListener {
 

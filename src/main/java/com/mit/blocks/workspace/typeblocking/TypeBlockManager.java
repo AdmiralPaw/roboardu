@@ -23,10 +23,10 @@ import com.mit.blocks.workspace.WorkspaceEvent;
 import com.mit.blocks.workspace.WorkspaceWidget;
 
 /**
- * The TypeBlockManager primary serves to help users drop 
- * blocks manually into the bock canvas through the keyboard.  
- * To achieve this, the TypeBlockManager commands three 
- * distinct phases: Interfacing, Searching, Dropping.
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Класс TypeBlockManager служит для того, чтобы помочь пользователям вручную сбрасывать
+ * блоки на заднее полотно с помощью клавиатуры. Чтобы достичь этого, тип BlockManager командует
+ * тремя различными фазами: взаимойдествие, поиск, удаление.
  */
 public class TypeBlockManager {
     

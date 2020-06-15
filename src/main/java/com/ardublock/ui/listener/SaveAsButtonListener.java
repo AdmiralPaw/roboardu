@@ -7,16 +7,14 @@ import com.ardublock.core.Context;
 import com.ardublock.ui.OpenblocksFrame;
 
 /**
- *
- * @author User
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class SaveAsButtonListener implements ActionListener
 {
 	private OpenblocksFrame parentFrame;
 	
     /**
-     *
-     * @param frame
+     * @param frame - Оконная процедура
      */
     public SaveAsButtonListener(OpenblocksFrame frame)
 	{
@@ -24,7 +22,11 @@ public class SaveAsButtonListener implements ActionListener
 		
 		this.parentFrame = frame;
 	}
-	
+
+	/**
+	 * Метод, сохраняющий файл сгенерированного кода Arduino из блоков
+	 * @param e - Событие совершённого действия
+	 */
 	public void actionPerformed(ActionEvent e)
 	{
 		parentFrame.doSaveAsArduBlockFile();
