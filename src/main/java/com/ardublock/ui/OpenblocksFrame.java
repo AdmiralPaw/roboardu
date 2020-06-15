@@ -297,6 +297,14 @@ public class OpenblocksFrame extends JFrame {
         }
     }
 
+    public void setAutosavePath(String path) {
+        autosavePath = path;
+    }
+
+    public String getAutosavePath() {
+        return autosavePath;
+    }
+
     /**
      * Метод, инициализирующий рабочее пространство, цвета, розмеры, расположение всех панелей, элементов и т.д.
      * @exception Exception e - Не были сохранены недавние файлы
