@@ -51,7 +51,7 @@ public class Tone extends TranslatorBlock {
         int leftLimit = 100;
         int rightLimit = 4000;
         if ((Integer.parseInt(freqBlock.toCode()) < leftLimit) || (Integer.parseInt(freqBlock.toCode()) > rightLimit)) {
-            throw new BlockException(freqBlock.getBlockID(), "[Ошибка в значении] Частота может быть только от "
+            throw new BlockException(freqBlock.getBlockID(), "Рекомендуемая частота от "
                     + leftLimit + " до " + rightLimit);
         }
         translator.LoadTranslators(this.getClass().getSimpleName());

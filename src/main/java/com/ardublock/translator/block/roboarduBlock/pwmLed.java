@@ -48,7 +48,7 @@ public class pwmLed extends TranslatorBlock {
         tb = this.getRequiredTranslatorBlockAtSocket(1);
         String Bright = tb.toCode();
         if((Integer.parseInt(Bright)<0) || (Integer.parseInt(Bright)>255)){
-            throw new BlockException(tb.getBlockID(), "ARGUMENT_ERROR");
+            throw new BlockException(tb.getBlockID(), "Диапазон допустимых значений от 0 до 255");
         }
         translator.LoadTranslators(this.getClass().getSimpleName());
 

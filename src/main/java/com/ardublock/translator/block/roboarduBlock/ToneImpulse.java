@@ -47,7 +47,7 @@ public class ToneImpulse extends TranslatorBlock {
         int leftLimit = 100;
         int rightLimit = 4000;
         if ((Integer.parseInt(freqBlock.toCode()) < leftLimit) || (Integer.parseInt(freqBlock.toCode()) > rightLimit)) {
-            throw new BlockException(freqBlock.getBlockID(), "[Ошибка в значении] Частота может быть только от "
+            throw new BlockException(freqBlock.getBlockID(), " Рекомендуемая частота от "
                     + leftLimit + " до " + rightLimit);
         }
         TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(2);
@@ -55,7 +55,7 @@ public class ToneImpulse extends TranslatorBlock {
         rightLimit = 10000;
         String TimeON = tb.toCode();
         if ((Integer.parseInt(TimeON) < leftLimit) || (Integer.parseInt(TimeON) > rightLimit)) {
-            throw new BlockException(tb.getBlockID(), "[Ошибка в значении] Время издавания звука может быть только от "
+            throw new BlockException(tb.getBlockID(), " Диапазон допустимых значений от "
                     + leftLimit + " до " + rightLimit);
         }
         tb = this.getRequiredTranslatorBlockAtSocket(3);
@@ -63,7 +63,7 @@ public class ToneImpulse extends TranslatorBlock {
         rightLimit = 10000;
         String TimeOFF = tb.toCode();
         if ((Integer.parseInt(TimeOFF) < leftLimit) || (Integer.parseInt(TimeOFF) > rightLimit)) {
-            throw new BlockException(tb.getBlockID(), "[Ошибка в значении] Время паузы звука может быть только от "
+            throw new BlockException(tb.getBlockID(), " Диапазон допустимых значений от "
                     + leftLimit + " до " + rightLimit);
         }
         tb = this.getRequiredTranslatorBlockAtSocket(4);
@@ -71,7 +71,7 @@ public class ToneImpulse extends TranslatorBlock {
         rightLimit = 100;
         String Count = tb.toCode();
         if ((Integer.parseInt(Count) < leftLimit) || (Integer.parseInt(Count) > rightLimit)) {
-            throw new BlockException(tb.getBlockID(), "[Ошибка в значении] Количество повторений может быть только от "
+            throw new BlockException(tb.getBlockID(), "Рекомендуемое количество повторений от "
                     + leftLimit + " до " + rightLimit);
         }
         translator.LoadTranslators(this.getClass().getSimpleName());
