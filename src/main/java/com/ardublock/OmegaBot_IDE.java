@@ -58,52 +58,58 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
             //OmegaBot_IDE.editor.setVisible(false);
 
             OmegaBot_IDE.openblocksFrame = new ArduBlockToolFrame();
-            OmegaBot_IDE.openblocksFrame.addListener(this);
-            Context context = Context.getContext();
-            String arduinoVersion = this.getArduinoVersion();
-            context.setInArduino(true);
-            context.setArduinoVersionString(arduinoVersion);
-            context.setEditor(editor);
-            this.context = context;
-            //editor.setVisible(false);
-            System.out.println("Arduino Version: " + arduinoVersion);
-            userPrefs = Preferences.userRoot().node("OmegaBot_IDE");
-            // Don't just "close" Ardublock, see if there's something to save first.
-            // Note to self: Code here only affects behaviour when we're an Arduino Tool,
-            // not when run directly - See Main.java for that.
-            //ArduBlockTool.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            if (OmegaBot_IDE.openblocksFrame.keyValidated) {
+                OmegaBot_IDE.openblocksFrame.addListener(this);
+                Context context = Context.getContext();
+                String arduinoVersion = this.getArduinoVersion();
+                context.setInArduino(true);
+                context.setArduinoVersionString(arduinoVersion);
+                context.setEditor(editor);
+                this.context = context;
+                //editor.setVisible(false);
+                System.out.println("Arduino Version: " + arduinoVersion);
+                userPrefs = Preferences.userRoot().node("OmegaBot_IDE");
+                // Don't just "close" Ardublock, see if there's something to save first.
+                // Note to self: Code here only affects behaviour when we're an Arduino Tool,
+                // not when run directly - See Main.java for that.
+                //ArduBlockTool.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-            Settings settings = openblocksFrame.settings;
-            if (settings.isFirstLaunch()) {
-                TutorialPane tutorialPane = new TutorialPane(openblocksFrame);
-                openblocksFrame.setGlassPane(tutorialPane);
-                openblocksFrame.getGlassPane().setVisible(true);
-                openblocksFrame.repaint();
-            }
-
-            OmegaBot_IDE.openblocksFrame.addWindowListener(new WindowAdapter() {
-                public void windowClosing(WindowEvent e) {
-                    OmegaBot_IDE.openblocksFrame.doCloseArduBlockFile();
+                Settings settings = openblocksFrame.settings;
+                if (settings.isFirstLaunch()) {
+                    TutorialPane tutorialPane = new TutorialPane(openblocksFrame);
+                    openblocksFrame.setGlassPane(tutorialPane);
+                    openblocksFrame.getGlassPane().setVisible(true);
+                    openblocksFrame.repaint();
                 }
-            });
-            if (userPrefs.getBoolean("ardublock.ui.autostart", false)) {
-                OmegaBot_IDE.openblocksFrame.setVisible(true);
+
+
+                OmegaBot_IDE.openblocksFrame.addWindowListener(new WindowAdapter() {
+                    public void windowClosing(WindowEvent e) {
+                        OmegaBot_IDE.openblocksFrame.doCloseArduBlockFile();
+                    }
+                });
+                if (userPrefs.getBoolean("ardublock.ui.autostart", false)) {
+                    OmegaBot_IDE.openblocksFrame.setVisible(true);
 //                Runnable task = () -> {
 //                    while (!editor.isVisible());
 //                    editor.setVisible(false);
 //                };
 //                task.run();
+                }
+                Timer timer = new Timer(300, (ActionListener) e -> getInfoText());
+                timer.start();
             }
-            Timer timer = new Timer(300, (ActionListener) e -> getInfoText());
-            timer.start();
+            else openblocksFrame.setVisible(false);
         }
     }
 
     public void run() {
         try {
-            OmegaBot_IDE.openblocksFrame.setVisible(true);
-            OmegaBot_IDE.openblocksFrame.toFront();
-            OmegaBot_IDE.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            if (OmegaBot_IDE.openblocksFrame.keyValidated) {
+                OmegaBot_IDE.openblocksFrame.setVisible(true);
+                OmegaBot_IDE.openblocksFrame.toFront();
+                OmegaBot_IDE.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            }
             //OmegaBot_IDE.editor.setVisible(false);
         } catch (Exception ignored) { }
     }
