@@ -82,8 +82,14 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
                     OmegaBot_IDE.openblocksFrame.doCloseArduBlockFile();
                 }
             });
+
             if (userPrefs.getBoolean("ardublock.ui.autostart", false)) {
                 OmegaBot_IDE.openblocksFrame.setVisible(true);
+                if (userPrefs.getBoolean("ardublock.ui.arduino_is_visible", true)) {
+                    if (context.getEditor() != null) {
+                        context.getEditor().setVisible(false);
+                    }
+                }
             }
             Timer timer = new Timer(300, (ActionListener) e -> getInfoText());
             timer.start();

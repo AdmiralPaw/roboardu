@@ -741,6 +741,30 @@ public class OpenblocksFrame extends JFrame {
             }
         });
 
+
+        ImageButton hideArduinoButton = new ImageButton(
+                "website",
+                "com/ardublock/block/buttons/websiteA.jpg",
+                "com/ardublock/block/buttons/websiteB.jpg",
+                infoLabel
+        );
+        hideArduinoButton.addActionListener(new ActionListener() {
+            /**
+             *
+             */
+            public void actionPerformed(ActionEvent e) {
+                //TODO: код ниже позволяет скрывать окно Arduino IDE, необходимо автоматически закрывать его, если
+                //  включен параметр @autostart@
+                if (context.getEditor() != null) {
+                    context.getEditor().setVisible(!context.getEditor().isVisible());
+                }
+                else {
+                    System.out.println("[DEBUG] editor == null");
+                }
+            }
+        });
+
+
         ImageButton configButton = new ImageButton(
                 "controller",
                 "com/ardublock/block/buttons/showPanelsA.jpg",
@@ -786,6 +810,7 @@ public class OpenblocksFrame extends JFrame {
         buttons.add(dividerSecond);
         buttons.add(saveImageButton);
         buttons.add(websiteButton);
+        buttons.add(hideArduinoButton);
         buttons.add(infoLabel);
 
         panelWithConfigButton.add(configButton);

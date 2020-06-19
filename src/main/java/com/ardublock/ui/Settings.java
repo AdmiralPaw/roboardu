@@ -54,7 +54,7 @@ public class Settings extends JFrame {
     int windowWidth = 500;
 
     //Поле высоты окна
-    int windowHeight = 350;
+    int windowHeight = 400;
 
     //Поле с буффеером нажатий кнопок
     private ArrayList<Integer> keyBuf;
@@ -268,16 +268,16 @@ public class Settings extends JFrame {
 
         position += offset;
 
-        text = new JLabel(uiMessageBundle.getString("ardublock.ui.arduino_is_visible"));
+        text = new JLabel(uiMessageBundle.getString("ardublock.ui.autohide"));
         text.setVerticalAlignment(SwingConstants.CENTER);
         windowBodyPanel.add(text);
         text.setBounds(leftOffset, position, 300, 40);
         text.setFont(new Font(mainFont, Font.PLAIN, 15));
 
-        RCheckBox arduinoIsVisible = new RCheckBox();
-        autostart.setSelected(userPrefs.getBoolean("ardublock.ui.arduino_is_visible", true));
-        windowBodyPanel.add(autostart);
-        autostart.setBounds(windowWidth - 44 - rigthOffset, position, 44, 40);
+        RCheckBox autohide = new RCheckBox();
+        autohide.setSelected(userPrefs.getBoolean("ardublock.ui.autohide", true));
+        windowBodyPanel.add(autohide);
+        autohide.setBounds(windowWidth - 44 - rigthOffset, position, 44, 40);
 
         position += offset;
 
@@ -401,6 +401,7 @@ public class Settings extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 thisFrame.setVisible(false);
                 userPrefs.putBoolean("ardublock.ui.autostart", autostart.isSelected());
+                userPrefs.putBoolean("ardublock.ui.autohide", autohide.isSelected());
                 userPrefs.putInt("ardublock.ui.autosaveInterval", autosaveInterval.getIntValue());
                 userPrefs.putInt("ardublock.ui.ctrlzLength", queueSize.getIntValue());
                 openblocksFrame.setAutosaveInterval(autosaveInterval.getIntValue());
