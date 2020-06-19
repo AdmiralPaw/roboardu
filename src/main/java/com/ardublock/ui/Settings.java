@@ -9,6 +9,7 @@ import com.mit.blocks.workspace.Workspace;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -436,6 +437,7 @@ public class Settings extends JFrame {
 //                        "Авторизация",
 //                        JOptionPane.PLAIN_MESSAGE);
                 userPrefs.putBoolean("is_key_valid", true);
+                userPrefs.put("key", "1234");
                 return true;
             } else {
                 JOptionPane.showMessageDialog(openblocksFrame,
