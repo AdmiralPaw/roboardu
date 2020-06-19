@@ -38,8 +38,6 @@ public class OpenblocksFrame extends JFrame {
     алгоритма. Хранится как числовое значение типа long.*/
     private static final long serialVersionUID = 2841155965906223806L;
 
-    public boolean keyValidated = false;
-
     //Поле меню
     JMenu recentMenu;
 
@@ -191,9 +189,10 @@ public class OpenblocksFrame extends JFrame {
         context.setDefaultFileName(uiMessageBundle.getString("ardublock.ui.untitled"));
 
         settings = new Settings(this);
-        if (settings.productKeyValidator(this)) {
-            this.keyValidated = true;
-        }
+
+//        if (settings.productKeyValidator(this)) {
+//            this.keyValidated = true;
+//        }
 
         this.setTitle(makeFrameTitle());
         this.setSize(new Dimension(1024, 760));

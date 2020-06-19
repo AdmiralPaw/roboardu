@@ -11,9 +11,7 @@ import processing.app.EditorStatus;
 import processing.app.tools.Tool;
 
 import javax.swing.*;
-import javax.swing.Timer;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -34,6 +32,7 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
     static ArduBlockToolFrame openblocksFrame;
     private Preferences userPrefs;
     private Context context;
+    private boolean kostil = false;
 
     /**
      * @param editor
@@ -54,64 +53,55 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
 
         if (OmegaBot_IDE.editor == null) {
             OmegaBot_IDE.editor = editor;
-
-            //OmegaBot_IDE.editor.setVisible(false);
-
             OmegaBot_IDE.openblocksFrame = new ArduBlockToolFrame();
-            if (OmegaBot_IDE.openblocksFrame.keyValidated) {
-                OmegaBot_IDE.openblocksFrame.addListener(this);
-                Context context = Context.getContext();
-                String arduinoVersion = this.getArduinoVersion();
-                context.setInArduino(true);
-                context.setArduinoVersionString(arduinoVersion);
-                context.setEditor(editor);
-                this.context = context;
-                //editor.setVisible(false);
-                System.out.println("Arduino Version: " + arduinoVersion);
-                userPrefs = Preferences.userRoot().node("OmegaBot_IDE");
-                // Don't just "close" Ardublock, see if there's something to save first.
-                // Note to self: Code here only affects behaviour when we're an Arduino Tool,
-                // not when run directly - See Main.java for that.
-                //ArduBlockTool.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            OmegaBot_IDE.openblocksFrame.addListener(this);
+            Context context = Context.getContext();
+            String arduinoVersion = this.getArduinoVersion();
+            context.setInArduino(true);
+            context.setArduinoVersionString(arduinoVersion);
+            context.setEditor(editor);
+            this.context = context;
+            System.out.println("Arduino Version: " + arduinoVersion);
+            userPrefs = Preferences.userRoot().node("OmegaBot_IDE");
+            // Don't just "close" Ardublock, see if there's something to save first.
+            // Note to self: Code here only affects behaviour when we're an Arduino Tool,
+            // not when run directly - See Main.java for that.
+            //ArduBlockTool.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-                Settings settings = openblocksFrame.settings;
-                if (settings.isFirstLaunch()) {
-                    TutorialPane tutorialPane = new TutorialPane(openblocksFrame);
-                    openblocksFrame.setGlassPane(tutorialPane);
-                    openblocksFrame.getGlassPane().setVisible(true);
-                    openblocksFrame.repaint();
-                }
-
-
-                OmegaBot_IDE.openblocksFrame.addWindowListener(new WindowAdapter() {
-                    public void windowClosing(WindowEvent e) {
-                        OmegaBot_IDE.openblocksFrame.doCloseArduBlockFile();
-                    }
-                });
-                if (userPrefs.getBoolean("ardublock.ui.autostart", false)) {
-                    OmegaBot_IDE.openblocksFrame.setVisible(true);
-//                Runnable task = () -> {
-//                    while (!editor.isVisible());
-//                    editor.setVisible(false);
-//                };
-//                task.run();
-                }
-                Timer timer = new Timer(300, (ActionListener) e -> getInfoText());
-                timer.start();
+            Settings settings = openblocksFrame.settings;
+            if (settings.isFirstLaunch()) {
+                TutorialPane tutorialPane = new TutorialPane(openblocksFrame);
+                openblocksFrame.setGlassPane(tutorialPane);
+                openblocksFrame.getGlassPane().setVisible(true);
+                openblocksFrame.repaint();
             }
-            else openblocksFrame.setVisible(false);
+
+
+            OmegaBot_IDE.openblocksFrame.addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    OmegaBot_IDE.openblocksFrame.doCloseArduBlockFile();
+                }
+            });
+            if (userPrefs.getBoolean("ardublock.ui.autostart", false)) {
+                OmegaBot_IDE.openblocksFrame.setVisible(true);
+            }
+            Timer timer = new Timer(300, (ActionListener) e -> getInfoText());
+            timer.start();
         }
     }
 
     public void run() {
         try {
-            if (OmegaBot_IDE.openblocksFrame.keyValidated) {
+            if (OmegaBot_IDE.openblocksFrame.settings.isProductKeyValid()) {
                 OmegaBot_IDE.openblocksFrame.setVisible(true);
                 OmegaBot_IDE.openblocksFrame.toFront();
                 OmegaBot_IDE.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            } else {
+                if (OmegaBot_IDE.openblocksFrame.settings.productKeyValidator(OmegaBot_IDE.openblocksFrame))
+                    run();
             }
-            //OmegaBot_IDE.editor.setVisible(false);
-        } catch (Exception ignored) { }
+        } catch (Exception ignored) {
+        }
     }
 
 
@@ -249,27 +239,27 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
     }
 
     public void getInfoText() {
-        if (this.context.getWorkspace().getErrWindow().mode == 0){
-        try {
-            Field f1 = Editor.class.getDeclaredField("console");
-            f1.setAccessible(true);
-            EditorConsole console = (EditorConsole) f1.get(OmegaBot_IDE.editor);
-            Field f2 = Editor.class.getDeclaredField("status");
-            f2.setAccessible(true);
-            EditorStatus status = (EditorStatus) f2.get(OmegaBot_IDE.editor);
-            Field f3 = EditorStatus.class.getDeclaredField("message");
-            f3.setAccessible(true);
-            String message = (String) f3.get(status);
-            Field f4 = EditorStatus.class.getDeclaredField("mode");
-            f4.setAccessible(true);
-            int mode = (int) f4.get(status);
-            Field f5 = EditorStatus.class.getDeclaredField("BGCOLOR");
-            f5.setAccessible(true);
-            Color[] BGCOLOR = (Color[]) f5.get(status);
-            this.context.getWorkspace().getErrWindow().setErr(message, console.getText(), BGCOLOR[mode]);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            //System.out.println(e.toString());
-        }
+        if (this.context.getWorkspace().getErrWindow().mode == 0) {
+            try {
+                Field f1 = Editor.class.getDeclaredField("console");
+                f1.setAccessible(true);
+                EditorConsole console = (EditorConsole) f1.get(OmegaBot_IDE.editor);
+                Field f2 = Editor.class.getDeclaredField("status");
+                f2.setAccessible(true);
+                EditorStatus status = (EditorStatus) f2.get(OmegaBot_IDE.editor);
+                Field f3 = EditorStatus.class.getDeclaredField("message");
+                f3.setAccessible(true);
+                String message = (String) f3.get(status);
+                Field f4 = EditorStatus.class.getDeclaredField("mode");
+                f4.setAccessible(true);
+                int mode = (int) f4.get(status);
+                Field f5 = EditorStatus.class.getDeclaredField("BGCOLOR");
+                f5.setAccessible(true);
+                Color[] BGCOLOR = (Color[]) f5.get(status);
+                this.context.getWorkspace().getErrWindow().setErr(message, console.getText(), BGCOLOR[mode]);
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                //System.out.println(e.toString());
+            }
         }
     }
 }

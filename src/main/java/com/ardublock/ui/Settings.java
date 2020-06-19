@@ -268,6 +268,19 @@ public class Settings extends JFrame {
 
         position += offset;
 
+        text = new JLabel(uiMessageBundle.getString("ardublock.ui.arduino_is_visible"));
+        text.setVerticalAlignment(SwingConstants.CENTER);
+        windowBodyPanel.add(text);
+        text.setBounds(leftOffset, position, 300, 40);
+        text.setFont(new Font(mainFont, Font.PLAIN, 15));
+
+        RCheckBox arduinoIsVisible = new RCheckBox();
+        autostart.setSelected(userPrefs.getBoolean("ardublock.ui.arduino_is_visible", true));
+        windowBodyPanel.add(autostart);
+        autostart.setBounds(windowWidth - 44 - rigthOffset, position, 44, 40);
+
+        position += offset;
+
         text = new JLabel(uiMessageBundle.getString("ardublock.ui.autosaveInterval"));
         text.setVerticalAlignment(SwingConstants.CENTER);
         windowBodyPanel.add(text);
@@ -398,7 +411,7 @@ public class Settings extends JFrame {
         this.requestFocus();
     }
 
-    private boolean isProductKeyValid() {
+    public boolean isProductKeyValid() {
         return userPrefs.getBoolean("is_key_valid", false);
     }
 
@@ -417,10 +430,10 @@ public class Settings extends JFrame {
             }
             //TODO сдесь нужна валидация с базой данных вместо if
             else if (result.equals("1234")) {
-                JOptionPane.showMessageDialog(openblocksFrame,
-                        "Ключ верный!",
-                        "Авторизация",
-                        JOptionPane.PLAIN_MESSAGE);
+//                JOptionPane.showMessageDialog(openblocksFrame,
+//                        "Ключ верный!",
+//                        "Авторизация",
+//                        JOptionPane.PLAIN_MESSAGE);
                 userPrefs.putBoolean("is_key_valid", true);
                 return true;
             } else {
