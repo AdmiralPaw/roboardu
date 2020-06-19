@@ -12,6 +12,7 @@ import processing.app.tools.Tool;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -33,6 +34,7 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
     private Preferences userPrefs;
     private Context context;
     private boolean kostil = false;
+    public Timer autohideTimer;
 
     /**
      * @param editor
@@ -85,11 +87,21 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
 
             if (userPrefs.getBoolean("ardublock.ui.autostart", false)) {
                 OmegaBot_IDE.openblocksFrame.setVisible(true);
-                if (userPrefs.getBoolean("ardublock.ui.arduino_is_visible", true)) {
-                    if (context.getEditor() != null) {
-                        context.getEditor().setVisible(false);
-                    }
-                }
+//                if (userPrefs.getBoolean("ardublock.ui.autohide", true)) {
+//                    autohideTimer = new Timer(300, new ActionListener() {
+//                        /**
+//                         *
+//                         */
+//                        public void actionPerformed(ActionEvent e) {
+//                            //TODO: код ниже позволяет скрывать окно Arduino IDE, необходимо автоматически закрывать его, если
+//                            //  включен параметр @autostart@
+//                            if (context.getEditor() != null) {
+//                                context.getEditor().setVisible(false);
+//                            }
+//                        }
+//                    });
+//                    autohideTimer.start();
+//                }
             }
             Timer timer = new Timer(300, (ActionListener) e -> getInfoText());
             timer.start();
