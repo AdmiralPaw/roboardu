@@ -51,14 +51,14 @@ public class ToneTime extends TranslatorBlock {
         int rightLimit = 4000;
         //TODO может засунуть строку ошибки в базу данных?
         if ((Integer.parseInt(freqBlock.toCode()) < leftLimit) || (Integer.parseInt(freqBlock.toCode()) > rightLimit)) {
-            throw new BlockException(freqBlock.getBlockID(), "[Ошибка в значении] Частота может быть только от "
+            throw new BlockException(freqBlock.getBlockID(), "Рекомендуемая частота от "
                     + leftLimit + " до " + rightLimit);
         }
         TranslatorBlock timeBlock = this.getRequiredTranslatorBlockAtSocket(2);
         leftLimit = 1;
         rightLimit = 10;
         if ((Integer.parseInt(timeBlock.toCode()) < 1) || (Integer.parseInt(timeBlock.toCode()) > 10)) {
-            throw new BlockException(timeBlock.getBlockID(), "[Ошибка в значении] Значение может быть только от "
+            throw new BlockException(timeBlock.getBlockID(), "Диапазон допустимых значений от "
                     + leftLimit + " до " + rightLimit);
         }
         translator.LoadTranslators(this.getClass().getSimpleName());
