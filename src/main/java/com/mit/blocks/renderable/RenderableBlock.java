@@ -413,7 +413,24 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     public Dimension getBlockSize() {
         return blockArea.getBounds().getSize();
     }
+    
+    
+    public long getFatherPlugBlockId(){
+        if(plugTag.getSocket()!=null){
+            return plugTag.getSocket().getBlockID();
+        }
+        return -1;
+    }
+    
+    public RenderableBlock getFatherPlugBlock(){
 
+        return workspace.getEnv().getRenderableBlock(getFatherPlugBlockId());
+    }
+
+    public boolean isFatherLoop(String LoopName){
+        return getBlock().getFatherConnectedBlockRecursive().getGenusName().equals(LoopName);
+    }
+    
     /**
      * Returns the width of the block shape of this
      *

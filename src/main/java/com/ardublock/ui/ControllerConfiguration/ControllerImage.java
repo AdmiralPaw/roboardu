@@ -124,7 +124,7 @@ public class ControllerImage extends JPanel {
      */
     public ControllerButton callModuleButton(String Id) {
         for (ControllerButton i : moduleButtons) {
-            if (i.getId() == Id) {
+            if (Id.equals(i.getId())) {
                 return i;
             }
         }

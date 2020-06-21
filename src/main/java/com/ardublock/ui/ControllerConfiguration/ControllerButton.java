@@ -20,7 +20,7 @@ public class ControllerButton extends JToggleButton {
     private final СontrollerСonfiguration controller;
 
     //Поле с идентификатором кнопки
-    private final String buttonId;
+    private String buttonId;
 
     //Поле пути
     private String path;
