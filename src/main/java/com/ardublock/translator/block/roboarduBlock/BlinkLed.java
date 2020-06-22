@@ -50,18 +50,18 @@ public class BlinkLed extends TranslatorBlock {
         try{
             Integer.parseInt(Count);
         }catch(Exception err){
-            throw new BlockException(tb.getBlockID(), "ARGUMENT_ERROR");
+            throw new BlockException(tb.getBlockID(), "Ошибка значения");
         }
         
         tb = this.getRequiredTranslatorBlockAtSocket(2);
         String TimeON = tb.toCode();
         if((Integer.parseInt(TimeON)<1) || (Integer.parseInt(TimeON)>10000)){
-            throw new BlockException(tb.getBlockID(), "ARGUMENT_ERROR");
+            throw new BlockException(tb.getBlockID(), "Диапазон допустимых значений [1; 10000]");
         }
         tb = this.getRequiredTranslatorBlockAtSocket(3);
         String TimeOFF = tb.toCode();
         if((Integer.parseInt(TimeOFF)<1) || (Integer.parseInt(TimeOFF)>10000)){
-            throw new BlockException(tb.getBlockID(), "ARGUMENT_ERROR");
+            throw new BlockException(tb.getBlockID(), "Диапазон допустимых значений [1; 10000]");
         }
         translator.LoadTranslators(this.getClass().getSimpleName());
         translator.addSetupCommand("InitBoard();");
