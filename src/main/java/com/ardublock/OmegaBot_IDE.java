@@ -11,7 +11,6 @@ import processing.app.EditorStatus;
 import processing.app.tools.Tool;
 
 import javax.swing.*;
-import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,6 +33,8 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
     static ArduBlockToolFrame openblocksFrame;
     private Preferences userPrefs;
     private Context context;
+    private boolean kostil = false;
+    public Timer autohideTimer;
 
     /**
      * @param editor
@@ -54,9 +55,6 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
 
         if (OmegaBot_IDE.editor == null) {
             OmegaBot_IDE.editor = editor;
-
-            //OmegaBot_IDE.editor.setVisible(false);
-
             OmegaBot_IDE.openblocksFrame = new ArduBlockToolFrame();
             OmegaBot_IDE.openblocksFrame.addListener(this);
             Context context = Context.getContext();
@@ -65,7 +63,6 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
             context.setArduinoVersionString(arduinoVersion);
             context.setEditor(editor);
             this.context = context;
-            //editor.setVisible(false);
             System.out.println("Arduino Version: " + arduinoVersion);
             userPrefs = Preferences.userRoot().node("OmegaBot_IDE");
             // Don't just "close" Ardublock, see if there's something to save first.
@@ -81,18 +78,30 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
                 openblocksFrame.repaint();
             }
 
+
             OmegaBot_IDE.openblocksFrame.addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent e) {
                     OmegaBot_IDE.openblocksFrame.doCloseArduBlockFile();
                 }
             });
+
             if (userPrefs.getBoolean("ardublock.ui.autostart", false)) {
                 OmegaBot_IDE.openblocksFrame.setVisible(true);
-//                Runnable task = () -> {
-//                    while (!editor.isVisible());
-//                    editor.setVisible(false);
-//                };
-//                task.run();
+//                if (userPrefs.getBoolean("ardublock.ui.autohide", true)) {
+//                    autohideTimer = new Timer(300, new ActionListener() {
+//                        /**
+//                         *
+//                         */
+//                        public void actionPerformed(ActionEvent e) {
+//                            //TODO: код ниже позволяет скрывать окно Arduino IDE, необходимо автоматически закрывать его, если
+//                            //  включен параметр @autostart@
+//                            if (context.getEditor() != null) {
+//                                context.getEditor().setVisible(false);
+//                            }
+//                        }
+//                    });
+//                    autohideTimer.start();
+//                }
             }
             Timer timer = new Timer(300, (ActionListener) e -> getInfoText());
             timer.start();
@@ -101,11 +110,16 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
 
     public void run() {
         try {
-            OmegaBot_IDE.openblocksFrame.setVisible(true);
-            OmegaBot_IDE.openblocksFrame.toFront();
-            OmegaBot_IDE.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-            //OmegaBot_IDE.editor.setVisible(false);
-        } catch (Exception ignored) { }
+            if (OmegaBot_IDE.openblocksFrame.settings.isProductKeyValid()) {
+                OmegaBot_IDE.openblocksFrame.setVisible(true);
+                OmegaBot_IDE.openblocksFrame.toFront();
+                OmegaBot_IDE.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            } else {
+                if (OmegaBot_IDE.openblocksFrame.settings.productKeyValidator(OmegaBot_IDE.openblocksFrame))
+                    run();
+            }
+        } catch (Exception ignored) {
+        }
     }
 
 
@@ -243,27 +257,27 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
     }
 
     public void getInfoText() {
-        if (this.context.getWorkspace().getErrWindow().mode == 0){
-        try {
-            Field f1 = Editor.class.getDeclaredField("console");
-            f1.setAccessible(true);
-            EditorConsole console = (EditorConsole) f1.get(OmegaBot_IDE.editor);
-            Field f2 = Editor.class.getDeclaredField("status");
-            f2.setAccessible(true);
-            EditorStatus status = (EditorStatus) f2.get(OmegaBot_IDE.editor);
-            Field f3 = EditorStatus.class.getDeclaredField("message");
-            f3.setAccessible(true);
-            String message = (String) f3.get(status);
-            Field f4 = EditorStatus.class.getDeclaredField("mode");
-            f4.setAccessible(true);
-            int mode = (int) f4.get(status);
-            Field f5 = EditorStatus.class.getDeclaredField("BGCOLOR");
-            f5.setAccessible(true);
-            Color[] BGCOLOR = (Color[]) f5.get(status);
-            this.context.getWorkspace().getErrWindow().setErr(message, console.getText(), BGCOLOR[mode]);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            //System.out.println(e.toString());
-        }
+        if (this.context.getWorkspace().getErrWindow().mode == 0) {
+            try {
+                Field f1 = Editor.class.getDeclaredField("console");
+                f1.setAccessible(true);
+                EditorConsole console = (EditorConsole) f1.get(OmegaBot_IDE.editor);
+                Field f2 = Editor.class.getDeclaredField("status");
+                f2.setAccessible(true);
+                EditorStatus status = (EditorStatus) f2.get(OmegaBot_IDE.editor);
+                Field f3 = EditorStatus.class.getDeclaredField("message");
+                f3.setAccessible(true);
+                String message = (String) f3.get(status);
+                Field f4 = EditorStatus.class.getDeclaredField("mode");
+                f4.setAccessible(true);
+                int mode = (int) f4.get(status);
+                Field f5 = EditorStatus.class.getDeclaredField("BGCOLOR");
+                f5.setAccessible(true);
+                Color[] BGCOLOR = (Color[]) f5.get(status);
+                this.context.getWorkspace().getErrWindow().setErr(message, console.getText(), BGCOLOR[mode]);
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                //System.out.println(e.toString());
+            }
         }
     }
 }
