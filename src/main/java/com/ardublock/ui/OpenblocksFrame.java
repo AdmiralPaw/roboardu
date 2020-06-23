@@ -96,6 +96,7 @@ public class OpenblocksFrame extends JFrame {
 
     //Поле видимости контроллера
     private boolean controllerIsShown = true;
+    public boolean hideArduinoToogle = true;
 
     /**
      * Метод, создающий прослушиватель
@@ -743,7 +744,7 @@ public class OpenblocksFrame extends JFrame {
 
 
         ImageButton hideArduinoButton = new ImageButton(
-                "website",
+                "hideArduino",
                 "com/ardublock/block/buttons/websiteA.jpg",
                 "com/ardublock/block/buttons/websiteB.jpg",
                 infoLabel
@@ -755,6 +756,7 @@ public class OpenblocksFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //TODO: код ниже позволяет скрывать окно Arduino IDE, необходимо автоматически закрывать его, если
                 //  включен параметр @autostart@
+                hideArduinoToogle = false;
                 if (context.getEditor() != null) {
                     context.getEditor().setVisible(!context.getEditor().isVisible());
                 }

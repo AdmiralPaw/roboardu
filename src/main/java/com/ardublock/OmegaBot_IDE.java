@@ -35,6 +35,7 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
     private Context context;
     private boolean kostil = false;
     public Timer autohideTimer;
+    private boolean firstAutohide;
 
     /**
      * @param editor
@@ -85,6 +86,7 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
                 }
             });
 
+            this.firstAutohide = userPrefs.getBoolean("ardublock.ui.autohide", false);
             if (userPrefs.getBoolean("ardublock.ui.autostart", false)) {
                 OmegaBot_IDE.openblocksFrame.setVisible(true);
 //                if (userPrefs.getBoolean("ardublock.ui.autohide", true)) {
@@ -105,6 +107,13 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
             }
             Timer timer = new Timer(300, (ActionListener) e -> getInfoText());
             timer.start();
+        }
+    }
+
+    //TODO сделать как-то почеловечески
+    private void hideArduinoEditor(boolean b) {
+        if (context.getEditor() != null && (context.getEditor().isVisible() ^ !b)) {
+            context.getEditor().setVisible(!b);
         }
     }
 
@@ -275,9 +284,12 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
                 f5.setAccessible(true);
                 Color[] BGCOLOR = (Color[]) f5.get(status);
                 this.context.getWorkspace().getErrWindow().setErr(message, console.getText(), BGCOLOR[mode]);
-            } catch (NoSuchFieldException | IllegalAccessException e) {
+            } catch (NoSuchFieldException | IllegalAccessException | NullPointerException e) {
                 //System.out.println(e.toString());
             }
+        }
+        if (openblocksFrame.hideArduinoToogle && firstAutohide) {
+            hideArduinoEditor(true);
         }
     }
 }

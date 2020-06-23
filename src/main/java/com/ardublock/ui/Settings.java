@@ -55,7 +55,7 @@ public class Settings extends JFrame {
     int windowWidth = 500;
 
     //Поле высоты окна
-    int windowHeight = 300;
+    int windowHeight = 350;
 
     //Поле с буффеером нажатий кнопок
     private ArrayList<Integer> keyBuf;
@@ -126,6 +126,7 @@ public class Settings extends JFrame {
         if (this.isFirstLaunch()) {
             userPrefs.putBoolean("is_first_launch", false);
             userPrefs.putBoolean("ardublock.ui.autostart", false);
+            userPrefs.putBoolean("ardublock.ui.autohide", false);
             userPrefs.putInt("ardublock.ui.autosaveInterval", 10);
             userPrefs.putInt("ardublock.ui.ctrlzLength", 10);
         }
@@ -269,18 +270,18 @@ public class Settings extends JFrame {
 
         position += offset;
 
-//        text = new JLabel(uiMessageBundle.getString("ardublock.ui.autohide"));
-//        text.setVerticalAlignment(SwingConstants.CENTER);
-//        windowBodyPanel.add(text);
-//        text.setBounds(leftOffset, position, 300, 40);
-//        text.setFont(new Font(mainFont, Font.PLAIN, 15));
-//
-//        RCheckBox autohide = new RCheckBox();
-//        autohide.setSelected(userPrefs.getBoolean("ardublock.ui.autohide", true));
-//        windowBodyPanel.add(autohide);
-//        autohide.setBounds(windowWidth - 44 - rigthOffset, position, 44, 40);
-//
-//        position += offset;
+        text = new JLabel(uiMessageBundle.getString("ardublock.ui.autohide"));
+        text.setVerticalAlignment(SwingConstants.CENTER);
+        windowBodyPanel.add(text);
+        text.setBounds(leftOffset, position, 300, 40);
+        text.setFont(new Font(mainFont, Font.PLAIN, 15));
+
+        RCheckBox autohide = new RCheckBox();
+        autohide.setSelected(userPrefs.getBoolean("ardublock.ui.autohide", true));
+        windowBodyPanel.add(autohide);
+        autohide.setBounds(windowWidth - 44 - rigthOffset, position, 44, 40);
+
+        position += offset;
 
         text = new JLabel(uiMessageBundle.getString("ardublock.ui.autosaveInterval"));
         text.setVerticalAlignment(SwingConstants.CENTER);
@@ -403,7 +404,7 @@ public class Settings extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 thisFrame.setVisible(false);
                 userPrefs.putBoolean("ardublock.ui.autostart", autostart.isSelected());
-//                userPrefs.putBoolean("ardublock.ui.autohide", autohide.isSelected());
+                userPrefs.putBoolean("ardublock.ui.autohide", autohide.isSelected());
                 userPrefs.putInt("ardublock.ui.autosaveInterval", autosaveInterval.getIntValue());
                 userPrefs.putInt("ardublock.ui.ctrlzLength", queueSize.getIntValue());
                 openblocksFrame.setAutosaveInterval(autosaveInterval.getIntValue());
