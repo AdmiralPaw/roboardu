@@ -343,22 +343,23 @@ public class Settings extends JFrame {
         });
         position += offset;
 
-        JButton resetButton = new JButton("[reset]");
-        windowBodyPanel.add(resetButton);
-        resetButton.setBounds(getWidth() - 80 - rigthOffset, position + offset / 2 - spinnerHeigth / 2, 80, spinnerHeigth);
-        resetButton.setBounds(getWidth() - 80 - rigthOffset, position + offset / 2 - spinnerHeigth / 2, 80, spinnerHeigth);
-        resetButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                userPrefs.putBoolean("is_first_launch", true);
-                userPrefs.putBoolean("is_key_valid", false);
-                userPrefs.putBoolean("ardublock.ui.autostart", false);
-                userPrefs.putInt("ardublock.ui.autosaveInterval", 10);
-                userPrefs.putInt("ardublock.ui.ctrlzLength", 10);
-            }
-        });
-
-        position += offset;
+        //DEBAG
+//        JButton resetButton = new JButton("[reset]");
+//        windowBodyPanel.add(resetButton);
+//        resetButton.setBounds(getWidth() - 80 - rigthOffset, position + offset / 2 - spinnerHeigth / 2, 80, spinnerHeigth);
+//        resetButton.setBounds(getWidth() - 80 - rigthOffset, position + offset / 2 - spinnerHeigth / 2, 80, spinnerHeigth);
+//        resetButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                userPrefs.putBoolean("is_first_launch", true);
+//                userPrefs.putBoolean("is_key_valid", false);
+//                userPrefs.putBoolean("ardublock.ui.autostart", false);
+//                userPrefs.putInt("ardublock.ui.autosaveInterval", 10);
+//                userPrefs.putInt("ardublock.ui.ctrlzLength", 10);
+//            }
+//        });
+//
+//        position += offset;
 
         eggText = new JLabel(uiMessageBundle.getString("ardublock.ui.randomColor"));
         eggText.setVerticalAlignment(SwingConstants.CENTER);
