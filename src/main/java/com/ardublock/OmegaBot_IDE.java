@@ -36,6 +36,7 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
     private boolean kostil = false;
     public Timer autohideTimer;
     private boolean firstAutohide;
+    private boolean autostart;
 
     /**
      * @param editor
@@ -87,7 +88,8 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
             });
 
             this.firstAutohide = userPrefs.getBoolean("ardublock.ui.autohide", false);
-            if (userPrefs.getBoolean("ardublock.ui.autostart", false)) {
+            this.autostart = userPrefs.getBoolean("ardublock.ui.autostart", false);
+            if (autostart) {
                 OmegaBot_IDE.openblocksFrame.setVisible(true);
 //                if (userPrefs.getBoolean("ardublock.ui.autohide", true)) {
 //                    autohideTimer = new Timer(300, new ActionListener() {
@@ -288,7 +290,7 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
                 //System.out.println(e.toString());
             }
         }
-        if (openblocksFrame.hideArduinoToogle && firstAutohide) {
+        if (openblocksFrame.hideArduinoToogle && firstAutohide && autostart) {
             hideArduinoEditor(true);
         }
     }
