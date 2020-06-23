@@ -1234,14 +1234,16 @@ public class OpenblocksFrame extends JFrame {
                 case JOptionPane.YES_OPTION:
                     if (doSaveArduBlockFile()) {
                         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//                        System.exit(0);
+                        if (!context.getEditor().isVisible())
+                            System.exit(0);
                     } else {
                         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                     }
                     break;
                 case JOptionPane.NO_OPTION:
                     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//                    System.exit(0);
+                    if (!context.getEditor().isVisible())
+                        System.exit(0);
                     break;
                 case JOptionPane.CANCEL_OPTION:
                     setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -1250,7 +1252,8 @@ public class OpenblocksFrame extends JFrame {
         } else {
 
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//            System.exit(0);
+            if (!context.getEditor().isVisible())
+                System.exit(0);
 
         }
         settings.dispose();
