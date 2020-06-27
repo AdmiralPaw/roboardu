@@ -39,11 +39,8 @@ public class pwmLed extends TranslatorBlock {
     {
         TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(0);
         String LedPin = tb.toCode();
-        if(!("A0 A1 A2 A3 13").contains(LedPin.trim())) {
+        if(!("8 9 10 11 A0 A1 A2 A3 13").contains(LedPin.trim())) {
             throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.Digital_pin_slot"));
-        }
-        if(LedPin.equals("13")){
-            translator.addSetupCommand("pinMode("+LedPin+", OUTPUT);");
         }
         tb = this.getRequiredTranslatorBlockAtSocket(1);
         String Bright = tb.toCode();
@@ -51,9 +48,9 @@ public class pwmLed extends TranslatorBlock {
             throw new BlockException(tb.getBlockID(), "Диапазон допустимых значений [0; 255]");
         }
         translator.LoadTranslators(this.getClass().getSimpleName());
+        translator.addSetupCommand("pinMode(" + LedPin + ", OUTPUT);");
 
         String ret ="LedBrightness(" + LedPin +", " + Bright + ");\n";
-
         return codePrefix + ret + codeSuffix;
     }
 

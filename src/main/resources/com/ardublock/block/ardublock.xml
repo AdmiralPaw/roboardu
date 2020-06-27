@@ -3475,8 +3475,6 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <BlockDrawer button-color="190 30 180" name="bd.diode">
                 <BlockGenusMember>LedControl</BlockGenusMember>
                 <BlockGenusMember>led_blink</BlockGenusMember>
-                <BlockGenusMember>ledD13</BlockGenusMember>
-                <BlockGenusMember>blink_ledD13</BlockGenusMember>
                 <BlockGenusMember>pwmled</BlockGenusMember>
             </BlockDrawer>
 

@@ -442,40 +442,41 @@ and open the template in the editor.
                 <command name="void ServoMoveSlow(Servo S1, int Angle, int Time)"/>
             </commands>
         </block>
+        <!-- TODO почистить от комментов -->
         <block name="LedControl">
             <headers>
             </headers>
             <headersDefinitions>
-                <headerDefinition name="#define LED_PIN             	13"/>
-                <headerDefinition name="#define BUTTON_PIN          	12"/>
+<!--                <headerDefinition name="#define LED_PIN             	13"/>-->
+<!--                <headerDefinition name="#define BUTTON_PIN          	12"/>-->
             </headersDefinitions>
             <commands>
-                <command name="void Init Board()"/>
+<!--                <command name="void Init Board()"/>-->
                 <command name="void LedControl(int LedPin, int State)"/>
             </commands>
         </block>
-        <block name="blink_ledD13">
-            <headers>
-            </headers>
-            <headersDefinitions>
-                <headerDefinition name="#define LED_PIN             	13"/>
-                <headerDefinition name="#define BUTTON_PIN          	12"/>
-            </headersDefinitions>
-            <commands>
-                <command name="void Init Board()"/>
-                <command name="void LedControl(int LedPin, int State)"/>
-                <command name="void LedOneBlink(int LedPin, int TimeBlink)"/>
-            </commands>
-        </block>
+<!--        <block name="blink_ledD13">-->
+<!--            <headers>-->
+<!--            </headers>-->
+<!--            <headersDefinitions>-->
+<!--                <headerDefinition name="#define LED_PIN             	13"/>-->
+<!--                <headerDefinition name="#define BUTTON_PIN          	12"/>-->
+<!--            </headersDefinitions>-->
+<!--            <commands>-->
+<!--                <command name="void Init Board()"/>-->
+<!--                <command name="void LedControl(int LedPin, int State)"/>-->
+<!--                <command name="void LedOneBlink(int LedPin, int TimeBlink)"/>-->
+<!--            </commands>-->
+<!--        </block>-->
         <block name="BlinkLed">
             <headers>
             </headers>
             <headersDefinitions>
-                <headerDefinition name="#define LED_PIN             	13"/>
-                <headerDefinition name="#define BUTTON_PIN          	12"/>
+<!--                <headerDefinition name="#define LED_PIN             	13"/>-->
+<!--                <headerDefinition name="#define BUTTON_PIN          	12"/>-->
             </headersDefinitions>
             <commands>
-                <command name="void Init Board()"/>
+<!--                <command name="void Init Board()"/>-->
                 <command name="void LedControl(int LedPin, int State)"/>
                 <command name="void LedBlinks(int LedPin, int Count, int TimeON, int TimeOFF)"/>
             </commands>
@@ -489,6 +490,7 @@ and open the template in the editor.
                 <command name="void LedBrightness(int LedPin, int Bright)"/>
             </commands>
         </block>
+
         <block name="Tone">
             <headers>
             </headers>
