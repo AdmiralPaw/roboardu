@@ -345,15 +345,16 @@ and open the template in the editor.
             </commands>
         </block>
 
+        <!-- TODO почистить от комментов -->
         <block name="Button">
             <headers>
             </headers>
             <headersDefinitions>
-                <headerDefinition name="#define LED_PIN             	13"/>
-                <headerDefinition name="#define BUTTON_PIN          	12"/>
+<!--                <headerDefinition name="#define LED_PIN             	13"/>-->
+<!--                <headerDefinition name="#define BUTTON_PIN          	12"/>-->
             </headersDefinitions>
             <commands>
-                <command name="void Init Board()"/>
+<!--                <command name="void Init Board()"/>-->
                 <command name="int ButtonRead(int ButtonPin)"/>
             </commands>
         </block>
