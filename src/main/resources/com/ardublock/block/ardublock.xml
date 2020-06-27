@@ -38,9 +38,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </KeyBlock>
         <KeyBlock key="modules.diod.name">
             <Block value="bg.LedControl"/>
-            <Block value="bg.ledD13"/>
             <Block value="bg.led_blink"/>
-            <Block value="bg.blink_ledD13"/>
             <Block value="bg.pwmled"/>
         </KeyBlock>
         <KeyBlock key="modules.piezzo.name">
@@ -3330,8 +3328,6 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <FamilyMember>pinListDigital_D11</FamilyMember>
             <FamilyMember>pinListDigital_D12</FamilyMember>
             <FamilyMember>pinListDigital_D13</FamilyMember>
-        </BlockFamily>
-        <BlockFamily>
             <FamilyMember>pinListAnalog_A0</FamilyMember>
             <FamilyMember>pinListAnalog_A1</FamilyMember>
             <FamilyMember>pinListAnalog_A2</FamilyMember>
