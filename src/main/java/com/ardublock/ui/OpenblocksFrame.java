@@ -519,6 +519,9 @@ public class OpenblocksFrame extends JFrame {
         //Финальное (неизменяемое, без наследования) поле со вторым разделителем
         final JLabel dividerSecond = new JLabel();
 
+        //Финальное (неизменяемое, без наследования) поле со третьим разделителем
+        final JLabel dividerThird = new JLabel();
+
         //Main logo---------------------------------------------------//
 
         //Финальное (неизменяемое, без наследования) поле логотипа
@@ -717,7 +720,7 @@ public class OpenblocksFrame extends JFrame {
         });
 
         ImageButton websiteButton = new ImageButton(
-                "website",
+                uiMessageBundle.getString("ardublock.ui.website"),
                 "com/ardublock/block/buttons/websiteA.jpg",
                 "com/ardublock/block/buttons/websiteB.jpg",
                 infoLabel
@@ -744,7 +747,7 @@ public class OpenblocksFrame extends JFrame {
 
 
         ImageButton hideArduinoButton = new ImageButton(
-                "hideArduino",
+                uiMessageBundle.getString("ardublock.ui.autohide.button"),
                 "com/ardublock/block/buttons/websiteA.jpg",
                 "com/ardublock/block/buttons/websiteB.jpg",
                 infoLabel
@@ -812,6 +815,7 @@ public class OpenblocksFrame extends JFrame {
         buttons.add(dividerSecond);
         buttons.add(saveImageButton);
         buttons.add(websiteButton);
+        buttons.add(dividerThird);
         buttons.add(hideArduinoButton);
         buttons.add(infoLabel);
 
