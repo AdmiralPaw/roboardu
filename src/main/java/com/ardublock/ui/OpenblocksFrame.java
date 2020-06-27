@@ -748,8 +748,8 @@ public class OpenblocksFrame extends JFrame {
 
         ImageButton hideArduinoButton = new ImageButton(
                 uiMessageBundle.getString("ardublock.ui.autohide.button"),
-                "com/ardublock/block/buttons/websiteA.jpg",
-                "com/ardublock/block/buttons/websiteB.jpg",
+                "com/ardublock/block/buttons/autohideA.jpg",
+                "com/ardublock/block/buttons/autohideB.jpg",
                 infoLabel
         );
         hideArduinoButton.addActionListener(new ActionListener() {
