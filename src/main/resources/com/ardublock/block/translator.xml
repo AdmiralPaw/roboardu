@@ -345,15 +345,16 @@ and open the template in the editor.
             </commands>
         </block>
 
+        <!-- TODO почистить от комментов -->
         <block name="Button">
             <headers>
             </headers>
             <headersDefinitions>
-                <headerDefinition name="#define LED_PIN             	13"/>
-                <headerDefinition name="#define BUTTON_PIN          	12"/>
+<!--                <headerDefinition name="#define LED_PIN             	13"/>-->
+<!--                <headerDefinition name="#define BUTTON_PIN          	12"/>-->
             </headersDefinitions>
             <commands>
-                <command name="void Init Board()"/>
+<!--                <command name="void Init Board()"/>-->
                 <command name="int ButtonRead(int ButtonPin)"/>
             </commands>
         </block>
@@ -442,40 +443,41 @@ and open the template in the editor.
                 <command name="void ServoMoveSlow(Servo S1, int Angle, int Time)"/>
             </commands>
         </block>
+        <!-- TODO почистить от комментов -->
         <block name="LedControl">
             <headers>
             </headers>
             <headersDefinitions>
-                <headerDefinition name="#define LED_PIN             	13"/>
-                <headerDefinition name="#define BUTTON_PIN          	12"/>
+<!--                <headerDefinition name="#define LED_PIN             	13"/>-->
+<!--                <headerDefinition name="#define BUTTON_PIN          	12"/>-->
             </headersDefinitions>
             <commands>
-                <command name="void Init Board()"/>
+<!--                <command name="void Init Board()"/>-->
                 <command name="void LedControl(int LedPin, int State)"/>
             </commands>
         </block>
-        <block name="blink_ledD13">
-            <headers>
-            </headers>
-            <headersDefinitions>
-                <headerDefinition name="#define LED_PIN             	13"/>
-                <headerDefinition name="#define BUTTON_PIN          	12"/>
-            </headersDefinitions>
-            <commands>
-                <command name="void Init Board()"/>
-                <command name="void LedControl(int LedPin, int State)"/>
-                <command name="void LedOneBlink(int LedPin, int TimeBlink)"/>
-            </commands>
-        </block>
+<!--        <block name="blink_ledD13">-->
+<!--            <headers>-->
+<!--            </headers>-->
+<!--            <headersDefinitions>-->
+<!--                <headerDefinition name="#define LED_PIN             	13"/>-->
+<!--                <headerDefinition name="#define BUTTON_PIN          	12"/>-->
+<!--            </headersDefinitions>-->
+<!--            <commands>-->
+<!--                <command name="void Init Board()"/>-->
+<!--                <command name="void LedControl(int LedPin, int State)"/>-->
+<!--                <command name="void LedOneBlink(int LedPin, int TimeBlink)"/>-->
+<!--            </commands>-->
+<!--        </block>-->
         <block name="BlinkLed">
             <headers>
             </headers>
             <headersDefinitions>
-                <headerDefinition name="#define LED_PIN             	13"/>
-                <headerDefinition name="#define BUTTON_PIN          	12"/>
+<!--                <headerDefinition name="#define LED_PIN             	13"/>-->
+<!--                <headerDefinition name="#define BUTTON_PIN          	12"/>-->
             </headersDefinitions>
             <commands>
-                <command name="void Init Board()"/>
+<!--                <command name="void Init Board()"/>-->
                 <command name="void LedControl(int LedPin, int State)"/>
                 <command name="void LedBlinks(int LedPin, int Count, int TimeON, int TimeOFF)"/>
             </commands>
@@ -489,6 +491,7 @@ and open the template in the editor.
                 <command name="void LedBrightness(int LedPin, int Bright)"/>
             </commands>
         </block>
+
         <block name="Tone">
             <headers>
             </headers>
@@ -646,35 +649,30 @@ and open the template in the editor.
                 }
             </command>
             <command name="void MoveBack(int Speed)">
-                //Ехать назад
                 void MoveBack(int Speed)
                 {
                 Motors(-Speed, -Speed);
                 }
             </command>
             <command name="void Stop()">
-                //Стоп
                 void Stop()
                 {
                 Motors(0, 0);
                 }
             </command>
             <command name="void MoveRight(int Speed)">
-                //Разворот налево
                 void MoveRight(int Speed)
                 {
                 Motors(Speed, -Speed);
                 }
             </command>
             <command name="void MoveLeft(int Speed)">
-                //Разворот направо
                 void MoveLeft(int Speed)
                 {
                 Motors(-Speed, Speed);
                 }
             </command>
             <command name="void MoveForwardByDelay(int Speed, int Time)">
-                //Вперед по времени
                 void MoveForwardByDelay(int Speed, int Time)
                 {
                 MoveForward(Speed);
@@ -683,7 +681,6 @@ and open the template in the editor.
                 }
             </command>
             <command name="void MoveForwardByEncoder(int Speed, unsigned long Distance)">
-                //Вперед по расстоянию
                 void MoveForwardByEncoder(int Speed, unsigned long Distance)
                 {
                 EncodersToNull();
@@ -700,7 +697,6 @@ and open the template in the editor.
                 }
             </command>
             <command name="void MoveBackByDelay(int Speed, int Time)">
-                //Назад по времени
                 void MoveBackByDelay(int Speed, int Time)
                 {
                 MoveBack(Speed);
@@ -709,7 +705,6 @@ and open the template in the editor.
                 }
             </command>
             <command name="void MoveBackByEncoder(int Speed, int Distance)">
-                //Назад по расстоянию
                 void MoveBackByEncoder(int Speed, int Distance)
                 {
                 EncodersToNull();
@@ -726,7 +721,6 @@ and open the template in the editor.
                 }
             </command>
             <command name="void MoveRightByDelay(int Speed, int Time)">
-                //Поворот направо по времени
                 void MoveRightByDelay(int Speed, int Time)
                 {
                 MoveRight(Speed);
@@ -735,7 +729,6 @@ and open the template in the editor.
                 }
             </command>
             <command name="void MoveRightByEncoder(int Speed, int Angle)">
-                //Поворот направо на градус
                 void MoveRightByEncoder(int Speed, int Angle)
                 {
                 EncodersToNull();
@@ -752,7 +745,6 @@ and open the template in the editor.
                 }
             </command>
             <command name="void MoveLeftByDelay(int Speed, int Time)">
-                //Поворот налево по времени
                 void MoveLeftByDelay(int Speed, int Time)
                 {
                 MoveLeft(Speed);
@@ -761,7 +753,6 @@ and open the template in the editor.
                 }
             </command>
             <command name="void MoveLeftByEncoder(int Speed, int Angle)">
-                //Поворот налево на градус
                 void MoveLeftByEncoder(int Speed, int Angle)
                 {
                 EncodersToNull();

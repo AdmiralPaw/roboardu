@@ -14,7 +14,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
 
         </KeyBlock>
         <KeyBlock key="modules.button.name">
-            <!--            <Block value="bg.sensor_button"/>-->
+            <Block value="bg.Button"/>
         </KeyBlock>
         <KeyBlock key="modules.gerkon.name">
             <Block value="bg.Gercon"/>
@@ -38,15 +38,8 @@ file before genus A is specified./ We impose this requirement so that sanity che
         </KeyBlock>
         <KeyBlock key="modules.diod.name">
             <Block value="bg.LedControl"/>
-            <Block value="bg.pwmled"/>
             <Block value="bg.led_blink"/>
-            <Block value="bg.rgb_led"/>
-            <Block value="bg.rgb_led_blink"/>
-            <Block value="bg.rgb_led_pwm"/>
-        </KeyBlock>
-        <KeyBlock key="modules.combined.name">
-            <!--            <Block value="bg.rangefinderCombined"/>-->
-            <!--            <Block value="bg.lightCombined"/>-->
+            <Block value="bg.pwmled"/>
         </KeyBlock>
         <KeyBlock key="modules.piezzo.name">
             <Block value="bg.tone"/>
@@ -54,9 +47,6 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <Block value="bg.no_tone"/>
             <Block value="bg.tone_impulse"/>
             <Block value="bg.melody"/>
-        </KeyBlock>
-        <KeyBlock key="modules.hall.name">
-<!--            <Block value="bg.Gercon"/>-->
         </KeyBlock>
         <KeyBlock key="modules.angle.name">
             <Block value="bg.Potentiometer"/>
@@ -67,10 +57,23 @@ file before genus A is specified./ We impose this requirement so that sanity che
         <KeyBlock key="modules.angle.name">
             <Block value="bg.Potentiometer"/>
         </KeyBlock>
-        <KeyBlock key="modules.angle.name">
-            <Block value="bg.Potentiometer"/>
+        <KeyBlock key="modules.temperature.name">
+            <Block value="bg.TempSensor"/>
         </KeyBlock>
-
+        <KeyBlock key="modules.trailer.name">
+            <Block value="bg.ObjectSensor"/>
+        </KeyBlock>
+        <KeyBlock key="modules.servo.name">
+            <Block value="bg.ServoMoveSlow"/>
+            <Block value="bg.servo_default"/>
+        </KeyBlock>
+        <KeyBlock key="modules.combined.name">
+            <Block value="bg.IK_sensor"/>
+        </KeyBlock>
+        <KeyBlock key="modules.eyes.name">
+            <Block value="bg.UltrasonicI2C"/>
+            <Block value="bg.UltrasonicHCSR04"/>
+        </KeyBlock>
 
     </SuitableBlocks>
 
@@ -3325,8 +3328,6 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <FamilyMember>pinListDigital_D11</FamilyMember>
             <FamilyMember>pinListDigital_D12</FamilyMember>
             <FamilyMember>pinListDigital_D13</FamilyMember>
-        </BlockFamily>
-        <BlockFamily>
             <FamilyMember>pinListAnalog_A0</FamilyMember>
             <FamilyMember>pinListAnalog_A1</FamilyMember>
             <FamilyMember>pinListAnalog_A2</FamilyMember>
@@ -3470,8 +3471,6 @@ file before genus A is specified./ We impose this requirement so that sanity che
             <BlockDrawer button-color="190 30 180" name="bd.diode">
                 <BlockGenusMember>LedControl</BlockGenusMember>
                 <BlockGenusMember>led_blink</BlockGenusMember>
-                <BlockGenusMember>ledD13</BlockGenusMember>
-                <BlockGenusMember>blink_ledD13</BlockGenusMember>
                 <BlockGenusMember>pwmled</BlockGenusMember>
             </BlockDrawer>
 
@@ -3555,13 +3554,6 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockGenusMember>eeprom_write</BlockGenusMember>
             </BlockDrawer>
 
-            <BlockDrawer button-color="169 148 212" name="bd.network" type="factory">
-                <BlockGenusMember>bleshield</BlockGenusMember>
-                <BlockGenusMember>bleshield_available</BlockGenusMember>
-                <BlockGenusMember>bleshield_read_poly</BlockGenusMember>
-                <BlockGenusMember>bleshield_compare</BlockGenusMember>
-            </BlockDrawer>
-
             <BlockDrawer button-color="120 120 120" name="bd.especial" type="factory">
                 <BlockGenusMember>code_head</BlockGenusMember>
                 <BlockGenusMember>code_setup</BlockGenusMember>
@@ -3598,7 +3590,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <Component name="modules.servo.name" info="modules.servo.info">servo</Component>
                 <Component name="modules.start.name" info="modules.start.info">start</Component>
             </ControllerComponents>
-            <ControllerComponents pin="d8">
+            <ControllerComponents pin="d11">
                 <Component name="modules.button.name" info="modules.button.info">button</Component>
                 <Component name="modules.diod.name" info="modules.diod.info">diod</Component>
                 <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
@@ -3628,7 +3620,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <Component name="modules.servo.name" info="modules.servo.info">servo</Component>
                 <Component name="modules.start.name" info="modules.start.info">start</Component>
             </ControllerComponents>
-            <ControllerComponents pin="d11">
+            <ControllerComponents pin="d8">
                 <Component name="modules.button.name" info="modules.button.info">button</Component>
                 <Component name="modules.diod.name" info="modules.diod.info">diod</Component>
                 <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
@@ -3638,22 +3630,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <Component name="modules.servo.name" info="modules.servo.info">servo</Component>
                 <Component name="modules.start.name" info="modules.start.info">start</Component>
             </ControllerComponents>
-            <ControllerComponents pin="a3">
-                <Component name="modules.angle.name" info="modules.angle.info">angle</Component>
-                <Component name="modules.button.name" info="modules.button.info">button</Component>
-                <Component name="modules.diod.name" info="modules.diod.info">diod</Component>
-                <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
-                <Component name="modules.hall.name" info="modules.hall.info">hall</Component>
-                <Component name="modules.light.name" info="modules.light.info">light</Component>
-                <Component name="modules.line.name" info="modules.line.info">line</Component>
-                <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
-                <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
-                <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
-                <Component name="modules.trailer.name" info="modules.trailer.info">trailer</Component>
-                <Component name="modules.servo.name" info="modules.servo.info">servo</Component>
-                <Component name="modules.start.name" info="modules.start.info">start</Component>
-            </ControllerComponents>
-            <ControllerComponents pin="a2">
+            <ControllerComponents pin="a0">
                 <Component name="modules.angle.name" info="modules.angle.info">angle</Component>
                 <Component name="modules.button.name" info="modules.button.info">button</Component>
                 <Component name="modules.diod.name" info="modules.diod.info">diod</Component>
@@ -3683,7 +3660,22 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <Component name="modules.servo.name" info="modules.servo.info">servo</Component>
                 <Component name="modules.start.name" info="modules.start.info">start</Component>
             </ControllerComponents>
-            <ControllerComponents pin="a0">
+            <ControllerComponents pin="a2">
+                <Component name="modules.angle.name" info="modules.angle.info">angle</Component>
+                <Component name="modules.button.name" info="modules.button.info">button</Component>
+                <Component name="modules.diod.name" info="modules.diod.info">diod</Component>
+                <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
+                <Component name="modules.hall.name" info="modules.hall.info">hall</Component>
+                <Component name="modules.light.name" info="modules.light.info">light</Component>
+                <Component name="modules.line.name" info="modules.line.info">line</Component>
+                <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
+                <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
+                <Component name="modules.touch.name" info="modules.touch.info">touch</Component>
+                <Component name="modules.trailer.name" info="modules.trailer.info">trailer</Component>
+                <Component name="modules.servo.name" info="modules.servo.info">servo</Component>
+                <Component name="modules.start.name" info="modules.start.info">start</Component>
+            </ControllerComponents>
+            <ControllerComponents pin="a3">
                 <Component name="modules.angle.name" info="modules.angle.info">angle</Component>
                 <Component name="modules.button.name" info="modules.button.info">button</Component>
                 <Component name="modules.diod.name" info="modules.diod.info">diod</Component>

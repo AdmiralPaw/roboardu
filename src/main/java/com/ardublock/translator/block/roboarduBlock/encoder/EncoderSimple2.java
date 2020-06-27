@@ -31,7 +31,7 @@ public class EncoderSimple2 extends TranslatorBlock{
             + "#define ON                        1\n"
             + "#define OFF                       0\n";
     private static final String ENCODER_DEFINE_VAR = ""
-            + "unsigned long long nEncoder1, nEncoder2;\n";
+            + "unsigned long nEncoder1, nEncoder2;\n";
     private static final String ENCODER_DEFINE = ""
             + "void InitEnc(int fEn)\n"
             + "{\n"

@@ -195,7 +195,8 @@ public class Window2Explorer extends JPanel implements Explorer {
             selectCanvas(0);
 
         }
-        if(iterationCount==18) {
+        //TODO почему 17? а я вам отвечу - 17 это костыль, т.е. у нас когда-то было 17 списков... это пиздец
+        if(iterationCount==17) {
             long time1 = System.currentTimeMillis();
             for (Canvas unit : items) {
                 for (Component comp : unit.getJComponent().getComponents()) {

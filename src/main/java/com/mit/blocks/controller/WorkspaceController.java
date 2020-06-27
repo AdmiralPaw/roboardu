@@ -78,7 +78,9 @@ public class WorkspaceController {
      *
      */
     public static Map<String,String[]> suitableBlocks;
-
+    
+    public static Map<String,String> translateRightPanel;
+    
     private Element langDefRoot;
     private boolean isWorkspacePanelInitialized = false;
 
@@ -207,6 +209,7 @@ public class WorkspaceController {
             ardublockLocalize(doc);
             ardublockStyling(doc);
             getAllSuitableBlocks(doc);
+            getRightPanelTranslate(doc);
             langDefRoot = doc.getDocumentElement();
             langDefDirty = true;
         } catch (ParserConfigurationException e) {
@@ -236,7 +239,7 @@ public class WorkspaceController {
 
             try {
                 key = resourses.getString(key);
-                //System.out.println(key);
+
             }catch (Exception e){
                 key = "not found";
             }
@@ -245,9 +248,9 @@ public class WorkspaceController {
             NodeList blocks = ((Element)keyElements.item(i)).getElementsByTagName("Block");
             String[] values = new String[blocks.getLength()];
             String[] parsedValues = new String[blocks.getLength()];
-
+               
             for(int q=0;q<blocks.getLength();q++){
-                values[q] = ((Element)blocks.item(q)).getAttribute("value");
+                values[q] = ((Element)blocks.item(q)).getAttribute("value");   
                 parsedValues[q] = resourses.getString(values[q]);
 
             }
@@ -271,7 +274,42 @@ public class WorkspaceController {
 
     }
 
+    private void getRightPanelTranslate(Document doc){
 
+        Map<String,String> translateRightPanel = new HashMap<String,String>(){};
+
+        ResourceBundle resourses = ResourceBundle.getBundle("com/ardublock/block/ardublock");
+
+        NodeList elements = doc.getElementsByTagName("SuitableBlocks");
+        Element el = (Element) elements.item(0);
+
+        NodeList keyElements = el.getElementsByTagName("KeyBlock");
+        //System.out.println("keys from xml ***************8");
+        for(int i=0;i<keyElements.getLength();i++){
+            String key = ((Element)keyElements.item(i)).getAttribute("key");
+
+            try {
+                //key = resourses.getString(key);
+
+            }catch (Exception e){
+                key = "not found";
+            }
+
+
+            NodeList blocks = ((Element)keyElements.item(i)).getElementsByTagName("Block");
+            String[] values = new String[blocks.getLength()];
+            String[] parsedValues = new String[blocks.getLength()];
+               
+            for(int q=0;q<blocks.getLength();q++){
+                values[q] = ((Element)blocks.item(q)).getAttribute("value");                
+                parsedValues[q] = resourses.getString(values[q]);
+                translateRightPanel.put(values[q].replace("bg.", ""),key.replace("modules.","").replace(".name", ""));
+            }
+            
+        }
+
+        this.translateRightPanel=translateRightPanel;
+    }
     
     /**
      * Styling the color of the BlockGenus and other elements with color

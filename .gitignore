@@ -19,3 +19,4 @@ deploy.sh
 test-output
 src/main/resources/com/ardublock/block/littlebits/files
 >>>>>>> upstream/master
+nbactions.xml

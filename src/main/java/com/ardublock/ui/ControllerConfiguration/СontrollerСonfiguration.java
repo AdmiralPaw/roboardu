@@ -34,7 +34,7 @@ public class СontrollerСonfiguration extends JPanel {
 
     //Поле сообщений пользовательского интерфейса
     private ResourceBundle uiMessageBundle;
-
+   
     //Структура контактов (пинов)
     public enum Pin {
 
@@ -140,19 +140,45 @@ public class СontrollerСonfiguration extends JPanel {
         if (buttonPin == null) {
             this.resetPane();
         }
+        ControllerMenuButton temp;
         for (int i = 0; i < components.size(); i++) {
             if (components.get(i).pin.equals(buttonPin)) {
-                componentsPane.add(new ControllerMenuButton(
+                temp = new ControllerMenuButton(
                         this,
                         components.get(i).deviceName,
                         components.get(i).deviceNameTranslated,
-                        buttonPin));
+                        buttonPin);
+                componentsPane.add(temp);
             }
         }
         componentsPane.validate();
         componentsPane.repaint();
     }
-
+    
+    public void setModuleOnPin(String buttonPin, String moduleName){
+        componentsPane.removeAll();
+        if (buttonPin == null) {
+            this.resetPane();
+        }
+        ControllerMenuButton temp;
+        for (int i = 0; i < components.size(); i++) {
+            if (components.get(i).pin.equals(buttonPin)) {
+                if(components.get(i).deviceName.equalsIgnoreCase(moduleName)){
+                    temp = new ControllerMenuButton(
+                        this,
+                        components.get(i).deviceName,
+                        components.get(i).deviceNameTranslated,
+                        buttonPin);
+                    if(temp!=null){
+                        temp.mouseReleased(null);
+                    }                   
+                }
+            }
+        }
+        componentsPane.validate();
+        componentsPane.repaint();
+    }
+    
     /**
      * Метод, меняющий панель компонентов коннектора
      * @param moduleName - Имя модуля

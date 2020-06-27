@@ -1,10 +1,12 @@
 package com.mit.blocks.workspace;
 
+import com.ardublock.ui.ControllerConfiguration.RightPanelListener;
 import com.ardublock.ui.ControllerConfiguration.СontrollerСonfiguration;
 import com.ardublock.ui.OpenblocksFrame;
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.codeblocks.ProcedureOutputManager;
 import com.mit.blocks.codeblockutil.*;
+import com.mit.blocks.controller.WorkspaceController;
 import com.mit.blocks.renderable.BlockUtilities;
 import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.typeblocking.FocusTraversalManager;
@@ -168,7 +170,8 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
      *
      */
     public FactoryManager factory;
-
+    
+    private RightPanelListener rightPanelListener;
     /**
      *
      */
@@ -232,6 +235,10 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
 
         this.controller = new СontrollerСonfiguration();
         controller.setMinimumSize(new Dimension(100, 100));
+        
+        rightPanelListener = new RightPanelListener(this);
+        this.addWorkspaceListener(this.rightPanelListener);
+        
         this.factory = new FactoryManager(this);
         this.addWorkspaceListener(this.factory);
         this.blockCanvas.getHorizontalModel().addChangeListener(this);
@@ -1396,6 +1403,8 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
             //load block drawers and their content
             PageDrawerLoadingUtils.loadBlockDrawerSets(this, originalLangRoot, factory, controller);
             PageDrawerLoadingUtils.loadComponentsSets(this, originalLangRoot, controller);
+                                   
+//            controller.setModuleOnPin("d8", "button");
             loadWorkspaceSettings(originalLangRoot);
         }
 

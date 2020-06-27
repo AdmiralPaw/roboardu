@@ -3,6 +3,7 @@ package com.mit.blocks.codeblocks;
 import com.mit.blocks.codeblocks.BlockConnector.PositionType;
 import com.mit.blocks.renderable.BlockImageIcon;
 import com.mit.blocks.renderable.BlockImageIcon.ImageLocation;
+import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.ISupportMemento;
 import com.mit.blocks.workspace.Workspace;
 import com.mit.blocks.workspace.WorkspaceEnvironment;
@@ -216,7 +217,25 @@ public class Block implements ISupportMemento {
     public Long getBlockID() {
         return blockID;
     }
+    
+    
+    
+    public Block getFatherConnectedBlockRecursive(){
+        Block subB=null;
+        Block temp=null;
+        subB = workspace.getEnv().getBlock(this.getBeforeBlockID());
+        if(subB!=null){
+            while(subB!=null){
+                temp = subB;
+                subB = workspace.getEnv().getBlock(subB.getBeforeBlockID());
+            }
+            return temp;
+        } else {
+            return this;
+        }
 
+    }
+    
     /**
      * Sets the block property with the specified property and value.  If this block's
      * genus already contains a value with the same property, then the specified property

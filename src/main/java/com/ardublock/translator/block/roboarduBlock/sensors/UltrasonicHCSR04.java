@@ -33,7 +33,7 @@ public class UltrasonicHCSR04 extends TranslatorBlock {
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
         translator.LoadTranslators(this.getClass().getSimpleName());
         
-        translator.addSetupCommand("void InitUltrasonicHCSR04();");
+        translator.addSetupCommand("InitUltrasonicHCSR04();");
 
         String ret = "UltrasonikHCSR04Read()";
         return codePrefix + ret + codeSuffix;

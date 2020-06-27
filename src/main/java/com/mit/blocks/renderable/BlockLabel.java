@@ -417,10 +417,11 @@ public class BlockLabel implements MouseListener, MouseMotionListener, KeyListen
     protected void genusChanged(String genus) {
         if (widget.hasSiblings()) {
             Block oldBlock = workspace.getEnv().getBlock(blockID);
+            String oldBlockLabel = oldBlock.getBlockLabel();
             oldBlock.changeGenusTo(genus);
             RenderableBlock rb = workspace.getEnv().getRenderableBlock(blockID);
             rb.repaintBlock();
-            workspace.notifyListeners(new WorkspaceEvent(workspace, rb.getParentWidget(), blockID, WorkspaceEvent.BLOCK_GENUS_CHANGED));
+            workspace.notifyListeners(new WorkspaceEvent(workspace, rb.getParentWidget(), blockID, oldBlockLabel, WorkspaceEvent.BLOCK_GENUS_CHANGED));
         }
     }
 

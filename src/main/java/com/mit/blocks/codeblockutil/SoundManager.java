@@ -24,7 +24,7 @@ public class SoundManager {
     public static Sound loadSound(String soundFileName) {
         final URL url = SoundManager.class.getResource(soundFileName);
         if (url == null) {
-            System.out.println("Could not find resource " + soundFileName);
+            //System.out.println("Could not find resource " + soundFileName);
             return null;
         }
 
