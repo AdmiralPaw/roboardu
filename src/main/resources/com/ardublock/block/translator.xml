@@ -646,35 +646,30 @@ and open the template in the editor.
                 }
             </command>
             <command name="void MoveBack(int Speed)">
-                //Ехать назад
                 void MoveBack(int Speed)
                 {
                 Motors(-Speed, -Speed);
                 }
             </command>
             <command name="void Stop()">
-                //Стоп
                 void Stop()
                 {
                 Motors(0, 0);
                 }
             </command>
             <command name="void MoveRight(int Speed)">
-                //Разворот налево
                 void MoveRight(int Speed)
                 {
                 Motors(Speed, -Speed);
                 }
             </command>
             <command name="void MoveLeft(int Speed)">
-                //Разворот направо
                 void MoveLeft(int Speed)
                 {
                 Motors(-Speed, Speed);
                 }
             </command>
             <command name="void MoveForwardByDelay(int Speed, int Time)">
-                //Вперед по времени
                 void MoveForwardByDelay(int Speed, int Time)
                 {
                 MoveForward(Speed);
@@ -683,7 +678,6 @@ and open the template in the editor.
                 }
             </command>
             <command name="void MoveForwardByEncoder(int Speed, unsigned long Distance)">
-                //Вперед по расстоянию
                 void MoveForwardByEncoder(int Speed, unsigned long Distance)
                 {
                 EncodersToNull();
@@ -700,7 +694,6 @@ and open the template in the editor.
                 }
             </command>
             <command name="void MoveBackByDelay(int Speed, int Time)">
-                //Назад по времени
                 void MoveBackByDelay(int Speed, int Time)
                 {
                 MoveBack(Speed);
@@ -709,7 +702,6 @@ and open the template in the editor.
                 }
             </command>
             <command name="void MoveBackByEncoder(int Speed, int Distance)">
-                //Назад по расстоянию
                 void MoveBackByEncoder(int Speed, int Distance)
                 {
                 EncodersToNull();
@@ -726,7 +718,6 @@ and open the template in the editor.
                 }
             </command>
             <command name="void MoveRightByDelay(int Speed, int Time)">
-                //Поворот направо по времени
                 void MoveRightByDelay(int Speed, int Time)
                 {
                 MoveRight(Speed);
@@ -735,7 +726,6 @@ and open the template in the editor.
                 }
             </command>
             <command name="void MoveRightByEncoder(int Speed, int Angle)">
-                //Поворот направо на градус
                 void MoveRightByEncoder(int Speed, int Angle)
                 {
                 EncodersToNull();
@@ -752,7 +742,6 @@ and open the template in the editor.
                 }
             </command>
             <command name="void MoveLeftByDelay(int Speed, int Time)">
-                //Поворот налево по времени
                 void MoveLeftByDelay(int Speed, int Time)
                 {
                 MoveLeft(Speed);
@@ -761,7 +750,6 @@ and open the template in the editor.
                 }
             </command>
             <command name="void MoveLeftByEncoder(int Speed, int Angle)">
-                //Поворот налево на градус
                 void MoveLeftByEncoder(int Speed, int Angle)
                 {
                 EncodersToNull();

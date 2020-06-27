@@ -3560,13 +3560,6 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockGenusMember>eeprom_write</BlockGenusMember>
             </BlockDrawer>
 
-            <BlockDrawer button-color="169 148 212" name="bd.network" type="factory">
-                <BlockGenusMember>bleshield</BlockGenusMember>
-                <BlockGenusMember>bleshield_available</BlockGenusMember>
-                <BlockGenusMember>bleshield_read_poly</BlockGenusMember>
-                <BlockGenusMember>bleshield_compare</BlockGenusMember>
-            </BlockDrawer>
-
             <BlockDrawer button-color="120 120 120" name="bd.especial" type="factory">
                 <BlockGenusMember>code_head</BlockGenusMember>
                 <BlockGenusMember>code_setup</BlockGenusMember>
