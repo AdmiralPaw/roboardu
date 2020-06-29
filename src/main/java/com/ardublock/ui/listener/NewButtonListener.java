@@ -7,17 +7,17 @@ import com.ardublock.core.Context;
 import com.ardublock.ui.OpenblocksFrame;
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  * Класс прослушивателя для получения событий новой кнопки
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class NewButtonListener implements ActionListener
 {
-	//Поле родительской оконной процедуры
+	/**Поле родительской оконной процедуры*/
 	private OpenblocksFrame parentFrame;
 	
     /**
      * Метод, прослушивающий события новой кнопки
-     * @param frame - оконная процедура
+     * @param frame Оконная процедура
      */
     public NewButtonListener(OpenblocksFrame frame)
 	{
@@ -28,7 +28,7 @@ public class NewButtonListener implements ActionListener
 
 	/**
 	 * Метод, создающий новый файл сгенерированного кода Arduino из блоков
-	 * @param e - Событие совершённого действия
+	 * @param e Событие совершённого действия
 	 */
 	public void actionPerformed(ActionEvent e)
 	{   

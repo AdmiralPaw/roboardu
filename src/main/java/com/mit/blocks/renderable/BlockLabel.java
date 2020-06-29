@@ -13,7 +13,6 @@ import java.awt.event.*;
 import java.util.List;
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  * Класс BlockLabel - это область блока, в которой отображается и, возможно, редактируется текст.
  * Расположение и шрифт метки блока задаются в форме блока, а отображаемый текст задается блоком,
  * BlockLabel - это шлюз для отображения и изменения текста.
@@ -24,6 +23,7 @@ import java.util.List;
  * Во время перемещения мыши, ввода и выхода событий белая граница переключается вокруг метки
  * для определенных блоков. Эта белая граница помогает предложить редактируемые метки
  * для блоков, у которых эта возможность включена.
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class BlockLabel implements MouseListener, MouseMotionListener, KeyListener {
 

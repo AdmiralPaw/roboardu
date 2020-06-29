@@ -1,8 +1,8 @@
 package com.mit.blocks.workspace;
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  * Странный класс* (Похоже, работает с состояниями программы)
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public interface ISupportMemento {
 

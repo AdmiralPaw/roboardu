@@ -10,7 +10,6 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  * Класс FactoryRenderableBlock расширяет RenderableBlock и используется в FactoryBlockDrawers.
  * В отличие от своего суперкласса RenderableBlock, Factory RenderableBlock не перемещается и не соединяется
  * ни с какими блоками. Вместо этого он имеет только одну функцию - создавать новые
@@ -18,6 +17,7 @@ import java.awt.event.MouseEvent;
  * 
  * Когда мышь нажимается на FactoryRenderableBlock, новый экземпляр RenderableBlock создается поверх него
  * для получения дальнейших событий мыши, а новый экземпляр блока создается в фоновом режиме.
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class FactoryRenderableBlock extends RenderableBlock implements Cloneable {
 

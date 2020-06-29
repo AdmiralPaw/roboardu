@@ -10,7 +10,6 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JComponent;
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  * PageDivider-это JComponent, графически отмечающий границу между двумя страницами.
  * Он содержит ссылку на левую страницу и вызывает мутации на этой странице при взаимодействии
  * пользователя с PageDivider. В частности, когда пользователь нажимает PageDivider,
@@ -34,10 +33,11 @@ import javax.swing.JComponent;
  *      4) пользователь перетаскивает разделитель страниц
  *      Страница.добавить ширину в пикселях() вызывается
  *      Вызываются прослушиватели изменений страниц
- * 
+ *
  * @specfield leftPage : Page //Cтраница в левой части этого PageDivider
  * @specfield color : Color //Wвет этого PageDivider
  * @specfield mouseIn : boolean flag //true тогда и только тогда, когда мышь находится над этим PageDivider
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class PageDivider extends JComponent implements MouseListener, MouseMotionListener {
 
