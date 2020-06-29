@@ -4,12 +4,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  * Класс PageChangeEventmanager отвечает за обработку всех событий изменения страницы,
  * инициируемых Pages, и уведомляет слушателей изменения страницы, когда такое событие инициируется.
  * Cобытие изменение страницы генерируется путем вызова диспетчера через статический
  * метод PageChangeEventManager.notifyListeners(). Объект может подписаться на события изменения страницы,
  * делегируя себя через статический метод PageChangeEventManager.addPageChangeListener().
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class PageChangeEventManager {
 

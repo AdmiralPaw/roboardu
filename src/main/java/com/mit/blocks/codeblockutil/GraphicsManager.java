@@ -14,10 +14,10 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  * GraphicsManager поддерживает информацию о графическом контексте, которая может быть полезна для многих аспектов
  * графического рендеринга. Это означает, что многие поля зависят от компьютера и помещаются здесь, поэтому они
  * вычисляются только один раз.
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class GraphicsManager {
 

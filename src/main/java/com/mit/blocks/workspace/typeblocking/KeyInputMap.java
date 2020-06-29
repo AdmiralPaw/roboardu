@@ -9,9 +9,10 @@ import com.mit.blocks.workspace.Workspace;
 import com.mit.blocks.workspace.typeblocking.TypeBlockManager.Direction;
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  * Класс KeyInputMap управляет обработкой определенных ключей и делегирует задачу
- * выполнения действия TypeBlockManager. В некотором смысле KeyInputMap помогает сопоставить символ с действием.
+ * выполнения действия TypeBlockManager. В некотором смысле KeyInputMap
+ * помогает сопоставить символ с действием.
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class KeyInputMap {
 

@@ -12,7 +12,6 @@ import java.awt.image.BufferedImage;
 
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  * Этот класс можно использовать для добавления возможности перетаскивания в любой JComponent.
  *  Он содержит методы и элементы данных, необходимые для поддержки автоматического перетаскивания, а также
  *  содержит методы для имплиментации как MouseListener, MouseMotionListener.
@@ -24,7 +23,7 @@ import java.awt.image.BufferedImage;
  *  методам мыши здесь, могут создать внутренний класс, который расширяет этот класс. Таким образом, внутренний класс
  *  может поддерживать функциональность Jcommonentdraghandler, а также иметь доступ к элементам данных и методам своего
  *  заключающего класса для целей расширения.
- *
+ *  @author AdmiralPaw, Ritevi, Aizek
  */
 public class JComponentDragHandler implements MouseListener, MouseMotionListener {
 

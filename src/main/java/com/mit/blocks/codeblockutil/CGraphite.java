@@ -3,8 +3,8 @@ package com.mit.blocks.codeblockutil;
 import java.awt.Color;
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  *
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public final class CGraphite {
 
