@@ -242,6 +242,9 @@ public class TutorialPane extends JPanel {
         this.repaint();
     }
 
+    /**
+     *
+     */
     private void initPanels() {
         tutorTextPanel = new TPanel(this);
 

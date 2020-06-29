@@ -122,8 +122,12 @@ public class WorkspaceEvent {
     private WorkspaceWidget widget = null;
     private BlockLink link = null;
     private String oldWidgetName = null;
+    private String oldBlockLabel = "";
+    
     //If this is a user spawned event or not
     private boolean userSpawned = false;
+    
+    
 
     /**
      * Constructs a new WorkspaceEvent.  This constructor should be used to report
@@ -200,7 +204,22 @@ public class WorkspaceEvent {
         this.eventType = eventType;
         this.blockID = blockID;
     }
-
+    
+    /**
+     * Constructs a new WorkspaceEvent.  This constructor should be used to report
+     * the following: genus changed.
+     * @param widget
+     * @param blockID
+     * @param eventType
+     */
+    public WorkspaceEvent(Workspace workspace, WorkspaceWidget widget, Long blockID,String oldBlockLabel, int eventType) {
+        this.workspace = workspace;
+        this.widget = widget;
+        this.eventType = eventType;
+        this.blockID = blockID;
+        this.oldBlockLabel = oldBlockLabel;
+    }
+    
     /**
      *
      * @param workspace
@@ -272,7 +291,7 @@ public class WorkspaceEvent {
     public WorkspaceWidget getSourceWidget() {
         return widget;
     }
-
+    
     /**
      * Returns the Long ID of the Block where this event occured.For 
  block connection events, this id is Block.NULL since the event occurred
@@ -310,7 +329,11 @@ public class WorkspaceEvent {
     public String getOldNameOfSourceWidget() {
         return oldWidgetName;
     }
-
+    
+    public String getoldBlockLabel(){
+        return oldBlockLabel;
+    }
+    
     public String toString() {
         switch (eventType) {
             case PAGE_ADDED:

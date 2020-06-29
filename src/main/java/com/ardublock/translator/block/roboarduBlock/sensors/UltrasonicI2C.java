@@ -33,7 +33,7 @@ public class UltrasonicI2C extends TranslatorBlock {
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException {
         translator.LoadTranslators(this.getClass().getSimpleName());
         
-        translator.addSetupCommand("void InitUltrasonic();");
+        translator.addSetupCommand("InitUltrasonic();");
 
         String ret = "UltrasonikRead()";
         return codePrefix + ret + codeSuffix;

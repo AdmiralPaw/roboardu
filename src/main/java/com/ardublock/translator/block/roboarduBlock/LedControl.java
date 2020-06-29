@@ -38,23 +38,20 @@ public class LedControl extends TranslatorBlock {
     {
         translator.LoadTranslators(this.getClass().getSimpleName());
         TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(0);
-        String pinNumber = tb.toCode();
+        String LedPin = tb.toCode();
         //TODO цифровые порты тоже нужны
-        if(!("A0 A1 A2 A3 13").contains(pinNumber.trim())) {
+        if(!("8 9 10 11 A0 A1 A2 A3 13").contains(LedPin.trim())) {
             throw new BlockException(blockId, uiMessageBundle.getString("ardublock.error_msg.Digital_pin_slot"));
-        }
-        if(pinNumber.equals("13")){
-            translator.addSetupCommand("pinMode("+pinNumber+", OUTPUT);");
         }
         tb = this.getRequiredTranslatorBlockAtSocket(1);
         String led_state = tb.toCode();
         if(!led_state.equals("HIGH") && !led_state.equals("LOW")){
             throw new BlockException(tb.getBlockID(), "ARGUMENT_ERROR");
         }
-        translator.addSetupCommand("InitBoard();");
-        //TODO add check for D13 pin in setup
-        String ret ="LedControl(" + pinNumber +", " + led_state + ");\n";
 
+        translator.addSetupCommand("pinMode(" + LedPin + ", OUTPUT);");
+
+        String ret ="LedControl(" + LedPin +", " + led_state + ");\n";
         return codePrefix + ret + codeSuffix;
     }
 

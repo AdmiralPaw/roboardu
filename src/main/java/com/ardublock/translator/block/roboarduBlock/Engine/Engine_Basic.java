@@ -44,13 +44,13 @@ public class Engine_Basic extends TranslatorBlock {
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
         String val = translatorBlock.toCode();
         if (Double.parseDouble(val) > 255 || Double.parseDouble(val) < -255) {
-            throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range").replace("?", 255 +", "+-255));
+            throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range").replace("?", -255 +"; "+255));
         };
         String ret = "Motors(" + translatorBlock.toCode() + ", ";
         translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
         val = translatorBlock.toCode();
         if (Double.parseDouble(val) > 255 || Double.parseDouble(val) < -255) {
-            throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range").replace("?", 255 +", "+-255));
+            throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range").replace("?", -255 +"; "+255));
         };
         ret = ret + translatorBlock.toCode() + ");";
         return codePrefix + ret + codeSuffix;
