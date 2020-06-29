@@ -6,25 +6,29 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- *
- * @author User
+ * Класс, генерирующий оконную процедуру, графику, кнопки, функции и т.д.
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class PropertiesReader
 {
 
-    /**
-     *
-     */
+    /**Поле словаря считывателя свойств*/
     public static Map<String, PropertiesReader> propertiesReaderMap = new SafeHashMap<String, PropertiesReader>();
 
-    /**
-     *
-     */
+    /**Поле стандартного файла свойств*/
     public static final String DEFAULT_PROPERTIES_FILE = "heqichen.properties";
-	
+
+    /**Поле имени файла*/
 	private String filename;
+
+	/**Поле свойств*/
 	private Properties p;
-	
+
+	/**
+	 * Метод, считывающий свойства указанного файла
+	 * @param filename Имя файла
+	 */
+	 //@exception IOException e - Исключение вызываемое при невозможности открыть указанный файл
 	private PropertiesReader(String filename)
 	{
 		this.filename = filename; 
@@ -46,9 +50,9 @@ public class PropertiesReader
 	}
 	
     /**
-     *
-     * @param key
-     * @return
+     * Метод для получения значения свойств
+     * @param key Ключ, по которому будут выданы свойства
+     * @return getValue(key, DEFAULT_PROPERTIES_FILE)
      */
     public static String getValue(String key)
 	{
@@ -56,22 +60,32 @@ public class PropertiesReader
 	}
 	
     /**
-     *
-     * @param key
-     * @param file
-     * @return
+     * Метод для получения значения свойств
+     * @param key Ключ, по которому будут выданы свойства
+     * @param file Файл для считывания свойств
+     * @return propertiesReader.readValue(key)
      */
     public static String getValue(String key, String file)
 	{
 		PropertiesReader propertiesReader = PropertiesReader.getPropertiesReader(file);
 		return propertiesReader.readValue(key);
 	}
-	
+
+	/**
+	 * Метод для считывания значения
+	 * @param key Ключ, по которому будут считаны свойства
+	 * @return p.getProperty(key)
+	 */
 	private String readValue(String key)
 	{
 		return p.getProperty(key);
 	}
-	
+
+	/**
+	 * Метод для получения свойств считывателя
+	 * @param filename Файл для считывания свойств
+	 * @return propertiesReader
+	 */
 	private static PropertiesReader getPropertiesReader(String filename)
 	{
 		PropertiesReader propertiesReader;

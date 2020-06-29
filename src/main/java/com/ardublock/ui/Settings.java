@@ -19,46 +19,54 @@ import java.util.prefs.Preferences;
 //>>>>>>> lerofaCtrlZ
 
 /**
+ * Класс, работающий с настройками, изменяющий их
+ * соответственно с предпочтениями пользователя
  * @author AdmiralPaw, Ritevi, Aizek
- * Класс, работающий с настройками, изменяющий их соответственно с предпочтениями пользователя
  */
 public class Settings extends JFrame {
 
-    //Поле, содержащее пакет сообщений пользовательского интерфейса
+    /**Поле, содержащее пакет сообщений пользовательского интерфейса*/
     private ResourceBundle uiMessageBundle;
 
-    //Поле пользовательских данных конфигурации (Пользовательские предпочтения)
+    /**Поле пользовательских данных конфигурации (Пользовательские предпочтения)*/
     private final Preferences userPrefs;
 
-    //Поле с настройками оконной процедуры
+    /**Поле с настройками оконной процедуры*/
     private Settings thisFrame;
 
-    //Поле с используемым шрифтом
+    /**Поле с используемым шрифтом*/
     private String mainFont = "TimesNewRoman";
 
-    //Поле логической переменной с информацией о перетаскивании (перемещении)
+    /**Поле логической переменной с информацией о перетаскивании (перемещении)*/
     boolean beginDrag;
 
-    //Поле с координатой по оси Ох нажатии мыши
+    /**Поле с координатой по оси Ох нажатии мыши*/
     int mousePressX;
 
-    //Поле с координатой по оси Оу нажатии мыши
+    /**Поле с координатой по оси Оу нажатии мыши*/
     int mousePressY;
-
-    //
+    
     JLabel eggText;
-
-    //
+    
     RCheckBox egg;
 
+<<<<<<< HEAD
     //Поле ширины окна
     int windowWidth = 500;
 
     //Поле высоты окна
     int windowHeight = 350;
+=======
+    /**Поле ширины окна*/
+    int windowWidth = 400;
 
-    //Поле с буффеером нажатий кнопок
+    /**Поле высоты окна*/
+    int windowHeight = 300;
+>>>>>>> parent of f14dfeb... Revert "Documentation_v1.1"
+
+    /**Поле с буфером нажатий кнопок*/
     private ArrayList<Integer> keyBuf;
+<<<<<<< HEAD
 
 
     JFileChooser fileChooser;
@@ -67,6 +75,16 @@ public class Settings extends JFrame {
      * Метод с предустановками оконной процедуры "Настройки" (Внешний вид, значения, режим окна и т.д.)
      *
      * @param openblocksFrame
+=======
+    
+    /**Поле выборщика файла*/
+    JFileChooser fileChooser;
+
+    /**
+     * Метод с предустановками оконной процедуры "Настройки" 
+     * (Внешний вид, значения, режим окна и т.д.)
+     * @param openblocksFrame Оконная процедура
+>>>>>>> parent of f14dfeb... Revert "Documentation_v1.1"
      */
     public Settings(OpenblocksFrame openblocksFrame) {
         thisFrame = this;
@@ -132,10 +150,13 @@ public class Settings extends JFrame {
         }
 
         //uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
-        //Поле панели со вкладками
+
+        /**Поле панели со вкладками*/
         final JTabbedPane tabbedPane = new JTabbedPane();
-        //Поле панели
+
+        /**Поле панели*/
         final JPanel panel = new JPanel();
+
         //panel.setLayout(new BorderLayout());
 
 
@@ -145,7 +166,7 @@ public class Settings extends JFrame {
         windowCapPanel.addMouseListener(new MouseAdapter() {
             /**
              * Метод, который указывает на то, что была нажата кнопка мыши
-             * @param e - Событие нажатия кнопки мыши
+             * @param e Событие нажатия кнопки мыши
              */
             @Override
             public void mousePressed(MouseEvent e) {
@@ -156,16 +177,16 @@ public class Settings extends JFrame {
 
             /**
              * Метод, который указывает на то, что была отпущена кнопка мыши
-             * @param e - Событие нажатия кнопки мыши
+             * @param e Событие нажатия кнопки мыши
              */
             @Override
             public void mouseReleased(MouseEvent e) {
                 beginDrag = false;
 
-                //Поле с новым местоположением перетаскиваемого объекта по оси Ох
+                /**Поле с новым местоположением перетаскиваемого объекта по оси Ох*/
                 int newX = e.getX() - mousePressX;
 
-                //Поле с новым местоположением перетаскиваемого объекта по оси Оу
+                /**Поле с новым местоположением перетаскиваемого объекта по оси Оу*/
                 int newY = e.getY() - mousePressY;
 
                 thisFrame.setBounds(thisFrame.getX() + newX, thisFrame.getY() + newY, windowWidth, windowHeight);
@@ -175,16 +196,16 @@ public class Settings extends JFrame {
         windowCapPanel.addMouseMotionListener(new MouseMotionListener() {
             /**
              * Метод, который указывает на то, что мышью начали перетаскивать объект
-             * @param e - Событие нажатия кнопки мыши
+             * @param e Событие нажатия кнопки мыши
              */
             @Override
             public void mouseDragged(MouseEvent e) {
                 if (beginDrag) {
 
-                    //Поле с новым местоположением перетаскиваемого объекта по оси Ох
+                    /**Поле с новым местоположением перетаскиваемого объекта по оси Ох*/
                     int newX = e.getX() - mousePressX;
 
-                    //Поле с новым местоположением перетаскиваемого объекта по оси Оу
+                    /**Поле с новым местоположением перетаскиваемого объекта по оси Оу*/
                     int newY = e.getY() - mousePressY;
 
                     thisFrame.setBounds(thisFrame.getX() + newX, thisFrame.getY() + newY, windowWidth, windowHeight);
@@ -193,7 +214,7 @@ public class Settings extends JFrame {
 
             /**
              * Метод, который указывает на то, что мышь была перемещена
-             * @param e - Событие нажатия кнопки мыши
+             * @param e Событие нажатия кнопки мыши
              */
             @Override
             public void mouseMoved(MouseEvent e) {
@@ -206,7 +227,7 @@ public class Settings extends JFrame {
         windowCapPanel.setBorder(BorderFactory.createLineBorder(new Color(215, 215, 215)));
 
 
-        //Поле с размером иконки
+        /**Поле с размером иконки*/
         int size = 16;
         URL iconURL = Workspace.class.getClassLoader().getResource("com/ardublock/X.png");
         ImageIcon button_icon = new ImageIcon(
@@ -216,7 +237,7 @@ public class Settings extends JFrame {
         XButton.addActionListener(new ActionListener() {
             /**
              * Метод, меняющий видимость оконной процедуры
-             * @param e - Событие совершённого действия
+             * @param e Событие совершённого действия
              */
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -231,10 +252,10 @@ public class Settings extends JFrame {
         XButton.setContentAreaFilled(false);
         XButton.setFocusable(false);
 
-        //Поле смещения вправо
+        /**Поле смещения вправо*/
         int rigthOffset = getWidth() - XButton.getX() - size;
 
-        //Поле смещения влево
+        /**Поле смещения влево*/
         int leftOffset = rigthOffset;
 
         JLabel text = new JLabel(uiMessageBundle.getString("ardublock.ui.settings"));
@@ -250,11 +271,13 @@ public class Settings extends JFrame {
         add(windowBodyPanel);
         windowBodyPanel.setBounds(0, windowCapPanel.getHeight() - 1, getWidth(), getHeight() - windowCapPanel.getHeight() + 1);
 
-        //Поле позиции
+        /**Поле позиции*/
         int position = 5;
-        //Поле смещения
+
+        /**Поле смещения*/
         int offset = 40;
-        //Поле высоты выпадающего списка
+
+        /**Поле высоты выпадающего списка*/
         int spinnerHeigth = 30;
 
         text = new JLabel(uiMessageBundle.getString("ardublock.ui.autostart"));
@@ -336,12 +359,25 @@ public class Settings extends JFrame {
 
         textField.setText(autosavePath);
         button.addActionListener(new ActionListener() {
+<<<<<<< HEAD
             @Override
             public void actionPerformed(ActionEvent e) {
                 fileChooser.showOpenDialog(null);
                 textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
             }
         });
+=======
+            /**
+             *
+              * @param e Событие совершённого действия
+             */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            fileChooser.showOpenDialog(null);
+            textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
+        }
+});
+>>>>>>> parent of f14dfeb... Revert "Documentation_v1.1"
         position += offset;
 
         //DEBAG
@@ -377,7 +413,7 @@ public class Settings extends JFrame {
         egg.addItemListener(new ItemListener() {
             /**
              * Метод, сообщающий, что состояние элемента было изменено
-             * @param e - событие, указывающее, что элемент был выбран или отменен
+             * @param e Событие, указывающее, что элемент был выбран или отменен
              */
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -398,7 +434,7 @@ public class Settings extends JFrame {
         saveBtn.addActionListener(new ActionListener() {
             /**
              * Метод, который меняет настройки согласно предпочтениям пользователя
-             * @param e - Событие совершённого действия
+             * @param e Событие совершённого действия
              */
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -452,8 +488,12 @@ public class Settings extends JFrame {
 
     /**
      * Метод, определяющий видимость
+<<<<<<< HEAD
      *
      * @param e - логическая переменная, которая ответственная за видимость
+=======
+     * @param e Логическая переменная, которая ответственная за видимость
+>>>>>>> parent of f14dfeb... Revert "Documentation_v1.1"
      */
     public void setVisible(boolean e) {
         super.setVisible(e);

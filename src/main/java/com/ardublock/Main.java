@@ -15,8 +15,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  * Главный класс проекта
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class Main {
 
@@ -24,12 +24,12 @@ public class Main {
 
     /**
      * Главный метод класса
-     * @param args - Аргументы получаемые главным классом
-     * @exception ClassNotFoundException - Не был найден необходимый класс
-     * @exception InstantiationException - Экземпляр невозможно создать (не был создан)
-     * @exception IllegalAccessException - Возможность несанкционированного доступа
-     * @exception UnsupportedLookAndFeelException - Неподдерживаемый внешний вид и Руководство для системы пользователя
+     * @param args Аргументы получаемые главным классом
      */
+     //@exception ClassNotFoundException - Не был найден необходимый класс
+     //@exception InstantiationException - Экземпляр невозможно создать (не был создан)
+     //@exception IllegalAccessException - Возможность несанкционированного доступа
+     //@exception UnsupportedLookAndFeelException - Неподдерживаемый внешний вид и Руководство для системы пользователя
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(
@@ -97,6 +97,7 @@ public class Main {
 
     /**
      * Метод, запускающий консольную процедуру
+     * НЕ ИСПОЛЬЗУЕТСЯ
      */
     @SuppressWarnings("unused")
     private void startConsoleFrame() {
