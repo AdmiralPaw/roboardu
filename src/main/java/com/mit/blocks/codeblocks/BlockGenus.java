@@ -18,10 +18,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Genus описывает свойства, определяющие блок. Например, FD-это род блоков,
+ * @author AdmiralPaw, Ritevi, Aizek
+ * Род описывает свойства, определяющие блок. Например, FD-это род блоков,
  * который описывает все прямые экземпляры блоков в Starlogo.
  * Класс BlockGenus хранит все неизменяемые свойства и информацию о сокете рода.
- * @author AdmiralPaw, Ritevi, Aizek
  */
 public class BlockGenus {
 

@@ -69,75 +69,67 @@ import com.mit.blocks.workspace.SearchableContainer;
 import com.mit.blocks.workspace.Workspace;
 
 /**
- * Класс, который управляет взаимодействиями/настройками с blocks.workspace
  * @author AdmiralPaw, Ritevi, Aizek
+ * Класс, который управляет взаимодействиями/настройками с blocks.workspace
  */
 public class WorkspaceController {
 
-    /**Поле словаря, содержащего подходящие блоки*/
+    /**
+     *
+     */
     public static Map<String,String[]> suitableBlocks;
 
-    /**Поле языка по умолчанию*/
     private Element langDefRoot;
-
-    /**Поле логической переменной, содержащей информацию была
-     * ли инициализирована панель рабочего пространства*/
     private boolean isWorkspacePanelInitialized = false;
 
-    /**Поле панели рабочего пространства*/
+    /**
+     *
+     */
     protected JPanel workspacePanel;
 
-    /** Финальное (неизменяемое, без наследования) защищенное (Доступ protected дает подклассу
-     * возможность использовать вспомогательный метод или переменную, предотвращая неродственный
-     * класс от попыток использовать их). Поле рабочего пространства*/
+    /**
+     *
+     */
     protected final Workspace workspace;
 
-    /**Защищенное (Доступ protected дает подкласс возможность использовать вспомогательный
-     * метод или переменную, предотвращая неродственный класс от попыток использовать их).
-     * Поле поисковой строки*/
+    /**
+     *
+     */
     protected SearchBar searchBar;
 
     /**
-     * Метод для получения рабочего пространства
-     * @return this.workspace
+     *
+     * @return
      */
     public Workspace getWorkspace() {
         return this.workspace;
     }
 
-    /**Поле, указывающее, был ли установлен новый файл определения языка*/
+    //flag to indicate if a new lang definition file has been set
     private boolean langDefDirty = true;
-
-    /**Поле, которое обрабатывает случай загрузки DTD из файла jar*/
+    // handle the case of loading the DTD from jar file. 
     private InputStream langDefDtd;
-
-    /**Поле, указывающее, была ли рабочая область загружена / инициализирована*/
+    //flag to indicate if a workspace has been loaded/initialized 
     private boolean workspaceLoaded = false;
-
-    /**Поле, последнего каталога, выбранного с помощью действия открыть или сохранить*/
+    // last directory that was selected with open or save action
     private File lastDirectory;
-
-    /**Поле, файла, загруженного в данный момент в рабочую область*/
+    // file currently loaded in workspace
     private File selectedFile;
-
-    /**Ссылка сохранена, чтобы иметь возможность обновить
-     * заголовок кадра с текущим загруженным файлом*/
+    // Reference kept to be able to update frame title with current loaded file
     private JFrame frame;
     
-    /**Поле пакета ресурсов I18N*/
+    // I18N resource bundle
     private ResourceBundle langResourceBundle;
-
-	/**Поле со списком стилей*/
+	// List of styles
     private List<String[]> styleList;
-
-    /**Поле процедур вывода отображений типов
-     * (Взаимодействие/Синхронизация с выходными блочными сокетами)*/
+    
     private static ProcedureOutputManager pom;	//*****
     
 
     /**
-     * Метод, создающий экземпляр WorkspaceController,
-     * который управляет взаимодействием с codeblocks.Workspace
+     * Constructs a WorkspaceController instance that manages the
+     * interaction with the codeblocks.Workspace
+     *
      */
     public WorkspaceController() {
         this.workspace = new Workspace();
@@ -145,40 +137,34 @@ public class WorkspaceController {
     }
     
     /**
-     * Метод, который определяет язык работы
-     * @param is Поток входа
+     *
+     * @param is
      */
     public void setLangDefDtd(InputStream is) {
     	langDefDtd = is;
     }
     
     /**
-     * Метод, который устанавливает языковой пакет ресурсов
-     * @param bundle Пакет реесурсов
+     *
+     * @param bundle
      */
     public void setLangResourceBundle(ResourceBundle bundle) {
     	langResourceBundle = bundle;
     }
     
     /**
-     * Метод, устанавливающий список стилей
-     * @param list Список
+     *
+     * @param list
      */
     public void setStyleList(List<String[]> list) {
     	styleList = list;
     }
 
     /**
-     * Метод, который задает путь к файлу определения языка,
-     * если файл определения языка присутствует (т.е. данный язык доступен)
-     * @param filePath Путь к файлу
+     * Sets the file path for the language definition file, if the
+     * language definition file is located in
+     * @param filePath
      */
-     // @exception IOException e - Исключение связанное с ошибками во время
-     // выполнения операций потоков входа/выхода
-     // (Неправильно задан путь до файла с определенями языков)
-     // @throws RuntimeException
-     // @exception IOException e - Не происходит закрытие потока
-     // @throws RuntimeException
     public void setLangDefFilePath(final String filePath) {
         InputStream in = null;
         try {
@@ -200,16 +186,9 @@ public class WorkspaceController {
     }
 
     /**
-     * Метод, который задает файл определения языка из заданного входного потока
-     * @param in Входной поток для чтения
+     * Sets language definition file from the given input stream
+     * @param in input stream to read
      */
-     // @exception ParserConfigurationException e - Указывает на серьезную ошибку конфигурации
-     // @throws RuntimeException
-     // @exception SAXException e - Encapsulate a general SAX error or warning
-     // @throws RuntimeException
-     // @exception IOException e - Исключение связанное с ошибками во время
-     // выполнения операций потоков входа/выхода
-     // @throws RuntimeException
     public void setLangDefStream(InputStream in) {
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         final DocumentBuilder builder;
@@ -239,11 +218,7 @@ public class WorkspaceController {
         }
     }
 
-    /**
-     * Метод, который показывает все подходящие блоки
-     * @param doc Документ для парсинга
-     */
-     // @exception Exception e - При отсутствии необходимого ключа блока
+
     private void getAllSuitableBlocks(Document doc){
 
         Map<String,String[]> allsuitableBlocks = new HashMap<String,String[]>(){};
@@ -299,10 +274,8 @@ public class WorkspaceController {
 
     
     /**
-     * Метод, который стилизирует BlockGenus и другие элементы с помощью цвета
-     * @param doc Выбранынй документ
+     * Styling the color of the BlockGenus and other elements with color
      */
-     // @exception XPathExpressionException e - Ошибка в выражении XPath
 	private void ardublockStyling(Document doc) {
 		if (styleList != null) {
 			XPathFactory factory = XPathFactory.newInstance();
@@ -323,13 +296,10 @@ public class WorkspaceController {
 			}
 		}
 	}
-
-    /**
-     * Процесс l10n для ArduBlock
-     * @param doc Парсируемый документ
+    
+    /** 
+     * l10n process for ArduBlock
      */
-     // @exception java.util.MissingResourceException mre - Сигнализирует о том,
-     // что ресурс отсутствует
     private void ardublockLocalize(Document doc) {
         if (langResourceBundle != null) {
         	NodeList nodes = doc.getElementsByTagName("BlockGenus");
@@ -391,9 +361,9 @@ public class WorkspaceController {
     }
 
     /**
-     * Загружает все типы блоков, свойства и правила ссылок языка,
-     * заданные в предопределенном файле langDef.
-     * @param root Загружает язык, указанный в корне элемента
+     * Loads all the block genuses, properties, and link rules of
+     * a language specified in the pre-defined language def file.
+     * @param root Loads the language specified in the Element root
      */
     public void loadBlockLanguage(final Element root) {
         /* MUST load shapes before genuses in order to initialize
@@ -416,7 +386,9 @@ public class WorkspaceController {
     }
 
     /**
-     * Метод для броса текущего языка в активной рабочей области
+     * Resets the current language within the active
+     * Workspace.
+     *
      */
     public void resetLanguage() {
         BlockConnectorShape.resetConnectorShapeMappings();
@@ -425,15 +397,10 @@ public class WorkspaceController {
     }
 
     /**
-     * Метод, который возвращает сохраненную строку для всей рабочей области.
-     * Включает в себя рабочую область блока, любые пользовательские фабрики,
-     * состояние и положение представления холста, массив страниц
-     * @return writer.toString()
+     * Returns the save string for the entire workspace.  This includes the block workspace, any
+     * custom factories, canvas view state and position, pages
+     * @return the save string for the entire workspace.
      */
-     // @exception TransformerConfigurationException e - Указывает на серьезную ошибку конфигурации
-     // @throws RuntimeException
-     // @exception TransformerException e - Ошибка, возникшая в процессе преобразования
-     // @throws RuntimeException
     public String getSaveString() {
         try {
             Node node = getSaveNode();
@@ -454,25 +421,22 @@ public class WorkspaceController {
     }
 
     /**
-     * Возвращает узел DOM для всей рабочей области. Включает в себя рабочую
-     * область блока, любые пользовательские фабрики, состояние и положение
-     * представления холста, страницы
-     * @return getSaveNode(true).
+     * Returns a DOM node for the entire workspace.  This includes the block workspace, any
+     * custom factories, canvas view state and position, pages
+     * @return the DOM node for the entire workspace.
      */
     public Node getSaveNode() {
         return getSaveNode(true);
     }
 
     /**
-     * Возвращает узел DOM для всей рабочей области. Включает в себя рабочую
-     * область блока, любые пользовательские фабрики, состояние и положение
-     * представления холста, страницы
-     * @param validate Если {@code true}, производит проверку выходных
-     * данных по схеме блоков кода
-     * @return document.
+     * Returns a DOM node for the entire workspace. This includes the block
+     * workspace, any custom factories, canvas view state and position, pages
+     *
+     * @param validate If {@code true}, perform a validation of the output
+     * against the code blocks schema
+     * @return the DOM node for the entire workspace.
      */
-     // @exception ParserConfigurationException e - Указывает на серьезную ошибку конфигурации
-     // @throws RuntimeException
     public Node getSaveNode(final boolean validate) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -503,19 +467,10 @@ public class WorkspaceController {
     }
 
     /**
-     * Метод, который проверяет документ блоков кода на соответствие схеме
-     * @param document Документ для проверки
+     * Validates the code blocks document against the schema
+     * @param document The document to check
+     * @throws RuntimeException If the validation failed
      */
-     // @exception MalformedURLException e - Брошен, чтобы указать, что
-     // был указан неправильный URL-адрес. Либо никакой юридический протокол
-     // не может быть найден в строке спецификации,
-     // либо строка не может быть проанализирована.
-     // @throws RuntimeException
-     // @exception SAXException e - Encapsulate a general SAX error or warning
-     // @throws RuntimeException
-     // @exception IOException e - Исключение связанное с ошибками во время
-     // выполнения операций потоков входа/выхода
-     // @throws RuntimeException
     private void validate(Document document) {
         try {
             SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -536,8 +491,8 @@ public class WorkspaceController {
     }
 
     /**
-     * Метод загружает новую рабочую область на основе спецификаций по умолчанию в
-     * файле определения языка. Холст блока не будет иметь никаких активных блоков.
+     * Loads a fresh workspace based on the default specifications in the language
+     * definition file.  The block canvas will have no live blocks.
      */
     public void loadFreshWorkspace() {
         if (workspaceLoaded) {
@@ -552,15 +507,11 @@ public class WorkspaceController {
     }
 
     /**
-     * Метод загружает проект программирования из указанного пути к файлу. Этот метод предполагает,
-     * что файл определения языка уже задан для данного проекта программирования.
-     * @param path - Путь к строковому файлу загружаемого проекта программирования
-     * @throws java.io.IOException Ошибки потоков входа/выхода
+     * Loads the programming project from the specified file path.This method assumes that a Language Definition File has already
+ been specified for this programming project.
+     * @param path String file path of the programming project to load
+     * @throws java.io.IOException
      */
-     // @exception ParserConfigurationException e - Указывает на серьезную ошибку конфигурации
-     // @throws RuntimeException
-     // @exception SAXException e - Encapsulate a general SAX error or warning
-     // @throws RuntimeException
     public void loadProjectFromPath(final String path) throws IOException
     {
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -588,10 +539,11 @@ public class WorkspaceController {
     }
 
     /**
-     * Метод загружает программный проект из указанного элемента.
-     * Этот метод предполагает, что файл определения языка уже задан для
-     * данного проекта программирования.
-     * @param elementToLoad Загружаемый элемент
+     * Loads the programming project from the specified element.This method
+ assumes that a Language Definition File has already been specified for
+ this programming project.
+     *
+     * @param elementToLoad
      */
     public void loadProjectFromElement(Element elementToLoad) {
         workspace.loadWorkspaceFrom(elementToLoad, langDefRoot);
@@ -599,32 +551,24 @@ public class WorkspaceController {
     }
 
     /**
-     * Загружает проект программирования, указанный в строке projectСontents,
-     * которая связана с файлом определения языка, содержащимся в указанном
-     * langDefContents. Все блоки, содержащиеся в projectСontents, должны
-     * иметь ассоциированный род блоков, определенный в langDefContents.
+     * Loads the programming project specified in the projectContents String,
+     * which is associated with the language definition file contained in the
+     * specified langDefContents.  All the blocks contained in projectContents
+     * must have an associted block genus defined in langDefContents.
      *
-     * Если langDefContents имеет какие-либо параметры рабочей области,
-     * такие как страницы или ящики, а projectСontents также имеет параметры
-     * рабочей области, параметры рабочей области в projectContents переопределят
-     * параметры рабочей области в langDefContents.
+     * If the langDefContents have any workspace settings such as pages or
+     * drawers and projectContents has workspace settings as well, the
+     * workspace settings within the projectContents will override the
+     * workspace settings in langDefContents.
      *
-     * Примечание: определение языка, содержащееся в langDefContents,
-     * не заменяет файл определения языка по умолчанию, установленный
-     * методами setLangDefFilePath () или setLangDefFile ().
+     * NOTE: The language definition contained in langDefContents does
+     * not replace the default language definition file set by: setLangDefFilePath() or
+     * setLangDefFile().
      *
-     * (ПОХОЖЕ, НИГДЕ НЕ ИСПОЛЬЗУЕТСЯ)
-     *
-     * @param projectContents Содержимое проекта
-     * @param langDefContents Строка XML, определяющая язык содержимого проекта
+     * @param projectContents
+     * @param langDefContents String XML that defines the language of
+     * projectContents
      */
-     // @exception ParserConfigurationException e - Указывает на серьезную ошибку конфигурации
-     // @throws RuntimeException
-     // @exception SAXException e - Encapsulate a general SAX error or warning
-     // @throws RuntimeException
-     // @exception IOException e - Исключение связанное с ошибками во время
-     // выполнения операций потоков входа/выхода
-     // @throws RuntimeException
     public void loadProject(String projectContents, String langDefContents) {
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         final DocumentBuilder builder;
@@ -657,9 +601,8 @@ public class WorkspaceController {
     }
 
     /**
-     * Метод сбрасывает все рабочее пространство. Включает в себя все блоки, страницы,
-     * ящики и разбитые блоки. Также сбрасывается стек отмены/повтора.
-     * Язык (то есть genuses и shapes) не сбрасывается.
+     * Resets the entire workspace.  This includes all blocks, pages, drawers, and trashed blocks.
+     * Also resets the undo/redo stack.  The language (i.e. genuses and shapes) is not reset.
      */
     public void resetWorkspace() {
         //clear all pages and their drawers
@@ -672,9 +615,10 @@ public class WorkspaceController {
     }
 
     /**
-     * Этот метод создает и раскладывает всю панель рабочего пространства с ее
-     * различными компонентами. Рабочая область и языковые данные не
-     * загружаются в эту функцию. Следует вызывать только один раз при запуске приложения.
+     * This method creates and lays out the entire workspace panel with its
+     * different components.  Workspace and language data not loaded in
+     * this function.
+     * Should be call only once at application startup.
      */
     private void initWorkspacePanel() {
         workspacePanel = new JPanel();
@@ -684,8 +628,8 @@ public class WorkspaceController {
     }
 
     /**
-     * Метод возвращает JComponent всего рабочего пространства
-     * @return workspacePanel
+     * Returns the JComponent of the entire workspace.
+     * @return the JComponent of the entire workspace.
      */
     public JComponent getWorkspacePanel() {
         if (!isWorkspacePanelInitialized) {
@@ -695,7 +639,7 @@ public class WorkspaceController {
     }
 
     /**
-     * Метод, связанное с "Открытием" процедуры.
+     * Action bound to "Open" action.
      */
     private class OpenAction extends AbstractAction {
 
@@ -705,10 +649,6 @@ public class WorkspaceController {
             super("Open");
         }
 
-        /**
-         * Открытие файла
-         * @param e Событие совершённого действия
-         */
         @Override
         public void actionPerformed(ActionEvent e) {
             JFileChooser fileChooser = new JFileChooser(lastDirectory);
@@ -733,17 +673,11 @@ public class WorkspaceController {
      * Action bound to "Save" button.
      */
     private class SaveAction extends AbstractAction {
-        /**Данное поле - идентификатор класса в языке Java, используемый при сериализации
-         с использованием стадартного алгоритма. Хранится как числовое значение типа long.*/
         private static final long serialVersionUID = -5540588250535739852L;
         SaveAction() {
             super("Save");
         }
 
-        /**
-         * Сохранение файла
-         * @param evt Событие совершённого действия
-         */
         @Override
         public void actionPerformed(ActionEvent evt) {
             if (selectedFile == null) {
@@ -764,28 +698,17 @@ public class WorkspaceController {
     }
 
     /**
-     * Действие, связанное с кнопкной "Сохранить как..."
+     * Action bound to "Save As..." button.
      */
     private class SaveAsAction extends AbstractAction {
-        /**Данное поле - идентификатор класса в языке Java, используемый при сериализации
-         с использованием стадартного алгоритма. Хранится как числовое значение типа long.*/
          private static final long serialVersionUID = 3981294764824307472L;
-
         private final SaveAction saveAction;
 
-        /**
-         * Назначение действия "Сохранить как..."
-         * @param saveAction Действие сохранения
-         */
         SaveAsAction(SaveAction saveAction) {
             super("Save As...");
             this.saveAction = saveAction;
         }
 
-        /**
-         * Совершение действия сохранения
-         * @param e Событие совершённого действия
-         */
         @Override
         public void actionPerformed(ActionEvent e) {
             selectedFile = null;
@@ -795,9 +718,9 @@ public class WorkspaceController {
     }
 
     /**
-     * Сохраняет содержимое рабочей области в заданный файл
-     * @param file Файл назначения
-     * @throws IOException При ошибках сохранения
+     * Saves the content of the workspace to the given file
+     * @param file Destination file
+     * @throws IOException If save failed
      */
     private void saveToFile(File file) throws IOException {
         FileWriter fileWriter = null;
@@ -813,8 +736,8 @@ public class WorkspaceController {
     }
 
     /**
-     * Установка выбранного файла в качестве названия
-     * @param selectedFile Выбранный файл
+     *
+     * @param selectedFile
      */
     public void setSelectedFile(File selectedFile) {
         this.selectedFile = selectedFile;
@@ -822,8 +745,7 @@ public class WorkspaceController {
     }
 
     /**
-     * Возвращает нижнюю панель кнопок
-     * @return buttonPanel
+     * Return the lower button panel.
      */
     private JComponent getButtonPanel() {
         JPanel buttonPanel = new JPanel();
@@ -840,9 +762,9 @@ public class WorkspaceController {
     }
 
     /**
-     * Возвращает экземпляр строки поиска, способный выполнять поиск
-     * блоков внутри BlockCanvas и ящиков блоков
-     * @return sb.getComponent()
+     * Returns a SearchBar instance capable of searching for blocks
+     * within the BlockCanvas and block drawers
+     * @return 
      */
     public JComponent getSearchBar() {
         final SearchBar sb = new SearchBar(
@@ -854,17 +776,16 @@ public class WorkspaceController {
     }
 
     /**
-     * Возвращает неподдающееся изменению итерируемые объекты из Searchablecontainer
-     * @return workspace.getAllSearchableContainers()
+     * Returns an unmodifiable Iterable of SearchableContainers
+     * @return an unmodifiable Iterable of SearchableContainers
      */
     public Iterable<SearchableContainer> getAllSearchableContainers() {
         return workspace.getAllSearchableContainers();
     }
 
     /**
-     * Создаёт графический интерфейс и показывает его.
-     * Для обеспечения потокобезопасности этот метод должен быть вызван
-     * из потока диспетчеризации событий.
+     * Create the GUI and show it.  For thread safety, this method should be
+     * invoked from the event-dispatching thread.
      */
     private void createAndShowGUI() {
         frame = new JFrame("WorkspaceDemo");
@@ -885,8 +806,8 @@ public class WorkspaceController {
     }
 
     /**
-     * Главный метод класса
-     * @param args Аргументы
+     *
+     * @param args
      */
     public static void main(final String[] args) {
 //        if (args.length < 1) {
@@ -894,9 +815,6 @@ public class WorkspaceController {
 //            System.exit(1);
 //        }
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            /**
-             * Запуск
-             */
             @Override public void run() {
                 final WorkspaceController wc = new WorkspaceController();
                 wc.setLangDefFilePath("D:\\Arduino\\ardublock-master\\openblocks-master\\support\\lang_def.xml");

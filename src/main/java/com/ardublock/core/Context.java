@@ -16,65 +16,65 @@ import java.io.IOException;
 import java.util.*;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  * Класс, ответственный за контекстуальные данные: настройки рабочего
  * пространства, язык, данные о среде (Напрмер версия ардуино) и т.д.
- * @author AdmiralPaw, Ritevi, Aizek
  */
 public class Context {
 
-    /**Поле, которое определяет путь к файлу с настройками языка
-    и начальной настройкой рабочей области*/
+    //Поле, которое определяет путь к файлу с настройками языка
+    //и начальной настройкой рабочей области
     public final static String LANG_DTD_PATH = "/com/ardublock/block/lang_def.dtd";
 
-    /**Поле, которое определяет путь к файлу с описанием
-    каждого блока, который генерирует код для Arduino*/
+    //Поле, которое определяет путь к файлу с описанием
+    // каждого блока, который генерирует код для Arduino
     public final static String ARDUBLOCK_LANG_PATH = "/com/ardublock/block/ardublock.xml";
 
-    /**Поле со стандартным путём к программе Ardublock*/
+    //Поле со стандартным путём к программе Ardublock
     public final static String DEFAULT_ARDUBLOCK_PROGRAM_PATH = "/com/ardublock/default.abp";
 
-    /**Поле со строкой версии Arduino*/
+    //Поле со строкой версии Arduino
     public final static String ARDUINO_VERSION_UNKNOWN = "unknown";
 
-    /**Поле с логической переменной, несущей в себе информацию об автоформатировании*/
+    //Поле с логической переменной, несущей в себе информацию об автоформатировании
     public final boolean isNeedAutoFormat = true;
 
-    /**Поле с синглтоном контекста (Т.е. экземпляр такого класса создаётся только один раз)*/
+    //Поле с синглтоном контекста (Т.е. экземпляр такого класса создаётся только один раз)
     private static Context singletonContext;
 
-    /**Поле с логической переменной, несущей в себе информацию о том,
-    что рабочее пространство было изменено*/
+    //Поле с логической переменной, несущей в себе информацию о том,
+    //что рабочее пространство было изменено
     private boolean workspaceChanged;
 
-    /**Поле с логической переменной, несущей в себе информацию о том,
-    что рабочее пространство пусто*/
+    //Поле с логической переменной, несущей в себе информацию о том,
+    //что рабочее пространство пусто
     private boolean workspaceEmpty;
 
-    /**Поле подсветки (выделения) набора блоков*/
+    //Поле подсветки (выделения) набора блоков
     private Set<RenderableBlock> highlightBlockSet;
 
-    /**Поле с набором прослушивателей оконных процедур*/
+    //Поле с набором прослушивателей оконных процедур
     private Set<OpenblocksFrameListener> ofls;
 
-    /**Поле с логической переменной, несущей в себе информацию есть ли данный объект в Arduino*/
+    //Поле с логической переменной, несущей в себе информацию есть ли данный объект в Arduino
     private boolean isInArduino = false;
 
-    /**Поле с версией Arduino*/
+    //Поле с версией Arduino
     private String arduinoVersionString = ARDUINO_VERSION_UNKNOWN;
 
-    /**Поле с информацией о текущей операционной системе*/
+    //Поле с информацией о текущей операционной системе
     private OsType osType;
 
-    /**Поле со стандартным именем файла*/
+    //Поле со стандартным именем файла
     private String defaultFileName = "untitled";
 
-    /**Поле с названием программы*/
+    //Поле с названием программы
     final public static String APP_NAME = "OmegaBot_IDE";
 
-    /**Поле редактора*/
+    //Поле редактора
     private Editor editor;
 
-    /**Структура возможных используемых операционных систем*/
+    //Структура о возможных используемых операционных системах
     public enum OsType {
 
         /**
@@ -98,10 +98,10 @@ public class Context {
         UNKNOWN,
     };
 
-    /**Поле, содержащее путь для сохранения файла*/
+    //Поле, содержащее путь для сохранения файла
     private String saveFilePath;
 
-    /**Поле, содержащее имя сохраняемого файла*/
+    //Поле, содержащее имя сохраняемого файла
     private String saveFileName;
 
     /**
@@ -119,10 +119,10 @@ public class Context {
         return singletonContext;
     }
 
-    /**Поле с контроллера рабочего пространства*/
+    //Поле с контроллера рабочего пространства
     private WorkspaceController workspaceController;
 
-    /**Поле рабочего пространства*/
+    //Поле рабочего пространства
     private Workspace workspace;
 
     /**
@@ -172,7 +172,7 @@ public class Context {
 
     /**
      * Метод для определения стандартного имени фйла
-     * @param name Имя
+     * @param name - Имя
      */
     public void setDefaultFileName(String name)
     {
@@ -237,7 +237,7 @@ public class Context {
 
     /**
      * Метод для получения файла Arduino
-     * @param name Имя
+     * @param name - Имя
      * @return File(workingDir, name)
      */
     public File getArduinoFile(String name) {
@@ -278,7 +278,7 @@ public class Context {
 
     /**
      * Метод, устанавливающий измененное рабочее пространство
-     * @param workspaceChanged Логическая переменная
+     * @param workspaceChanged - Логическая переменная
      * с информацией было ли изменено рабочее пространство
      */
     public void setWorkspaceChanged(boolean workspaceChanged) {
@@ -287,7 +287,7 @@ public class Context {
 
     /**
      * Метод, подсвечивающий (выделяющий) блок
-     * @param block Блок, который будет подсвечен
+     * @param block
      */
     public void highlightBlock(RenderableBlock block) {
         block.updateInSearchResults(true);
@@ -296,8 +296,7 @@ public class Context {
 
     /**
      * Метод, прекращающий выделение блока
-     * (ПОХОЖЕ, НЕ ИСПОЛЬЗУЕТСЯ НИГДЕ)
-     * @param block Блок, который больше не будет подсвечен
+     * @param block
      */
     public void cancelHighlightBlock(RenderableBlock block) {
         block.updateInSearchResults(false);
@@ -316,11 +315,11 @@ public class Context {
 
     /**
      * Метод, сохраняющий файл ArduBlock
-     * @param saveFile Сохраняемый файл
-     * @param saveString Сохраняемая строка
+     * @param saveFile - Сохраняемый файл
+     * @param saveString - Сохраняемая строка
+     * @throws IOException - Исключение связанное с ошибками
+     * во время выполнения операций потоков входа/выхода
      */
-     //@throws IOException - Исключение связанное с ошибками
-     //во время выполнения операций потоков входа/выхода
     public void saveArduBlockFile(File saveFile, String saveString) throws IOException {
         if (!saveFile.exists()) {
             saveFile.createNewFile();
@@ -334,10 +333,10 @@ public class Context {
 
     /**
      * Метод для загрузки файла ArduBlock
-     * @param savedFile Сохранённый файл
+     * @param savedFile - Сохранённый файл
+     * @throws IOException - Исключение связанное с ошибками
+     * во время выполнения операций потоков входа/выхода
      */
-     //@throws IOException - Исключение связанное с ошибками
-     //во время выполнения операций потоков входа/выхода
     public void loadArduBlockFile(File savedFile) throws IOException {
         if (savedFile != null) {
             saveFilePath = savedFile.getAbsolutePath();
@@ -350,7 +349,7 @@ public class Context {
 
     /**
      * Метод, выбирающий редактор
-     * @param e Редактор
+     * @param e
      */
     public void setEditor(Editor e) {
         editor = e;
@@ -390,7 +389,7 @@ public class Context {
 
     /**
      * Метод для изменения версии Arduino
-     * @param arduinoVersionString - Версия Arduino
+     * @param arduinoVersionString
      */
     public void setArduinoVersionString(String arduinoVersionString) {
         this.arduinoVersionString = arduinoVersionString;
@@ -406,7 +405,7 @@ public class Context {
 
     /**
      * Метод для создания прослушивателя оконной процедуры
-     * @param ofl Прослушиватель оконной процедуры
+     * @param ofl
      */
     public void registerOpenblocksFrameListener(OpenblocksFrameListener ofl) {
         ofls.add(ofl);
@@ -432,7 +431,7 @@ public class Context {
 
     /**
      * Метод, показывающий был ли сгенерирован код
-     * @param sourcecode Исходный код
+     * @param sourcecode - Исходный код
      */
     public void didGenerate(String sourcecode) {
         for (OpenblocksFrameListener ofl : ofls) {
@@ -442,7 +441,7 @@ public class Context {
 
     /**
      * Метод, показывающий были ли пройдена верификация
-     * @param sourcecode Исходный код
+     * @param sourcecode - Исходный код
      */
     public void didVerify(String sourcecode) {
         for (OpenblocksFrameListener ofl : ofls) {
@@ -450,7 +449,6 @@ public class Context {
         }
     }
 
-    /**НИГДЕ НЕ ИСПОЛЬЗУЕТСЯ (Кроме интерфейса OpenblocksFrameListener)*/
     public void getInfoText(){
         for (OpenblocksFrameListener ofl : ofls) {
             ofl.getInfoText();
@@ -467,7 +465,7 @@ public class Context {
 
     /**
      * Метод для сохранения имени файла
-     * @param saveFileName Имя сохраняемого файла
+     * @param saveFileName - Имя сохраняемого файла
      */
     public void setSaveFileName(String saveFileName) {
         this.saveFileName = saveFileName;
@@ -483,7 +481,7 @@ public class Context {
 
     /**
      * Метод для установки пути сохраняемого файла
-     * @param saveFilePath Путь сохраняемого файла
+     * @param saveFilePath - Путь сохраняемого файла
      */
     public void setSaveFilePath(String saveFilePath) {
         this.saveFilePath = saveFilePath;
@@ -499,8 +497,7 @@ public class Context {
 
     /**
      * Метод, делающий рабочее пространство пустым
-     * @param workspaceEmpty - Логическая переменная, содержащая
-     * информацию свободно ли рабочее пространство
+     * @param workspaceEmpty
      */
     public void setWorkspaceEmpty(boolean workspaceEmpty) {
         this.workspaceEmpty = workspaceEmpty;

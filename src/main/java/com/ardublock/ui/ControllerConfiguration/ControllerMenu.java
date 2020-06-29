@@ -9,42 +9,27 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.SwingUtilities;
 
 /**
- * Класс содержащий настройки меню контроллера и управления ими
- * @author AdmiralPaw, Ritevi, Aizek
+ *
+ * @author User
  */
 public class ControllerMenu extends CButton {
 
-    /**Данное поле - идентификатор класса в языке Java, используемый при сериализации
-    с использованием стадартного алгоритма. Хранится как числовое значение типа long.*/
     private static final long serialVersionUID = 328149080229L;
 
-    /**Поле имени устройства*/
     String deviceName;
-
-    /**Поле переведённого имени устройства*/
     String deviceNameTranslated;
-
-    /**Поле идентификатора*/
     String Id;
-
-    /**Поле кнопки модуля*/
     ControllerButton moduleButton;
-
-    /**Поле настроек контроллера*/
     СontrollerСonfiguration controller;
-
-    /**Поле стандартного цвета*/
     final Color standartColor = new Color(19, 144, 148);
-
-    /**Поле цвета при нажатии*/
     final Color pressedColor = new Color(235, 158, 91);
 
     /**
-     * Метод, управляющий меню контроллера и всеми его настройками (Цвет, шрифт, размеры)
-     * @param controller Настройки контроллера
-     * @param deviceName Имя устройства
-     * @param tr Видимый текст, он же перевод
-     * @param Id Идентификатор порта
+     *
+     * @param controller
+     * @param deviceName
+     * @param tr видимый текст, он же перевод
+     * @param Id ID порта
      */
     public ControllerMenu(СontrollerСonfiguration controller, String deviceName, String tr, String Id) {
         super(Color.black, CGraphite.blue, tr);
@@ -58,8 +43,8 @@ public class ControllerMenu extends CButton {
     }
 
     /**
-     * Метод для рисовки (окрашивания) менюшки контроллера
-     * @param g Параметр графического контекста
+     * re paints this
+     * @param g
      */
     @Override
     public void paint(Graphics g) {
@@ -69,19 +54,10 @@ public class ControllerMenu extends CButton {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Set up first layer
-
-        /**Поле высоты кнопки*/
         int buttonHeight = this.getHeight();
-
-        /**Поле ширины кнопки*/
         int buttonWidth = this.getWidth();
-
-        /**Поле размера куба по оси Ох*/
         int cube_x = 38;
-
-        /**Поле размера куба по оси Оу*/
         int cube_y = buttonHeight / 2;
-
         g2.setPaint(new Color(218, 226, 228));
         g2.drawLine(0, buttonHeight / 2, cube_x, buttonHeight / 2);
         g2.drawLine(cube_x / 3, 0, buttonWidth, 0);
@@ -94,10 +70,7 @@ public class ControllerMenu extends CButton {
         g2.fillRect(cube_x - 5, cube_y - 5, 10, 10);
         if (this.focus) {
             g2.setPaint(new Color(241, 241, 241));
-
-            /**Поле размера прямоугольника по оси Ох*/
             int rect_x = 50;
-
             g2.fillRect(rect_x, 1, buttonWidth - rect_x, buttonHeight - 1);
         }
 
@@ -125,10 +98,6 @@ public class ControllerMenu extends CButton {
         
     }*/
 
-    /**
-     * Метод, указывающий на то, что кнопка мыши была отпущена
-     * @param e Событие, указывающее, что в компоненте произошло действие мыши
-     */
     public void mouseReleased(MouseEvent e) {
         //this.moduleButton.setModuleBig(false);
         controller.changeModuleComponentsPane(this.moduleButton.moduleName);
@@ -157,11 +126,7 @@ public class ControllerMenu extends CButton {
         }
         repaint();
     }*/
-
-    /**
-     * Метод, указывающий на то, что мышь наведена
-     * @param e Событие, указывающее, что в компоненте произошло действие мыши
-     */
+    
     public void mouseEntered(MouseEvent e){
         this.pressed = true;
         for (Component i : controller.componentsPane.getComponents()) {
@@ -177,11 +142,7 @@ public class ControllerMenu extends CButton {
         //this.moduleButton.setModuleBig(true);
         repaint();
     }
-
-    /**
-     * Метод, указывающий на то, что мышь не наведена (убрана из зоны наведения)
-     * @param e Событие, указывающее, что в компоненте произошло действие мыши
-     */
+    
     public void mouseExited(MouseEvent e) {
         this.pressed = false;
         for (Component i : controller.componentsPane.getComponents()) {

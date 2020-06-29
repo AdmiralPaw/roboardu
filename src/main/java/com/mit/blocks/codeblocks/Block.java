@@ -19,16 +19,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  * Класс Block содержит изменяемую опору (данные) конкретного блока.
  * Кроме того, блок хранит информацию, описывающую отношения конкретного блока с другими блоками.
- * @author AdmiralPaw, Ritevi, Aizek
+ *
  */
 public class Block implements ISupportMemento {
 
-    //Поле, которое определяет NULL идентификатор для Block
+    //Defines a NULL id for a Block
+
+    /**
+     *
+     */
     public static final Long NULL = Long.valueOf(-1);
 
-    //Поле идентификационной информации блока
+    //block identifying information
     private final Long blockID;
     private String label;
     private String pageLabel = null;

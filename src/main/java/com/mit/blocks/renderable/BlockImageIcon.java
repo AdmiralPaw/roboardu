@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  * Класс BlockImageIcon содержит информацию о значках изображений, нарисованных
  * в пределах RenderableBlock (Визуализируемого блока. Эта информация включает
  * в себя следующее:
@@ -14,7 +15,6 @@ import javax.swing.JLabel;
  * визуализации. (На каждое место изображения приходится только один значок
  * блочного изображения. Это усиливается внутри карты изображений блоков в
  * экземпляре рода блоков.)
- * @author AdmiralPaw, Ritevi, Aizek
  */
 public class BlockImageIcon extends JLabel {
 

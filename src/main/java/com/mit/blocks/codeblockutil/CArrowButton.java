@@ -11,11 +11,11 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.GeneralPath;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  * Класс CArrowButton - это совместимый с swing виджет, который позволяет клиентам отображать
  * полупрозрачную стрелку в любом из четырех традиционных направлений: север, юг, восток,
  * запад. Клиенты кнопки со стрелкой могут подписывать триггеры мыши на
  * определенные действия, делая следующее: this.addCButtonListener(new CButtonListener());
- * @author AdmiralPaw, Ritevi, Aizek
  */
 public abstract class CArrowButton extends CButton implements ActionListener {
 

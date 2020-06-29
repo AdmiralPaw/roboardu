@@ -8,27 +8,27 @@ import java.awt.Image;
 import java.net.URL;
 
 /**
- * Класс, работающий с внешним видом контроллеров
  * @author AdmiralPaw, Ritevi, Aizek
+ * Класс, работающий с внешним видом контроллеров
  */
 public class ControllerImage extends JPanel {
 
-    /**Поле с типом платы*/
+    //Поле с типом платы
     private int type_of_plate;
 
-    /**Поле с настройками контроллера*/
+    //Поле с настройками контроллера
     private СontrollerСonfiguration controllerConf;
 
-    /**Поле изображения фона*/
+    //Поле изображения фона
     private Image background;
 
-    /**Поле со списком кнопок модулей*/
+    //Поле со списком кнопок модулей
     public ArrayList<ControllerButton> moduleButtons;
 
-    /**Поле со списком кнопок коннекторов*/
+    //Поле со списком кнопок коннекторов
     public ArrayList<ControllerButton> connectorButtons;
 
-    /**Поле со списком имён кнопок контроллеров*/
+    //Поле со списком имён кнопок контроллеров
     private static final String[] names = {
 //        "dir04pwm05",
 //        "dir07pwm06",
@@ -39,8 +39,8 @@ public class ControllerImage extends JPanel {
 
     /**
      * Метод для назначения внешнего вида и изображения для платы
-     * @param controller Настройки контроллера
-     * @param type_of_plate Тип платы
+     * @param controller - Настройки контроллера
+     * @param type_of_plate - Тип платы
      */
     public ControllerImage(СontrollerСonfiguration controller, int type_of_plate) {
         this.setLayout(null);
@@ -63,7 +63,7 @@ public class ControllerImage extends JPanel {
 
     /**
      * Метод для инициализици списков модулей и коннекторов
-     * @param type_of_plate Тип платы
+     * @param type_of_plate - тип платы
      */
     private void initArrays(int type_of_plate) {
         this.moduleButtons = new ArrayList<ControllerButton>();
@@ -76,7 +76,7 @@ public class ControllerImage extends JPanel {
     
     /**
      * Модуль для выбора подключенной платы
-     * @param plate_in Подключенная плата
+     * @param plate_in - Подключенная плата
      */
     public void setPlate(int plate_in){
         this.type_of_plate = plate_in;
@@ -86,8 +86,8 @@ public class ControllerImage extends JPanel {
 
     /**
      * Метод для установки изображения модуля при помощи пути
-     * @param Id Идентификатор
-     * @param Path Путь
+     * @param Id - Идентификатор
+     * @param Path - Путь
      */
     public void setModule(String Id, String Path) {
         this.callModuleButton(Id).setNewIconAsModule(Path);
@@ -95,8 +95,8 @@ public class ControllerImage extends JPanel {
 
     /**
      * Метод для установки изображения модуля через URL
-     * @param Id Идентификатор
-     * @param iconURL URL изображения иконки
+     * @param Id- Идентификатор
+     * @param iconURL - URL изображения иконки
      */
     public void setModule(String Id, URL iconURL) {
         this.callModuleButton(Id).setNewIconAsModule(iconURL);
@@ -105,9 +105,9 @@ public class ControllerImage extends JPanel {
 
     /**
      * Метод для получения изображения
-     * @param Path Путь
-     * @param Width Ширина
-     * @param Height Высота
+     * @param Path - Путь
+     * @param Width - Ширина
+     * @param Height - Высота
      * @return Увеличенное изображение
      */
     public Image getImage(String Path, int Width, int Height) {
@@ -119,7 +119,7 @@ public class ControllerImage extends JPanel {
 
     /**
      * Метод вызова кнопки выбранного модуля
-     * @param Id Идентификатор
+     * @param Id - Идентификатор
      * @return Идентификатор кнопки, если не был найден возвращается null
      */
     public ControllerButton callModuleButton(String Id) {
@@ -133,7 +133,7 @@ public class ControllerImage extends JPanel {
 
     /**
      * Метод вызова кнопки выбранного коннектора
-     * @param Id Идентификатор
+     * @param Id - Идентификатор
      * @return Идентификатор кнопки, если не был найден возвращается null
      */
     public ControllerButton callConnectorButton(String Id) {
@@ -158,9 +158,8 @@ public class ControllerImage extends JPanel {
 
     /**
      * Метод, отжимающий оставшиеся кнопки контроллера
-     * @param Id Идентификатор
-     * @param isConnector Логическая переменная, которая показывает
-     * является ли данный компонент коннектором
+     * @param Id - Идентификатор
+     * @param isConnector - Логическая переменная, которая показывает является ли данный компонент коннектором
      */
     public void unpressElse(String Id, boolean isConnector) {
         if (isConnector) {
@@ -188,9 +187,8 @@ public class ControllerImage extends JPanel {
 
     /**
      * Метод, который устанавливает кнопки контроллера с выбранными идентификаторами
-     * @param Id Идентификатор
-     * @param isConnector Логическая переменная, которая показывает является
-     * ли данный компонент коннектором
+     * @param Id - Идентификатор
+     * @param isConnector - Логическая переменная, которая показывает является ли данный компонент коннектором
      */
     public void setSelectedId(String Id, boolean isConnector) {
         if (isConnector) {
@@ -216,9 +214,8 @@ public class ControllerImage extends JPanel {
     
     /**
      * Метод, который сбрасывает кнопки контроллера с выбранными идентификаторами
-     * @param Id Идентификатор
-     * @param isConnector Логическая переменная, которая показывает является ли
-     * данный компонент коннектором
+     * @param Id - Идентификатор
+     * @param isConnector - Логическая переменная, которая показывает является ли данный компонент коннектором
      */
     public void resetSelectedId(String Id, boolean isConnector) {
         if (isConnector) {
@@ -248,7 +245,7 @@ public class ControllerImage extends JPanel {
 
     /**
      * Метод, окрашивающий компонент
-     * @param g Параметр графического контекста
+     * @param g - параметр графического контекста
      */
     @Override
     protected void paintComponent(Graphics g) {

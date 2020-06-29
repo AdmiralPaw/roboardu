@@ -535,7 +535,6 @@ public class CSlider extends JPanel implements MouseListener, MouseMotionListene
 /**
  * Contains the location for the CSlider components
  * (in pixels)
- * @author AdmiralPaw, Ritevi, Aizek
  */
 class SliderBlueprint {
 

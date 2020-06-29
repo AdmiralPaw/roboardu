@@ -19,84 +19,91 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 /**
- * Класс, отвечающий за работу, настройки и внешний вид руководства новых пользователей
- * @author AdmiralPaw, Ritevi, Aizek
+ *
+ * @author User
  */
 public class TutorialPane extends JPanel {
 
-    /**Поле оконной процедуры*/
     private OpenblocksFrame openblocksFrame;
-
-    /**Поле заводской панели*/
     private DarkPanel factoryPanel;
-
-    /**Поле панели кнопок*/
     private DarkPanel buttonsPanel;
-
-    /**Поле панели рабочего пространства*/
     private DarkPanel workspacePanel;
-
-    /**Поле панели контроллера*/
     private DarkPanel controllerPanel;
-
-    /**Поле панели логотипа*/
     private DarkPanel logoPanel;
-
-    /**Поле правой верхней панели (с кнопкой закрыть обучение)*/
     private DarkPanel rightTopPanel;
 
-    /**Поле рабочей области руководства пользователя*/
+    /**
+     *
+     */
     public TutorialPane tutorialPane;
 
-    /**Поле нового экземпляра подсвеченной панели*/
+    /**
+     *
+     */
     public IllumPanel dummy;
 
-    /**Поле списка активных панелей*/
+    /**
+     *
+     */
     public List<List<DarkPanel>> activeAnimPanels = new ArrayList<>();
 
-    /**Поле списка неактивных панелей*/
+    /**
+     *
+     */
     public List<DarkPanel> inactiveTutorPanels = new ArrayList<>();
 
-    /**Поле списка местоположений*/
+    /**
+     *
+     */
     public List<Point> tutorLocations = new ArrayList<>();
 
-    /**Поле списка размеров*/
+    /**
+     *
+     */
     public List<Dimension> tutorDimensions = new ArrayList<>();
 
-    /**Поле списка текстов, которые появляются во время руководства*/
+    /**
+     *
+     */
     public List<String> tutorTexts = new ArrayList<>();
 
-    /**Поле списка используемых цветов*/
+    /**
+     *
+     */
     public List<Color> tutorColors = new ArrayList<>();
 
-    /**НЕ ИСПОЛЬЗУЕТСЯ*/
+    /**
+     *
+     */
     public List<Color> tutorTextColors = new ArrayList<>();
 
-    /**Поле списка подсвеченных панелей*/
+    /**
+     *
+     */
     public List<List<IllumPanel>> tutorIllumPanels = new ArrayList<>();
 
-    /**Поле текста во время руководства*/
+    /**
+     *
+     */
     public TPanel tutorTextPanel;
 
-    /**Поле высоты меню*/
     private final int menuHeight = 22;
-
-    /**Костыль костылёк*/
     private final int kostilEbani = 1;
 
-    /**Поле значения итерации*/
+    /**
+     *
+     */
     public int iter = 0;
 
-    /**Поле значения последней итерации*/
+    /**
+     *
+     */
     public int lastIter = 1;
-
-    /**НЕ ИСПОЛЬЗУЕТСЯ*/
     private boolean tutorIsActive = true;
 
     /**
-     * Главный метод класса, который добавляет все панели
-     * во время работы руководства пользователя в область руководства
-     * @param openblocksFrame Оконная процедура
+     *
+     * @param openblocksFrame
      */
     public TutorialPane(OpenblocksFrame openblocksFrame) {
         openblocksFrame.validate();
@@ -128,10 +135,6 @@ public class TutorialPane extends JPanel {
 //        this.openblocksFrame.
         this.rightTopPanel.add(exitButton);
         exitButton.addActionListener(new ActionListener() {
-            /**
-             * Метод для выхода из руководства пользователя
-             * @param e
-             */
             public void actionPerformed(ActionEvent e) {
                 tutorialPane.removeAll();
                 openblocksFrame.repaint();
@@ -141,10 +144,6 @@ public class TutorialPane extends JPanel {
 
         JSplitPane workLayer = openblocksFrame.getContext().getWorkspace().workLayer;
         workLayer.addPropertyChangeListener(new PropertyChangeListener() {
-            /**
-             * Метод изменения свойств
-             * @param e Событие изменение свойств
-             */
             public void propertyChange(PropertyChangeEvent e) {
                 if (workLayer.getDividerLocation() > factoryPanel.getWidth()) {
                     workLayer.setDividerLocation(factoryPanel.getWidth());
@@ -160,15 +159,12 @@ public class TutorialPane extends JPanel {
         this.startTutor();
     }
 
-    /**
-     * Метод, запускающий руководство пользователя
-     */
     private void startTutor() {
         this.nextTutor();
     }
 
     /**
-     * Метод, который переходит к следующему пункту руководства пользователя
+     *
      */
     public void nextTutor() {
         this.repaintPanels();
@@ -208,9 +204,6 @@ public class TutorialPane extends JPanel {
 
     }
 
-    /**
-     * Метод для сброса значения видимость (Альфа компонента в RGBA) всех панелей
-     */
     void resetPanels() {
         logoPanel.setColorAlpha(128);
         rightTopPanel.setColorAlpha(128);
@@ -220,9 +213,6 @@ public class TutorialPane extends JPanel {
         controllerPanel.setColorAlpha(128);
     }
 
-    /**
-     * Метод, который перерисовывает панели, т.е. сбрасывает их внешний вид и положение
-     */
     void repaintPanels() {
         JComponent component = openblocksFrame.logo;
         logoPanel.repaintPanel(new Dimension(component.getWidth(), component.getHeight()),
@@ -252,12 +242,6 @@ public class TutorialPane extends JPanel {
         this.repaint();
     }
 
-    /**
-     * Метод, который инициализирует все рабочие панели, устанавливает последовательность их работы,
-     * их поведение, как они будут выглядеть, подсвечиваться, какой текст будет выводится и где,
-     * а также какие действия будут воспроизводить те или иные панели (например панели с кнопками
-     * "далее" и "назад", а также "закрыть обучение"
-     */
     private void initPanels() {
         tutorTextPanel = new TPanel(this);
 

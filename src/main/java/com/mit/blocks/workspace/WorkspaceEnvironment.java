@@ -11,6 +11,7 @@ import com.mit.blocks.codeblocks.BlockLinkChecker;
 import com.mit.blocks.renderable.RenderableBlock;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  * Для данной {@link Workspace},
  * {@link WorkspaceEnvironment} хранит ссылку на все экземпляры:
  * {@link Block}
@@ -19,7 +20,6 @@ import com.mit.blocks.renderable.RenderableBlock;
  * {@link BlockGenus}
  * Это позволяет отделить компоненты каждой рабочей области и таким образом
  * использовать несколько одновременно.
- * @author AdmiralPaw, Ritevi, Aizek
  * TODO: Cannot resolve symbol 'BlockStub' (No longer valid)
  */
 

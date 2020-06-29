@@ -11,13 +11,13 @@ import com.mit.blocks.workspace.Workspace;
 import com.mit.blocks.workspace.WorkspaceListener;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  * BlockLinkChecker определяет, могут ли соединяться два блочных объекта.
  * В частности, BlockLinkChecker сообщит, какие сокеты двух блочных объектов могут соединяться.
  * Заинтересованные блочные объекты могут сделать статический вызов canLink, чтобы определить,
  * может ли он ссылаться на другой блочный объект. BlockLinkChecker использует список правил
  * ссылок для проверки соединителей каждого блока. Правила могут быть добавлены,
  * вставлены и удалены из чекера. Существует только один экземпляр средства проверки блочных ссылок.
- * @author AdmiralPaw, Ritevi, Aizek
  */
 public class BlockLinkChecker {
 
