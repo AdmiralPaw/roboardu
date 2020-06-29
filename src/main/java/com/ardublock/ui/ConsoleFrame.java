@@ -6,17 +6,18 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 /**
- * Класс для работы с операциями консольной процедуры
- * @author AdmiralPaw, Ritevi, Aizek
+ *
+ * @author User
  */
 public class ConsoleFrame extends JFrame
 {
-	/**Данное поле - идентификатор класса в языке Java, используемый при сериализации
-    с использованием стадартного алгоритма. Хранится как числовое значение типа long.*/
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = -4057010070646255290L;
 
     /**
-     * Метод, работающий с консольной процедурой 
+     *
      */
     public ConsoleFrame()
 	{	

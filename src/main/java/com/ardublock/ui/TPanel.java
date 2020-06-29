@@ -15,32 +15,20 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 /**
- * Класс, работающий с настройками и внешним видом рабочего
- * пространства во время запуска руководства пользователя
- * @author AdmiralPaw, Ritevi, Aizek
+ *
+ * @author User
  */
 public class TPanel extends JPanel {
 
-    /**Поле текста руководства*/
     private JTextArea tutorialText;
-
-    /**Поле кнопки "назад"*/
     private JButton prevButton;
-
-    /**Поле кнопки "далее"*/
     private JButton nextButton;
-
-    /**Поле ширины*/
     private int width = 300;
-
-    /**Поле высоты*/
     private int height = 300;
 
     /**
-     * Метод для настройки рабочего пространства во время работы руководства пользователя
-     * Т.е. настройка внешнего вида, подсвечиваемой панели, затемнённой панели, кнопок управления,
-     * т.е. кнопок "вперёд","назад" и "закрыть обучение", как взаимодействие с пользователем и т.д.
-     * @param tutorialPane Рабочая область руководства пользователя
+     *
+     * @param tutorialPane
      */
     public TPanel(TutorialPane tutorialPane) {
         this.setLayout(null);
@@ -97,10 +85,6 @@ public class TPanel extends JPanel {
         this.setSize(new Dimension(width, height));
         this.setPreferredSize(new Dimension(300, 250));
         nextButton.addActionListener(new ActionListener() {
-            /**
-             * 
-             * @param e Событие совершённого действия
-             */
             public void actionPerformed(ActionEvent e) {
                 if (tutorialPane.iter < tutorialPane.activeAnimPanels.size()) {
                     if (tutorialPane.activeAnimPanels.get(tutorialPane.iter).get(0).animationIsFinished) {
@@ -118,10 +102,6 @@ public class TPanel extends JPanel {
         });
 
         prevButton.addActionListener(new ActionListener() {
-            /**
-             *
-             * @param e Событие совершённого действия
-             */
             public void actionPerformed(ActionEvent e) {
                 if (tutorialPane.iter > 0) {
                     if (tutorialPane.activeAnimPanels.get(tutorialPane.iter).get(0).animationIsFinished) {
@@ -140,16 +120,16 @@ public class TPanel extends JPanel {
     }
 
     /**
-     * Метод для высвечивания текста
-     * @param newText Новый текст
+     *
+     * @param newText
      */
     public void setText(String newText) {
         this.tutorialText.setText(newText);
     }
 
     /**
-     * Метод для изменения координат (местоположения)
-     * @param p Координаты (x;y) точки
+     *
+     * @param p
      */
     public void changeLocation(Point p) {
         this.setLocation(p.x, p.y);
@@ -157,8 +137,8 @@ public class TPanel extends JPanel {
     }
 
     /**
-     * Метод для изменения размеров активной в данный момент панели
-     * @param d Инкапсулированные в данном компоненте значения высоты и ширины
+     *
+     * @param d
      */
     public void changeDimension(Dimension d) {
         this.width = d.width;
@@ -185,17 +165,13 @@ public class TPanel extends JPanel {
     }
 
     /**
-     * Метод для установки нового цвета текста
-     * @param newColor Новый цвет переднего плана
+     *
+     * @param newColor
      */
     public void setTextColor(Color newColor) {
         this.tutorialText.setForeground(newColor);
     }
 
-    /**
-     * Метод начала анимации
-     * (ПОХОЖЕ, НИГДЕ НЕ ИСПОЛЬЗУЕТСЯ)
-     */
     private void startAnimation() {
         ((DarkPanel) this.getParent()).startAnimation();
     }

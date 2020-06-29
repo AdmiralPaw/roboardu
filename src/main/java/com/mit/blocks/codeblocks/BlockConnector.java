@@ -12,104 +12,84 @@ import com.mit.blocks.workspace.ISupportMemento;
 import com.mit.blocks.workspace.Workspace;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  * Класс, который описывает информацию о выходе/входе для каждого выхода
  * или входа конкретного блока. Каждый сокет имеет свой вид (например, число, строку,
  * логическое значение и т. д.), метка и блочный идентификатор блока в этом сокете
  * (не путать с блоком, который содержит информацию о сокете - сокет не имеет ссылки на этот родительский блок).
- * @author AdmiralPaw, Ritevi, Aizek
  */
 public class BlockConnector implements ISupportMemento {
     
     //TODO need some sort of indication if there is a block in this socket, i.e. -1 value or boolean flag
     
-    //Свойства коннектора
-
-    /**Поле типа*/
+    //Connector properties
     private String kind;
-
-    /**Поле инициализации типа*/
     private String initKind;
-
-    /**Поле типа позиции*/
     private PositionType positionType;
-
-    /**Поле лейбла*/
     private String label;
-
-    /**Поле идентификатора коннектора блока*/
-    private Long connBlockID = Block.NULL;
-
-    /**Поле стандартных аргументов*/
+    private Long connBlockID = Block.NULL;   
     private DefArgument arg = null;
-
-    /**Поле логической перемнной с информацией о наличии стандартных аргументов*/
     private boolean hasDefArg = false;
-
-    /**Поле логической перемнной с информацией о возможности расширения*/
     private boolean isExpandable = false;
-
-    /**Поле логической перемнной с информацией о возможности редактирования лейбла*/
     private boolean isLabelEditable = false;
-
-    /**Поле группы расширения*/
     private String expandGroup = "";
-
-    /**Поле рабочего пространства*/
     private final Workspace workspace;
 
+    //Specifies the PositionType of connector:
+    //Single is the default connector that appears on only one side (left/right) of a block.
+    //Mirror is creates a connectors with locations mirrored on both left and right side of a block.
+    //Bottom is a double sided enclosure within the bottom side of a block, or the next command.
+    //Top is the previous command.
+
     /**
-     * Данная структура указывает тип позиции соединителя:
+     *
      */
     public enum PositionType { 
 
         /**
-         * Single - это соединитель по умолчанию, который отображается
-         * только на одной стороне блока (слева/справа).
+         *
          */
-        SINGLE,
+        SINGLE, 
 
         /**
-         * Mirror создает соединители с местоположениями,
-         * отраженными как на левой, так и на правой стороне блока.
+         *
          */
         MIRROR, 
 
         /**
-         * Bottom - это двустороннее ограждение в нижней
-         * части блока или следующая команда.
+         *
          */
         BOTTOM, 
 
         /**
-         * Top - это предыдущая команда.
+         *
          */
         TOP };
     
     /**
-     * Создает новый соединитель блоков
-     * @param workspace Рабочая область, в которой создается этот соединитель
-     * @param kind Тип этого сокета
-     * @param positionType Тип положения соединителя
-     * @param label Строковая метка этого сокета
-	 * @param isLabelEditable True, если этот BlockConnector может редактировать свои метки
-     * @param isExpandable Может ли этот разъем расширяться в другой разъем при подключении блока
-     * @param expandGroup Группа расширения сокета этого коннектора
-     * @param connBlockID Идентификатор подключенного блока
+     * Constructs a new <code>BlockConnector</code>
+     * @param workspace The workspace this connector is created in 
+     * @param kind the kind of this socket
+     * @param positionType the PositionType of connector
+     * @param label the String label of this socket
+	 * @param isLabelEditable is true iff this BlockConnector can have its labels edited.
+     * @param isExpandable whether this socket can expand into another connector when a block is connected
+     * @param expandGroup the expand socket group of this connector
+     * @param connBlockID the ID of the block connected to this 
      */
     public BlockConnector(Workspace workspace, String kind, PositionType positionType, String label, boolean isLabelEditable, boolean isExpandable, String expandGroup, Long connBlockID) {
         this(workspace, kind, positionType, label, isLabelEditable, isExpandable, connBlockID);
         this.expandGroup = expandGroup == null ? "" : expandGroup;
     }
-
+    
     /**
-     * Создает новый соединитель блоков
-     * @param workspace Рабочая область, в которой создается этот соединитель
-     * @param kind Тип этого сокета
-     * @param positionType Тип положения соединителя
-     * @param label Строковая метка этого сокета
-     * @param isLabelEditable True, если этот BlockConnector может редактировать свои метки
-     * @param isExpandable Может ли этот разъем расширяться в другой разъем при подключении блока
-     * @param connBlockID Идентификатор подключенного блока
+     * Constructs a new <code>BlockConnector</code>
+     * @param workspace The workspace this connector is created in 
+     * @param label the String label of this socket
+     * @param kind the kind of this socket
+	 * @param isLabelEditable is true iff this BlockConnector can have its labels edited.
+     * @param isExpandable true if this socket can expand into another connector when a block is connected to this
+     * @param positionType specifies the PositionType of connector
      */
     public BlockConnector(Workspace workspace, String kind, PositionType positionType, String label, boolean isLabelEditable, boolean isExpandable, Long connBlockID) {
         this.workspace = workspace;
@@ -123,32 +103,32 @@ public class BlockConnector implements ISupportMemento {
     }
     
     /**
-     * Создает новый соединитель блоков с соединителем по умолчанию (Single Position)
-     * @param workspace Рабочая область, в которой создается этот соединитель
-     * @param label Строковая метка этого сокета
-     * @param kind Тип этого сокета
-     * @param socketBlockID Идентификатор блока подключенного к сокету
+     * Constructs a new <code>BlockConnector</code> with a single position
+     * @param workspace The workspace this connector is created in 
+     * @param label the String label of this socket
+     * @param kind the kind of this socket
+     * @param socketBlockID the block id attached to this socket
      */
     public BlockConnector(Workspace workspace, String kind, String label, Long socketBlockID) {
         this(workspace, kind, PositionType.SINGLE, label, false, false, socketBlockID);
     }
     
     /**
-     * Создает новый блочный соединитель с заданной меткой и типом.
-     * Новый сокет не имеет подключенного блока.
-     * @param workspace Рабочая область, в которой создается этот соединитель
-     * @param label Строковая метка этого сокета
-	 * @param isLabelEditable True, если этот BlockConnector может редактировать свои метки
-     * @param kind Тип этого сокета
+     * Constructs a new <code>BlockConnector</code> with the specified label and kind.
+     * This new socket does not have an attached block.
+     * @param workspace The workspace this connector is created in 
+     * @param label the String label of this socket
+	 * @param isLabelEditable is true iff this BlockConnector can have its labels edited.
+     * @param kind the kind of this socket
      */
     public BlockConnector(Workspace workspace, String label, String kind, boolean isLabelEditable, boolean isExpandable) {
         this(workspace, kind, PositionType.SINGLE, label, isLabelEditable, isExpandable, Block.NULL);
     }
     
     /**
-     * Создает новый BlockConnector, копируя информацию о соединителе из
-     * указанного con. Копирует метку и вид соединителя con.
-     * @param con BlockConnector для копирования из него
+     * Constucts a new <code>BlockConnector</code> by copying the connector information
+     * from the specified con.  Copies the con's connector label and kind.
+     * @param con the BlockConnector to copy from
      */
     public BlockConnector(BlockConnector con) {
         this(con.workspace, con.kind, con.positionType, con.label, con.isLabelEditable, con.isExpandable, con.connBlockID);
@@ -159,129 +139,125 @@ public class BlockConnector implements ISupportMemento {
     }
     
     /**
-     * Метод возвращает лейбл
-     * @return label
+     * Returns the label of this
+     * @return the label of this
      */
     public String getLabel() {
         return label;
     }
     
     /**
-     * Метод возвращает тип
-     * @return kind
+     * Returns the kind of this
+     * @return the kind of this
      */
     public String getKind() {
         return kind;
     }
     
     /**
-     * Метод возвращает начальный тип
-     * @return initKind
+     * Returns the initial kind of this
+     * @return the initial kind of this
      */
     public String initKind() {
         return initKind;
     }
     
     /**
-     * Метод возвращает тип позиции
-     * @return positionType
+     * Returns the PositionType of this
+     * @return the PositionType of this
      */
     public PositionType getPositionType() {
         return positionType;
     }
 
     /**
-     * Метод возвращает идентификатор блока, подключенного к этому сокету
-     * @return connBlockID
+     * Returns the block id attached (in) this socket
+     * @return the block id attached (in) this socket
      */
     public Long getBlockID() {
         return connBlockID;
     }
 
     /**
-     * Метод возвращает true, если блок присоединен к этому сокету; false в противном случае
-     * @return !connBlockID.equals(Block.NULL)
+     * Returns true iff a block is attached to this socket; false otherwise
+     * @return true iff a block is attached to this socket; false otherwise
      */
     public boolean hasBlock() {
         return !connBlockID.equals(Block.NULL);
     }
 
     /**
-     * Возвращает true, если этот соединитель расширяется,
-     * то есть если к нему подключен блок, то это может привести к появлению
-     * другого пустого соединителя, такого же, как этот. Появится ли блок на
-     * самом деле, зависит от родительского блока этого соединителя. Технически
-     * только розетки могут расширяться. Каждый блок может иметь только один
-     * штекер (то есть возвращать одно значение).
-     * @return isExpandable
+     * Returns true iff this connector is expandable, meaning if a block is connected to it, it may 
+     * cause another empty connector just like this to appear.  Whether or not a block actually appears
+     * depends on this connector's parent block.  Technically only sockets can expand.  Each block
+     * can only have one plug (meaning return one value).
+     * @return true iff this connector is expandable; false otherwise
      */
     public boolean isExpandable() {
         return isExpandable;
     }
 
     /**
-     * Возвращает развернутую группу этого соединителя или пустую строку (""),
-     * если соединитель не является частью группы
-     * @return expandGroup
+     * Returns the expand group of this connector, or an empty string ("") if
+     * the connector is not part of a group.
+     * @return 
      */
     public String getExpandGroup() {
         return expandGroup;
     }
 
     /**
-     * Задает лейбл сокета для указанного лейбла
-     * @param label Нужная метка
+     * Sets the socket label of this to specified label
+     * @param label the desired label 
      */
     public void setLabel(String label) {
         this.label = label;
     }
 
     /**
-     * Возвращает true, если метка этого сокета доступна для редактирования
-     * @return isLabelEditable
+     * Returns true iff this socket's label is editable.
+     * @return true iff this socket's label is editable; false otherwise
      */
     public boolean isLabelEditable() {
         return isLabelEditable;
     }
 
     /**
-     * Задает тип сокета на указанный тип
-     * @param kind Нужный тип
+     * Sets the socket kind of this to the specified kind
+     * @param kind the desired kind
      */
     public void setKind(String kind) {
         this.kind = kind;
     }
 
     /**
-     * Устанавливает блок сокета, прикрепленный к этому разъему
-     * @param id  Идентификатор блока нужного для подключения
+     * Sets the socket block attached to this connector
+     * @param id the block id of the desired block to attach
      */
     public void setConnectorBlockID(Long id) {
         connBlockID = id;
     }
 
     /**
-     * Задает тип положения этого соединителя
-     * @param pos Нужный тип положения
+     * Sets the position type of this connector
+     * @param pos the desired PositionType for this 
      */
     public void setPositionType(PositionType pos) {
         this.positionType = pos;
     }
 
     /**
-     * Возвращает true, если этот соединитель имеет аргумент по умолчанию;
-     * в противном случае false
-     * @return hasDefArg
+     * Returns true is this connector has a default argument; false otherwise
+     * @return true is this connector has a default argument; false otherwise
      */
     public boolean hasDefArg() {
         return hasDefArg;
     }
 
     /**
-     * Устанавливает аргумент по умолчанию этого соединителя
-     * в указанный genus и начальный лейбл.
-     * @param genusName Нужное имя BlockGenus аргумента по умолчанию
-     * @param label Начальный лейбл аргумента по умолчанию
+     * Sets this connector's default argument to the specified genus and initial label.
+     * @param genusName the desired BLockGenus name of the default agrument
+     * @param label the initial label of the default argument
      */
     public void setDefaultArgument(String genusName, String label) {
         hasDefArg = true;
@@ -289,10 +265,9 @@ public class BlockConnector implements ISupportMemento {
     }
 
     /**
-     * Соединяет этот соединитель с его аргументом по умолчанию, если он
-     * имеет таковой, и возвращает идентификатор блока подключенного
-     * аргумента по умолчанию или Block.NULL, если его нет.
-     * @return connBlockID
+     * Connects this connector with its default argument, if it has any, and 
+     * returns the block ID of the connected default argument or Block.NULL if there is none.
+     * @return the block ID of the connected default argument or Block.NULL if there is none.
      */
     public Long linkDefArgument() {
         //checks if connector has a def arg or if connector already has a block
@@ -319,42 +294,24 @@ public class BlockConnector implements ISupportMemento {
     }
 
     /**
-     * DefArgument-это облегченный класс, который хранит информацию об аргументе
-     * по умолчанию этого соединителя, если он имеет таковую, в частности имя рода
-     * аргумента и его начальный лейбл. Каждый соединитель имеет не более 1
-     * аргумента по умолчанию.
-     * @author AdmiralPaw, Ritevi, Aizek
+     * <code>DefArgument</code> is a lightweight class that stores Default Argument information of this 
+     * connector if it has any, particular the name of the argument's genus and its initial label.  
+     * Each connector has at most 1 default argument.  
      */
     private class DefArgument {
 
-        /**Поле имени рода*/
         private String genusName;
-
-        /**Поле лейбла*/
         private String label;
 
-        /**
-         * Метод присвоения стандартных аргументов
-         * @param genusName - Нужное имя рода
-         * @param label - Нужна метка
-         */
         public DefArgument(String genusName, String label) {
             this.genusName = genusName;
             this.label = label;
         }
 
-        /**
-         * Метод для получения имени рода
-         * @return genusName
-         */
         public String getGenusName() {
             return genusName;
         }
 
-        /**
-         * Метод для получения нужного лейбла
-         * @return label
-         */
         public String getLabel() {
             return label;
         }
@@ -364,12 +321,12 @@ public class BlockConnector implements ISupportMemento {
     // SAVING AND LOADING //
     ////////////////////////
     /**
-     * Загружает информацию для одного BlockConnector и возвращает экземпляр
-     * BlockConnector с загруженной информацией
-     * @param workspace Используемое рабочее пространство
-     * @param node Узел, содержащий нужную информацию
-     * @param idMapping - Сопоставление идентификаторов
-     * @return con
+     * Loads information for a single BlockConnector and returns an instance 
+     * of BlockConnector with the loaded information
+     * @param workspace The workspace in use
+     * @param node the Node containing the desired information
+     * @param idMapping
+     * @return BlockConnector instance with the loaded information
      */
     public static BlockConnector loadBlockConnector(Workspace workspace, Node node, HashMap<Long, Long> idMapping) {
         Pattern attrExtractor = Pattern.compile("\"(.*)\"");
@@ -461,11 +418,11 @@ public class BlockConnector implements ISupportMemento {
     }
     
     /**
-     * Возвращает узел this.Node, содержащий только ту информацию,
-     * которая была изменена и модифицирована
+     * Returns the node of this.Node only includes 
+ information that was modifiable and modified 
      * @param document
-     * @param conKind Строка, содержащая, тип: сокет или разъем
-     * @return connectorElement
+     * @param conKind String containing if this is a socket or plug
+     * @return the node of this
      */
     public Node getSaveNode(Document document, String conKind) {
         Element connectorElement = document.createElement("BlockConnector");
@@ -503,52 +460,26 @@ public class BlockConnector implements ISupportMemento {
     /***********************************
     * State Saving Stuff for Undo/Redo *
     ***********************************/
-
-    /**
-     * Класс, информирующий о состоянии BlockConnector
-     * @author AdmiralPaw, Ritevi, Aizek
-     */
+    
     private class BlockConnectorState {
 
-        /**Поле типа*/
         public String kind;
-
-        /**Поле инициализации типа*/
         public String initKind;
-
-        /**Поле типа позиции*/
         public PositionType positionType;
-
-        /**Поле лейбла*/
         public String label;
-
-        /**Поле идентификатора коннектора блока*/
         public Long connBlockID = Block.NULL;
-
         //DefaultArg Stuff
-
-        /**Поле логической перемнной с информацией о наличии стандартных аргументов*/
         public boolean hasDefArg;
-
-        /**Поле стандартных аргументов имени рода*/
         public String defArgGenusName;
-
-        /**Поле стандартных аргументов лейбла*/
         public String defArgLabel;
-
-        /**Поле логической перемнной с информацией о возможности расширения*/
         public boolean isExpandable;
-
-        /**Поле группы расширения*/
         public String expandGroup;
-
-        /**Поле логической перемнной с информацией о возможности редактирования лейбла*/
         public boolean isLabelEditable;
     }
 
     /**
-     * Метод для получения состояния
-     * @return state
+     *
+     * @return
      */
     @Override
     public Object getState() {
@@ -577,7 +508,7 @@ public class BlockConnector implements ISupportMemento {
     }
 
     /**
-     * Состояние загрузки
+     *
      * @param memento
      */
     @Override
@@ -603,12 +534,12 @@ public class BlockConnector implements ISupportMemento {
     }
 
     /**
-     * Это способ создания BlockConnector из memento. Это немного странно,
-     * так как другие объекты не имеют этого метода, однако здесь это имеет лучший смысл,
-     * поскольку BlockConnector по сути является структурой.
-     * @param workspace Используемое рабочее пространство
-     * @param memento Состояние агрузки
-     * @return instance
+     * This is a way of generating a BlockConnector from a memento. It's a bit
+     * weird since other objects don't have this method, however, it makes the
+     * best sense here since BlockConnector is essentially a struct.
+     * @param workspace The workspace in use
+     * @param memento The state to load
+     * @return An instance of BlockConnector
      */
     public static BlockConnector instantiateFromState(Workspace workspace, Object memento) {
         if (memento instanceof BlockConnectorState) {

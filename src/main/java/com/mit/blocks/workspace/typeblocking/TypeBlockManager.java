@@ -23,10 +23,10 @@ import com.mit.blocks.workspace.WorkspaceEvent;
 import com.mit.blocks.workspace.WorkspaceWidget;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  * Класс TypeBlockManager служит для того, чтобы помочь пользователям вручную сбрасывать
  * блоки на заднее полотно с помощью клавиатуры. Чтобы достичь этого, тип BlockManager командует
  * тремя различными фазами: взаимойдествие, поиск, удаление.
- * @author AdmiralPaw, Ritevi, Aizek
  */
 public class TypeBlockManager {
     

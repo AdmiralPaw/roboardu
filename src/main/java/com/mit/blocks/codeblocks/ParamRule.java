@@ -5,9 +5,9 @@ import com.mit.blocks.codeblocks.LinkRule;
 import com.mit.blocks.codeblocks.BlockConnector;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  * Класс LinkRule запрещает связывание констант в качестве параметров процедуры
  * и запрещает связывание параметров в качестве констант в другом коде.
- * @author AdmiralPaw, Ritevi, Aizek
  */
 public class ParamRule implements LinkRule{
 

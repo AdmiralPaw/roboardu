@@ -6,8 +6,8 @@ import com.mit.blocks.codeblocks.BlockConnectorShape;
 import com.mit.blocks.workspace.Workspace;
 
 /**
- * Класс NameLabel отображает имя Визуализируемого блока
  * @author AdmiralPaw, Ritevi, Aizek
+ * Класс NameLabel отображает имя Визуализируемого блока
  */
 class NameLabel extends BlockLabel {
 

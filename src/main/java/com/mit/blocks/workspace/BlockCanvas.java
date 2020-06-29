@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.*;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  * BlockCanvas - это контейнер страниц и прокручиваемая панель. Когда страница
  * добавляется в BlockCanvas, эта конкретная новая страница должна быть
  * добавлена как в структуру данных, содержащую набор страниц, так и в
@@ -28,7 +29,6 @@ import java.util.*;
  * отразить это изменение. Начиная с текущей реализации, BlockCanvas должен
  * иметь по крайней мере одну страницу, когда он становится видимым (то есть
  * когда его видимый JComponent становится видимым).
- * @author AdmiralPaw, Ritevi, Aizek
  */
 public class BlockCanvas implements PageChangeListener, ISupportMemento {
 

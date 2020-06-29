@@ -4,6 +4,7 @@ import java.awt.Shape;
 import java.awt.geom.PathIterator;
 
 /**
+ * @author AdmiralPaw, Ritevi, Aizek
  * Класс BevelIterator обрабатывает геометрические вычисления, связанные с
  * созданием эффекта скоса вокруг края фигуры. Как и FlatteningPathIterator,
  * он повторяет набор сегментов линии, следующих за границей фигуры. Для каждого
@@ -11,7 +12,6 @@ import java.awt.geom.PathIterator;
  * текущего сегмента, а 1-я и 4-я-конечными точками соседних сегментов.
  * Из этих четырех точек автоматически вычисляются и предоставляются соответствующие
  * векторы для рисования скоса. Точки и векторы задаются координатами (x,y) в массиве.
- * @author AdmiralPaw, Ritevi, Aizek
  */
 
 public class BevelIterator {

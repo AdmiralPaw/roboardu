@@ -11,31 +11,31 @@ import javax.swing.JSplitPane;
 import org.jfree.ui.tabbedui.VerticalLayout;
 
 /**
- * Класс для определения настроек контроллера
  * @author AdmiralPaw, Ritevi, Aizek
+ * Класс, для определения настроек контроллера
  */
 public class СontrollerСonfiguration extends JPanel {
 
     //верхняя панель контроллера
 
-    /**Поле изображения контроллера*/
+    //Поле изображения контроллера
     public ControllerImage controllerImage;
 
-    /**Поле списка всевозможных компонентов на подключение*/
+    //лист всевозможных компонентов на подключение
     private List<Device> components;
 
     //нижняя панель
 
-    /**Поле панели компонентов*/
+    //Поле панели компонентов
     public JPanel componentsPane;
 
-    /**Поле информационной панели модулей*/
+    //Поле информационной панели модулей
     private ModuleInfoPane moduleInfoPane;
 
-    /**Поле сообщений пользовательского интерфейса*/
+    //Поле сообщений пользовательского интерфейса
     private ResourceBundle uiMessageBundle;
-
-    /**Структура контактов (пинов)*/
+   
+    //Структура контактов (пинов)
     public enum Pin {
 
         //
@@ -78,9 +78,7 @@ public class СontrollerСonfiguration extends JPanel {
         i2c
     };
 
-    /** Поле контакта контроллера
-     *  (ПОХОЖЕ, НИГДЕ НЕ ИСПОЛЬЗУЕТСЯ)
-     */
+    //Поле контакта контроллера
     public Pin controllerPin;
 
     /**
@@ -120,10 +118,10 @@ public class СontrollerСonfiguration extends JPanel {
 
     /**
      * Метод добавляющий новый компонент
-     * @param pin Контакт
-     * @param name Имя
-     * @param pathToTranslate Путь к переводу
-     * @param info Информация
+     * @param pin - Контакт
+     * @param name - Имя
+     * @param pathToTranslate - Путь к переводу
+     * @param info - Информация
      */
     public void addComponent(String pin, String name, String pathToTranslate, String info) {
         this.components.add(new Device(
@@ -135,29 +133,55 @@ public class СontrollerСonfiguration extends JPanel {
 
     /**
      * Метод, меняющий панель компонентов коннектора
-     * @param buttonPin Кнопка контакта
+     * @param buttonPin - Кнопка контакта
      */
     public void changeConnectorComponentsPane(String buttonPin) {
         componentsPane.removeAll();
         if (buttonPin == null) {
             this.resetPane();
         }
+        ControllerMenuButton temp;
         for (int i = 0; i < components.size(); i++) {
             if (components.get(i).pin.equals(buttonPin)) {
-                componentsPane.add(new ControllerMenuButton(
+                temp = new ControllerMenuButton(
                         this,
                         components.get(i).deviceName,
                         components.get(i).deviceNameTranslated,
-                        buttonPin));
+                        buttonPin);
+                componentsPane.add(temp);
             }
         }
         componentsPane.validate();
         componentsPane.repaint();
     }
-
+    
+    public void setModuleOnPin(String buttonPin, String moduleName){
+        componentsPane.removeAll();
+        if (buttonPin == null) {
+            this.resetPane();
+        }
+        ControllerMenuButton temp;
+        for (int i = 0; i < components.size(); i++) {
+            if (components.get(i).pin.equals(buttonPin)) {
+                if(components.get(i).deviceName.equalsIgnoreCase(moduleName)){
+                    temp = new ControllerMenuButton(
+                        this,
+                        components.get(i).deviceName,
+                        components.get(i).deviceNameTranslated,
+                        buttonPin);
+                    if(temp!=null){
+                        temp.mouseReleased(null);
+                    }                   
+                }
+            }
+        }
+        componentsPane.validate();
+        componentsPane.repaint();
+    }
+    
     /**
      * Метод, меняющий панель компонентов коннектора
-     * @param moduleName Имя модуля
+     * @param moduleName - Имя модуля
      */
     public void changeModuleComponentsPane(String moduleName) {
         componentsPane.removeAll();
@@ -200,24 +224,24 @@ public class СontrollerСonfiguration extends JPanel {
      */
     private static class Device {
 
-        /**Поле контакта*/
+        //Поле контакта
         final String pin;
 
-        /**Поле имени устройства*/
+        //Поле имени устройства
         final public String deviceName;
 
-        /**Поле переведённого имени устройства*/
+        //Поле переведённого имени устройства
         final String deviceNameTranslated;
 
-        /**Поле информации об устройстве*/
+        //Поле информации об устройстве
         final String deviceInfo;
 
         /**
          * Метод, для конфигурации информации об устройстве
-         * @param pin Контакт
-         * @param deviceName Имя устройства
-         * @param deviceNameTranslated Переведённое имя устройства
-         * @param deviceInfo Информация об устройстве
+         * @param pin - Контакт
+         * @param deviceName - Имя устройства
+         * @param deviceNameTranslated - Переведённое имя устройства
+         * @param deviceInfo - Информация об устройстве
          */
         public Device(String pin, String deviceName, String deviceNameTranslated, String deviceInfo) {
             this.pin = pin;
