@@ -10,15 +10,16 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 /**
+ * Класс, работающий с однострочным полем ввода, позволяющим пользователю
+ * выбрать число или значение объекта из упорядоченной последовательности
  * @author AdmiralPaw, Ritevi, Aizek
- * Класс, работающий с однострочным полем ввода, позволяющим пользователю выбрать число или значение
- * объекта из упорядоченной последовательности
  */
 public class RSpinner extends JSpinner {
 
     /**
-     * Метод, работающий с выпадающим списком (однострочным полем ввода), а именно с его внешним видом
-     * @param model - Несёт параметры модели для выпадающего списка
+     * Метод, работающий с выпадающим списком (однострочным полем ввода),
+     * а именно с его внешним видом
+     * @param model Несёт параметры модели для выпадающего списка
      */
     public RSpinner(SpinnerNumberModel model)
     {
@@ -52,15 +53,19 @@ public class RSpinner extends JSpinner {
 }
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  * Класс, работающий конкретно с пользовательским интефрейсом для выпадающего списка
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 class RSpinnerUI extends BasicSpinnerUI
 {
-    //Поле с экземпляром выпадающего списка
+    /**Поле с экземпляром выпадающего списка*/
     public static JSpinner s;
 
-    //Поле с компонентом пользовательского интерфейса для выпадающего списка
+    /**
+     * Поле с компонентом пользовательского интерфейса для выпадающего списка
+     * @param c - Компонент
+     * @return new RSpinnerUI()
+     */
     public static ComponentUI createUI(JComponent c)
     {
         return new RSpinnerUI();
@@ -101,16 +106,18 @@ class RSpinnerUI extends BasicSpinnerUI
     }
 
     /**
-     * @author AdmiralPaw, Ritevi, Aizek
      * Класс, работающий с редактором выпадающих списков (внешний вид, значения)
+     * @author AdmiralPaw, Ritevi, Aizek
      */
     public class SpinEditor extends JPanel implements ChangeListener
     {
+        /**Поле редактора*/
         JTextField editor;
 
         /**
-         * Метод, описывающий редактируемые свойства выпадающего списка (цвет, фон, шрифт и т.д.)
-         * @param spin - экземпляр выпадающего списка
+         * Метод, описывающий редактируемые свойства
+         * выпадающего списка (цвет, фон, шрифт и т.д.)
+         * @param spin Экземпляр выпадающего списка
          */
         public SpinEditor(JSpinner spin)
         {
@@ -131,7 +138,7 @@ class RSpinnerUI extends BasicSpinnerUI
 
         /**
          * Метод изменения состояния
-         * @param e - Уведомление об изменении состояния
+         * @param e Уведомление об изменении состояния
          */
         public void stateChanged(ChangeEvent e)
         {
@@ -142,17 +149,17 @@ class RSpinnerUI extends BasicSpinnerUI
     }
 
     /**
-     * @author AdmiralPaw, Ritevi, Aizek
      * Класс, работающий с кнопкой выпадающего списка (цвет, размеры, направление)
+     * @author AdmiralPaw, Ritevi, Aizek
      */
     public class RSpinnerButton extends JButton
     {
-        //Поле направления
+        /**Поле направления*/
         private int diraction;
 
         /**
          * Метод, задающий направление кнопки
-         * @param dir - направление
+         * @param dir Направление
          */
         public RSpinnerButton(int dir)
         {
@@ -162,7 +169,7 @@ class RSpinnerUI extends BasicSpinnerUI
 
         /**
          * Метод, задающий внешний вид кнопки
-         * @param g - Параметр графического контекста
+         * @param g Параметр графического контекста
          */
         public void paint(Graphics g)
         {
@@ -184,19 +191,22 @@ class RSpinnerUI extends BasicSpinnerUI
 
         /**
          * Метод для заливки треугольника
-         * @param g - Параметр графического контекста
-         * @param xpos - Параметр значения по оси Ох
-         * @param ypos - Параметр значения по оси Оу
+         * @param g Параметр графического контекста
+         * @param xpos Параметр значения по оси Ох
+         * @param ypos Параметр значения по оси Оу
          */
         public void fillTriangle(Graphics2D g, int xpos, int ypos)
         {
-            //Поле смещения по оси Ох
+            /**Поле смещения по оси Ох*/
             int xoffset = 5;
-            //Поле смещения по оси Оу
+
+            /**Поле смещения по оси Оу*/
             int yoffset = 5;
-            //Поле массива значений с оси Ох (3 значения для треугольника)
+
+            /**Поле массива значений с оси Ох (3 значения для треугольника)*/
             int[] x = new int[3];
-            //Поле массива значений с оси Оу (3 значения для треугольника)
+
+            /**Поле массива значений с оси Оу (3 значения для треугольника)*/
             int[] y = new int[3];
 
             x[0] =  xpos - xoffset ;

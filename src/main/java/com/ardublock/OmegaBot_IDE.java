@@ -25,13 +25,21 @@ import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 
 /**
- * @author User
+ * Класс настроек и запуска OmegaBot_IDE
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
 
+    /**Поле редактора*/
     static Editor editor;
+
+    /**Поле оконной процедуры*/
     static ArduBlockToolFrame openblocksFrame;
+
+    /**Поле пользовательских настроек*/
     private Preferences userPrefs;
+
+    /**Поле контекстуальных данных*/
     private Context context;
     private boolean kostil = false;
     public Timer autohideTimer;
@@ -39,7 +47,8 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
     private boolean autostart;
 
     /**
-     * @param editor
+     * Метод для инициализации работы OmegaBot_IDE
+     * @param editor Редактор
      */
     public void init(Editor editor) {
         try {
@@ -112,6 +121,7 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
         }
     }
 
+<<<<<<< HEAD
     //TODO сделать как-то почеловечески
     private void hideArduinoEditor(boolean b) {
         if (context.getEditor() != null && (context.getEditor().isVisible() ^ !b)) {
@@ -119,6 +129,11 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
         }
     }
 
+=======
+    /**
+     * Запуск OmegaBot_IDE
+     */
+>>>>>>> parent of f14dfeb... Revert "Documentation_v1.1"
     public void run() {
         try {
             if (OmegaBot_IDE.openblocksFrame.settings.isProductKeyValid()) {
@@ -135,42 +150,44 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
 
 
     /**
-     * @return
+     * Метод для получения названия в меню (APP_NAME = "OmegaBot_IDE")
+     * @return Context.APP_NAME
      */
     public String getMenuTitle() {
         return Context.APP_NAME;
     }
 
     /**
-     *
+     * Метод, показывающий была ли сохранена оконная процедура
      */
     public void didSave() {
 
     }
 
     /**
-     *
+     * Метод, показывающий была ли загружена оконная процедура
      */
     public void didLoad() {
 
     }
 
     /**
-     *
+     * НЕ ИСПОЛЬЗУЕТСЯ
      */
     public void didSaveAs() {
 
     }
 
     /**
-     *
+     * НЕ ИСПОЛЬЗУЕТСЯ
      */
     public void didNew() {
 
     }
 
     /**
-     * @param source
+     * Метод, показывающий был ли сгенерирован код
+     * @param source Исходный код
      */
     public void didGenerate(String source) {
         java.lang.reflect.Method method;
@@ -194,7 +211,8 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
     }
 
     /**
-     * @param source
+     * Метод, показывающий были ли пройдена верификация
+     * @param source Исходный код
      */
     public void didVerify(String source) {
         java.lang.reflect.Method method;
@@ -237,6 +255,10 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
         }
     }
 
+    /**
+     * Метод показывающий текущую версию Arduino
+     * @return line/Context.ARDUINO_VERSION_UNKNOWN
+     */
     private String getArduinoVersion() {
         Context context = Context.getContext();
         File versionFile = context.getArduinoFile("lib/version.txt");
