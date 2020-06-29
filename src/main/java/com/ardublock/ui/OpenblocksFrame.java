@@ -29,88 +29,79 @@ import java.util.*;
 import static javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW;
 
 /**
- * Класс, генерирующий оконную процедуру, графику, кнопки, функции и т.д.
  * @author AdmiralPaw, Ritevi, Aizek
+ * Класс, генерирующий оконную процедуру, графику, кнопки, функции и т.д.
  */
 public class OpenblocksFrame extends JFrame {
 
-<<<<<<< HEAD
     /*Данное поле - идентификатор класса в языке Java, используемый при сериализации с использованием стадартного
     алгоритма. Хранится как числовое значение типа long.*/
-=======
-    /**Данное поле - идентификатор класса в языке Java, используемый при сериализации
-    с использованием стадартного алгоритма. Хранится как числовое значение типа long.*/
->>>>>>> parent of f14dfeb... Revert "Documentation_v1.1"
     private static final long serialVersionUID = 2841155965906223806L;
 
-    /**Поле меню*/
+    //Поле меню
     JMenu recentMenu;
 
-    /**Поле окна*/
+    //Поле окна
     private OpenblocksFrame thisFrame;
 
-    /**Поле времени для функции вызова автосохранения*/
+    //Поле времени для функции вызова автосохранения
     public int timeDelay = 5;
 
-    /**Поле файла, который будет сохранён*/
+    //Поле файла, который будет сохранён
     private File fileToSave;
 
-    /**Поле рабочего пространства (Контекст, Фон)*/
+    //Поле рабочего пространства (Контекст, Фон)
     private Context context;
 
-    /**Поле механизма для выбора пользователем файла*/
+    //Поле механизма для выбора пользователем файла
     private JFileChooser fileChooser;
 
-    /**Поле фильтра файлов*/
+    //Поле фильтра файлов
     private FileFilter ffilter;
 
-    /**Поле консоли*/
+    //Поле консоли
     private ErrWindow errWindow;
 
-    /**Поле настроек*/
+    //Поле настроек
     public Settings settings;
 
-    /**Поле добавляет глубину к контейнеру JFC/Swing, позволяя компонентам перекрывать друг друга, когда это необходимо.
+    /*Поле добавляет глубину к контейнеру JFC/Swing, позволяя компонентам перекрывать друг друга, когда это необходимо.
     Целочисленный объект определяет глубину каждого компонента в контейнере, где компоненты с более высоким номером
     располагаются "сверху" других компонентов.*/
     public JLayeredPane GlobalLayaredPane;
 
-    /**Поле таймера*/
+    //Поле таймера
     private Timer timer = null;
 
-    /**Поле центра верхней панели*/
+    //Поле центра верхней панели
     public JPanel northPanelCenter = null;
 
-    /**Поле логотипа*/
+    //Поле логотипа
     public JPanel logo;
 
-    /**Поле правой панели*/
+    //Поле правой панели
     public JPanel rightPanel;
 
-    /**Поле создания кнопки*/
+    //Поле создания кнопки
     public ImageButton generateButton;
 
-    /**Поле проверки кнопки*/
+    //Поле проверки кнопки
     public ImageButton verifyButton;
 
-    /**Поле сообщений пользовательского интерфейса*/
+    //Поле сообщений пользовательского интерфейса
     private ResourceBundle uiMessageBundle;
 
-    /**Поле директории для автосохранения*/
+    //Поле директории для автосохранения
     private String autosavePath = "";
 
-    /**Поле видимости контроллера*/
+    //Поле видимости контроллера
     private boolean controllerIsShown = true;
     public boolean hideArduinoToogle = true;
 
     /**
      * Метод, создающий прослушиватель
-<<<<<<< HEAD
      *
      * @param ofl - Прослушиватель открытых оконных процедур
-=======
-     * @param ofl Прослушиватель открытых оконных процедур
->>>>>>> parent of f14dfeb... Revert "Documentation_v1.1"
      */
     public void addListener(OpenblocksFrameListener ofl) {
         context.registerOpenblocksFrameListener(ofl);
@@ -133,14 +124,9 @@ public class OpenblocksFrame extends JFrame {
     }
 
     /**
-<<<<<<< HEAD
      * Метод, создающий название оконной процедуры
      *
      * @return title - Название оконной процедуры
-=======
-     * Метод, создающий название оконной процедуры и возвращающий её название
-     * @return title
->>>>>>> parent of f14dfeb... Revert "Documentation_v1.1"
      */
     public String makeFrameTitle() {
         String title;
@@ -159,17 +145,14 @@ public class OpenblocksFrame extends JFrame {
 
 
     //TODO: доделать список последних файлов
-    /**Поле пользователь*/
     String user;
 
-    /**Поле последних файлов*/
+    //Поле последних файлов
     public static String recentFile;
 
-    /**Поле списка последних файлов*/
     List<String> recentFiles = new ArrayList<>();
 
     /**
-<<<<<<< HEAD
      * Главный метод класса
      *
      * @throws IOException           - Исключение связанное с ошибками во время
@@ -179,15 +162,7 @@ public class OpenblocksFrame extends JFrame {
      * @throws IOException           ex - Проверка закрытия потока входа
      * @throws FileNotFoundException e - Сигнализирует о том, что попытка открыть файл,
      *                               обозначенный указанным именем пути, не удалась.
-=======
-     *  Главный метод класса
->>>>>>> parent of f14dfeb... Revert "Documentation_v1.1"
      */
-    //IOException e - Исключение, связанное с невозможностью закрыть поток входа,
-    //после загрузки и работы с классами
-    //IOException ex - Проверка закрытия потока входа
-    //FileNotFoundException e - Сигнализирует о том, что попытка открыть файл,
-    //обозначенный указанным именем пути, не удалась.
     public OpenblocksFrame() {
         thisFrame = this;
         ClassLoader classLoader = getClass().getClassLoader();
@@ -321,12 +296,8 @@ public class OpenblocksFrame extends JFrame {
 
     /**
      * Метод, который устанавливает, через сколько произойдёт автосохранение файла
-<<<<<<< HEAD
      *
      * @param interval - Интервал времени, после которого будет сделано автосохранение
-=======
-     * @param interval Интервал времени, после которого будет сделано автосохранение
->>>>>>> parent of f14dfeb... Revert "Documentation_v1.1"
      */
     public void setAutosaveInterval(int interval) {
         timeDelay = interval;
@@ -345,35 +316,16 @@ public class OpenblocksFrame extends JFrame {
     }
 
     /**
-<<<<<<< HEAD
      * Метод, инициализирующий рабочее пространство, цвета, розмеры, расположение всех панелей, элементов и т.д.
      *
      * @throws Exception e - Не были сохранены недавние файлы
-=======
-     * Метод, устанавливающий директорию, куда будут сохраняться файлы во время автосохранения
-     * @param path - Путь для сохранения
-     */
-    public void setAutosavePath(String path) {
-        autosavePath = path;
-    }
-
-    public String getAutosavePath() {
-        return autosavePath;
-    }
-
-    /**
-     * Метод, инициализирующий рабочее пространство, цвета, розмеры,
-     * расположение всех панелей, элементов и т.д.
-     *
-     * Exception e - Не были сохранены недавние файлы
->>>>>>> parent of f14dfeb... Revert "Documentation_v1.1"
      */
     private void initOpenBlocks() {
 
-        /**Финальное (неизменяемое, без наследования) поле контекста*/
+        //Финальное (неизменяемое, без наследования) поле контекста
         final Context context = Context.getContext();
 
-        /**Финальное (неизменяемое, без наследования) поле рабочего пространства*/
+        //Финальное (неизменяемое, без наследования) поле рабочего пространства
         final Workspace workspace = context.getWorkspace();
 
         errWindow = workspace.getErrWindow();
@@ -480,7 +432,7 @@ public class OpenblocksFrame extends JFrame {
         saveImageItem.addActionListener(new ActionListener() {
             /**
              * Метод для сохранения элемента в качесте png изображения
-             * @param e Событие совершённого действия
+             * @param e - Событие совершённого действия
              * @exception Exception e1 - Не было сохранено изображение
              */
             public void actionPerformed(ActionEvent e) {
@@ -511,7 +463,7 @@ public class OpenblocksFrame extends JFrame {
         tutorialItem.addActionListener(new ActionListener() {
             /**
              * Метод для вывода обучающего гайда (туториала) в новой оконной процедуре
-             * @param e Событие совершённого действия
+             * @param e - Событие совершённого действия
              */
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -545,27 +497,26 @@ public class OpenblocksFrame extends JFrame {
         // </editor-fold>
         //Panels------------------------------------------------------//
 
-        /**Финальное (неизменяемое, без наследования) поле размера верхней панели*/
+        //Финальное (неизменяемое, без наследования) поле размера верхней панели
         final int standartNorthPanelSize = 24;  //TODO: make like constant
-
-        /**Финальное (неизменяемое, без наследования) поле верхней панели*/
+        //Финальное (неизменяемое, без наследования) поле верхней панели
         final JPanel northPanel = new JPanel();
 
         logo = new JPanel();
         northPanelCenter = new JPanel();
 
-        /**Финальное (неизменяемое, без наследования) поле кнопок*/
+        //Финальное (неизменяемое, без наследования) поле кнопок
         final JPanel buttons = new JPanel();
 
-        /**Финальное (неизменяемое, без наследования) поле панели с кнопкой настроек*/
+        //Финальное (неизменяемое, без наследования) поле панели с кнопкой настроек
         final JPanel panelWithConfigButton = new JPanel();
 
         rightPanel = new JPanel();
 
-        /**Финальное (неизменяемое, без наследования) поле с первым разделителем*/
+        //Финальное (неизменяемое, без наследования) поле с первым разделителем
         final JLabel dividerFirst = new JLabel();
 
-        /**Финальное (неизменяемое, без наследования) поле со вторым разделителем*/
+        //Финальное (неизменяемое, без наследования) поле со вторым разделителем
         final JLabel dividerSecond = new JLabel();
 
         //Финальное (неизменяемое, без наследования) поле со третьим разделителем
@@ -573,7 +524,7 @@ public class OpenblocksFrame extends JFrame {
 
         //Main logo---------------------------------------------------//
 
-        /**Финальное (неизменяемое, без наследования) поле логотипа*/
+        //Финальное (неизменяемое, без наследования) поле логотипа
         final JLabel mainLogo = new JLabel();
 
         ImageIcon mLogo = new ImageIcon(OpenblocksFrame.class.getClassLoader().getResource(
@@ -632,11 +583,7 @@ public class OpenblocksFrame extends JFrame {
         reloadDeleted.addActionListener(new ActionListener() {
             /**
              * Метод, загружающий файл
-<<<<<<< HEAD
              * @param e - Событие совершённого действия
-=======
-             * @param e Событие совершённого действия
->>>>>>> parent of f14dfeb... Revert "Documentation_v1.1"
              */
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -781,7 +728,7 @@ public class OpenblocksFrame extends JFrame {
         websiteButton.addActionListener(new ActionListener() {
             /**
              * Метод, осуществляющий переход на сайт омегабота
-             * @param e Событие совершённого действия
+             * @param e - Событие совершённого действия
              * @exception Exception e1 - Невозмонжость перехода на веб-сайт омегабота из-за несовместимости
              */
             public void actionPerformed(ActionEvent e) {
@@ -832,7 +779,7 @@ public class OpenblocksFrame extends JFrame {
         configButton.addActionListener(new ActionListener() {
             /**
              * Метод, обновляющий интерфейс рабочего стола
-             * @param e Событие совершённого действия
+             * @param e - Событие совершённого действия
              */
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -877,7 +824,7 @@ public class OpenblocksFrame extends JFrame {
         workspace.workLayer.addPropertyChangeListener(new PropertyChangeListener() {
             /**
              * Метод, обновляющий интерфейс рабочего стола
-             * @param e Событие изменённого свойства
+             * @param e - Событие изменённого свойства
              */
             public void propertyChange(PropertyChangeEvent e) {
                 Dimension s = workspace.getFactorySize();
@@ -910,7 +857,7 @@ public class OpenblocksFrame extends JFrame {
         this.addWindowListener(new WindowAdapter() {
             /**
              * Метод, изменяющий статус окна на "Включено"
-             * @param e Событие, указывающее статус окна
+             * @param e - Событие, указывающее статус окна
              */
             @Override
             public void windowActivated(WindowEvent e) {
@@ -919,7 +866,7 @@ public class OpenblocksFrame extends JFrame {
 
             /**
              * Метод, изменяющий статус окна на "Выключено"
-             * @param e Событие, указывающее статус окна
+             * @param e - Событие, указывающее статус окна
              */
             @Override
             public void windowDeactivated(WindowEvent e) {
@@ -931,7 +878,7 @@ public class OpenblocksFrame extends JFrame {
         this.addComponentListener(new ComponentAdapter() {
             /**
              * Метод, меняющий размер компонента
-             * @param e Событие, которое указывает, что компонент изменил размер
+             * @param e - Событие, которое указывает, что компонент изменил размер
              */
             @Override
             public void componentResized(ComponentEvent e) {
@@ -940,7 +887,7 @@ public class OpenblocksFrame extends JFrame {
 
             /**
              * Метод, меняющий местоположение компонента
-             * @param e Событие, которое указывает, что компонент переместился
+             * @param e - Событие, которое указывает, что компонент переместился
              */
             @Override
             public void componentMoved(ComponentEvent e) {
@@ -949,7 +896,7 @@ public class OpenblocksFrame extends JFrame {
 
             /**
              * Метод, указываюший статус компонента - "Виден"
-             * @param e Событие, которое указывает, что компонент виден
+             * @param e - Событие, которое указывает, что компонент виден
              */
             @Override
             public void componentShown(ComponentEvent e) {
@@ -958,7 +905,7 @@ public class OpenblocksFrame extends JFrame {
 
             /**
              * Метод, указываюший статус компонента - "Не виден"
-             * @param e Событие, которое указывает, что компонент не виден
+             * @param e - Событие, которое указывает, что компонент не виден
              */
             @Override
             public void componentHidden(ComponentEvent e) {
@@ -971,7 +918,7 @@ public class OpenblocksFrame extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Buttons listners">
 
     /**
-     * Метод, открывающий Ardublock файл
+     *
      */
     public void doOpenArduBlockFile() {
         if (context.isWorkspaceChanged()) {
@@ -990,11 +937,6 @@ public class OpenblocksFrame extends JFrame {
         this.setTitle(makeFrameTitle());
     }
 
-    /**
-     * Метод загружающий файл
-     *
-     * IOException e - Ошибка из-за невозможности загрузить файл
-     */
     private void loadFile() {
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
@@ -1023,12 +965,7 @@ public class OpenblocksFrame extends JFrame {
     }
 
     /**
-<<<<<<< HEAD
      * @return
-=======
-     * Метод, который показывает, был ли сохранён файл ArduBlock
-     * @return true
->>>>>>> parent of f14dfeb... Revert "Documentation_v1.1"
      */
     public boolean doSaveArduBlockFile() {
         if (!context.isWorkspaceChanged()) {
@@ -1048,7 +985,7 @@ public class OpenblocksFrame extends JFrame {
     }
 
     /**
-     * Метод, который позволяет сохранить ArduBlock файл
+     *
      */
     public void doSaveAsArduBlockFile() {
         if (context.isWorkspaceEmpty()) {
@@ -1062,21 +999,12 @@ public class OpenblocksFrame extends JFrame {
     }
 
     /**
-<<<<<<< HEAD
      * @return
-=======
-     * Метод получения источника сообщений пользовательского интерфейса
-     * @return uiMessageBundle
->>>>>>> parent of f14dfeb... Revert "Documentation_v1.1"
      */
     public ResourceBundle getResource() {
         return uiMessageBundle;
     }
 
-    /**
-     * Метод, переделывающий последние элементы
-     * @param recentFiles Последние файлы
-     */
     private void remakeRecentItems(List<String> recentFiles) {
         File recentfiles = new File("C:\\Users\\Public\\recentFiles.txt");
         List<String> files = new ArrayList<>();
@@ -1094,11 +1022,6 @@ public class OpenblocksFrame extends JFrame {
 
         for (String s : files) {
             JMenuItem item = new JMenuItem(new AbstractAction() {
-                /**
-                 * Загрузка и переделка последних файлов
-                 * @param e Событие совершённого действия
-                 * @exception IOException ex - Ошибка загрузки
-                 */
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
@@ -1128,10 +1051,6 @@ public class OpenblocksFrame extends JFrame {
         recentMenu.repaint();
     }
 
-    /**
-     * Метод, переделывающий последние файлы
-     * @param path Путь к файл
-     */
     private void remakeRecentFiles(String path) {
 
         //файл для хранения всех недавних файлов
@@ -1209,11 +1128,6 @@ public class OpenblocksFrame extends JFrame {
 
     }
 
-    /**
-     * Выбор файла для сохранения
-     * @param ardublockString Строка Ardublock
-     * @return true/false
-     */
     private boolean chooseFileAndSave(String ardublockString) {
         File saveFile = letUserChooseSaveFile();
         fileToSave = saveFile;
@@ -1236,20 +1150,11 @@ public class OpenblocksFrame extends JFrame {
         return true;
     }
 
-    /**
-     * Метод для сохранения Ardublock программы
-     * @return workspaceController.getSaveString()
-     */
     private String getArduBlockString() {
         WorkspaceController workspaceController = context.getWorkspaceController();
         return workspaceController.getSaveString();
     }
 
-    /**
-     * Запись файла и обновление оконной процедуры
-     * @param ardublockString Строка Ardublock
-     * @param saveFile Сохраняемые файл
-     */
     private void writeFileAndUpdateFrame(String ardublockString, File saveFile) {
         try {
             saveArduBlockToFile(ardublockString, saveFile);
@@ -1261,10 +1166,6 @@ public class OpenblocksFrame extends JFrame {
 
     }
 
-    /**
-     * Пользователь выбирает как он сохранит файл
-     * @return fileChooser.getSelectedFile()
-     */
     private File letUserChooseSaveFile() {
         int chooseResult;
         chooseResult = fileChooser.showSaveDialog(this);
@@ -1274,10 +1175,6 @@ public class OpenblocksFrame extends JFrame {
         return null;
     }
 
-    /**
-     * Метод, спрашивающий разрешение у пользователя на перезапись уже существующего файла
-     * @return (optionValue == JOptionPane.YES_OPTION)
-     */
     private boolean askUserOverwriteExistedFile() {
         int optionValue = JOptionPane.showOptionDialog(this, uiMessageBundle.getString("message.content.overwrite"),
                 uiMessageBundle.getString("message.title.question"), JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
@@ -1285,12 +1182,6 @@ public class OpenblocksFrame extends JFrame {
         return (optionValue == JOptionPane.YES_OPTION);
     }
 
-    /**
-     * Сохранение результатов работы в файл
-     * @param ardublockString Строка Ardublock
-     * @param saveFile Сохраняемый файл
-     * @throws IOException Ошибка сохранения файла
-     */
     private void saveArduBlockToFile(String ardublockString, File saveFile) throws IOException {
         context.saveArduBlockFile(saveFile, ardublockString);
         context.setSaveFileName(saveFile.getName());
@@ -1298,7 +1189,7 @@ public class OpenblocksFrame extends JFrame {
     }
 
     /**
-     * Метод для создания нового файла (abp)
+     *
      */
     public void doNewArduBlockFile() {
         if (context.isWorkspaceChanged()) {
@@ -1334,7 +1225,7 @@ public class OpenblocksFrame extends JFrame {
     }
 
     /**
-     * Метод для выхода из программы
+     *
      */
     public void doCloseArduBlockFile() {
         if (context.isWorkspaceChanged()) {
@@ -1373,11 +1264,6 @@ public class OpenblocksFrame extends JFrame {
 
     }
 
-    /**
-     * Метод, проверяющий расширение имени файла для сохранения
-     * @param saveFile Сохраняемый файл
-     * @return saveFile/new File(filePath + ".abp")
-     */
     private File checkFileSuffix(File saveFile) {
         String filePath = saveFile.getAbsolutePath();
         if (filePath.endsWith(".abp")) {
@@ -1402,18 +1288,18 @@ public class OpenblocksFrame extends JFrame {
 
 
     /**
-     * Класс, работающий с внешним видом кнопок
      * @author AdmiralPaw, Ritevi, Aizek
+     * Класс, работающий с внешним видом кнопок
      */
     class ImageButton extends JButton {
 
-        /**Поле наименования*/
+        //Поле наименования
         private String name;
 
-        /**Поле метки*/
+        //Поле метки
         private JLabel label;
 
-        /**Поле размера*/
+        //Поле размера
         private int size = 23;
 
         /**
@@ -1522,12 +1408,12 @@ public class OpenblocksFrame extends JFrame {
     }
 
     /**
-     * Класс обработки событий нажатий кнопки
      * @author AdmiralPaw, Ritevi, Aizek
+     * Класс обработки событий нажатий кнопки
      */
     class ClickAction extends AbstractAction {
 
-        /**Поле кнопки*/
+        //Поле кнопки
         private JButton button;
 
         /**
@@ -1549,7 +1435,6 @@ public class OpenblocksFrame extends JFrame {
         }
     }
 
-    /**Поток для сохранения времени таймера*/
     Thread timerSave = new Thread(new Runnable() {
         /**
          * Метод, сохраняющий файл (Начало работы?)

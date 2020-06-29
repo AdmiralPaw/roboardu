@@ -8,51 +8,38 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
 /**
- * Класс содержащий настройки (управление ими) кнопки меню контроллера
- * @author AdmiralPaw, Ritevi, Aizek
+ *
+ * @author User
  */
 public class ControllerMenuButton extends CButton {
 
-    /**Данное поле - идентификатор класса в языке Java, используемый при сериализации
-    с использованием стадартного алгоритма. Хранится как числовое значение типа long.*/
     private static final long serialVersionUID = 328149080229L;
 
-    /**Поле цвета*/
     Color cat_color;
-
-    /**Поле имени устройства*/
     String deviceName;
-
-    /**Поле переведённого имени устройства*/
     String deviceNameTranslated;
-
-    /**Поле идентификатора*/
     String Id;
-
-    /**Поле кнопки модуля*/
     ControllerButton moduleButton;
-
-    /**Поле настроек контроллера*/
     СontrollerСonfiguration controller;
 
     /**
-     * Метод, устанавливающий кнопку меню контроллера
-     * @param controller Настройки контроллера
-     * @param text Текст
-     * @param tr Видимый текст, он же перевод
-     * @param Id Идентификатор порта
+     *
+     * @param controller
+     * @param text
+     * @param tr
+     * @param Id
      */
     public ControllerMenuButton(СontrollerСonfiguration controller, String text, String tr, String Id) {
         this(controller, text, tr, Id, Color.black);
     }
 
     /**
-     * Метод, управляющий кнопкой меню контроллера и всеми её настройками (Цвет, шрифт, размеры)
-     * @param controller Настройки контроллера
-     * @param deviceName Имя устройства
-     * @param tr Видимый текст, он же перевод
-     * @param Id Идентификатор порта
-     * @param cat_col - Цвет
+     *
+     * @param controller
+     * @param deviceName
+     * @param tr
+     * @param Id
+     * @param cat_col
      */
     public ControllerMenuButton(СontrollerСonfiguration controller, String deviceName, String tr, String Id, Color cat_col) {
         super(Color.black, CGraphite.blue, tr);
@@ -67,8 +54,8 @@ public class ControllerMenuButton extends CButton {
     }
 
     /**
-     * Метод для рисовки (окрашивания) кнопки менюшки контроллера
-     * @param g Параметр графического контекста
+     * re paints this
+     * @param g
      */
     @Override
     public void paint(Graphics g) {
@@ -78,19 +65,10 @@ public class ControllerMenuButton extends CButton {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Set up first layer
-
-        /**Поле высоты кнопки*/
         int buttonHeight = this.getHeight();
-
-        /**Поле ширины кнопки*/
         int buttonWidth = this.getWidth();
-
-        /**Поле размера куба по оси Ох*/
         int cube_x = 38;
-
-        /**Поле размера куба по оси Оу*/
         int cube_y = buttonHeight / 2;
-
         g2.setPaint(new Color(218, 226, 228));
         g2.drawLine(0, buttonHeight / 2, cube_x, buttonHeight / 2);
         g2.drawLine(cube_x / 3, 0, buttonWidth, 0);
@@ -99,7 +77,6 @@ public class ControllerMenuButton extends CButton {
         g2.fillRect(cube_x - 5, cube_y - 5, 10, 10);
         if (this.focus) {
             g2.setPaint(new Color(241, 241, 241));
-            /**Поле размера прямоугольника по оси Ох*/
             int rect_x = 50;
             g2.fillRect(rect_x, 1, buttonWidth - rect_x, buttonHeight - 1);
         }
@@ -122,10 +99,6 @@ public class ControllerMenuButton extends CButton {
         }
     }
 
-    /**
-     * Метод, указывающий на то, что кнопка мыши была отпущена
-     * @param e Событие, указывающее, что в компоненте произошло действие мыши
-     */
     public void mouseReleased(MouseEvent e) {
         //System.out.println("mouseReleased");
         //this.moduleButton.setModuleBig(false);
@@ -138,11 +111,7 @@ public class ControllerMenuButton extends CButton {
         this.controller.controllerImage.resetSelectedId(Id, true);
         this.controller.changeConnectorComponentsPane(null);
     }
-
-    /**
-     * Метод, указывающий на то, что мышь наведена
-     * @param e Событие, указывающее, что в компоненте произошло действие мыши
-     */
+    
     public void mouseEntered(MouseEvent e){
         //this.moduleButton.setModuleBig(true);
         this.moduleButton.setNewIconAsModule(
@@ -150,11 +119,7 @@ public class ControllerMenuButton extends CButton {
         this.moduleButton.setModuleName(deviceName);
         this.moduleButton.setTranslatedName(deviceNameTranslated);
     }
-
-    /**
-     * Метод, указывающий на то, что мышь не наведена (убрана из зоны наведения)
-     * @param e Событие, указывающее, что в компоненте произошло действие мыши
-     */
+    
     public void mouseExited(MouseEvent e){
         //this.moduleButton.setModuleBig(false);
     }

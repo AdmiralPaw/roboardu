@@ -29,43 +29,43 @@ import java.util.Map;
 
 /**
  * Класс, содержащий информацию о панели модулей
- * @author AdmiralPaw, Ritevi, Aizek
+ * @author User
  */
 public class ModuleInfoPane extends JPanel {
 
-    /**Поле с URL ссылкой на изображение*/
+    //Поле с URL ссылкой на изображение
     private URL imageURL;
 
-    /**Поле имени модуля*/
+    //Поле имени модуля
     public String moduleName;
 
-    /**Поле с переведённым именем модуля*/
+    //Поле с переведённым именем модуля
     public String transModuleName;
 
-    /**Поле информации о модуле*/
+    //Поле информации о модуле
     private String moduleInfo;
 
-    /**Поле настроек контроллера*/
+    //Поле настроек контроллера
     private СontrollerСonfiguration controller;
 
-    /**Поле имени метки модуля*/
+    //Поле имени метки модуля
     private JTextArea moduleNameLabel = new JTextArea();
 
-    /**Поле иконки модуля*/
+    //Поле иконки модуля
     private JLabel moduleIcon = new JLabel();
 
-    /**Поле кнопки блоков*/
+    //Поле кнопки блоков
     private JButton blocksButton = new JButton();
 
-    /**Поле кнопки закрытия*/
+    //Поле кнопки закрытия
     private JButton closeButton = new JButton();
 
-    /**Поле метки информации о модуле*/
+    //Поле метки информации о модуле
     private JTextArea moduleInfoLabel = new JTextArea();
 
     /**
      * Метод для настройки внешнего вида информационной панели модулей (цвет, размеры, фон, метод взаимодействия)
-     * @param controller Настройки контроллера
+     * @param controller - Настройки контроллера
      */
     public ModuleInfoPane(СontrollerСonfiguration controller) {
         super();
@@ -87,7 +87,7 @@ public class ModuleInfoPane extends JPanel {
             /**
              * Метод для отображения информации о модуле (как будет выглядеть всплывающая информация,
              * текст, фон, как будет происходить её прокрутка и т.д.)
-             * @param e Событие совершённого действия
+             * @param e - Событие совершённого действия
              */
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -222,7 +222,7 @@ public class ModuleInfoPane extends JPanel {
 
             /**
              * Метод, указывающий на то, что кнопка мыши была нажата
-             * @param e Событие, указывающее, что в компоненте произошло действие мыши
+             * @param e - Событие, указывающее, что в компоненте произошло действие мыши
              */
             public void mouseClicked(MouseEvent e) {
 
@@ -231,7 +231,7 @@ public class ModuleInfoPane extends JPanel {
             /**
              * Метод, указывающий на то, что кнопка мыши была нажата (Тоже самое?)
              * (Возможная разница: Click - быстрое нажатие, Press - зажатая кнопка мыши)
-             * @param e Событие, указывающее, что в компоненте произошло действие мыши
+             * @param e - Событие, указывающее, что в компоненте произошло действие мыши
              */
             public void mousePressed(MouseEvent e) {
 
@@ -239,7 +239,7 @@ public class ModuleInfoPane extends JPanel {
 
             /**
              * Метод, указывающий на то, что кнопка мыши была отпущена
-             * @param e Событие, указывающее, что в компоненте произошло действие мыши
+             * @param e - Событие, указывающее, что в компоненте произошло действие мыши
              */
             public void mouseReleased(MouseEvent e) {
                 controller.changeConnectorComponentsPane(null);
@@ -248,7 +248,7 @@ public class ModuleInfoPane extends JPanel {
 
             /**
              * Метод, указывающий на то, что мышь наведена
-             * @param e Событие, указывающее, что в компоненте произошло действие мыши
+             * @param e - Событие, указывающее, что в компоненте произошло действие мыши
              */
             public void mouseEntered(MouseEvent e) {
                 closeButton.setSelected(true);
@@ -256,7 +256,7 @@ public class ModuleInfoPane extends JPanel {
 
             /**
              * Метод, указывающий на то, что мышь не наведена (убрана из зоны наведения)
-             * @param e Событие, указывающее, что в компоненте произошло действие мыши
+             * @param e - Событие, указывающее, что в компоненте произошло действие мыши
              */
             public void mouseExited(MouseEvent e) {    
                 closeButton.setSelected(false);            
@@ -300,13 +300,13 @@ public class ModuleInfoPane extends JPanel {
     
     /**
      * Метод настройки действий кнопки
-     * @param modules Выбранные модули
+     * @param modules - выбранные модули
      */
     public void setButtonAction(String modules){//просто как пример
         this.blocksButton.addMouseListener(new MouseListener(){
             /**
              * Метод, указывающий на то, что кнопка мыши была нажата
-             * @param e Событие, указывающее, что в компоненте произошло действие мыши
+             * @param e - Событие, указывающее, что в компоненте произошло действие мыши
              */
             public void mouseClicked(MouseEvent e) {
 
@@ -315,7 +315,7 @@ public class ModuleInfoPane extends JPanel {
             /**
              * Метод, указывающий на то, что кнопка мыши была нажата (Тоже самое?)
              * (Возможная разница: Click - быстрое нажатие, Press - зажатая кнопка мыши)
-             * @param e Событие, указывающее, что в компоненте произошло действие мыши
+             * @param e - Событие, указывающее, что в компоненте произошло действие мыши
              */
             public void mousePressed(MouseEvent e) {
 
@@ -323,7 +323,7 @@ public class ModuleInfoPane extends JPanel {
 
             /**
              * Метод, указывающий на то, что кнопка мыши была отпущена
-             * @param e Событие, указывающее, что в компоненте произошло действие мыши
+             * @param e - Событие, указывающее, что в компоненте произошло действие мыши
              */
             public void mouseReleased(MouseEvent e) {
                 //чтото происходит
@@ -331,14 +331,14 @@ public class ModuleInfoPane extends JPanel {
 
             /**
              * Метод, указывающий на то, что мышь наведена
-             * @param e Событие, указывающее, что в компоненте произошло действие мыши
+             * @param e - Событие, указывающее, что в компоненте произошло действие мыши
              */
             public void mouseEntered(MouseEvent e) {
             }
 
             /**
              * Метод, указывающий на то, что мышь не наведена (убрана из зоны наведения)
-             * @param e Событие, указывающее, что в компоненте произошло действие мыши
+             * @param e - Событие, указывающее, что в компоненте произошло действие мыши
              */
             public void mouseExited(MouseEvent e) {                
             }
@@ -347,7 +347,7 @@ public class ModuleInfoPane extends JPanel {
 
     /**
      * Метод для выбора изображения модуля
-     * @param deviceName Имя устройства
+     * @param deviceName - Имя устройства
      */
     public void setModuleImage(String deviceName) {
         setImageURL(deviceName+"Info");
@@ -359,7 +359,7 @@ public class ModuleInfoPane extends JPanel {
 
     /**
      * Метод для присвоения имени модулю
-     * @param deviceName Имя устройства
+     * @param deviceName - Имя устройства
      */
     public void setModuleName(String deviceName) {
         this.moduleNameLabel.setText(deviceName);
@@ -367,7 +367,7 @@ public class ModuleInfoPane extends JPanel {
 
     /**
      * Метод для назначения информации к модулю
-     * @param info Информация о выбранном модуле
+     * @param info - Информация
      */
     public void setModuleInfo(String info) {
         this.moduleInfo = info;
@@ -376,7 +376,7 @@ public class ModuleInfoPane extends JPanel {
 
     /**
      * Метод для выбора изображения модуля при помощи URL
-     * @param deviceName Имя устройства
+     * @param deviceName - Имя устройства
      */
     private void setImageURL(String deviceName) {
         //if (!deviceName.equals("start")) {
