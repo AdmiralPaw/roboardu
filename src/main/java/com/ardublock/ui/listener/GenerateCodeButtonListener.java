@@ -25,28 +25,28 @@ import java.util.Set;
 //>>>>>>> lerofaCtrlZ
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  * Класс, который генерирует код прослушивателя кнопки
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 
 public class GenerateCodeButtonListener implements ActionListener {
 
-    //Поле родительской оконной процедуры
+    /**Поле родительской оконной процедуры*/
     private JFrame parentFrame;
 
-    //Поле контекста
+    /**Поле контекста*/
     private Context context;
 
-    //Поле рабочего пространства
+    /**Поле рабочего пространства*/
     private Workspace workspace;
 
-    //Поле сообщений пользовательского интерфейса
+    /**Поле сообщений пользовательского интерфейса*/
     private ResourceBundle uiMessageBundle;
 
     /**
      * Метод, генерирующий код прослушивателя кнопки
-     * @param frame - Оконная процедура
-     * @param context - Контекст
+     * @param frame Оконная процедура
+     * @param context Контекст
      */
     public GenerateCodeButtonListener(JFrame frame, Context context) {
         this.parentFrame = frame;
@@ -56,8 +56,8 @@ public class GenerateCodeButtonListener implements ActionListener {
     }
 
     /**
-     * Метод, *
-     * @param blockId - Идентификатор блока
+     * Действия после обработки исключения
+     * @param blockId Идентификатор блока
      */
     private void afterException(Long blockId) {
         Iterable<RenderableBlock> blocks = workspace.getRenderableBlocks();
@@ -72,12 +72,12 @@ public class GenerateCodeButtonListener implements ActionListener {
     }
 
     /**
-     *
-     * @param e - Событие совершённого действия
-     * @exception SocketNullException e1
-     * @exception BlockException e2
-     * @exception SubroutineNotDeclaredException e3
+     * Работа прослушивателя кнопки
+     * @param e Событие совершённого действия
      */
+     //@exception SocketNullException e1
+     //@exception BlockException e2
+     //@exception SubroutineNotDeclaredException e3
     public void actionPerformed(ActionEvent e) {
         if (parentFrame instanceof OpenblocksFrame)
         {

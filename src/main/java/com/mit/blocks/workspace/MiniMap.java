@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  * Миникарта - это миниатюризированное представление текущего холста блока рабочего пространства.
  * Каждая миникарта может быть связана только с одним блоком холста.
  * *
@@ -29,6 +28,7 @@ import java.util.Collection;
  * mapheight: Integer				//Минимальная ширина этой миникарты
  * ratio : Double					//соотношение сторон, которое должно поддерживаться при
  *                                  //рендеринге this.blocks и this.comments
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class MiniMap extends JPanel implements MouseListener, MouseMotionListener, SearchableContainer, PageChangeListener, WorkspaceWidget {
     /*
