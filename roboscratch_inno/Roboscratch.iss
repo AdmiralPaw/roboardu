@@ -105,7 +105,7 @@ function find(Value:string): string;
 
 var 
     reg_key: string; // Просматриваемый подраздел системного реестра
-    success: boolean; // Флаг наличия запрашиваемой версии .NET
+    success: boolean; // Флаг наличия запрашиваемой версии
     key_value: string; // Прочитанное из реестра значение ключа
 
 begin
