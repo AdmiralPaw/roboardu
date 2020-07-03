@@ -170,13 +170,15 @@ public class СontrollerСonfiguration extends JPanel {
                         components.get(i).deviceNameTranslated,
                         buttonPin);
                     if(temp!=null){
+                        componentsPane.add(temp);
                         temp.mouseReleased(null);
-                    }                   
+                    }
                 }
             }
         }
+        this.resetPane();
         componentsPane.validate();
-        componentsPane.repaint();
+        componentsPane.repaint();        
     }
     
     /**
@@ -198,7 +200,7 @@ public class СontrollerСonfiguration extends JPanel {
             }
         /*} else {
             this.resetPane();
-        }*/
+        }*/       
         componentsPane.validate();
         componentsPane.repaint();
     }

@@ -3043,7 +3043,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     /**
      *
      */
-    public void removeBlock() {
+    public void removeBlocks() {
         removeBlocks(this);
     }
 
@@ -3057,5 +3057,5 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             }
             this.workspace.getEnv().removeBlockByID(rb.getBlockID());
         }
-    }
+    }    
 }
