@@ -1,6 +1,7 @@
 .metadata/
 build/
 target/
+roboscratch_inno/*
 .DS_Store
 .classpath
 .idea
