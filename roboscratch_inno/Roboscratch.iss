@@ -31,7 +31,7 @@ AppSupportURL={#URL}
 AppUpdatesURL={#URL}
 
 ; Путь установки по-умолчанию 
-DefaultDirName={code:find}
+DefaultDirName={code:findMSG}
 
 ; Имя группы в меню "Пуск"
 DefaultGroupName={#Name}
@@ -97,11 +97,10 @@ Source: "{#Sourse}\ArduinoLibraries\NewPing\*"; Components: libs\NewPing; DestDi
 Source: "{#Sourse}\ArduinoLibraries\OneWire-2.3.5\*"; Components: libs\OneWire; DestDir: "{app}\libraries\OneWire-2.3.5"; Flags: recursesubdirs createallsubdirs ignoreversion
 Source: "{#Sourse}\ArduinoLibraries\Arduino-Temperature-Control-Library-master\*"; Components: libs\Arduino_Temperature_Control_Library; DestDir: "{app}\libraries\Arduino-Temperature-Control-Library-master"; Flags: recursesubdirs createallsubdirs ignoreversion
 
-
 Source: "{#Sourse}\target\{#ExeName}.jar"; Components: programm; DestDir: "{app}\tools\{#Name}\tool"; Flags: ignoreversion
 
 [Code]
-function find(Value:string): string;
+function findMSG(Value:string): string;
 
 var 
     reg_key: string; // Просматриваемый подраздел системного реестра
@@ -118,12 +117,53 @@ begin
       result := key_value;
       Exit;
     end;
+    MsgBox('{#Name} является дополнением к Arduino IDE.'#13#13
+             'Пожалуйста установите Arduino IDE.',
+             mbInformation,
+             MB_OK);
+    Abort;
+end;
+
+function find(): boolean;
+
+var 
+    reg_key: string; // Просматриваемый подраздел системного реестра
+    success: boolean; // Флаг наличия запрашиваемой версии
+    key_value: string; // Прочитанное из реестра значение ключа
+
+begin
+
+    success := false;
+    reg_key := 'SOFTWARE\WOW6432Node\Arduino';
+    success := RegQueryStringValue(HKEY_LOCAL_MACHINE, reg_key, 'Install_Dir', key_value);
+    result := success;
+end;
+
+function InitializeSetup(): boolean;
+var
+  ResultCode: integer;
+begin
+  if not find() then
+  begin
+  // Launch Notepad and wait for it to terminate
+    //if Exec(ExpandConstant('{tmp}\arduino-1.8.13-windows.exe'), '', '', SW_SHOW,
+    //   ewWaitUntilTerminated, ResultCode) then
     if MsgBox('{#Name} является дополнением к Arduino IDE.'#13#13
-             'Установщик не обнаружил Arduino IDE, продолжить установку?',
-             mbConfirmation,
-             MB_YESNO or MB_DEFBUTTON2) = IDNO then
+             'Установщик не обнаружил Arduino IDE, установить?',
+              mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
     begin
-      result := '';
-      Abort;
+      if Exec('arduino\arduino-1.8.13-windows.exe', '', '', SW_SHOW,
+         ewWaitUntilTerminated, ResultCode) then
+      begin
+        // handle success if necessary; ResultCode contains the exit code
+      end
+      else begin
+        // handle failure if necessary; ResultCode contains the error code
+      end;
     end;
+  end;
+
+  // Proceed Setup
+  Result := True;
+
 end;
