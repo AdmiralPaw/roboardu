@@ -126,7 +126,7 @@ public class Settings extends JFrame {
         if (this.isFirstLaunch()) {
             userPrefs.putBoolean("is_first_launch", false);
             userPrefs.putBoolean("ardublock.ui.autostart", true);
-            userPrefs.putBoolean("ardublock.ui.autohide", true);
+            userPrefs.putBoolean("ardublock.ui.autohide", false);
             userPrefs.putInt("ardublock.ui.autosaveInterval", 10);
             userPrefs.putInt("ardublock.ui.ctrlzLength", 10);
         }
@@ -277,7 +277,7 @@ public class Settings extends JFrame {
         text.setFont(new Font(mainFont, Font.PLAIN, 15));
 
         RCheckBox autohide = new RCheckBox();
-        autohide.setSelected(userPrefs.getBoolean("ardublock.ui.autohide", true));
+        autohide.setSelected(userPrefs.getBoolean("ardublock.ui.autohide", false));
         windowBodyPanel.add(autohide);
         autohide.setBounds(windowWidth - 44 - rigthOffset, position, 44, 40);
 
