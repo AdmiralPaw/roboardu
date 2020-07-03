@@ -90,22 +90,7 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
             this.firstAutohide = userPrefs.getBoolean("ardublock.ui.autohide", false);
             this.autostart = userPrefs.getBoolean("ardublock.ui.autostart", false);
             if (autostart) {
-                OmegaBot_IDE.openblocksFrame.setVisible(true);
-//                if (userPrefs.getBoolean("ardublock.ui.autohide", true)) {
-//                    autohideTimer = new Timer(300, new ActionListener() {
-//                        /**
-//                         *
-//                         */
-//                        public void actionPerformed(ActionEvent e) {
-//                            //TODO: код ниже позволяет скрывать окно Arduino IDE, необходимо автоматически закрывать его, если
-//                            //  включен параметр @autostart@
-//                            if (context.getEditor() != null) {
-//                                context.getEditor().setVisible(false);
-//                            }
-//                        }
-//                    });
-//                    autohideTimer.start();
-//                }
+                run();
             }
             Timer timer = new Timer(300, (ActionListener) e -> getInfoText());
             timer.start();

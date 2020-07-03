@@ -125,7 +125,7 @@ public class Settings extends JFrame {
         userPrefs = Preferences.userRoot().node("OmegaBot_IDE");
         if (this.isFirstLaunch()) {
             userPrefs.putBoolean("is_first_launch", false);
-            userPrefs.putBoolean("ardublock.ui.autostart", true);
+            userPrefs.putBoolean("ardublock.ui.autostart", false);
             userPrefs.putBoolean("ardublock.ui.autohide", false);
             userPrefs.putInt("ardublock.ui.autosaveInterval", 10);
             userPrefs.putInt("ardublock.ui.ctrlzLength", 10);
@@ -345,19 +345,20 @@ public class Settings extends JFrame {
         position += offset;
 
         //DEBAG
-//        JButton resetButton = new JButton("Сбросить настройки");
-//        windowBodyPanel.add(resetButton);
-//        resetButton.setBounds(leftOffset, position, 300, 40);
-//        resetButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                userPrefs.putBoolean("is_first_launch", false);
-//                userPrefs.putBoolean("ardublock.ui.autostart", true);
-//                userPrefs.putBoolean("ardublock.ui.autohide", true);
-//                userPrefs.putInt("ardublock.ui.autosaveInterval", 10);
-//                userPrefs.putInt("ardublock.ui.ctrlzLength", 10);
-//            }
-//        });
+        JButton resetButton = new JButton("Сбросить настройки");
+        windowBodyPanel.add(resetButton);
+        resetButton.setBounds(leftOffset, position, 300, 40);
+        resetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userPrefs.putBoolean("is_first_launch", true);
+                userPrefs.putBoolean("is_key_valid", false);
+                userPrefs.putBoolean("ardublock.ui.autostart", false);
+                userPrefs.putBoolean("ardublock.ui.autohide", false);
+                userPrefs.putInt("ardublock.ui.autosaveInterval", 10);
+                userPrefs.putInt("ardublock.ui.ctrlzLength", 10);
+            }
+        });
 
         position += offset;
 
@@ -427,18 +428,19 @@ public class Settings extends JFrame {
                     "Введите ключ продукта: ",
                     "Авторизация",
                     JOptionPane.PLAIN_MESSAGE);
-
             if (result == null) {
                 return false;
             }
-            //TODO сдесь нужна валидация с базой данных вместо if
-            else if (result.equals("1234")) {
+            String[] subStr = result.split("-");
+            int resultValue = Integer.parseInt(subStr[subStr.length - 1]);
+            String clearResult = result.substring(0,result.lastIndexOf("-"));
+            if (resultValue >= 50 && resultValue <= 10000 && clearResult.equals("BOT-V2-20")) {
 //                JOptionPane.showMessageDialog(openblocksFrame,
 //                        "Ключ верный!",
 //                        "Авторизация",
 //                        JOptionPane.PLAIN_MESSAGE);
                 userPrefs.putBoolean("is_key_valid", true);
-                userPrefs.put("key", "1234");
+                userPrefs.put("key", result);
                 return true;
             } else {
                 JOptionPane.showMessageDialog(openblocksFrame,

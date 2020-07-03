@@ -152,7 +152,7 @@ begin
              'Установщик не обнаружил Arduino IDE, установить?',
               mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
     begin
-      if Exec('arduino\arduino-1.8.13-windows.exe', '', '', SW_SHOW,
+      if Exec('.\arduino\arduino-1.8.13-windows.exe', '', '', SW_SHOW,
          ewWaitUntilTerminated, ResultCode) then
       begin
         // handle success if necessary; ResultCode contains the exit code

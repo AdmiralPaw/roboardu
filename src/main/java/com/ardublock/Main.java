@@ -59,7 +59,7 @@ public class Main {
      */
     private void startOpenblocksFrame() {
         openblocksFrame = new OpenblocksFrame();
-
+        openblocksFrame.settings.productKeyValidator(openblocksFrame);
         // Don't just "close" Ardublock, see if there's something to save first.
         // Note to self: This only affects behaviour when we're run directly,
         // not when we're an Arduino Tool - See ArduBlockTool.java for that.
