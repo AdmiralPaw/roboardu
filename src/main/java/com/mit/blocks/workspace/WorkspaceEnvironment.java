@@ -46,6 +46,7 @@ public class WorkspaceEnvironment {
      */
     public void addRenderableBlock(RenderableBlock block) {
     	this.allRenderableBlocks.put(block.getBlockID(), block);
+//        System.out.println("Рендер блоков: " + allRenderableBlocks.size()+" блок : "+block.getGenus());
     }
     
     /**
@@ -98,6 +99,7 @@ public class WorkspaceEnvironment {
         }
 
     	this.allBlocks.put(id, block);
+//        System.out.println("Блоков: " + allBlocks.size()+" блок : "+block.getGenusName());
     }
 
     /**

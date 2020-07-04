@@ -93,7 +93,7 @@ public class OpenblocksFrame extends JFrame {
 
     //Поле директории для автосохранения
     private String autosavePath = "";
-
+    
     //Поле видимости контроллера
     private boolean controllerIsShown = true;
     public boolean hideArduinoToogle = true;
@@ -284,10 +284,12 @@ public class OpenblocksFrame extends JFrame {
                 context.setWorkspaceChanged(isWorkspaceChanged);
                 context.setSaveFilePath(oldPath);
                 setTitle(makeFrameTitle());
-                Date dateNow = new Date();
-                SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss");
-                errWindow.setErrText("[" + formatForDateNow.format(dateNow) + "] " +
-                        uiMessageBundle.getString("ardublock.ui.compledAutosave") + autosavePath + newText + "_autosave.abp");
+                
+                
+//                Date dateNow = new Date();
+//                SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss");
+//                errWindow.setErrText("[" + formatForDateNow.format(dateNow) + "] " +
+//                        uiMessageBundle.getString("ardublock.ui.compledAutosave") + autosavePath + newText + "_autosave.abp");
             }
         });
         timer.start();
@@ -309,6 +311,7 @@ public class OpenblocksFrame extends JFrame {
 
     public void setAutosavePath(String path) {
         autosavePath = path;
+        System.out.println(path);
     }
 
     public String getAutosavePath() {

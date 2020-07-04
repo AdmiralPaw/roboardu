@@ -9,6 +9,7 @@ import com.mit.blocks.workspace.Workspace;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
@@ -333,13 +334,23 @@ public class Settings extends JFrame {
 
         String user = System.getProperty("user.name");
         String autosavePath = "C:\\Users\\" + user + "\\Documents\\OmegaBot_IDE\\";
-
+        
+        String tempAutoSavePath = "C:\\Users\\" + user + "\\Documents\\OmegaBot_IDE\\";
+        
         textField.setText(autosavePath);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 fileChooser.showOpenDialog(null);
-                textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
+                File chosenPath = fileChooser.getSelectedFile();
+                if (chosenPath==null){
+                    System.out.println("her");
+                    textField.setText(tempAutoSavePath);
+                } else {
+                    System.out.println("her1");
+                    textField.setText(chosenPath.getAbsolutePath());
+                }
+                
             }
         });
         position += offset;

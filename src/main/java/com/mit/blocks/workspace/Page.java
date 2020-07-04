@@ -753,6 +753,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
      * @param b
      */
     public void stopDragged(RenderableBlock b) {
+    
     }
 
     /**
