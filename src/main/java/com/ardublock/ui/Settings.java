@@ -435,10 +435,6 @@ public class Settings extends JFrame {
             int resultValue = Integer.parseInt(subStr[subStr.length - 1]);
             String clearResult = result.substring(0,result.lastIndexOf("-"));
             if (resultValue >= 50 && resultValue <= 10000 && clearResult.equals("BOT-V2-20")) {
-//                JOptionPane.showMessageDialog(openblocksFrame,
-//                        "Ключ верный!",
-//                        "Авторизация",
-//                        JOptionPane.PLAIN_MESSAGE);
                 userPrefs.putBoolean("is_key_valid", true);
                 userPrefs.put("key", result);
                 return true;
