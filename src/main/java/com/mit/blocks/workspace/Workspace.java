@@ -28,10 +28,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  * Рабочее пространство - это основная блочная область, где происходит
  * манипулирование блоками и их сборка. Этот класс управляет блоками, миром,
  * видом, рисованием, перетаскиванием, анимацией.
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class Workspace extends JLayeredPane implements ISupportMemento, RBParent, ChangeListener, ExplorerListener {
 

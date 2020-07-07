@@ -8,66 +8,70 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
+ * Класс, работающий с контроллерами кнопок 
+ * (их внешний вид, взаимодействие с ними, местоположение и т.д.)
  * @author AdmiralPaw, Ritevi, Aizek
- * Класс, работающий с контроллерами кнопок (их внешний вид, взаимодействие с ними, местоположение и т.д.)
  */
 public class ControllerButton extends JToggleButton {
 
-    //Поле с изображением контроллера
+    /**Поле с изображением контроллера*/
     private final ControllerImage controllerImage;
 
-    //Поле с настройками контроллера
+    /**Поле с настройками контроллера*/
     private final СontrollerСonfiguration controller;
 
-    //Поле с идентификатором кнопки
+    /**Поле с идентификатором кнопки*/
     private String buttonId;
 
-    //Поле пути
+    /**Поле пути*/
     private String path;
 
-    //Поле с именем модуля
+    /**Поле с именем модуля*/
     public String moduleName = "start";
 
-    //Поле с переведенным названием модуля
+    /**Поле с переведенным названием модуля*/
     public String moduleTranslatedName = "modules.start.info";
 
-    //Поле со списком блоков подходящих для модуля
+    /**Поле со списком блоков подходящих для модуля*/
     public ArrayList<String> moduleSuitableBlocks = new ArrayList<String>();
 
-    //Поле с режимом работы
+    /**Поле с режимом работы*/
     private String mode;
 
     //private String pathSet;
 
-    //Поле с иконкой изображения
+    /**Поле с иконкой изображения*/
     private ImageIcon image;
 
-    //Поле с набором изображений
+    /**Поле с набором изображений*/
     private ImageIcon imageSet;
 
-    //Поле логической переменной, которая несёт в себе информацию является ли объект соединителем (коннектором)
+    /**Поле логической переменной, которая несёт в себе информацию 
+     * является ли объект соединителем (коннектором)*/
     private boolean isItConnector;
 
-    //Поле кнопки управления
+    /**Поле кнопки управления*/
     private ControllerButton button;
 
-    //Поле логической переменной, которая несёт в себе информацию находится ли мышь над данным объектом
+    /**Поле логической переменной, которая несёт в себе 
+     * информацию находится ли мышь над данным объектом*/
     private boolean mouseIsOnThis;
 
-    //Поле логической переменной, которая несёт в себе информацию был ли объект нажат мышью (выбран)
+    /**Поле логической переменной, которая несёт в себе информацию 
+     * был ли объект нажат мышью (выбран)*/
     private boolean mouseIsPressedThis;
 
-    //Поле с типом платы
+    /**Поле с типом платы*/
     private int type_of_plate;
     //private boolean canBePressed;
 
     /**
      * Метод, который работает с функционалом и внешним видом кнопок контроллера
-     *
-     * @param root      - Стандартные настройки контроллера
-     * @param rootImage - Стандартное изображение контроллера
-     * @param Id        - Идентификатор кнопки
-     * @param mode      - Режим работы
+     * @param root Стандартные настройки контроллера
+     * @param rootImage Стандартное изображение контроллера
+     * @param Id Идентификатор кнопки
+     * @param mode Режим работы
+     * @param type_of_plate Тип платы
      */
     public ControllerButton(СontrollerСonfiguration root, ControllerImage rootImage, String Id, String mode, int type_of_plate) {
         moduleSuitableBlocks.add("");
@@ -106,7 +110,7 @@ public class ControllerButton extends JToggleButton {
         this.addMouseListener(new MouseListener() {
             /**
              * Метод, который указывает на то, что была нажата кнопка мыши
-             * @param e - Событие нажатия кнопки мыши
+             * @param e Событие нажатия кнопки мыши
              */
             public void mouseClicked(MouseEvent e) {
 
@@ -115,7 +119,7 @@ public class ControllerButton extends JToggleButton {
 
             /**
              * Метод, который указывает на то, что была зажата кнопка мыши
-             * @param e - Событие нажатия кнопки мыши
+             * @param e Событие нажатия кнопки мыши
              */
             public void mousePressed(MouseEvent e) {
                 mouseIsPressedThis = true;
@@ -123,7 +127,7 @@ public class ControllerButton extends JToggleButton {
 
             /**
              * Метод, который указывает на то, что была отпущена кнопка мыши
-             * @param e - Событие нажатия кнопки мыши
+             * @param e Событие нажатия кнопки мыши
              */
             public void mouseReleased(MouseEvent e) {
                 mouseIsPressedThis = false;
@@ -152,7 +156,7 @@ public class ControllerButton extends JToggleButton {
 
             /**
              * Метод, который указывает на то, что мышь находится над объектом
-             * @param e - Событие нажатия кнопки мыши
+             * @param e Событие нажатия кнопки мыши
              */
             public void mouseEntered(MouseEvent e) {
                 mouseIsOnThis = true;
@@ -174,7 +178,7 @@ public class ControllerButton extends JToggleButton {
 
             /**
              * Метод, который указывает на то, что мышь больше не находится над объектом
-             * @param e - Событие нажатия кнопки мыши
+             * @param e Событие нажатия кнопки мыши
              */
             public void mouseExited(MouseEvent e) {
                 mouseIsOnThis = false;
@@ -200,8 +204,8 @@ public class ControllerButton extends JToggleButton {
 
     /**
      * Метод, который указывает на набор подходящих блоков
-     *
-     * @param paths - Пути до объектов
+     * НИГДЕ НЕ ИСПОЛЬЗУЕТСЯ
+     * @param paths Пути до объектов
      */
     public void setSuitableBlocks(ArrayList<String> paths) {
 
@@ -210,7 +214,7 @@ public class ControllerButton extends JToggleButton {
     /**
      * Модуль, увеличивающий размер выбранного компонента
      *
-     * @param isItBig - Логическая переменная, которая показывает увеличен ли выбранный компонент
+     * @param isItBig Логическая переменная, которая показывает увеличен ли выбранный компонент
      */
     public void setModuleBig(boolean isItBig) { //можно лучше, но мозг в такой жаре не работает
         if (isItConnector) {
@@ -225,7 +229,7 @@ public class ControllerButton extends JToggleButton {
     /**
      * Метод, который увеличивает размер выбранной кнопки
      *
-     * @param isItBig - Логическая переменная, которая показывает увеличена ли выбранная кнопка
+     * @param isItBig Логическая переменная, которая показывает увеличена ли выбранная кнопка
      */
     private void setButtonBig(boolean isItBig) {
         if (isItBig) {
@@ -284,8 +288,8 @@ public class ControllerButton extends JToggleButton {
     /**
      * Метод, который устанавливает значки (иконки) для коннекторов
      *
-     * @param Id            - Идентификатор
-     * @param type_of_plate - Тип платы
+     * @param Id Идентификатор
+     * @param type_of_plate Тип платы
      */
     private void setIconAsConnector(String Id, int type_of_plate) {
         switch (type_of_plate) {
@@ -349,8 +353,8 @@ public class ControllerButton extends JToggleButton {
     /**
      * Метод, который устанавливает начальные положения для коннекторов
      *
-     * @param Id            - Идентификатор
-     * @param type_of_plate - Тип платы
+     * @param Id Идентификатор
+     * @param type_of_plate Тип платы
      */
     private void setStartPositionAsConnector(String Id, int type_of_plate) {
         int width_between_simples;
@@ -483,8 +487,8 @@ public class ControllerButton extends JToggleButton {
     /**
      * Метод, который устанавливает начальные положения для модулей
      *
-     * @param Id            - Идентификатор
-     * @param type_of_plate - Тип платы
+     * @param Id Идентификатор
+     * @param type_of_plate Тип платы
      */
     private void setStartPositionAsModule(String Id, int type_of_plate) {
         int where_up_width;
@@ -600,7 +604,7 @@ public class ControllerButton extends JToggleButton {
     /**
      * Метод, который возвращает модуль или коннектор в стандартное положение
      *
-     * @param type_of_plate - Тип платы
+     * @param type_of_plate Тип платы
      */
     public void refresh_plate(int type_of_plate) {
         switch (mode) {
@@ -633,7 +637,7 @@ public class ControllerButton extends JToggleButton {
     /**
      * Метод, который назначает новую иконку (выбранную) вместо стандартной при помощи URL
      *
-     * @param iconURL - Путь до выбранной иконки
+     * @param iconURL Путь до выбранной иконки
      */
     public void setNewIconAsModule(URL iconURL) {
         path = iconURL.getPath();
@@ -642,7 +646,7 @@ public class ControllerButton extends JToggleButton {
     /**
      * Метод, который назначает новую иконку (выбранную) вместо стандартной при помощи указания пути
      *
-     * @param Path - Путь
+     * @param Path Путь
      */
     public void setNewIconAsModule(String Path) {
         path = Path;
@@ -652,8 +656,8 @@ public class ControllerButton extends JToggleButton {
     /**
      * Метод для получения пути к добавленному объекту
      *
-     * @param base   - основание
-     * @param adding - смещение
+     * @param base основание
+     * @param adding смещение
      * @return beforePoint + adding + afterPoint
      */
     private String getPathAddedName(String base, String adding) {
@@ -704,7 +708,7 @@ public class ControllerButton extends JToggleButton {
     /**
      * Метод для получения масштабируемого экземпляра
      *
-     * @param icon - иконка выбранного объекта
+     * @param icon Иконка выбранного объекта
      * @return ImageIcon(imageRaw)
      */
     private ImageIcon getScaled(ImageIcon icon) {
@@ -733,7 +737,7 @@ public class ControllerButton extends JToggleButton {
     /**
      * Метод назначения имени модуля
      *
-     * @param moduleName - Имя модуля
+     * @param moduleName Имя модуля
      */
     public void setModuleName(String moduleName) {
         this.moduleName = moduleName;
@@ -742,7 +746,7 @@ public class ControllerButton extends JToggleButton {
     /**
      * Метод назначения переведённого имени модуля
      *
-     * @param moduleTrName - Переведённое имя модуля
+     * @param moduleTrName Переведённое имя модуля
      */
     public void setTranslatedName(String moduleTrName) {
         this.moduleTranslatedName = moduleTrName;

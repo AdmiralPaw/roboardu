@@ -34,11 +34,11 @@ import com.mit.blocks.renderable.TextualFactoryBlock;
 import com.mit.blocks.workspace.Workspace;
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  * Класс AutoCompletePanel - это панель, которая отображает редактируемое текстовое поле
  * для пользователя, чтобы создать нужный шаблон (регулярное выражение). Он также предоставляет
  * список для пользователей, чтобы увидеть некоторые заранее определенные варианты выбора.
  * Пользователь может выбрать, чтобы действовать/реагировать на панель автозаполнения интуитивно.
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class AutoCompletePanel extends JPanel implements MouseListener, MouseMotionListener {
 

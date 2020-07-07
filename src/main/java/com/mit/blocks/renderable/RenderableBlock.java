@@ -22,11 +22,11 @@ import java.util.List;
 import java.util.*;
 
 /**
- * @author AdmiralPaw, Ritevi, Aizek
  * Класс RenderableBlock отвечает за весь графический рендеринг блока кода.
  * Этот класс также отвечает за потребление всех событий мыши и ключа на себя.
  * Каждый объект RenderableBlock связан со своим связанным объектом Block и использует информацию,
  * сохраняемую в блоке, для соответствующего отображения графического блока.
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class RenderableBlock extends JComponent implements SearchableElement,
         MouseListener, MouseMotionListener, ISupportMemento, CommentSource, KeyListener {

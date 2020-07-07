@@ -11,7 +11,8 @@ import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.codeblocks.rendering.BlockShapeUtil;
 
 /**
- * Specifies the BlockShape of infix blocks.  Infix blocks have two bottom sockets.  
+ * Задает форму блока блоков инфикса. Блоки инфикса имеют два нижних сокета.
+ * @author AdmiralPaw, Ritevi, Aizek
  */
 public class InfixBlockShape extends BlockShape {
 
