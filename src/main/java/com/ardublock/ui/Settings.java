@@ -344,10 +344,8 @@ public class Settings extends JFrame {
                 fileChooser.showOpenDialog(null);
                 File chosenPath = fileChooser.getSelectedFile();
                 if (chosenPath==null){
-                    System.out.println("her");
                     textField.setText(tempAutoSavePath);
                 } else {
-                    System.out.println("her1");
                     textField.setText(chosenPath.getAbsolutePath());
                 }
                 
