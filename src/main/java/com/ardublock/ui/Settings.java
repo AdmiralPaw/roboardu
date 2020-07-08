@@ -345,20 +345,20 @@ public class Settings extends JFrame {
         position += offset;
 
         //DEBAG
-        JButton resetButton = new JButton("Сбросить настройки");
-        windowBodyPanel.add(resetButton);
-        resetButton.setBounds(leftOffset, position, 300, 40);
-        resetButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                userPrefs.putBoolean("is_first_launch", true);
-                userPrefs.putBoolean("is_key_valid", false);
-                userPrefs.putBoolean("ardublock.ui.autostart", false);
-                userPrefs.putBoolean("ardublock.ui.autohide", false);
-                userPrefs.putInt("ardublock.ui.autosaveInterval", 10);
-                userPrefs.putInt("ardublock.ui.ctrlzLength", 10);
-            }
-        });
+//        JButton resetButton = new JButton("Сбросить настройки");
+//        windowBodyPanel.add(resetButton);
+//        resetButton.setBounds(leftOffset, position, 300, 40);
+//        resetButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                userPrefs.putBoolean("is_first_launch", true);
+//                userPrefs.putBoolean("is_key_valid", false);
+//                userPrefs.putBoolean("ardublock.ui.autostart", false);
+//                userPrefs.putBoolean("ardublock.ui.autohide", false);
+//                userPrefs.putInt("ardublock.ui.autosaveInterval", 10);
+//                userPrefs.putInt("ardublock.ui.ctrlzLength", 10);
+//            }
+//        });
 
         position += offset;
 
