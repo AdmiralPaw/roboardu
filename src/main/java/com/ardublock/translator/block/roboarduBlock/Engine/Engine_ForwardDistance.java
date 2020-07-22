@@ -56,17 +56,17 @@ public class Engine_ForwardDistance extends TranslatorBlock {
 
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
         String val = translatorBlock.toCode();
-        if (Double.parseDouble(val) > 255 || Double.parseDouble(val) < -255) {
-            throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range").replace("?", -255 +"; "+255));
-        };
+        try{
+            if (Double.parseDouble(val) > 255 || Double.parseDouble(val) < -255) {
+                throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range").replace("?", -255 +"; "+255));
+            };
+        } catch(NumberFormatException err){
+            
+        }
         String ret = "MoveForwardByEncoder(" + translatorBlock.toCode() + ", ";
         translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
         val = translatorBlock.toCode();
-        try {
-            Integer.parseInt(val);
-        } catch (NumberFormatException e) {
-            throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.must_be_int"));
-        }
+        checkValueInt(val,translatorBlock.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));  
         ret = ret + translatorBlock.toCode() + ");";
         return codePrefix + ret + codeSuffix;
     }

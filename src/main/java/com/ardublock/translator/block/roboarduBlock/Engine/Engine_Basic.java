@@ -43,15 +43,24 @@ public class Engine_Basic extends TranslatorBlock {
         translator.addSetupCommand("InitMotors();");
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
         String val = translatorBlock.toCode();
-        if (Double.parseDouble(val) > 255 || Double.parseDouble(val) < -255) {
-            throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range").replace("?", -255 +"; "+255));
-        };
+        try{
+            if (Double.parseDouble(val) > 255 || Double.parseDouble(val) < -255) {
+                throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range").replace("?", -255 +"; "+255));
+            };
+        } catch(NumberFormatException err){
+            
+        }
+        
         String ret = "Motors(" + translatorBlock.toCode() + ", ";
         translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
         val = translatorBlock.toCode();
-        if (Double.parseDouble(val) > 255 || Double.parseDouble(val) < -255) {
-            throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range").replace("?", -255 +"; "+255));
-        };
+        try{
+            if (Double.parseDouble(val) > 255 || Double.parseDouble(val) < -255) {
+                throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range").replace("?", -255 +"; "+255));
+            };
+        } catch(NumberFormatException err){
+            
+        }
         ret = ret + translatorBlock.toCode() + ");";
         return codePrefix + ret + codeSuffix;
     }

@@ -216,5 +216,19 @@ abstract public class TranslatorBlock
      * @throws SubroutineNotDeclaredException
      */
     public void onTranslateBodyFinished() throws SocketNullException, SubroutineNotDeclaredException{}
+    
+    
+    protected void checkValueInt(String val,long blockID,String msgError) throws BlockException,NumberFormatException {
+        try {
+            Double.parseDouble(val);
+            try {
+                Integer.parseInt(val);
+            } catch (NumberFormatException e) {
+                throw new BlockException(blockID, msgError);
+            }
+        } catch (NumberFormatException|BlockException e) {
+            throw e;
+        } 
+    }
 	
 }
