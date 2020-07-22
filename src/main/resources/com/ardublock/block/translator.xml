@@ -663,13 +663,13 @@ and open the template in the editor.
             <command name="void MoveRight(int Speed)">
                 void MoveRight(int Speed)
                 {
-                Motors(Speed, -Speed);
+                Motors(-Speed, Speed);
                 }
             </command>
             <command name="void MoveLeft(int Speed)">
                 void MoveLeft(int Speed)
                 {
-                Motors(-Speed, Speed);
+                Motors(Speed, -Speed);
                 }
             </command>
             <command name="void MoveForwardByDelay(int Speed, int Time)">
