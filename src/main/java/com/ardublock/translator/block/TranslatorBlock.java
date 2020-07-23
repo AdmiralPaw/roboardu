@@ -219,16 +219,16 @@ abstract public class TranslatorBlock
     
     
     protected void checkValueInt(String val,long blockID,String msgError) throws BlockException,NumberFormatException {
-        try {
+        try{
             Double.parseDouble(val);
-            try {
-                Integer.parseInt(val);
-            } catch (NumberFormatException e) {
-                throw new BlockException(blockID, msgError);
-            }
-        } catch (NumberFormatException|BlockException e) {
+        } catch(NumberFormatException e){
             throw e;
-        } 
+        }
+        try {
+            Integer.parseInt(val);
+        } catch (NumberFormatException e) {
+            throw new BlockException(blockID, msgError);
+        }        
     }
 	
 }

@@ -45,21 +45,24 @@ public class BlinkLed extends TranslatorBlock {
         tb = this.getRequiredTranslatorBlockAtSocket(1);
         String Count = tb.toCode();
         try{
-            Integer.parseInt(Count);
-        }catch(Exception err){
-            throw new BlockException(tb.getBlockID(), "Ошибка значения");
-        }
-        
+            checkValueInt(Count,tb.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));
+        }   catch(NumberFormatException e){}
         tb = this.getRequiredTranslatorBlockAtSocket(2);
         String TimeON = tb.toCode();
-        if((Integer.parseInt(TimeON)<1) || (Integer.parseInt(TimeON)>10000)){
-            throw new BlockException(tb.getBlockID(), "Диапазон допустимых значений [1; 10000]");
-        }
+        try{
+            checkValueInt(TimeON,tb.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));
+            if((Integer.parseInt(TimeON)<1) || (Integer.parseInt(TimeON)>10000)){
+                throw new BlockException(tb.getBlockID(), "Диапазон допустимых значений [1; 10000]");
+            }
+        }   catch(NumberFormatException e){}
         tb = this.getRequiredTranslatorBlockAtSocket(3);
         String TimeOFF = tb.toCode();
-        if((Integer.parseInt(TimeOFF)<1) || (Integer.parseInt(TimeOFF)>10000)){
-            throw new BlockException(tb.getBlockID(), "Диапазон допустимых значений [1; 10000]");
-        }
+        try{
+            checkValueInt(TimeOFF,tb.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));       
+            if((Integer.parseInt(TimeOFF)<1) || (Integer.parseInt(TimeOFF)>10000)){
+                throw new BlockException(tb.getBlockID(), "Диапазон допустимых значений [1; 10000]");
+            }
+        }   catch(NumberFormatException e){}
         translator.LoadTranslators(this.getClass().getSimpleName());
         translator.addSetupCommand("pinMode(" + LedPin + ", OUTPUT);");
         String ret ="LedBlinks(" + LedPin +", " + Count + ", " + TimeON +", " + TimeOFF + ");\n";

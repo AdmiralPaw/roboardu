@@ -66,7 +66,9 @@ public class Engine_ForwardDistance extends TranslatorBlock {
         String ret = "MoveForwardByEncoder(" + translatorBlock.toCode() + ", ";
         translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
         val = translatorBlock.toCode();
-        checkValueInt(val,translatorBlock.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));  
+        try{
+            checkValueInt(val,translatorBlock.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));  
+        }   catch(NumberFormatException e){}
         ret = ret + translatorBlock.toCode() + ");";
         return codePrefix + ret + codeSuffix;
     }

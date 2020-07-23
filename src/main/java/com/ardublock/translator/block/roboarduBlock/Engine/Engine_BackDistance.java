@@ -50,8 +50,10 @@ public class Engine_BackDistance extends TranslatorBlock {
         
         String ret = "MoveBackByEncoder(" + translatorBlock.toCode() + ", ";
         translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
-        val = translatorBlock.toCode();      
-        checkValueInt(val,translatorBlock.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));     
+        val = translatorBlock.toCode();  
+        try{
+            checkValueInt(val,translatorBlock.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));     
+        }   catch(NumberFormatException e){}
         ret = ret + translatorBlock.toCode() + ");";
         return codePrefix + ret + codeSuffix;
     }

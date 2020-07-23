@@ -46,18 +46,24 @@ public class ToneImpulse extends TranslatorBlock {
         TranslatorBlock freqBlock = this.getRequiredTranslatorBlockAtSocket(1);
         int leftLimit = 100;
         int rightLimit = 4000;
-        if ((Integer.parseInt(freqBlock.toCode()) < leftLimit) || (Integer.parseInt(freqBlock.toCode()) > rightLimit)) {
-            throw new BlockException(freqBlock.getBlockID(), " Рекомендуемая частота от "
+        try{
+            checkValueInt(freqBlock.toCode(),freqBlock.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));        
+            if ((Integer.parseInt(freqBlock.toCode()) < leftLimit) || (Integer.parseInt(freqBlock.toCode()) > rightLimit)) {
+                throw new BlockException(freqBlock.getBlockID(), " Рекомендуемая частота от "
                     + leftLimit + " до " + rightLimit);
-        }
+            }
+        } catch(NumberFormatException e){}
         TranslatorBlock tb = this.getRequiredTranslatorBlockAtSocket(2);
         leftLimit = 10;
         rightLimit = 10000;
         String TimeON = tb.toCode();
-        if ((Integer.parseInt(TimeON) < leftLimit) || (Integer.parseInt(TimeON) > rightLimit)) {
-            throw new BlockException(tb.getBlockID(), " Диапазон допустимых значений от "
+        try{
+            checkValueInt(TimeON,tb.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));        
+            if ((Integer.parseInt(TimeON) < leftLimit) || (Integer.parseInt(TimeON) > rightLimit)) {
+                throw new BlockException(tb.getBlockID(), " Диапазон допустимых значений от "
                     + leftLimit + " до " + rightLimit);
-        }
+            }
+        } catch(NumberFormatException e){}
         tb = this.getRequiredTranslatorBlockAtSocket(3);
         leftLimit = 10;
         rightLimit = 10000;
@@ -70,10 +76,13 @@ public class ToneImpulse extends TranslatorBlock {
         leftLimit = 1;
         rightLimit = 100;
         String Count = tb.toCode();
-        if ((Integer.parseInt(Count) < leftLimit) || (Integer.parseInt(Count) > rightLimit)) {
-            throw new BlockException(tb.getBlockID(), "Рекомендуемое количество повторений от "
+        try{
+            checkValueInt(Count,tb.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));        
+            if ((Integer.parseInt(Count) < leftLimit) || (Integer.parseInt(Count) > rightLimit)) {
+                throw new BlockException(tb.getBlockID(), "Рекомендуемое количество повторений от "
                     + leftLimit + " до " + rightLimit);
-        }
+            }
+        }catch(NumberFormatException e){}
         translator.LoadTranslators(this.getClass().getSimpleName());
 
         String ret = "PiezoBeep(" + pinBlock.toCode() + ", " + freqBlock.toCode() + ", " + TimeON + ", " + TimeOFF + ", " + Count + ");\n";

@@ -57,14 +57,20 @@ public class ServoMoveSlow extends TranslatorBlock {
 
         tb = this.getRequiredTranslatorBlockAtSocket(1);
         String angle = tb.toCode();
-        if (Integer.parseInt(angle) > 180 || Integer.parseInt(angle) < 0) {
-            throw new BlockException(tb.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range"));
-        };
+        try{
+            checkValueInt(angle,tb.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));        
+            if (Integer.parseInt(angle) > 180 || Integer.parseInt(angle) < 0) {
+                throw new BlockException(tb.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range"));
+            };
+        } catch(NumberFormatException e){}
         tb = this.getRequiredTranslatorBlockAtSocket(2);
         String time = tb.toCode();
-        if (Integer.parseInt(time) > 50 || Integer.parseInt(time) < 1) {
-            throw new BlockException(tb.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range"));
-        };
+        try{
+            checkValueInt(time,tb.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));        
+            if (Integer.parseInt(time) > 50 || Integer.parseInt(time) < 1) {
+                throw new BlockException(tb.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range"));
+            };
+        }catch(NumberFormatException e){}
         translator.addSetupCommand(servoName + ".attach(" + pinNumber + servoSpecs + ");");
         //String ret = servoName + ".write(" + start_angle + ");\n" + "SetServoPos(" + servoName + ", " + end_angle + ", " + time + ");\n";
         String ret = "ServoMoveSlow(" + servoName + "," + angle + "," + time + ");";

@@ -49,7 +49,9 @@ public class Engine_ForwardTime extends TranslatorBlock {
         String ret = "MoveForwardByDelay(" + translatorBlock.toCode() + ", ";
         translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
         val = translatorBlock.toCode();
-        checkValueInt(val,translatorBlock.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));  
+        try{
+            checkValueInt(val,translatorBlock.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));  
+        }   catch(NumberFormatException e){}
         ret = ret + translatorBlock.toCode() + " );";
         return codePrefix + ret + codeSuffix;
     }

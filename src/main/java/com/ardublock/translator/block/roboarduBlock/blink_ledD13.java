@@ -51,10 +51,12 @@ public class blink_ledD13 extends TranslatorBlock {
         }
         tb = this.getRequiredTranslatorBlockAtSocket(1);
         String TimeBlink = tb.toCode();
-        if((Integer.parseInt(TimeBlink)<1) || (Integer.parseInt(TimeBlink)>10000)){
-            throw new BlockException(tb.getBlockID(), "Диапазон допустимых значений [1; 10000]");
-        }
- 
+        try{
+        checkValueInt(TimeBlink,tb.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));
+            if((Integer.parseInt(TimeBlink)<1) || (Integer.parseInt(TimeBlink)>10000)){
+                throw new BlockException(tb.getBlockID(), "Диапазон допустимых значений [1; 10000]");
+            }
+        }   catch(NumberFormatException e){}    
         translator.LoadTranslators(this.getClass().getSimpleName());
         translator.addSetupCommand("InitBoard();");
         String ret ="LedOneBlink(" + LedPin +", " + TimeBlink + ");\n";

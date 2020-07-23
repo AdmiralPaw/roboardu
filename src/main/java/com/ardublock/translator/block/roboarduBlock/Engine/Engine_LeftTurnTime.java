@@ -51,7 +51,9 @@ public class Engine_LeftTurnTime extends TranslatorBlock {
 
         translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
         val = translatorBlock.toCode();
-        checkValueInt(val,translatorBlock.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));  
+        try{
+            checkValueInt(val,translatorBlock.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));  
+        }   catch(NumberFormatException e){}
         ret = ret + val + ");";
 
         return codePrefix + ret + codeSuffix;
