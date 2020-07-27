@@ -165,7 +165,6 @@ begin
 
   // Proceed Setup
   Result := True;
-
 end;
 
 procedure DeinitializeUninstall();

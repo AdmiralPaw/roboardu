@@ -278,7 +278,7 @@ public class Settings extends JFrame {
         text.setFont(new Font(mainFont, Font.PLAIN, 15));
 
         RCheckBox autohide = new RCheckBox();
-        autohide.setSelected(userPrefs.getBoolean("ardublock.ui.autohide", true));
+        autohide.setSelected(userPrefs.getBoolean("ardublock.ui.autohide", false));
         windowBodyPanel.add(autohide);
         autohide.setBounds(windowWidth - 44 - rigthOffset, position, 44, 40);
 
@@ -354,22 +354,22 @@ public class Settings extends JFrame {
         position += offset;
 
         //DEBAG
-//        JButton resetButton = new JButton("[reset]");
+//        JButton resetButton = new JButton("Сбросить настройки");
 //        windowBodyPanel.add(resetButton);
-//        resetButton.setBounds(getWidth() - 80 - rigthOffset, position + offset / 2 - spinnerHeigth / 2, 80, spinnerHeigth);
-//        resetButton.setBounds(getWidth() - 80 - rigthOffset, position + offset / 2 - spinnerHeigth / 2, 80, spinnerHeigth);
+//        resetButton.setBounds(leftOffset, position, 300, 40);
 //        resetButton.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {
 //                userPrefs.putBoolean("is_first_launch", true);
 //                userPrefs.putBoolean("is_key_valid", false);
 //                userPrefs.putBoolean("ardublock.ui.autostart", false);
+//                userPrefs.putBoolean("ardublock.ui.autohide", false);
 //                userPrefs.putInt("ardublock.ui.autosaveInterval", 10);
 //                userPrefs.putInt("ardublock.ui.ctrlzLength", 10);
 //            }
 //        });
-//
-//        position += offset;
+
+        position += offset;
 
         eggText = new JLabel(uiMessageBundle.getString("ardublock.ui.randomColor"));
         eggText.setVerticalAlignment(SwingConstants.CENTER);
@@ -437,18 +437,15 @@ public class Settings extends JFrame {
                     "Введите ключ продукта: ",
                     "Авторизация",
                     JOptionPane.PLAIN_MESSAGE);
-
             if (result == null) {
                 return false;
             }
-            //TODO сдесь нужна валидация с базой данных вместо if
-            else if (result.equals("1234")) {
-//                JOptionPane.showMessageDialog(openblocksFrame,
-//                        "Ключ верный!",
-//                        "Авторизация",
-//                        JOptionPane.PLAIN_MESSAGE);
+            String[] subStr = result.split("-");
+            int resultValue = Integer.parseInt(subStr[subStr.length - 1]);
+            String clearResult = result.substring(0,result.lastIndexOf("-"));
+            if (resultValue >= 50 && resultValue <= 10000 && clearResult.equals("BOT-V2-20")) {
                 userPrefs.putBoolean("is_key_valid", true);
-                userPrefs.put("key", "1234");
+                userPrefs.put("key", result);
                 return true;
             } else {
                 JOptionPane.showMessageDialog(openblocksFrame,

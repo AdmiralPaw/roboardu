@@ -293,15 +293,16 @@ public class Workspace extends JLayeredPane implements ISupportMemento, RBParent
                 blockCanvasWithDepth, errWindow);
         centerPane.setOneTouchExpandable(true);
         centerPane.setDividerSize(6);
+        centerPane.setDividerLocation(Toolkit.getDefaultToolkit().getScreenSize().height - 200);
 //        centerPane.setDividerLocation(centerPane.getMaximumDividerLocation() - 100);
-        centerPane.addPropertyChangeListener(new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent e) {
-                if (centerPane.getDividerLocation() < centerPane.getMaximumDividerLocation() - 50) {
-                    centerPane.setDividerLocation(centerPane.getMaximumDividerLocation() - 50);
-                }
-                blockCanvasLayer.updateUI();
-            }
-        });
+//        centerPane.addPropertyChangeListener(new PropertyChangeListener() {
+//            public void propertyChange(PropertyChangeEvent e) {
+//                if (centerPane.getDividerLocation() < centerPane.getMaximumDividerLocation() - 50) {
+//                    centerPane.setDividerLocation(centerPane.getMaximumDividerLocation() - 50);
+//                }
+//                blockCanvasLayer.updateUI();
+//            }
+//        });
 
         workLayer = new RSplitPane(JSplitPane.HORIZONTAL_SPLIT, true,
                 factory.getJComponent(), centerPane);
