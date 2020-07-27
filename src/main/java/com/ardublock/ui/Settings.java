@@ -422,7 +422,7 @@ public class Settings extends JFrame {
                 userPrefs.putInt("ardublock.ui.autosaveInterval", autosaveInterval.getIntValue());
                 userPrefs.putInt("ardublock.ui.ctrlzLength", queueSize.getIntValue());
                 openblocksFrame.setAutosaveInterval(autosaveInterval.getIntValue());
-                openblocksFrame.setAutosavePath(textField.getText());
+                openblocksFrame.setAutosavePath(textField.getText()+"\\");
                 BlocksKeeper.setSize(queueSize.getIntValue());
             }
         });
