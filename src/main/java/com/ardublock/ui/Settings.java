@@ -244,6 +244,11 @@ public class Settings extends JFrame {
         windowCapPanel.add(text);
         text.setBounds(leftOffset, 0, 100, windowCapPanel.getHeight());
 
+        text = new JLabel(userPrefs.get("key", "BOT-V2-20-DEVDEV"));
+        text.setVerticalAlignment(SwingConstants.CENTER);
+        text.setFont(new Font(mainFont, Font.BOLD, 12));
+        windowCapPanel.add(text);
+        text.setBounds(leftOffset + 100, 0, 100, windowCapPanel.getHeight());
 
         JPanel windowBodyPanel = new JPanel();
         windowBodyPanel.setLayout(null);
@@ -440,19 +445,23 @@ public class Settings extends JFrame {
             if (result == null) {
                 return false;
             }
-            String[] subStr = result.split("-");
-            int resultValue = Integer.parseInt(subStr[subStr.length - 1]);
-            String clearResult = result.substring(0,result.lastIndexOf("-"));
-            if (resultValue >= 50 && resultValue <= 10000 && clearResult.equals("BOT-V2-20")) {
-                userPrefs.putBoolean("is_key_valid", true);
-                userPrefs.put("key", result);
-                return true;
-            } else {
-                JOptionPane.showMessageDialog(openblocksFrame,
+            try {
+                String[] subStr = result.split("-");
+                int resultValue = Integer.parseInt(subStr[subStr.length - 1]);
+                String clearResult = result.substring(0, result.lastIndexOf("-"));
+                if (resultValue >= 50 && resultValue <= 10000 && clearResult.equals("BOT-V2-20")) {
+                    userPrefs.putBoolean("is_key_valid", true);
+                    userPrefs.put("key", result);
+                    return true;
+                }
+
+            } catch (NumberFormatException e) {
+                //e.printStackTrace();
+            }
+            JOptionPane.showMessageDialog(openblocksFrame,
                         new String[]{"Ключ не верный!", "Попробуйте снова"},
                         "Авторизация",
                         JOptionPane.PLAIN_MESSAGE);
-            }
         }
     }
 
