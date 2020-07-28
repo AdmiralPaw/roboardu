@@ -244,11 +244,11 @@ public class Settings extends JFrame {
         windowCapPanel.add(text);
         text.setBounds(leftOffset, 0, 100, windowCapPanel.getHeight());
 
-        text = new JLabel(userPrefs.get("key", "BOT-V2-20-DEVDEV"));
+        text = new JLabel(userPrefs.get("key", "BOT-V2-20-*****"));
         text.setVerticalAlignment(SwingConstants.CENTER);
         text.setFont(new Font(mainFont, Font.BOLD, 12));
         windowCapPanel.add(text);
-        text.setBounds(leftOffset + 100, 0, 100, windowCapPanel.getHeight());
+        text.setBounds(leftOffset + 100, 0, 250, windowCapPanel.getHeight());
 
         JPanel windowBodyPanel = new JPanel();
         windowBodyPanel.setLayout(null);
