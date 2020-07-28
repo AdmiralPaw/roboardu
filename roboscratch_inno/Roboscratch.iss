@@ -52,6 +52,12 @@ AlwaysShowDirOnReadyPage=yes
 DirExistsWarning=no
 UninstallFilesDir={app}\tools\{#Name}
 
+[Icons]
+Name: "{commondesktop}\OmegaBot"; Filename: "{app}\tools\{#Name}\tool\{#Name}.bat"; IconFilename: "{app}\tools\{#Name}\unins000.exe"
+
+[Registry]
+Root: HKCU; Subkey: "SOFTWARE\JavaSoft\Prefs\/Omega/Bot_/I/D/E"; ValueType: string; ValueName: "cmd_run"; ValueData: "true"
+
 ;------------------------------------------------------------------------------
 ;   Устанавливаем языки для процесса установки
 ;------------------------------------------------------------------------------
@@ -97,6 +103,7 @@ Source: "{#Sourse}\ArduinoLibraries\NewPing\*"; Components: libs\NewPing; DestDi
 Source: "{#Sourse}\ArduinoLibraries\OneWire-2.3.5\*"; Components: libs\OneWire; DestDir: "{app}\libraries\OneWire-2.3.5"; Flags: recursesubdirs createallsubdirs ignoreversion
 Source: "{#Sourse}\ArduinoLibraries\Arduino-Temperature-Control-Library-master\*"; Components: libs\Arduino_Temperature_Control_Library; DestDir: "{app}\libraries\Arduino-Temperature-Control-Library-master"; Flags: recursesubdirs createallsubdirs ignoreversion
 
+Source: "{#Sourse}\roboscratch_inno\{#Name}.bat"; DestDir: "{app}\tools\{#Name}\tool"; Flags: ignoreversion
 Source: "{#Sourse}\target\{#ExeName}.jar"; Components: programm; DestDir: "{app}\tools\{#Name}\tool"; Flags: ignoreversion
 
 [Code]

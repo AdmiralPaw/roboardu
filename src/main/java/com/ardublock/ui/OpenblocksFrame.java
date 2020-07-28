@@ -1230,6 +1230,9 @@ public class OpenblocksFrame extends JFrame {
      *
      */
     public void doCloseArduBlockFile() {
+        if (settings.isCMDRun()) {
+            settings.resetSettings();
+        }
         if (context.isWorkspaceChanged()) {
             int optionValue = JOptionPane.showOptionDialog(this,
                     uiMessageBundle.getString("message.question.close_on_workspace_changed"),

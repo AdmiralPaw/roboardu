@@ -10,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -446,15 +445,16 @@ public class Settings extends JFrame {
                 return false;
             }
             try {
-                String[] subStr = result.split("-");
-                int resultValue = Integer.parseInt(subStr[subStr.length - 1]);
-                String clearResult = result.substring(0, result.lastIndexOf("-"));
-                if (resultValue >= 50 && resultValue <= 10000 && clearResult.equals("BOT-V2-20")) {
-                    userPrefs.putBoolean("is_key_valid", true);
-                    userPrefs.put("key", result);
-                    return true;
+                if (result.contains("-")) {
+                    String[] subStr = result.split("-");
+                    int resultValue = Integer.parseInt(subStr[subStr.length - 1]);
+                    String clearResult = result.substring(0, result.lastIndexOf("-"));
+                    if (resultValue >= 50 && resultValue <= 10000 && clearResult.equals("BOT-V2-20")) {
+                        userPrefs.putBoolean("is_key_valid", true);
+                        userPrefs.put("key", result);
+                        return true;
+                    }
                 }
-
             } catch (NumberFormatException e) {
                 //e.printStackTrace();
             }
@@ -484,5 +484,15 @@ public class Settings extends JFrame {
      */
     public boolean isFirstLaunch() {
         return userPrefs.getBoolean("is_first_launch", true);
+    }
+
+    public boolean isCMDRun(){
+        return userPrefs.getBoolean("cmd_run", false);
+    }
+
+    public void resetSettings(){
+        userPrefs.putBoolean("cmd_run", false);
+        userPrefs.putBoolean("ardublock.ui.autostart", false);
+        userPrefs.putBoolean("ardublock.ui.autohide", false);
     }
 }
