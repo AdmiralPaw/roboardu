@@ -90,9 +90,8 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
 
             this.firstAutohide = userPrefs.getBoolean("ardublock.ui.autohide", false);
             this.autostart = userPrefs.getBoolean("ardublock.ui.autostart", false);
-            this.cmd_run = settings.isCMDRun();
 
-            if (autostart || cmd_run) {
+            if (autostart) {
                 run();
             }
             Timer timer = new Timer(300, (ActionListener) e -> getInfoText());
@@ -285,7 +284,7 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
                 //System.out.println(e.toString());
             }
         }
-        if ((openblocksFrame.hideArduinoToogle && firstAutohide && autostart) || cmd_run) {
+        if ((openblocksFrame.hideArduinoToogle && firstAutohide && autostart)) {
             hideArduinoEditor(true);
         }
     }

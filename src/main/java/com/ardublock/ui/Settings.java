@@ -130,7 +130,13 @@ public class Settings extends JFrame {
             userPrefs.putInt("ardublock.ui.autosaveInterval", 10);
             userPrefs.putInt("ardublock.ui.ctrlzLength", 10);
         }
-
+        if (this.isCMDRun()){
+            userPrefs.putBoolean("is_first_launch", false);
+            userPrefs.putBoolean("ardublock.ui.autostart", true);
+            userPrefs.putBoolean("ardublock.ui.autohide", true);
+            userPrefs.putInt("ardublock.ui.autosaveInterval", 10);
+            userPrefs.putInt("ardublock.ui.ctrlzLength", 10);
+        }
         //uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
         //Поле панели со вкладками
         final JTabbedPane tabbedPane = new JTabbedPane();

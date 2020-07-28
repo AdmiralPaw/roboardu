@@ -55,8 +55,8 @@ UninstallFilesDir={app}\tools\{#Name}
 [Icons]
 Name: "{commondesktop}\OmegaBot"; Filename: "{app}\tools\{#Name}\tool\{#Name}.bat"; IconFilename: "{app}\tools\{#Name}\unins000.exe"
 
-[Registry]
-Root: HKCU; Subkey: "SOFTWARE\JavaSoft\Prefs\/Omega/Bot_/I/D/E"; ValueType: string; ValueName: "cmd_run"; ValueData: "true"
+;[Registry]
+;Root: HKCU; Subkey: "SOFTWARE\JavaSoft\Prefs\/Omega/Bot_/I/D/E"; ValueType: string; ValueName: "cmd_run"; ValueData: "true"
 
 ;------------------------------------------------------------------------------
 ;   Устанавливаем языки для процесса установки
