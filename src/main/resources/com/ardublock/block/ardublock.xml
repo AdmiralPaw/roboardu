@@ -3272,6 +3272,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 
+        <!-- Датчик касания -->
         <BlockGenus name="TouchSensor" kind="data" color="242 123 99" initlabel="bg.TouchSensor">
             <description>
                 <text>Read digital from the pin</text>
@@ -3284,6 +3285,23 @@ file before genus A is specified./ We impose this requirement so that sanity che
                                 label="bc.pin_number">
                     <DefaultArg genus-name="pinListDigital_D8"
                                 label="D8"/>
+                </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
+
+        <!-- Датчик цвета -->
+        <BlockGenus name="ColorSensor" kind="data" color="242 123 99" initlabel="bg.ColorSensor">
+            <description>
+                <text>Color sensor</text>
+            </description>
+            <BlockConnectors>
+                <BlockConnector connector-type="number"
+                                connector-kind="plug"/>
+                <BlockConnector connector-type="number"
+                                connector-kind="socket"
+                                label="bc.pin_number">
+                    <DefaultArg genus-name="pinListAnalog_A0"
+                                label="A0"/>
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -3458,6 +3476,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockGenusMember>UltrasonicI2C</BlockGenusMember>
                 <BlockGenusMember>UltrasonicHCSR04</BlockGenusMember>
                 <BlockGenusMember>IK_sensor</BlockGenusMember>
+                <BlockGenusMember>ColorSensor</BlockGenusMember>
             </BlockDrawer>
 
             <!-- servo -->
