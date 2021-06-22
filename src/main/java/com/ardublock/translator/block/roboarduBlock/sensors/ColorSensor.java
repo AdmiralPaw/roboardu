@@ -6,8 +6,8 @@ import com.ardublock.translator.block.exception.BlockException;
 import com.ardublock.translator.block.exception.SocketNullException;
 import com.ardublock.translator.block.exception.SubroutineNotDeclaredException;
 
-public class ColorSensor extends TranslatorBlock
-{
+public class ColorSensor extends TranslatorBlock {
+
 
     public ColorSensor(Long blockId, Translator translator, String codePrefix, String codeSuffix, String label) {
         super(blockId, translator, codePrefix, codeSuffix, label);
