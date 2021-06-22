@@ -3,7 +3,7 @@
 ; Путь установки по стандарту
 #define   Path 			 "Arduino\tools"
 ; Версия приложения
-#define   Version    "1.0.0"
+#define   Version    "1.0.2"
 ; Фирма-разработчик
 #define   Publisher  "Omega-lab"
 ; Сафт фирмы разработчика
@@ -11,7 +11,7 @@
 ; Имя исполняемого модуля
 #define   ExeName    "roboscratch-tool"
 ; Путь до приложения
-#define		Sourse	 "D:\GitHub\roboardu\"
+#define		Sourse	 "O:\Development\OmegaBot_IDE"
 
 
 ;------------------------------------------------------------------------------

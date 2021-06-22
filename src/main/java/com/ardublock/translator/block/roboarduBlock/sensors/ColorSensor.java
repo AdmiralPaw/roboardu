@@ -23,7 +23,12 @@ public class ColorSensor extends TranslatorBlock
 
     @Override
     public String toCode() throws SocketNullException, SubroutineNotDeclaredException, BlockException {
-        System.out.println("Датчик цвета в код");
-        return null;
+        translator.CheckClassName(this);
+
+        TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
+        String ret = "ColorSensorRead(" + translatorBlock.toCode() + ") test";
+        System.out.println("test");
+
+        return codePrefix + ret + codeSuffix;
     }
 }

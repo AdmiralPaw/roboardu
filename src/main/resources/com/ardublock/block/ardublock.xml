@@ -25,6 +25,9 @@ file before genus A is specified./ We impose this requirement so that sanity che
         <KeyBlock key="modules.light.name">
             <Block value="bg.LightSensor"/>
         </KeyBlock>
+        <KeyBlock key="modules.color.name">
+        <Block value="bg.ColorSensor"/>
+        </KeyBlock>
         <KeyBlock key="modules.line.name">
             <Block value="bg.LineSensor"/>
         </KeyBlock>
