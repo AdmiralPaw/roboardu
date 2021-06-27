@@ -397,15 +397,17 @@ public class OpenblocksFrame extends JFrame {
         KeyStroke settingStr = KeyStroke.getKeyStroke(KeyEvent.VK_WINDOWS, InputEvent.CTRL_DOWN_MASK);
         settingsItem.setAccelerator(settingStr);
 
+
         exitItem.addActionListener(new ActionListener() {
             /**
              * Метод для выхода из программы
              * @param e - Событие совершённого действия
              */
             public void actionPerformed(ActionEvent e) {
-//                System.exit(0);
+                doCloseArduBlockFile();
             }
         });
+
         KeyStroke exitStr = KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_DOWN_MASK);
         exitItem.setAccelerator(exitStr);
 
@@ -1129,7 +1131,7 @@ public class OpenblocksFrame extends JFrame {
         }
 
     }
-
+    //"Сохранить как"
     private boolean chooseFileAndSave(String ardublockString) {
         File saveFile = letUserChooseSaveFile();
         fileToSave = saveFile;
@@ -1227,7 +1229,7 @@ public class OpenblocksFrame extends JFrame {
     }
 
     /**
-     *
+     * Логическое завершение работы программы
      */
     public void doCloseArduBlockFile() {
         if (settings.isCMDRun()) {
@@ -1446,8 +1448,6 @@ public class OpenblocksFrame extends JFrame {
          */
         @Override
         public void run() {
-
-
             chooseFileAndSave("backupSave.abp");
         }
     });
