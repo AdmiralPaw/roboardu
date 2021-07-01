@@ -50,10 +50,13 @@ public class Tone extends TranslatorBlock {
         //TODO может засунуть строку ошибки в базу данных?
         int leftLimit = 100;
         int rightLimit = 4000;
-        if ((Integer.parseInt(freqBlock.toCode()) < leftLimit) || (Integer.parseInt(freqBlock.toCode()) > rightLimit)) {
-            throw new BlockException(freqBlock.getBlockID(), "Рекомендуемая частота от "
+        try{
+            checkValueInt(freqBlock.toCode(),freqBlock.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));        
+            if ((Integer.parseInt(freqBlock.toCode()) < leftLimit) || (Integer.parseInt(freqBlock.toCode()) > rightLimit)) {
+                throw new BlockException(freqBlock.getBlockID(), "Рекомендуемая частота от "
                     + leftLimit + " до " + rightLimit);
-        }
+            }
+        } catch(NumberFormatException e){}
         translator.LoadTranslators(this.getClass().getSimpleName());
 
         String ret = "PiezoON(" + pinBlock.toCode() + ", " + freqBlock.toCode() + ");\n";

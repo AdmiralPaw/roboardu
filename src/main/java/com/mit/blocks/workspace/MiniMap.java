@@ -31,6 +31,7 @@ import java.util.Collection;
  *                                  //рендеринге this.blocks и this.comments
  */
 public class MiniMap extends JPanel implements MouseListener, MouseMotionListener, SearchableContainer, PageChangeListener, WorkspaceWidget {
+    
     /*
      * Implementation Notes:
      * -should be initialized BEFORE blockCanvas (that is, should initialize miniMap

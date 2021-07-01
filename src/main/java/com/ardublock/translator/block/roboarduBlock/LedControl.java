@@ -46,7 +46,7 @@ public class LedControl extends TranslatorBlock {
         tb = this.getRequiredTranslatorBlockAtSocket(1);
         String led_state = tb.toCode();
         if(!led_state.equals("HIGH") && !led_state.equals("LOW")){
-            throw new BlockException(tb.getBlockID(), "ARGUMENT_ERROR");
+            throw new BlockException(tb.getBlockID(), "Значение должно быть высокий или низкий");
         }
 
         translator.addSetupCommand("pinMode(" + LedPin + ", OUTPUT);");

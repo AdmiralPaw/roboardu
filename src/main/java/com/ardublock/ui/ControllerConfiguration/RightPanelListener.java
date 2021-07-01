@@ -8,21 +8,15 @@ package com.ardublock.ui.ControllerConfiguration;
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.codeblocks.BlockConnector;
 import com.mit.blocks.controller.WorkspaceController;
-import com.mit.blocks.renderable.ConnectorTag;
 import com.mit.blocks.renderable.RenderableBlock;
 import com.mit.blocks.workspace.Workspace;
 import com.mit.blocks.workspace.WorkspaceEvent;
 import com.mit.blocks.workspace.WorkspaceListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.Set;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 /**
  *
@@ -225,8 +219,7 @@ public class RightPanelListener implements WorkspaceListener {
         workspace.controller.setModuleOnPin("d9", "start");
         workspace.controller.setModuleOnPin("d10", "start");
         workspace.controller.setModuleOnPin("d11", "start");
-        workspace.controller.setModuleOnPin("d12", "start");
-        
+        workspace.controller.setModuleOnPin("d12", "start");        
     }
     
 }

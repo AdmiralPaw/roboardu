@@ -44,9 +44,12 @@ public class pwmLed extends TranslatorBlock {
         }
         tb = this.getRequiredTranslatorBlockAtSocket(1);
         String Bright = tb.toCode();
-        if((Integer.parseInt(Bright)<0) || (Integer.parseInt(Bright)>255)){
-            throw new BlockException(tb.getBlockID(), "Диапазон допустимых значений [0; 255]");
-        }
+        try{
+            checkValueInt(Bright,tb.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));  
+            if((Integer.parseInt(Bright)<0) || (Integer.parseInt(Bright)>255)){
+                throw new BlockException(tb.getBlockID(), "Диапазон допустимых значений [0; 255]");
+            }
+        }   catch(NumberFormatException e){}
         translator.LoadTranslators(this.getClass().getSimpleName());
         translator.addSetupCommand("pinMode(" + LedPin + ", OUTPUT);");
 

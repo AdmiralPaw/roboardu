@@ -46,7 +46,7 @@ public class WorkspaceEnvironment {
      */
     public void addRenderableBlock(RenderableBlock block) {
     	this.allRenderableBlocks.put(block.getBlockID(), block);
-        //Debug System.out.println("Рендер блоков: " + allRenderableBlocks.size());
+//        System.out.println("Рендер блоков: " + allRenderableBlocks.size()+" блок : "+block.getGenus());
     }
     
     /**
@@ -99,7 +99,7 @@ public class WorkspaceEnvironment {
         }
 
     	this.allBlocks.put(id, block);
-        //Debug System.out.println("Блоков: " + allBlocks.size());
+//        System.out.println("Блоков: " + allBlocks.size()+" блок : "+block.getGenusName());
     }
 
     /**
@@ -184,7 +184,6 @@ public class WorkspaceEnvironment {
      * @param blockStubs
      */
     public void putBlockStubs(String parentName, ArrayList<Long> blockStubs) {
-                System.out.println("parentNameToBlockStubs size: " + parentNameToParentBlock.size());
     	this.parentNameToBlockStubs.put(parentName, blockStubs);
     }
 

@@ -40,6 +40,7 @@ public class ErrWindow extends JPanel {
         JPanel noWrapPanel = new JPanel(new BorderLayout());
         noWrapPanel.add(this.consoleTextPane);
         this.editorConsole.setViewportView(noWrapPanel);
+        this.editorConsole.setAutoscrolls(false);
         this.editorConsole.getVerticalScrollBar().setUnitIncrement(7);
         FontMetrics metrics = this.getFontMetrics(actualFont);
         this.editorConsole.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
@@ -92,6 +93,14 @@ public class ErrWindow extends JPanel {
         setErrText(text);
         this.editorStatus.setBackground(backgroundColourError);
         mode = 1;
+    }
+
+    public String getErrText() {
+        return this.consoleTextPane.getText();
+    }
+
+    public String getErrTitle() {
+        return this.status.getText();
     }
 
     public void setErr(String title, String text, Color bgcolor) {

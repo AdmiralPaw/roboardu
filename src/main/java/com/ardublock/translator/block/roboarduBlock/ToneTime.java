@@ -50,17 +50,24 @@ public class ToneTime extends TranslatorBlock {
         int leftLimit = 100;
         int rightLimit = 4000;
         //TODO может засунуть строку ошибки в базу данных?
-        if ((Integer.parseInt(freqBlock.toCode()) < leftLimit) || (Integer.parseInt(freqBlock.toCode()) > rightLimit)) {
-            throw new BlockException(freqBlock.getBlockID(), "Рекомендуемая частота от "
+        try{
+            checkValueInt(freqBlock.toCode(),freqBlock.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));
+            if ((Integer.parseInt(freqBlock.toCode()) < leftLimit) || (Integer.parseInt(freqBlock.toCode()) > rightLimit)) {
+                throw new BlockException(freqBlock.getBlockID(), "Рекомендуемая частота от "
                     + leftLimit + " до " + rightLimit);
-        }
+            }
+        }catch(NumberFormatException e){}
         TranslatorBlock timeBlock = this.getRequiredTranslatorBlockAtSocket(2);
         leftLimit = 1;
         rightLimit = 10;
-        if ((Integer.parseInt(timeBlock.toCode()) < 1) || (Integer.parseInt(timeBlock.toCode()) > 10)) {
-            throw new BlockException(timeBlock.getBlockID(), "Диапазон допустимых значений от "
+        try{
+            checkValueInt(timeBlock.toCode(),timeBlock.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));        
+            if ((Integer.parseInt(timeBlock.toCode()) < 1) || (Integer.parseInt(timeBlock.toCode()) > 10)) {
+                throw new BlockException(timeBlock.getBlockID(), "Диапазон допустимых значений от "
                     + leftLimit + " до " + rightLimit);
+            }
         }
+        catch(NumberFormatException e){}
         translator.LoadTranslators(this.getClass().getSimpleName());
 
         String ret = "PiezoTone(" + pinBlock.toCode() + ", " + freqBlock.toCode() + ", " + timeBlock.toCode() + ");\n";

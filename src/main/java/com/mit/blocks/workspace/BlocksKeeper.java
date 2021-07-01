@@ -84,7 +84,7 @@ public class BlocksKeeper {
                 undoList.add(screen);
                 redoList.forEach(listOfRB ->{
                     for (RenderableBlock rb : listOfRB) {
-                        rb.removeBlock();
+                        rb.removeBlocks();
                     }
                 });
                 redoList.clear();
@@ -93,7 +93,7 @@ public class BlocksKeeper {
             undoList.add(screen);
             redoList.forEach(listOfRB ->{
                     for (RenderableBlock rb : listOfRB) {
-                        rb.removeBlock();
+                        rb.removeBlocks();
                     }
                 });
             redoList.clear();
@@ -149,7 +149,7 @@ public class BlocksKeeper {
     public void normalizeListSize() {
         if (undoList.size() > maxSize) {
             for (RenderableBlock rb : undoList.get(0)) {
-                rb.removeBlock();
+                rb.removeBlocks();
             }
             undoList.remove(0);
             normalizeListSize();
