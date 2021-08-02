@@ -3295,16 +3295,11 @@ file before genus A is specified./ We impose this requirement so that sanity che
         <!-- Датчик цвета -->
         <BlockGenus name="ColorSensor" kind="data" color="242 123 99" initlabel="bg.ColorSensor">
             <description>
-                <text>Color sensor</text>
+                <text>Determines the color of the object</text>
             </description>
             <BlockConnectors>
                 <BlockConnector connector-type="number"
-                                connector-kind="plug"/>
-                <BlockConnector connector-type="number"
-                                connector-kind="socket"
-                                label="bc.pin_number">
-                    <DefaultArg genus-name="pinListAnalog_A0"
-                                label="A0"/>
+                                connector-kind="plug">
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>

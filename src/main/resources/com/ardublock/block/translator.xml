@@ -473,7 +473,7 @@ and open the template in the editor.
             <headers>
             </headers>
             <headersDefinitions>
-<!--                <headerDefinition name="#define LED_PIN             	13"/>-->
+<!--                -->
 <!--                <headerDefinition name="#define BUTTON_PIN          	12"/>-->
             </headersDefinitions>
             <commands>
@@ -537,6 +537,19 @@ and open the template in the editor.
                 <command name="void PiezoAlarm(int PiezoPin)"/>
             </commands>
         </block>
+
+        <block name="ColorSensor">
+            <headers>
+                <header name="SparkFun_BH1749NUC_Arduino_Library.h"/>
+            </headers>
+            <headersDefinitions>
+                <headerDefinition name="BH1749NUC rgb;"/>
+            </headersDefinitions>
+            <commands>
+                <command name="void ColorSensorRead()"/>
+            </commands>
+        </block>
+
     </translator>
 
     <translatorCode>
@@ -545,6 +558,7 @@ and open the template in the editor.
             <header name="Servo.h">Servo.h</header>
             <header name="OneWire.h">OneWire.h</header>
             <header name="DallasTemperature.h">DallasTemperature.h</header>
+            <header name="SparkFun_BH1749NUC_Arduino_Library.h">SparkFun_BH1749NUC_Arduino_Library.h</header>
         </headers>
 
 
@@ -584,19 +598,9 @@ and open the template in the editor.
             <headerDefinition name="#define BUTTON_PIN          	12">
                 #define BUTTON_PIN 12
             </headerDefinition>
-            <!--            <headerDefinition name="">
-                        </headerDefinition>
-                        <headerDefinition name="">
-                        </headerDefinition>
-                        <headerDefinition name="">
-                        </headerDefinition>
-                        <headerDefinition name="">
-                        </headerDefinition>
-                        <headerDefinition name="">
-                        </headerDefinition>
-                        <headerDefinition name="">
-                        -->
-
+            <headerDefinition name="BH1749NUC rgb;">
+                BH1749NUC rgb;
+            </headerDefinition>
 
         </headersDefinitions>
 
@@ -1123,14 +1127,28 @@ and open the template in the editor.
                 noTone(PiezoPin);
             }
             </command>
-            
-            <!--            <command name="">
-                        </command>
-                        <command name="">
-                        </command>-->
-
-
+            <command name="void ColorSensorRead()">
+                void ColorSensorTest()
+                {
+                Serial.println("Red: " + String(rgb.red()));
+                Serial.println("Green: " + String(rgb.green()));
+                Serial.println("Blue: " + String(rgb.blue()));
+                Serial.println();
+                }
+            </command>
+            <command name="void ColorSensorInit()">
+                void ColorSensorTest()
+                {
+                if (rgb.begin() != BH1749NUC_SUCCESS)
+                {
+                Serial.println("Error initializing the rgb sensor.");
+                while (1) ;
+                }
+                rgb.setIRGain(BH1749NUC_GAIN_X1);
+                rgb.setRGBGain(BH1749NUC_GAIN_X1);
+                rgb.setMeasurementMode(BH1749NUC_MEASUREMENT_MODE_240_MS);
+                }
+            </command>
         </commands>
-
     </translatorCode>
 </root>
