@@ -19,7 +19,6 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.List;
-import java.util.*;
 
 /**
  * @author AdmiralPaw, Ritevi, Aizek
@@ -290,7 +289,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 BlockLabel.Type.PAGE_LABEL, false, blockID);
         this.add(pageLabel.getJComponent());
         this.add(blockLabel.getJComponent(), 0);
-        synchronizeSockets();
+        synchronizeSocketsAndRemoveComponents();
 
         // initialize collapse label
         if (getBlock().isProcedureDeclBlock()
@@ -643,14 +642,18 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * structure, (2) check/add block label for every tag in Renderable: (1)
      * delete any sockets not in Block
      */
-    private boolean synchronizeSockets() {
-        boolean changed = false;
-        List<ConnectorTag> newSocketTags = new ArrayList<ConnectorTag>();
+    private boolean synchronizeSocketsAndRemoveComponents() {
         for (ConnectorTag tag : socketTags) {
             if (tag.getLabel() != null) {
                 this.remove(tag.getLabel().getJComponent());
             }
         }
+        return synchronizeSockets();
+    }
+
+    private boolean synchronizeSockets() {//synchronizeSockets
+        boolean changed = false;
+        List<ConnectorTag> newSocketTags = new ArrayList<ConnectorTag>();
         for (int i = 0; i < getBlock().getNumSockets(); i++) {
             BlockConnector socket = getBlock().getSocketAt(i);
             ConnectorTag tag = this.getConnectorTag(socket);
@@ -661,7 +664,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                 } else {
                     SocketLabel label = new SocketLabel(workspace, socket,
                             socket.getLabel(), BlockLabel.Type.PORT_LABEL,
-                            socket.isLabelEditable(), blockID);                   
+                            socket.isLabelEditable(), blockID);
                     String argumentToolTip = getBlock().getArgumentDescription(
                             i);
                     if (argumentToolTip != null) {
@@ -687,7 +690,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                         if (argumentToolTip != null) {
                             label.setToolTipText(getBlock()
                                     .getArgumentDescription(i).trim());
-                        }                      
+                        }
                         tag.setLabel(label);
                         label.setText(socket.getLabel());
                         this.add(label.getJComponent());
@@ -700,7 +703,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                     label.setZoomLevel(this.getZoom());
                 }
             }
-            newSocketTags.add(tag); 
+            newSocketTags.add(tag);
         }
         this.socketTags.clear();
         this.socketTags = newSocketTags;
@@ -740,13 +743,13 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             if (tag != null) {
                 if (tag.getLabel() != null) {
                     if (!tag.getLabel().getText().equals(socket.getLabel())) {
-                        socketLabelsChanged = synchronizeSockets();
+                        socketLabelsChanged = synchronizeSocketsAndRemoveComponents();
                         break;
                     }
                 }
             }
             if (!socket.isLabelEditable()) {
-                socketLabelsChanged = synchronizeSockets();
+                socketLabelsChanged = synchronizeSocketsAndRemoveComponents();
                 break;
             }
         }
@@ -1340,7 +1343,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         getBlock().blockConnected(connectedSocket, connectedBlockID);
 
         // synchronize sockets
-        synchronizeSockets();
+        synchronizeSocketsAndRemoveComponents();
 
         // make sure the connected block is positioned correctly
         moveConnectedBlocks();
@@ -1361,7 +1364,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         updateSocketSpace(disconnectedSocket, Block.NULL, false);
 
         // synchronize sockets
-        synchronizeSockets();
+        synchronizeSocketsAndRemoveComponents();
     }
 
     // /////////////////
@@ -3041,10 +3044,32 @@ public class RenderableBlock extends JComponent implements SearchableElement,
     }
 
     /**
-     *
+     *Удаляет выбранный блок и все блоки, которые к нему присоединены
      */
     public void removeBlocks() {
         removeBlocks(this);
+    }
+
+    public void removeThisBlock() {
+
+        Container parent = this.getParent();
+        if (comment != null){
+            removeComment();
+        }
+        if (parent != null) {
+            parent.remove(this);
+            parent.validate();
+            parent.repaint();
+            this.setParentWidget(null);
+        }
+
+        for (ConnectorTag tag : socketTags){
+            BlockConnector bc = tag.getSocket();
+            getBlock().blockDisconnected(bc);
+            updateSocketSpace(bc, Block.NULL, false);
+            synchronizeSockets();
+        }
+        workspace.notifyListeners(new WorkspaceEvent(workspace, workspace.getFactoryManager(), this.getBlockID(), WorkspaceEvent.BLOCK_REMOVED));
     }
 
     private void removeBlocks(RenderableBlock rb) {
