@@ -3114,13 +3114,14 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * Удаляет один единственный, выделенный блок отсоединяя его от родительского блока и ото всех потомков.
      */
     public void removeThisBlock() {
+        workspace.getPageNamed("Main").saveScreen();
         //Удаляем комментарий
-        Container parent = this.getParent();
         if (comment != null) {
             removeComment();
         }
 
         //Удаляет визуальную часть объекта
+        Container parent = this.getParent();
         if (parent != null) {
             parent.remove(this);
             parent.validate();
@@ -3128,6 +3129,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
             this.setParentWidget(null);
         }
         //Сообщаем родительскому блоку, что его подчиненный был отсоединен
+        //TODO выделить в отдельный метод disconnectFromParentBlock
         Point p = SwingUtilities.convertPoint(this.getParent(),
                 dragHandler.myLoc, workspace);
         WorkspaceWidget widget = workspace.getWidgetAt(p);
@@ -3148,6 +3150,7 @@ public class RenderableBlock extends JComponent implements SearchableElement,
                     widget, parentLink, WorkspaceEvent.BLOCKS_DISCONNECTED));
         }
         //Сообщаем всем подчиненным блокам, что их родитель был отсоединен.
+        //TODO выделить в отдельный метод disconnectFromChildrenBlocks
         for (ConnectorTag tag : socketTags) {
             if (tag.getSocket().hasBlock()) {
                 long childId = tag.getSocket().getBlockID();
