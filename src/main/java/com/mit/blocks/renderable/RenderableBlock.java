@@ -704,69 +704,6 @@ public class RenderableBlock extends JComponent implements SearchableElement,
         return changed;
     }
 
-    private void synchronizeSockets() {//synchronizeSockets
-        boolean changed = false;
-        List<ConnectorTag> newSocketTags = new ArrayList<ConnectorTag>();
-//        for (ConnectorTag tag : socketTags) {
-//            if (tag.getLabel() != null) {
-//                this.remove(tag.getLabel().getJComponent());
-//            }
-//        }
-        for (int i = 0; i < getBlock().getNumSockets(); i++) {
-            BlockConnector socket = getBlock().getSocketAt(i);
-            ConnectorTag tag = this.getConnectorTag(socket);
-            if (tag == null) {
-                tag = new ConnectorTag(socket);
-                if (SocketLabel.ignoreSocket(socket)) {
-                    tag.setLabel(null); // ignored sockets have no labels
-                } else {
-                    SocketLabel label = new SocketLabel(workspace, socket,
-                            socket.getLabel(), BlockLabel.Type.PORT_LABEL,
-                            socket.isLabelEditable(), blockID);
-                    String argumentToolTip = getBlock().getArgumentDescription(
-                            i);
-                    if (argumentToolTip != null) {
-                        label.setToolTipText(getBlock().getArgumentDescription(
-                                i).trim());
-                    }
-                    tag.setLabel(label);
-                    label.setZoomLevel(this.getZoom());
-                    label.setText(socket.getLabel());
-                    this.add(label.getJComponent());
-                    changed = true;
-                }
-            } else {
-                SocketLabel label = tag.getLabel();
-                if (!SocketLabel.ignoreSocket(socket)) {
-                    // ignored bottom sockets or sockets with label == ""
-                    if (label == null) {
-                        label = new SocketLabel(workspace, socket,
-                                socket.getLabel(), BlockLabel.Type.PORT_LABEL,
-                                socket.isLabelEditable(), blockID);
-                        String argumentToolTip = getBlock()
-                                .getArgumentDescription(i);
-                        if (argumentToolTip != null) {
-                            label.setToolTipText(getBlock()
-                                    .getArgumentDescription(i).trim());
-                        }
-                        tag.setLabel(label);
-                        label.setText(socket.getLabel());
-                        this.add(label.getJComponent());
-                        changed = true;
-                    } else {
-                        label.setText(socket.getLabel());
-                        this.add(label.getJComponent());
-                        changed = true;
-                    }
-                    label.setZoomLevel(this.getZoom());
-                }
-            }
-            newSocketTags.add(tag);
-        }
-        this.socketTags.clear();
-        this.socketTags = newSocketTags;
-    }
-
     /**
      * Updates all the labels within this block. Returns true if this update
      * found any changed labels; false otherwise
