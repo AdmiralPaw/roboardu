@@ -1,5 +1,7 @@
 package com.mit.blocks.renderable;
 
+import com.ardublock.core.exception.ArdublockException;
+import com.ardublock.translator.block.exception.BlockException;
 import com.mit.blocks.codeblocks.*;
 import com.mit.blocks.codeblocks.rendering.BlockShapeUtil;
 import com.mit.blocks.codeblockutil.CToolTip;
@@ -3051,8 +3053,17 @@ public class RenderableBlock extends JComponent implements SearchableElement,
      * Удаляет один единственный, выделенный блок отсоединяя его от родительского блока и ото всех потомков.
      */
     public void removeThisBlock() {
+        //Проверка. Не удаляется ли ключевой блок.
+       if(this.getBlock().getGenusName().equals("loop")){
+           ErrWindow errWindow = workspace.getErrWindow();
+           errWindow.reset();
+           errWindow.setErrTitle("BlockException");
+           errWindow.setErrText("Нельзя удалять ключевой блок");
+           throw new BlockException(getBlockID(), "Попытка удалить ключевой блок");
+       }
+
         workspace.getPageNamed("Main").saveScreen();
-        //Удаляем комментарий
+        //Удаляем комментарий, если есть
         if (comment != null) {
             removeComment();
         }
