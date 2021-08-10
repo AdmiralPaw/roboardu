@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ardublock.translator.block.exception.BlockException;
 import com.mit.blocks.codeblocks.Block;
 import com.mit.blocks.codeblocks.BlockConnector;
 import com.mit.blocks.codeblocks.BlockGenus;
 import com.mit.blocks.codeblocks.BlockLinkChecker;
 import com.mit.blocks.renderable.RenderableBlock;
+import org.jfree.data.json.JSONUtils;
 
 /**
  * @author AdmiralPaw, Ritevi, Aizek
@@ -25,14 +27,14 @@ import com.mit.blocks.renderable.RenderableBlock;
 
 public class WorkspaceEnvironment {
 
-	private final Map<Long, RenderableBlock> allRenderableBlocks = new HashMap<Long, RenderableBlock>();
-
+    private final Map<Long, RenderableBlock> allRenderableBlocks = new HashMap<Long, RenderableBlock>();
 
 
     // RenderableBlock
 
     /**
      * Returns the Renderable specified by blockID; null if RenderableBlock does not exist
+     *
      * @param blockID the block id of the desired RenderableBlock
      * @return the Renderable specified by blockID; null if RenderableBlock does not exist
      */
@@ -41,16 +43,14 @@ public class WorkspaceEnvironment {
     }
 
     /**
-     *
      * @param block
      */
     public void addRenderableBlock(RenderableBlock block) {
-    	this.allRenderableBlocks.put(block.getBlockID(), block);
+        this.allRenderableBlocks.put(block.getBlockID(), block);
 //        System.out.println("Рендер блоков: " + allRenderableBlocks.size()+" блок : "+block.getGenus());
     }
-    
+
     /**
-     *
      * @param id
      */
     public void removeBlockByID(long id) {
@@ -58,9 +58,8 @@ public class WorkspaceEnvironment {
         this.allBlocks.remove(id);
         //Debug System.out.println("Блоков после удаления: " + allRenderableBlocks.size() + "    " + allBlocks.size());
     }
-    
+
     /**
-     *
      * @param block
      */
     public void removeBlock(RenderableBlock block) {
@@ -76,7 +75,6 @@ public class WorkspaceEnvironment {
     private long nextBlockID = 1;
 
     /**
-     *
      * @param blockID
      * @return
      */
@@ -85,44 +83,37 @@ public class WorkspaceEnvironment {
     }
 
     /**
-     *
      * @param block
      */
     public void addBlock(Block block) {
-
-    	long id = block.getBlockID();
-        
+        long id = block.getBlockID();
         if (this.allBlocks.containsKey(id)) {
             Block dup = this.allBlocks.get(id);
-            //System.out.println("pre-existing block is: " + dup + " with genus " + dup.getGenusName() + " and label " + dup.getBlockLabel());
             assert !this.allBlocks.containsKey(id) : "Block id: " + id + " already exists!  BlockGenus " + block.getGenusName() + " label: " + block.getBlockLabel();
         }
-
-    	this.allBlocks.put(id, block);
-//        System.out.println("Блоков: " + allBlocks.size()+" блок : "+block.getGenusName());
+        this.allBlocks.put(id, block);
     }
 
     /**
-     *
      * @return
      */
     public long getNextBlockID() {
-    	return this.nextBlockID++;
+        return this.nextBlockID++;
     }
-    
+
     /**
-     *
      * @param blockID
      */
     public void setNextBlockID(long blockID) {
-    	nextBlockID = blockID;
+        nextBlockID = blockID;
     }
 
     // BlockStubs
 
-    /** STUB HASH MAPS
+    /**
+     * STUB HASH MAPS
      * key: parentName + parentGenus
-     *
+     * <p>
      * Key includes both parentName and parentGenus because the names of two parents
      * may be the same if they are of different genii
      * blockids of parents are not used as a reference because parents and stubs are
@@ -130,78 +121,70 @@ public class WorkspaceEnvironment {
      * connection is more apparent when the parent Block is removed/deleted.  The stubs
      * become dangling references. These stubs are resolved when a new parent block is
      * created with the previous parent's name.
-     * */
+     */
     private final HashMap<String, Long> parentNameToParentBlock = new HashMap<String, Long>();
     private final HashMap<String, ArrayList<Long>> parentNameToBlockStubs = new HashMap<String, ArrayList<Long>>();
 
     /**
-     *
      * @param parentName
      * @return
      */
     public Long getParentBlockID(String parentName) {
-    	return this.parentNameToParentBlock.get(parentName);
+        return this.parentNameToParentBlock.get(parentName);
     }
 
     /**
-     *
      * @param parentName
      * @param parentBlockID
      */
     public void putParentBlock(String parentName, Long parentBlockID) {
-    	this.parentNameToParentBlock.put(parentName, parentBlockID);
+        this.parentNameToParentBlock.put(parentName, parentBlockID);
     }
 
     /**
-     *
      * @param parentName
      */
     public void removeParentBlock(String parentName) {
-    	this.parentNameToParentBlock.remove(parentName);
+        this.parentNameToParentBlock.remove(parentName);
     }
 
     /**
-     *
      * @param parentName
      * @return
      */
     public boolean containsParentBlock(String parentName) {
-    	return this.parentNameToParentBlock.containsKey(parentName);
+        return this.parentNameToParentBlock.containsKey(parentName);
     }
 
     /**
-     *
      * @param parentName
      * @return
      */
     public ArrayList<Long> getBlockStubs(String parentName) {
-    	return this.parentNameToBlockStubs.get(parentName);
+        return this.parentNameToBlockStubs.get(parentName);
     }
 
     /**
-     *
      * @param parentName
      * @param blockStubs
      */
     public void putBlockStubs(String parentName, ArrayList<Long> blockStubs) {
-    	this.parentNameToBlockStubs.put(parentName, blockStubs);
+        this.parentNameToBlockStubs.put(parentName, blockStubs);
     }
 
     /**
-     *
      * @param parentName
      * @return
      */
     public boolean containsBlockStubs(String parentName) {
-    	return this.parentNameToBlockStubs.containsKey(parentName);
+        return this.parentNameToBlockStubs.containsKey(parentName);
     }
 
     /**
-     *
      * @param parentName
      */
     public void removeBlockStubs(String parentName) {
-    	this.parentNameToBlockStubs.remove(parentName);
+        this.parentNameToBlockStubs.remove(parentName);
     }
 
     /**
@@ -224,27 +207,27 @@ public class WorkspaceEnvironment {
     }
 
     // BlockGenuses
-    
+
     private Map<String, BlockGenus> nameToGenus = new HashMap<String, BlockGenus>();
-    
+
     /**
      * Returns the BlockGenus with the specified name; null if this name does not exist
-     * @param name the name of the desired BlockGenus  
+     *
+     * @param name the name of the desired BlockGenus
      * @return the BlockGenus with the specified name; null if this name does not exist
      */
-    
+
     public BlockGenus getGenusWithName(String name) {
         return nameToGenus.get(name);
     }
-    
+
     /**
-     *
      * @param genus
      */
     public void addBlockGenus(BlockGenus genus) {
-    	nameToGenus.put(genus.getGenusName(), genus);
+        nameToGenus.put(genus.getGenusName(), genus);
     }
-    
+
     /**
      * Resets all the Block Genuses of current language.
      */
@@ -255,11 +238,9 @@ public class WorkspaceEnvironment {
     //add by HE Qichen 20120126
 
     /**
-     *
      * @return
      */
-    public Iterable<RenderableBlock> getRenderableBlocks()
-    {
-    	return allRenderableBlocks.values();
+    public Iterable<RenderableBlock> getRenderableBlocks() {
+        return allRenderableBlocks.values();
     }
 }

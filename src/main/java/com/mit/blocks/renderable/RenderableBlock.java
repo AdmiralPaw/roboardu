@@ -3061,9 +3061,10 @@ public class RenderableBlock extends JComponent implements SearchableElement,
            errWindow.setErrText("Нельзя удалять ключевой блок");
            throw new BlockException(getBlockID(), "Попытка удалить ключевой блок");
        }
-
+        //Сохраняем текущее состояние экрана, для возможности вернуть его при помощи ctrl+z
         workspace.getPageNamed("Main").saveScreen();
-        //Удаляем комментарий, если есть
+
+       //Удаляем комментарий, если есть
         if (comment != null) {
             removeComment();
         }
