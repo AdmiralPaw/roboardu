@@ -108,17 +108,17 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
 
     public void run() {
         try {
-            if (OmegaBot_IDE.openblocksFrame.settings.isProductKeyValid()) {
-                OmegaBot_IDE.openblocksFrame.setVisible(true);
-                OmegaBot_IDE.openblocksFrame.toFront();
-                OmegaBot_IDE.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-            } else {
-                if (OmegaBot_IDE.openblocksFrame.settings.productKeyValidator(OmegaBot_IDE.openblocksFrame))
-                    run();
-                else {
-                    System.exit(0);
-                }
-            }
+//            if (OmegaBot_IDE.openblocksFrame.settings.isProductKeyValid()) {
+            OmegaBot_IDE.openblocksFrame.setVisible(true);
+            OmegaBot_IDE.openblocksFrame.toFront();
+            OmegaBot_IDE.openblocksFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+//            } else {
+//                if (OmegaBot_IDE.openblocksFrame.settings.productKeyValidator(OmegaBot_IDE.openblocksFrame))
+//                    run();
+//                else {
+//                    System.exit(0);
+//                }
+//            }
         } catch (Exception ignored) {
         }
     }
