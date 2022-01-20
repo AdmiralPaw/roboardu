@@ -106,7 +106,11 @@ Source: "{#Sourse}\ArduinoLibraries\Arduino-Temperature-Control-Library-master\*
 Source: "{#Sourse}\ArduinoLibraries\SparkFun_BH1749NUC\*"; Components: libs\SparkFun_BH1749NUC; DestDir: "{app}\libraries\SparkFun_BH1749NUC"; Flags: recursesubdirs createallsubdirs ignoreversion
 
 Source: "{#Sourse}\roboscratch_inno\{#Name}.bat"; DestDir: "{app}\tools\{#Name}\tool"; Flags: ignoreversion
+Source: "{#Sourse}\roboscratch_inno\prefs_fix.bat"; DestDir: "{app}\tools\{#Name}\tool"; Flags: ignoreversion
 Source: "{#Sourse}\target\{#ExeName}.jar"; Components: programm; DestDir: "{app}\tools\{#Name}\tool"; Flags: ignoreversion
+
+[Run]
+Filename: "{app}\tools\{#Name}\tool\prefs_fix.bat"; StatusMsg: "Fix Arduino IDE"; Flags: runhidden
 
 [Code]
 function findMSG(Value:string): string;

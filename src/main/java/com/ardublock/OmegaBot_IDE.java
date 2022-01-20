@@ -100,8 +100,6 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
             }
             Timer timer = new Timer(300, (ActionListener) e -> getInfoText());
             timer.start();
-            PreferencesData.set("last.sketch.default.path", "");
-            PreferencesData.setDoSave(true);
             resetEditorClosing();
         }
     }
