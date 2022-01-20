@@ -12,10 +12,10 @@ import processing.app.tools.Tool;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -96,6 +96,7 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
             }
             Timer timer = new Timer(300, (ActionListener) e -> getInfoText());
             timer.start();
+            resetEditorClosing();
         }
     }
 
@@ -121,6 +122,52 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
 //            }
         } catch (Exception ignored) {
         }
+    }
+
+    public void resetEditorClosing() {
+        WindowListener listener = editor.getWindowListeners()[0];
+        WindowListener new_listener = new WindowListener() {
+
+            @Override
+            public void windowOpened(WindowEvent e) {
+                listener.windowOpened(e);
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if (context.isWorkspaceChanged()) {
+                    openblocksFrame.doCloseArduBlockFile();
+                }
+                listener.windowClosing(e);
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                listener.windowClosed(e);
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+                listener.windowIconified(e);
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+                listener.windowDeiconified(e);
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+                listener.windowActivated(e);
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                listener.windowDeactivated(e);
+            }
+        };
+        editor.removeWindowListener(listener);
+        editor.addWindowListener(new_listener);
     }
 
 
