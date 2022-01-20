@@ -29,4 +29,6 @@ public interface OpenblocksFrameListener {
     void didVerify(String source);
 
     void getInfoText();
+
+    void didNew();
 }

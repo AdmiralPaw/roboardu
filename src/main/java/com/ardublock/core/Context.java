@@ -186,10 +186,21 @@ public class Context {
     public void loadFreshWorkSpace() {
         //workspaceController.loadFreshWorkspace();
         loadDefaultArdublockProgram();
+        resetArduinoSketch();
 
         saveFilePath = null;
         saveFileName = defaultFileName;
         workspaceEmpty = true;
+    }
+
+    private void resetArduinoSketch() {
+        didNew();
+    }
+
+    private void didNew() {
+        for (OpenblocksFrameListener ofl : ofls) {
+            ofl.didNew();
+        }
     }
 
     /**
