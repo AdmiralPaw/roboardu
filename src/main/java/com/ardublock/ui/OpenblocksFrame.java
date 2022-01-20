@@ -6,6 +6,7 @@ import com.mit.blocks.controller.WorkspaceController;
 import com.mit.blocks.workspace.ErrWindow;
 import com.mit.blocks.workspace.Page;
 import com.mit.blocks.workspace.Workspace;
+import processing.app.PreferencesData;
 
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
@@ -1244,31 +1245,29 @@ public class OpenblocksFrame extends JFrame {
             switch (optionValue) {
                 case JOptionPane.YES_OPTION:
                     if (doSaveArduBlockFile()) {
-                        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                        if (context.isInArduino() && !context.getEditor().isVisible())
-                            System.exit(0);
+                        closing();
                     } else {
                         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                     }
                     break;
                 case JOptionPane.NO_OPTION:
-                    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    if (context.isInArduino() && !context.getEditor().isVisible())
-                        System.exit(0);
+                    closing();
                     break;
                 case JOptionPane.CANCEL_OPTION:
                     setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                     break;
             }
         } else {
-
-            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            if (context.isInArduino() && !context.getEditor().isVisible())
-                System.exit(0);
-
+            closing();
         }
         settings.dispose();
+    }
 
+    private void closing() {
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        if (context.isInArduino() && !context.getEditor().isVisible()) {
+            System.exit(0);
+        }
     }
 
     private File checkFileSuffix(File saveFile) {

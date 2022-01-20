@@ -5,10 +5,14 @@ import com.ardublock.ui.ArduBlockToolFrame;
 import com.ardublock.ui.Settings;
 import com.ardublock.ui.TutorialPane;
 import com.ardublock.ui.listener.OpenblocksFrameListener;
+import processing.app.Base;
 import processing.app.Editor;
 import processing.app.EditorConsole;
 import processing.app.EditorStatus;
+import processing.app.debug.RunnerException;
+import processing.app.helpers.PreferencesMapException;
 import processing.app.tools.Tool;
+import processing.app.PreferencesData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -96,6 +100,8 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
             }
             Timer timer = new Timer(300, (ActionListener) e -> getInfoText());
             timer.start();
+            PreferencesData.set("last.sketch.default.path", "");
+            PreferencesData.setDoSave(true);
             resetEditorClosing();
         }
     }
@@ -203,7 +209,21 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
      *
      */
     public void didNew() {
-
+        try {
+            Field baseField = Editor.class.getDeclaredField("base");
+            baseField.setAccessible(true);
+            Base base = (Base) baseField.get(OmegaBot_IDE.editor);
+            base.handleNew();
+            Editor oldEditor = editor;
+            editor = base.getEditors().get(1);
+            base.handleClose(oldEditor);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
