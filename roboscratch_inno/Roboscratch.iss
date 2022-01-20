@@ -11,7 +11,7 @@
 ; Имя исполняемого модуля
 #define   ExeName    "roboscratch-tool"
 ; Путь до приложения
-#define		Sourse	 "O:\Development\OmegaBot_IDE\"
+#define		Sourse	 "C:\Users\User\Работа\OmegaBot_IDE\"
 
 
 ;------------------------------------------------------------------------------

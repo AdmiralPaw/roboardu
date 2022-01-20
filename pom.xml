@@ -7,7 +7,7 @@
     <groupId>org.ardublock</groupId>
     <artifactId>roboscratch</artifactId>
     <packaging>jar</packaging>
-    <version>1.1.2.1</version>
+    <version>1.1.2.2</version>
     <name>RoboscratchEtu</name>
     <description>A Block Programming Language for Arduino</description>
     <properties>
