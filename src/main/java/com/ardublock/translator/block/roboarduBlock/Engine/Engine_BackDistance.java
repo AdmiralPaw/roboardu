@@ -40,18 +40,20 @@ public class Engine_BackDistance extends TranslatorBlock {
         translator.addSetupCommand("InitMotors();");
         TranslatorBlock translatorBlock = this.getRequiredTranslatorBlockAtSocket(0);
         String val = translatorBlock.toCode();
-        if (Double.parseDouble(val) > 255 || Double.parseDouble(val) < -255) {
-            throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range").replace("?", -255 +"; "+255));
-        };
+        try{
+            if (Double.parseDouble(val) > 255 || Double.parseDouble(val) < -255) {
+                throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.out_of_range").replace("?", -255 +"; "+255));
+            };
+        }catch(NumberFormatException e){
+            
+        }
+        
         String ret = "MoveBackByEncoder(" + translatorBlock.toCode() + ", ";
         translatorBlock = this.getRequiredTranslatorBlockAtSocket(1);
-        val = translatorBlock.toCode();
-        try {
-            Integer.parseInt(val);
-        } catch (NumberFormatException e) {
-            throw new BlockException(translatorBlock.getBlockID(), uiMessageBundle.getString("ardublock.error_msg.must_be_int"));
-        }
-
+        val = translatorBlock.toCode();  
+        try{
+            checkValueInt(val,translatorBlock.getBlockID(),uiMessageBundle.getString("ardublock.error_msg.must_be_int"));     
+        }   catch(NumberFormatException e){}
         ret = ret + translatorBlock.toCode() + ");";
         return codePrefix + ret + codeSuffix;
     }

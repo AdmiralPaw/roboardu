@@ -3,7 +3,7 @@
 ; Путь установки по стандарту
 #define   Path 			 "Arduino\tools"
 ; Версия приложения
-#define   Version    "1.0.0"
+#define   Version    "1.0.1.5"
 ; Фирма-разработчик
 #define   Publisher  "Omega-lab"
 ; Сафт фирмы разработчика
@@ -11,7 +11,7 @@
 ; Имя исполняемого модуля
 #define   ExeName    "roboscratch-tool"
 ; Путь до приложения
-#define		Sourse	 "D:\GitHub\roboardu\"
+#define		Sourse	 "O:\Development\OmegaBot_IDE\"
 
 
 ;------------------------------------------------------------------------------
@@ -52,6 +52,12 @@ AlwaysShowDirOnReadyPage=yes
 DirExistsWarning=no
 UninstallFilesDir={app}\tools\{#Name}
 
+[Icons]
+Name: "{commondesktop}\OmegaBot"; Filename: "{app}\tools\{#Name}\tool\{#Name}.bat"; IconFilename: "{app}\tools\{#Name}\unins000.exe"
+
+;[Registry]
+;Root: HKCU; Subkey: "SOFTWARE\JavaSoft\Prefs\/Omega/Bot_/I/D/E"; ValueType: string; ValueName: "cmd_run"; ValueData: "true"
+
 ;------------------------------------------------------------------------------
 ;   Устанавливаем языки для процесса установки
 ;------------------------------------------------------------------------------
@@ -81,6 +87,7 @@ Name: "libs\SparkFun_ToF_Range_FinderVL6180";              Description: "SparkFu
 Name: "libs\NewPing";                                      Description: "NewPing"; Types: full
 Name: "libs\OneWire";                                      Description: "OneWire-2.3.5"; Types: full
 Name: "libs\Arduino_Temperature_Control_Library";          Description: "Arduino-Temperature-Control-Library-master"; Types: full
+Name: "libs\SparkFun_BH1749NUC";                           Description: "SparkFun_BH1749NUC"; Types: full
 
 ;------------------------------------------------------------------------------
 ;   Файлы, которые надо включить в пакет установщика
@@ -96,7 +103,9 @@ Source: "{#Sourse}\ArduinoLibraries\SparkFun_ToF_Range_Finder-VL6180_Arduino_Lib
 Source: "{#Sourse}\ArduinoLibraries\NewPing\*"; Components: libs\NewPing; DestDir: "{app}\libraries\NewPing"; Flags: recursesubdirs createallsubdirs ignoreversion
 Source: "{#Sourse}\ArduinoLibraries\OneWire-2.3.5\*"; Components: libs\OneWire; DestDir: "{app}\libraries\OneWire-2.3.5"; Flags: recursesubdirs createallsubdirs ignoreversion
 Source: "{#Sourse}\ArduinoLibraries\Arduino-Temperature-Control-Library-master\*"; Components: libs\Arduino_Temperature_Control_Library; DestDir: "{app}\libraries\Arduino-Temperature-Control-Library-master"; Flags: recursesubdirs createallsubdirs ignoreversion
+Source: "{#Sourse}\ArduinoLibraries\SparkFun_BH1749NUC\*"; Components: libs\SparkFun_BH1749NUC; DestDir: "{app}\libraries\SparkFun_BH1749NUC"; Flags: recursesubdirs createallsubdirs ignoreversion
 
+Source: "{#Sourse}\roboscratch_inno\{#Name}.bat"; DestDir: "{app}\tools\{#Name}\tool"; Flags: ignoreversion
 Source: "{#Sourse}\target\{#ExeName}.jar"; Components: programm; DestDir: "{app}\tools\{#Name}\tool"; Flags: ignoreversion
 
 [Code]
@@ -165,5 +174,10 @@ begin
 
   // Proceed Setup
   Result := True;
+end;
 
+procedure DeinitializeUninstall();
+
+begin
+  RegDeleteKeyIncludingSubkeys(HKEY_CURRENT_USER, 'SOFTWARE\JavaSoft\Prefs\/Omega/Bot_/I/D/E');
 end;

@@ -93,7 +93,7 @@ public class OpenblocksFrame extends JFrame {
 
     //Поле директории для автосохранения
     private String autosavePath = "";
-
+    
     //Поле видимости контроллера
     private boolean controllerIsShown = true;
     public boolean hideArduinoToogle = true;
@@ -284,10 +284,12 @@ public class OpenblocksFrame extends JFrame {
                 context.setWorkspaceChanged(isWorkspaceChanged);
                 context.setSaveFilePath(oldPath);
                 setTitle(makeFrameTitle());
-                Date dateNow = new Date();
-                SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss");
-                errWindow.setErrText("[" + formatForDateNow.format(dateNow) + "] " +
-                        uiMessageBundle.getString("ardublock.ui.compledAutosave") + autosavePath + newText + "_autosave.abp");
+                
+                
+//                Date dateNow = new Date();
+//                SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss");
+//                errWindow.setErrText("[" + formatForDateNow.format(dateNow) + "] " +
+//                        uiMessageBundle.getString("ardublock.ui.compledAutosave") + autosavePath + newText + "_autosave.abp");
             }
         });
         timer.start();
@@ -395,15 +397,17 @@ public class OpenblocksFrame extends JFrame {
         KeyStroke settingStr = KeyStroke.getKeyStroke(KeyEvent.VK_WINDOWS, InputEvent.CTRL_DOWN_MASK);
         settingsItem.setAccelerator(settingStr);
 
+
         exitItem.addActionListener(new ActionListener() {
             /**
              * Метод для выхода из программы
              * @param e - Событие совершённого действия
              */
             public void actionPerformed(ActionEvent e) {
-//                System.exit(0);
+                doCloseArduBlockFile();
             }
         });
+
         KeyStroke exitStr = KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_DOWN_MASK);
         exitItem.setAccelerator(exitStr);
 
@@ -1127,7 +1131,7 @@ public class OpenblocksFrame extends JFrame {
         }
 
     }
-
+    //"Сохранить как"
     private boolean chooseFileAndSave(String ardublockString) {
         File saveFile = letUserChooseSaveFile();
         fileToSave = saveFile;
@@ -1225,9 +1229,12 @@ public class OpenblocksFrame extends JFrame {
     }
 
     /**
-     *
+     * Логическое завершение работы программы
      */
     public void doCloseArduBlockFile() {
+        if (settings.isCMDRun()) {
+            settings.resetSettings();
+        }
         if (context.isWorkspaceChanged()) {
             int optionValue = JOptionPane.showOptionDialog(this,
                     uiMessageBundle.getString("message.question.close_on_workspace_changed"),
@@ -1441,8 +1448,6 @@ public class OpenblocksFrame extends JFrame {
          */
         @Override
         public void run() {
-
-
             chooseFileAndSave("backupSave.abp");
         }
     });

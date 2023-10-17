@@ -316,7 +316,7 @@ public class SearchBar {
             searchBar.setText(defaultText);
             if(LastSearch.size()!=0){
                     LastSearch.forEach(rb ->{
-                        workspace.getEnv().getRenderableBlock(rb).removeBlock();
+                        workspace.getEnv().getRenderableBlock(rb).removeBlocks();
                     });
                     LastSearch.clear();
                 }

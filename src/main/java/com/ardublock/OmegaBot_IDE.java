@@ -37,6 +37,7 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
     public Timer autohideTimer;
     private boolean firstAutohide;
     private boolean autostart;
+    private boolean cmd_run;
 
     /**
      * @param editor
@@ -89,6 +90,7 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
 
             this.firstAutohide = userPrefs.getBoolean("ardublock.ui.autohide", false);
             this.autostart = userPrefs.getBoolean("ardublock.ui.autostart", false);
+
             if (autostart) {
                 run();
             }
@@ -113,6 +115,9 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
             } else {
                 if (OmegaBot_IDE.openblocksFrame.settings.productKeyValidator(OmegaBot_IDE.openblocksFrame))
                     run();
+                else {
+                    System.exit(0);
+                }
             }
         } catch (Exception ignored) {
         }
@@ -270,12 +275,16 @@ public class OmegaBot_IDE implements Tool, OpenblocksFrameListener {
                 Field f5 = EditorStatus.class.getDeclaredField("BGCOLOR");
                 f5.setAccessible(true);
                 Color[] BGCOLOR = (Color[]) f5.get(status);
+//                if (message.equals(this.context.getWorkspace().getErrWindow().getErrTitle()) &&
+//                        console.getText().equals(this.context.getWorkspace().getErrWindow().getErrText())) {
+//                    return;
+//                }
                 this.context.getWorkspace().getErrWindow().setErr(message, console.getText(), BGCOLOR[mode]);
             } catch (NoSuchFieldException | IllegalAccessException | NullPointerException e) {
                 //System.out.println(e.toString());
             }
         }
-        if (openblocksFrame.hideArduinoToogle && firstAutohide && autostart) {
+        if ((openblocksFrame.hideArduinoToogle && firstAutohide && autostart)) {
             hideArduinoEditor(true);
         }
     }

@@ -9,7 +9,7 @@ import com.mit.blocks.workspace.Workspace;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.Serializable;
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -130,7 +130,13 @@ public class Settings extends JFrame {
             userPrefs.putInt("ardublock.ui.autosaveInterval", 10);
             userPrefs.putInt("ardublock.ui.ctrlzLength", 10);
         }
-
+        if (this.isCMDRun()){
+            userPrefs.putBoolean("is_first_launch", false);
+            userPrefs.putBoolean("ardublock.ui.autostart", true);
+            userPrefs.putBoolean("ardublock.ui.autohide", true);
+            userPrefs.putInt("ardublock.ui.autosaveInterval", 10);
+            userPrefs.putInt("ardublock.ui.ctrlzLength", 10);
+        }
         //uiMessageBundle = ResourceBundle.getBundle("com/ardublock/block/ardublock");
         //Поле панели со вкладками
         final JTabbedPane tabbedPane = new JTabbedPane();
@@ -243,6 +249,11 @@ public class Settings extends JFrame {
         windowCapPanel.add(text);
         text.setBounds(leftOffset, 0, 100, windowCapPanel.getHeight());
 
+        text = new JLabel(userPrefs.get("key", "BOT-V2-20-*****"));
+        text.setVerticalAlignment(SwingConstants.CENTER);
+        text.setFont(new Font(mainFont, Font.BOLD, 12));
+        windowCapPanel.add(text);
+        text.setBounds(leftOffset + 100, 0, 250, windowCapPanel.getHeight());
 
         JPanel windowBodyPanel = new JPanel();
         windowBodyPanel.setLayout(null);
@@ -333,13 +344,21 @@ public class Settings extends JFrame {
 
         String user = System.getProperty("user.name");
         String autosavePath = "C:\\Users\\" + user + "\\Documents\\OmegaBot_IDE\\";
-
+        
+        String tempAutoSavePath = "C:\\Users\\" + user + "\\Documents\\OmegaBot_IDE\\";
+        
         textField.setText(autosavePath);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 fileChooser.showOpenDialog(null);
-                textField.setText(fileChooser.getSelectedFile().getAbsolutePath());
+                File chosenPath = fileChooser.getSelectedFile();
+                if (chosenPath==null){
+                    textField.setText(tempAutoSavePath);
+                } else {
+                    textField.setText(chosenPath.getAbsolutePath());
+                }
+                
             }
         });
         position += offset;
@@ -408,7 +427,7 @@ public class Settings extends JFrame {
                 userPrefs.putInt("ardublock.ui.autosaveInterval", autosaveInterval.getIntValue());
                 userPrefs.putInt("ardublock.ui.ctrlzLength", queueSize.getIntValue());
                 openblocksFrame.setAutosaveInterval(autosaveInterval.getIntValue());
-                openblocksFrame.setAutosavePath(textField.getText());
+                openblocksFrame.setAutosavePath(textField.getText()+"\\");
                 BlocksKeeper.setSize(queueSize.getIntValue());
             }
         });
@@ -431,19 +450,24 @@ public class Settings extends JFrame {
             if (result == null) {
                 return false;
             }
-            String[] subStr = result.split("-");
-            int resultValue = Integer.parseInt(subStr[subStr.length - 1]);
-            String clearResult = result.substring(0,result.lastIndexOf("-"));
-            if (resultValue >= 50 && resultValue <= 10000 && clearResult.equals("BOT-V2-20")) {
-                userPrefs.putBoolean("is_key_valid", true);
-                userPrefs.put("key", result);
-                return true;
-            } else {
-                JOptionPane.showMessageDialog(openblocksFrame,
+            try {
+                if (result.contains("-")) {
+                    String[] subStr = result.split("-");
+                    int resultValue = Integer.parseInt(subStr[subStr.length - 1]);
+                    String clearResult = result.substring(0, result.lastIndexOf("-"));
+                    if (resultValue >= 50 && resultValue <= 10000 && clearResult.equals("BOT-V2-20")) {
+                        userPrefs.putBoolean("is_key_valid", true);
+                        userPrefs.put("key", result);
+                        return true;
+                    }
+                }
+            } catch (NumberFormatException e) {
+                //e.printStackTrace();
+            }
+            JOptionPane.showMessageDialog(openblocksFrame,
                         new String[]{"Ключ не верный!", "Попробуйте снова"},
                         "Авторизация",
                         JOptionPane.PLAIN_MESSAGE);
-            }
         }
     }
 
@@ -466,5 +490,15 @@ public class Settings extends JFrame {
      */
     public boolean isFirstLaunch() {
         return userPrefs.getBoolean("is_first_launch", true);
+    }
+
+    public boolean isCMDRun(){
+        return userPrefs.getBoolean("cmd_run", false);
+    }
+
+    public void resetSettings(){
+        userPrefs.putBoolean("cmd_run", false);
+        userPrefs.putBoolean("ardublock.ui.autostart", false);
+        userPrefs.putBoolean("ardublock.ui.autohide", false);
     }
 }

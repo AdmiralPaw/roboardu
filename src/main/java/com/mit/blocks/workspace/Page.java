@@ -275,7 +275,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
             for (RenderableBlock block : screen) {
                 block.cloneThisForKeeper(block, currentPage);                
                 oldZoom = block.getZoom();
-                block.removeBlock();
+                block.removeBlocks();
             }
 
             for (RenderableBlock block : getBlocks()) {
@@ -384,7 +384,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
             if (block.hasComment()) {
                 block.removeCommentNoAct();
             }
-            block.removeBlock();
+            block.removeBlocks();
             this.pageJComponent.remove(block);
             pageJComponent.repaint();
         }
@@ -753,6 +753,7 @@ public class Page implements WorkspaceWidget, SearchableContainer, ISupportMemen
      * @param b
      */
     public void stopDragged(RenderableBlock b) {
+    
     }
 
     /**

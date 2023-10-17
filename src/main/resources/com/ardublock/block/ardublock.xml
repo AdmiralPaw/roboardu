@@ -25,6 +25,9 @@ file before genus A is specified./ We impose this requirement so that sanity che
         <KeyBlock key="modules.light.name">
             <Block value="bg.LightSensor"/>
         </KeyBlock>
+        <KeyBlock key="modules.color.name">
+        <Block value="bg.ColorSensor"/>
+        </KeyBlock>
         <KeyBlock key="modules.line.name">
             <Block value="bg.LineSensor"/>
         </KeyBlock>
@@ -3272,6 +3275,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
             </BlockConnectors>
         </BlockGenus>
 
+        <!-- Датчик касания -->
         <BlockGenus name="TouchSensor" kind="data" color="242 123 99" initlabel="bg.TouchSensor">
             <description>
                 <text>Read digital from the pin</text>
@@ -3284,6 +3288,18 @@ file before genus A is specified./ We impose this requirement so that sanity che
                                 label="bc.pin_number">
                     <DefaultArg genus-name="pinListDigital_D8"
                                 label="D8"/>
+                </BlockConnector>
+            </BlockConnectors>
+        </BlockGenus>
+
+        <!-- Датчик цвета -->
+        <BlockGenus name="ColorSensor" kind="data" color="242 123 99" initlabel="bg.ColorSensor">
+            <description>
+                <text>Determines the color of the object</text>
+            </description>
+            <BlockConnectors>
+                <BlockConnector connector-type="number"
+                                connector-kind="plug">
                 </BlockConnector>
             </BlockConnectors>
         </BlockGenus>
@@ -3458,6 +3474,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <BlockGenusMember>UltrasonicI2C</BlockGenusMember>
                 <BlockGenusMember>UltrasonicHCSR04</BlockGenusMember>
                 <BlockGenusMember>IK_sensor</BlockGenusMember>
+                <BlockGenusMember>ColorSensor</BlockGenusMember>
             </BlockDrawer>
 
             <!-- servo -->
@@ -3637,6 +3654,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
                 <Component name="modules.hall.name" info="modules.hall.info">hall</Component>
                 <Component name="modules.light.name" info="modules.light.info">light</Component>
+                <Component name="modules.color.name" info="modules.color.info">color</Component>
                 <Component name="modules.line.name" info="modules.line.info">line</Component>
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
@@ -3652,6 +3670,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
                 <Component name="modules.hall.name" info="modules.hall.info">hall</Component>
                 <Component name="modules.light.name" info="modules.light.info">light</Component>
+                <Component name="modules.color.name" info="modules.color.info">color</Component>
                 <Component name="modules.line.name" info="modules.line.info">line</Component>
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
@@ -3667,6 +3686,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
                 <Component name="modules.hall.name" info="modules.hall.info">hall</Component>
                 <Component name="modules.light.name" info="modules.light.info">light</Component>
+                <Component name="modules.color.name" info="modules.color.info">color</Component>
                 <Component name="modules.line.name" info="modules.line.info">line</Component>
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
@@ -3682,6 +3702,7 @@ file before genus A is specified./ We impose this requirement so that sanity che
                 <Component name="modules.gerkon.name" info="modules.gerkon.info">gerkon</Component>
                 <Component name="modules.hall.name" info="modules.hall.info">hall</Component>
                 <Component name="modules.light.name" info="modules.light.info">light</Component>
+                <Component name="modules.color.name" info="modules.color.info">color</Component>
                 <Component name="modules.line.name" info="modules.line.info">line</Component>
                 <Component name="modules.piezzo.name" info="modules.piezzo.info">piezzo</Component>
                 <Component name="modules.temperature.name" info="modules.temperature.info">temperature</Component>
